@@ -1,0 +1,135 @@
+/* GERAL
+**********************/
+html, body {
+  background-color: rgb(237, 237, 237);
+  margin: 0;
+  height: 100%
+}
+
+::-webkit-scrollbar { width: 4px }
+::-webkit-scrollbar-track {
+  border-left: 1px solid #333;
+  background-color: rgb(237, 237, 237)
+}
+::-webkit-scrollbar-thumb { background-color: rgb(0, 78, 78) }
+
+/* HEADER
+**********************/
+header {
+  width: 100%;
+  height: 45px;
+  color: rgb(237, 237, 237);
+  background-color: rgb(0, 177, 177)
+}
+
+header h1 {
+  font-size: 36px;
+  font-weight: 1000;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  margin: 0 0 0 15px
+}
+
+/* LEFTNAV
+**********************/
+.leftNav {
+  float: left;
+  border-right: 1px solid #333;
+  width: 185px;
+  min-height: calc(100% - 45px);
+  background-color: #333
+}
+
+.item { overflow: hidden }
+
+.menu {
+  overflow: hidden;
+  max-height: 0px;
+  padding: 0;
+  margin: 0
+}
+
+.btnTop, .btn {
+  position: relative;
+  user-select: none;
+  cursor: pointer;
+  text-indent: 20px;
+  color: white;
+  padding: 10px 0;
+  margin: 0
+}
+
+.smenu a {
+  position: relative;
+  border-top: 1px solid darkcyan;
+  text-indent: 10px;
+  display: block;
+  font-size: 90%;
+  background-color: rgb(237, 237, 237);
+  padding: 12px 0;
+  color: black;
+  text-decoration: none
+}
+
+.btnTop {
+  border-top: 1px solid #333;
+  background-color: rgb(0, 78, 78);
+  font-size: 23px
+}
+
+.btn {
+  border-top: 1px solid rgb(0, 78, 78);
+  background-color: darkcyan;
+  display: block;
+  font-size: 20px
+}
+
+.btnTop:before, .btn:before, .smenu a:before {
+  content: '';
+  width: 5px;
+  height: 90%;
+  position: absolute;
+  left: 0;
+  top: 5%;
+  opacity: 0;
+  transition: opacity .1s
+}
+
+.btnTop:before { background-color: rgb(237, 237, 237) }
+.btn:before { background-color: rgb(0, 78, 78) }
+.smenu a:before { background-color: darkcyan }
+
+.btnTop:hover:before { opacity: 1 }
+
+.btnTop:after, .btn:after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  bottom: -6px;
+  background-color: rgb(0, 78, 78);
+  left: 10px;
+  transform: rotateZ(45deg);
+  z-index: 1
+}
+
+.btnTop:after { background-color: rgb(0, 78, 78) }
+.btn:after { background-color: darkcyan }
+
+.subItem {
+  overflow: hidden;
+  list-style: none;
+  width: 100%;
+  min-height: 0
+}
+
+.btn:hover:before { opacity: 1 }
+
+.smenu {
+  overflow: hidden;
+  max-height: 0
+}
+
+.actived { max-height: 100% }
+
+.smenu a:hover:before { opacity: 1 }
