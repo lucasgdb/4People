@@ -3,6 +3,7 @@
 html, body {
   background-color: rgb(237, 237, 237);
   margin: 0;
+  min-width: 300px;
   height: 100%;
   font-family: Arial, Helvetica, sans-serif
 }
@@ -23,14 +24,36 @@ header {
   background-color: rgb(0, 177, 177)
 }
 
-header h1 {
-  text-align: center;
-  top: -5px;
+.containerMenus {
   position: relative;
-  margin: 0
+  width: 45px;
+  height: 45px;
+  left: 10px
 }
 
-header h1 a {
+.menus {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.menus, .menus:before, .menus:after {
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  background-color: rgb(0, 78, 78)
+}
+
+.menus:before, .menus:after { content: '' }
+
+.menus:before { top: -10px }
+.menus:after { bottom: -10px }
+
+header a {
+  user-select: none;
+  position: absolute;
+  transform: translateX(-50%);
+  top: 0;
+  left: 50%;
   font-size: 36px;
   font-weight: 1000;
   -webkit-text-stroke-width: 2px;
@@ -42,10 +65,9 @@ header h1 a {
 /* LEFTNAV
 **********************/
 .leftNav {
-  float: left;
-  border-right: 1px solid #333;
-  width: 185px;
-  min-height: calc(100% - 45px);
+  display: none;
+  width: 100%;
+  min-height: 0;
   background-color: #333
 }
 
@@ -60,15 +82,15 @@ header h1 a {
 
 .btnTop, .btn {
   position: relative;
-  cursor: pointer;
   color: white;
-  padding: 10px 0;
   margin: 0
 }
 
 .smenu a, .btnTop, .btn {
-  user-select: none;
-  text-indent: 8px
+  font-size: 22px;
+  padding: 14px 0;
+  text-align: center;
+  user-select: none
 }
 
 .smenu a {
@@ -76,47 +98,23 @@ header h1 a {
   border-top: 1px solid darkcyan;
   text-indent: 7px;
   display: block;
-  font-size: 1;
   background-color: rgb(237, 237, 237);
-  padding: 12px 0;
   color: black;
   text-decoration: none
 }
 
-.fs-1 { font-size: calc(100% - 1px) }
-.fs-2 { font-size: calc(100% - 2px) }
-.fs-3 { font-size: calc(100% - 3px) }
-
 .btnTop {
   border-top: 1px solid #333;
   background-color: rgb(0, 78, 78);
-  font-size: 1;
   font-weight: 1000;
-  text-indent: 10px
 }
 
 .btn {
   font-weight: 600;
   border-top: 1px solid rgb(0, 78, 78);
   background-color: darkcyan;
-  display: block;
-  font-size: 1
+  display: block
 }
-
-.btnTop:before, .btn:before, .smenu a:before {
-  content: '';
-  width: 5px;
-  height: 90%;
-  position: absolute;
-  left: 0;
-  top: 5%;
-  opacity: 0;
-  transition: opacity .1s
-}
-
-.btnTop:before { background-color: rgb(237, 237, 237) }
-.btn:before { background-color: rgb(0, 78, 78) }
-.smenu a:before { background-color: darkcyan }
 
 .btnTop:hover:before, .btn:hover:before, .smenu a:hover:before { opacity: 1 }
 
@@ -125,10 +123,10 @@ header h1 a {
   position: absolute;
   width: 12px;
   height: 12px;
-  bottom: -6px;
+  bottom: -11px;
   background-color: rgb(0, 78, 78);
-  left: 10px;
-  transform: rotateZ(45deg);
+  left: 50%;
+  transform: rotateZ(45deg) translateX(-50%);
   z-index: 1
 }
 
@@ -148,5 +146,45 @@ header h1 a {
 }
 
 .actived { max-height: 100% }
-.selected:before { opacity: 1 !important }
-.selected:hover:before { background-color: rgb(0, 78, 78) }
+
+@media (min-width: 768px) {
+  .fs-1 { font-size: calc(100% - 1px) !important }
+  .fs-2 { font-size: calc(100% - 2px) !important }
+  .fs-3 { font-size: calc(100% - 3px) !important }
+
+  .menus { display: none }
+
+  .leftNav {
+    display: block !important;
+    min-height: calc(100% - 45px);
+    width: 200px;
+    border-right: 1px solid #333
+  }
+
+  .btnTop, .btn, .smenu a {
+    font-size: 100%;
+    padding: 11px 0;
+    text-align: left;
+    text-indent: 8px
+  }
+
+  .btnTop:after, .btn:after { left: 17px }
+
+  .btnTop:before, .btn:before, .smenu a:before {
+    content: '';
+    width: 5px;
+    height: 90%;
+    position: absolute;
+    left: 0;
+    top: 5%;
+    opacity: 0;
+    transition: opacity .1s
+  }
+
+  .btnTop:before { background-color: rgb(237, 237, 237) }
+  .btn:before { background-color: rgb(0, 78, 78) }
+  .smenu a:before { background-color: darkcyan }
+
+  .selected:before { opacity: 1 !important }
+  .selected:hover:before { background-color: rgb(0, 78, 78) }
+}

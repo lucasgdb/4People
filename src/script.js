@@ -1,5 +1,7 @@
 const btns = document.querySelectorAll('.btn'),
-  btnTop = document.querySelectorAll('.btnTop');
+  btnTop = document.querySelectorAll('.btnTop'),
+  menu = document.querySelector('.containerMenus'),
+  nav = document.querySelector('.leftNav');
 
 for (let i = 0; i < btns.length; i++)
   btns[i].onclick = () => {
@@ -21,3 +23,10 @@ for (let i = 0; i < btnTop.length; i++)
       menu.className = 'menu'
     else menu.className = 'menu actived'
   }
+
+menu.onclick = () => {
+  if (nav.style.display === 'block')
+    nav.style.display = 'none'
+  else nav.style.display = 'block'
+}
+
