@@ -1,32 +1,22 @@
 const btns = document.querySelectorAll('.btn'),
-  btnTop = document.querySelectorAll('.btnTop'),
-  menu = document.querySelector('.containerMenus'),
-  nav = document.querySelector('.leftNav');
+  btnTop = document.querySelectorAll('.btnTop');
 
 for (let i = 0; i < btns.length; i++)
   btns[i].onclick = () => {
     const smenu = btns[i].parentElement.querySelector('.smenu');
-    for (let j = 0; j < btns.length; j++)
-      if (btns[i] !== btns[j])
-        btns[j].parentElement.querySelector('.smenu').className = 'smenu'
-
-    if (smenu.className === 'smenu actived')
-      smenu.className = 'smenu'
-    else smenu.className = 'smenu actived'
+    if (smenu !== null) {
+      if (smenu.style.maxHeight === '100em')
+        smenu.style.maxHeight = '0em'
+      else smenu.style.maxHeight = '100em'
+    }
   }
 
 for (let i = 0; i < btnTop.length; i++)
   btnTop[i].onclick = () => {
     const menu = btnTop[i].parentElement.querySelector('.menu');
-
-    if (menu.className === 'menu actived')
-      menu.className = 'menu'
-    else menu.className = 'menu actived'
+    if (menu !== null) {
+      if (menu.style.maxHeight === '0em')
+        menu.style.maxHeight = '100em'
+      else menu.style.maxHeight = '0em'
+    }
   }
-
-menu.onclick = () => {
-  if (nav.style.display === 'block')
-    nav.style.display = 'none'
-  else nav.style.display = 'block'
-}
-
