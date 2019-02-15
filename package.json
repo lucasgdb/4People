@@ -1,0 +1,25 @@
+{
+  "name": "4people",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LucasNaja/4People.git"
+  },
+  "author": "Lucas Bittencourt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LucasNaja/4People/issues"
+  },
+  "homepage": "https://github.com/LucasNaja/4People#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
