@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/LucasNaja/4People#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^5.0.0-alpha.7"
   },
   "devDependencies": {
     "nodemon": "^1.18.10",

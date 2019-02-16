@@ -7,8 +7,6 @@ app.set('port', port)
 
 app.use(express.static('public'))
 
-app.use('/images/', () => {})
-
 app.use('/', (req, res) => {
   res.send('<meta http-equiv="refresh" content="0; url=./" />')
 })
