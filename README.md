@@ -12,4 +12,4 @@
   - Renan de Mattos
     - Analista
   - Suzany Silva
-    - Analista
+    - Teoria/Análise
