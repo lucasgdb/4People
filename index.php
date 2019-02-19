@@ -49,7 +49,9 @@
   </head>
 
   <body>
-    <h1>Lucas - BR</h1>
+    <?php
+      phpinfo()
+    ?>
 
     <script src="src/js/materialize.min.js"></script>
   </body>
