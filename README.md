@@ -5,11 +5,11 @@
   O **_4People_** disponibiliza ferramentas que vão desde Geradores (Senhas, CPF, RG, Portfólio) até ferramentas para o uso no cotidiano (Sorteadores, Progresso do Ano, etc.) e ferramentas para jogos (Gerador de Decks, Calculadoras, etc.)
 
 ## Integrantes
-  - Lucas Bittencourt
+  - **Lucas Bittencourt**
     - Programador
-  - Jairo Arcy
+  - **Jairo Arcy**
     - Programador
-  - Renan de Mattos
+  - **Renan de Mattos**
     - Analista
-  - Suzany Silva
+  - **Suzany Silva**
     - Teoria/Análise

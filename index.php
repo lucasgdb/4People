@@ -31,14 +31,14 @@
     <meta property="og:url" content="https://4people.now.sh/">
     <meta property="og:title" content="4People - Ferramentas OnLine">
     <meta property="og:description" content="4People é uma ferramenta online para pessoas">
-    <meta property="og:image" content="https://4people.now.sh/images/4people_br.png">
+    <meta property="og:image" content="https://4people.now.sh/images/4people.png">
     <meta property="og:image:alt" content="Print da página inicial do 4People.">
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://4people.now.sh/">
     <meta name="twitter:title" content="4People - Ferramentas OnLine">
     <meta name="twitter:description" content="4People é uma ferramenta online para pessoas">
-    <meta name="twitter:image" content="https://4people.now.sh/images/4people_br.png">
+    <meta name="twitter:image" content="https://4people.now.sh/images/4people.png">
     <meta name="twitter:image:alt" content="Print da página inicial do 4People.">
     <meta name="twitter:creator" content="@LucasNaja0">
     <meta name="twitter:site" content="@LucasNaja0">
@@ -50,7 +50,7 @@
 
   <body>
     <?php
-      phpinfo()
+      echo '<h1>Lucas</h1>'
     ?>
 
     <script src="src/js/materialize.min.js"></script>
