@@ -47,6 +47,10 @@ main {
   width: 100%
 }
 
+.sidenav {
+  height: 100% !important
+}
+
 @media (min-width: 993px) {
   body {
     padding-left: 300px

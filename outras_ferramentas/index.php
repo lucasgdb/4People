@@ -3,29 +3,29 @@
 
 <head>
     <!-- Links -->
-    <link rel="stylesheet" href="src/css/materialize.min.css">
-    <link rel="stylesheet" href="src/css/style.css">
-    <title>4People - Ferramentas OnLine</title>
+    <link rel="stylesheet" href="../src/css/materialize.min.css">
+    <link rel="stylesheet" href="../src/css/style.css">
+    <title>Outras Ferramentas - 4People</title>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-    <?php include_once('components/metas.php') ?>
+    <?php include_once('../components/metas.php') ?>
 </head>
 
 <body>
     <nav class="blue accent-4">
         <a href="#" id="menu" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a>
         <div class="nav-wrapper">
-            <a href="./" class="brand-logo right">4People</a>
+            <a href="../" class="brand-logo right">4People</a>
             <ul id="nav-mobile" class="left hide-on-med-and-down">
-                <li class="active"><a href="./">Início</a></li>
-                <li><a href="computacao/">Computação</a></li>
-                <li><a href="matematica/">Matemática</a></li>
-                <li><a href="outras_ferramentas/">Outras Ferramentas</a></li>
+                <li><a href="../">Início</a></li>
+                <li><a href="../computacao/">Computação</a></li>
+                <li><a href="../matematica/">Matemática</a></li>
+                <li class="active"><a href="./">Outras Ferramentas</a></li>
             </ul>
         </div>
     </nav>
 
     <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
-        <li class="active">
+        <li>
             <div class="collapsible-header"><i class="material-icons">computer</i>Computação</div>
             <div class="collapsible-body">
                 <ul class="collapsible">
@@ -127,7 +127,7 @@
             </div>
         </li>
 
-        <li class="active">
+        <li>
             <div class="collapsible-header"><i class="material-icons">functions</i>Matemática</div>
             <div class="collapsible-body">
                 <ul class="collapsible">
@@ -220,10 +220,10 @@
         </div>
     </main>
 
-    <?php include_once('components/footer.php') ?>
+    <?php include_once('../components/footer.php') ?>
 
-    <script src="src/js/materialize.min.js"></script>
-    <script src="src/js/script.js"></script>
+    <script src="../src/js/materialize.min.js"></script>
+    <script src="../src/js/script.js"></script>
 </body>
 
 </html> 

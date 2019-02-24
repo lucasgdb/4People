@@ -1,0 +1,8 @@
+{
+    "name": "4People",
+    "alias": "4people",
+    "version": 2,
+    "builds": [
+        { "src": "*.php", "use": "@now/php" }
+    ]
+}
