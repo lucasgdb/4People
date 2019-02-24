@@ -21,3 +21,49 @@
   font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 }
+
+body {
+  height: 100%;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.collapsible-body {
+  padding: 0 10px !important
+}
+
+.collapsible-body a {
+  width: 100%
+}
+
+@media (min-width: 993px) {
+  body {
+    padding-left: 300px
+  }
+}
+
+@media (min-width: 1024px) {
+  .btn {
+    -webkit-user-select: none !important
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 5px;
+    cursor: pointer
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #ccc
+  }
+}

@@ -13,3 +13,10 @@
     - Analista
   - **Suzany Silva**
     - Teoria/Análise
+
+## Ferramentas
+  - HTML
+  - CSS
+  - JavaScript
+  - PHP
+  - FakerJS
