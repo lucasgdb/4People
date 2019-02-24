@@ -46,12 +46,12 @@
 </head>
 
 <body>
-    <nav class="teal">
-        <a href="#" id="menu" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    <nav class="blue accent-4">
+        <a href="#" id="menu" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a>
         <div class="nav-wrapper">
             <a href="./" class="brand-logo right">4People</a>
             <ul id="nav-mobile" class="left hide-on-med-and-down">
-                <li><a href="sass.html">Início</a></li>
+                <li class="active"><a href="sass.html">Início</a></li>
                 <li><a href="badges.html">Computação</a></li>
                 <li><a href="collapsible.html">Matemática</a></li>
                 <li><a href="collapsible.html">Outras Ferramentas</a></li>
@@ -60,21 +60,25 @@
     </nav>
 
     <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
-        <?php include_once('components/computacao.php') ?>
-        <?php include_once('components/matematica.php') ?>
-        <?php include_once('components/outras_ferramentas.php') ?>
+        <?php
+        include_once('components/computacao.php');
+        include_once('components/matematica.php');
+        include_once('components/outras_ferramentas.php')
+        ?>
     </ul>
 
     <main>
         <div class="container">
-            <h2>Ferramenta aqui</h2>
+            <div class="card-panel">
+                <h2>Ferramentas</h2>
+            </div>
         </div>
     </main>
 
     <?php include_once('components/footer.php') ?>
 
     <script src="src/js/materialize.min.js"></script>
-    <script async src="src/js/script.js"></script>
+    <script src="src/js/script.js"></script>
 </body>
 
 </html> 

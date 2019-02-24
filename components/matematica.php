@@ -1,6 +1,6 @@
 <?=
     '<li class="active">
-        <div class="collapsible-header"><i class="material-icons">place</i>Matemática</div>
+        <div class="collapsible-header"><i class="material-icons">functions</i>Matemática</div>
         <div class="collapsible-body">
             <ul class="collapsible">
                 <li>

@@ -1,6 +1,6 @@
 <?=
     '<li class="active">
-        <div class="collapsible-header"><i class="material-icons">place</i>Computação</div>
+        <div class="collapsible-header"><i class="material-icons">computer</i>Computação</div>
         <div class="collapsible-body">
             <ul class="collapsible">
                 <li>
@@ -35,7 +35,7 @@
                 <li>
                     <div class="collapsible-header"><i class="material-icons">place</i>Validadores</div>
                     <div class="collapsible-body">
-                        <a class="btn waves-effect waves-light" href="">Validador de Cartão de Crédito</a>
+                        <a class="btn waves-effect waves-light truncate blue accent-4" href="">Validador de Cartão de Crédito</a>
                         <a class="btn waves-effect waves-light" href="">Validador de Conta Bancária</a>
                         <a class="btn waves-effect waves-light" href="">Validador de Certidões</a>
                         <a class="btn waves-effect waves-light" href="">Validador de CNH</a>

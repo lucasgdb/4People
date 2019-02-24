@@ -33,6 +33,12 @@ main {
   flex: 1 0 auto;
 }
 
+.collapsible-header,
+.collapsible-body,
+.btn {
+  -webkit-user-select: none
+}
+
 .collapsible-body {
   padding: 0 10px !important
 }
@@ -48,10 +54,6 @@ main {
 }
 
 @media (min-width: 1024px) {
-  .btn {
-    -webkit-user-select: none !important
-  }
-
   ::-webkit-scrollbar {
     width: 5px;
     height: 5px
