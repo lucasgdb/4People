@@ -17,30 +17,21 @@
             <div class="nav-wrapper">
                 <a href="/" class="brand-logo right hide-on-large-only">4People</a>
                 <ul id="nav-mobile" class="left hide-on-med-and-down">
-                    <li class="active"><a href="/"><i class="material-icons left">home</i>Início</a></li>
-                    <li><a href="/computacao/"><i class="material-icons left">computer</i>Computação</a></li>
-                    <li><a href="/matematica/"><i class="material-icons left">functions</i>Matemática</a></li>
-                    <li><a href="/outras_ferramentas/"><i class="material-icons left">settings</i>Outras Ferramentas</a></li>
+                    <li class="active waves-effect"><a href="/"><i class="material-icons left">home</i>Início</a></li>
+                    <li class="waves-effect"><a href="/computacao/"><i class="material-icons left">computer</i>Computação</a></li>
+                    <li class="waves-effect"><a href="/matematica/"><i class="material-icons left">functions</i>Matemática</a></li>
+                    <li class="waves-effect"><a href="/outras_ferramentas/"><i class="material-icons left">settings</i>Outras Ferramentas</a></li>
                 </ul>
             </div>
         </nav>
 
         <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
-            <li>
-                <div class="user-view">
-                    <div class="background blue accent-2">
-
-                    </div>
-                    <a><img class="circle" src="/images/lucas.jpg"></a>
-                    <a><span class="white-text name">4People</span></a>
-                    <a href="https://github.com/LucasNaja/4People" target="_blank" rel="noopener noreferrer"><span class="white-text email">Nosso GitHub</span></a>
-                </div>
-            </li>
             <?php
+            include_once('components/logo.php');
             $active = 'class="active"';
             include_once('components/computacao.php');
             include_once('components/matematica.php');
-            include_once('components/outros_componentes.php')
+            include_once('components/outras_ferramentas.php')
             ?>
             <div class="divider"></div>
         </ul>
