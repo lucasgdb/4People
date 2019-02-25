@@ -1,6 +1,6 @@
 // Materialize initalizations
 M.Sidenav.init(document.querySelectorAll('.sidenav'))
-M.Collapsible.init(document.querySelectorAll('ul.collapsible'), {
+M.Collapsible.init(document.querySelectorAll('.collapsible'), {
   accordion: false
 })
 
