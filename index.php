@@ -31,7 +31,7 @@
                     <div class="background blue accent-2">
 
                     </div>
-                    <a><img class="circle" src="images/lucas.jpg"></a>
+                    <a><img class="circle" src="/images/lucas.jpg"></a>
                     <a><span class="white-text name">4People</span></a>
                     <a href="https://github.com/LucasNaja/4People" target="_blank" rel="noopener noreferrer"><span class="white-text email">Nosso GitHub</span></a>
                 </div>
