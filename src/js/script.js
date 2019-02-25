@@ -72,4 +72,6 @@ function matchMin(minWidth) {
 window.onload = function () {
   maxWidth.addListener(matchMax)
   minWidth.addListener(matchMin)
+
+  document.body.style.display = 'flex'
 }

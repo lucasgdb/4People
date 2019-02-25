@@ -24,7 +24,7 @@
 
 body {
   height: 100%;
-  display: flex;
+  display: none;
   min-height: 100vh;
   flex-direction: column;
 }
@@ -39,11 +39,12 @@ main {
   -webkit-user-select: none
 }
 
-.collapsible-body {
-  padding: 0 10px !important
+.padding-headers .collapsible-header {
+  padding: 0 25px !important;
 }
 
 .collapsible-body a {
+  height:35px;
   width: 100%
 }
 
