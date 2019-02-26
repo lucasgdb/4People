@@ -4,7 +4,11 @@
             <div class=\"row\">
                 <div class=\"col l6 s12\">
                     <h5 class=\"white-text\">Sobre</h5>
-                    <p class=\"grey-text text-lighten-4\">4People foi feito para trazer muitas ferramentas em um só lugar. As ferramentas foram feitas utilizando JavaScript, e o código é open-source sob a licença MIT.</p>
+                    <p class=\"grey-text text-lighten-4\">
+                        4People é um site feito para trazer muitas ferramentas em um só lugar.
+                        As ferramentas foram feitas utilizando JavaScript, para mais velocidade das ferramentas.
+                        E o projeto é open-source sob a licença MIT, no GitHub.
+                    </p>
                 </div>
                 <div class=\"col l4 offset-l2 s12\">
                     <h5 class=\"white-text\">Contato</h5>

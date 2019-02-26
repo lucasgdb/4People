@@ -3,8 +3,8 @@
 
 <head>
     <!-- Links -->
-    <link rel="stylesheet" href="../src/css/materialize.min.css">
-    <link rel="stylesheet" href="../src/css/style.css">
+    <link rel="stylesheet" href="/src/css/materialize.min.css">
+    <link rel="stylesheet" href="/src/css/style.css">
     <title>Outras Ferramentas - 4People</title>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <?php include_once('../components/metas.php') ?>
@@ -47,8 +47,8 @@
 
     <?php include_once('../components/footer.php') ?>
 
-    <script src="../src/js/materialize.min.js"></script>
-    <script src="../src/js/script.js"></script>
+    <script src="/src/js/materialize.min.js"></script>
+    <script src="/src/js/script.js"></script>
 </body>
 
 </html> 
