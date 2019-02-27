@@ -2,7 +2,7 @@
     "name": "4People",
     "short_name": "4People",
     "description": "4People é um site com ferramentas online para as pessoas.",
-    "start_url": ".",
+    "start_url": "/",
     "background_color": "",
     "theme_color": "",
     "display": "standalone",

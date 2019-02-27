@@ -12,15 +12,15 @@
 
 <body>
     <header>
-        <nav class="blue accent-4">
-            <a href="#" id="menu" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a>
+        <nav class="indigo lighten-5">
+            <a href="#" id="menu" data-target="slide-out" class="sidenav-trigger show-on-large black-text"><i class="material-icons">menu</i></a>
             <div class="nav-wrapper">
-                <a href="/" class="brand-logo right hide-on-large-only">4People</a>
+                <a href="/" class="brand-logo right hide-on-large-only grey-text text-darken-4">4People</a>
                 <ul id="nav-mobile" class="left hide-on-med-and-down">
-                    <li class="waves-effect"><a href="/"><i class="material-icons left">home</i>Início</a></li>
-                    <li class="waves-effect"><a href="/computacao/"><i class="material-icons left">computer</i>Computação</a></li>
-                    <li class="waves-effect"><a href="/matematica/"><i class="material-icons left">functions</i>Matemática</a></li>
-                    <li class="active waves-effect"><a href="/outras_ferramentas/"><i class="material-icons left">settings</i>Outras Ferramentas</a></li>
+                    <li class="waves-effect"><a class="grey-text text-darken-4" href="/"><i class="material-icons left">home</i>Início</a></li>
+                    <li class="waves-effect"><a class="grey-text text-darken-4" href="/computacao/"><i class="material-icons left">computer</i>Computação</a></li>
+                    <li class="waves-effect"><a class="grey-text text-darken-4" href="/matematica/"><i class="material-icons left">functions</i>Matemática</a></li>
+                    <li class="active waves-effect"><a class="grey-text text-darken-4" href="/outras_ferramentas/"><i class="material-icons left">settings</i>Outras Ferramentas</a></li>
                 </ul>
             </div>
         </nav>

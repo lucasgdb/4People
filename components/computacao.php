@@ -6,7 +6,7 @@
                 <li>
                     <div class="collapsible-header"><i class="material-icons">filter_drama</i>Geradores</div>
                     <div class="collapsible-body">
-                        <a class="btn waves-effect waves-light" href="/computacao/geradores/gerador_de_certidoes">Gerador de Certidões</a>
+                        <a class="btn waves-effect waves-light indigo" href="/computacao/geradores/gerador_de_certidoes">Gerador de Certidões</a>
                         <a class="btn waves-effect waves-light" href="/computacao/geradores/gerador_de_cnh">Gerador de CNH</a>
                         <a class="btn waves-effect waves-light" href="/computacao/geradores/gerador_de_conta_bancaria">Gerador de Conta Bancária</a>
                         <a class="btn waves-effect waves-light" href="/computacao/geradores/gerador_de_cpf">Gerador de CPF</a>
