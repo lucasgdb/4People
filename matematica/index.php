@@ -2,9 +2,7 @@
 <html lang="pt-br">
 
 <head>
-    <!-- Links -->
-    <link rel="stylesheet" href="/src/css/materialize.min.css">
-    <link rel="stylesheet" href="/src/css/style.css">
+    <?php include_once('../components/links.php') ?>
     <title>Matemática - 4People</title>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <?php include_once('../components/metas.php') ?>
@@ -17,10 +15,10 @@
             <div class="nav-wrapper">
                 <a href="/" class="brand-logo right hide-on-large-only grey-text text-darken-4">4People</a>
                 <ul id="nav-mobile" class="left hide-on-med-and-down">
-                    <li class="waves-effect"><a class="grey-text text-darken-4" href="/"><i class="material-icons left">home</i>Início</a></li>
-                    <li class="waves-effect"><a class="grey-text text-darken-4" href="/computacao/"><i class="material-icons left">computer</i>Computação</a></li>
-                    <li class="active waves-effect"><a class="grey-text text-darken-4" href="/matematica/"><i class="material-icons left">functions</i>Matemática</a></li>
-                    <li class="waves-effect"><a class="grey-text text-darken-4" href="/outras_ferramentas/"><i class="material-icons left">settings</i>Outras Ferramentas</a></li>
+                    <li title="Início" class="waves-effect"><a class="grey-text text-darken-4" href="/"><i class="material-icons left">home</i>Início</a></li>
+                    <li title="Computação" class="waves-effect"><a class="grey-text text-darken-4" href="/computacao/"><i class="material-icons left">computer</i>Computação</a></li>
+                    <li title="Matemática" class="active waves-effect"><a class="grey-text text-darken-4" href="/matematica/"><i class="material-icons left">functions</i>Matemática</a></li>
+                    <li title="Outras Ferramentas" class="waves-effect"><a class="grey-text text-darken-4" href="/outras_ferramentas/"><i class="material-icons left">settings</i>Outras Ferramentas</a></li>
                 </ul>
             </div>
         </nav>
@@ -48,7 +46,6 @@
 
     <?php include_once('../components/footer.php') ?>
 
-    <script src="/src/js/materialize.min.js"></script>
     <script src="/src/js/script.js"></script>
 </body>
 

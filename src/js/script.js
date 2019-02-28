@@ -8,6 +8,12 @@ M.Collapsible.init(document.querySelectorAll('.collapsible'), {
 const sidenav = M.Sidenav.getInstance(document.querySelector('#slide-out'))
 let tr = false
 
+if (sessionStorage.getItem('sideStatus') === 'true') {
+  sidenav.options.outDuration = 0
+  sideOut()
+  animateOut(0)
+}
+
 function animateIn(delay = 200) {
   document.body.animate([{
       paddingLeft: '0',
@@ -21,7 +27,7 @@ function animateIn(delay = 200) {
   })
 }
 
-function animateOut() {
+function animateOut(delay = 150) {
   document.body.animate([{
       paddingLeft: '300px',
     },
@@ -29,23 +35,34 @@ function animateOut() {
       paddingLeft: '0',
     }
   ], {
-    duration: 150,
+    duration: delay,
     fill: 'forwards'
   })
+}
+
+function sideIn() {
+  sidenav._animateSidenavIn()
+  tr = false
+  sidenav.isOpen = true
+}
+
+function sideOut() {
+  sidenav._animateSidenavOut()
+  tr = true
+  sidenav.isClose = true
 }
 
 document.querySelector('#menu').onclick = function () {
   if (innerWidth >= 993) {
     if (tr) {
-      sidenav._animateSidenavIn()
-      tr = false
-      sidenav.isOpen = true
+      sidenav.options.outDuration = 150
+      sideIn()
       animateIn()
+      sessionStorage.removeItem('sideStatus')
     } else {
-      sidenav._animateSidenavOut()
-      tr = true
-      sidenav.isClose = true
+      sideOut()
       animateOut()
+      sessionStorage.setItem('sideStatus', true)
     }
   } else if (sidenav.options.outDuration === 0)
     sidenav.options.outDuration = 200
@@ -64,6 +81,7 @@ function matchMax(maxWidth) {
 
 function matchMin(minWidth) {
   if (minWidth.matches) {
+    sessionStorage.removeItem('sideStatus')
     animateIn(0)
     tr = false
   }

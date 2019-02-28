@@ -36,16 +36,25 @@ main {
 .collapsible-header,
 .collapsible-body,
 .btn {
-  -webkit-user-select: none
+  user-select: none !important;
+  -webkit-user-select: none !important
 }
 
 .padding-headers .collapsible-header {
-  padding: 0 25px !important;
+  padding: 0 35px !important
+}
+
+.padding-headers .collapsible-body a {
+  text-transform: unset !important
 }
 
 .collapsible-body a {
-  height:35px;
+  height: 35px;
   width: 100%
+}
+
+.padding-headers .collapsible-body {
+  padding: 0 5px
 }
 
 .sidenav {
@@ -65,8 +74,8 @@ main {
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: grey;
-    border-radius: 5px;
+    background-color: rgb(104, 104, 104);
+    border-radius: 8px;
     cursor: pointer
   }
 
