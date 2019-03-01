@@ -3,6 +3,7 @@
 
 <head>
     <?php include_once('components/links.php') ?>
+    <link rel="stylesheet" href="src/css/index.css">
     <title>4People - Ferramentas OnLine</title>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <?php include_once('components/metas.php') ?>
@@ -38,14 +39,46 @@
     <main>
         <div class="container">
             <div class="card-panel">
-                <h2>Ferramentas</h2>
+                <div class="slider">
+                    <ul class="slides">
+                        <li>
+                            <img src="images/img1.jpg">
+                            <div class="caption center-align">
+                                <h3 class="dark black-text">This is our big Tagline!</h3>
+                                <h5 class="light black-text">Here's our small slogan.</h5>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="images/img2.jpg">
+                            <div class="caption left-align">
+                                <h3 class="dark black-text">Left Aligned Caption</h3>
+                                <h5 class="light black-text">Here's our small slogan.</h5>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="images/img3.jpg">
+                            <div class="caption right-align">
+                                <h3 class="dark black-text">Right Aligned Caption</h3>
+                                <h5 class="light black-text">Here's our small slogan.</h5>
+                            </div>
+                        </li>
+                        <li>
+                            <img src="images/img4.jpg">
+                            <div class="caption center-align">
+                                <h3 class="dark black-text">This is our big Tagline!</h3>
+                                <h5 class="light black-text">Here's our small slogan.</h5>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </main>
 
     <?php include_once('components/footer.php') ?>
 
-    <script src="/src/js/script.js"></script>
+    <script src="src/js/index.js"></script>
+    <script src="/src/js/scripts.js"></script>
 </body>
 
 </html> 

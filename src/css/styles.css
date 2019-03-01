@@ -27,10 +27,13 @@ body {
   display: none;
   min-height: 100vh;
   flex-direction: column;
+  animation-fill-mode: forwards;
+  animation-delay: 300ms;
+  transition: padding-left 300ms
 }
 
 main {
-  flex: 1 0 auto;
+  flex: 1 0 auto
 }
 
 .collapsible-header,
@@ -61,9 +64,25 @@ main {
   height: 100% !important
 }
 
+@media (min-width: 0px) {
+  .container {
+    width: 100%
+  }
+}
+
+@media (min-width: 601px) {
+  .container {
+    width: 95%
+  }
+}
+
 @media (min-width: 993px) {
   body {
     padding-left: 300px
+  }
+
+  .container {
+    width: 85% !important
   }
 }
 
@@ -81,5 +100,11 @@ main {
 
   ::-webkit-scrollbar-track {
     background-color: #ccc
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 70%
   }
 }

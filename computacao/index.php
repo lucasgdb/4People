@@ -46,7 +46,7 @@
 
     <?php include_once('../components/footer.php') ?>
 
-    <script src="/src/js/script.js"></script>
+    <script src="/src/js/scripts.js"></script>
 </body>
 
 </html> 

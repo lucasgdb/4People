@@ -14,30 +14,14 @@ if (sessionStorage.getItem('sideStatus') === 'true') {
   animateOut(0)
 }
 
-function animateIn(delay = 200) {
-  document.body.animate([{
-      paddingLeft: '0',
-    },
-    {
-      paddingLeft: '300px',
-    }
-  ], {
-    duration: delay,
-    fill: 'forwards'
-  })
+function animateIn(delay = 250) {
+  document.body.style.transition = `padding-left ${delay}ms`
+  document.body.style.paddingLeft = '300px'
 }
 
-function animateOut(delay = 150) {
-  document.body.animate([{
-      paddingLeft: '300px',
-    },
-    {
-      paddingLeft: '0',
-    }
-  ], {
-    duration: delay,
-    fill: 'forwards'
-  })
+function animateOut(delay = 200) {
+  document.body.style.transition = `padding-left ${delay}ms`
+  document.body.style.paddingLeft = '0'
 }
 
 function sideIn() {
