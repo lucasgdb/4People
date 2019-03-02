@@ -2,14 +2,15 @@
 <html lang="pt-br">
 
 <head>
-    <?php include_once('../components/links.php') ?>
-    <title>Computação - 4People</title>
+    <?php include_once('../../../components/links.php') ?>
+    <link rel="stylesheet" href="src/css/index.css">
+    <title>Matemática - 4People</title>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-    <?php include_once('../components/metas.php') ?>
+    <?php include_once('../../../components/metas.php') ?>
 </head>
 
 <body>
-    <?php include_once('../components/spinner.php') ?>
+    <?php include_once('../../../components/spinner.php') ?>
 
     <header class="hide">
         <nav class="indigo lighten-5">
@@ -18,7 +19,7 @@
                 <a href="/" class="brand-logo right hide-on-large-only grey-text text-darken-4">4People</a>
                 <ul id="nav-mobile" class="left hide-on-med-and-down">
                     <li title="Início" class="waves-effect"><a class="grey-text text-darken-4" href="/"><i class="material-icons left">home</i>Início</a></li>
-                    <li title="Computação" class="active waves-effect"><a class="grey-text text-darken-4" href="/computacao/"><i class="material-icons left">computer</i>Computação</a></li>
+                    <li title="Computação" class="waves-effect"><a class="grey-text text-darken-4" href="/computacao/"><i class="material-icons left">computer</i>Computação</a></li>
                     <li title="Matemática" class="waves-effect"><a class="grey-text text-darken-4" href="/matematica/"><i class="material-icons left">functions</i>Matemática</a></li>
                     <li title="Outras Ferramentas" class="waves-effect"><a class="grey-text text-darken-4" href="/outras_ferramentas/"><i class="material-icons left">settings</i>Outras Ferramentas</a></li>
                 </ul>
@@ -27,10 +28,10 @@
 
         <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
             <?php
-            include_once('../components/logo.php');
+            include_once('../../../components/logo.php');
             ?>
 
-            <li class="active">
+            <li>
                 <div class="collapsible-header"><i class="material-icons">computer</i>Computação</div>
                 <div class="collapsible-body">
                     <ul class="collapsible padding-headers">
@@ -132,7 +133,7 @@
                 </div>
             </li>
 
-            <li>
+            <li class="active">
                 <div class="collapsible-header"><i class="material-icons">functions</i>Matemática</div>
                 <div class="collapsible-body">
                     <ul class="collapsible padding-headers">
@@ -149,7 +150,7 @@
                             </div>
                         </li>
 
-                        <li>
+                        <li class="active">
                             <div class="collapsible-header"><i class="material-icons">whatshot</i>Calcular Áreas</div>
                             <div class="collapsible-body">
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calcular_areas/area_do_circulo/">Área do Círculo</a>
@@ -207,15 +208,85 @@
     </header>
 
     <main class="hide">
-        <div class="container z-depth-2">
-            <div class="card-panel">
-                <h2>Ferramentas</h2>
+        <div class="container">
+            <div class="card-panel z-depth-2">
+                <h1 class="flow-text">Calcular Área do Círculo</h1>
+                <div class="divider"></div>
+
+                <div class="row">
+                    <div class="col s12 m6">
+                        <p>
+                            <label>
+                                <input class="with-gap" name="formula" type="radio" checked />
+                                <span>Fórmula do Raio (PI * r²)</span>
+                            </label>
+                        </p>
+                    </div>
+                    <div class="col s12 m6">
+                        <p>
+                            <label>
+                                <input class="with-gap" name="formula" type="radio" />
+                                <span>Fórmula do Diâmetro (PI * d² / 4)</span>
+                            </label>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12">
+                        Raio:
+                        <div class="input-field inline">
+                            <input id="raio" type="number" placeholder="Digite aqui o raio." min="1" value="1">
+                        </div>
+                    </div>
+
+                    <div class="col s12">
+                        Medida:
+                        <div class="input-field inline">
+                            <select id="medida">
+                                <option value="km">Kilômetros</option>
+                                <option value="m" selected>Metros</option>
+                                <option value="cm">Centímetros</option>
+                                <option value="mm">Milímetros</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col s12">
+                        Casas decimais:
+                        <div class="input-field inline">
+                            <select id="decimal">
+                                <option value="0">Nenhuma</option>
+                                <option value="1">1</option>
+                                <option value="2" selected>2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="-1">Automática</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-center waves-effect white black-text z-depth-2" onclick="calculateArea()">Calcular área</button>
+
+                <div class="divider mt-2"></div>
+
+                <span id="result" class="flow-text">
+
+                </span>
             </div>
         </div>
     </main>
 
-    <?php include_once('../components/footer.php') ?>
+    <?php include_once('../../../components/footer.php') ?>
 
+    <script src="src/js/index.js"></script>
     <script src="/src/js/main.js"></script>
 </body>
 
