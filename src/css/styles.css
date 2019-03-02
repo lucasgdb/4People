@@ -2,7 +2,7 @@
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url(flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+  src: url(flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2')
 }
 
 .material-icons {
@@ -19,12 +19,12 @@
   direction: ltr;
   -webkit-font-feature-settings: 'liga';
   font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased
 }
 
 body {
   height: 100%;
-  display: none;
+  display: flex;
   min-height: 100vh;
   flex-direction: column;
   animation-fill-mode: forwards;
@@ -51,17 +51,32 @@ main {
   text-transform: unset !important
 }
 
+.collapsible-header:target {
+  background-color: red
+}
+
+.sidenav.collapsible > li.active {
+  background-color: #e6e6e6
+}
+
 .collapsible-body a {
   height: 35px;
   width: 100%
 }
 
 .padding-headers .collapsible-body {
-  padding: 0 5px
+  padding: 0 8.5px
 }
 
 .sidenav {
   height: 100% !important
+}
+
+#spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%)
 }
 
 @media (min-width: 0px) {

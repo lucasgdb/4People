@@ -9,6 +9,8 @@
 </head>
 
 <body>
+    <?php include_once('../components/spinner.php') ?>
+
     <header>
         <nav class="indigo lighten-5">
             <a href="#" id="menu" data-target="slide-out" class="sidenav-trigger show-on-large black-text"><i class="material-icons">menu</i></a>

@@ -10,7 +10,9 @@
 </head>
 
 <body>
-    <header>
+    <?php include_once('components/spinner.php') ?>
+
+    <header class="hide">
         <nav class="indigo lighten-5">
             <a href="#" id="menu" data-target="slide-out" class="sidenav-trigger show-on-large black-text"><i class="material-icons">menu</i></a>
             <div class="nav-wrapper">
@@ -36,7 +38,7 @@
         </ul>
     </header>
 
-    <main>
+    <main class="hide">
         <div class="container">
             <div class="card-panel">
                 <div class="slider">

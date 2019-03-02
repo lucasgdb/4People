@@ -1,8 +1,9 @@
 // Materialize initalizations
 M.Sidenav.init(document.querySelectorAll('.sidenav'))
-M.Collapsible.init(document.querySelectorAll('.collapsible'), {
+M.Collapsible.init(document.querySelectorAll('.sidenav.collapsible'), {
   accordion: false
 })
+M.Collapsible.init(document.querySelectorAll('.padding-headers.collapsible'))
 
 // Left and right effects from sidebar
 const sidenav = M.Sidenav.getInstance(document.querySelector('#slide-out'))
@@ -72,8 +73,10 @@ function matchMin(minWidth) {
 }
 
 window.onload = function () {
+  document.querySelector('header').className = ''
+  document.querySelector('main').className = ''
+  document.querySelector('footer').className = 'page-footer indigo lighten-5'
+  document.querySelector('#spinner').remove()
   maxWidth.addListener(matchMax)
   minWidth.addListener(matchMin)
-
-  document.body.style.display = 'flex'
 }
