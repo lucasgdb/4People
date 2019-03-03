@@ -1,7 +1,7 @@
 <?=
     '<li>
         <div class="user-view">
-            <div class="background indigo lighten-5">
+            <div class="background grey lighten-3">
 
             </div>
             <a><img class="circle" src="/images/lucas.jpg"></a>

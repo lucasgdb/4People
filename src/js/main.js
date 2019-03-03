@@ -75,7 +75,7 @@ function matchMin(minWidth) {
 window.onload = function () {
   document.querySelector('header').className = ''
   document.querySelector('main').className = ''
-  document.querySelector('footer').className = 'page-footer indigo lighten-5'
+  document.querySelector('footer').className = 'page-footer grey lighten-3'
   document.querySelector('#spinner').remove()
   maxWidth.addListener(matchMax)
   minWidth.addListener(matchMin)

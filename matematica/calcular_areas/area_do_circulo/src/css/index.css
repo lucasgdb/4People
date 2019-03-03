@@ -27,10 +27,10 @@
 [type=radio]:checked+span:after,
 [type=radio].with-gap:checked+span:before,
 [type=radio].with-gap:checked+span:after {
-    border: 2px solid #3f51b5
+    border: 2px solid grey
 }
 
 [type=radio]:checked+span:after,
 [type=radio].with-gap:checked+span:after {
-    background-color: #3f51b5
+    background-color: grey
 }

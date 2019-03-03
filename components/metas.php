@@ -10,8 +10,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="4People">
     <meta name="apple-mobile-web-app-title" content="4People">
-    <meta name="theme-color" content="#343e51">
-    <meta name="msapplication-navbutton-color" content="#343e51">
+    <meta name="theme-color" content="#eeeeee">
+    <meta name="msapplication-navbutton-color" content="#eeeeee">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="msapplication-starturl" content="https://4people.now.sh/">
     

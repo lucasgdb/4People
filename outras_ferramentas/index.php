@@ -12,7 +12,7 @@
     <?php include_once('../components/spinner.php') ?>
 
     <header class="hide">
-        <nav class="indigo lighten-5">
+        <nav class="grey lighten-3">
             <a href="#" id="menu" data-target="slide-out" class="sidenav-trigger show-on-large black-text"><i class="material-icons">menu</i></a>
             <div class="nav-wrapper">
                 <a href="/" class="brand-logo right hide-on-large-only grey-text text-darken-4">4People</a>
@@ -35,7 +35,7 @@
                 <div class="collapsible-body">
                     <ul class="collapsible padding-headers">
                         <li>
-                            <div class="collapsible-header"><i class="material-icons">filter_drama</i>Geradores</div>
+                            <div class="collapsible-header"><i class="material-icons">autorenew</i>Geradores</div>
                             <div class="collapsible-body">
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/computacao/geradores/gerador_de_certidoes/">Gerador de Certidões</a>
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/computacao/geradores/gerador_de_cnh/">Gerador de CNH</a>
@@ -64,7 +64,7 @@
                         </li>
 
                         <li>
-                            <div class="collapsible-header"><i class="material-icons">place</i>Validadores</div>
+                            <div class="collapsible-header"><i class="material-icons">check</i>Validadores</div>
                             <div class="collapsible-body">
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/computacao/validadores/validador_de_cartao_de_credito/">Validador de Cartão de Crédito</a>
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/computacao/validadores/validador_de_conta_bancaria/">Validador de Conta Bancária</a>
@@ -81,7 +81,7 @@
                         </li>
 
                         <li>
-                            <div class="collapsible-header"><i class="material-icons">whatshot</i>Funções String</div>
+                            <div class="collapsible-header"><i class="material-icons">content_cut</i>Funções String</div>
                             <div class="collapsible-body">
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/computacao/funcoes_string/colocar_em_ordem_alfabetica/">Colocar em Ordem Alfabética</a>
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/computacao/funcoes_string/contador_de_caracteres/">Contador de Caracteres</a>
@@ -100,7 +100,7 @@
                         </li>
 
                         <li>
-                            <div class="collapsible-header"><i class="material-icons">place</i>Rede e Internet</div>
+                            <div class="collapsible-header"><i class="material-icons">wifi</i>Rede e Internet</div>
                             <div class="collapsible-body">
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/computacao/rede_e_internet/meu_ip/">Meu IP</a>
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/computacao/rede_e_internet/meu_navegador/">Meu Navegador</a>
@@ -109,7 +109,7 @@
                         </li>
 
                         <li>
-                            <div class="collapsible-header"><i class="material-icons">place</i>Encoders e Decoders</div>
+                            <div class="collapsible-header"><i class="material-icons">textsms</i>Encoders e Decoders</div>
                             <div class="collapsible-body">
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/computacao/encoders_e_decoders/base64_encode_decode/">Base64 Encode/Decode</a>
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/computacao/encoders_e_decoders/calcular_crc32/">Calcular CRC32</a>
@@ -122,7 +122,7 @@
                         </li>
 
                         <li>
-                            <div class="collapsible-header"><i class="material-icons">place</i>Tabelas e Padrões</div>
+                            <div class="collapsible-header"><i class="material-icons">colorize</i>Tabelas e Padrões</div>
                             <div class="collapsible-body">
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/computacao/tabelas_e_padroes/color_picker/">Color Picker</a>
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/computacao/tabelas_e_padroes/tabela_ascii/">Tabela ASCII</a>
@@ -137,7 +137,7 @@
                 <div class="collapsible-body">
                     <ul class="collapsible padding-headers">
                         <li>
-                            <div class="collapsible-header"><i class="material-icons">whatshot</i>Calculadoras</div>
+                            <div class="collapsible-header"><i class="material-icons">plus_one</i>Calculadoras</div>
                             <div class="collapsible-body">
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calculadoras/converter_numero_romano/">Converter Número Romano</a>
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calculadoras/fatorar_numero/">Fatorar Número</a>
@@ -150,7 +150,7 @@
                         </li>
 
                         <li>
-                            <div class="collapsible-header"><i class="material-icons">whatshot</i>Calcular Áreas</div>
+                            <div class="collapsible-header"><i class="material-icons">explore</i>Calcular Áreas</div>
                             <div class="collapsible-body">
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calcular_areas/area_do_circulo/">Área do Círculo</a>
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calcular_areas/area_do_quadrado/">Área do Quadrado</a>
@@ -169,7 +169,7 @@
                         </li>
 
                         <li>
-                            <div class="collapsible-header"><i class="material-icons">whatshot</i>Datas e Horas</div>
+                            <div class="collapsible-header"><i class="material-icons">timer</i>Datas e Horas</div>
                             <div class="collapsible-body">
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/datas_e_horas/diferenca_entre_dias/">Diferença entre Datas</a>
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/datas_e_horas/somar_dias_em_datas/">Somar Dias em Datas</a>
@@ -181,11 +181,11 @@
             </li>
 
             <li class="active">
-                <div class="collapsible-header"><i class="material-icons">settings</i>Outras Ferramentas</div>
+                <div class="collapsible-header"><i class="material-icons">build</i>Outras Ferramentas</div>
                 <div class="collapsible-body">
                     <ul class="collapsible padding-headers">
                         <li>
-                            <div class="collapsible-header"><i class="material-icons">place</i>Dia a dia</div>
+                            <div class="collapsible-header"><i class="material-icons">today</i>Dia a dia</div>
                             <div class="collapsible-body">
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/outras_ferramentas/dia_a_dia/progresso_do_ano/">Progresso do Ano</a>
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/outras_ferramentas/dia_a_dia/sorteador_de_pessoas/">Sorteador de Pessoas</a>
@@ -194,7 +194,7 @@
                         </li>
 
                         <li>
-                            <div class="collapsible-header"><i class="material-icons">place</i>Jogos</div>
+                            <div class="collapsible-header"><i class="material-icons">videogame_asset</i>Jogos</div>
                             <div class="collapsible-body">
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/outras_ferramentas/jogos/gerador_de_decks/">Gerador de Deck</a>
                             </div>

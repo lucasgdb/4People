@@ -1,5 +1,5 @@
 <?php
-    echo "<footer class=\"hide page-footer indigo lighten-5\">
+    echo "<footer class=\"hide\">
         <div class=\"container\">
             <div class=\"row\">
                 <div class=\"col l6 s12\">
