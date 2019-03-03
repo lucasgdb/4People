@@ -207,7 +207,7 @@
     </header>
 
     <main class="hide">
-        <div class="container z-depth-2">
+        <div class="container">
             <div class="card-panel">
                 <div class="slider">
                     <ul class="slides">

@@ -208,7 +208,7 @@
 
     <main class="hide">
         <div class="container">
-            <div class="card-panel z-depth-2">
+            <div class="card-panel">
                 <h1 class="flow-text mt-2">Calcular Área do Círculo</h1>
 
                 <label>R = Raio, D = Diâmetro (2 * R), PI = 3.141592653589793... (Math.PI.toFixed(48))</label>

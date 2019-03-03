@@ -207,7 +207,7 @@
 
     <main class="hide">
         <div class="container">
-            <div class="card-panel z-depth-2">
+            <div class="card-panel">
                 <h2>Ferramentas</h2>
             </div>
         </div>
