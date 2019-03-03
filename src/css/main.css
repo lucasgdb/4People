@@ -36,8 +36,16 @@ main {
   flex: 1 0 auto
 }
 
-.flow-text {
-  margin-top: 5px
+footer {
+  border-top: 1px solid #e0e0e0
+}
+
+.mt-2 {
+  margin-top: 10px
+}
+
+.mt-4 {
+  margin-top: 20px
 }
 
 .collapsible-header,
@@ -47,16 +55,21 @@ main {
   -webkit-user-select: none !important
 }
 
+.collapsible-header,
+nav {
+  border-bottom: 1px solid #e0e0e0 !important
+}
+
+.active>.collapsible-header {
+  border-bottom: none !important
+}
+
 .padding-headers .collapsible-header {
   padding: 0 35px !important
 }
 
 .padding-headers .collapsible-body a {
   text-transform: unset !important
-}
-
-.collapsible-header:target {
-  background-color: red
 }
 
 .sidenav.collapsible>li.active {

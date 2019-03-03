@@ -153,7 +153,7 @@
                         <li class="active">
                             <div class="collapsible-header"><i class="material-icons">explore</i>Calcular Áreas</div>
                             <div class="collapsible-body">
-                                <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calcular_areas/area_do_circulo/">Área do Círculo</a>
+                                <a class="btn waves-effect grey lighten-2 black-text z-depth-2" href="/matematica/calcular_areas/area_do_circulo/">Área do Círculo</a>
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calcular_areas/area_do_quadrado/">Área do Quadrado</a>
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calcular_areas/area_do_retangulo/">Área do Retângulo</a>
                                 <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calcular_areas/area_do_triangulo/">Área do Triângulo</a>
@@ -203,14 +203,13 @@
                     </ul>
                 </div>
             </li>
-            <div class="divider"></div>
         </ul>
     </header>
 
     <main class="hide">
         <div class="container">
             <div class="card-panel z-depth-2">
-                <h1 class="flow-text">Calcular Área do Círculo</h1>
+                <h1 class="flow-text mt-2">Calcular Área do Círculo</h1>
 
                 <label>R = Raio, D = Diâmetro (2 * R), PI = 3.141592653589793... (Math.PI.toFixed(48))</label>
                 <div class="divider"></div>
@@ -238,7 +237,7 @@
                     <div class="col s12">
                         <span id="formulaName">Raio</span>:
                         <div class="input-field inline">
-                            <input id="raio" type="number" placeholder="Digite aqui o raio." min="1" value="1">
+                            <input id="raio" type="number" placeholder="Digite aqui o raio." min="0" value="1">
                         </div>
                     </div>
 
@@ -279,9 +278,7 @@
 
                 <div class="divider mt-2"></div>
 
-                <span id="result" class="flow-text">
-
-                </span>
+                <p id="result" class="flow-text mt-4 mb-0"></p>
             </div>
         </div>
     </main>

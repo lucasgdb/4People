@@ -24,5 +24,10 @@ function calculateArea() {
         }
 
         result.innerText = `Área: ${decimal.value === '-1' ? area : area.toFixed(parseInt(decimal.value), 10)}${medida.value}²`
+    } else {
+        M.toast({
+            html: 'Valor não permitido!',
+            classes: 'red accent-4'
+        })
     }
 }

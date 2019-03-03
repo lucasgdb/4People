@@ -203,7 +203,6 @@
                     </ul>
                 </div>
             </li>
-            <div class="divider"></div>
         </ul>
     </header>
 
