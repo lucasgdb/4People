@@ -73,7 +73,7 @@ function matchMin(minWidth) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-  let itens = document.querySelectorAll('#nav-mobile a[href^="/"]')
+  let itens = document.querySelectorAll('#nav-mobile a')
 
   itens.forEach(item => {
     if (item.getAttribute('href') === location.pathname)
