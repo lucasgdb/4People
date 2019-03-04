@@ -72,6 +72,22 @@ function matchMin(minWidth) {
   }
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+  let itens = document.querySelectorAll('#nav-mobile a[href^="/"]')
+
+  itens.forEach(item => {
+    if (item.getAttribute('href') === location.pathname)
+      item.parentElement.setAttribute('class', 'active waves-effect')
+  })
+
+  itens = document.querySelectorAll('.active .padding-headers a')
+
+  itens.forEach(item => {
+    if (item.getAttribute('href') === location.pathname)
+      item.setAttribute('class', 'btn waves-effect grey lighten-2 black-text z-depth-2')
+  })
+})
+
 window.onload = function () {
   document.querySelector('header').className = ''
   document.querySelector('main').className = 'grey lighten-5'
