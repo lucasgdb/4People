@@ -7,6 +7,14 @@
     <title>Área do Círculo - 4People</title>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <?php include_once('../../../components/metas.php') ?>
+    <meta name="title" content="4People - Ferramentas OnLine">
+    <meta name="description" content="Calcular área do círculo. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+    <meta name="application-name" content="4People">
+    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calcular_areas/area_do_circulo/">
+    <meta property="og:title" content="4People - Ferramentas OnLine">
+    <meta name="twitter:title" content="4People - Ferramentas OnLine">
+    <meta property="og:url" content="https://4people.now.sh/matematica/calcular_areas/area_do_circulo/">
+    <meta name="twitter:url" content="https://4people.now.sh/matematica/calcular_areas/area_do_circulo/">
 </head>
 
 <body>
@@ -16,7 +24,7 @@
         <nav class="grey lighten-3">
             <a href="#" id="menu" data-target="slide-out" class="sidenav-trigger show-on-large black-text"><i class="material-icons">menu</i></a>
             <div class="nav-wrapper">
-                <a href="/" class="brand-logo right hide-on-large-only grey-text text-darken-4">4People</a>
+                <a href="/" class="brand-logo center hide-on-large-only grey-text text-darken-4">4People</a>
                 <ul id="nav-mobile" class="left hide-on-med-and-down">
                     <li title="Início" class="waves-effect"><a class="grey-text text-darken-4" href="/"><i class="material-icons left">home</i>Início</a></li>
                     <li title="Computação" class="waves-effect"><a class="grey-text text-darken-4" href="/computacao/"><i class="material-icons left">computer</i>Computação</a></li>
@@ -235,18 +243,21 @@
 
                 <div class="row">
                     <div class="col s12">
-                        <span id="formulaName">Raio</span>:
+                        <span id="formulasName">Raio</span>:<br class="hide-on-med-and-up">
                         <div class="input-field inline">
-                            <input id="raio" type="number" placeholder="Digite aqui o raio." min="0" value="1">
+                            <input id="radius" type="number" placeholder="Digite aqui o raio." min="0" value="1">
                         </div>
                     </div>
 
                     <div class="col s12">
-                        Medida:
+                        Medida:<br class="hide-on-med-and-up">
                         <div class="input-field inline">
                             <select id="medida">
                                 <option value="km">Kilômetros</option>
+                                <option value="hm">Hectômetros</option>
+                                <option value="dam">Decâmetros</option>
                                 <option value="m" selected>Metros</option>
+                                <option value="dm">Decímetros</option>
                                 <option value="cm">Centímetros</option>
                                 <option value="mm">Milímetros</option>
                             </select>
@@ -254,7 +265,7 @@
                     </div>
 
                     <div class="col s12">
-                        Casas decimais:
+                        Casas decimais:<br class="hide-on-med-and-up">
                         <div class="input-field inline">
                             <select id="decimal">
                                 <option value="0">Nenhuma</option>
@@ -268,23 +279,29 @@
                                 <option value="8">8</option>
                                 <option value="9">9</option>
                                 <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="48">48</option>
                                 <option value="-1">Automática</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
-                <button class="btn btn-center waves-effect white black-text z-depth-2" onclick="calculateArea()">Calcular área</button>
+                <button title="Calcular Área" class="btn btn-center waves-effect white black-text z-depth-2" onclick="calculate()">Calcular área</button>
 
                 <div class="divider mt-2"></div>
 
-                <p id="result" class="flow-text mt-4 mb-0"></p>
+                <input type="text" id="result" placeholder="Resultado">
+                <button title="Copiar" class="btn waves-effect waves-dark white black-text" onclick="copyResult()">Copiar</button>
             </div>
         </div>
     </main>
 
     <?php include_once('../../../components/footer.php') ?>
 
+    <script src="/algoritmos/circle_area.js"></script>
     <script src="src/js/index.js"></script>
     <script src="/src/js/main.js"></script>
 </body>

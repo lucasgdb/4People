@@ -7,6 +7,14 @@
     <title>4People - Ferramentas OnLine</title>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <?php include_once('components/metas.php') ?>
+    <meta name="title" content="4People - Ferramentas OnLine">
+    <meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+    <meta name="application-name" content="4People">
+    <meta name="msapplication-starturl" content="https://4people.now.sh/">
+    <meta property="og:title" content="4People - Ferramentas OnLine">
+    <meta name="twitter:title" content="4People - Ferramentas OnLine">
+    <meta property="og:url" content="https://4people.now.sh/">
+    <meta name="twitter:url" content="https://4people.now.sh/">
 </head>
 
 <body>
@@ -16,7 +24,7 @@
         <nav class="grey lighten-3">
             <a href="#" id="menu" data-target="slide-out" class="sidenav-trigger show-on-large black-text"><i class="material-icons">menu</i></a>
             <div class="nav-wrapper">
-                <a href="/" class="brand-logo right hide-on-large-only grey-text text-darken-4">4People</a>
+                <a href="/" class="brand-logo center hide-on-large-only grey-text text-darken-4">4People</a>
                 <ul id="nav-mobile" class="left hide-on-med-and-down">
                     <li title="Início" class="active waves-effect"><a class="grey-text text-darken-4" href="/"><i class="material-icons left">home</i>Início</a></li>
                     <li title="Computação" class="waves-effect"><a class="grey-text text-darken-4" href="/computacao/"><i class="material-icons left">computer</i>Computação</a></li>

@@ -2,31 +2,48 @@ M.FormSelect.init(document.querySelectorAll('select'))
 
 const result = document.querySelector('#result')
 const formulas = document.querySelectorAll('[name=formula]')
-const formulaName = document.querySelector('#formulaName')
-const raio = document.querySelector('#raio')
+const formulasName = document.querySelector('#formulasName')
+const radius = document.querySelector('#radius')
 const medida = document.querySelector('#medida')
 const decimal = document.querySelector('#decimal')
 
-const formulasNames = ['Raio', 'Diâmetro']
+const names = ['Raio', 'Diâmetro']
 formulas.forEach((formula, index) => {
     formula.onclick = function () {
-        formulaName.textContent = formulasNames[index]
+        formulasName.textContent = names[index]
     }
 })
 
-function calculateArea() {
-    if (raio.value !== '') {
+function calculate() {
+    if (radius.value !== '') {
         let area
         if (formulas[0].checked) {
-            area = Math.PI.toFixed(48) * Math.pow(parseFloat(raio.value, 10), 2)
+            area = calculateCircleArea(radius.value)
         } else {
-            area = (Math.PI.toFixed(48) * (2 * Math.pow(parseFloat(raio.value), 2))) / 4
+            area = calculateCircleArea(radius.value, 1)
         }
 
-        result.innerText = `Área: ${decimal.value === '-1' ? area : area.toFixed(parseInt(decimal.value), 10)}${medida.value}²`
+        result.value = `${decimal.value === '-1' ? area : area.toFixed(parseInt(decimal.value), 10)}${medida.value}²`
     } else {
         M.toast({
             html: 'Valor não permitido!',
+            classes: 'red accent-4'
+        })
+    }
+}
+
+function copyResult() {
+    if (result.value !== '') {
+        result.select()
+        document.execCommand('copy')
+
+        M.toast({
+            html: 'Copiado!',
+            classes: 'green'
+        })
+    } else {
+        M.toast({
+            html: 'Calcule a área primeiro!',
             classes: 'red accent-4'
         })
     }

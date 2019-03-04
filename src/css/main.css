@@ -23,6 +23,7 @@
 }
 
 body {
+  font-family: Arial, Helvetica, sans-serif;
   height: 100%;
   display: flex;
   min-height: 100vh;
@@ -89,6 +90,11 @@ nav {
   height: 100% !important
 }
 
+.img {
+  position: relative;
+  top: 5px
+}
+
 #spinner {
   position: absolute;
   left: 50%;
@@ -141,11 +147,5 @@ nav {
 
   ::-webkit-scrollbar-track {
     background-color: #ccc
-  }
-}
-
-@media (min-width: 1200px) {
-  .container {
-    width: 70%
   }
 }
