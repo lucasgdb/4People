@@ -1,29 +1,29 @@
 M.FormSelect.init(document.querySelectorAll('select'))
 
-const result = document.querySelector('#result')
-const formulas = document.querySelectorAll('[name=formula]')
-const formulasName = document.querySelector('#formulasName')
-const radius = document.querySelector('#radius')
-const medida = document.querySelector('#medida')
-const decimal = document.querySelector('#decimal')
+const txtResult = document.querySelector('#result')
+const txtFormulas = document.querySelectorAll('[name=formula]')
+const lblFormula = document.querySelector('#formulasName')
+const txtRadius = document.querySelector('#radius')
+const txtMedida = document.querySelector('#medida')
+const txtDecimal = document.querySelector('#decimal')
 
 const names = ['Raio', 'Diâmetro']
-formulas.forEach((formula, index) => {
-    formula.onclick = function () {
-        formulasName.textContent = names[index]
+txtFormulas.forEach((txtFormula, index) => {
+    txtFormula.onclick = function () {
+        lblFormula.textContent = names[index]
     }
 })
 
 function calculate() {
-    if (radius.value !== '') {
+    if (txtRadius.value !== '') {
         let area
-        if (formulas[0].checked) {
-            area = calculateCircleArea(radius.value)
+        if (txtFormulas[0].checked) {
+            area = calculateCircleArea(txtRadius.value)
         } else {
-            area = calculateCircleArea(radius.value, 1)
+            area = calculateCircleArea(txtRadius.value, 1)
         }
 
-        result.value = `${decimal.value === '-1' ? area : area.toFixed(parseInt(decimal.value), 10)}${medida.value}²`
+        txtResult.value = `${txtDecimal.value === '-1' ? area : area.toFixed(parseInt(txtDecimal.value), 10)}${txtMedida.value}²`
     } else {
         M.toast({
             html: 'Valor não permitido!',
@@ -33,8 +33,8 @@ function calculate() {
 }
 
 function copyResult() {
-    if (result.value !== '') {
-        result.select()
+    if (txtResult.value !== '') {
+        txtResult.select()
         document.execCommand('copy')
 
         M.toast({
@@ -46,5 +46,11 @@ function copyResult() {
             html: 'Calcule a área primeiro!',
             classes: 'red accent-4'
         })
+    }
+}
+
+txtRadius.onkeyup = function (e) {
+    if (e.which === 13) {
+        calculate()
     }
 }

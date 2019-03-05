@@ -18,7 +18,10 @@
 </head>
 
 <body>
-    <?php include_once('componentes/spinner.php') ?>
+    <?php
+    include_once('componentes/noscript.php');
+    include_once('componentes/spinner.php')
+    ?>
 
     <header class="hide">
         <?php include_once('componentes/nav.php') ?>
