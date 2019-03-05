@@ -25,22 +25,3 @@ input[type=text]:focus {
     border-bottom: 1px solid grey !important;
     box-shadow: 0 1px 0 0 grey !important
 }
-
-.select-wrapper ul li>span {
-    color: black
-}
-
-.select-wrapper input.select-dropdown:focus {
-    border-bottom: 1px solid grey !important
-}
-
-[type=radio]:checked+span:after,
-[type=radio].with-gap:checked+span:before,
-[type=radio].with-gap:checked+span:after {
-    border: 2px solid grey
-}
-
-[type=radio]:checked+span:after,
-[type=radio].with-gap:checked+span:after {
-    background-color: grey
-}

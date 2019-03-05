@@ -3,9 +3,9 @@
     <div class="collapsible-body">
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calculadoras/converter_numero_romano/">Converter Número Romano</a>
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calculadoras/fatorar_numero/">Fatorar Número</a>
-        <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calculadoras/maximo_divisor_comum/">Máximo Divisor Comum</a>
-        <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calculadoras/minimo_multiplo_comum/">Mínimo Múltiplo Comum</a>
-        <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calculadoras/indice_de_massa_corporal/">Índice de Massa Corporal</a>
+        <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calculadoras/mdc/">Máximo Divisor Comum</a>
+        <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calculadoras/mmc/">Mínimo Múltiplo Comum</a>
+        <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calculadoras/imc/">Índice de Massa Corporal</a>
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calculadoras/porcentagem/">Porcentagem</a>
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calculadoras/regra_de_3_simples/">Regra de 3 Simples</a>
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calculadoras/equacao_2_grau/">Equação do 2° grau</a>

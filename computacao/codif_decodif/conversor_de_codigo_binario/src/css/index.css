@@ -4,8 +4,8 @@ textarea {
     min-height: 150px;
     overflow-y: scroll;
     border: 0.5px solid grey;
-    border-radius: 3px;
     outline: none;
+    border-radius: 3px;
     color: #333;
     transition: background-color .15s, color .15s
 }

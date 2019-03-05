@@ -128,7 +128,7 @@
                     <div class="col s12">
                         <span id="formulasName">Raio</span>:<br class="hide-on-med-and-up">
                         <div class="input-field inline">
-                            <input id="number" type="number" placeholder="Digite aqui o raio." min="0" value="1">
+                            <input id="number" type="number" placeholder="Digite aqui o raio." min="0" value="1" step="any">
                         </div>
                     </div>
 
@@ -172,12 +172,16 @@
                     </div>
                 </div>
 
-                <button title="Calcular Área" class="btn btn-center waves-effect white black-text z-depth-2" onclick="calculate()">Calcular área</button>
+                <button title="Calcular Área" class="btn btn-center waves-effect white black-text z-depth-2" onclick="calculate()">
+                    Calcular área
+                </button>
 
                 <div class="divider mt-2"></div>
 
-                <input type="text" id="result" placeholder="Resultado">
-                <button title="Copiar" class="btn waves-effect waves-dark white black-text" onclick="copyResult()">Copiar</button>
+                <textarea class="mt-2" id="result" placeholder="Resultado"></textarea>
+                <button title="Copiar" class="btn waves-effect waves-dark white black-text" onclick="copyResult()">
+                    Copiar
+                </button>
             </div>
         </div>
     </main>

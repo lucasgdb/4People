@@ -5,17 +5,17 @@
 <head>
     <?php include_once("$path/componentes/links.php") ?>
     <link rel="stylesheet" href="src/css/index.css">
-    <title>Outras Ferramentas - 4People</title>
+    <title>Índice de Massa Corporal - 4People</title>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <?php include_once("$path/componentes/metas.php") ?>
-    <meta name="title" content="4People - Ferramentas OnLine">
+    <meta name="title" content="Índice de Massa Corporal - 4People">
     <meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/outras_ferramentas/">
-    <meta property="og:title" content="Outras Ferramentas - 4People">
-    <meta name="twitter:title" content="Outras Ferramentas - 4People">
-    <meta property="og:url" content="https://4people.now.sh/outras_ferramentas/">
-    <meta name="twitter:url" content="https://4people.now.sh/outras_ferramentas/">
+    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calculadoras/imc/">
+    <meta property="og:title" content="Índice de Massa Corporal - 4People">
+    <meta name="twitter:title" content="Índice de Massa Corporal - 4People">
+    <meta property="og:url" content="https://4people.now.sh/matematica/calculadoras/imc/">
+    <meta name="twitter:url" content="https://4people.now.sh/matematica/calculadoras/imc/">
 </head>
 
 <body>
@@ -30,7 +30,7 @@
         <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
             <?php include_once("$path/componentes/logo.php") ?>
 
-            <li class="active">
+            <li>
                 <div class="collapsible-header"><i class="material-icons">computer</i>Computação</div>
                 <div class="collapsible-body">
                     <ul class="collapsible padding-headers">
@@ -50,7 +50,7 @@
                             <?php include_once("$path/componentes/computacao/rede_e_internet.php") ?>
                         </li>
 
-                        <li class="active">
+                        <li>
                             <?php include_once("$path/componentes/computacao/codif_decodif.php") ?>
                         </li>
 
@@ -61,11 +61,11 @@
                 </div>
             </li>
 
-            <li>
+            <li class="active">
                 <div class="collapsible-header"><i class="material-icons">functions</i>Matemática</div>
                 <div class="collapsible-body">
                     <ul class="collapsible padding-headers">
-                        <li>
+                        <li class="active">
                             <?php include_once("$path/componentes/matematica/calculadoras.php") ?>
                         </li>
 
@@ -100,21 +100,36 @@
     <main class="hide">
         <div class="container">
             <div class="card-panel">
-                <h1 class="flow-text mt-2">Conversor de código Binário</h1>
+                <h1 class="flow-text mt-2">Calcular Índice de Massa Corporal</h1>
 
-                <label>Tradutor OnLine de código binário e vice-versa, basta digitar abaixo e clicar no botão que desejar.</label>
+                <label>Calculadora de IMC OnLine</label>
                 <div class="divider"></div>
 
-                <textarea class="mt-2" id="text" placeholder="Digite aqui o texto"></textarea>
+                <div class="row mt-2">
+                    <div class="col s12">
+                        Peso:<br class="hide-on-med-and-up">
+                        <div class="input-field inline">
+                            <input id="weight" type="number" placeholder="Digite aqui seu peso." min="1" step="any">
+                        </div>
+                    </div>
 
-                <button title="Converter texto para Binário" class="btn waves-effect waves-dark white black-text" onclick="convertToBinary()">
-                    Converter para Binário
+                    <div class="col s12">
+                        Altura:<br class="hide-on-med-and-up">
+                        <div class="input-field inline">
+                            <input id="height" type="number" placeholder="Digite aqui sua altura." min="1" step="any">
+                        </div>
+                    </div>
+                </div>
+
+                <button title="Calcular IMC" class="btn waves-effect waves-dark white black-text btn-center" onclick="calculate()">
+                    Calcular IMC
                 </button>
 
-                <textarea class="mt-2" id="binary" placeholder="Digite aqui o código binário"></textarea>
+                <div class="divider mt-2"></div>
 
-                <button title="Converter código Binário para texto" class="btn waves-effect waves-dark white black-text" onclick="convertToText()">
-                    Converter para Texto
+                <textarea class="mt-2" id="result" placeholder="Resultado"></textarea>
+                <button title="Copiar" class="btn waves-effect waves-dark white black-text" onclick="copyResult()">
+                    Copiar
                 </button>
             </div>
         </div>
@@ -122,7 +137,7 @@
 
     <?php include_once("$path/componentes/footer.php") ?>
 
-    <script src="/algoritmos/binary_converter.js"></script>
+    <script src="/algoritmos/bmi.js"></script>
     <script src="src/js/index.js"></script>
     <script src="/src/js/main.js"></script>
 </body>
