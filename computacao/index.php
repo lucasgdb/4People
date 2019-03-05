@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+<?php $path = '..' ?>
 <html lang="pt-br">
 
 <head>
-    <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/componentes/links.php') ?>
+    <?php include_once("$path/componentes/links.php") ?>
     <title>Computação - 4People</title>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-    <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/componentes/metas.php') ?>
+    <?php include_once("$path/componentes/metas.php") ?>
     <meta name="title" content="4People - Ferramentas OnLine">
     <meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
@@ -18,42 +19,42 @@
 
 <body>
     <?php
-    include_once($_SERVER['DOCUMENT_ROOT'] . '/componentes/noscript.php');
-    include_once($_SERVER['DOCUMENT_ROOT'] . '/componentes/spinner.php')
+    include_once("$path/componentes/noscript.php");
+    include_once("$path/componentes/spinner.php")
     ?>
 
     <header class="hide">
-        <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/componentes/nav.php') ?>
+        <?php include_once("$path/componentes/nav.php") ?>
 
         <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
-            <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/componentes/logo.php') ?>
+            <?php include_once("$path/componentes/logo.php") ?>
 
             <li class="active">
                 <div class="collapsible-header"><i class="material-icons">computer</i>Computação</div>
                 <div class="collapsible-body">
                     <ul class="collapsible padding-headers">
                         <li>
-                            <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/componentes/computacao/geradores.php') ?>
+                            <?php include_once("$path/componentes/computacao/geradores.php") ?>
                         </li>
 
                         <li>
-                            <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/componentes/computacao/validadores.php') ?>
+                            <?php include_once("$path/componentes/computacao/validadores.php") ?>
                         </li>
 
                         <li>
-                            <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/componentes/computacao/funcoes_string.php') ?>
+                            <?php include_once("$path/componentes/computacao/funcoes_string.php") ?>
                         </li>
 
                         <li>
-                            <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/componentes/computacao/rede_e_internet.php') ?>
+                            <?php include_once("$path/componentes/computacao/rede_e_internet.php") ?>
                         </li>
 
                         <li>
-                            <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/componentes/computacao/encoders_decoders.php') ?>
+                            <?php include_once("$path/componentes/computacao/encoders_decoders.php") ?>
                         </li>
 
                         <li>
-                            <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/componentes/computacao/tabelas_e_padroes.php') ?>
+                            <?php include_once("$path/componentes/computacao/tabelas_e_padroes.php") ?>
                         </li>
                     </ul>
                 </div>
@@ -64,15 +65,15 @@
                 <div class="collapsible-body">
                     <ul class="collapsible padding-headers">
                         <li>
-                            <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/componentes/matematica/calculadoras.php') ?>
+                            <?php include_once("$path/componentes/matematica/calculadoras.php") ?>
                         </li>
 
                         <li>
-                            <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/componentes/matematica/calcular_areas.php') ?>
+                            <?php include_once("$path/componentes/matematica/calcular_areas.php") ?>
                         </li>
 
                         <li>
-                            <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/componentes/matematica/datas_e_horas.php') ?>
+                            <?php include_once("$path/componentes/matematica/datas_e_horas.php") ?>
                         </li>
                     </ul>
                 </div>
@@ -83,11 +84,11 @@
                 <div class="collapsible-body">
                     <ul class="collapsible padding-headers">
                         <li>
-                            <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/componentes/outras_ferramentas/dia_a_dia.php') ?>
+                            <?php include_once("$path/componentes/outras_ferramentas/dia_a_dia.php") ?>
                         </li>
 
                         <li>
-                            <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/componentes/outras_ferramentas/jogos.php') ?>
+                            <?php include_once("$path/componentes/outras_ferramentas/jogos.php") ?>
                         </li>
                     </ul>
                 </div>
@@ -103,7 +104,7 @@
         </div>
     </main>
 
-    <?php include_once($_SERVER['DOCUMENT_ROOT'] . '/componentes/footer.php') ?>
+    <?php include_once("$path/componentes/footer.php") ?>
 
     <script src="/src/js/main.js"></script>
 </body>
