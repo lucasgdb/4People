@@ -122,15 +122,7 @@ nav {
   .container {
     width: 85% !important
   }
-}
 
-@media (max-width: 1023px) {
-  * {
-    cursor: default !important
-  }
-}
-
-@media (min-width: 1024px) {
   ::-webkit-scrollbar {
     width: 5px;
     height: 5px
@@ -147,5 +139,11 @@ nav {
 
   ::-webkit-scrollbar-track {
     background-color: #ccc
+  }
+}
+
+@media (max-width: 992px) {
+  * {
+    cursor: default !important
   }
 }

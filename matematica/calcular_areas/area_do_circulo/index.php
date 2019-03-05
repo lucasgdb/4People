@@ -51,7 +51,7 @@
                         </li>
 
                         <li>
-                            <?php include_once("$path/componentes/computacao/encoders_decoders.php") ?>
+                            <?php include_once("$path/componentes/computacao/codif_decodif.php") ?>
                         </li>
 
                         <li>
@@ -128,7 +128,7 @@
                     <div class="col s12">
                         <span id="formulasName">Raio</span>:<br class="hide-on-med-and-up">
                         <div class="input-field inline">
-                            <input id="radius" type="number" placeholder="Digite aqui o raio." min="0" value="1">
+                            <input id="number" type="number" placeholder="Digite aqui o raio." min="0" value="1">
                         </div>
                     </div>
 

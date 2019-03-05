@@ -50,7 +50,7 @@
                         </li>
 
                         <li>
-                            <?php include_once('componentes/computacao/encoders_decoders.php') ?>
+                            <?php include_once('componentes/computacao/codif_decodif.php') ?>
                         </li>
 
                         <li>

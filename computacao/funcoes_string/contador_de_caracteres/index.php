@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<?php $path = '..' ?>
+<?php $path = '../../..' ?>
 <html lang="pt-br">
 
 <head>
     <?php include_once("$path/componentes/links.php") ?>
+    <link rel="stylesheet" href="src/css/index.css">
     <title>Outras Ferramentas - 4People</title>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <?php include_once("$path/componentes/metas.php") ?>
@@ -29,7 +30,7 @@
         <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
             <?php include_once("$path/componentes/logo.php") ?>
 
-            <li>
+            <li class="active">
                 <div class="collapsible-header"><i class="material-icons">computer</i>Computação</div>
                 <div class="collapsible-body">
                     <ul class="collapsible padding-headers">
@@ -41,7 +42,7 @@
                             <?php include_once("$path/componentes/computacao/validadores.php") ?>
                         </li>
 
-                        <li>
+                        <li class="active">
                             <?php include_once("$path/componentes/computacao/funcoes_string.php") ?>
                         </li>
 
@@ -79,7 +80,7 @@
                 </div>
             </li>
 
-            <li class="active">
+            <li>
                 <div class="collapsible-header"><i class="material-icons">build</i>Outras Ferramentas</div>
                 <div class="collapsible-body">
                     <ul class="collapsible padding-headers">
@@ -99,13 +100,31 @@
     <main class="hide">
         <div class="container">
             <div class="card-panel">
-                <h2>Ferramentas</h2>
+                <h1 class="flow-text mt-2">Contador de Caracteres</h1>
+
+                <label>Contador de caracteres, caracteres sem espaço, palavras, espaços, vogais, consoantes, números e linhas.</label>
+                <div class="divider"></div>
+
+                <textarea class="mt-2" id="text" placeholder="Digite aqui o texto" oninput="countChars()"></textarea>
+
+                <ul class="collection">
+                    <li class="collection-item">Caracteres: <span id="chars">0</span></li>
+                    <li class="collection-item">Caracteres sem espaço: <span id="charsWSpaces">0</span></li>
+                    <li class="collection-item">Palavras: <span id="words">0</span></li>
+                    <li class="collection-item">Espaços: <span id="spaces">0</span></li>
+                    <li class="collection-item">Vogais: <span id="vowels">0</span></li>
+                    <li class="collection-item">Consoantes: <span id="consonants">0</span></li>
+                    <li class="collection-item">Números: <span id="numbers">0</span></li>
+                    <li class="collection-item">Linhas: <span id="lines">0</span></li>
+                </ul>
             </div>
         </div>
     </main>
 
     <?php include_once("$path/componentes/footer.php") ?>
 
+    <script src="/algoritmos/characters_count.js"></script>
+    <script src="src/js/index.js"></script>
     <script src="/src/js/main.js"></script>
 </body>
 

@@ -3,7 +3,7 @@ M.FormSelect.init(document.querySelectorAll('select'))
 const txtResult = document.querySelector('#result')
 const txtFormulas = document.querySelectorAll('[name=formula]')
 const lblFormula = document.querySelector('#formulasName')
-const txtRadius = document.querySelector('#radius')
+const txtNumber = document.querySelector('#number')
 const txtMedida = document.querySelector('#medida')
 const txtDecimal = document.querySelector('#decimal')
 
@@ -15,12 +15,12 @@ txtFormulas.forEach((txtFormula, index) => {
 })
 
 function calculate() {
-    if (txtRadius.value !== '') {
+    if (txtNumber.value !== '') {
         let area
         if (txtFormulas[0].checked) {
-            area = calculateCircleArea(txtRadius.value)
+            area = calculateCircleAreaRadius(parseFloat(txtNumber.value))
         } else {
-            area = calculateCircleArea(txtRadius.value, 1)
+            area = calculateCircleAreaDiameter(parseFloat(txtNumber.value))
         }
 
         txtResult.value = `${txtDecimal.value === '-1' ? area : area.toFixed(parseInt(txtDecimal.value), 10)}${txtMedida.value}²`
@@ -49,7 +49,7 @@ function copyResult() {
     }
 }
 
-txtRadius.onkeyup = function (e) {
+txtNumber.onkeyup = function (e) {
     if (e.which === 13) {
         calculate()
     }

@@ -1,5 +1,7 @@
-function calculateCircleArea(number, type = 0) {
-    return type === 0 ?
-        Math.PI.toFixed(48) * Math.pow(parseFloat(number), 2) :
-        Math.PI.toFixed(48) * Math.pow(parseFloat(number), 2) / 4
+function calculateCircleAreaRadius(radius) {
+    return Math.PI.toFixed(48) * Math.pow(radius, 2) // PI * R²
+}
+
+function calculateCircleAreaDiameter(diameter) {
+    return Math.PI.toFixed(48) * Math.pow(diameter, 2) / 4 // PI * D² / 4
 }
