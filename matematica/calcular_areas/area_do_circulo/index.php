@@ -4,7 +4,7 @@
 
 <head>
     <?php include_once("$path/componentes/links.php") ?>
-    <link rel="stylesheet" href="src/css/index.css">
+    <link rel="stylesheet" href="src/index.css">
     <title>Área do Círculo - 4People</title>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <?php include_once("$path/componentes/metas.php") ?>
@@ -188,8 +188,8 @@
 
     <?php include_once("$path/componentes/footer.php") ?>
 
-    <script src="/algoritmos/circle_area.js"></script>
-    <script src="src/js/index.js"></script>
+    <script src="/algoritmos/circleArea.js"></script>
+    <script src="src/index.js"></script>
     <script src="/src/js/main.js"></script>
 </body>
 

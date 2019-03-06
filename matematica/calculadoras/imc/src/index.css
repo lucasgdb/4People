@@ -8,9 +8,9 @@
 }
 
 textarea {
-    font-size: 25px;
+    font-size: 20px;
     resize: vertical;
-    height: 40px;
+    white-space: nowrap;
     border-top: none;
     border-right: none;
     border-left: none;
@@ -22,6 +22,12 @@ textarea {
 
 input[type=number]:focus,
 input[type=text]:focus {
-    border-bottom: 1px solid grey !important;
-    box-shadow: 0 1px 0 0 grey !important
+    border-bottom: 1px solid #607d8b !important;
+    box-shadow: 0 1px 0 0 #607d8b !important
+}
+
+@media (min-width: 993px) {
+    textarea {
+        font-size: 25px
+    }
 }

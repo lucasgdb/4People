@@ -101,32 +101,32 @@
             <div class="card-panel">
                 <div class="slider">
                     <ul class="slides">
-                        <li>
-                            <img src="images/img1.jpg">
+                        <li class="grey lighten-1">
+                            <img>
                             <div class="caption center-align">
-                                <h3 class="dark black-text">This is our big Tagline!</h3>
-                                <h5 class="light black-text">Here's our small slogan.</h5>
+                                <h3 class="dark grey-text text-darken-4">Feito para todos!</h3>
+                                <h5 class="light grey-text text-darken-4">Contamos com inúmeras ferramentas para Programadores, professores, estudantes e até mesmo para usuários comuns.</h5>
                             </div>
                         </li>
-                        <li>
-                            <img src="images/img2.jpg">
+                        <li class="grey lighten-1">
+
                             <div class="caption left-align">
-                                <h3 class="dark black-text">Left Aligned Caption</h3>
-                                <h5 class="light black-text">Here's our small slogan.</h5>
+                                <h3 class="dark grey-text text-darken-4">Mais rápido!</h3>
+                                <h5 class="light grey-text text-darken-4">Nossas ferramentas foram todas escritas em JavaScript, para maior velocidade e segurança.</h5>
                             </div>
                         </li>
-                        <li>
-                            <img src="images/img3.jpg">
+                        <li class="grey lighten-1">
+
                             <div class="caption right-align">
-                                <h3 class="dark black-text">Right Aligned Caption</h3>
-                                <h5 class="light black-text">Here's our small slogan.</h5>
+                                <h3 class="dark grey-text text-darken-4">Mais acessível!</h3>
+                                <h5 class="light grey-text text-darken-4">Nosso site que permite que qualquer um acesse-o offline.</h5>
                             </div>
                         </li>
-                        <li>
-                            <img src="images/img4.jpg">
+                        <li class="grey lighten-1">
+
                             <div class="caption center-align">
-                                <h3 class="dark black-text">This is our big Tagline!</h3>
-                                <h5 class="light black-text">Here's our small slogan.</h5>
+                                <h3 class="dark grey-text text-darken-4">O melhor!</h3>
+                                <h5 class="light grey-text text-darken-4">O 4People é de código aberto, o que permite qualquer pessoa aprender e contribuir com o site.</h5>
                             </div>
                         </li>
                     </ul>

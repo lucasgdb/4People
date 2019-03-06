@@ -24,7 +24,7 @@ function copyResult(txt) {
         })
     } else {
         M.toast({
-            html: 'Converta-o primeiro!',
+            html: 'Converta-o primeiro.',
             classes: 'red accent-4'
         })
     }

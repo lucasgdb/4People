@@ -18,9 +18,9 @@ function calculate() {
         if (bhaskara.delta < 0) {
             txtResult.value = `Δ: ${bhaskara.delta}. ${bhaskara.msg}`
         } else if (bhaskara.delta === 0) {
-            txtResult.value = `Δ: ${bhaskara.delta}. S: { ${bhaskara.x1}, ${bhaskara.x2} }. ${bhaskara.msg}`
+            txtResult.value = `Δ: ${bhaskara.delta}. Conj. Solução: { ${bhaskara.x1}, ${bhaskara.x2} }. ${bhaskara.msg}`
         } else {
-            txtResult.value = `Δ: ${bhaskara.delta}. S: { ${bhaskara.x1}, ${bhaskara.x2} }. ${bhaskara.msg}`
+            txtResult.value = `Δ: ${bhaskara.delta}. Conj. Solução: { ${bhaskara.x1}, ${bhaskara.x2} }. ${bhaskara.msg}`
         }
     } else {
         M.toast({
@@ -42,7 +42,7 @@ function copyResult() {
         })
     } else {
         M.toast({
-            html: 'Calcule a equação primeiro!',
+            html: 'Calcule a equação primeiro.',
             classes: 'red accent-4'
         })
     }

@@ -30,7 +30,8 @@ body {
   flex-direction: column;
   animation-fill-mode: forwards;
   animation-delay: 300ms;
-  transition: padding-left 300ms
+  transition: padding-left 300ms;
+  min-width: 320px
 }
 
 main {
@@ -123,21 +124,21 @@ nav {
     width: 85% !important
   }
 
-  ::-webkit-scrollbar {
+  :not(textarea)::-webkit-scrollbar {
     width: 5px;
     height: 5px
   }
 
-  ::-webkit-scrollbar-thumb {
+  :not(textarea)::-webkit-scrollbar-thumb {
     background-color: rgb(104, 104, 104);
     border-radius: 8px
   }
 
-  ::-webkit-scrollbar-thumb:hover {
+  :not(textarea)::-webkit-scrollbar-thumb:hover {
     background-color: rgb(66, 66, 66)
   }
 
-  ::-webkit-scrollbar-track {
+  :not(textarea)::-webkit-scrollbar-track {
     background-color: #ccc
   }
 }

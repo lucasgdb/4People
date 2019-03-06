@@ -5,7 +5,7 @@ const txtWeight = document.querySelector('#weight')
 function calculate() {
     if (txtHeight.value !== '' && txtWeight.value !== '') {
         const imcResult = calculateBMI(parseFloat(txtHeight.value), parseFloat(txtWeight.value))
-        txtResult.value = `IMC: ${imcResult.bmi.toFixed(2)} Descrição: ${imcResult.description}`
+        txtResult.value = `IMC: ${Number.isInteger(imcResult.bmi) ? imcResult.bmi.toFixed(1) : imcResult.bmi.toFixed(2)}! Resultado: ${imcResult.description}`
     } else {
         M.toast({
             html: 'Valor não permitido!',
@@ -25,7 +25,7 @@ function copyResult() {
         })
     } else {
         M.toast({
-            html: 'Calcule o IMC primeiro!',
+            html: 'Calcule o IMC primeiro.',
             classes: 'red accent-4'
         })
     }

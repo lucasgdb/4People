@@ -43,7 +43,7 @@ function copyResult() {
         })
     } else {
         M.toast({
-            html: 'Calcule a área primeiro!',
+            html: 'Calcule a área primeiro.',
             classes: 'red accent-4'
         })
     }

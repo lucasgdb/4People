@@ -1,3 +1,4 @@
 M.Slider.init(document.querySelectorAll('.slider'), {
-    interval: 4000
+    interval: 5000,
+    height: 450
 })
