@@ -11,7 +11,7 @@
     <meta name="title" content="Contador de Caracteres - 4People">
     <meta name="description" content="Gerador de Senha. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/geradores/funcoes_string/gerador_de_senha/">
+    <meta name="msapplication-starturl" content="https://4people.now.sh/computacao/geradores/gerador_de_senha/">
     <meta property="og:title" content="Gerador de Senha - 4People">
     <meta name="twitter:title" content="Gerador de Senha - 4People">
     <meta property="og:url" content="https://4people.now.sh/computacao/geradores/gerador_de_senha/">
@@ -233,9 +233,9 @@
                 <button title="Gerar Senha" class="btn btn-center waves-effect waves-dark black-text white" onclick="generate()">Gerar senha</button>
                 <div class="divider mt-2"></div>
 
+                <p class="mb-0">Força de senha: <span id="passwordLength"></span></p>
                 <textarea class="mt-2" id="result" placeholder="Resultado"></textarea>
                 <button title="Copiar" class="btn waves-effect waves-dark black-text white" onclick="copyResult()">Copiar</button>
-
             </div>
         </div>
     </main>

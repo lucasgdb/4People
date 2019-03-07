@@ -6,6 +6,7 @@ const cbSimilarChars = document.querySelector('#similarChars')
 const cbAdditionalChars = document.querySelector('#additionalChars')
 const cbStrength = document.querySelector('#strength')
 const txtLength = document.querySelector('#length')
+const lblPasswordLength = document.querySelector('#passwordLength')
 
 function generate() {
     if (!cbOtherChars[0].checked && !cbOtherChars[1].checked &&
@@ -28,10 +29,11 @@ function generate() {
             cbAdditionalChars.value,
             cbEqualChars.checked,
             cbSimilarChars.checked,
-            cbStrength.checked
+            true
         )
 
-        txtResult.value = `Senha: ${password.password}${cbStrength.checked ? `. Força: ${password.strength}` : ''}`
+        lblPasswordLength.textContent = password.strength
+        txtResult.value = password.password
     }
 }
 
@@ -49,5 +51,13 @@ function copyResult() {
             html: 'Gere sua senha primeiro.',
             classes: 'red accent-4'
         })
+    }
+}
+
+cbStrength.onchange = function () {
+    if (this.checked) {
+        lblPasswordLength.parentElement.hidden = false
+    } else {
+        lblPasswordLength.parentElement.hidden = true
     }
 }

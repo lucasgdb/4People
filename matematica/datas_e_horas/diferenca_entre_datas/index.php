@@ -8,14 +8,14 @@
     <title>Diferença entre Datas - 4People</title>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <?php include_once("$path/componentes/metas.php") ?>
-    <meta name="title" content="Equação do 2° Grau - Ferramentas OnLine">
-    <meta name="description" content="Calcular a equação do 2° grau (Bhaskara). 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+    <meta name="title" content="Diferença entre Datas - 4People">
+    <meta name="description" content="Diferença entre Datas. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calcular_areas/equacao_2_grau/">
-    <meta property="og:title" content="Equação do 2° Grau - 4People">
-    <meta name="twitter:title" content="Equação do 2° Grau - 4People">
-    <meta property="og:url" content="https://4people.now.sh/matematica/calcular_areas/equacao_2_grau/">
-    <meta name="twitter:url" content="https://4people.now.sh/matematica/calcular_areas/equacao_2_grau/">
+    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/datas_e_horas/diferenca_entre_datas/">
+    <meta property="og:title" content="Diferença entre Datas - 4People">
+    <meta name="twitter:title" content="Diferença entre Datas - 4People">
+    <meta property="og:url" content="https://4people.now.sh/matematica/datas_e_horas/diferenca_entre_datas/">
+    <meta name="twitter:url" content="https://4people.now.sh/matematica/datas_e_horas/diferenca_entre_datas/">
 </head>
 
 <body>
