@@ -9,7 +9,7 @@
 
 textarea {
     font-size: 20px;
-    resize: vertical;
+    resize: none;
     white-space: nowrap;
     border-top: none;
     border-right: none;

@@ -74,7 +74,6 @@ function generatePassword(
                     passChar === 'g' && char === 'q' ||
                     passChar === 'q' && char === 'g'
                 ) {
-                    console.log(passChar, char)
                     char = characters[parseInt(Math.random() * characters.length)]
                 }
 

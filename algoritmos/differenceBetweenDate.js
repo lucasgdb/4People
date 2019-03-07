@@ -15,4 +15,4 @@ function compareDateBetween(beginDate, endDate) {
     }
 }
 
-console.log(compareDateBetween("07/30/1999", "03/06/2019"))
+// console.log(compareDateBetween("07/30/1999", "03/06/2019"))

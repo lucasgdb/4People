@@ -5,17 +5,17 @@
 <head>
     <?php include_once("$path/componentes/links.php") ?>
     <link rel="stylesheet" href="src/index.css">
-    <title>Equação do 2° Grau - 4People</title>
+    <title>Gerador de Pessoa - 4People</title>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <?php include_once("$path/componentes/metas.php") ?>
-    <meta name="title" content="Equação do 2° Grau - Ferramentas OnLine">
-    <meta name="description" content="Calcular a equação do 2° grau (Bhaskara). 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+    <meta name="title" content="Contador de Caracteres - 4People">
+    <meta name="description" content="Contador de Caracteres. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calcular_areas/equacao_2_grau/">
-    <meta property="og:title" content="Equação do 2° Grau - 4People">
-    <meta name="twitter:title" content="Equação do 2° Grau - 4People">
-    <meta property="og:url" content="https://4people.now.sh/matematica/calcular_areas/equacao_2_grau/">
-    <meta name="twitter:url" content="https://4people.now.sh/matematica/calcular_areas/equacao_2_grau/">
+    <meta name="msapplication-starturl" content="https://4people.now.sh/computacao/funcoes_string/contador_de_caracteres/">
+    <meta property="og:title" content="Contador de Caracteres - 4People">
+    <meta name="twitter:title" content="Contador de Caracteres - 4People">
+    <meta property="og:url" content="https://4people.now.sh/computacao/funcoes_string/contador_de_caracteres/">
+    <meta name="twitter:url" content="https://4people.now.sh/computacao/funcoes_string/contador_de_caracteres/">
 </head>
 
 <body>
@@ -30,11 +30,11 @@
         <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
             <?php include_once("$path/componentes/logo.php") ?>
 
-            <li>
+            <li class="active">
                 <div class="collapsible-header"><i class="material-icons">computer</i>Computação</div>
                 <div class="collapsible-body">
                     <ul class="collapsible padding-headers">
-                        <li>
+                        <li class="active">
                             <?php include_once("$path/componentes/computacao/geradores.php") ?>
                         </li>
 
@@ -61,11 +61,11 @@
                 </div>
             </li>
 
-            <li class="active">
+            <li>
                 <div class="collapsible-header"><i class="material-icons">functions</i>Matemática</div>
                 <div class="collapsible-body">
                     <ul class="collapsible padding-headers">
-                        <li class="active">
+                        <li>
                             <?php include_once("$path/componentes/matematica/calculadoras.php") ?>
                         </li>
 
@@ -100,51 +100,64 @@
     <main class="hide">
         <div class="container">
             <div class="card-panel">
-                <h1 class="flow-text mt-2">Calcular equação do 2° Grau</h1>
+                <h1 class="flow-text mt-2">Gerador de pessoas</h1>
 
-                <label>Cálculo da equção do 2° grau (Bhaskara) OnLine</label>
+                <label>O Gerador de Pessoas gera dados aleatórios e não existentes de pessoas</label>
                 <div class="divider"></div>
 
-                <div class="row mt-2">
-                    <div class="col s12">
-                        Valor A:<br class="hide-on-med-and-up">
-                        <div class="input-field inline">
-                            <input id="valueA" type="number" placeholder="Digite aqui o valor do A." step="any">
-                        </div>
+                <div class="row">
+                    <h5>Dados pessoais</h5>
+                    <div class="col s12 m6">
+                        <textarea class="mt-2" placeholder="Nome" readonly></textarea>
                     </div>
-
-                    <div class="col s12">
-                        Valor B:<br class="hide-on-med-and-up">
-                        <div class="input-field inline">
-                            <input id="valueB" type="number" placeholder="Digite aqui o valor do B." step="any">
-                        </div>
+                    <div class="col s12 m6">
+                        <textarea class="mt-2" placeholder="Sobrenome" readonly></textarea>
                     </div>
-
-                    <div class="col s12">
-                        Valor C:<br class="hide-on-med-and-up">
-                        <div class="input-field inline">
-                            <input id="valueC" type="number" placeholder="Digite aqui o valor do C." step="any">
-                        </div>
+                    <div class="col s12 m6">
+                        <textarea class="mt-2" placeholder="CPF" readonly></textarea>
+                    </div>
+                    <div class="col s12 m6">
+                        <textarea class="mt-2" placeholder="RG" readonly></textarea>
+                    </div>
+                    <div class="col s12 m6">
+                        <textarea class="mt-2" placeholder="Data de nascimento" readonly></textarea>
+                    </div>
+                    <div class="col s12 m6">
+                        <textarea class="mt-2" placeholder="Signo" readonly></textarea>
                     </div>
                 </div>
 
-                <button title="Calcular o Bhaskara" class="btn btn-center waves-effect white black-text z-depth-2" onclick="calculate()">
-                    Calcular Bhaskara
-                </button>
+                <div class="row">
+                    <h5>Dados online</h5>
+                    <div class="col s12 m6">
+                        <textarea class="mt-2" placeholder="E-mail" readonly></textarea>
+                    </div>
+                    <div class="col s12 m6">
+                        <textarea class="mt-2" placeholder="Senha" readonly></textarea>
+                    </div>
+                    <div class="col s12 m6">
+                        <textarea class="mt-2" placeholder="Nick" readonly></textarea>
+                    </div>
+                    <div class="col s12 m6">
+                        <textarea class="mt-2" placeholder="Site" readonly></textarea>
+                    </div>
+                    <div class="col s12 m6">
+                        <textarea class="mt-2" placeholder="Data de nascimento" readonly></textarea>
+                    </div>
+                    <div class="col s12 m6">
+                        <textarea class="mt-2" placeholder="Signo" readonly></textarea>
+                    </div>
+                </div>
 
-                <div class="divider mt-2"></div>
+                <button class="btn waves-effect waves-dark black-text white" id="result" onclick="generateResult()">Gerar</button>
+                <button class="btn waves-effect waves-dark black-text white" id="copy" onclick="copyResult()">Copiar</button>
 
-                <textarea class="mt-2" id="result" placeholder="Resultado"></textarea>
-                <button title="Copiar" class="btn waves-effect waves-dark white black-text" onclick="copyResult()">
-                    Copiar
-                </button>
             </div>
         </div>
     </main>
 
     <?php include_once("$path/componentes/footer.php") ?>
-
-    <script src="/algoritmos/bhaskara.js"></script>
+    <script src="src/faker.pt_BR.min.js"></script>
     <script src="src/index.js"></script>
     <script src="/src/js/main.js"></script>
 </body>

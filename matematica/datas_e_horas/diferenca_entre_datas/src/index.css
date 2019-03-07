@@ -1,0 +1,56 @@
+.input-field {
+    margin: 0
+}
+
+.btn-center {
+    left: 50%;
+    transform: translateX(-50%)
+}
+
+input[type=text]:focus {
+    border-bottom: 1px solid #607d8b !important;
+    box-shadow: 0 1px 0 0 #607d8b !important
+}
+
+.datepicker-date-display {
+    background-color: #607d8b
+}
+
+.datepicker-day-button:focus {
+    color: white !important;
+    background-color: #a2b0b6
+}
+
+.datepicker-done,
+.datepicker-cancel,
+.select-dropdown li>span,
+.is-today,
+.timepicker-close {
+    color: #607d8b !important
+}
+
+td.is-selected,
+.month-prev:active,
+.month-prev:focus,
+.month-next:active,
+.month-next:focus,
+.timepicker-digital-display {
+    background-color: #607d8b !important
+}
+
+td.is-selected.is-today {
+    color: white !important
+}
+
+.timepicker-canvas-bg,
+.timepicker-canvas-bearing {
+    fill: #607d8b !important
+}
+
+.timepicker-canvas line {
+    stroke: #607d8b
+}
+
+.timepicker-tick:hover {
+    background-color: #a2b0b6
+}

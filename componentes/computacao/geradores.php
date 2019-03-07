@@ -18,7 +18,7 @@
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/computacao/geradores/gerador_de_inscricao_estadual/">Gerador de Inscrição Estadual</a>
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/computacao/geradores/gerador_de_titulo_de_eleitor/">Gerador de Título de Eleitor</a>
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/computacao/geradores/gerador_de_cartao_de_credito/">Gerador de Cartão de Crédito</a>
-        <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/computacao/geradores/gerador_de_pessoas/">Gerador de Pessoas</a>
+        <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/computacao/geradores/gerador_de_pessoa/">Gerador de Pessoa</a>
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/computacao/geradores/gerador_de_empresas/">Gerador de Empresas</a>
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/computacao/geradores/gerador_de_imagem/">Gerador de Imagem</a>
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/computacao/geradores/gerador_de_lorem_ipsum/">Gerador de Lorem Ipsum</a>

@@ -141,6 +141,22 @@ nav {
   :not(textarea)::-webkit-scrollbar-track {
     background-color: #ccc
   }
+
+  #result::-webkit-scrollbar {
+    height: 5px
+  }
+
+  #result#result::-webkit-scrollbar-thumb {
+    background-color: rgb(104, 104, 104)
+  }
+
+  #result::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(66, 66, 66)
+  }
+
+  #result::-webkit-scrollbar-track {
+    background-color: #ccc
+  }
 }
 
 @media (max-width: 992px) {

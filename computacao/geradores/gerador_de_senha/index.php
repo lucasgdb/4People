@@ -187,7 +187,7 @@
                     <div class="col s12">
                         Caracteres adicionais:
                         <div class="input-field inline">
-                            <input placeholder="E.g: ^<>:,.~´`'" id="additionalChars" type="text">
+                            <input placeholder="E.g: ^<>:,.~´`'." id="additionalChars" type="text">
                         </div>
                     </div>
                 </div>
@@ -206,7 +206,7 @@
                         <p>
                             <label>
                                 <input id="equalChars" type="checkbox" class="filled-in" checked>
-                                <span>Excluir caracteres iguais</span>
+                                <span>Excluir caracteres iguais (AA, ll, 22)</span>
                             </label>
                         </p>
                     </div>
@@ -215,7 +215,7 @@
                         <p>
                             <label>
                                 <input id="similarChars" type="checkbox" class="filled-in" checked>
-                                <span>Excluir caracteres similares</span>
+                                <span>Excluir caracteres similares (lL, lj, O0)</span>
                             </label>
                         </p>
                     </div>
@@ -230,10 +230,11 @@
                     </div>
                 </div>
 
-                <div class="divider"></div>
+                <button title="Gerar Senha" class="btn btn-center waves-effect waves-dark black-text white" onclick="generate()">Gerar senha</button>
+                <div class="divider mt-2"></div>
+
                 <textarea class="mt-2" id="result" placeholder="Resultado"></textarea>
-                <button class="btn waves-effect waves-dark black-text white" onclick="generate()">Gerar senha</button>
-                <button class="btn waves-effect waves-dark black-text white" onclick="copyResult()">Copiar</button>
+                <button title="Copiar" class="btn waves-effect waves-dark black-text white" onclick="copyResult()">Copiar</button>
 
             </div>
         </div>

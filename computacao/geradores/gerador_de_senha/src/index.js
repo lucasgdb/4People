@@ -31,7 +31,7 @@ function generate() {
             cbStrength.checked
         )
 
-        txtResult.value = `Senha: ${password.password}. Força: ${password.strength}`
+        txtResult.value = `Senha: ${password.password}${cbStrength.checked ? `. Força: ${password.strength}` : ''}`
     }
 }
 

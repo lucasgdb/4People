@@ -5,7 +5,7 @@
 <head>
     <?php include_once("$path/componentes/links.php") ?>
     <link rel="stylesheet" href="src/index.css">
-    <title>Equação do 2° Grau - 4People</title>
+    <title>Diferença entre Datas - 4People</title>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <?php include_once("$path/componentes/metas.php") ?>
     <meta name="title" content="Equação do 2° Grau - Ferramentas OnLine">
@@ -65,7 +65,7 @@
                 <div class="collapsible-header"><i class="material-icons">functions</i>Matemática</div>
                 <div class="collapsible-body">
                     <ul class="collapsible padding-headers">
-                        <li class="active">
+                        <li>
                             <?php include_once("$path/componentes/matematica/calculadoras.php") ?>
                         </li>
 
@@ -73,7 +73,7 @@
                             <?php include_once("$path/componentes/matematica/calcular_areas.php") ?>
                         </li>
 
-                        <li>
+                        <li class="active">
                             <?php include_once("$path/componentes/matematica/datas_e_horas.php") ?>
                         </li>
                     </ul>
@@ -100,51 +100,63 @@
     <main class="hide">
         <div class="container">
             <div class="card-panel">
-                <h1 class="flow-text mt-2">Calcular equação do 2° Grau</h1>
+                <h1 class="flow-text mt-2">Diferença entre Datas</h1>
 
-                <label>Cálculo da equção do 2° grau (Bhaskara) OnLine</label>
+                <label>Calcular diferença entre duas datas, com um leque de recursos disponíveis.</label>
                 <div class="divider"></div>
 
                 <div class="row mt-2">
-                    <div class="col s12">
-                        Valor A:<br class="hide-on-med-and-up">
+                    <div class="col s12 m6">
+                        Data inicial:<br class="hide-on-large-only">
                         <div class="input-field inline">
-                            <input id="valueA" type="number" placeholder="Digite aqui o valor do A." step="any">
+                            <input id="beginDate" type="text" placeholder="Data inicial" class="datepicker">
                         </div>
                     </div>
 
-                    <div class="col s12">
-                        Valor B:<br class="hide-on-med-and-up">
+                    <div class="col s12 m6">
+                        Horário:<br class="hide-on-large-only">
                         <div class="input-field inline">
-                            <input id="valueB" type="number" placeholder="Digite aqui o valor do B." step="any">
+                            <input id="beginTime" type="text" placeholder="Horário atual" class="timepicker">
                         </div>
                     </div>
 
-                    <div class="col s12">
-                        Valor C:<br class="hide-on-med-and-up">
+                    <div class="col s12 m6">
+                        Data final:<br class="hide-on-large-only">
                         <div class="input-field inline">
-                            <input id="valueC" type="number" placeholder="Digite aqui o valor do C." step="any">
+                            <input id="endDate" type="text" placeholder="Data final" class="datepicker">
+                        </div>
+                    </div>
+
+                    <div class="col s12 m6">
+                        Horário:<br class="hide-on-large-only">
+                        <div class="input-field inline">
+                            <input id="endTime" type="text" placeholder="Horário atual" class="timepicker">
                         </div>
                     </div>
                 </div>
 
-                <button title="Calcular o Bhaskara" class="btn btn-center waves-effect white black-text z-depth-2" onclick="calculate()">
-                    Calcular Bhaskara
+                <button title="Calcular a diferença entre datas" class="btn btn-center waves-effect white black-text z-depth-2" onclick="calculate()">
+                    Calcular diferença
                 </button>
 
                 <div class="divider mt-2"></div>
 
-                <textarea class="mt-2" id="result" placeholder="Resultado"></textarea>
-                <button title="Copiar" class="btn waves-effect waves-dark white black-text" onclick="copyResult()">
-                    Copiar
-                </button>
+                <ul class="collection">
+                    <li class="collection-item">Segundos: <span id="secs">0</span></li>
+                    <li class="collection-item">Minutos: <span id="mins">0</span></li>
+                    <li class="collection-item">Horas: <span id="hours">0</span></li>
+                    <li class="collection-item">Dias: <span id="days">0</span></li>
+                    <li class="collection-item">Semanas: <span id="weeks">0</span></li>
+                    <li class="collection-item">Meses: <span id="months">0</span></li>
+                    <li class="collection-item">Anos: <span id="years">0</span></li>
+                </ul>
             </div>
         </div>
     </main>
 
     <?php include_once("$path/componentes/footer.php") ?>
 
-    <script src="/algoritmos/bhaskara.js"></script>
+    <script src="/algoritmos/differenceBetweenDate.js"></script>
     <script src="src/index.js"></script>
     <script src="/src/js/main.js"></script>
 </body>
