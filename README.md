@@ -13,14 +13,14 @@
   - **Jairo Arcy**
     - Programador
   - **Renan de Mattos**
-    - Analista
+    - Análise
   - **Suzany Silva**
-    - Teoria/Análise
+    - Análise, teoria
 
 ## Linguagens/Bibliotecas/Frameworks
   - HTML
   - CSS
-  - JavaScript
+  - JavaScript 
   - PHP
   - FakerJS
   - MaterializeCSS
