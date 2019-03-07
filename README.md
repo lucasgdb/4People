@@ -5,7 +5,7 @@
   O **_4People_** disponibiliza ferramentas que vão desde Geradores (Senhas, CPF, RG, Portfólio) até ferramentas para o uso no cotidiano (Sorteadores, Progresso do Ano, etc.) e ferramentas para jogos (Gerador de Decks, Calculadoras, etc.)
 
 ## Imagem
-  ![4people](images/4People.png "4People - Início")
+  ![4people](imagens/4People.png "4People - Início")
 
 ## Integrantes
   - **Lucas Bittencourt**
