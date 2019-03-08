@@ -57,8 +57,7 @@ footer {
   -webkit-user-select: none !important
 }
 
-.collapsible-header,
-nav {
+.collapsible-header {
   border-bottom: 1px solid #e0e0e0 !important
 }
 
@@ -89,11 +88,6 @@ nav {
 
 .sidenav {
   height: 100% !important
-}
-
-.img {
-  position: relative;
-  top: 5px
 }
 
 #spinner {

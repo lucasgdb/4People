@@ -5,8 +5,10 @@ M.Collapsible.init(document.querySelectorAll('.sidenav.collapsible'), {
 })
 M.Collapsible.init(document.querySelectorAll('.padding-headers.collapsible'))
 
-// Left and right effects from sidebar
+// Constants
 const sidenav = M.Sidenav.getInstance(document.querySelector('#slide-out'))
+
+// Left and right effects from sidebar
 let tr = false
 
 if (sessionStorage.getItem('sideStatus') === 'true') {
@@ -89,10 +91,14 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 window.onload = function () {
-  document.querySelector('header').className = ''
+  document.querySelector('header').className = 'navbar-fixed'
   document.querySelector('main').className = 'grey lighten-5'
   document.querySelector('footer').className = 'page-footer grey lighten-3'
   document.querySelector('#spinner').remove()
   maxWidth.addListener(matchMax)
   minWidth.addListener(matchMin)
+}
+
+window.onscroll = function() {
+
 }

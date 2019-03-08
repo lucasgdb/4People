@@ -17,10 +17,11 @@
   - **Suzany Silva**
     - Análise, teoria
 
-## Linguagens/Bibliotecas/Frameworks
+## Linguagens/Bibliotecas/Frameworks/Tecnologias
   - HTML
   - CSS
   - JavaScript 
   - PHP
   - FakerJS
   - MaterializeCSS
+  - PWA

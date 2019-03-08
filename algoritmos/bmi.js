@@ -1,3 +1,4 @@
+// Body Mass Index
 function calculateBMI(height, weight) {
     let bmi = weight / height ** 2
     if (!Number.isFinite(bmi)) bmi = 0
