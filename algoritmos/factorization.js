@@ -44,5 +44,3 @@ function countItems(array, item) {
 
     return sum
 }
-
-console.log(calculateFacorization(20))
