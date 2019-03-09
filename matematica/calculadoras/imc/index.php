@@ -124,7 +124,7 @@
 
                 <div class="divider mt-2"></div>
 
-                <textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false"></textarea>
+                <textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
                 <button title="Copiar" class="btn waves-effect waves-dark white black-text" onclick="copyResult()">
                     Copiar
                 </button>

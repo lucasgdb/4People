@@ -5,17 +5,17 @@
 <head>
     <?php include_once("$path/componentes/links.php") ?>
     <link rel="stylesheet" href="src/index.css">
-    <title>Equação do 2° Grau - 4People</title>
+    <title>Fatorar Número - 4People</title>
     <?php include_once("$path/componentes/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-    <meta name="title" content="Equação do 2° Grau - 4People">
-    <meta name="description" content="Calcular a equação do 2° grau (Bhaskara). 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+    <meta name="title" content="Fatorar Número - 4People">
+    <meta name="description" content="Fatoração de Número OnLine. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calcular_areas/equacao_2_grau/">
-    <meta property="og:title" content="Equação do 2° Grau - 4People">
-    <meta name="twitter:title" content="Equação do 2° Grau - 4People">
-    <meta property="og:url" content="https://4people.now.sh/matematica/calcular_areas/equacao_2_grau/">
-    <meta name="twitter:url" content="https://4people.now.sh/matematica/calcular_areas/equacao_2_grau/">
+    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calculadoras/fatorar_numero/">
+    <meta property="og:title" content="Fatorar Número - 4People">
+    <meta name="twitter:title" content="Fatorar Número - 4People">
+    <meta property="og:url" content="https://4people.now.sh/matematica/calculadoras/fatorar_numero/">
+    <meta name="twitter:url" content="https://4people.now.sh/matematica/calculadoras/fatorar_numero/">
 </head>
 
 <body>
@@ -97,36 +97,22 @@
     <main class="grey lighten-5 hide">
         <div class="container">
             <div class="card-panel">
-                <h1 class="flow-text mt-2">Calcular equação do 2° Grau</h1>
+                <h1 class="flow-text mt-2">Fatorar Número</h1>
 
-                <label>Cálculo da equção do 2° grau (Bhaskara) OnLine</label>
+                <label>Calculadora para Fatorar Números OnLine.</label>
                 <div class="divider"></div>
 
                 <div class="row mt-2">
                     <div class="col s12">
-                        Valor A:<br class="hide-on-med-and-up">
+                        Número:
                         <div class="input-field inline">
-                            <input id="valueA" type="number" placeholder="Digite aqui o valor do A." step="any">
-                        </div>
-                    </div>
-
-                    <div class="col s12">
-                        Valor B:<br class="hide-on-med-and-up">
-                        <div class="input-field inline">
-                            <input id="valueB" type="number" placeholder="Digite aqui o valor do B." step="any">
-                        </div>
-                    </div>
-
-                    <div class="col s12">
-                        Valor C:<br class="hide-on-med-and-up">
-                        <div class="input-field inline">
-                            <input id="valueC" type="number" placeholder="Digite aqui o valor do C." step="any">
+                            <input id="number" type="number" placeholder="Digite aqui o número." min="1" step="1" value="10">
                         </div>
                     </div>
                 </div>
 
-                <button title="Calcular o Bhaskara" class="btn btn-center waves-effect white black-text z-depth-2" onclick="calculate()">
-                    Calcular Bhaskara
+                <button title="Fatorar Número" class="btn waves-effect waves-dark white black-text btn-center" onclick="calculate()">
+                    Fatorar Número
                 </button>
 
                 <div class="divider mt-2"></div>
@@ -141,7 +127,7 @@
 
     <?php include_once("$path/componentes/footer.php") ?>
 
-    <script src="/algoritmos/bhaskara.js"></script>
+    <script src="/algoritmos/factorization.js"></script>
     <script src="src/index.js"></script>
     <script src="/src/js/main.js"></script>
 </body>

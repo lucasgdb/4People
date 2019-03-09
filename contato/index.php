@@ -119,7 +119,7 @@
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Contato - 4People</h1>
 
-                <label>Alguma dúvida? Algum bug? Deseja alguma ferramenta nova? Por favor, nos contate e nos deixe sabendo de qualquer coisa.</label>
+                <label>Alguma dúvida? Algum bug? Deseja alguma ferramenta nova? Por favor, nos contate e deixe-nos sabendo de qualquer coisa.</label>
                 <div class="divider"></div>
 
                 <h5>Dados</h5>
@@ -147,7 +147,7 @@
                     <div class="divider"></div>
 
                     <h5>Informações</h5>
-                    <textarea name="subject" placeholder="Informações" oninvalid="this.setCustomValidity('Por favor, preencha esse campo.')" oninput="setCustomValidity('')" spellcheck="false" required></textarea>
+                    <textarea name="subject" placeholder="Mensagem" oninvalid="this.setCustomValidity('Por favor, preencha esse campo.')" oninput="setCustomValidity('')" spellcheck="false" required></textarea>
 
                     <button title="Enviar" class="btn btn-center waves-effect waves-dark white black-text" type="submit">
                         Enviar

@@ -1,9 +1,9 @@
 // Least Common Minimum
-function calculateLCM(...numbers) {
+function calculateLCM(numbers) {
     let by = 2 // Lower prime number
     let result = 1 // Lower result number
-    
-    numbers = numbers.filter(number => number > 0) // Removing the 0's
+
+    const lcm = `MMC (${numbers.join(', ')})`
 
     do {
         let count = 0 // Number of divided numbers
@@ -20,7 +20,12 @@ function calculateLCM(...numbers) {
         } else {
             result *= by
         }
+
     } while (numbers.filter(number => number > 1).length >= 1)
 
-    return result
+    return {
+        lcm,
+        result
+    }
 }
+

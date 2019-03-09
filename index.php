@@ -123,7 +123,7 @@
 
                             <div class="caption center-align">
                                 <h3 class="dark grey-text text-darken-4">O melhor!</h3>
-                                <h5 class="light grey-text text-darken-4">O 4People possui as melhores ferramentas atualizadas. Tá sentindo falta de alguma? Por favor, nos <a href="contato/">contate</a>.</h5>
+                                <h5 class="light grey-text text-darken-4">O 4People possui as melhores ferramentas atualizadas. Tá sentindo falta de alguma? Por favor, nos envie uma <a href="contato/">mensagem</a>.</h5>
                             </div>
                         </li>
                     </ul>

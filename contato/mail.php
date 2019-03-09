@@ -2,8 +2,6 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-//Load Composer's autoloader
-
 require_once('src/Exception.php');
 require_once('src/PHPMailer.php');
 require_once('src/SMTP.php');
@@ -16,7 +14,7 @@ $message = $_POST['subject'];
 $mail = new PHPMailer(true);
 
 try {
-    //Server settings
+    // Server settings
     $mail->SMTPDebug = 0;
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
@@ -26,14 +24,14 @@ try {
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
 
-    //Recipients
+    // Recipients
     $mail->setFrom("$email", '4People');
     $mail->addAddress("4people.onlinetools@gmail.com", "$firstName $lastName");
 
-    //Content
+    // Content
     $mail->isHTML(true);
     $mail->Subject = '4People - Contato';
-    $mail->Body    = "Nome: $firstName $lastName<br>E-mail: $email<br>Mensagem: $message";
+    $mail->Body = "Nome: $firstName $lastName<br>E-mail: $email<br>Mensagem: $message";
     $mail->AltBody = 'Mensagem recebida do 4People';
 
     if ($mail->send()) {

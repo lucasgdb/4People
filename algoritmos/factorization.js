@@ -1,34 +1,44 @@
 function calculateFacorization(number) {
-    let by = 2
-    let result = []
+    if (number !== 1) {
+        let by = 2
+        let result = []
 
-    do {
-        let count = 0
-        if (number % by === 0) {
-            number /= by
-            count++
-        }
+        do {
+            let count = 0
+            if (number % by === 0) {
+                number /= by
+                count++
+            }
 
-        if (count === 0) {
-            by++
-        } else {
-            result.push(by)
-        }
-    } while (number > 1)
+            if (count === 0) {
+                by++
+            } else {
+                result.push(by)
+            }
+        } while (number > 1)
 
-    const noRepeatedResults = [...new Set(result)]
+        const noRepeatedResults = [...new Set(result)]
 
-    const amount = []
-    noRepeatedResults.forEach(number => {
-        amount.push({
-            number,
-            "toThe": countItems(result, number)
+        const amount = []
+        noRepeatedResults.forEach(number => {
+            amount.push({
+                number,
+                "toThe": countItems(result, number)
+            })
         })
-    })
 
-    return {
-        result,
-        amount
+        return {
+            result,
+            amount
+        }
+    } else {
+        return {
+            "result": [1],
+            "amount": [{
+                "number": [1],
+                "toThe": 1
+            }]
+        }
     }
 }
 

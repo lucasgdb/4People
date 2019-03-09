@@ -1,9 +1,9 @@
 // Greatest Common Divisor
-function calculateGCD(...numbers) {
+function calculateGCD(numbers) {
     let by = 2 // Lower prime number
     let result = 1 // Lower result number
 
-    numbers = numbers.filter(number => number > 0) // Removing the 0's
+    const gcd = `MDC (${numbers.join(', ')})`
 
     do {
         let count = 0 // Number of divided numbers
@@ -22,7 +22,10 @@ function calculateGCD(...numbers) {
         }
     } while (numbers.filter(number => number > 1).length >= 1)
 
-    return result
+    return {
+        gcd,
+        result
+    }
 }
 
 console.log(calculateGCD(50, 30))
