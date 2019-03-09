@@ -98,7 +98,3 @@ window.onload = function () {
   maxWidth.addListener(matchMax)
   minWidth.addListener(matchMin)
 }
-
-window.onscroll = function() {
-
-}
