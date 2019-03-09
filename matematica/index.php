@@ -5,8 +5,8 @@
 <head>
     <?php include_once("$path/componentes/links.php") ?>
     <title>Matemática - 4People</title>
-    <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <?php include_once("$path/componentes/metas.php") ?>
+    <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <meta name="title" content="4People - Ferramentas OnLine">
     <meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
@@ -24,7 +24,7 @@
     include_once("$path/componentes/header.php")
     ?>
 
-    <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
+    <ul id="slide-out" class="sidenav sidenav-fixed collapsible hide">
         <?php include_once("$path/componentes/logo.php") ?>
 
         <li>
@@ -93,7 +93,7 @@
         </li>
     </ul>
 
-    <main class="hide">
+    <main class="grey lighten-5 hide">
         <div class="container">
             <div class="card-panel">
                 <h2>Ferramentas</h2>

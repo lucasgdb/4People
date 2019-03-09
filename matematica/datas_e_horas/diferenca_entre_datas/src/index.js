@@ -1,4 +1,5 @@
 M.Datepicker.init(document.querySelectorAll('.datepicker'), {
+    format: 'mmmm dd (dddd), yyyy',
     yearRange: 25,
     i18n: {
         "cancel": '',
@@ -60,6 +61,7 @@ M.Timepicker.init(document.querySelectorAll('.timepicker'), {
     }
 })
 
+const lblMilliSec = document.querySelector('#milliSecs')
 const lblSec = document.querySelector('#secs')
 const lblMin = document.querySelector('#mins')
 const lblHours = document.querySelector('#hours')
@@ -86,6 +88,7 @@ function calculate() {
             endDate.date.toUTCString().replace('03:00:00', endTimeHour)
         )
 
+        lblMilliSec.textContent = difference.milliSeconds
         lblSec.textContent = difference.seconds
         lblMin.textContent = difference.minutes
         lblHours.textContent = difference.hours
@@ -116,4 +119,12 @@ function calculateAMorPM(time, type) {
 document.addEventListener('DOMContentLoaded', function () {
     beginDate.cancelBtn.disabled = true
     endDate.cancelBtn.disabled = true
+
+    const date = new Date()
+    beginDate.setDate(date)
+    beginDate.doneBtn.click()
+
+    date.setDate(date.getDate() + 1)
+    endDate.setDate(date)
+    endDate.doneBtn.click()
 })

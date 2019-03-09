@@ -91,9 +91,10 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 window.onload = function () {
-  document.querySelector('header').className = 'navbar-fixed'
-  document.querySelector('main').className = 'grey lighten-5'
-  document.querySelector('footer').className = 'page-footer grey lighten-3'
+  document.querySelector('#slide-out').classList.remove('hide')
+  document.querySelector('header').classList.remove('hide')
+  document.querySelector('main').classList.remove('hide')
+  document.querySelector('footer').classList.remove('hide')
   document.querySelector('#spinner').remove()
   maxWidth.addListener(matchMax)
   minWidth.addListener(matchMin)

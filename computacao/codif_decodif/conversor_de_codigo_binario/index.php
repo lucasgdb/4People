@@ -6,8 +6,8 @@
     <?php include_once("$path/componentes/links.php") ?>
     <link rel="stylesheet" href="src/index.css">
     <title>Conversor de Código Binário - 4People</title>
-    <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <?php include_once("$path/componentes/metas.php") ?>
+    <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <meta name="title" content="Conversor de Código Binário - 4People">
     <meta name="description" content="Conversor de Código Binário. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
@@ -25,7 +25,7 @@
     include_once("$path/componentes/header.php")
     ?>
 
-    <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
+    <ul id="slide-out" class="sidenav sidenav-fixed collapsible hide">
         <?php include_once("$path/componentes/logo.php") ?>
 
         <li class="active">
@@ -94,7 +94,7 @@
         </li>
     </ul>
 
-    <main class="hide">
+    <main class="grey lighten-5 hide">
         <div class="container">
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Conversor de Código Binário</h1>
@@ -102,7 +102,7 @@
                 <label>Tradutor OnLine de código binário e vice-versa, basta digitar abaixo e clicar no botão que desejar.</label>
                 <div class="divider"></div>
 
-                <textarea class="mt-2" id="text" placeholder="Digite aqui o texto"></textarea>
+                <textarea class="mt-2" id="text" placeholder="Digite aqui o texto" spellcheck="false"></textarea>
 
                 <button title="Converter texto para Binário" class="btn waves-effect waves-dark white black-text" onclick="convertToBinary()">
                     Converter para Binário
@@ -111,7 +111,7 @@
                     Copiar
                 </button>
 
-                <textarea class="mt-2" id="binary" placeholder="Digite aqui o código binário"></textarea>
+                <textarea class="mt-2" id="binary" placeholder="Digite aqui o código binário" spellcheck="false"></textarea>
 
                 <button title="Converter Código Binário para texto" class="btn waves-effect waves-dark white black-text" onclick="convertToText()">
                     Converter para Texto

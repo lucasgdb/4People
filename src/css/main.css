@@ -136,19 +136,19 @@ footer {
     background-color: #ccc
   }
 
-  #result::-webkit-scrollbar {
+  #result:not(.v-scroll)::-webkit-scrollbar {
     height: 5px
   }
 
-  #result#result::-webkit-scrollbar-thumb {
+  #result:not(.v-scroll)::-webkit-scrollbar-thumb {
     background-color: rgb(104, 104, 104)
   }
 
-  #result::-webkit-scrollbar-thumb:hover {
+  #result:not(.v-scroll)::-webkit-scrollbar-thumb:hover {
     background-color: rgb(66, 66, 66)
   }
 
-  #result::-webkit-scrollbar-track {
+  #result:not(.v-scroll)::-webkit-scrollbar-track {
     background-color: #ccc
   }
 }

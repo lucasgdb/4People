@@ -6,8 +6,8 @@
     <?php include_once("$path/componentes/links.php") ?>
     <link rel="stylesheet" href="src/index.css">
     <title>Diferença entre Datas - 4People</title>
-    <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <?php include_once("$path/componentes/metas.php") ?>
+    <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <meta name="title" content="Diferença entre Datas - 4People">
     <meta name="description" content="Diferença entre Datas. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
@@ -25,7 +25,7 @@
     include_once("$path/componentes/header.php")
     ?>
 
-    <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
+    <ul id="slide-out" class="sidenav sidenav-fixed collapsible hide">
         <?php include_once("$path/componentes/logo.php") ?>
 
         <li>
@@ -94,7 +94,7 @@
         </li>
     </ul>
 
-    <main class="hide">
+    <main class="grey lighten-5 hide">
         <div class="container">
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Diferença entre Datas</h1>
@@ -139,6 +139,7 @@
                 <div class="divider mt-2"></div>
 
                 <ul class="collection">
+                    <li class="collection-item">Milissegundos: <span id="milliSecs">0</span></li>
                     <li class="collection-item">Segundos: <span id="secs">0</span></li>
                     <li class="collection-item">Minutos: <span id="mins">0</span></li>
                     <li class="collection-item">Horas: <span id="hours">0</span></li>

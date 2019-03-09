@@ -5,8 +5,8 @@
     <?php include_once('componentes/links.php') ?>
     <link rel="stylesheet" href="src/css/index.css">
     <title>4People - Ferramentas OnLine</title>
-    <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <?php include_once('componentes/metas.php') ?>
+    <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <meta name="title" content="4People - Ferramentas OnLine">
     <meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
@@ -24,7 +24,7 @@
     include_once('componentes/header.php')
     ?>
 
-    <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
+    <ul id="slide-out" class="sidenav sidenav-fixed collapsible hide">
         <?php include_once('componentes/logo.php') ?>
 
         <li class="active">
@@ -93,7 +93,7 @@
         </li>
     </ul>
 
-    <main class="hide">
+    <main class="grey lighten-5 hide">
         <div class="container">
             <div class="card-panel">
                 <div class="slider">
@@ -123,7 +123,7 @@
 
                             <div class="caption center-align">
                                 <h3 class="dark grey-text text-darken-4">O melhor!</h3>
-                                <h5 class="light grey-text text-darken-4">O 4People é de código aberto, o que permite qualquer pessoa aprender e contribuir com o site.</h5>
+                                <h5 class="light grey-text text-darken-4">O 4People possui as melhores ferramentas atualizadas. Tá sentindo falta de alguma? Por favor, nos <a href="contato/">contate</a>.</h5>
                             </div>
                         </li>
                     </ul>

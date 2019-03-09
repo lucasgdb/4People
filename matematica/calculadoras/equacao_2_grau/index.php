@@ -6,9 +6,9 @@
     <?php include_once("$path/componentes/links.php") ?>
     <link rel="stylesheet" href="src/index.css">
     <title>Equação do 2° Grau - 4People</title>
-    <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <?php include_once("$path/componentes/metas.php") ?>
-    <meta name="title" content="Equação do 2° Grau - Ferramentas OnLine">
+    <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
+    <meta name="title" content="Equação do 2° Grau - 4People">
     <meta name="description" content="Calcular a equação do 2° grau (Bhaskara). 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
     <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calcular_areas/equacao_2_grau/">
@@ -25,7 +25,7 @@
     include_once("$path/componentes/header.php")
     ?>
 
-    <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
+    <ul id="slide-out" class="sidenav sidenav-fixed collapsible hide">
         <?php include_once("$path/componentes/logo.php") ?>
 
         <li>
@@ -94,7 +94,7 @@
         </li>
     </ul>
 
-    <main class="hide">
+    <main class="grey lighten-5 hide">
         <div class="container">
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Calcular equação do 2° Grau</h1>
@@ -131,7 +131,7 @@
 
                 <div class="divider mt-2"></div>
 
-                <textarea class="mt-2" id="result" placeholder="Resultado"></textarea>
+                <textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false"></textarea>
                 <button title="Copiar" class="btn waves-effect waves-dark white black-text" onclick="copyResult()">
                     Copiar
                 </button>

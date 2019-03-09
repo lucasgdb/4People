@@ -11,12 +11,14 @@ const lines = document.querySelector('#lines')
 function countChars() {
     const result = countCharacters(txtText.value)
 
-    chars.textContent = result.totalCharacters
-    charsWSpaces.textContent = result.charWithoutSpaces
-    words.textContent = result.words
-    spaces.textContent = result.spaces
-    vowels.textContent = result.vowels
-    consonants.textContent = result.consonant
-    numbers.textContent = result.numbers
-    lines.textContent = result.lines
+    const formatter = Intl.NumberFormat('pt-BR')
+
+    chars.textContent = formatter.format(result.totalCharacters)
+    charsWSpaces.textContent = formatter.format(result.charWithoutSpaces)
+    words.textContent = formatter.format(result.words)
+    spaces.textContent = formatter.format(result.spaces)
+    vowels.textContent = formatter.format(result.vowels)
+    consonants.textContent = formatter.format(result.consonant)
+    numbers.textContent = formatter.format(result.numbers)
+    lines.textContent = formatter.format(result.lines)
 }

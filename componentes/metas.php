@@ -1,8 +1,10 @@
 <?=
-    '<meta charset="UTF-8">
+    '<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta http-equiv="content-language" content="pt-br" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes, shrink-to-fit=yes">
     <meta name="author" content="Lucas Bittencourt">
+    <meta name="copyright" content="© 2019 - Lucas Naja">
   
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -25,4 +27,6 @@
     
     <meta name="robots" content="index,follow,noodp">
     <meta name="robots" content="noydir">
-    <meta name="slurp" content="noydir">';
+    <meta name="slurp" content="noydir">
+    <meta name="generator" content="Microsoft Visual Studio Code">
+    <meta name="rating" content="general">';

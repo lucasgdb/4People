@@ -1,0 +1,42 @@
+.input-field {
+    margin: 10px 0
+}
+
+.btn-center {
+    left: 50%;
+    transform: translateX(-50%)
+}
+
+h5 {
+    margin-bottom: 20px
+}
+
+textarea {
+    font-size: 20px;
+    resize: vertical;
+    white-space: nowrap;
+    min-height: 200px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    outline: none;
+    border-radius: 3px;
+    color: #333;
+    transition: background-color .15s, color .15s
+}
+
+label.active {
+    color: #607d8b !important
+}
+
+input[type=text]:focus,
+input[type=email]:focus {
+    border-bottom: 1px solid #607d8b !important;
+    box-shadow: 0 1px 0 0 #607d8b !important
+}
+
+@media (min-width: 993px) {
+    textarea {
+        font-size: 25px
+    }
+}

@@ -4,21 +4,42 @@
 
 <head>
     <?php include_once("$path/componentes/links.php") ?>
-    <title>Computação - 4People</title>
+    <link rel="stylesheet" href="src/index.css">
+    <title>Contato - 4People</title>
     <?php include_once("$path/componentes/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-    <meta name="title" content="4People - Ferramentas OnLine">
+    <meta name="title" content="Contato - 4People">
     <meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/computacao/">
-    <meta property="og:title" content="4Computação - 4People">
-    <meta name="twitter:title" content="Computação - 4People">
-    <meta property="og:url" content="https://4people.now.sh/computacao/">
-    <meta name="twitter:url" content="https://4people.now.sh/computacao/">
+    <meta name="msapplication-starturl" content="https://4people.now.sh/contato/">
+    <meta property="og:title" content="Contato - 4People">
+    <meta name="twitter:title" content="Contato - 4People">
+    <meta property="og:url" content="https://4people.now.sh/contato/">
+    <meta name="twitter:url" content="https://4people.now.sh/contato/">
 </head>
 
 <body>
     <?php
+    $msg = $_GET['msg'];
+    if (isset($msg)) {
+        if ($msg === 'error') {
+            echo
+                '<script>
+                    M.toast({
+                        html: "Não foi possível enviar o e-mail.",
+                        classes: "red accent-4"   
+                    })
+                </script>';
+        } else if ($msg === 'success') {
+            echo
+                '<script>
+                    M.toast({
+                        html: "E-mail enviado com sucesso! Aguarde retorno.",
+                        classes: "green"   
+                    })
+                </script>';
+        }
+    }
     include_once("$path/componentes/noscript.php");
     include_once("$path/componentes/spinner.php");
     include_once("$path/componentes/header.php")
@@ -27,7 +48,7 @@
     <ul id="slide-out" class="sidenav sidenav-fixed collapsible hide">
         <?php include_once("$path/componentes/logo.php") ?>
 
-        <li class="active">
+        <li>
             <div class="collapsible-header"><i class="material-icons">computer</i>Computação</div>
             <div class="collapsible-body">
                 <ul class="collapsible padding-headers">
@@ -96,7 +117,42 @@
     <main class="grey lighten-5 hide">
         <div class="container">
             <div class="card-panel">
-                <h2>Ferramentas</h2>
+                <h1 class="flow-text mt-2">Contato - 4People</h1>
+
+                <label>Alguma dúvida? Algum bug? Deseja alguma ferramenta nova? Por favor, nos contate e nos deixe sabendo de qualquer coisa.</label>
+                <div class="divider"></div>
+
+                <h5>Dados</h5>
+
+                <form class="mt-2" action="mail.php" method="post">
+                    <div class="row">
+                        <div class="input-field col s12 m6">
+                            <input placeholder="Ex: Lucas" oninvalid="this.setCustomValidity('Por favor, preencha esse campo com seu nome.')" oninput="setCustomValidity('')" name="firstName" id="firstName" type="text" class="validate" required>
+                            <label for="firstName">Nome</label>
+                        </div>
+
+                        <div class="input-field col s12 m6">
+                            <input placeholder="Ex: Bittencourt" oninvalid="this.setCustomValidity('Por favor, preencha esse campo com seu sobrenome.')" oninput="setCustomValidity('')" name="lastName" id="lastName" type="text" class="validate" required>
+                            <label for="lastName">Sobrenome</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input placeholder="Ex: lucasnaja0@gmail.com" oninvalid="this.setCustomValidity('Por favor, preencha esse campo com seu e-mail.')" oninput="setCustomValidity('')" name="email" id="email" type="email" class="validate" required>
+                            <label for="email">E-mail</label>
+                        </div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <h5>Informações</h5>
+                    <textarea name="subject" placeholder="Informações" oninvalid="this.setCustomValidity('Por favor, preencha esse campo.')" oninput="setCustomValidity('')" spellcheck="false" required></textarea>
+
+                    <button title="Enviar" class="btn btn-center waves-effect waves-dark white black-text" type="submit">
+                        Enviar
+                    </button>
+                </form>
             </div>
         </div>
     </main>

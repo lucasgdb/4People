@@ -54,3 +54,7 @@ td.is-selected.is-today {
 .timepicker-tick:hover {
     background-color: #a2b0b6
 }
+
+.datepicker-controls .select-month input {
+    width: 80px
+}

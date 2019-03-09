@@ -1,5 +1,5 @@
 <?=
-    '<footer class="hide">
+    '<footer class="page-footer grey lighten-3 hide">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
@@ -13,10 +13,11 @@
                 <div class="col l4 offset-l2 s12">
                     <h5 class="black-text">Contato</h5>
                     <ul>
-                        <li><a class="grey-text text-darken-4" href="https://github.com/LucasNaja" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-                        <li><a class="grey-text text-darken-4" href="https://facebook.com/Lucas.Naja0" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-                        <li><a class="grey-text text-darken-4" href="https://www.linkedin.com/in/lucas-bittencourt/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-                        <li><a class="grey-text text-darken-4" href="https://twitter.com/LucasNaja0" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+                        <li><a class="grey-text text-darken-4" href="https://github.com/LucasNaja" target="_blank">GitHub</a></li>
+                        <li><a class="grey-text text-darken-4" href="https://facebook.com/Lucas.Naja0" target="_blank">Facebook</a></li>
+                        <li><a class="grey-text text-darken-4" href="https://www.linkedin.com/in/lucas-bittencourt/" target="_blank">LinkedIn</a></li>
+                        <li><a class="grey-text text-darken-4" href="https://twitter.com/LucasNaja0" target="_blank">Twitter</a></li>
+                        <li><a class="grey-text text-darken-4" href="/contato/">4People</a></li>
                     </ul>
                 </div>
             </div>
