@@ -61,12 +61,12 @@ M.Timepicker.init(document.querySelectorAll('.timepicker'), {
     }
 })
 
+const totalTime = document.querySelector('#totalTime')
 const lblMilliSec = document.querySelector('#milliSecs')
 const lblSec = document.querySelector('#secs')
 const lblMin = document.querySelector('#mins')
 const lblHours = document.querySelector('#hours')
 const lblDays = document.querySelector('#days')
-const lblWeeks = document.querySelector('#weeks')
 const lblMonths = document.querySelector('#months')
 const lblYears = document.querySelector('#years')
 const beginDate = M.Datepicker.getInstance(document.querySelector('#beginDate'))
@@ -88,12 +88,12 @@ function calculate() {
             endDate.date.toUTCString().replace('03:00:00', endTimeHour)
         )
 
+        totalTime.textContent = difference.totalTime
         lblMilliSec.textContent = difference.milliSeconds
         lblSec.textContent = difference.seconds
         lblMin.textContent = difference.minutes
         lblHours.textContent = difference.hours
         lblDays.textContent = difference.days
-        lblWeeks.textContent = difference.weeks
         lblMonths.textContent = difference.months
         lblYears.textContent = difference.years
     } else {

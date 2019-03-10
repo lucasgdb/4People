@@ -20,12 +20,12 @@ function calculateFacorization(number) {
         const noRepeatedResults = [...new Set(result)]
 
         const amount = []
-        noRepeatedResults.forEach(number => {
+        for (let i = 0; i < noRepeatedResults.length; i++) {
             amount.push({
-                number,
-                "toThe": countItems(result, number)
+                "number": noRepeatedResults[i],
+                "toThe": countItems(result, noRepeatedResults[i])
             })
-        })
+        }
 
         return {
             result,

@@ -2,6 +2,14 @@
     margin: 0
 }
 
+.mb-0 {
+    margin-bottom: 0
+}
+
+.ml-0 {
+    margin-left: 0
+}
+
 .btn-center {
     left: 50%;
     transform: translateX(-50%)
@@ -9,20 +17,15 @@
 
 textarea {
     font-size: 20px;
-    resize: vertical;
+    resize: none;
     white-space: nowrap;
-    min-height: 279px;
     border-top: none;
+    border-right: none;
     border-left: none;
     outline: none;
     color: #333
 }
 
-input[type=text]::placeholder {
-    color: #999
-}
-
-input[type=number]:focus,
 input[type=text]:focus {
     border-bottom: 1px solid #607d8b !important;
     box-shadow: 0 1px 0 0 #607d8b !important
@@ -43,6 +46,12 @@ input[type=text]:focus {
     color: #607d8b
 }
 
-.dropdown-content li.selected > span {
+.dropdown-content li.selected>span {
     color: black
+}
+
+@media (min-width: 993px) {
+    textarea {
+        font-size: 25px
+    }
 }

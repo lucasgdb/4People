@@ -116,7 +116,7 @@
 
                             <div class="caption right-align">
                                 <h3 class="dark grey-text text-darken-4">Mais acessível!</h3>
-                                <h5 class="light grey-text text-darken-4">Nosso site que permite que qualquer um acesse-o offline.</h5>
+                                <h5 class="light grey-text text-darken-4">Nosso site que permite que qualquer um acesse-o offline e tem suporte a PWA.</h5>
                             </div>
                         </li>
                         <li class="grey lighten-1">

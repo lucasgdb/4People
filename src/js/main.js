@@ -74,6 +74,7 @@ function matchMin(minWidth) {
   }
 }
 
+// Events
 document.addEventListener('DOMContentLoaded', function () {
   let itens = document.querySelectorAll('#nav-mobile a')
 

@@ -20,8 +20,7 @@ textarea {
     border-left: none;
     outline: none;
     border-radius: 3px;
-    color: #333;
-    transition: background-color .15s, color .15s
+    color: #333
 }
 
 input[type=number]:focus,

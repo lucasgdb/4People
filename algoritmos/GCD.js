@@ -27,5 +27,3 @@ function calculateGCD(numbers) {
         result
     }
 }
-
-console.log(calculateGCD(50, 30))

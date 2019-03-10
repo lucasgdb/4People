@@ -149,7 +149,7 @@
                     <h5>Informações</h5>
                     <textarea name="subject" placeholder="Mensagem" oninvalid="this.setCustomValidity('Por favor, preencha esse campo.')" oninput="setCustomValidity('')" spellcheck="false" required></textarea>
 
-                    <button title="Enviar" class="btn btn-center waves-effect waves-dark white black-text" type="submit">
+                    <button title="Enviar" class="btn waves-effect waves-dark white black-text" type="submit">
                         Enviar
                     </button>
                 </form>

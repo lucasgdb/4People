@@ -8,8 +8,8 @@
     <title>Gerador de Senha - 4People</title>
     <?php include_once("$path/componentes/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-    <meta name="title" content="Contador de Caracteres - 4People">
-    <meta name="description" content="Gerador de Senha. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+    <meta name="title" content="Gerador de Senha - 4People">
+    <meta name="description" content="Gerador de Senha OnLine para gerar senhas personalizadas e fortes. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
     <meta name="msapplication-starturl" content="https://4people.now.sh/computacao/geradores/gerador_de_senha/">
     <meta property="og:title" content="Gerador de Senha - 4People">
@@ -97,13 +97,13 @@
     <main class="grey lighten-5 hide">
         <div class="container">
             <div class="card-panel">
-                <h1 class="flow-text mt-2">Gerador de senha</h1>
+                <h1 class="flow-text mt-2">Gerador de Senha</h1>
 
-                <label>Gerador de Senha OnLine para gerar senhas personalizadas e fortes</label>
+                <label>Gerador de Senha OnLine para gerar senhas personalizadas e fortes.</label>
                 <div class="divider"></div>
 
                 <div class="row">
-                    <p>Primeiro caractere</p>
+                    <p class="mb-0">Primeiro caractere</p>
                     <div class="col s6 m3">
                         <p>
                             <label>
@@ -142,7 +142,7 @@
                 </div>
 
                 <div class="row">
-                    <p>Outros caracteres</p>
+                    <p class="mb-0">Outros caracteres</p>
                     <div class="col s6 m3">
                         <p>
                             <label>
@@ -199,7 +199,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col s12 m4 l12">
+                    <div class="col s12 m4 l6">
                         <p>
                             <label>
                                 <input id="equalChars" type="checkbox" class="filled-in" checked>
@@ -208,7 +208,7 @@
                         </p>
                     </div>
 
-                    <div class="col s12 m4 l12">
+                    <div class="col s12 m4 l6">
                         <p>
                             <label>
                                 <input id="similarChars" type="checkbox" class="filled-in" checked>

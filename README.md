@@ -25,3 +25,25 @@
   - FakerJS
   - MaterializeCSS
   - PWA
+
+## Ferramentas prontas
+  - Geradores
+    - Gerador de CPF
+    - Gerador de Senha
+    - Gerador de Meta Tags (Falta algumas coisas)
+  - Validadores
+    - Validador de CPF
+  - Funções String
+    - Contador de Caracteres
+  - Codificadores e Decodificadores
+    - Conversor de Código Binário
+  - Calculadoras
+    - Fatorar Número
+    - Máximo Divisor Comum
+    - Mínimo Múltiplo Comum
+    - Índice de Massa Corporal
+    - Equação do 2° Grau
+  - Calcular Áreas
+    - Área do Círculo
+  - Datas e Horas
+    - Diferenças entre Datas

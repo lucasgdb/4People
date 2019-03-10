@@ -2,11 +2,6 @@
     margin: 10px 0
 }
 
-.btn-center {
-    left: 50%;
-    transform: translateX(-50%)
-}
-
 h5 {
     margin-bottom: 20px
 }
@@ -23,6 +18,17 @@ textarea {
     border-radius: 3px;
     color: #333;
     transition: background-color .15s, color .15s
+}
+
+textarea:focus {
+    border-top: 1px solid #999;
+    border-right: 1px solid #999;
+    border-left: 1px solid #999;
+    background-color: rgb(214, 214, 214)
+}
+
+textarea:focus::placeholder {
+    color: #999
 }
 
 label.active {

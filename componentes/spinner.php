@@ -1,7 +1,7 @@
 <?=
     '<div id="spinner">
         <div class="preloader-wrapper active">
-            <div class="spinner-layer spinner-blue-only">
+            <div class="spinner-layer">
                 <div class="circle-clipper left">
                     <div class="circle"></div>
                 </div>
