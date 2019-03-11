@@ -139,7 +139,7 @@
                 <div class="divider mt-2"></div>
 
                 <ul class="collection">
-                <li class="collection-item">Tempo decorrido: <span id="totalTime">0 anos, 0 meses, 0 dias, 0 horas e 0 minutos</span></li>
+                <li class="collection-item">Tempo decorrido: <span id="totalTime">0 anos, 0 meses e 0 dias</span></li>
                     <li class="collection-item">Milissegundos: <span id="milliSecs">0</span></li>
                     <li class="collection-item">Segundos: <span id="secs">0</span></li>
                     <li class="collection-item">Minutos: <span id="mins">0</span></li>
