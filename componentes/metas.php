@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes, shrink-to-fit=yes">
     <meta name="author" content="Lucas Bittencourt">
     <meta name="copyright" content="© 2019 - Lucas Naja">
+    <link rel="icon" href="/imagens/icon.png">
   
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
