@@ -17,12 +17,12 @@ if (sessionStorage.getItem('sideStatus') === 'true') {
   animateOut(0)
 }
 
-function animateIn(delay = 250) {
+function animateIn(delay = 200) {
   document.body.style.transition = `padding-left ${delay}ms`
   document.body.style.paddingLeft = '300px'
 }
 
-function animateOut(delay = 200) {
+function animateOut(delay = 250) {
   document.body.style.transition = `padding-left ${delay}ms`
   document.body.style.paddingLeft = '0'
 }

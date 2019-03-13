@@ -16,4 +16,5 @@
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calculadoras/numeros_triangulares/">Números Triangulares</a>
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calculadoras/fibonacci/">Fibonacci</a>
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calculadoras/conversao_de_temperaturas/">Conversão de Temperaturas</a>
+        <a class="btn waves-effect white black-text z-depth-2 hoverable" href="/matematica/calculadoras/resto_da_divisao/">Resto da Divisão</a>
     </div>';

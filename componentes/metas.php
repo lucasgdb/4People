@@ -15,6 +15,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="4People" />
     <meta property="og:description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta property="og:image" content="https://4people.now.sh/imagens/4People.png">
     <meta property="og:image:alt" content="Print da página inicial do 4People.">

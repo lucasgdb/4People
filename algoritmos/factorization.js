@@ -1,5 +1,5 @@
 function calculateFacorization(number) {
-    if (number !== 1) {
+    if (number != 1) {
         let by = 2
         let result = []
 

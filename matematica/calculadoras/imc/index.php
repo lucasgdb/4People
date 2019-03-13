@@ -98,7 +98,7 @@
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Calcular Índice de Massa Corporal</h1>
 
-                <label>Calculadora de IMC OnLine</label>
+                <label>Calculadora de Índice de Massa Corporal OnLine.</label>
                 <div class="divider"></div>
 
                 <div class="row mt-2">

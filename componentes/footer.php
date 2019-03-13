@@ -13,7 +13,7 @@
                 <div class="col l4 offset-l2 s12">
                     <h5 class="black-text">Contato</h5>
                     <ul>
-                        <li><a class="grey-text text-darken-4" href="/contato/">4People</a></li>
+                        <li><a class="grey-text text-darken-4" href="/contato/">Enviar e-mail</a></li>
                         <li><a class="grey-text text-darken-4" href="https://github.com/LucasNaja" target="_blank">GitHub</a></li>
                         <li><a class="grey-text text-darken-4" href="https://facebook.com/Lucas.Naja0" target="_blank">Facebook</a></li>
                         <li><a class="grey-text text-darken-4" href="https://www.linkedin.com/in/lucas-bittencourt/" target="_blank">LinkedIn</a></li>
