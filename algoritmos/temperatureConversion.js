@@ -21,3 +21,21 @@ function kelvinToCelsius(kelvin) {
 function kelvinToFahrenheit(kelvin) {
     return (kelvin - 273.15) * 1.8 + 32
 }
+
+function calculateTemperature(from, to, temperature) {
+    if (from === '0' && to === '1') {
+        return celsiusToFahrenheit(temperature)
+    } else if (from === '0' && to === '2') {
+        return celsiusToKelvin(temperature)
+    } else if (from === '1' && to === '0') {
+        return fahrenheitToCelsius(temperature)
+    } else if (from === '1' && to === '2') {
+        return fahrenheitToKelvin(temperature)
+    } else if (from === '2' && to === '0') {
+        return kelvinToCelsius(temperature)
+    } else if (from === '2' && to === '1') {
+        return kelvinToFahrenheit(temperature)
+    } else {
+        return temperature
+    }
+}

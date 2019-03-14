@@ -1,13 +1,10 @@
-function traduzirNumeralRomano(texto) {
+function translateRomanNumber(text) {
     let result = 0;
-    let numeralDaDireita = 0;
-    for (let i = texto.length - 1; i >= 0; i--) {
-        const valor = Math.floor(Math.pow(10, "IXCM".indexOf(texto.charAt(i)))) + 5 * Math.floor(Math.pow(10, "VLD".indexOf(texto.charAt(i))));
-        result += valor * Math.sign(valor + 0.5 - numeralDaDireita);
-        //console.log(result, valor)
-        numeralDaDireita = valor;
+    let rightNumber = 0;
+    for (let i = text.length - 1; i >= 0; i--) {
+        const value = Math.floor(Math.pow(10, "IXCM".indexOf(text.charAt(i)))) + 5 * Math.floor(Math.pow(10, "VLD".indexOf(text.charAt(i))));
+        result += value * Math.sign(value + 0.5 - rightNumber);
+        rightNumber = value;
     }
     return result;
 }
-
-console.log(traduzirNumeralRomano('MMMDMIIIII'))

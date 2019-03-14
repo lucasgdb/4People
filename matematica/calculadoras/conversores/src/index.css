@@ -1,0 +1,33 @@
+.input-field {
+    margin: 0
+}
+
+.mt-0 {
+    margin-top: 0
+}
+
+.mb-0 {
+    margin-bottom: 0
+}
+
+.equal {
+    font-size: 30px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%)
+}
+
+input[type=number]:focus,
+input[type=text]:focus {
+    border-bottom: 1px solid #607d8b !important;
+    box-shadow: 0 1px 0 0 #607d8b !important
+}
+
+.select-wrapper ul li>span {
+    color: black
+}
+
+.select-wrapper input.select-dropdown:focus {
+    border-bottom: 1px solid #607d8b !important
+}

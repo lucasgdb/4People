@@ -13,11 +13,10 @@
                 <div class="col l4 offset-l2 s12">
                     <h5 class="black-text">Contato</h5>
                     <ul>
-                        <li><a class="grey-text text-darken-4" href="/contato/">Enviar e-mail</a></li>
+                        <li><a class="grey-text text-darken-4" href="/sobre/">Sobre</a></li>
                         <li><a class="grey-text text-darken-4" href="https://github.com/LucasNaja" target="_blank">GitHub</a></li>
                         <li><a class="grey-text text-darken-4" href="https://facebook.com/Lucas.Naja0" target="_blank">Facebook</a></li>
                         <li><a class="grey-text text-darken-4" href="https://www.linkedin.com/in/lucas-bittencourt/" target="_blank">LinkedIn</a></li>
-                        <li><a class="grey-text text-darken-4" href="https://twitter.com/LucasNaja0" target="_blank">Twitter</a></li>
                     </ul>
                 </div>
             </div>
@@ -25,7 +24,7 @@
         <div class="footer-copyright">
             <div class="container grey-text text-darken-4">
                 © 4People - 2019
-                <a class="right indigo-text text-accent-4" href="https://github.com/LucasNaja/4People" target="_blank"><i class="material-icons left" style="position:relative;top:-1.5px">code</i>Código fonte (MIT)</a>
+                <a class="right indigo-text text-accent-4" href="/contato/"><i class="material-icons left" style="position:relative;top:-1px">email</i>Enviar e-mail</a>
             </div>
         </div>
     </footer>';
