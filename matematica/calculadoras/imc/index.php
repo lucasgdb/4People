@@ -133,7 +133,7 @@
 
     <?php include_once($_SERVER['DOCUMENT_ROOT']."/componentes/footer.php") ?>
 
-    <script src="/algoritmos/BMI.js"></script>
+    <script src="/algoritmos/IMC.js"></script>
     <script src="src/index.js"></script>
     <script src="/src/js/main.js"></script>
 </body>

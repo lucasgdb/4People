@@ -110,7 +110,7 @@
                     </div>
                 </div>
 
-                <button title="Fatorar Número" class="btn waves-effect waves-dark white black-text btn-center" onclick="calculate()">
+                <button title="Fatorar Número" class="btn waves-effect waves-dark white black-text btn-center" onclick="factorize()">
                     Fatorar Número
                 </button>
 
@@ -126,7 +126,7 @@
 
     <?php include_once($_SERVER['DOCUMENT_ROOT']."/componentes/footer.php") ?>
 
-    <script src="/algoritmos/factorization.js"></script>
+    <script src="/algoritmos/fatoracao.js"></script>
     <script src="src/index.js"></script>
     <script src="/src/js/main.js"></script>
 </body>

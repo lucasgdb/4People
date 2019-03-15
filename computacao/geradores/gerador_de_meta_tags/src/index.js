@@ -1,4 +1,5 @@
 const txtResult = document.querySelector('#result')
+const txtSiteName = document.querySelector('#siteName')
 const txtTitle = document.querySelector('#title')
 const txtAuthor = document.querySelector('#author')
 const txtDescription = document.querySelector('#description')
@@ -17,6 +18,7 @@ M.FormSelect.init(document.querySelectorAll('select'))
 
 function generate() {
     const metas = generateMetaTags(
+        txtSiteName.value,
         txtTitle.value,
         txtAuthor.value,
         txtDescription.value,
@@ -33,7 +35,7 @@ function generate() {
     )
 
     txtResult.value =
-        `${metas.title}\n${metas.standards}\n${metas.contentLanguage}\n${metas.author}\n${metas.description}\n${metas.keywords}\n${metas.copyright}\n${metas.viewport}\n${metas.generator}\n${metas.rating}`
+        `${metas.title}\n${metas.standards}\n${metas.contentLanguage}\n${metas.author}\n${metas.description}\n${metas.keywords}\n${metas.copyright}\n${metas.viewport}\n${metas.generator}\n${metas.rating}\n${metas.siteName}`
 }
 
 function countCharacters(event) {

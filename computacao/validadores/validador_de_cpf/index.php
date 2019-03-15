@@ -112,7 +112,7 @@
                     </div>
                 </div>
 
-                <button title="Validar CPF" class="btn btn-center mt-2 waves-effect waves-dark black-text white" onclick="generate()">
+                <button title="Validar CPF" class="btn btn-center mt-2 waves-effect waves-dark black-text white" onclick="validate()">
                     Validar CPF
                 </button>
                 <div class="divider mt-2"></div>
@@ -128,7 +128,7 @@
 
     <?php include_once($_SERVER['DOCUMENT_ROOT']."/componentes/footer.php") ?>
 
-    <script src="/algoritmos/CPFValidator.js"></script>
+    <script src="/algoritmos/validadorDeCPF.js"></script>
     <script src="src/index.js"></script>
     <script src="/src/js/main.js"></script>
 </body>

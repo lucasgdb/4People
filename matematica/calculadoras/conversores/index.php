@@ -169,7 +169,7 @@
 
     <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/footer.php") ?>
 
-    <script src="/algoritmos/temperatureConversion.js"></script>
+    <script src="/algoritmos/conversorDeTemperatura.js"></script>
     <script src="src/index.js"></script>
     <script src="/src/js/main.js"></script>
 </body>

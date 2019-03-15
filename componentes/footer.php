@@ -24,7 +24,7 @@
         <div class="footer-copyright">
             <div class="container grey-text text-darken-4">
                 © 4People - 2019
-                <a class="right indigo-text text-accent-4" href="/contato/"><i class="material-icons left" style="position:relative;top:-1px">email</i>Enviar e-mail</a>
+                <a class="right indigo-text text-accent-4" href="/contato/"><i class="material-icons left" style="position:relative;top:-1px">email</i>Fale conosco</a>
             </div>
         </div>
     </footer>';

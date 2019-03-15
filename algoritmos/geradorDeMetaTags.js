@@ -1,4 +1,5 @@
 function generateMetaTags(
+    siteName = '',
     title = '',
     author = '',
     description = '',
@@ -14,8 +15,9 @@ function generateMetaTags(
     rating = 'general'
 ) {
     return {
+        "siteName": `<meta name="apple-mobile-web-app-title" content="${siteName}">\n<meta property="og:site_name" content="${siteName}">`,
         "title": `<title>${title}</title>`,
-        "standards": `<meta http-equiv="content-type" content="text/html; charset=UTF-8" />\n<meta http-equiv="X-UA-Compatible" content="ie=edge">`,
+        "standards": `<meta http-equiv="content-type" content="text/html; charset=UTF-8" />\n<meta http-equiv="X-UA-Compatible" content="ie=edge">\n<meta property="og:type" content="website">`,
         "author": `<meta name="author" content="${author}">`,
         "metaTitle": `<meta name="title" content="${title}">`,
         "description": `<meta name="description" content="${description}">`,

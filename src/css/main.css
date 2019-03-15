@@ -23,7 +23,7 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: sans-serif, Arial;
   height: 100%;
   display: flex;
   min-height: 100vh;
@@ -32,6 +32,10 @@ body {
   animation-delay: 300ms;
   transition: padding-left 300ms;
   min-width: 320px
+}
+
+.slider {
+  font-family: serif
 }
 
 main {
@@ -59,6 +63,10 @@ footer {
 
 .collapsible-header {
   border-bottom: 1px solid #e0e0e0 !important
+}
+
+body>header+ul>li:nth-child(2) {
+  border-top: 1px solid #e0e0e0 !important
 }
 
 .active>.collapsible-header {
@@ -122,37 +130,21 @@ footer {
     width: 85% !important
   }
 
-  :not(textarea)::-webkit-scrollbar {
+  .sidenav::-webkit-scrollbar {
     width: 5px;
     height: 5px
   }
 
-  :not(textarea)::-webkit-scrollbar-thumb {
+  .sidenav::-webkit-scrollbar-thumb {
     background-color: rgb(104, 104, 104);
     border-radius: 8px
   }
 
-  :not(textarea)::-webkit-scrollbar-thumb:hover {
+  .sidenav::-webkit-scrollbar-thumb:hover {
     background-color: rgb(66, 66, 66)
   }
 
-  :not(textarea)::-webkit-scrollbar-track {
-    background-color: #ccc
-  }
-
-  #result:not(.v-scroll)::-webkit-scrollbar {
-    height: 5px
-  }
-
-  #result:not(.v-scroll)::-webkit-scrollbar-thumb {
-    background-color: rgb(104, 104, 104)
-  }
-
-  #result:not(.v-scroll)::-webkit-scrollbar-thumb:hover {
-    background-color: rgb(66, 66, 66)
-  }
-
-  #result:not(.v-scroll)::-webkit-scrollbar-track {
+  .sidenav::-webkit-scrollbar-track {
     background-color: #ccc
   }
 }

@@ -2,10 +2,10 @@
 <html lang="pt-br">
 
 <head>
-    <?php include_once($_SERVER['DOCUMENT_ROOT']."/componentes/links.php") ?>
+    <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/links.php") ?>
     <link rel="stylesheet" href="src/index.css">
     <title>Gerador de Meta Tags - 4People</title>
-    <?php include_once($_SERVER['DOCUMENT_ROOT']."/componentes/metas.php") ?>
+    <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <meta name="title" content="Gerador de Meta Tags - 4People">
     <meta name="description" content="Gerar Meta Tags OnLine. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
@@ -19,40 +19,40 @@
 
 <body>
     <?php
-    include_once($_SERVER['DOCUMENT_ROOT']."/componentes/noscript.php");
-    include_once($_SERVER['DOCUMENT_ROOT']."/componentes/spinner.php");
-    include_once($_SERVER['DOCUMENT_ROOT']."/componentes/header.php")
+    include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/noscript.php");
+    include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/spinner.php");
+    include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/header.php")
     ?>
 
     <ul id="slide-out" class="sidenav sidenav-fixed collapsible hide">
-        <?php include_once($_SERVER['DOCUMENT_ROOT']."/componentes/logo.php") ?>
+        <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/logo.php") ?>
 
         <li class="active">
             <div class="collapsible-header"><i class="material-icons">computer</i>Computação</div>
             <div class="collapsible-body">
                 <ul class="collapsible padding-headers">
                     <li class="active">
-                        <?php include_once($_SERVER['DOCUMENT_ROOT']."/componentes/computacao/geradores.php") ?>
+                        <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/computacao/geradores.php") ?>
                     </li>
 
                     <li>
-                        <?php include_once($_SERVER['DOCUMENT_ROOT']."/componentes/computacao/validadores.php") ?>
+                        <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/computacao/validadores.php") ?>
                     </li>
 
                     <li>
-                        <?php include_once($_SERVER['DOCUMENT_ROOT']."/componentes/computacao/funcoes_string.php") ?>
+                        <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/computacao/funcoes_string.php") ?>
                     </li>
 
                     <li>
-                        <?php include_once($_SERVER['DOCUMENT_ROOT']."/componentes/computacao/rede_e_internet.php") ?>
+                        <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/computacao/rede_e_internet.php") ?>
                     </li>
 
                     <li>
-                        <?php include_once($_SERVER['DOCUMENT_ROOT']."/componentes/computacao/codif_decodif.php") ?>
+                        <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/computacao/codif_decodif.php") ?>
                     </li>
 
                     <li>
-                        <?php include_once($_SERVER['DOCUMENT_ROOT']."/componentes/computacao/tabelas_e_padroes.php") ?>
+                        <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/computacao/tabelas_e_padroes.php") ?>
                     </li>
                 </ul>
             </div>
@@ -63,15 +63,15 @@
             <div class="collapsible-body">
                 <ul class="collapsible padding-headers">
                     <li>
-                        <?php include_once($_SERVER['DOCUMENT_ROOT']."/componentes/matematica/calculadoras.php") ?>
+                        <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/matematica/calculadoras.php") ?>
                     </li>
 
                     <li>
-                        <?php include_once($_SERVER['DOCUMENT_ROOT']."/componentes/matematica/calcular_areas.php") ?>
+                        <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/matematica/calcular_areas.php") ?>
                     </li>
 
                     <li>
-                        <?php include_once($_SERVER['DOCUMENT_ROOT']."/componentes/matematica/datas_e_horas.php") ?>
+                        <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/matematica/datas_e_horas.php") ?>
                     </li>
                 </ul>
             </div>
@@ -82,11 +82,11 @@
             <div class="collapsible-body">
                 <ul class="collapsible padding-headers">
                     <li>
-                        <?php include_once($_SERVER['DOCUMENT_ROOT']."/componentes/outras_ferramentas/dia_a_dia.php") ?>
+                        <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/outras_ferramentas/dia_a_dia.php") ?>
                     </li>
 
                     <li>
-                        <?php include_once($_SERVER['DOCUMENT_ROOT']."/componentes/outras_ferramentas/jogos.php") ?>
+                        <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/outras_ferramentas/jogos.php") ?>
                     </li>
                 </ul>
             </div>
@@ -104,6 +104,11 @@
                 <h5>Informações</h5>
 
                 <div class="row mt-2">
+                    <div class="input-field col s12">
+                        Nome do site:
+                        <input id="siteName" type="text" placeholder="Ex: 4People">
+                    </div>
+
                     <div class="input-field col s12">
                         Título do site. Caracteres usados: <span>0</span>. Recomendado: 63-90
                         <input oninput="countCharacters(event)" id="title" type="text" placeholder="Ex: 4People - Ferramentas OnLine">
@@ -228,7 +233,7 @@
 
                 <div class="divider mt-2"></div>
 
-                <textarea class="mt-2 v-scroll" id="result" placeholder="Resultado" spellcheck="false"></textarea>
+                <textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false"></textarea>
                 <button title="Copiar" class="btn waves-effect waves-dark white black-text" onclick="copyResult()">
                     Copiar
                 </button>
@@ -236,9 +241,9 @@
         </div>
     </main>
 
-    <?php include_once($_SERVER['DOCUMENT_ROOT']."/componentes/footer.php") ?>
+    <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/footer.php") ?>
 
-    <script src="/algoritmos/metaTagsGenerator.js"></script>
+    <script src="/algoritmos/geradorDeMetaTags.js"></script>
     <script src="src/index.js"></script>
     <script src="/src/js/main.js"></script>
 </body>

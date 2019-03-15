@@ -101,29 +101,29 @@
                         <li class="grey lighten-1">
                             <img>
                             <div class="caption center-align">
-                                <h3 class="dark grey-text text-darken-4">Feito para todos!</h3>
+                                <h3 class="dark grey-text text-darken-4">FEITO PARA TODOS!</h3>
                                 <h5 class="light grey-text text-darken-4">Contamos com inúmeras ferramentas para Programadores, professores, estudantes e até mesmo para usuários comuns.</h5>
                             </div>
                         </li>
                         <li class="grey lighten-1">
 
                             <div class="caption left-align">
-                                <h3 class="dark grey-text text-darken-4">Mais rápido!</h3>
+                                <h3 class="dark grey-text text-darken-4">MAIS RÁPIDO!</h3>
                                 <h5 class="light grey-text text-darken-4">Nossas ferramentas foram todas escritas em JavaScript, para maior velocidade e segurança.</h5>
                             </div>
                         </li>
                         <li class="grey lighten-1">
 
                             <div class="caption right-align">
-                                <h3 class="dark grey-text text-darken-4">Mais acessível!</h3>
+                                <h3 class="dark grey-text text-darken-4">MAIS ACESSÍVEL!</h3>
                                 <h5 class="light grey-text text-darken-4">Nosso site que permite que qualquer um acesse-o offline e tem suporte a PWA.</h5>
                             </div>
                         </li>
                         <li class="grey lighten-1">
 
                             <div class="caption center-align">
-                                <h3 class="dark grey-text text-darken-4">O melhor!</h3>
-                                <h5 class="light grey-text text-darken-4">O 4People possui as melhores ferramentas atualizadas. Tá sentindo falta de alguma? Por favor, nos envie uma <a href="contato/">mensagem</a>.</h5>
+                                <h3 class="dark grey-text text-darken-4">O MELHOR!</h3>
+                                <h5 class="light grey-text text-darken-4">O 4People possui as melhores ferramentas atualizadas. Tá sentindo falta de alguma? Por favor, nos envie um <a href="contato/">e-mail</a>.</h5>
                             </div>
                         </li>
                     </ul>

@@ -101,7 +101,7 @@
                 <label>4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.</label>
                 <div class="divider"></div>
 
-                <h2 class="flow-text mb-0">4People</h2>
+                <h2 class="flow-text mb-0">Informações</h2>
                 <div class="divider"></div>
                 <p>
                     <strong>4People</strong> é um projeto de TCC da Escola Técnica Alfredo de Barros Santos de Guaratinguetá, no curso de Desenvolvimento de Sistemas.

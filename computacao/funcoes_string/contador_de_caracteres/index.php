@@ -119,7 +119,7 @@
 
     <?php include_once($_SERVER['DOCUMENT_ROOT']."/componentes/footer.php") ?>
 
-    <script src="/algoritmos/charactersCount.js"></script>
+    <script src="/algoritmos/contadorDeCaracteres.js"></script>
     <script src="src/index.js"></script>
     <script src="/src/js/main.js"></script>
 </body>

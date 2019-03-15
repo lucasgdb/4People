@@ -1,7 +1,7 @@
 const txtResult = document.querySelector('#result')
 const txtNum = document.querySelector('#number')
 
-function calculate() {
+function factorize() {
     if (parseInt(txtNum.value) >= 1 && Number.isInteger(parseFloat(txtNum.value))) {
         const result = calculateFacorization(parseFloat(txtNum.value))
         txtResult.value =

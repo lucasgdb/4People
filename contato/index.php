@@ -4,7 +4,7 @@
 <head>
     <?php include_once($_SERVER['DOCUMENT_ROOT']."/componentes/links.php") ?>
     <link rel="stylesheet" href="src/index.css">
-    <title>Contato - 4People</title>
+    <title>Fale conosco - 4People</title>
     <?php include_once($_SERVER['DOCUMENT_ROOT']."/componentes/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <meta name="title" content="Contato - 4People">
@@ -116,7 +116,7 @@
     <main class="grey lighten-5 hide">
         <div class="container">
             <div class="card-panel">
-                <h1 class="flow-text mt-2">Contato - 4People</h1>
+                <h1 class="flow-text mt-2">Fale conosco</h1>
 
                 <label>Alguma dúvida? Algum bug? Deseja alguma ferramenta nova? Por favor, nos contate e deixe-nos sabendo de qualquer coisa.</label>
                 <div class="divider"></div>

@@ -25,11 +25,13 @@ function copyResult(txtComponent) {
 }
 
 function calculateFirst() {
-    txtSecond.value = calculateTemperature(ddFirst.value, ddSecond.value, parseFloat(txtFirst.value)).toFixed(2)
+    const temperature = calculateTemperature(ddFirst.value, ddSecond.value, parseFloat(txtFirst.value))
+    txtSecond.value = Number.isInteger(temperature) ? temperature : temperature.toFixed()
 }
 
 function calculateSecond() {
-    txtFirst.value = calculateTemperature(ddSecond.value, ddFirst.value, parseFloat(txtSecond.value)).toFixed(2)
+    const temperature = calculateTemperature(ddSecond.value, ddFirst.value, parseFloat(txtSecond.value)).toFixed(2)
+    txtFirst.value = Number.isInteger(temperature) ? temperature : temperature.toFixed()
 }
 
 txtFirst.oninput = calculateFirst

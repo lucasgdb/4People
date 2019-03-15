@@ -1,4 +1,12 @@
 function validateCPF(CPF = Array) {
+    if (CPF.filter(number => number === CPF[0]).length === 11) {
+        return {
+            "isCPF": false,
+            "from": null,
+            "CPF": fixCPF(CPF).join('')
+        }
+    }
+
     let firstSum = 0
     let secondSum = 0
     let firstDigit
@@ -52,13 +60,17 @@ function validateCPF(CPF = Array) {
         }
     }
 
+    return {
+        isCPF,
+        from,
+        "CPF": fixCPF(CPF).join('')
+    }
+}
+
+function fixCPF(CPF) {
     CPF.splice(3, 0, '.')
     CPF.splice(7, 0, '.')
     CPF.splice(11, 0, '-')
 
-    return {
-        isCPF,
-        from,
-        "CPF": CPF.join('')
-    }
+    return CPF
 }

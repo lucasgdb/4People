@@ -3,7 +3,7 @@ const txtResult = document.querySelector('#result')
 const txtCPF = document.querySelector('#cpf')
 const from = document.querySelector('#from')
 
-function generate() {
+function validate() {
     const CPF = txtCPF.value.split('').filter(item => Number.isInteger(parseInt(item))).map(item => parseInt(item))
     
     if (txtCPF.value !== '' && CPF.length >= 11) {
@@ -37,5 +37,11 @@ function copyResult() {
             html: 'Valide seu CPF primeiro.',
             classes: 'red accent-4'
         })
+    }
+}
+
+txtCPF.oninput = function(e) {
+    if (e.which === 13) {
+        generate()
     }
 }
