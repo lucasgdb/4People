@@ -17,12 +17,12 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="4People">
     <meta property="og:description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
-    <meta property="og:image" content="https://4people.now.sh/imagens/4People.png">
+    <meta property="og:image" content="/imagens/4People.png">
     <meta property="og:image:alt" content="Print da página inicial do 4People.">
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
-    <meta name="twitter:image" content="https://4people.now.sh/imagens/4People.png">
+    <meta name="twitter:image" content="/imagens/4People.png">
     <meta name="twitter:image:alt" content="Print da página inicial do 4People.">
     <meta name="twitter:creator" content="@LucasNaja0">
     <meta name="twitter:site" content="@LucasNaja0">

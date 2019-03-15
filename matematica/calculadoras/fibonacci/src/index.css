@@ -1,0 +1,30 @@
+.input-field {
+    margin: 0
+}
+
+.btn-center {
+    left: 50%;
+    transform: translateX(-50%)
+}
+
+textarea {
+    font-size: 20px;
+    resize: vertical;
+    min-height: 200px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    outline: none;
+    color: #333
+}
+
+input[type=number]:focus {
+    border-bottom: 1px solid #607d8b !important;
+    box-shadow: 0 1px 0 0 #607d8b !important
+}
+
+@media (min-width: 993px) {
+    textarea {
+        font-size: 25px
+    }
+}
