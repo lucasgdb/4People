@@ -4,41 +4,21 @@
 <head>
     <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/links.php") ?>
     <link rel="stylesheet" href="src/index.css">
-    <title>Fale conosco - 4People</title>
+    <title>Meu IP - 4People</title>
     <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-    <meta name="title" content="Contato - 4People">
-    <meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+    <meta name="title" content="Meu IP - 4People">
+    <meta name="description" content="Meu IP OnLine para ver informações do seu IP. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/contato/">
-    <meta property="og:title" content="Contato - 4People">
-    <meta name="twitter:title" content="Contato - 4People">
-    <meta property="og:url" content="https://4people.now.sh/contato/">
-    <meta name="twitter:url" content="https://4people.now.sh/contato/">
+    <meta name="msapplication-starturl" content="https://4people.now.sh/computacao/rede_e_internet/meu_ip/">
+    <meta property="og:title" content="Meu IP - 4People">
+    <meta name="twitter:title" content="Meu IP - 4People">
+    <meta property="og:url" content="https://4people.now.sh/computacao/rede_e_internet/meu_ip/">
+    <meta name="twitter:url" content="https://4people.now.sh/computacao/rede_e_internet/meu_ip/">
 </head>
 
 <body>
     <?php
-    $msg = $_GET['msg'];
-    if (isset($msg)) {
-        if ($msg === 'error') {
-            echo
-                '<script>
-                    M.toast({
-                        html: "Não foi possível enviar o e-mail.",
-                        classes: "red accent-4"   
-                    })
-                </script>';
-        } else if ($msg === 'success') {
-            echo
-                '<script>
-                    M.toast({
-                        html: "E-mail enviado com sucesso! Aguarde retorno.",
-                        classes: "green"   
-                    })
-                </script>';
-        }
-    }
     include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/noscript.php");
     include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/spinner.php");
     include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/header.php")
@@ -47,7 +27,7 @@
     <ul id="slide-out" class="sidenav sidenav-fixed collapsible hide">
         <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/logo.php") ?>
 
-        <li>
+        <li class="active">
             <div class="collapsible-header"><i class="material-icons">computer</i>Computação</div>
             <div class="collapsible-body">
                 <ul class="collapsible padding-headers">
@@ -63,7 +43,7 @@
                         <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/computacao/funcoes_string.php") ?>
                     </li>
 
-                    <li>
+                    <li class="active">
                         <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/computacao/rede_e_internet.php") ?>
                     </li>
 
@@ -116,48 +96,35 @@
     <main class="grey lighten-5 hide">
         <div class="container">
             <div class="card-panel">
-                <h1 class="flow-text mt-2">Fale conosco</h1>
+                <h1 class="flow-text mt-2">Meu IP</h1>
 
-                <label>Alguma dúvida? Algum bug? Deseja alguma ferramenta nova? Por favor, nos contate e deixe-nos sabendo de qualquer coisa.</label>
+                <label>Veja seu IP e mais informações aqui.</label>
                 <div class="divider"></div>
 
-                <h5>Dados</h5>
-
-                <form class="mt-2" action="mail.php" method="post">
-                    <div class="row">
-                        <div class="input-field col s12 m6">
-                            <input placeholder="Ex: Lucas" oninvalid="this.setCustomValidity('Por favor, preencha esse campo com seu nome.')" oninput="setCustomValidity('')" name="firstName" id="firstName" type="text" class="validate" required>
-                            <label for="firstName">Nome</label>
-                        </div>
-
-                        <div class="input-field col s12 m6">
-                            <input placeholder="Ex: Bittencourt" oninvalid="this.setCustomValidity('Por favor, preencha esse campo com seu sobrenome.')" oninput="setCustomValidity('')" name="lastName" id="lastName" type="text" class="validate" required>
-                            <label for="lastName">Sobrenome</label>
-                        </div>
+                <div class="row mt-0">
+                    <div class="col s12">
+                        <p class="mt-0">Meu IP: <span id="ip"></span></p>
+                        <p class="mt-0">Cidade: <span id="city"></span></p>
+                        <p class="mt-0">Região: <span id="region"></span></p>
+                        <p class="mt-0">Código da região: <span id="regionCode"></span></p>
+                        <p class="mt-0">País: <span id="country"></span></p>
+                        <p class="mt-0">Código do país: <span id="countryCode"></span></p>
+                        <p class="mt-0">Bandeira: <span id="flag"></span></p>
+                        <p class="mt-0">Continente: <span id="continent"></span></p>
+                        <p class="mt-0">Código do continente: <span id="continentCode"></span></p>
+                        <p class="mt-0">Latitude: <span id="latitude"></span></p>
+                        <p class="mt-0">Longitude: <span id="longitude"></span></p>
+                        <p class="mt-0">Organização: <span id="organization"></span></p>
+                        <p class="mt-0">Código de chamada: <span id="callingCode"></span></p>
                     </div>
-
-                    <div class="row">
-                        <div class="input-field col s12">
-                            <input placeholder="Ex: lucasnaja0@gmail.com" oninvalid="this.setCustomValidity('Por favor, preencha esse campo com seu e-mail.')" oninput="setCustomValidity('')" name="email" id="email" type="email" class="validate" required>
-                            <label for="email">E-mail</label>
-                        </div>
-                    </div>
-
-                    <div class="divider"></div>
-
-                    <h5>Informações</h5>
-                    <textarea name="subject" placeholder="Mensagem" oninvalid="this.setCustomValidity('Por favor, preencha esse campo.')" oninput="setCustomValidity('')" spellcheck="false" required></textarea>
-
-                    <button title="Enviar" class="btn waves-effect waves-dark white black-text" type="submit">
-                        Enviar
-                    </button>
-                </form>
+                </div>
             </div>
         </div>
     </main>
 
     <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/footer.php") ?>
 
+    <script src="src/index.js"></script>
     <script src="/src/js/main.js"></script>
 </body>
 

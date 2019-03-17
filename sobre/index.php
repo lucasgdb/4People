@@ -107,7 +107,7 @@
                     <strong>4People</strong> é um projeto de TCC da Escola Técnica Alfredo de Barros Santos de Guaratinguetá, no curso de Desenvolvimento de Sistemas.
                     O 4People foi feito por 2 programadores e 2 analistas.
                     Na criação foi utilizado HTML, CSS, JavaScript e PHP como linguagens.
-                    O Editor de Texto que utilizamos foi o Visual Studio Code, da Microsoft. 
+                    O Editor de Texto que utilizamos foi o Visual Studio Code, da Microsoft.
                 </p>
 
                 <h2 class="flow-text">Criadores</h2>

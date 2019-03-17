@@ -23,6 +23,17 @@ input[type=number]:focus {
     box-shadow: 0 1px 0 0 #607d8b !important
 }
 
+[type=radio]:checked+span:after,
+[type=radio].with-gap:checked+span:before,
+[type=radio].with-gap:checked+span:after {
+    border: 2px solid #607d8b
+}
+
+[type=radio]:checked+span:after,
+[type=radio].with-gap:checked+span:after {
+    background-color: #607d8b
+}
+
 @media (min-width: 993px) {
     textarea {
         font-size: 25px
