@@ -26,15 +26,17 @@
   - MaterializeCSS
   - PWA
 
-## Ferramentas prontas
+## Ferramentas prontas (16/95, 16.8%)
   - Geradores
     - Gerador de CPF
     - Gerador de Senha
-    - Gerador de Meta Tags (Falta algumas coisas)
+    - Gerador de Meta Tags (Faltam algumas coisas)
   - Validadores
     - Validador de CPF
   - Funções String
     - Contador de Caracteres
+  - Rede e Internet
+    - Meu IP
   - Codificadores e Decodificadores
     - Conversor de Código Binário
   - Calculadoras
@@ -43,6 +45,8 @@
     - Mínimo Múltiplo Comum
     - Índice de Massa Corporal
     - Equação do 2° Grau
+    - Fibonacci
+    - Conversores (Faltam algumas coisas)
   - Calcular Áreas
     - Área do Círculo
   - Datas e Horas
