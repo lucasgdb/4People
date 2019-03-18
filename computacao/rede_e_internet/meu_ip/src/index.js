@@ -36,6 +36,4 @@ document.addEventListener('DOMContentLoaded', function () {
                 classes: 'red accent-4'
             })
         })
-
-
 })

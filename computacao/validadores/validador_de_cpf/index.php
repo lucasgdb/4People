@@ -3,7 +3,7 @@
 
 <head>
     <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/links.php") ?>
-    <link rel="stylesheet" href="src/index.css">
+    <link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
     <title>Validador de CPF - 4People</title>
     <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
@@ -129,7 +129,7 @@
     <?php include_once($_SERVER['DOCUMENT_ROOT'] . "/componentes/footer.php") ?>
 
     <script src="/algoritmos/validadorDeCPF.js"></script>
-    <script src="src/index.js"></script>
+    <script src="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.js"></script>
     <script src="/src/js/main.js"></script>
 </body>
 

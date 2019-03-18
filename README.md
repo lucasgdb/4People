@@ -26,7 +26,7 @@
   - MaterializeCSS
   - PWA
 
-## Ferramentas prontas (16/95, 16.8%)
+## Ferramentas prontas (17/95, 17.89%)
   - Geradores
     - Gerador de CPF
     - Gerador de Senha
@@ -44,6 +44,7 @@
     - Máximo Divisor Comum
     - Mínimo Múltiplo Comum
     - Índice de Massa Corporal
+    - Porcentagem
     - Equação do 2° Grau
     - Fibonacci
     - Conversores (Faltam algumas coisas)

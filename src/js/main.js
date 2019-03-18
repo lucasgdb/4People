@@ -76,18 +76,16 @@ function matchMin(minWidth) {
 
 // Events
 document.addEventListener('DOMContentLoaded', function () {
-  let itens = document.querySelectorAll('#nav-mobile a')
-
-  itens.forEach(item => {
-    if (item.getAttribute('href') === location.pathname)
+  document.querySelectorAll('#nav-mobile a').forEach(item => {
+    if (item.getAttribute('href') === location.pathname || item.getAttribute('href') === `${location.pathname}/`) {
       item.parentElement.setAttribute('class', 'active waves-effect')
+    }
   })
 
-  itens = document.querySelectorAll('.active .padding-headers a')
-
-  itens.forEach(item => {
-    if (item.getAttribute('href') === location.pathname)
+  document.querySelectorAll('.active .padding-headers a').forEach(item => {
+    if (item.getAttribute('href') === location.pathname || item.getAttribute('href') === `${location.pathname}/`) {
       item.setAttribute('class', 'btn waves-effect grey lighten-2 black-text z-depth-2')
+    }
   })
 })
 
