@@ -101,10 +101,32 @@
                 <label>4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.</label>
                 <div class="divider"></div>
 
-                <h2 class="flow-text mb-0">Informações</h2>
+                <h2 class="flow-text mt-2 center-align">Criadores do 4People</h2>
+                <div class="row mt-2">
+                    <div class="col s12 m8 offset-m2">
+                        <div class="col s6 m3">
+                            <img class="responsive-img circle" src="../imagens/lucas.jpg" alt="Lucas Bittencourt">
+                        </div>
+
+                        <div class="col s6 m3">
+                            <img class="responsive-img circle" src="../imagens/lucas.jpg" alt="Jairo Arcy">
+                        </div>
+
+                        <div class="col s6 m3">
+                            <img class="responsive-img circle" src="../imagens/lucas.jpg" alt="Renan de Mattos">
+                        </div>
+
+                        <div class="col s6 m3">
+                            <img class="responsive-img circle" src="../imagens/lucas.jpg" alt="Suzany Silva">
+                        </div>
+                    </div>
+
+                </div>
+
+                <h2 class="flow-text">Informações</h2>
                 <div class="divider"></div>
                 <p>
-                    <strong>4People</strong> é um projeto de TCC da Escola Técnica Alfredo de Barros Santos de Guaratinguetá, no curso de Desenvolvimento de Sistemas.
+                    <strong>4People</strong> é um projeto de TCC da Escola Técnica (Etec) Alfredo de Barros Santos de Guaratinguetá, no curso de Desenvolvimento de Sistemas.
                     O 4People foi feito por 2 programadores e 2 analistas.
                     Na criação foi utilizado HTML, CSS, JavaScript e PHP como linguagens.
                     O Editor de Texto que utilizamos foi o Visual Studio Code, da Microsoft.
