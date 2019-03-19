@@ -104,20 +104,20 @@
                 <h2 class="flow-text mt-2 center-align">Criadores do 4People</h2>
                 <div class="row mt-2">
                     <div class="col s12 m8 offset-m2">
-                        <div class="col s6 m3">
-                            <img class="responsive-img circle" src="../imagens/lucas.jpg" alt="Lucas Bittencourt">
+                        <div class="col s3">
+                            <img title="Lucas Bittencourt" class="responsive-img circle" src="../imagens/lucas.jpg" alt="Lucas Bittencourt">
                         </div>
 
-                        <div class="col s6 m3">
-                            <img class="responsive-img circle" src="../imagens/lucas.jpg" alt="Jairo Arcy">
+                        <div class="col s3">
+                            <img title="Jairo Arcy" class="responsive-img circle" src="../imagens/lucas.jpg" alt="Jairo Arcy">
                         </div>
 
-                        <div class="col s6 m3">
-                            <img class="responsive-img circle" src="../imagens/lucas.jpg" alt="Renan de Mattos">
+                        <div class="col s3">
+                            <img title="Renan de Mattos" class="responsive-img circle" src="../imagens/renan.jpg" alt="Renan de Mattos">
                         </div>
 
-                        <div class="col s6 m3">
-                            <img class="responsive-img circle" src="../imagens/lucas.jpg" alt="Suzany Silva">
+                        <div class="col s3">
+                            <img title="Suzany Silva" class="responsive-img circle" src="../imagens/suzany.jpg" alt="Suzany Silva">
                         </div>
                     </div>
 

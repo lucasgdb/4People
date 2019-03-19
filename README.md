@@ -26,7 +26,7 @@
   - MaterializeCSS
   - PWA
 
-## Ferramentas prontas (17/95, 17.89%)
+## Ferramentas prontas (17/101, 16.83%)
   - Geradores
     - Gerador de CPF
     - Gerador de Senha
