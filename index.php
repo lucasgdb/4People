@@ -134,6 +134,13 @@
 
     <?php include_once('componentes/footer.php') ?>
 
+    <!-- <script type='text/javascript'>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker
+                .register('./service-worker.js')
+                .then(() => console.log('worker registered!'))
+        }
+    </script> -->
     <script src="src/js/index.js"></script>
     <script src="/src/js/main.js"></script>
 </body>

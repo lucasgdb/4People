@@ -109,7 +109,7 @@
                         </div>
 
                         <div class="col s3">
-                            <img title="Jairo Arcy" class="responsive-img circle" src="../imagens/lucas.jpg" alt="Jairo Arcy">
+                            <img title="Jairo Arcy" class="responsive-img circle" src="../imagens/jairo.jpg" alt="Jairo Arcy">
                         </div>
 
                         <div class="col s3">
@@ -138,28 +138,28 @@
                     <li>
                         Lucas Bittencourt
                         <ul class="browser-default">
-                            <li><a href="#" target="_blank">GitHub</a></li>
-                            <li><a href="#" target="_blank">Facebook</a></li>
-                            <li><a href="#" target="_blank">LinkedIn</a></li>
+                            <li><a href="https://github.com/LucasNaja" target="_blank">GitHub</a></li>
+                            <li><a href="https://www.facebook.com/Lucas.Naja0" target="_blank">Facebook</a></li>
+                            <li><a href="https://www.linkedin.com/in/lucas-bittencourt/" target="_blank">LinkedIn</a></li>
                         </ul>
                     </li>
                     <li>
                         Jairo Arcy
                         <ul class="browser-default">
-                            <li><a href="#" target="_blank">GitHub</a></li>
-                            <li><a href="#" target="_blank">Facebook</a></li>
+                            <li><a href="https://github.com/Jairo-Arcy" target="_blank">GitHub</a></li>
+                            <li><a href="https://www.facebook.com/jairo.arcy" target="_blank">Facebook</a></li>
                         </ul>
                     </li>
                     <li>
                         Renan de Mattos
                         <ul class="browser-default">
-                            <li><a href="#" target="_blank">Facebook</a></li>
+                            <li><a href="https://www.facebook.com/reenan.mattos" target="_blank">Facebook</a></li>
                         </ul>
                     </li>
                     <li>
                         Suzany Silva
                         <ul class="browser-default">
-                            <li><a href="#" target="_blank">Facebook</a></li>
+                            <li><a href="https://www.facebook.com/suzany.castrodasilva" target="_blank">Facebook</a></li>
                         </ul>
                     </li>
                 </ul>

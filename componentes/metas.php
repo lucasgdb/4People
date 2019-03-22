@@ -6,6 +6,7 @@
     <meta name="author" content="Lucas Bittencourt">
     <meta name="copyright" content="© 2019 - Lucas Naja">
     <link rel="icon" href="/imagens/icon.png">
+    <meta rel="manifest" href="/manifest.json">
   
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">

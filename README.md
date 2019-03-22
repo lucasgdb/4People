@@ -7,6 +7,17 @@
 ## Imagem
   ![4people](imagens/4People.png "4People - Início")
 
+## Como contribuir
+  - Requisitos
+    - PHP
+    - Git
+    
+  ```sh
+    git clone https://github.com/LucasNaja/4People.git
+    cd 4People
+    php -S localhost:5500
+  ```
+
 ## Integrantes
   - **Lucas Bittencourt**
     - Programador
