@@ -1,11 +1,15 @@
+<?php
+include_once('asset.php');
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-    <?php include_once('componentes/links.php') ?>
-    <link rel="stylesheet" href="src/css/index.css">
+    <?php include_once("$path/componentes/links.php") ?>
+    <link rel="stylesheet" href="<?= $return ?>/src/css/index.css">
     <title>4People - Ferramentas OnLine</title>
-    <?php include_once('componentes/metas.php') ?>
+    <?php include_once("$path/componentes/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <meta name="title" content="4People - Ferramentas OnLine">
     <meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
@@ -19,40 +23,40 @@
 
 <body>
     <?php
-    include_once('componentes/noscript.php');
-    include_once('componentes/spinner.php');
-    include_once('componentes/header.php')
+    include_once("$path/componentes/noscript.php");
+    include_once("$path/componentes/spinner.php");
+    include_once("$path/componentes/header.php")
     ?>
 
     <ul id="slide-out" class="sidenav sidenav-fixed collapsible hide">
-        <?php include_once('componentes/logo.php') ?>
+        <?php include_once("$path/componentes/logo.php") ?>
 
         <li class="active">
             <div class="collapsible-header"><i class="material-icons">computer</i>Computação</div>
             <div class="collapsible-body">
                 <ul class="collapsible padding-headers">
                     <li>
-                        <?php include_once('componentes/computacao/geradores.php') ?>
+                        <?php include_once("$path/componentes/computacao/geradores.php") ?>
                     </li>
 
                     <li>
-                        <?php include_once('componentes/computacao/validadores.php') ?>
+                        <?php include_once("$path/componentes/computacao/validadores.php") ?>
                     </li>
 
                     <li>
-                        <?php include_once('componentes/computacao/funcoes_string.php') ?>
+                        <?php include_once("$path/componentes/computacao/funcoes_string.php") ?>
                     </li>
 
                     <li>
-                        <?php include_once('componentes/computacao/rede_e_internet.php') ?>
+                        <?php include_once("$path/componentes/computacao/rede_e_internet.php") ?>
                     </li>
 
                     <li>
-                        <?php include_once('componentes/computacao/codif_decodif.php') ?>
+                        <?php include_once("$path/componentes/computacao/codif_decodif.php") ?>
                     </li>
 
                     <li>
-                        <?php include_once('componentes/computacao/tabelas_e_padroes.php') ?>
+                        <?php include_once("$path/componentes/computacao/tabelas_e_padroes.php") ?>
                     </li>
                 </ul>
             </div>
@@ -63,15 +67,15 @@
             <div class="collapsible-body">
                 <ul class="collapsible padding-headers">
                     <li>
-                        <?php include_once('componentes/matematica/calculadoras.php') ?>
+                        <?php include_once("$path/componentes/matematica/calculadoras.php") ?>
                     </li>
 
                     <li>
-                        <?php include_once('componentes/matematica/calcular_areas.php') ?>
+                        <?php include_once("$path/componentes/matematica/calcular_areas.php") ?>
                     </li>
 
                     <li>
-                        <?php include_once('componentes/matematica/datas_e_horas.php') ?>
+                        <?php include_once("$path/componentes/matematica/datas_e_horas.php") ?>
                     </li>
                 </ul>
             </div>
@@ -82,11 +86,11 @@
             <div class="collapsible-body">
                 <ul class="collapsible padding-headers">
                     <li>
-                        <?php include_once('componentes/outras_ferramentas/dia_a_dia.php') ?>
+                        <?php include_once("$path/componentes/outras_ferramentas/dia_a_dia.php") ?>
                     </li>
 
                     <li>
-                        <?php include_once('componentes/outras_ferramentas/jogos.php') ?>
+                        <?php include_once("$path/componentes/outras_ferramentas/jogos.php") ?>
                     </li>
                 </ul>
             </div>
@@ -132,7 +136,7 @@
         </div>
     </main>
 
-    <?php include_once('componentes/footer.php') ?>
+    <?php include_once("$path/componentes/footer.php") ?>
 
     <!-- <script type='text/javascript'>
         if ('serviceWorker' in navigator) {
@@ -141,8 +145,8 @@
                 .then(() => console.log('worker registered!'))
         }
     </script> -->
-    <script src="src/js/index.js"></script>
-    <script src="/src/js/main.js"></script>
+    <script src="<?= $return ?>/src/js/index.js"></script>
+    <script src="<?= $return ?>/src/js/main.js"></script>
 </body>
 
 </html> 

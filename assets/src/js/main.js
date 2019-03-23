@@ -76,17 +76,29 @@ function matchMin(minWidth) {
 
 // Events
 document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('#nav-mobile a').forEach(item => {
-    if (item.getAttribute('href') === location.pathname || item.getAttribute('href') === `${location.pathname}/`) {
-      item.parentElement.setAttribute('class', 'active waves-effect')
+  const navMobileA = document.querySelectorAll('#nav-mobile a')
+  for (let i = 0; i < navMobileA.length; i++) {
+    if (navMobileA[i].getAttribute('href').split('/').filter(link => link !== '' && link !== '.').join('') === '') {
+      navMobileA[i].parentElement.setAttribute('class', 'active waves-effect')
+      return
     }
-  })
+    const path = navMobileA[i].getAttribute('href').split('/').filter(link => link !== '')
+    const pathName = location.pathname.split('/').filter(link => link !== '')
+    if (path[path.length - 1] === pathName[pathName.length - 1]) {
+      navMobileA[i].parentElement.setAttribute('class', 'active waves-effect')
+      break;
+    }
+  }
 
-  document.querySelectorAll('.active .padding-headers a').forEach(item => {
-    if (item.getAttribute('href') === location.pathname || item.getAttribute('href') === `${location.pathname}/`) {
-      item.setAttribute('class', 'btn waves-effect grey lighten-2 black-text z-depth-2')
+  const paddingHeadersA = document.querySelectorAll('.active .active a')
+  for (let i = 0; i < paddingHeadersA.length; i++) {
+    const path = paddingHeadersA[i].getAttribute('href').split('/').filter(link => link !== '')
+    const pathName = location.pathname.split('/').filter(link => link !== '')
+    if (path[path.length - 1] === pathName[pathName.length - 1]) {
+      paddingHeadersA[i].setAttribute('class', 'btn waves-effect grey lighten-2 black-text z-depth-2')
+      break;
     }
-  })
+  }
 })
 
 window.onload = function () {
