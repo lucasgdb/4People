@@ -21,8 +21,8 @@
 
 <body>
     <?php
-    $msg = $_GET['msg'];
-    if (isset($msg)) {
+    if (isset($_GET['msg'])) {
+        $msg = $_GET['msg'];
         if ($msg === 'error') {
             echo
                 '<script>
