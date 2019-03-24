@@ -6,17 +6,17 @@
 <head>
     <?php include_once("$path/components/links.php") ?>
     <link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
-    <title>Conversor de Código Binário - 4People</title>
+    <title>Conversor Binário - 4People</title>
     <?php include_once("$path/components/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <meta name="title" content="Conversor de Código Binário - 4People">
-    <meta name="description" content="Conversor de Código Binário. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+    <meta name="description" content="Conversor Binário. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/computacao/codif_decodif/conversor_de_codigo_binario/">
-    <meta property="og:title" content="Conversor de Código Binário - 4People">
-    <meta name="twitter:title" content="Conversor de Código Binário - 4People">
-    <meta property="og:url" content="https://4people.now.sh/computacao/codif_decodif/conversor_de_codigo_binario/">
-    <meta name="twitter:url" content="https://4people.now.sh/computacao/codif_decodif/conversor_de_codigo_binario/">
+    <meta name="msapplication-starturl" content="https://4people.now.sh/computacao/codif_decodif/conversor_binario/">
+    <meta property="og:title" content="Conversor Binário - 4People">
+    <meta name="twitter:title" content="Conversor Binário - 4People">
+    <meta property="og:url" content="https://4people.now.sh/computacao/codif_decodif/conversor_binario/">
+    <meta name="twitter:url" content="https://4people.now.sh/computacao/codif_decodif/conversor_binario/">
 </head>
 
 <body>
@@ -98,9 +98,9 @@
     <main class="grey lighten-5 hide">
         <div class="container">
             <div class="card-panel">
-                <h1 class="flow-text mt-2">Conversor de Código Binário</h1>
+                <h1 class="flow-text mt-2">Conversor Binário</h1>
 
-                <label>Tradutor OnLine de código binário e vice-versa, basta digitar abaixo e clicar no botão que desejar.</label>
+                <label>Tradutor OnLine de Código Binário. Basta digitar o código binário ou texto abaixo e clicar no botão para converter.</label>
                 <div class="divider"></div>
 
                 <textarea class="mt-2" id="text" placeholder="Digite aqui o texto" spellcheck="false"></textarea>

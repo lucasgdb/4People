@@ -24,9 +24,12 @@ input[type=text]:focus {
 .datepicker-done,
 .datepicker-cancel,
 .select-dropdown li>span,
-.is-today,
 .timepicker-close {
     color: #607d8b !important
+}
+
+.is-today {
+    color: rgb(0, 116, 116) !important
 }
 
 td.is-selected,

@@ -69,12 +69,16 @@ body>header+ul>li:nth-child(2) {
   border-top: 1px solid #e0e0e0 !important
 }
 
+body>header+ul>li>.collapsible-header {
+  padding-left: 8px !important
+}
+
 .active>.collapsible-header {
   border-bottom: none !important
 }
 
 .padding-headers .collapsible-header {
-  padding: 0 35px !important
+  padding: 0 31px !important
 }
 
 .padding-headers .collapsible-body a {
