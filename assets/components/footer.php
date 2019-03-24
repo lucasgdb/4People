@@ -6,7 +6,7 @@
                     <h5 class="black-text">Sobre</h5>
                     <p class="grey-text text-darken-4">
                         4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.
-                        Feito com <img title="Coração" style="position:relative;top:4px" src="' . $return . '/imagens/heart.png" alt="Coração"> e <img title="JavaScript" style="position:relative;top:2.5px" src="' . $return . '/imagens/js.png" alt="JavaScript">.
+                        Feito com <img title="Coração" style="position:relative;top:4px" src="' . $return . '/images/heart.png" alt="Coração"> e <img title="JavaScript" style="position:relative;top:2.5px" src="' . $return . '/images/js.png" alt="JavaScript">.
                         O projeto é de código aberto sob a licença MIT, no GitHub.
                     </p>
                 </div>

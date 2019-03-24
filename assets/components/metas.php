@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes, shrink-to-fit=yes">
     <meta name="author" content="Lucas Bittencourt">
     <meta name="copyright" content="© 2019 - Lucas Naja">
-    <link rel="icon" href="' . $return . '/imagens/icon.png">
+    <link rel="icon" href="' . $return . '/images/icon.png">
     <meta rel="manifest" href="' . $return . '/manifest.json">
   
     <meta name="mobile-web-app-capable" content="yes">
@@ -18,12 +18,12 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="4People">
     <meta property="og:description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
-    <meta property="og:image" content="' . $return . '/imagens/4People.png">
+    <meta property="og:image" content="' . $return . '/images/4People.png">
     <meta property="og:image:alt" content="Print da página inicial do 4People.">
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
-    <meta name="twitter:image" content="' . $return . '/imagens/4People.png">
+    <meta name="twitter:image" content="' . $return . '/images/4People.png">
     <meta name="twitter:image:alt" content="Print da página inicial do 4People.">
     <meta name="twitter:creator" content="@LucasNaja0">
     <meta name="twitter:site" content="@LucasNaja0">
