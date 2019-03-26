@@ -38,7 +38,7 @@
   - MaterializeCSS
   - PWA
 
-## Ferramentas prontas (17/101, 16.83%)
+## Ferramentas prontas (19/101, 18.81%)
   - Geradores
     - Gerador de CPF
     - Gerador de Senha
@@ -60,7 +60,9 @@
     - Equação do 2° Grau
     - Fibonacci
     - Conversores (Faltam algumas coisas)
+    - Divisão
   - Calcular Áreas
     - Área do Círculo
+    - Área do Quadrado
   - Datas e Horas
     - Diferenças entre Datas

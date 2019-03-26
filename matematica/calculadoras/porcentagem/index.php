@@ -136,11 +136,11 @@
                     <div class="col s12">
                         O valor
                         <div class="input-field mt-2 mb-0 inline lesser">
-                            <input id="thirdNumber" type="number" placeholder="Ex: 50">
+                            <input id="thirdNumber" type="number" placeholder="Ex: 50" step="any">
                         </div>
                         é qual porcentagem de
                         <div class="input-field mt-2 mb-0 inline lesser">
-                            <input id="fourthNumber" type="number" placeholder="Ex: 100">
+                            <input id="fourthNumber" type="number" placeholder="Ex: 100" step="any">
                         </div>
                         ?
                         <div class="input-field mt-2 mb-0 inline">
@@ -165,11 +165,11 @@
                     <div class="col s12">
                         O valor
                         <div class="input-field mt-2 mb-0 inline lesser">
-                            <input id="fifthNumber" type="number" placeholder="Ex: 50">
+                            <input id="fifthNumber" type="number" placeholder="Ex: 50" step="any">
                         </div>
                         aumentou para
                         <div class="input-field mt-2 mb-0 inline lesser">
-                            <input id="sixthNumber" type="number" placeholder="Ex: 100">
+                            <input id="sixthNumber" type="number" placeholder="Ex: 100" step="any">
                         </div>
                         . Qual foi seu aumento percentual?
                         <div class="input-field mt-2 mb-0 inline">
@@ -194,11 +194,11 @@
                     <div class="col s12">
                         O valor
                         <div class="input-field mt-2 mb-0 inline lesser">
-                            <input id="seventhNumber" type="number" placeholder="Ex: 50">
+                            <input id="seventhNumber" type="number" placeholder="Ex: 50" step="any">
                         </div>
                         diminuiu para
                         <div class="input-field mt-2 mb-0 inline lesser">
-                            <input id="eighthNumber" type="number" placeholder="Ex: 100">
+                            <input id="eighthNumber" type="number" placeholder="Ex: 100" step="any">
                         </div>
                         . Qual foi sua diminuição porcentual?
                         <div class="input-field mt-2 mb-0 inline">
@@ -223,11 +223,11 @@
                     <div class="col s12">
                         O valor
                         <div class="input-field mt-2 mb-0 inline lesser">
-                            <input id="ninethNumber" type="number" placeholder="Ex: 50">
+                            <input id="ninethNumber" type="number" placeholder="Ex: 50" step="any">
                         </div>
                         sobre o valor
                         <div class="input-field mt-2 mb-0 inline lesser">
-                            <input id="tenthNumber" type="number" placeholder="Ex: 100">
+                            <input id="tenthNumber" type="number" placeholder="Ex: 100" step="any">
                         </div>
                         são quantos %?
                         <div class="input-field mt-2 mb-0 inline">
@@ -252,11 +252,11 @@
                     <div class="col s12">
                         O valor
                         <div class="input-field mt-2 mb-0 inline lesser">
-                            <input id="eleventhNumber" type="number" placeholder="Ex: 50">
+                            <input id="eleventhNumber" type="number" placeholder="Ex: 50" step="any">
                         </div>
                         mais
                         <div class="input-field mt-2 mb-0 inline lesser">
-                            <input id="twelfthNumber" type="number" placeholder="Ex: 100">
+                            <input id="twelfthNumber" type="number" placeholder="Ex: 100" step="any">
                         </div>
                         % dá que resultado?
                         <div class="input-field mt-2 mb-0 inline">
@@ -281,11 +281,11 @@
                     <div class="col s12">
                         O valor
                         <div class="input-field mt-2 mb-0 inline lesser">
-                            <input id="thirteenthNumber" type="number" placeholder="Ex: 50">
+                            <input id="thirteenthNumber" type="number" placeholder="Ex: 50" step="any">
                         </div>
                         menos
                         <div class="input-field mt-2 mb-0 inline lesser">
-                            <input id="fourteenthNumber" type="number" placeholder="Ex: 100">
+                            <input id="fourteenthNumber" type="number" placeholder="Ex: 100" step="any">
                         </div>
                         % dá que resultado?
                         <div class="input-field mt-2 mb-0 inline">
@@ -310,11 +310,11 @@
                     <div class="col s12">
                         O valor X aumentou em
                         <div class="input-field mt-2 mb-0 inline lesser">
-                            <input id="fifteenthNumber" type="number" placeholder="Ex: 50">
+                            <input id="fifteenthNumber" type="number" placeholder="Ex: 50" step="any">
                         </div>
                         % para
                         <div class="input-field mt-2 mb-0 inline lesser">
-                            <input id="sixteenthNumber" type="number" placeholder="Ex: 100">
+                            <input id="sixteenthNumber" type="number" placeholder="Ex: 100" step="any">
                         </div>
                         . Qual o valor X?
                         <div class="input-field mt-2 mb-0 inline">
@@ -339,11 +339,11 @@
                     <div class="col s12">
                         O valor X diminuiu em
                         <div class="input-field mb-0 inline lesser">
-                            <input id="seventeenthNumber" type="number" placeholder="Ex: 50">
+                            <input id="seventeenthNumber" type="number" placeholder="Ex: 50" step="any">
                         </div>
                         % para
                         <div class="input-field mb-0 inline lesser">
-                            <input id="eighteenthNumber" type="number" placeholder="Ex: 100">
+                            <input id="eighteenthNumber" type="number" placeholder="Ex: 100" step="any">
                         </div>
                         . Qual o valor X?
                         <div class="input-field mb-0 inline">
@@ -367,7 +367,7 @@
 
     <?php include_once("$path/components/footer.php") ?>
 
-    <script src="<?= $return ?>/algorithms/porcentagem.js"></script>
+    <script src="<?= $return ?>/algorithms/percentage.js"></script>
     <script src="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.js"></script>
     <script src="<?= $return ?>/src/js/main.js"></script>
 </body>
