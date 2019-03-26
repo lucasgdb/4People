@@ -22,7 +22,7 @@ function animateIn(delay = 250) {
   document.body.style.paddingLeft = '300px'
 }
 
-function animateOut(delay = 125) {
+function animateOut(delay = 250) {
   document.body.style.transition = `padding-left ${delay}ms`
   document.body.style.paddingLeft = '0'
 }
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const pathName = location.pathname.split('/').filter(link => link !== '')
     if (path[path.length - 1] === pathName[pathName.length - 1]) {
       navMobileA[i].parentElement.setAttribute('class', 'active waves-effect')
-      break;
+      break
     }
   }
 
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const pathName = location.pathname.split('/').filter(link => link !== '')
     if (path[path.length - 1] === pathName[pathName.length - 1]) {
       paddingHeadersA[i].setAttribute('class', 'btn waves-effect grey lighten-2 black-text z-depth-2')
-      break;
+      break
     }
   }
 })

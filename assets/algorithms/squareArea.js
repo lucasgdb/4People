@@ -1,3 +1,3 @@
 function calculateSquareArea(side) {
-    return side ** 2;
+    return side ** 2
 }

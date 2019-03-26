@@ -6,17 +6,17 @@
 <head>
     <?php include_once("$path/components/links.php") ?>
     <link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
-    <title>Diferença entre Datas - 4People</title>
+    <title>Área do Quadrado - 4People</title>
     <?php include_once("$path/components/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-    <meta name="title" content="Diferença entre Datas - 4People">
-    <meta name="description" content="Diferença entre Datas. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+    <meta name="title" content="Área do Quadrado - 4People">
+    <meta name="description" content="Calcular área do Quadrado. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/datas_e_horas/diferenca_entre_datas/">
-    <meta property="og:title" content="Diferença entre Datas - 4People">
-    <meta name="twitter:title" content="Diferença entre Datas - 4People">
-    <meta property="og:url" content="https://4people.now.sh/matematica/datas_e_horas/diferenca_entre_datas/">
-    <meta name="twitter:url" content="https://4people.now.sh/matematica/datas_e_horas/diferenca_entre_datas/">
+    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calcular_areas/area_do_quadrado/">
+    <meta property="og:title" content="Área do Quadrado - 4People">
+    <meta name="twitter:title" content="Área do Quadrado - 4People">
+    <meta property="og:url" content="https://4people.now.sh/matematica/calcular_areas/area_do_quadrado/">
+    <meta name="twitter:url" content="https://4people.now.sh/matematica/calcular_areas/area_do_quadrado/">
 </head>
 
 <body>
@@ -68,11 +68,11 @@
                         <?php include_once("$path/components/matematica/calculadoras.php") ?>
                     </li>
 
-                    <li>
+                    <li class="active">
                         <?php include_once("$path/components/matematica/calcular_areas.php") ?>
                     </li>
 
-                    <li class="active">
+                    <li>
                         <?php include_once("$path/components/matematica/datas_e_horas.php") ?>
                     </li>
                 </ul>
@@ -98,64 +98,76 @@
     <main class="grey lighten-5 hide">
         <div class="container">
             <div class="card-panel">
-                <h1 class="flow-text mt-2">Diferença entre Datas</h1>
+                <h1 class="flow-text mt-2">Área do Quadrado</h1>
 
-                <label>Calcular diferença entre duas datas, com um leque de recursos disponíveis.</label>
+                <label>Calcular Área do Quadrado OnLine. Área do Quadrado: Lado * Lado ou L²</label>
                 <div class="divider"></div>
 
-                <div class="row mt-2 mb-0">
-                    <div class="col s12 m6">
-                        Data inicial:<br class="hide-on-large-only">
+                <div class="row mb-0">
+                    <div class="col s12">
+                        Lado:<br class="hide-on-med-and-up">
                         <div class="input-field inline">
-                            <input id="beginDate" type="text" placeholder="Data inicial" class="datepicker">
+                            <input id="side" type="number" placeholder="Digite aqui o raio." min="0" value="10" step="any">
                         </div>
                     </div>
 
-                    <div class="col s12 m6">
-                        Horário:<br class="hide-on-large-only">
+                    <div class="col s12">
+                        Medida:<br class="hide-on-med-and-up">
                         <div class="input-field inline">
-                            <input id="beginTime" type="text" placeholder="Horário atual" class="timepicker">
+                            <select id="measure">
+                                <option value="km">Kilômetros</option>
+                                <option value="hm">Hectômetros</option>
+                                <option value="dam">Decâmetros</option>
+                                <option value="m" selected>Metros</option>
+                                <option value="dm">Decímetros</option>
+                                <option value="cm">Centímetros</option>
+                                <option value="mm">Milímetros</option>
+                            </select>
                         </div>
                     </div>
 
-                    <div class="col s12 m6">
-                        Data final:<br class="hide-on-large-only">
+                    <div class="col s12">
+                        Casas decimais:<br class="hide-on-med-and-up">
                         <div class="input-field inline">
-                            <input id="endDate" type="text" placeholder="Data final" class="datepicker">
-                        </div>
-                    </div>
-
-                    <div class="col s12 m6">
-                        Horário:<br class="hide-on-large-only">
-                        <div class="input-field inline">
-                            <input id="endTime" type="text" placeholder="Horário atual" class="timepicker">
+                            <select id="decimal">
+                                <option value="0">Nenhuma</option>
+                                <option value="1">1</option>
+                                <option value="2" selected>2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="48">48</option>
+                                <option value="-1">Automática</option>
+                            </select>
                         </div>
                     </div>
                 </div>
 
-                <button title="Calcular a Diferença Entre Datas" class="btn btn-center waves-effect white black-text z-depth-2" onclick="calculate()">
-                    Calcular diferença
+                <button title="Calcular Área" class="btn btn-center waves-effect white black-text z-depth-2" onclick="calculate()">
+                    Calcular área
                 </button>
 
                 <div class="divider mt-2"></div>
 
-                <ul class="collection">
-                    <li class="collection-item">Tempo decorrido: <span id="totalTime">0 anos, 0 meses e 0 dias</span></li>
-                    <li class="collection-item">Milissegundos: <span id="milliSecs">0</span></li>
-                    <li class="collection-item">Segundos: <span id="secs">0</span></li>
-                    <li class="collection-item">Minutos: <span id="mins">0</span></li>
-                    <li class="collection-item">Horas: <span id="hours">0</span></li>
-                    <li class="collection-item">Dias: <span id="days">0</span></li>
-                    <li class="collection-item">Meses: <span id="months">0</span></li>
-                    <li class="collection-item">Anos: <span id="years">0</span></li>
-                </ul>
+                <textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
+                <button title="Copiar" class="btn waves-effect waves-dark white black-text" onclick="copyResult()">
+                    Copiar
+                </button>
             </div>
         </div>
     </main>
 
     <?php include_once("$path/components/footer.php") ?>
 
-    <script src="<?= $return ?>/algorithms/differenceBetweenDates.js"></script>
+    <script src="<?= $return ?>/algorithms/squareArea.js"></script>
     <script src="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.js"></script>
     <script src="<?= $return ?>/src/js/main.js"></script>
 </body>

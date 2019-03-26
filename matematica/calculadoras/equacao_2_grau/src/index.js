@@ -1,7 +1,7 @@
-const txtResult = document.querySelector('#result');
-const txtValueA = document.querySelector('#valueA');
-const txtValueB = document.querySelector('#valueB');
-const txtValueC = document.querySelector('#valueC');
+const txtResult = document.querySelector('#result')
+const txtValueA = document.querySelector('#valueA')
+const txtValueB = document.querySelector('#valueB')
+const txtValueC = document.querySelector('#valueC')
 
 function calculate() {
     if (txtValueA.value !== '' && parseInt(txtValueA.value) !== 0 && txtValueB.value !== '' && txtValueC.value !== '') {
@@ -28,7 +28,6 @@ function calculate() {
             classes: 'red accent-4'
         })
     }
-
 }
 
 function copyResult() {

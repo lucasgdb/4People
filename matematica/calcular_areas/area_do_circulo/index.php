@@ -98,12 +98,12 @@
     <main class="grey lighten-5 hide">
         <div class="container">
             <div class="card-panel">
-                <h1 class="flow-text mt-2">Calcular Área do Círculo</h1>
+                <h1 class="flow-text mt-2">Área do Círculo</h1>
 
                 <label>R = Raio, D = Diâmetro (2 * R), PI = 3.141592653589793... (Math.PI.toFixed(48))</label>
                 <div class="divider"></div>
 
-                <div class="row">
+                <div class="row mb-0">
                     <div class="col s12 m6">
                         <p>
                             <label>
@@ -122,7 +122,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row mb-0">
                     <div class="col s12">
                         <span id="formulasName">Raio</span>:<br class="hide-on-med-and-up">
                         <div class="input-field inline">
@@ -133,7 +133,7 @@
                     <div class="col s12">
                         Medida:<br class="hide-on-med-and-up">
                         <div class="input-field inline">
-                            <select id="medida">
+                            <select id="measure">
                                 <option value="km">Kilômetros</option>
                                 <option value="hm">Hectômetros</option>
                                 <option value="dam">Decâmetros</option>

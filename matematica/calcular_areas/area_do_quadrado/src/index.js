@@ -1,28 +1,13 @@
 M.FormSelect.init(document.querySelectorAll('select'))
 
 const txtResult = document.querySelector('#result')
-const txtFormulas = document.querySelectorAll('[name=formula]')
-const lblFormula = document.querySelector('#formulasName')
-const txtNumber = document.querySelector('#number')
+const txtSide = document.querySelector('#side')
 const txtMeasure = document.querySelector('#measure')
 const txtDecimal = document.querySelector('#decimal')
 
-const names = ['Raio', 'Diâmetro']
-txtFormulas.forEach((txtFormula, index) => {
-    txtFormula.onclick = function () {
-        lblFormula.textContent = names[index]
-    }
-})
-
 function calculate() {
-    if (txtNumber.value !== '') {
-        let area
-        if (txtFormulas[0].checked) {
-            area = calculateCircleAreaRadius(parseFloat(txtNumber.value))
-        } else {
-            area = calculateCircleAreaDiameter(parseFloat(txtNumber.value))
-        }
-
+    if (txtMeasure.value !== '') {
+        const area = calculateSquareArea(parseFloat(txtSide.value))
         txtResult.value = `${txtDecimal.value === '-1' ? area : area.toFixed(parseInt(txtDecimal.value), 10)}${txtMeasure.value}²`
     } else {
         M.toast({
@@ -49,7 +34,7 @@ function copyResult() {
     }
 }
 
-txtNumber.onkeyup = function (e) {
+txtSide.onkeyup = function (e) {
     if (e.which === 13) {
         calculate()
     }

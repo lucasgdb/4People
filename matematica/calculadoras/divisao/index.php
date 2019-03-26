@@ -6,17 +6,17 @@
 <head>
     <?php include_once("$path/components/links.php") ?>
     <link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
-    <title>Diferença entre Datas - 4People</title>
+    <title>Divisão - 4People</title>
     <?php include_once("$path/components/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-    <meta name="title" content="Diferença entre Datas - 4People">
-    <meta name="description" content="Diferença entre Datas. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+    <meta name="title" content="Divisão - 4People">
+    <meta name="description" content="Calculadora de Divisão. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/datas_e_horas/diferenca_entre_datas/">
-    <meta property="og:title" content="Diferença entre Datas - 4People">
-    <meta name="twitter:title" content="Diferença entre Datas - 4People">
-    <meta property="og:url" content="https://4people.now.sh/matematica/datas_e_horas/diferenca_entre_datas/">
-    <meta name="twitter:url" content="https://4people.now.sh/matematica/datas_e_horas/diferenca_entre_datas/">
+    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calcular_areas/divisao/">
+    <meta property="og:title" content="Divisão - 4People">
+    <meta name="twitter:title" content="Divisão - 4People">
+    <meta property="og:url" content="https://4people.now.sh/matematica/calcular_areas/divisao/">
+    <meta name="twitter:url" content="https://4people.now.sh/matematica/calcular_areas/divisao/">
 </head>
 
 <body>
@@ -64,7 +64,7 @@
             <div class="collapsible-header"><i class="material-icons">functions</i>Matemática</div>
             <div class="collapsible-body">
                 <ul class="collapsible padding-headers">
-                    <li>
+                    <li class="active">
                         <?php include_once("$path/components/matematica/calculadoras.php") ?>
                     </li>
 
@@ -72,7 +72,7 @@
                         <?php include_once("$path/components/matematica/calcular_areas.php") ?>
                     </li>
 
-                    <li class="active">
+                    <li>
                         <?php include_once("$path/components/matematica/datas_e_horas.php") ?>
                     </li>
                 </ul>
@@ -98,64 +98,53 @@
     <main class="grey lighten-5 hide">
         <div class="container">
             <div class="card-panel">
-                <h1 class="flow-text mt-2">Diferença entre Datas</h1>
+                <h1 class="flow-text mt-2">Calcular Divisão</h1>
 
-                <label>Calcular diferença entre duas datas, com um leque de recursos disponíveis.</label>
+                <label>Calculadora de Divisão OnLine que mostra o resultado da divisão entre dois números e o resto (módulo) entre eles.</label>
                 <div class="divider"></div>
 
                 <div class="row mt-2 mb-0">
                     <div class="col s12 m6">
-                        Data inicial:<br class="hide-on-large-only">
-                        <div class="input-field inline">
-                            <input id="beginDate" type="text" placeholder="Data inicial" class="datepicker">
+                        <div class="col s12">
+                            <p class="mt-0 mb-0">Dividendo:</p>
+                        </div>
+                        <div class="col s12">
+                            <div class="input-field">
+                                <input id="dividend" type="number" placeholder="Número a ser dividido" step="any">
+                            </div>
                         </div>
                     </div>
 
                     <div class="col s12 m6">
-                        Horário:<br class="hide-on-large-only">
-                        <div class="input-field inline">
-                            <input id="beginTime" type="text" placeholder="Horário atual" class="timepicker">
+                        <div class="col s12">
+                            <p class="mt-0 mb-0">Divisor:</p>
                         </div>
-                    </div>
 
-                    <div class="col s12 m6">
-                        Data final:<br class="hide-on-large-only">
-                        <div class="input-field inline">
-                            <input id="endDate" type="text" placeholder="Data final" class="datepicker">
-                        </div>
-                    </div>
-
-                    <div class="col s12 m6">
-                        Horário:<br class="hide-on-large-only">
-                        <div class="input-field inline">
-                            <input id="endTime" type="text" placeholder="Horário atual" class="timepicker">
+                        <div class="col s12">
+                            <div class="input-field">
+                                <input id="divider" type="number" placeholder="Número que vai dividir" step="any">
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <button title="Calcular a Diferença Entre Datas" class="btn btn-center waves-effect white black-text z-depth-2" onclick="calculate()">
-                    Calcular diferença
+                <button title="Calcular Divisão" class="btn btn-center waves-effect white black-text z-depth-2" onclick="calculate()">
+                    Calcular Divisão
                 </button>
 
                 <div class="divider mt-2"></div>
 
-                <ul class="collection">
-                    <li class="collection-item">Tempo decorrido: <span id="totalTime">0 anos, 0 meses e 0 dias</span></li>
-                    <li class="collection-item">Milissegundos: <span id="milliSecs">0</span></li>
-                    <li class="collection-item">Segundos: <span id="secs">0</span></li>
-                    <li class="collection-item">Minutos: <span id="mins">0</span></li>
-                    <li class="collection-item">Horas: <span id="hours">0</span></li>
-                    <li class="collection-item">Dias: <span id="days">0</span></li>
-                    <li class="collection-item">Meses: <span id="months">0</span></li>
-                    <li class="collection-item">Anos: <span id="years">0</span></li>
-                </ul>
+                <textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
+                <button title="Copiar" class="btn waves-effect waves-dark white black-text" onclick="copyResult()">
+                    Copiar
+                </button>
             </div>
         </div>
     </main>
 
     <?php include_once("$path/components/footer.php") ?>
 
-    <script src="<?= $return ?>/algorithms/differenceBetweenDates.js"></script>
+    <script src="<?= $return ?>/algorithms/division.js"></script>
     <script src="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.js"></script>
     <script src="<?= $return ?>/src/js/main.js"></script>
 </body>

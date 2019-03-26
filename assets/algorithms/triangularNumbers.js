@@ -3,7 +3,7 @@ function isTringularNumber(number) {
         return true
     }
 
-    let sum = 0;
+    let sum = 0
     for (let i = 0, j = 1; i < number; i++, sum += j++) {
         if (sum == number) {
             return true
