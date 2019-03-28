@@ -16,5 +16,6 @@
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="' . $returnPage . '/matematica/calculadoras/numeros_triangulares/">Números Triangulares</a>
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="' . $returnPage . '/matematica/calculadoras/fibonacci/">Fibonacci</a>
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="' . $returnPage . '/matematica/calculadoras/conversores/">Conversores</a>
+        <a class="btn waves-effect white black-text z-depth-2 hoverable" href="' . $returnPage . '/matematica/calculadoras/juros_simples_e_compostos/">Juros Simples e Compostos</a>
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="' . $returnPage . '/matematica/calculadoras/divisao/">Divisão</a>
     </div>';
