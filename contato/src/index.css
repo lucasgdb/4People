@@ -7,28 +7,23 @@ h5 {
 }
 
 textarea {
-    font-size: 20px;
+    font-size: 25px;
     resize: vertical;
-    white-space: nowrap;
     min-height: 200px;
-    border-top: none;
-    border-right: none;
-    border-left: none;
+    overflow-y: scroll;
+    border: .5px solid rgb(190, 190, 190);
     outline: none;
-    border-radius: 3px;
     color: #333;
-    transition: background-color .15s, color .15s
+    transition: all .2s, height 0s
 }
 
 textarea:focus {
-    border-top: 1px solid #999;
-    border-right: 1px solid #999;
-    border-left: 1px solid #999;
-    background-color: rgb(214, 214, 214)
+    border: .5px solid rgb(73, 73, 73);
+    background-color: rgb(230, 230, 230)
 }
 
 textarea:focus::placeholder {
-    color: #999
+    color: grey
 }
 
 label.active {

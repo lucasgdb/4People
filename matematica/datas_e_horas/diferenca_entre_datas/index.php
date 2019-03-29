@@ -100,7 +100,7 @@
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Diferença entre Datas</h1>
 
-                <label>Calcular diferença entre duas datas, com um leque de recursos disponíveis.</label>
+                <label>Calcular Diferença entre Datas. Possui um leque de recursos disponíveis, como calcular idades, tempo, etc.</label>
                 <div class="divider"></div>
 
                 <div class="row mt-2 mb-0">

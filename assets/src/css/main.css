@@ -30,7 +30,8 @@ body {
   flex-direction: column;
   animation-fill-mode: forwards;
   animation-delay: 300ms;
-  transition: padding-left 300ms;
+  opacity: 0;
+  transition: padding-left 300ms, opacity 150ms;
   min-width: 320px
 }
 

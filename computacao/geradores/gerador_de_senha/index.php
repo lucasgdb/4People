@@ -228,12 +228,16 @@
                     </div>
                 </div>
 
-                <button title="Gerar Senha" class="btn btn-center waves-effect waves-dark black-text white" onclick="generate()">Gerar senha</button>
+                <button title="Gerar Senha" class="btn btn-center waves-effect waves-dark black-text white" onclick="generate()">
+                    Gerar senha
+                </button>
                 <div class="divider mt-2"></div>
 
                 <p class="mb-0">Força de senha: <span id="passwordLength"></span></p>
                 <textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false"></textarea>
-                <button title="Copiar" class="btn waves-effect waves-dark black-text white" onclick="copyResult()">Copiar</button>
+                <button title="Copiar" class="btn waves-effect waves-dark black-text white" onclick="copyResult()">
+                    Copiar
+                </button>
             </div>
         </div>
     </main>
