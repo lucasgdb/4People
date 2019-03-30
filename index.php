@@ -125,7 +125,7 @@
 
                             <div class="caption center-align">
                                 <h3 class="dark grey-text text-darken-4">O MELHOR!</h3>
-                                <h5 class="light grey-text text-darken-4">O 4People possui as melhores ferramentas atualizadas. Tá sentindo falta de alguma? Por favor, nos envie um <a href="contato/">e-mail</a>.</h5>
+                                <h5 class="light grey-text text-darken-4">O 4People possui as melhores ferramentas atualizadas. Tá sentindo falta de alguma? Por favor, nos envie um <a href="./contato/">e-mail</a>.</h5>
                             </div>
                         </li>
                     </ul>
