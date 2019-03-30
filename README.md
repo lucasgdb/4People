@@ -59,7 +59,7 @@
     - Porcentagem
     - Equação do 2° Grau
     - Fibonacci
-    - Conversores (Faltam algumas coisas)
+    - Conversor de Temperatura
     - Divisão
   - Calcular Áreas
     - Área do Círculo

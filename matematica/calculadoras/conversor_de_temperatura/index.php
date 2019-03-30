@@ -6,17 +6,17 @@
 <head>
     <?php include_once("$path/components/links.php") ?>
     <link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
-    <title>Conversores - 4People</title>
+    <title>Conversor de Temperatura - 4People</title>
     <?php include_once("$path/components/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-    <meta name="title" content="Conversores - 4People">
-    <meta name="description" content="Conversores OnLine. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+    <meta name="title" content="Conversor de Temperatura - 4People">
+    <meta name="description" content="Conversor de Temperatura OnLine. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calculadoras/conversores/">
-    <meta property="og:title" content="Conversores - 4People">
-    <meta name="twitter:title" content="Conversores - 4People">
-    <meta property="og:url" content="https://4people.now.sh/matematica/calculadoras/conversores/">
-    <meta name="twitter:url" content="https://4people.now.sh/matematica/calculadoras/conversores/">
+    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calculadoras/conversor_de_temperatura/">
+    <meta property="og:title" content="Conversor de Temperatura - 4People">
+    <meta name="twitter:title" content="Conversor de Temperatura - 4People">
+    <meta property="og:url" content="https://4people.now.sh/matematica/calculadoras/conversor_de_temperatura/">
+    <meta name="twitter:url" content="https://4people.now.sh/matematica/calculadoras/conversor_de_temperatura/">
 </head>
 
 <body>
@@ -98,31 +98,10 @@
     <main class="grey lighten-5 hide">
         <div class="container">
             <div class="card-panel">
-                <h1 class="flow-text mt-2">Conversores</h1>
+                <h1 class="flow-text mt-2">Conversor de Temperatura</h1>
 
-                <label>Conversor de Armazenamento de Dados, Comprimento, Consumo de Combustível, Energia Mecânica, Frequência, Massa, Pressão, Temperatura, Tempo, Transmissão de Dados, Velocidade, Volume, Área e Ângulo.</label>
+                <label>Conversor de Temperatura OnLine para calcular Graus Celsius, Fahrenheit e Kelvin.</label>
                 <div class="divider"></div>
-
-                <div class="row mb-0">
-                    <div class="input-field col s12">
-                        <select class="normalScroll" id="ddConvertType">
-                            <option value="0" disabled>Armazenamento de Dados</option>
-                            <option value="1" disabled>Comprimento</option>
-                            <option value="2" disabled>Consumo de Combustível</option>
-                            <option value="3" disabled>Energia Mecânica</option>
-                            <option value="4" disabled>Frequência</option>
-                            <option value="5" disabled>Massa</option>
-                            <option value="6" disabled>Pressão</option>
-                            <option value="7" selected>Temperatura</option>
-                            <option value="8" disabled>Tempo</option>
-                            <option value="9" disabled>Transmissão de Dados</option>
-                            <option value="10" disabled>Velocidade</option>
-                            <option value="11" disabled>Volume</option>
-                            <option value="12" disabled>Área</option>
-                            <option value="13" disabled>Ângulo</option>
-                        </select>
-                    </div>
-                </div>
 
                 <div class="row mb-0" style="position:relative">
                     <div class="input-field col s5">
@@ -134,7 +113,7 @@
                     </span>
 
                     <div class="input-field inline col s5 offset-s2">
-                        <input type="number" id="txtSecond" placeholder="Temperatura" step="any" value="0">
+                        <input type="number" id="txtSecond" placeholder="Temperatura" step="any" value="32">
                     </div>
                 </div>
 

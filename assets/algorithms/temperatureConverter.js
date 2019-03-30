@@ -22,6 +22,7 @@ function kelvinToFahrenheit(kelvin) {
     return (kelvin - 273.15) * 1.8 + 32
 }
 
+// Helper method
 function calculateTemperature(from, to, temperature) {
     if (from === '0' && to === '1') {
         return celsiusToFahrenheit(temperature)
