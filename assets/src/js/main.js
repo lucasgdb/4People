@@ -13,13 +13,51 @@ const paddingHeadersA = document.querySelectorAll('.active .active a')
 // Left and right effects from sidebar
 let tr = false
 
+document.querySelector('#menu').onclick = function () {
+    if (innerWidth >= 993) {
+        if (tr) {
+            sidenav.options.outDuration = 150
+            sideIn()
+            animateIn()
+            sessionStorage.removeItem('sideStatus')
+        } else {
+            sideOut()
+            animateOut()
+            sessionStorage.setItem('sideStatus', true)
+        }
+    } else if (sidenav.options.outDuration === 0) {
+        sidenav.options.outDuration = 200
+    }
+}
+
+// Media Queries with pure JS
+const maxWidth = window.matchMedia('(max-width: 992px)')
+const minWidth = window.matchMedia('(min-width: 993px)')
+
+function matchMax(maxWidth) {
+    if (maxWidth.matches && !tr) {
+        animateOut()
+    } else if (maxWidth.matches && tr) {
+        sidenav.options.outDuration = 0
+    }
+}
+
+function matchMin(minWidth) {
+    if (minWidth.matches) {
+        sessionStorage.removeItem('sideStatus')
+        animateIn(0)
+        tr = false
+    }
+}
+
+// Methods
 function animateIn(delay = 250) {
-    document.body.style.transition = `padding-left ${delay}ms, opacity 150ms`
+    document.body.style.transition = `padding-left ${delay}ms, opacity 125ms`
     document.body.style.paddingLeft = '300px'
 }
 
 function animateOut(delay = 250) {
-    document.body.style.transition = `padding-left ${delay}ms, opacity 150ms`
+    document.body.style.transition = `padding-left ${delay}ms, opacity 125ms`
     document.body.style.paddingLeft = '0'
 }
 
@@ -35,85 +73,22 @@ function sideOut() {
     sidenav.isClose = true
 }
 
-document.querySelector('#menu').onclick = function () {
-    if (innerWidth >= 993) {
-        if (tr) {
-            sidenav.options.outDuration = 150
-            sideIn()
-            animateIn()
-            sessionStorage.removeItem('sideStatus')
-        } else {
-            sideOut()
-            animateOut()
-            sessionStorage.setItem('sideStatus', true)
-        }
-    } else if (sidenav.options.outDuration === 0)
-        sidenav.options.outDuration = 200
+function updatePage(e, link) {
+    e.preventDefault()
+    document.body.style.opacity = '0'
+    setTimeout(function () {
+        location = link
+    }, 125)
 }
 
-// Media Queries with pure JS
-const maxWidth = window.matchMedia('(max-width: 992px)')
-const minWidth = window.matchMedia('(min-width: 993px)')
-
-function matchMax(maxWidth) {
-    if (maxWidth.matches && !tr)
-        animateOut()
-    else if (maxWidth.matches && tr)
-        sidenav.options.outDuration = 0
-}
-
-function matchMin(minWidth) {
-    if (minWidth.matches) {
-        sessionStorage.removeItem('sideStatus')
-        animateIn(0)
-        tr = false
-    }
-}
-
-// Events
+// Pave events
 document.addEventListener('DOMContentLoaded', function () {
-    for (let i = 0; i < navMobileA.length; i++) {
-        navMobileA[i].onclick = function (e) {
-            e.preventDefault()
-            const link = this.getAttribute('href')
-            document.body.style.opacity = '0'
-            setTimeout(function () {
-                location = link
-            }, 150)
+    const allAElements = document.querySelectorAll('a[href^="."]')
+    for (let i = 0; i < allAElements.length; i++) {
+        allAElements[i].onclick = function (event) {
+            const link = allAElements[i].getAttribute('href')
+            updatePage(event, link)
         }
-    }
-
-    const leftButtons = document.querySelectorAll('.collapsible-body a.btn')
-    for (let i = 0; i < leftButtons.length; i++) {
-        leftButtons[i].onclick = function (e) {
-            e.preventDefault()
-            const link = this.getAttribute('href')
-            document.body.style.opacity = '0'
-            setTimeout(function () {
-                location = link
-            }, 150)
-        }
-    }
-
-    const restAs = document.querySelectorAll('footer a')
-    for (let i = 0; i < restAs.length; i++) {
-        restAs[i].onclick = function (e) {
-            e.preventDefault()
-            const link = this.getAttribute('href')
-            document.body.style.opacity = '0'
-            setTimeout(function () {
-                location = link
-            }, 150)
-        }
-    }
-
-    document.querySelector('a.brand-logo').onclick = function (e) {
-        e.preventDefault()
-        const link = this.getAttribute('href')
-        document.body.style.opacity = '0'
-        setTimeout(function () {
-            location = link
-        }, 150)
     }
 
     if (sessionStorage.getItem('sideStatus') === 'true') {
@@ -159,10 +134,6 @@ window.onload = function () {
 
 document.onkeydown = function (e) {
     if (e.keyCode === 116) {
-        e.preventDefault()
-        document.body.style.opacity = '0'
-        setTimeout(function () {
-            location = location
-        }, 200)
+        updatePage(e, location)
     }
 }

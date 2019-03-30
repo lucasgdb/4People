@@ -21,26 +21,18 @@
 
 <body>
     <?php
-    if (isset($_GET['msg'])) {
-        $msg = $_GET['msg'];
+    session_start();
+
+    if (isset($_SESSION['msg'])) {
+        $msg = $_SESSION['msg']['type'];
         if ($msg === 'error') {
-            echo
-                '<script>
-                    M.toast({
-                        html: "Não foi possível enviar o e-mail.",
-                        classes: "red accent-4"   
-                    })
-                </script>';
+            echo '<script>M.toast({html:"Não foi possível enviar o e-mail.",classes:"red accent-4"})</script>';
         } else if ($msg === 'success') {
-            echo
-                '<script>
-                    M.toast({
-                        html: "E-mail enviado com sucesso! Aguarde retorno.",
-                        classes: "green"   
-                    })
-                </script>';
+            echo '<script>M.toast({html:"E-mail enviado com sucesso! Aguarde retorno.",classes:"green"})</script>';
         }
     }
+
+    unset($_SESSION['msg']);
     include_once("$path/components/noscript.php");
     include_once("$path/components/spinner.php");
     include_once("$path/components/header.php")
