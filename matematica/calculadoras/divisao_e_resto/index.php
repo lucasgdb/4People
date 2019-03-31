@@ -6,17 +6,17 @@
 <head>
     <?php include_once("$path/components/links.php") ?>
     <link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
-    <title>Divisão - 4People</title>
+    <title>Divisão e Resto - 4People</title>
     <?php include_once("$path/components/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-    <meta name="title" content="Divisão - 4People">
-    <meta name="description" content="Calculadora de Divisão. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+    <meta name="title" content="Divisão e Resto - 4People">
+    <meta name="description" content="Calculadora de Divisão e Resto. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calcular_areas/divisao/">
-    <meta property="og:title" content="Divisão - 4People">
-    <meta name="twitter:title" content="Divisão - 4People">
-    <meta property="og:url" content="https://4people.now.sh/matematica/calcular_areas/divisao/">
-    <meta name="twitter:url" content="https://4people.now.sh/matematica/calcular_areas/divisao/">
+    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calcular_areas/divisao_e_resto/">
+    <meta property="og:title" content="Divisão e Resto - 4People">
+    <meta name="twitter:title" content="Divisão e Resto - 4People">
+    <meta property="og:url" content="https://4people.now.sh/matematica/calcular_areas/divisao_e_resto/">
+    <meta name="twitter:url" content="https://4people.now.sh/matematica/calcular_areas/divisao_e_resto/">
 </head>
 
 <body>
@@ -98,7 +98,7 @@
     <main class="grey lighten-5 hide">
         <div class="container">
             <div class="card-panel">
-                <h1 class="flow-text mt-2">Calcular Divisão</h1>
+                <h1 class="flow-text mt-2">Calcular Divisão e Resto</h1>
 
                 <label>Calculadora de Divisão OnLine que mostra o resultado da divisão entre dois números e o resto (módulo) entre eles.</label>
                 <div class="divider"></div>

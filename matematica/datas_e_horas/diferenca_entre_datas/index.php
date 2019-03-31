@@ -105,32 +105,49 @@
 
                 <div class="row mt-2 mb-0">
                     <div class="col s12 m6">
-                        Data inicial:<br class="hide-on-large-only">
-                        <div class="input-field inline">
-                            <input id="beginDate" type="text" placeholder="Data inicial" class="datepicker">
+                        <div class="row mb-0">
+                            <div class="col s12">
+                                <p class="mb-0">Data inicial:</p>
+                            </div>
+                            <div class="col s12">
+                                <div class="input-field">
+                                    <input id="beginDate" type="text" placeholder="Data inicial" class="datepicker">
+                                </div>
+                            </div>
+
+                            <div class="col s12">
+                                <p class="mb-0">Horário inicial:</p>
+                            </div>
+                            <div class="col s12">
+                                <div class="input-field">
+                                    <input id="beginTime" type="text" placeholder="Horário atual" class="timepicker">
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="col s12 m6">
-                        Horário:<br class="hide-on-large-only">
-                        <div class="input-field inline">
-                            <input id="beginTime" type="text" placeholder="Horário atual" class="timepicker">
+                        <div class="row mb-0">
+                            <div class="col s12">
+                                <p class="mb-0">Data final:</p>
+                            </div>
+                            <div class="col s12">
+                                <div class="input-field">
+                                    <input id="endDate" type="text" placeholder="Data final" class="datepicker">
+                                </div>
+                            </div>
+
+                            <div class="col s12">
+                                <p class="mb-0">Horário final:</p>
+                            </div>
+                            <div class="col s12">
+                                <div class="input-field">
+                                    <input id="endTime" type="text" placeholder="Horário atual" class="timepicker">
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col s12 m6">
-                        Data final:<br class="hide-on-large-only">
-                        <div class="input-field inline">
-                            <input id="endDate" type="text" placeholder="Data final" class="datepicker">
-                        </div>
-                    </div>
-
-                    <div class="col s12 m6">
-                        Horário:<br class="hide-on-large-only">
-                        <div class="input-field inline">
-                            <input id="endTime" type="text" placeholder="Horário atual" class="timepicker">
-                        </div>
-                    </div>
                 </div>
 
                 <button title="Calcular a Diferença Entre Datas" class="btn btn-center waves-effect white black-text z-depth-2" onclick="calculate()">

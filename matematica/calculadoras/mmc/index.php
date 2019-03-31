@@ -103,7 +103,7 @@
                 <label>Calculadora para encontrar o Mínimo Múltiplo Comum OnLine.</label>
                 <div class="divider"></div>
 
-                <div class="row mt-2">
+                <div class="row mt-2 mb-0">
                     <div class="col s12">
                         Números:
                         <div class="input-field">

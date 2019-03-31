@@ -100,7 +100,7 @@
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Gerador de CPF</h1>
 
-                <label>Gerador de CPF OnLine para gerar CPFs verdadeiros para programadores testarem seus softwares em desenvolvimento.</label>
+                <label>Gerador de CPF OnLine que gera CPFs verdadeiros para Programadores testarem seus Softwares em desenvolvimento.</label>
                 <div class="divider"></div>
 
                 <div class="row mb-0">

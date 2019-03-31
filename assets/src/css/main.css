@@ -51,6 +51,10 @@ footer {
     margin-top: 10px
 }
 
+.mb-0 {
+    margin-bottom: 0
+}
+
 .collapsible-header,
 .collapsible-body,
 .btn {

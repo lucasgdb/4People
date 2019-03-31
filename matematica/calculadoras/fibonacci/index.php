@@ -103,29 +103,45 @@
                 <label>Calculadora para calcular a Sequência de Fibonacci. Ex: 0, 1, 1, 2, 3, 5, 8, 13, etc...</label>
                 <div class="divider"></div>
 
-                <div class="row mt-2">
-                    <div class="col s12">
-                        Quantidade da sequênca:
-                        <div class="input-field inline">
-                            <input id="number" type="number" placeholder="Digite aqui o número." min="0" step="1" value="5">
+                <div class="row mt-2 mb-0">
+                    <div class="col s12 m6">
+                        <div class="row">
+                            <div class="col s12">
+                                <p class="mb-0">Calcular até o número:</p>
+                            </div>
+
+                            <div class="col s12">
+                                <div class="input-field">
+                                    <input id="number" type="number" placeholder="Digite aqui o número." min="0" step="1" value="5">
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col s12 m6 l4">
-                        <p>
-                            <label>
-                                <input class="with-gap" name="type" type="radio" checked />
-                                <span>Todos os números</span>
-                            </label>
-                        </p>
-                    </div>
-                    <div class="col s12 m6 l4">
-                        <p>
-                            <label>
-                                <input class="with-gap" name="type" type="radio" />
-                                <span>Somente o último número</span>
-                            </label>
-                        </p>
+                    <div class="col s12 m6">
+                        <div class="row">
+                            <div class="col s12">
+                                <p class="mb-0">Quantidade de números:</p>
+                            </div>
+
+                            <div class="col s12 m4">
+                                <p>
+                                    <label>
+                                        <input class="with-gap" name="type" type="radio" checked />
+                                        <span>Todos</span>
+                                    </label>
+                                </p>
+                            </div>
+
+                            <div class="col s12 m8">
+                                <p>
+                                    <label>
+                                        <input class="with-gap" name="type" type="radio" />
+                                        <span>Último</span>
+                                    </label>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

@@ -3,7 +3,7 @@ const txtNum = document.querySelector('#number')
 const type = document.querySelector('[name=type]')
 
 function calculate() {
-    if (txtNum.value !== '') {
+    if (txtNum.value !== '' && Number.isInteger(parseFloat(txtNum.value))) {
         txtResult.value = calculateFibonacci(BigInt(txtNum.value), !type.checked)
     } else {
         M.toast({

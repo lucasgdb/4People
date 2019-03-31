@@ -17,5 +17,5 @@
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="' . $returnPage . '/matematica/calculadoras/fibonacci/">Fibonacci</a>
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="' . $returnPage . '/matematica/calculadoras/conversor_de_temperatura/">Conversor de Temperatura</a>
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="' . $returnPage . '/matematica/calculadoras/juros_simples_e_compostos/">Juros Simples e Compostos</a>
-        <a class="btn waves-effect white black-text z-depth-2 hoverable" href="' . $returnPage . '/matematica/calculadoras/divisao/">Divisão</a>
+        <a class="btn waves-effect white black-text z-depth-2 hoverable" href="' . $returnPage . '/matematica/calculadoras/divisao_e_resto/">Divisão e Resto</a>
     </div>';

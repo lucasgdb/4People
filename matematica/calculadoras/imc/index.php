@@ -98,15 +98,16 @@
     <main class="grey lighten-5 hide">
         <div class="container">
             <div class="card-panel">
-                <h1 class="flow-text mt-2">Calcular Índice de Massa Corporal</h1>
+                <h1 class="flow-text mt-2">Índice de Massa Corporal</h1>
 
-                <label>Calculadora de Índice de Massa Corporal OnLine.</label>
+                <label>Calculadora de Índice de Massa Corporal OnLine para calcular o IMD e o seu peso ideal.</label>
                 <div class="divider"></div>
 
-                <div class="row">
+                <div class="row mb-0">
                     <div class="col s12">
                         <p class="mb-0">Sexo:</p>
                     </div>
+
                     <div class="col s6 m3 l2">
                         <p>
                             <label>
@@ -115,6 +116,7 @@
                             </label>
                         </p>
                     </div>
+
                     <div class="col s6 m3 l2">
                         <p>
                             <label>
@@ -125,18 +127,31 @@
                     </div>
                 </div>
 
-                <div class="row mt-2">
-                    <div class="col s12">
-                        Peso:<br class="hide-on-med-and-up">
-                        <div class="input-field inline">
-                            <input id="weight" type="number" placeholder="Digite aqui seu peso." min="1" step="any">
+                <div class="row mb-0">
+                    <div class="col s12 m6">
+                        <div class="row mb-0">
+                            <div class="col s12">
+                                <p class="mb-0">Peso:</p>
+                            </div>
+
+                            <div class="col s12">
+                                <div class="input-field">
+                                    <input id="weight" type="number" placeholder="Digite aqui seu peso." min="1" step="any">
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col s12">
-                        Altura:<br class="hide-on-med-and-up">
-                        <div class="input-field inline">
-                            <input id="height" type="number" placeholder="Digite aqui sua altura." min="1" step="any">
+                    <div class="col s12 m6">
+                        <div class="row mb-0">
+                            <div class="col s12">
+                                <p class="mb-0">Altura:</p>
+                            </div>
+                            <div class="col s12">
+                                <div class="input-field">
+                                    <input id="height" type="number" placeholder="Digite aqui sua altura." min="1" step="any">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

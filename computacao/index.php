@@ -97,7 +97,47 @@
     <main class="grey lighten-5 hide">
         <div class="container">
             <div class="card-panel">
-                <h2>Ferramentas</h2>
+                <h1 class="flow-text mt-2">Principais Ferramentas</h1>
+
+                <div class="row mb-0">
+                    <div class="col s12 m6">
+                        <div class="card grey darken-2">
+                            <div class="card-content white-text">
+                                <span class="card-title activator">Gerador de CPF<i class="material-icons right">more_vert</i></span>
+                                <p>
+                                    Gerador de CPF OnLine que gera CPFs verdadeiros para Programadores testarem seus Softwares em desenvolvimento.
+                                </p>
+                            </div>
+                            <div class="card-action">
+                                <a class="light-blue-text" href="./geradores/gerador_de_cpf/">Gerador de CPF</a>
+                                <a class="light-blue-text" href="./geradores/">Geradores</a>
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                                <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m6">
+                        <div class="card sticky-action grey darken-2">
+                            <div class="card-content white-text">
+                                <span class="card-title activator">Gerador de CC<i class="material-icons right">more_vert</i></span>
+                                <p>
+                                    Gerador de Cartão de Crédito OnLine que gera Cartões de Créditos válidos para Desenvolvedores testarem seus Softwares em desenvolvimento.
+                                </p>
+                            </div>
+                            <div class="card-action">
+                                <a class="light-blue-text" href="./geradores/gerador_de_cartao_de_credito/">Gerador de CC</a>
+                                <a class="light-blue-text" href="./geradores/">Geradores</a>
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+                                <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

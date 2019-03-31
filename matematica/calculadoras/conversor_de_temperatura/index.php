@@ -126,7 +126,6 @@
                         </select>
                     </div>
 
-
                     <div class="input-field col s6 m5 offset-m2">
                         <select class="normalScroll" id="ddSecond">
                             <option value="0">Graus Celsius</option>

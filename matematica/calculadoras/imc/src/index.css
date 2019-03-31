@@ -2,10 +2,6 @@
     margin: 0
 }
 
-.mb-0 {
-    margin-bottom: 0
-}
-
 .btn-center {
     left: 50%;
     transform: translateX(-50%)
