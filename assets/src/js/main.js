@@ -4,11 +4,16 @@ M.Collapsible.init(document.querySelectorAll('.sidenav.collapsible'), {
     accordion: false
 })
 M.Collapsible.init(document.querySelectorAll('.padding-headers.collapsible'))
+M.FloatingActionButton.init(document.querySelectorAll('.fixed-action-btn'))
 
 // Constants
 const sidenav = M.Sidenav.getInstance(document.querySelector('#slide-out'))
 const navMobileA = document.querySelectorAll('#nav-mobile a')
 const paddingHeadersA = document.querySelectorAll('.active .active a')
+const header = document.querySelector('header')
+const main = document.querySelector('main')
+const footer = document.querySelector('footer')
+const actionButton = document.querySelector('.fixed-action-btn')
 
 // Left and right effects from sidebar
 let tr = false
@@ -57,7 +62,7 @@ function animateIn(delay = 250) {
 }
 
 function animateOut(delay = 250) {
-    document.body.style.transition = `padding-left ${delay}ms, opacity 125ms`
+    document.body.style.transition = `padding-left ${delay}ms`
     document.body.style.paddingLeft = '0'
 }
 
@@ -75,7 +80,11 @@ function sideOut() {
 
 function updatePage(e, link) {
     e.preventDefault()
-    document.body.style.opacity = '0'
+    header.style.opacity = '0'
+    main.style.opacity = '0'
+    footer.style.opacity = '0'
+    sidenav.el.style.opacity = '0'
+    actionButton.style.opacity = '0'
     setTimeout(function () {
         location = link
     }, 125)
@@ -122,14 +131,14 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 window.onload = function () {
-    document.querySelector('#slide-out').classList.remove('hide')
-    document.querySelector('header').classList.remove('hide')
-    document.querySelector('main').classList.remove('hide')
-    document.querySelector('footer').classList.remove('hide')
+    header.style.opacity = '1'
+    main.style.opacity = '1'
+    footer.style.opacity = '1'
+    sidenav.el.style.opacity = '1'
+    actionButton.style.opacity = '1'
     document.querySelector('#spinner').remove()
     maxWidth.addListener(matchMax)
     minWidth.addListener(matchMin)
-    document.body.style.opacity = '1'
 }
 
 document.onkeydown = function (e) {

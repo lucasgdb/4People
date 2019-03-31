@@ -26,7 +26,7 @@
     include_once("$path/components/header.php")
     ?>
 
-    <ul id="slide-out" class="sidenav sidenav-fixed collapsible hide">
+    <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
         <?php include_once("$path/components/logo.php") ?>
 
         <li class="active">
@@ -95,7 +95,7 @@
         </li>
     </ul>
 
-    <main class="grey lighten-5 hide">
+    <main class="grey lighten-5">
         <div class="container">
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Meu IP</h1>
@@ -124,7 +124,10 @@
         </div>
     </main>
 
-    <?php include_once("$path/components/footer.php") ?>
+    <?php
+    include_once("$path/components/footer.php");
+    include_once("$path/components/fixed-action-btn.php")
+    ?>
 
     <script src="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.js"></script>
     <script src="<?= $return ?>/src/js/main.js"></script>

@@ -28,11 +28,13 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    animation-fill-mode: forwards;
-    animation-delay: 300ms;
-    opacity: 0;
-    transition: padding-left 300ms, opacity 125ms;
+    transition: padding-left 300ms;
     min-width: 320px
+}
+
+header, main, footer, ul#slide-out, .fixed-action-btn {
+    opacity: 0;
+    transition: opacity 125ms
 }
 
 .slider {

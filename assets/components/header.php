@@ -1,5 +1,5 @@
 <?=
-    '<header class="navbar-fixed hide">
+    '<header class="navbar-fixed">
         <nav class="grey lighten-3">
             <a href="#!" id="menu" data-target="slide-out" class="sidenav-trigger show-on-large black-text"><i class="material-icons">menu</i></a>
             <div class="nav-wrapper">
