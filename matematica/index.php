@@ -11,11 +11,11 @@
     <meta name="title" content="4People - Ferramentas OnLine">
     <meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/">
+    <meta name="msapplication-starturl" content="./matematica/">
     <meta property="og:title" content="Matemática - 4People">
     <meta name="twitter:title" content="Matemática - 4People">
-    <meta property="og:url" content="https://4people.now.sh/matematica/">
-    <meta name="twitter:url" content="https://4people.now.sh/matematica/">
+    <meta property="og:url" content="./matematica/">
+    <meta name="twitter:url" content="./matematica/">
 </head>
 
 <body>

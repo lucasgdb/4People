@@ -12,11 +12,11 @@
     <meta name="title" content="Índice de Massa Corporal - 4People">
     <meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calculadoras/imc/">
+    <meta name="msapplication-starturl" content="./matematica/calculadoras/imc/">
     <meta property="og:title" content="Índice de Massa Corporal - 4People">
     <meta name="twitter:title" content="Índice de Massa Corporal - 4People">
-    <meta property="og:url" content="https://4people.now.sh/matematica/calculadoras/imc/">
-    <meta name="twitter:url" content="https://4people.now.sh/matematica/calculadoras/imc/">
+    <meta property="og:url" content="./matematica/calculadoras/imc/">
+    <meta name="twitter:url" content="./matematica/calculadoras/imc/">
 </head>
 
 <body>

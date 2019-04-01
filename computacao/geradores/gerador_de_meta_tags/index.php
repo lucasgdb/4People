@@ -12,11 +12,11 @@
     <meta name="title" content="Gerador de Meta Tags - 4People">
     <meta name="description" content="Gerar Meta Tags OnLine. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/computacao/geradores/gerador_de_meta_tags/">
+    <meta name="msapplication-starturl" content="./computacao/geradores/gerador_de_meta_tags/">
     <meta property="og:title" content="Gerador de Meta Tags - 4People">
     <meta name="twitter:title" content="Gerador de Meta Tags - 4People">
-    <meta property="og:url" content="https://4people.now.sh/computacao/geradores/gerador_de_meta_tags/">
-    <meta name="twitter:url" content="https://4people.now.sh/computacao/geradores/gerador_de_meta_tags/">
+    <meta property="og:url" content="./computacao/geradores/gerador_de_meta_tags/">
+    <meta name="twitter:url" content="./computacao/geradores/gerador_de_meta_tags/">
 </head>
 
 <body>

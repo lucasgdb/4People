@@ -12,11 +12,11 @@
     <meta name="title" content="Conversor de Temperatura - 4People">
     <meta name="description" content="Conversor de Temperatura OnLine. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calculadoras/conversor_de_temperatura/">
+    <meta name="msapplication-starturl" content="./matematica/calculadoras/conversor_de_temperatura/">
     <meta property="og:title" content="Conversor de Temperatura - 4People">
     <meta name="twitter:title" content="Conversor de Temperatura - 4People">
-    <meta property="og:url" content="https://4people.now.sh/matematica/calculadoras/conversor_de_temperatura/">
-    <meta name="twitter:url" content="https://4people.now.sh/matematica/calculadoras/conversor_de_temperatura/">
+    <meta property="og:url" content="./matematica/calculadoras/conversor_de_temperatura/">
+    <meta name="twitter:url" content="./matematica/calculadoras/conversor_de_temperatura/">
 </head>
 
 <body>

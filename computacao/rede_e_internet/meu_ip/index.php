@@ -12,11 +12,11 @@
     <meta name="title" content="Meu IP - 4People">
     <meta name="description" content="Meu IP OnLine para ver informações do seu IP. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/computacao/rede_e_internet/meu_ip/">
+    <meta name="msapplication-starturl" content="./computacao/rede_e_internet/meu_ip/">
     <meta property="og:title" content="Meu IP - 4People">
     <meta name="twitter:title" content="Meu IP - 4People">
-    <meta property="og:url" content="https://4people.now.sh/computacao/rede_e_internet/meu_ip/">
-    <meta name="twitter:url" content="https://4people.now.sh/computacao/rede_e_internet/meu_ip/">
+    <meta property="og:url" content="./computacao/rede_e_internet/meu_ip/">
+    <meta name="twitter:url" content="./computacao/rede_e_internet/meu_ip/">
 </head>
 
 <body>

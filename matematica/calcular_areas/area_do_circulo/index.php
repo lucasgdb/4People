@@ -12,11 +12,11 @@
     <meta name="title" content="Área do Círculo - 4People">
     <meta name="description" content="Calcular área do círculo. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calcular_areas/area_do_circulo/">
+    <meta name="msapplication-starturl" content="./matematica/calcular_areas/area_do_circulo/">
     <meta property="og:title" content="Área do Círculo - 4People">
     <meta name="twitter:title" content="Área do Círculo - 4People">
-    <meta property="og:url" content="https://4people.now.sh/matematica/calcular_areas/area_do_circulo/">
-    <meta name="twitter:url" content="https://4people.now.sh/matematica/calcular_areas/area_do_circulo/">
+    <meta property="og:url" content="./matematica/calcular_areas/area_do_circulo/">
+    <meta name="twitter:url" content="./matematica/calcular_areas/area_do_circulo/">
 </head>
 
 <body>

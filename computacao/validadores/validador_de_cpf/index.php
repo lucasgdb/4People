@@ -12,11 +12,11 @@
     <meta name="title" content="Validador de CPF - 4People">
     <meta name="description" content="Validador de CPF OnLine para validar CPFs. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/computacao/geradores/validador_de_cpf/">
+    <meta name="msapplication-starturl" content="./computacao/geradores/validador_de_cpf/">
     <meta property="og:title" content="Validador de CPF - 4People">
     <meta name="twitter:title" content="Validador de CPF - 4People">
-    <meta property="og:url" content="https://4people.now.sh/computacao/geradores/validador_de_cpf/">
-    <meta name="twitter:url" content="https://4people.now.sh/computacao/geradores/validador_de_cpf/">
+    <meta property="og:url" content="./computacao/geradores/validador_de_cpf/">
+    <meta name="twitter:url" content="./computacao/geradores/validador_de_cpf/">
 </head>
 
 <body>

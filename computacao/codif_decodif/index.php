@@ -11,11 +11,11 @@
     <meta name="title" content="Codificadores e Decodificadores - 4People">
     <meta name="description" content="Codificadores e Decodificadores. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/computacao/codif_decodif/">
+    <meta name="msapplication-starturl" content="./computacao/codif_decodif/">
     <meta property="og:title" content="Codificadores e Decodificadores - 4People">
     <meta name="twitter:title" content="Codificadores e Decodificadores - 4People">
-    <meta property="og:url" content="https://4people.now.sh/computacao/codif_decodif/">
-    <meta name="twitter:url" content="https://4people.now.sh/computacao/codif_decodif/">
+    <meta property="og:url" content="./computacao/codif_decodif/">
+    <meta name="twitter:url" content="./computacao/codif_decodif/">
 </head>
 
 <body>

@@ -11,11 +11,11 @@
     <meta name="title" content="Rede e Internet - 4People">
     <meta name="description" content="Rede e Internet. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/computacao/rede_e_internet/">
+    <meta name="msapplication-starturl" content="./computacao/rede_e_internet/">
     <meta property="og:title" content="Rede e Internet - 4People">
     <meta name="twitter:title" content="Rede e Internet - 4People">
-    <meta property="og:url" content="https://4people.now.sh/computacao/rede_e_internet/">
-    <meta name="twitter:url" content="https://4people.now.sh/computacao/rede_e_internet/">
+    <meta property="og:url" content="./computacao/rede_e_internet/">
+    <meta name="twitter:url" content="./computacao/rede_e_internet/">
 </head>
 
 <body>

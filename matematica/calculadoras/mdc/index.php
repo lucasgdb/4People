@@ -12,11 +12,11 @@
     <meta name="title" content="Máximo Divisor Comum - 4People">
     <meta name="description" content="Calculadora para encontrar o Máximo Divisor Comum OnLine. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calculadoras/mdc/">
+    <meta name="msapplication-starturl" content="./matematica/calculadoras/mdc/">
     <meta property="og:title" content="Máximo Divisor Comum - 4People">
     <meta name="twitter:title" content="Máximo Divisor Comum - 4People">
-    <meta property="og:url" content="https://4people.now.sh/matematica/calculadoras/mdc/">
-    <meta name="twitter:url" content="https://4people.now.sh/matematica/calculadoras/mdc/">
+    <meta property="og:url" content="./matematica/calculadoras/mdc/">
+    <meta name="twitter:url" content="./matematica/calculadoras/mdc/">
 </head>
 
 <body>

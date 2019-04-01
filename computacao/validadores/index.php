@@ -11,11 +11,11 @@
     <meta name="title" content="Validadores - 4People">
     <meta name="description" content="Validadores. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/computacao/geradores/">
+    <meta name="msapplication-starturl" content="./computacao/geradores/">
     <meta property="og:title" content="Validadores - 4People">
     <meta name="twitter:title" content="Validadores - 4People">
-    <meta property="og:url" content="https://4people.now.sh/computacao/geradores/">
-    <meta name="twitter:url" content="https://4people.now.sh/computacao/geradores/">
+    <meta property="og:url" content="./computacao/geradores/">
+    <meta name="twitter:url" content="./computacao/geradores/">
 </head>
 
 <body>

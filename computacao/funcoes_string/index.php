@@ -11,11 +11,11 @@
     <meta name="title" content="Funções String - 4People">
     <meta name="description" content="Funções String. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/computacao/funcoes_string/">
+    <meta name="msapplication-starturl" content="./computacao/funcoes_string/">
     <meta property="og:title" content="Funções String - 4People">
     <meta name="twitter:title" content="Funções String - 4People">
-    <meta property="og:url" content="https://4people.now.sh/computacao/funcoes_string/">
-    <meta name="twitter:url" content="https://4people.now.sh/computacao/funcoes_string/">
+    <meta property="og:url" content="./computacao/funcoes_string/">
+    <meta name="twitter:url" content="./computacao/funcoes_string/">
 </head>
 
 <body>

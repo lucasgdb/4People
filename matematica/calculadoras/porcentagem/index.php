@@ -12,11 +12,11 @@
     <meta name="title" content="Porcentagem - 4People">
     <meta name="description" content="Calculadora OnLine para encontrar a porcentagem. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calculadoras/porcentagem/">
+    <meta name="msapplication-starturl" content="./matematica/calculadoras/porcentagem/">
     <meta property="og:title" content="Porcentagem - 4People">
     <meta name="twitter:title" content="Porcentagem - 4People">
-    <meta property="og:url" content="https://4people.now.sh/matematica/calculadoras/porcentagem/">
-    <meta name="twitter:url" content="https://4people.now.sh/matematica/calculadoras/porcentagem/">
+    <meta property="og:url" content="./matematica/calculadoras/porcentagem/">
+    <meta name="twitter:url" content="./matematica/calculadoras/porcentagem/">
 </head>
 
 <body>

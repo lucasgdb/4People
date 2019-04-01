@@ -12,11 +12,11 @@
     <meta name="title" content="Conversor de Código Binário - 4People">
     <meta name="description" content="Conversor Binário. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/computacao/codif_decodif/conversor_binario/">
+    <meta name="msapplication-starturl" content="./computacao/codif_decodif/conversor_binario/">
     <meta property="og:title" content="Conversor Binário - 4People">
     <meta name="twitter:title" content="Conversor Binário - 4People">
-    <meta property="og:url" content="https://4people.now.sh/computacao/codif_decodif/conversor_binario/">
-    <meta name="twitter:url" content="https://4people.now.sh/computacao/codif_decodif/conversor_binario/">
+    <meta property="og:url" content="./computacao/codif_decodif/conversor_binario/">
+    <meta name="twitter:url" content="./computacao/codif_decodif/conversor_binario/">
 </head>
 
 <body>

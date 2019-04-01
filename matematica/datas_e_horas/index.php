@@ -11,11 +11,11 @@
     <meta name="title" content="Datas e Horas - 4People">
     <meta name="description" content="Datas e Horas. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/datas_e_horas/">
+    <meta name="msapplication-starturl" content="./matematica/datas_e_horas/">
     <meta property="og:title" content="Datas e Horas - 4People">
     <meta name="twitter:title" content="Datas e Horas - 4People">
-    <meta property="og:url" content="https://4people.now.sh/matematica/datas_e_horas/">
-    <meta name="twitter:url" content="https://4people.now.sh/matematica/datas_e_horas/">
+    <meta property="og:url" content="./matematica/datas_e_horas/">
+    <meta name="twitter:url" content="./matematica/datas_e_horas/">
 </head>
 
 <body>

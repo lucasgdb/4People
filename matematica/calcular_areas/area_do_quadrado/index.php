@@ -12,11 +12,11 @@
     <meta name="title" content="Área do Quadrado - 4People">
     <meta name="description" content="Calcular área do Quadrado. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calcular_areas/area_do_quadrado/">
+    <meta name="msapplication-starturl" content="./matematica/calcular_areas/area_do_quadrado/">
     <meta property="og:title" content="Área do Quadrado - 4People">
     <meta name="twitter:title" content="Área do Quadrado - 4People">
-    <meta property="og:url" content="https://4people.now.sh/matematica/calcular_areas/area_do_quadrado/">
-    <meta name="twitter:url" content="https://4people.now.sh/matematica/calcular_areas/area_do_quadrado/">
+    <meta property="og:url" content="./matematica/calcular_areas/area_do_quadrado/">
+    <meta name="twitter:url" content="./matematica/calcular_areas/area_do_quadrado/">
 </head>
 
 <body>

@@ -12,11 +12,11 @@
     <meta name="title" content="Mínimo Múltiplo Comum - 4People">
     <meta name="description" content="Calculadora para encontrar o Mínimo Múltiplo Comum OnLine. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calculadoras/mmc/">
+    <meta name="msapplication-starturl" content="./matematica/calculadoras/mmc/">
     <meta property="og:title" content="Mínimo Múltiplo Comum - 4People">
     <meta name="twitter:title" content="Mínimo Múltiplo Comum - 4People">
-    <meta property="og:url" content="https://4people.now.sh/matematica/calculadoras/mmc/">
-    <meta name="twitter:url" content="https://4people.now.sh/matematica/calculadoras/mmc/">
+    <meta property="og:url" content="./matematica/calculadoras/mmc/">
+    <meta name="twitter:url" content="./matematica/calculadoras/mmc/">
 </head>
 
 <body>

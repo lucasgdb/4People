@@ -11,11 +11,11 @@
     <meta name="title" content="Calculadoras - 4People">
     <meta name="description" content="Calculadoras. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calculadoras/">
+    <meta name="msapplication-starturl" content="./matematica/calculadoras/">
     <meta property="og:title" content="Calculadoras - 4People">
     <meta name="twitter:title" content="Calculadoras - 4People">
-    <meta property="og:url" content="https://4people.now.sh/matematica/calculadoras/">
-    <meta name="twitter:url" content="https://4people.now.sh/matematica/calculadoras/">
+    <meta property="og:url" content="./matematica/calculadoras/">
+    <meta name="twitter:url" content="./matematica/calculadoras/">
 </head>
 
 <body>

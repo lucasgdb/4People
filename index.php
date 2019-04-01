@@ -12,11 +12,11 @@
     <meta name="title" content="4People - Ferramentas OnLine">
     <meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/">
+    <meta name="msapplication-starturl" content="./">
     <meta property="og:title" content="4People - Ferramentas OnLine">
     <meta name="twitter:title" content="4People - Ferramentas OnLine">
-    <meta property="og:url" content="https://4people.now.sh/">
-    <meta name="twitter:url" content="https://4people.now.sh/">
+    <meta property="og:url" content="./">
+    <meta name="twitter:url" content="./">
 </head>
 
 <body>

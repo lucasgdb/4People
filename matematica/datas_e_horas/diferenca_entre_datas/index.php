@@ -12,11 +12,11 @@
     <meta name="title" content="Diferença entre Datas - 4People">
     <meta name="description" content="Diferença entre Datas. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/datas_e_horas/diferenca_entre_datas/">
+    <meta name="msapplication-starturl" content="./matematica/datas_e_horas/diferenca_entre_datas/">
     <meta property="og:title" content="Diferença entre Datas - 4People">
     <meta name="twitter:title" content="Diferença entre Datas - 4People">
-    <meta property="og:url" content="https://4people.now.sh/matematica/datas_e_horas/diferenca_entre_datas/">
-    <meta name="twitter:url" content="https://4people.now.sh/matematica/datas_e_horas/diferenca_entre_datas/">
+    <meta property="og:url" content="./matematica/datas_e_horas/diferenca_entre_datas/">
+    <meta name="twitter:url" content="./matematica/datas_e_horas/diferenca_entre_datas/">
 </head>
 
 <body>

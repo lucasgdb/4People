@@ -12,11 +12,11 @@
     <meta name="title" content="Gerador de Senha - 4People">
     <meta name="description" content="Gerador de Senha OnLine para gerar senhas personalizadas e fortes. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/computacao/geradores/gerador_de_senha/">
+    <meta name="msapplication-starturl" content="./computacao/geradores/gerador_de_senha/">
     <meta property="og:title" content="Gerador de Senha - 4People">
     <meta name="twitter:title" content="Gerador de Senha - 4People">
-    <meta property="og:url" content="https://4people.now.sh/computacao/geradores/gerador_de_senha/">
-    <meta name="twitter:url" content="https://4people.now.sh/computacao/geradores/gerador_de_senha/">
+    <meta property="og:url" content="./computacao/geradores/gerador_de_senha/">
+    <meta name="twitter:url" content="./computacao/geradores/gerador_de_senha/">
 </head>
 
 <body>

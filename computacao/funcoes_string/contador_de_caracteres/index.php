@@ -12,11 +12,11 @@
     <meta name="title" content="Contador de Caracteres - 4People">
     <meta name="description" content="Contador de Caracteres. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/computacao/funcoes_string/contador_de_caracteres/">
+    <meta name="msapplication-starturl" content="./computacao/funcoes_string/contador_de_caracteres/">
     <meta property="og:title" content="Contador de Caracteres - 4People">
     <meta name="twitter:title" content="Contador de Caracteres - 4People">
-    <meta property="og:url" content="https://4people.now.sh/computacao/funcoes_string/contador_de_caracteres/">
-    <meta name="twitter:url" content="https://4people.now.sh/computacao/funcoes_string/contador_de_caracteres/">
+    <meta property="og:url" content="./computacao/funcoes_string/contador_de_caracteres/">
+    <meta name="twitter:url" content="./computacao/funcoes_string/contador_de_caracteres/">
 </head>
 
 <body>

@@ -12,11 +12,11 @@
     <meta name="title" content="Sequência de Fibonacci - 4People">
     <meta name="description" content="Calculadora para calcular a Sequência de Fibonacci. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="https://4people.now.sh/matematica/calculadoras/fibonacci/">
+    <meta name="msapplication-starturl" content="./matematica/calculadoras/fibonacci/">
     <meta property="og:title" content="Sequência de Fibonacci- 4People">
     <meta name="twitter:title" content="Sequência de Fibonacci - 4People">
-    <meta property="og:url" content="https://4people.now.sh/matematica/calculadoras/fibonacci/">
-    <meta name="twitter:url" content="https://4people.now.sh/matematica/calculadoras/fibonacci/">
+    <meta property="og:url" content="./matematica/calculadoras/fibonacci/">
+    <meta name="twitter:url" content="./matematica/calculadoras/fibonacci/">
 </head>
 
 <body>
