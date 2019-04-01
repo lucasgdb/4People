@@ -86,8 +86,9 @@ function updatePage(e, link) {
     } else {
         sidenav.el.style.opacity = '0'
     }
+
     setTimeout(function () {
-        location = link
+        location = link.includes('#') ? link.replace(/[#]/g, '') : link
     }, 125)
 }
 
@@ -143,6 +144,6 @@ window.onload = function () {
 
 document.onkeydown = function (e) {
     if (e.keyCode === 116) {
-        updatePage(e, location)
+        updatePage(e, location.href)
     }
 }

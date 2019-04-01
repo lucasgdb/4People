@@ -16,6 +16,14 @@
     <meta name="twitter:title" content="Computação - 4People">
     <meta property="og:url" content="./computacao/">
     <meta name="twitter:url" content="./computacao/">
+    <style>
+        .no-select {
+            user-select: none;
+            -ms-user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none
+        }
+    </style>
 </head>
 
 <body>
@@ -101,39 +109,39 @@
 
                 <div class="row mb-0">
                     <div class="col s12 m6">
-                        <div class="card grey darken-2">
-                            <div class="card-content white-text">
-                                <span class="card-title activator">Gerador de CPF<i class="material-icons right">more_vert</i></span>
+                        <div class="card sticky-action">
+                            <div class="card-content grey lighten-2">
+                                <span class="card-title activator no-select">Gerador de CPF<i class="material-icons right">more_vert</i></span>
                                 <p>
                                     Gerador de CPF OnLine que gera CPFs verdadeiros para Programadores testarem seus Softwares em desenvolvimento.
                                 </p>
                             </div>
-                            <div class="card-action">
-                                <a class="light-blue-text" href="./geradores/gerador_de_cpf/">Gerador de CPF</a>
-                                <a class="light-blue-text" href="./geradores/">Geradores</a>
+                            <div class="card-action grey lighten-1">
+                                <a class="black-text" href="./geradores/gerador_de_cpf/">Gerador de CPF &raquo;</a>
+                                <a class="black-text" href="./geradores/">Geradores &raquo;</a>
                             </div>
                             <div class="card-reveal">
-                                <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                                <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                                <span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
+                                <p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/CPFGenerator.js" target="_blank">Clique aqui</a> para ir direto ao código fonte no GitHub.</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="col s12 m6">
-                        <div class="card sticky-action grey darken-2">
-                            <div class="card-content white-text">
-                                <span class="card-title activator">Gerador de CC<i class="material-icons right">more_vert</i></span>
+                        <div class="card sticky-action">
+                            <div class="card-content grey lighten-2">
+                                <span class="card-title activator no-select">Gerador de CC<i class="material-icons right">more_vert</i></span>
                                 <p>
                                     Gerador de Cartão de Crédito OnLine que gera Cartões de Créditos válidos para Desenvolvedores testarem seus Softwares em desenvolvimento.
                                 </p>
                             </div>
-                            <div class="card-action">
-                                <a class="light-blue-text" href="./geradores/gerador_de_cartao_de_credito/">Gerador de CC</a>
-                                <a class="light-blue-text" href="./geradores/">Geradores</a>
+                            <div class="card-action grey lighten-1">
+                                <a class="black-text" href="./geradores/gerador_de_cartao_de_credito/">Gerador de CC &raquo;</a>
+                                <a class="black-text" href="./geradores/">Geradores &raquo;</a>
                             </div>
                             <div class="card-reveal">
-                                <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                                <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                                <span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
+                                <p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/CCGenerator.js" target="_blank">Clique aqui</a> para ir direto ao código fonte no GitHub.</p>
                             </div>
                         </div>
                     </div>
