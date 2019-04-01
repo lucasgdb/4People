@@ -169,10 +169,7 @@
         </div>
     </main>
 
-    <?php
-    include_once("$path/components/footer.php");
-    include_once("$path/components/fixed-action-btn.php")
-    ?>
+    <?php include_once("$path/components/footer.php") ?>
 
     <script src="<?= $return ?>/src/js/main.js"></script>
 </body>

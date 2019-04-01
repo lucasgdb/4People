@@ -165,10 +165,7 @@
         </div>
     </main>
 
-    <?php
-    include_once("$path/components/footer.php");
-    include_once("$path/components/fixed-action-btn.php")
-    ?>
+    <?php include_once("$path/components/footer.php") ?>
 
     <script src="<?= $return ?>/algorithms/squareArea.js"></script>
     <script src="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.js"></script>

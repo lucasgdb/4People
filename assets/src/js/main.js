@@ -4,7 +4,6 @@ M.Collapsible.init(document.querySelectorAll('.sidenav.collapsible'), {
     accordion: false
 })
 M.Collapsible.init(document.querySelectorAll('.padding-headers.collapsible'))
-M.FloatingActionButton.init(document.querySelectorAll('.fixed-action-btn'))
 
 // Constants
 const sidenav = M.Sidenav.getInstance(document.querySelector('#slide-out'))
@@ -13,7 +12,6 @@ const paddingHeadersA = document.querySelectorAll('.active .active a')
 const header = document.querySelector('header')
 const main = document.querySelector('main')
 const footer = document.querySelector('footer')
-const actionButton = document.querySelector('.fixed-action-btn')
 
 // Left and right effects from sidebar
 let tr = false
@@ -83,8 +81,11 @@ function updatePage(e, link) {
     header.style.opacity = '0'
     main.style.opacity = '0'
     footer.style.opacity = '0'
-    sidenav.el.style.opacity = '0'
-    actionButton.style.opacity = '0'
+    if (innerWidth < 993) {
+        sidenav.close()
+    } else {
+        sidenav.el.style.opacity = '0'
+    }
     setTimeout(function () {
         location = link
     }, 125)
@@ -135,7 +136,6 @@ window.onload = function () {
     main.style.opacity = '1'
     footer.style.opacity = '1'
     sidenav.el.style.opacity = '1'
-    actionButton.style.opacity = '1'
     document.querySelector('#spinner').remove()
     maxWidth.addListener(matchMax)
     minWidth.addListener(matchMin)

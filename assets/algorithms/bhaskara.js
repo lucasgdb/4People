@@ -1,6 +1,7 @@
 function calculateBhaskara(a, b, c) {
-    if (a === 0)
-        throw new Error('"A" cannot be 0.')
+    if (a === 0) {
+        throw new Error('"A" não pode ser zero.')
+    }
 
     const delta = b ** 2 - 4 * a * c
     const x1 = (-b + delta ** 0.5) / (2 * a)

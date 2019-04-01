@@ -104,25 +104,25 @@
                             <img>
                             <div class="caption center-align">
                                 <h3 class="dark grey-text text-darken-4">FEITO PARA TODOS!</h3>
-                                <h5 class="light grey-text text-darken-4">Contamos com inúmeras ferramentas para Programadores, professores, estudantes e até mesmo para usuários comuns.</h5>
+                                <h5 class="light grey-text text-darken-4">Possuímos ferramentas para Programadores, professores, estudantes e usuários comuns.</h5>
                             </div>
                         </li>
-                        <li class="grey lighten-1">
 
+                        <li class="grey lighten-1">
                             <div class="caption left-align">
                                 <h3 class="dark grey-text text-darken-4">MAIS RÁPIDO!</h3>
                                 <h5 class="light grey-text text-darken-4">Nossas ferramentas foram todas escritas em JavaScript, para maior velocidade e segurança.</h5>
                             </div>
                         </li>
-                        <li class="grey lighten-1">
 
+                        <li class="grey lighten-1">
                             <div class="caption right-align">
                                 <h3 class="dark grey-text text-darken-4">MAIS ACESSÍVEL!</h3>
                                 <h5 class="light grey-text text-darken-4">Nosso site que permite que qualquer um acesse-o offline e tem suporte a PWA.</h5>
                             </div>
                         </li>
-                        <li class="grey lighten-1">
 
+                        <li class="grey lighten-1">
                             <div class="caption center-align">
                                 <h3 class="dark grey-text text-darken-4">O MELHOR!</h3>
                                 <h5 class="light grey-text text-darken-4">O 4People possui as melhores ferramentas atualizadas. Tá sentindo falta de alguma? Por favor, nos envie um <a href="./contato/">e-mail</a>.</h5>
@@ -134,10 +134,7 @@
         </div>
     </main>
 
-    <?php
-    include_once("$path/components/footer.php");
-    include_once("$path/components/fixed-action-btn.php")
-    ?>
+    <?php include_once("$path/components/footer.php") ?>
 
     <!-- <script type='text/javascript'>
         if ('serviceWorker' in navigator) {
