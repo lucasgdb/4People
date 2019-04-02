@@ -1,4 +1,4 @@
-<?php include_once('../../asset.php') ?>
+<?php include_once('../../assets/asset.php') ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">

@@ -1,4 +1,4 @@
-<?php include_once('../../../asset.php') ?>
+<?php include_once('../../../assets/asset.php') ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -105,7 +105,7 @@
 
                 <textarea class="mt-2" id="text" placeholder="Digite aqui o texto" oninput="countChars()"></textarea>
 
-                <ul class="collection">
+                <ul class="collection mb-0">
                     <li class="collection-item">Caracteres: <span id="chars">0</span></li>
                     <li class="collection-item">Caracteres sem espaço: <span id="charsWSpaces">0</span></li>
                     <li class="collection-item">Palavras: <span id="words">0</span></li>

@@ -1,4 +1,4 @@
-<?php include_once('../asset.php') ?>
+<?php include_once('../assets/asset.php') ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -99,6 +99,9 @@
         <div class="container">
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Principais Ferramentas</h1>
+
+                <label>Principais Ferramentas Matemáticas do 4People</label>
+                <div class="divider"></div>
 
                 <div class="row mb-0">
                     <div class="col s12 m6">
