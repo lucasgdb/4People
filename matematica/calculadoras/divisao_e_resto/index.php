@@ -12,11 +12,11 @@
     <meta name="title" content="Divisão e Resto - 4People">
     <meta name="description" content="Calculadora de Divisão e Resto. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="./matematica/calcular_areas/divisao_e_resto/">
+    <meta name="msapplication-starturl" content="./matematica/calculo_de_areas/divisao_e_resto/">
     <meta property="og:title" content="Divisão e Resto - 4People">
     <meta name="twitter:title" content="Divisão e Resto - 4People">
-    <meta property="og:url" content="./matematica/calcular_areas/divisao_e_resto/">
-    <meta name="twitter:url" content="./matematica/calcular_areas/divisao_e_resto/">
+    <meta property="og:url" content="./matematica/calculo_de_areas/divisao_e_resto/">
+    <meta name="twitter:url" content="./matematica/calculo_de_areas/divisao_e_resto/">
 </head>
 
 <body>
@@ -69,7 +69,7 @@
                     </li>
 
                     <li>
-                        <?php include_once("$path/components/matematica/calcular_areas.php") ?>
+                        <?php include_once("$path/components/matematica/calculo_de_areas.php") ?>
                     </li>
 
                     <li>

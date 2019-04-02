@@ -11,11 +11,11 @@
     <meta name="title" content="Calcular Áreas - 4People">
     <meta name="description" content="Calcular Áreas. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="./matematica/calcular_areas/">
+    <meta name="msapplication-starturl" content="./matematica/calculo_de_areas/">
     <meta property="og:title" content="Calcular Áreas - 4People">
     <meta name="twitter:title" content="Calcular Áreas - 4People">
-    <meta property="og:url" content="./matematica/calcular_areas/">
-    <meta name="twitter:url" content="./matematica/calcular_areas/">
+    <meta property="og:url" content="./matematica/calculo_de_areas/">
+    <meta name="twitter:url" content="./matematica/calculo_de_areas/">
 </head>
 
 <body>
@@ -68,7 +68,7 @@
                     </li>
 
                     <li class="active">
-                        <?php include_once("$path/components/matematica/calcular_areas.php") ?>
+                        <?php include_once("$path/components/matematica/calculo_de_areas.php") ?>
                     </li>
 
                     <li>

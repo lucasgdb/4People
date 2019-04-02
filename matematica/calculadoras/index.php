@@ -68,7 +68,7 @@
                     </li>
 
                     <li>
-                        <?php include_once("$path/components/matematica/calcular_areas.php") ?>
+                        <?php include_once("$path/components/matematica/calculo_de_areas.php") ?>
                     </li>
 
                     <li>

@@ -10,7 +10,7 @@ const txtDecimal = document.querySelector('#decimal')
 const names = ['Raio', 'Diâmetro']
 txtFormulas.forEach((txtFormula, index) => {
     txtFormula.onclick = function () {
-        lblFormula.textContent = names[index]
+        lblFormula.textContent = `${names[index]}:`
     }
 })
 

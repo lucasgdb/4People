@@ -12,11 +12,11 @@
     <meta name="title" content="Área do Círculo - 4People">
     <meta name="description" content="Calcular área do círculo. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="./matematica/calcular_areas/area_do_circulo/">
+    <meta name="msapplication-starturl" content="./matematica/calculo_de_areas/area_do_circulo/">
     <meta property="og:title" content="Área do Círculo - 4People">
     <meta name="twitter:title" content="Área do Círculo - 4People">
-    <meta property="og:url" content="./matematica/calcular_areas/area_do_circulo/">
-    <meta name="twitter:url" content="./matematica/calcular_areas/area_do_circulo/">
+    <meta property="og:url" content="./matematica/calculo_de_areas/area_do_circulo/">
+    <meta name="twitter:url" content="./matematica/calculo_de_areas/area_do_circulo/">
 </head>
 
 <body>
@@ -69,7 +69,7 @@
                     </li>
 
                     <li class="active">
-                        <?php include_once("$path/components/matematica/calcular_areas.php") ?>
+                        <?php include_once("$path/components/matematica/calculo_de_areas.php") ?>
                     </li>
 
                     <li>
@@ -104,7 +104,10 @@
                 <div class="divider"></div>
 
                 <div class="row mb-0">
-                    <div class="col s12 m6">
+                    <div class="col s12">
+                        <p class="mb-0">Fórmulas:</p>
+                    </div>
+                    <div class="col s12 m6 l5">
                         <p>
                             <label>
                                 <input class="with-gap" name="formula" type="radio" checked />
@@ -112,7 +115,8 @@
                             </label>
                         </p>
                     </div>
-                    <div class="col s12 m6">
+
+                    <div class="col s12 m6 l7">
                         <p>
                             <label>
                                 <input class="with-gap" name="formula" type="radio" />
@@ -123,49 +127,67 @@
                 </div>
 
                 <div class="row mb-0">
-                    <div class="col s12">
-                        <span id="formulasName">Raio</span>:<br class="hide-on-med-and-up">
-                        <div class="input-field inline">
-                            <input id="number" type="number" placeholder="Digite aqui o raio." min="0" value="1" step="any">
+                    <div class="col s12 m6 l4">
+                        <div class="row mb-0">
+                            <div class="col s12">
+                                <p class="mb-0" id="formulasName">Raio:</p>
+                            </div>
+                            <div class="col s12">
+                                <div class="input-field">
+                                    <input id="number" type="number" placeholder="Digite aqui o raio." min="0" value="1" step="any">
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col s12">
-                        Medida:<br class="hide-on-med-and-up">
-                        <div class="input-field inline">
-                            <select id="measure">
-                                <option value="km">Kilômetros</option>
-                                <option value="hm">Hectômetros</option>
-                                <option value="dam">Decâmetros</option>
-                                <option value="m" selected>Metros</option>
-                                <option value="dm">Decímetros</option>
-                                <option value="cm">Centímetros</option>
-                                <option value="mm">Milímetros</option>
-                            </select>
+                    <div class="col s12 m6 l4">
+                        <div class="row mb-0">
+                            <div class="col s12">
+                                <p class="mb-0">Medida:</p>
+                            </div>
+                            <div class="col s12">
+                                <div class="input-field">
+                                    <select id="measure">
+                                        <option value="km">Kilômetros</option>
+                                        <option value="hm">Hectômetros</option>
+                                        <option value="dam">Decâmetros</option>
+                                        <option value="m" selected>Metros</option>
+                                        <option value="dm">Decímetros</option>
+                                        <option value="cm">Centímetros</option>
+                                        <option value="mm">Milímetros</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col s12">
-                        Casas decimais:<br class="hide-on-med-and-up">
-                        <div class="input-field inline">
-                            <select id="decimal">
-                                <option value="0">Nenhuma</option>
-                                <option value="1">1</option>
-                                <option value="2" selected>2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="15">15</option>
-                                <option value="20">20</option>
-                                <option value="30">30</option>
-                                <option value="48">48</option>
-                                <option value="-1">Automática</option>
-                            </select>
+                    <div class="col s12 m6 l4">
+                        <div class="row mb-0">
+                            <div class="col s12">
+                                <p class="mb-0">Casas decimais:</p>
+                            </div>
+                            <div class="col s12">
+                                <div class="input-field">
+                                    <select id="decimal">
+                                        <option value="0">Nenhuma</option>
+                                        <option value="1">1</option>
+                                        <option value="2" selected>2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                        <option value="48">48</option>
+                                        <option value="-1">Automática</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
