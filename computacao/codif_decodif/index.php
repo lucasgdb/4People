@@ -5,7 +5,7 @@
 
 <head>
     <?php include_once("$path/components/links.php") ?>
-    <title>Codificadores e Decodificadores - 4People</title>
+    <title>Codificadores & Decodificadores - 4People</title>
     <?php include_once("$path/components/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <meta name="title" content="Codificadores e Decodificadores - 4People">
@@ -72,7 +72,7 @@
                     </li>
 
                     <li>
-                        <?php include_once("$path/components/matematica/datas_e_horas.php") ?>
+                        <?php include_once("$path/components/matematica/calculo_de_datas.php") ?>
                     </li>
                 </ul>
             </div>
@@ -97,14 +97,14 @@
     <main class="grey lighten-5">
         <div class="container">
             <div class="card-panel">
-                <h1>Ferramentas</h1>
+                <h1 class="flow-text mt-2">Codificadores & Decodificadores</h1>
             </div>
         </div>
     </main>
 
     <?php include_once("$path/components/footer.php") ?>
 
-    <script src="<?= $return ?>/src/js/main.js"></script>
+    <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
 </html> 

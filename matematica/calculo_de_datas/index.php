@@ -11,11 +11,11 @@
     <meta name="title" content="Datas e Horas - 4People">
     <meta name="description" content="Datas e Horas. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="./matematica/datas_e_horas/">
+    <meta name="msapplication-starturl" content="./matematica/calculo_de_datas/">
     <meta property="og:title" content="Datas e Horas - 4People">
     <meta name="twitter:title" content="Datas e Horas - 4People">
-    <meta property="og:url" content="./matematica/datas_e_horas/">
-    <meta name="twitter:url" content="./matematica/datas_e_horas/">
+    <meta property="og:url" content="./matematica/calculo_de_datas/">
+    <meta name="twitter:url" content="./matematica/calculo_de_datas/">
 </head>
 
 <body>
@@ -72,7 +72,7 @@
                     </li>
 
                     <li class="active">
-                        <?php include_once("$path/components/matematica/datas_e_horas.php") ?>
+                        <?php include_once("$path/components/matematica/calculo_de_datas.php") ?>
                     </li>
                 </ul>
             </div>
@@ -97,14 +97,14 @@
     <main class="grey lighten-5">
         <div class="container">
             <div class="card-panel">
-                <h1>Ferramentas</h1>
+                <h1 class="flow-text mt-2">Cálculo de Datas</h1>
             </div>
         </div>
     </main>
 
     <?php include_once("$path/components/footer.php") ?>
 
-    <script src="<?= $return ?>/src/js/main.js"></script>
+    <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
 </html> 

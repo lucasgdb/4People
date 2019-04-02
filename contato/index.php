@@ -85,7 +85,7 @@
                     </li>
 
                     <li>
-                        <?php include_once("$path/components/matematica/datas_e_horas.php") ?>
+                        <?php include_once("$path/components/matematica/calculo_de_datas.php") ?>
                     </li>
                 </ul>
             </div>
@@ -152,7 +152,7 @@
 
     <?php include_once("$path/components/footer.php") ?>
 
-    <script src="<?= $return ?>/src/js/main.js"></script>
+    <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
 </html> 

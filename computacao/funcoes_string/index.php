@@ -72,7 +72,7 @@
                     </li>
 
                     <li>
-                        <?php include_once("$path/components/matematica/datas_e_horas.php") ?>
+                        <?php include_once("$path/components/matematica/calculo_de_datas.php") ?>
                     </li>
                 </ul>
             </div>
@@ -97,14 +97,14 @@
     <main class="grey lighten-5">
         <div class="container">
             <div class="card-panel">
-                <h1>Ferramentas</h1>
+                <h1 class="flow-text mt-2">Funções String</h1>
             </div>
         </div>
     </main>
 
     <?php include_once("$path/components/footer.php") ?>
 
-    <script src="<?= $return ?>/src/js/main.js"></script>
+    <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
 </html> 

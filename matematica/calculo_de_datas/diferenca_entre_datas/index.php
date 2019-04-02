@@ -12,11 +12,11 @@
     <meta name="title" content="Diferença entre Datas - 4People">
     <meta name="description" content="Diferença entre Datas. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="./matematica/datas_e_horas/diferenca_entre_datas/">
+    <meta name="msapplication-starturl" content="./matematica/calculo_de_datas/diferenca_entre_datas/">
     <meta property="og:title" content="Diferença entre Datas - 4People">
     <meta name="twitter:title" content="Diferença entre Datas - 4People">
-    <meta property="og:url" content="./matematica/datas_e_horas/diferenca_entre_datas/">
-    <meta name="twitter:url" content="./matematica/datas_e_horas/diferenca_entre_datas/">
+    <meta property="og:url" content="./matematica/calculo_de_datas/diferenca_entre_datas/">
+    <meta name="twitter:url" content="./matematica/calculo_de_datas/diferenca_entre_datas/">
 </head>
 
 <body>
@@ -73,7 +73,7 @@
                     </li>
 
                     <li class="active">
-                        <?php include_once("$path/components/matematica/datas_e_horas.php") ?>
+                        <?php include_once("$path/components/matematica/calculo_de_datas.php") ?>
                     </li>
                 </ul>
             </div>
@@ -172,9 +172,9 @@
 
     <?php include_once("$path/components/footer.php") ?>
 
-    <script src="<?= $return ?>/algorithms/differenceBetweenDates.js"></script>
+    <script src="<?= "$return/algorithms/differenceBetweenDates.js" ?>"></script>
     <script src="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.js"></script>
-    <script src="<?= $return ?>/src/js/main.js"></script>
+    <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
 </html> 
