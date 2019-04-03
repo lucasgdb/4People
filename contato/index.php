@@ -26,9 +26,9 @@
     if (isset($_SESSION['msg'])) {
         $msg = $_SESSION['msg']['type'];
         if ($msg === 'error') {
-            echo '<script>M.toast({html:"Não foi possível enviar o e-mail.",classes:"red accent-4"})</script>';
+            echo '<script defer>M.toast({html:"Não foi possível enviar o e-mail.",classes:"red accent-4"})</script>';
         } else if ($msg === 'success') {
-            echo '<script>M.toast({html:"E-mail enviado com sucesso! Aguarde retorno.",classes:"green"})</script>';
+            echo '<script defer>M.toast({html:"E-mail enviado com sucesso! Aguarde retorno.",classes:"green"})</script>';
         }
 
         unset($_SESSION['msg']);
@@ -153,6 +153,7 @@
 
     <?php include_once("$path/components/footer.php") ?>
 
+    <script src="<?= "$return/src/js/materialize.min.js" ?>"></script>
     <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 

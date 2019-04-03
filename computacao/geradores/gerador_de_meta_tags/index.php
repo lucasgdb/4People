@@ -246,6 +246,7 @@
     <?php include_once("$path/components/footer.php") ?>
 
     <script src="<?= "$return/algorithms/metaTagsGenerator.js" ?>"></script>
+    <script src="<?= "$return/src/js/materialize.min.js" ?>"></script>
     <script src="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.js"></script>
     <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>

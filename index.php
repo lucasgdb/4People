@@ -23,7 +23,7 @@
     <?php
     include_once("$path/components/noscript.php");
     include_once("$path/components/spinner.php");
-    include_once("$path/components/header.php")
+    include_once("$path/components/header.php");
     ?>
 
     <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
@@ -143,8 +143,9 @@
                 .then(() => console.log('worker registered!'))
         }
     </script> -->
-    <script src="<?= $return ?>/src/js/index.js"></script>
+    <script src="<?= "$return/src/js/materialize.min.js" ?>"></script>
+    <script src="<?= "$return/src/js/index.js" ?>"></script>
     <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
-</html> 
+</html>
