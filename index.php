@@ -97,6 +97,7 @@
 
     <main class="grey lighten-5">
         <div class="container">
+
             <div class="card-panel">
                 <div class="slider">
                     <ul class="slides">

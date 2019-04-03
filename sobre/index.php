@@ -142,6 +142,7 @@
                         <ul class="browser-default">
                             <li><a href="https://github.com/LucasNaja" target="_blank">GitHub</a></li>
                             <li><a href="https://www.facebook.com/Lucas.Naja0" target="_blank">Facebook</a></li>
+                            <li><a href="https://dev.to/lucasnaja" target="_blank">Dev Community</a></li>
                             <li><a href="https://www.linkedin.com/in/lucas-bittencourt/" target="_blank">LinkedIn</a></li>
                         </ul>
                     </li>
