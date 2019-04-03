@@ -6,7 +6,7 @@
 <head>
     <?php include_once("$path/components/links.php") ?>
     <link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
-    <title>Fale conosco - 4People</title>
+    <title>Fale Conosco - 4People</title>
     <?php include_once("$path/components/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <meta name="title" content="Contato - 4People">
@@ -30,9 +30,10 @@
         } else if ($msg === 'success') {
             echo '<script>M.toast({html:"E-mail enviado com sucesso! Aguarde retorno.",classes:"green"})</script>';
         }
+
+        unset($_SESSION['msg']);
     }
 
-    unset($_SESSION['msg']);
     include_once("$path/components/noscript.php");
     include_once("$path/components/spinner.php");
     include_once("$path/components/header.php")
@@ -110,7 +111,7 @@
     <main class="grey lighten-5">
         <div class="container">
             <div class="card-panel">
-                <h1 class="flow-text mt-2">Fale conosco</h1>
+                <h1 class="flow-text mt-2">Fale Conosco</h1>
 
                 <label>Alguma dúvida? Algum bug? Deseja alguma ferramenta nova? Por favor, nos contate e deixe-nos sabendo de qualquer coisa.</label>
                 <div class="divider"></div>
@@ -155,4 +156,4 @@
     <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
-</html> 
+</html>

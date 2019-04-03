@@ -28,8 +28,7 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
-    transition: padding-left 300ms;
-    min-width: 320px
+    transition: padding-left 300ms
 }
 
 header, main, footer, ul#slide-out, .fixed-action-btn {

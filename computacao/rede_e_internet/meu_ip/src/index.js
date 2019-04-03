@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(json => JSON.parse(json))
         .then(data => {
             ip.textContent = data.ip
-            city.textContent = data.city
+            // city.textContent = data.city
             region.textContent = data.region
             regionCode.textContent = data.region_code
             country.textContent = data.country_name

@@ -13,6 +13,7 @@ $message = $_POST['subject'];
 
 $mail = new PHPMailer(true);
 
+session_start();
 try {
     // Server settings
     $mail->SMTPDebug = 0;
@@ -36,7 +37,6 @@ try {
     $mail->Body = "Nome: $firstName $lastName<br>E-mail: $email<br>Mensagem: $message";
     $mail->AltBody = 'Mensagem recebida do 4People';
 
-    session_start();
     if ($mail->send()) {
         $_SESSION['msg']['type'] = 'success';
         header('Location: ./');
@@ -45,5 +45,6 @@ try {
         header('Location: ./');
     }
 } catch (Exception $e) {
-    header('Location: index.php?msg=error');
+    $_SESSION['msg']['type'] = 'error';
+    header('Location: ./');
 }

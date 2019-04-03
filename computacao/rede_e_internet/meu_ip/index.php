@@ -106,7 +106,7 @@
                 <div class="row mt-0">
                     <div class="col s12">
                         <p class="mt-0">Meu IP: <span id="ip"></span></p>
-                        <p class="mt-0">Cidade: <span id="city"></span></p>
+                        <!-- <p class="mt-0">Cidade: <span id="city"></span></p> -->
                         <p class="mt-0">Região: <span id="region"></span></p>
                         <p class="mt-0">Código da região: <span id="regionCode"></span></p>
                         <p class="mt-0">País: <span id="country"></span></p>

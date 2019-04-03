@@ -100,7 +100,7 @@
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Contador de Caracteres</h1>
 
-                <label>Contador de caracteres, caracteres sem espaço, palavras, espaços, vogais, consoantes, números e linhas.</label>
+                <label>Contador de letras, caracteres sem espaço, palavras, espaços, vogais, consoantes, números e linhas.</label>
                 <div class="divider"></div>
 
                 <textarea class="mt-2" id="text" placeholder="Digite aqui o texto" oninput="countChars()"></textarea>
