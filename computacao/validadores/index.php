@@ -94,6 +94,9 @@
         <div class="container">
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Validadores</h1>
+
+                <label>Ferramentas de Validadores do 4People</label>
+                <div class="divider"></div>
             </div>
         </div>
     </main>

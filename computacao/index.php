@@ -101,7 +101,7 @@
 
                 <div class="row mb-0">
                     <div class="col s12 m6">
-                        <div class="card sticky-action">
+                        <div class="card">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Gerador de CPF<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -111,18 +111,62 @@
 
                             <div class="card-action grey lighten-1">
                                 <a class="black-text no-break" href="./geradores/gerador_de_cpf/">Ferramenta &raquo;</a>
-                                <a class="black-text no-break" href="./geradores/">Geradores &raquo;</a>
+                                <a class="black-text no-break" href="./geradores/">Mais Ferramentas &raquo;</a>
                             </div>
 
                             <div class="card-reveal">
                                 <span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-                                <p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/CPFGenerator.js" target="_blank">Clique aqui</a> para ir direto ao código fonte no GitHub.</p>
+                                <p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/CPFGenerator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="col s12 m6">
-                        <div class="card sticky-action">
+                        <div class="card">
+                            <div class="card-content grey lighten-2">
+                                <span class="card-title activator no-select">Gerador de Senha<i class="material-icons right">more_vert</i></span>
+                                <p>
+                                    Gerador de Senha OnLine para gerar senhas personalizadas e fortes.
+                                </p>
+                            </div>
+
+                            <div class="card-action grey lighten-1">
+                                <a class="black-text no-break" href="./geradores/gerador_de_senha/">Ferramenta &raquo;</a>
+                                <a class="black-text no-break" href="./geradores/">Mais Ferramentas &raquo;</a>
+                            </div>
+
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
+                                <p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/passwordGenerator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-0">
+                    <div class="col s12 m6">
+                        <div class="card">
+                            <div class="card-content grey lighten-2">
+                                <span class="card-title activator no-select">Gerador de Meta Tags<i class="material-icons right">more_vert</i></span>
+                                <p>
+                                    Gerador de Meta Tags OnLine, feito para gerar várias das Meta Tags existentes.
+                                </p>
+                            </div>
+
+                            <div class="card-action grey lighten-1">
+                                <a class="black-text no-break" href="./geradores/gerador_de_meta_tags/">Ferramenta &raquo;</a>
+                                <a class="black-text no-break" href="./geradores/">Mais Ferramentas &raquo;</a>
+                            </div>
+
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
+                                <p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/metaTagsGenerator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m6">
+                        <div class="card">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Validador de CPF<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -132,12 +176,12 @@
 
                             <div class="card-action grey lighten-1">
                                 <a class="black-text no-break" href="./validadores/validador_de_cpf/">Ferramenta &raquo;</a>
-                                <a class="black-text no-break" href="./validadores/">Validadores &raquo;</a>
+                                <a class="black-text no-break" href="./validadores/">Mais Ferramentas &raquo;</a>
                             </div>
 
                             <div class="card-reveal">
                                 <span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-                                <p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/CPFValidator.js" target="_blank">Clique aqui</a> para ir direto ao código fonte no GitHub.</p>
+                                <p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/CPFValidator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
                             </div>
                         </div>
                     </div>
@@ -145,7 +189,7 @@
 
                 <div class="row mb-0">
                     <div class="col s12 m6">
-                        <div class="card sticky-action">
+                        <div class="card">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Contador de Caracteres<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -155,18 +199,18 @@
 
                             <div class="card-action grey lighten-1">
                                 <a class="black-text no-break" href="./funcoes_string/contador_de_caracteres/">Ferramenta &raquo;</a>
-                                <a class="black-text no-break" href="./funcoes_string/">Funções String &raquo;</a>
+                                <a class="black-text no-break" href="./funcoes_string/">Mais Ferramentas &raquo;</a>
                             </div>
 
                             <div class="card-reveal">
                                 <span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-                                <p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/charactersCount.js" target="_blank">Clique aqui</a> para ir direto ao código fonte no GitHub.</p>
+                                <p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/charactersCount.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="col s12 m6">
-                        <div class="card sticky-action">
+                        <div class="card">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Meu IP<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -175,11 +219,11 @@
                             </div>
                             <div class="card-action grey lighten-1">
                                 <a class="black-text no-break" href="./rede_e_internet/meu_ip/">Ferramenta &raquo;</a>
-                                <a class="black-text no-break" href="./rede_e_internet/">Rede e Internet &raquo;</a>
+                                <a class="black-text no-break" href="./rede_e_internet/">Mais Ferramentas &raquo;</a>
                             </div>
                             <div class="card-reveal">
                                 <span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-                                <p><a href="https://github.com/LucasNaja/4People/blob/master/computacao/rede_e_internet/meu_ip/src/index.js" target="_blank">Clique aqui</a> para ir direto ao código fonte no GitHub.</p>
+                                <p><a href="https://github.com/LucasNaja/4People/blob/master/computacao/rede_e_internet/meu_ip/src/index.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
                             </div>
                         </div>
                     </div>
@@ -187,7 +231,7 @@
 
                 <div class="row mb-0">
                     <div class="col s12 m6">
-                        <div class="card sticky-action">
+                        <div class="card">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Conversor de Código Binário<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -196,11 +240,11 @@
                             </div>
                             <div class="card-action grey lighten-1">
                                 <a class="black-text no-break" href="./codif_decodif/conversor_binario/">Ferramenta &raquo;</a>
-                                <a class="black-text" href="./codif_decodif/">Codificadores & Decodificadores &raquo;</a>
+                                <a class="black-text no-break" href="./codif_decodif/">Mais Ferramentas &raquo;</a>
                             </div>
                             <div class="card-reveal">
                                 <span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-                                <p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/binaryConverter.js" target="_blank">Clique aqui</a> para ir direto ao código fonte no GitHub.</p>
+                                <p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/binaryConverter.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
                             </div>
                         </div>
                     </div>

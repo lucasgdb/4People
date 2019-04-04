@@ -94,6 +94,9 @@
         <div class="container">
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Calcular Áreas</h1>
+
+                <label>Ferramentas de Calcular Áreas do 4People</label>
+                <div class="divider"></div>
             </div>
         </div>
     </main>

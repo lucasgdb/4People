@@ -94,6 +94,9 @@
         <div class="container">
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Cálculo de Datas</h1>
+
+                <label>Ferramentas de Cálculo de Datas do 4People</label>
+                <div class="divider"></div>
             </div>
         </div>
     </main>
@@ -104,4 +107,4 @@
     <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
-</html> 
+</html>

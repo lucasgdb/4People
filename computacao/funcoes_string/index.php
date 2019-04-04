@@ -94,6 +94,9 @@
         <div class="container">
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Funções String</h1>
+
+                <label>Ferramentas de Funções String do 4People</label>
+                <div class="divider"></div>
             </div>
         </div>
     </main>

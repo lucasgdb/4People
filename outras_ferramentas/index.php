@@ -94,6 +94,9 @@
         <div class="container">
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Principais Ferramentas</h1>
+
+                <label>Principais Ferramentas para usos do dia-a-dia do 4People</label>
+                <div class="divider"></div>
             </div>
         </div>
     </main>
