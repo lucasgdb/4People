@@ -19,11 +19,7 @@
 </head>
 
 <body>
-    <?php
-    include_once("$path/components/noscript.php");
-    include_once("$path/components/spinner.php");
-    include_once("$path/components/header.php")
-    ?>
+    <?php include_once("$path/components/topComponents.php") ?>
 
     <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
         <?php include_once("$path/components/logo.php") ?>

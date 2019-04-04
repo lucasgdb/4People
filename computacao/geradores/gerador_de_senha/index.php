@@ -20,11 +20,7 @@
 </head>
 
 <body>
-    <?php
-    include_once("$path/components/noscript.php");
-    include_once("$path/components/spinner.php");
-    include_once("$path/components/header.php")
-    ?>
+    <?php include_once("$path/components/topComponents.php") ?>
 
     <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
         <?php include_once("$path/components/logo.php") ?>
@@ -182,47 +178,58 @@
                 </div>
 
                 <div class="row">
-                    <div class="col s12">
-                        Caracteres adicionais:
-                        <div class="input-field inline">
-                            <input placeholder="E.g: ^<>:,.~´`'." id="additionalChars" type="text">
+                    <div class="col s12 m6">
+                        <div class="row mb-0">
+                            <div class="col s12">
+                                <p class="mb-0">Tamanho:</p>
+                            </div>
+
+                            <div class="col s12">
+                                <div class="input-field">
+                                    <input placeholder="Tamanho da senha" id="length" type="number" min="6" value="12">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m6">
+                        <div class="row mb-0">
+                            <div class="col s12">
+                                <p class="mb-0">Caracteres adicionais:</p>
+                            </div>
+                            <div class="col s12">
+                                <div class="input-field">
+                                    <input placeholder="E.g: ^<>:,.~´`'." id="additionalChars" type="text">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col s12">
-                        Tamanho:
-                        <div class="input-field inline">
-                            <input placeholder="Tamanho da senha" id="length" type="number" min="6" value="12">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col s12 m4 l6">
+                <div class="row mb-0">
+                    <div class="col s12 m6">
                         <p>
                             <label>
                                 <input id="equalChars" type="checkbox" class="filled-in" checked>
-                                <span>Excluir caracteres iguais (AA, ll, 22)</span>
+                                <span>Excluir Caracteres iguais (AA, ll, 22)</span>
                             </label>
                         </p>
                     </div>
 
-                    <div class="col s12 m4 l6">
+                    <div class="col s12 m6">
                         <p>
                             <label>
                                 <input id="similarChars" type="checkbox" class="filled-in" checked>
-                                <span>Excluir caracteres similares (lL, lj, O0)</span>
+                                <span>Excluir Caracteres similares (lL, lj, O0)</span>
                             </label>
                         </p>
                     </div>
 
-                    <div class="col s12 m4 l12">
+                    <div class="col s12 m6 l12">
                         <p>
                             <label>
                                 <input id="strength" type="checkbox" class="filled-in" checked>
-                                <span>Força de Senha</span>
+                                <span>Mostrar Força de Senha</span>
                             </label>
                         </p>
                     </div>
@@ -234,7 +241,7 @@
                 <div class="divider mt-2"></div>
 
                 <p class="mb-0">Força de senha: <span id="passwordLength"></span></p>
-                <textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false"></textarea>
+                <textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
                 <button title="Copiar" class="btn waves-effect waves-dark black-text white" onclick="copyResult()">
                     Copiar
                 </button>
@@ -250,4 +257,4 @@
     <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
-</html> 
+</html>

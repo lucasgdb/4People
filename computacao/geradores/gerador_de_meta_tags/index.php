@@ -20,11 +20,7 @@
 </head>
 
 <body>
-    <?php
-    include_once("$path/components/noscript.php");
-    include_once("$path/components/spinner.php");
-    include_once("$path/components/header.php")
-    ?>
+    <?php include_once("$path/components/topComponents.php") ?>
 
     <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
         <?php include_once("$path/components/logo.php") ?>
@@ -106,53 +102,84 @@
                 <h5>Informações</h5>
 
                 <div class="row mt-2">
-                    <div class="input-field col s12">
-                        Nome do site:
-                        <input id="siteName" type="text" placeholder="Ex: 4People">
+                    <div class="col s12 m6">
+                        <div class="row mb-0">
+                            <p class="mb-0 col s12">Nome do site:</p>
+
+                            <div class="input-field col s12">
+                                <input id="siteName" type="text" placeholder="Ex: 4People">
+                            </div>
+                        </div>
                     </div>
 
+                    <div class="col s12 m6">
+                        <div class="row mb-0">
+                            <p class="mb-0 col s12">Autor do site:</p>
+
+                            <div class="input-field col s12">
+                                <input id="author" type="text" placeholder="Ex: Lucas Bittencourt">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m6">
+                        <div class="row mb-0">
+                            <p class="mb-0 col s12">Copyright:</p>
+
+                            <div class="input-field col s12">
+                                <input id="copyright" type="text" placeholder="Ex: © 4People - 2019">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m6">
+                        <div class="row mb-0">
+                            <p class="mb-0 col s12">Linguagens do site:</p>
+
+                            <div class="input-field col s12">
+                                <input id="languages" type="text" placeholder="Ex: pt-br, en-US, fr">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m6">
+                        <div class="row mb-0">
+                            <p class="mb-0 col s12">IDE ou Editor de Texto utilizado:</p>
+
+                            <div class="input-field col s12">
+                                <input id="generator" type="text" placeholder="Ex: Microsoft Visual Studio Code">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m6">
+                        <div class="row mb-0">
+                            <p class="mb-0 col s12">Classificação:</p>
+
+                            <div class="input-field col s12">
+                                <select id="rating">
+                                    <option value="general" selected>Todas as idades</option>
+                                    <option value="14 years">Censura 14 anos</option>
+                                    <option value="mature">A partir de 18 anos</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="mb-0 col s12">Título do site. Caracteres usados: <span>0</span>. Recomendado: 63-90</p>
                     <div class="input-field col s12">
-                        Título do site. Caracteres usados: <span>0</span>. Recomendado: 63-90
                         <input oninput="countCharacters(event)" id="title" type="text" placeholder="Ex: 4People - Ferramentas OnLine">
                     </div>
 
+                    <p class="mb-0 col s12">Descrição do site: Caracteres usados: <span>0</span>. Recomendado: 160-300</p>
                     <div class="input-field col s12">
-                        Autor do site:
-                        <input id="author" type="text" placeholder="Ex: Lucas Bittencourt">
-                    </div>
-
-                    <div class="input-field col s12">
-                        Descrição do site: Caracteres usados: <span>0</span>. Recomendado: 160-300
                         <input oninput="countCharacters(event)" id="description" type="text" placeholder="Ex. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
                     </div>
 
+                    <p class="mb-0 col s12">Palavras-chave do site: Caracteres usados: <span>0</span>. Recomendado: 160-200</p>
                     <div class="input-field col s12">
-                        Palavras-chave do site: Caracteres usados: <span>0</span>. Recomendado: 160-200
+
                         <input oninput="countCharacters(event)" id="keywords" type="text" placeholder="Ex: 4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-                    </div>
-
-                    <div class="input-field col s12">
-                        Copyright:
-                        <input id="copyright" type="text" placeholder="Ex: © 4People - 2019">
-                    </div>
-
-                    <div class="input-field col s12">
-                        Linguagens do site:
-                        <input id="languages" type="text" placeholder="Ex: pt-br, en-US, fr">
-                    </div>
-
-                    <div class="input-field col s12">
-                        IDE ou Editor de Texto usado:
-                        <input id="generator" type="text" placeholder="Ex: Microsoft Visual Studio Code">
-                    </div>
-
-                    <div class="input-field col s12">
-                        Classificação:
-                        <select id="rating">
-                            <option value="general" selected>Todas as idades</option>
-                            <option value="14 years">Censura 14 anos</option>
-                            <option value="mature">A partir de 18 anos</option>
-                        </select>
                     </div>
                 </div>
 
@@ -161,31 +188,40 @@
                 <h5>Viewport</h5>
 
                 <div class="row">
-                    <div class="col s12">
-                        Escala inicial:<br class="hide-on-med-and-up">
-                        <div class="input-field inline">
-                            <input id="initialScale" type="number" placeholder="1.0" min="0.0" max="2.0" step="0.1" value="1.0">
+                    <div class="col s12 m4">
+                        <div class="row mb-0">
+                            <p class="mb-0 col s12">Escala inicial:</p>
+
+                            <div class="input-field col s12">
+                                <input id="initialScale" type="number" placeholder="1.0" min="0.0" max="2.0" step="0.1" value="1.0">
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col s12">
-                        Escala mínima:<br class="hide-on-med-and-up">
-                        <div class="input-field inline">
-                            <input id="minimumScale" type="number" placeholder="0.0" min="0.0" max="2.0" step="0.1" value="0.0">
+                    <div class="col s12 m4">
+                        <div class="row mb-0">
+                            <p class="mb-0 col s12">Escala mínima:</p>
+                            <div class="input-field col s12">
+                                <input id="minimumScale" type="number" placeholder="0.0" min="0.0" max="2.0" step="0.1" value="0.0">
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col s12">
-                        Escala máxima:<br class="hide-on-med-and-up">
-                        <div class="input-field inline">
-                            <input id="maximumScale" type="number" placeholder="2.0" min="0.0" max="2.0" step="0.1" value="2.0">
+                    <div class="col s12 m4">
+                        <div class="row mb-0">
+                            <p class="mb-0 col s12">Escala máxima:</p>
+                            <div class="input-field col s12">
+                                <input id="maximumScale" type="number" placeholder="2.0" min="0.0" max="2.0" step="0.1" value="2.0">
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col s12">
-                        Escalável:
-                        <div class="row">
-                            <div class="col s4 m3 l2">
+                <div class="row">
+                    <div class="col s12 m6">
+                        <div class="row mb-0">
+                            <p class="mb-0 col s12">Escalável:</p>
+                            <div class="col s4 m3">
                                 <p>
                                     <label>
                                         <input class="with-gap" name="scalable" type="radio" checked>
@@ -194,7 +230,7 @@
                                 </p>
                             </div>
 
-                            <div class="col s4 m3 l2">
+                            <div class="col s4 m3">
                                 <p>
                                     <label>
                                         <input class="with-gap" name="scalable" type="radio">
@@ -205,10 +241,10 @@
                         </div>
                     </div>
 
-                    <div class="col s12">
-                        Encolher para caber:
-                        <div class="row">
-                            <div class="col s4 m3 l2">
+                    <div class="col s12 m6">
+                        <div class="row mb-0">
+                            <p class="mb-0 col s12">Encolher para caber:</p>
+                            <div class="col s4 m3">
                                 <p>
                                     <label>
                                         <input class="with-gap" name="shrinkToFit" type="radio" checked>
@@ -217,7 +253,7 @@
                                 </p>
                             </div>
 
-                            <div class="col s4 m3 l2">
+                            <div class="col s4 m3">
                                 <p>
                                     <label>
                                         <input class="with-gap" name="shrinkToFit" type="radio">
@@ -251,4 +287,4 @@
     <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
-</html> 
+</html>

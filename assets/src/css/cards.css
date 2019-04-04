@@ -4,3 +4,7 @@
     -webkit-user-select: none;
     -moz-user-select: none
 }
+
+.no-break {
+    white-space: nowrap
+}

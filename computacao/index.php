@@ -20,11 +20,7 @@
 </head>
 
 <body>
-    <?php
-    include_once("$path/components/noscript.php");
-    include_once("$path/components/spinner.php");
-    include_once("$path/components/header.php")
-    ?>
+    <?php include_once("$path/components/topComponents.php") ?>
 
     <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
         <?php include_once("$path/components/logo.php") ?>
@@ -100,7 +96,7 @@
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Principais Ferramentas</h1>
 
-                <label>Principais Ferramentas Matemáticas do 4People</label>
+                <label>Principais Ferramentas de Computação do 4People</label>
                 <div class="divider"></div>
 
                 <div class="row mb-0">
@@ -109,13 +105,13 @@
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Gerador de CPF<i class="material-icons right">more_vert</i></span>
                                 <p>
-                                    Gerador de CPF OnLine que gera CPFs verdadeiros para Programadores testarem seus Softwares em desenvolvimento.
+                                    Gerador de CPF OnLine para Programadores testarem seus Softwares em desenvolvimento.
                                 </p>
                             </div>
 
                             <div class="card-action grey lighten-1">
-                                <a class="black-text" href="./geradores/gerador_de_cpf/">Ferramenta &raquo;</a>
-                                <a class="black-text" href="./geradores/">Geradores &raquo;</a>
+                                <a class="black-text no-break" href="./geradores/gerador_de_cpf/">Ferramenta &raquo;</a>
+                                <a class="black-text no-break" href="./geradores/">Geradores &raquo;</a>
                             </div>
 
                             <div class="card-reveal">
@@ -130,13 +126,13 @@
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Validador de CPF<i class="material-icons right">more_vert</i></span>
                                 <p>
-                                    Validador de CPF OnLine que valida CPFs para Programadores testarem seus Softwares em desenvolvimento.
+                                    Validador de CPF OnLine para Programadores testarem seus Softwares em desenvolvimento.
                                 </p>
                             </div>
 
                             <div class="card-action grey lighten-1">
-                                <a class="black-text" href="./validadores/validador_de_cpf/">Ferramenta &raquo;</a>
-                                <a class="black-text" href="./validadores/">Validadores &raquo;</a>
+                                <a class="black-text no-break" href="./validadores/validador_de_cpf/">Ferramenta &raquo;</a>
+                                <a class="black-text no-break" href="./validadores/">Validadores &raquo;</a>
                             </div>
 
                             <div class="card-reveal">
@@ -158,8 +154,8 @@
                             </div>
 
                             <div class="card-action grey lighten-1">
-                                <a class="black-text" href="./funcoes_string/contador_de_caracteres/">Ferramenta &raquo;</a>
-                                <a class="black-text" href="./funcoes_string/">Funções String &raquo;</a>
+                                <a class="black-text no-break" href="./funcoes_string/contador_de_caracteres/">Ferramenta &raquo;</a>
+                                <a class="black-text no-break" href="./funcoes_string/">Funções String &raquo;</a>
                             </div>
 
                             <div class="card-reveal">
@@ -178,8 +174,8 @@
                                 </p>
                             </div>
                             <div class="card-action grey lighten-1">
-                                <a class="black-text" href="./rede_e_internet/meu_ip/">Ferramenta &raquo;</a>
-                                <a class="black-text" href="./rede_e_internet/">Rede e Internet &raquo;</a>
+                                <a class="black-text no-break" href="./rede_e_internet/meu_ip/">Ferramenta &raquo;</a>
+                                <a class="black-text no-break" href="./rede_e_internet/">Rede e Internet &raquo;</a>
                             </div>
                             <div class="card-reveal">
                                 <span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
@@ -199,7 +195,7 @@
                                 </p>
                             </div>
                             <div class="card-action grey lighten-1">
-                                <a class="black-text" href="./codif_decodif/conversor_binario/">Ferramenta &raquo;</a>
+                                <a class="black-text no-break" href="./codif_decodif/conversor_binario/">Ferramenta &raquo;</a>
                                 <a class="black-text" href="./codif_decodif/">Codificadores & Decodificadores &raquo;</a>
                             </div>
                             <div class="card-reveal">
@@ -219,4 +215,4 @@
     <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
-</html> 
+</html>
