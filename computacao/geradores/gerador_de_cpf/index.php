@@ -99,12 +99,10 @@
                 <label>Gerador de CPF OnLine que gera CPFs verdadeiros para Programadores testarem seus Softwares em desenvolvimento.</label>
                 <div class="divider"></div>
 
-                <div class="row mb-0">
+                <div class="row">
                     <div class="col s12 m6">
                         <div class="row mb-0">
-                            <div class="col s12">
-                                <p class="mb-0">Gerar com pontuação:</p>
-                            </div>
+                            <p class="mb-0 col s12">Gerar com pontuação:</p>
 
                             <div class="col s12 m3">
                                 <p>
@@ -128,9 +126,7 @@
 
                     <div class="col s12 m6">
                         <div class="row mb-0">
-                            <div class="col s12">
-                                <p class="mb-0 ml-0">Estado:</p>
-                            </div>
+                            <p class="mb-0 col s12">Estado:</p>
                             <div class="input-field col s12">
                                 <select>
                                     <option value="-1" selected>Aleatório</option>
@@ -167,7 +163,7 @@
                     </div>
                 </div>
 
-                <button title="Gerar CPF" class="btn btn-center mt-2 waves-effect waves-dark black-text white" onclick="generate()">
+                <button title="Gerar CPF" class="btn btn-center waves-effect waves-dark black-text white" onclick="generate()">
                     Gerar CPF
                 </button>
                 <div class="divider mt-2"></div>
@@ -188,4 +184,4 @@
     <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
-</html> 
+</html>

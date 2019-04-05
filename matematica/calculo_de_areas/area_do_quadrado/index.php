@@ -96,70 +96,58 @@
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Área do Quadrado</h1>
 
-                <label>Calcular Área do Quadrado OnLine. Área do Quadrado: Lado * Lado ou L²</label>
+                <label>Calculador de Área do Quadrado OnLine. Área do Quadrado: Lado * Lado ou L²</label>
                 <div class="divider"></div>
 
-                <div class="row mb-0">
+                <div class="row">
                     <div class="col s12 m6 l4">
                         <div class="row mb-0">
-                            <div class="col s12">
-                                <p class="mb-0">Lado:</p>
-                            </div>
-                            <div class="col s12">
-                                <div class="input-field">
-                                    <input id="side" type="number" placeholder="Digite aqui o raio." min="0" value="10" step="any">
-                                </div>
+                            <p class="mb-0 col s12">Lado:</p>
+                            <div class="input-field col s12">
+                                <input id="side" type="number" placeholder="Digite aqui o raio." min="0" value="10" step="any">
                             </div>
                         </div>
                     </div>
 
                     <div class="col s12 m6 l4">
                         <div class="row mb-0">
-                            <div class="col s12">
-                                <p class="mb-0">Medida:</p>
-                            </div>
-                            <div class="col s12">
-                                <div class="input-field">
-                                    <select id="measure">
-                                        <option value="km">Kilômetros</option>
-                                        <option value="hm">Hectômetros</option>
-                                        <option value="dam">Decâmetros</option>
-                                        <option value="m" selected>Metros</option>
-                                        <option value="dm">Decímetros</option>
-                                        <option value="cm">Centímetros</option>
-                                        <option value="mm">Milímetros</option>
-                                    </select>
-                                </div>
+                            <p class="mb-0 col s12">Medida:</p>
+                            <div class="input-field col s12">
+                                <select id="measure">
+                                    <option value="km">Kilômetros</option>
+                                    <option value="hm">Hectômetros</option>
+                                    <option value="dam">Decâmetros</option>
+                                    <option value="m" selected>Metros</option>
+                                    <option value="dm">Decímetros</option>
+                                    <option value="cm">Centímetros</option>
+                                    <option value="mm">Milímetros</option>
+                                </select>
                             </div>
                         </div>
                     </div>
 
                     <div class="col s12 m6 l4">
                         <div class="row mb-0">
-                            <div class="col s12">
-                                <p class="mb-0">Casas decimais:</p>
-                            </div>
-                            <div class="col s12">
-                                <div class="input-field">
-                                    <select id="decimal">
-                                        <option value="0">Nenhuma</option>
-                                        <option value="1">1</option>
-                                        <option value="2" selected>2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="15">15</option>
-                                        <option value="20">20</option>
-                                        <option value="30">30</option>
-                                        <option value="48">48</option>
-                                        <option value="-1">Automática</option>
-                                    </select>
-                                </div>
+                            <p class="mb-0 col s12">Casas decimais:</p>
+                            <div class="input-field col s12">
+                                <select id="decimal">
+                                    <option value="0">Nenhuma</option>
+                                    <option value="1">1</option>
+                                    <option value="2" selected>2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="48">48</option>
+                                    <option value="-1">Automática</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -187,4 +175,4 @@
     <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
-</html> 
+</html>

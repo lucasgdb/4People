@@ -100,7 +100,7 @@
                 <div class="divider"></div>
 
                 <div class="row">
-                    <p class="mb-0">Primeiro caractere</p>
+                    <p class="mb-0 col s12">Primeiro caractere</p>
                     <div class="col s6 m3">
                         <p>
                             <label>
@@ -139,7 +139,7 @@
                 </div>
 
                 <div class="row">
-                    <p class="mb-0">Outros caracteres</p>
+                    <p class="mb-0 col s12">Outros caracteres</p>
                     <div class="col s6 m3">
                         <p>
                             <label>
@@ -180,9 +180,7 @@
                 <div class="row">
                     <div class="col s12 m6">
                         <div class="row mb-0">
-                            <div class="col s12">
-                                <p class="mb-0">Tamanho:</p>
-                            </div>
+                            <p class="mb-0 col s12">Tamanho:</p>
 
                             <div class="col s12">
                                 <div class="input-field">
@@ -194,13 +192,10 @@
 
                     <div class="col s12 m6">
                         <div class="row mb-0">
-                            <div class="col s12">
-                                <p class="mb-0">Caracteres adicionais:</p>
-                            </div>
-                            <div class="col s12">
-                                <div class="input-field">
-                                    <input placeholder="E.g: ^<>:,.~´`'." id="additionalChars" type="text">
-                                </div>
+                            <p class="mb-0 col s12">Caracteres adicionais:</p>
+
+                            <div class="input-field col s12">
+                                <input placeholder="E.g: ^<>:,.~´`'." id="additionalChars" type="text">
                             </div>
                         </div>
                     </div>

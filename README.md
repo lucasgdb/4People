@@ -60,7 +60,7 @@
     - Equação do 2° Grau
     - Fibonacci
     - Conversor de Temperatura
-    - Divisão
+    - Divisão e Resto
   - Calcular Áreas
     - Área do Círculo
     - Área do Quadrado

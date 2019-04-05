@@ -96,13 +96,11 @@
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Índice de Massa Corporal</h1>
 
-                <label>Calculadora de Índice de Massa Corporal OnLine para calcular o IMD e o seu peso ideal.</label>
+                <label>Calculadora de Índice de Massa Corporal OnLine para calcular o IMC e o seu peso ideal.</label>
                 <div class="divider"></div>
 
                 <div class="row mb-0">
-                    <div class="col s12">
-                        <p class="mb-0">Sexo:</p>
-                    </div>
+                    <p class="mb-0 col s12">Sexo:</p>
 
                     <div class="col s6 m3 l2">
                         <p>
@@ -123,30 +121,22 @@
                     </div>
                 </div>
 
-                <div class="row mb-0">
+                <div class="row">
                     <div class="col s12 m6">
                         <div class="row mb-0">
-                            <div class="col s12">
-                                <p class="mb-0">Peso:</p>
-                            </div>
+                            <p class="mb-0 col s12">Peso:</p>
 
-                            <div class="col s12">
-                                <div class="input-field">
-                                    <input id="weight" type="number" placeholder="Digite aqui seu peso." min="1" step="any">
-                                </div>
+                            <div class="input-field col s12">
+                                <input id="weight" type="number" placeholder="Digite aqui seu peso." min="1" step="any">
                             </div>
                         </div>
                     </div>
 
                     <div class="col s12 m6">
                         <div class="row mb-0">
-                            <div class="col s12">
-                                <p class="mb-0">Altura:</p>
-                            </div>
-                            <div class="col s12">
-                                <div class="input-field">
-                                    <input id="height" type="number" placeholder="Digite aqui sua altura." min="1" step="any">
-                                </div>
+                            <p class="mb-0 col s12">Altura:</p>
+                            <div class="input-field col s12">
+                                <input id="height" type="number" placeholder="Digite aqui sua altura." min="1" step="any">
                             </div>
                         </div>
                     </div>
@@ -174,4 +164,4 @@
     <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
-</html> 
+</html>

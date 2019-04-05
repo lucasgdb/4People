@@ -96,48 +96,36 @@
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Equação do 2° Grau</h1>
 
-                <label>Cálculo da Equção do 2° Grau (Bhaskara) OnLine</label>
+                <label>Cálculo da Equção do 2° Grau (Bhaskara) OnLine. &Delta; = B² - 4 * A * C, X = (-B +- √&Delta;) / 2 * A</label>
                 <div class="divider"></div>
 
-                <div class="row mt-2 mb-0">
+                <div class="row">
                     <div class="col s12 m6 l4">
                         <div class="row mb-0">
-                            <div class="col s12">
-                                <p class="mb-0">Valor A:</p>
-                            </div>
+                            <p class="mb-0 col s12">Valor A:</p>
 
-                            <div class="col s12">
-                                <div class="input-field">
-                                    <input id="valueA" type="number" placeholder="Digite aqui o valor do A." step="any">
-                                </div>
+                            <div class="input-field col s12">
+                                <input id="valueA" type="number" placeholder="Digite aqui o valor do A." step="any">
                             </div>
                         </div>
                     </div>
 
                     <div class="col s12 m6 l4">
                         <div class="row mb-0">
-                            <div class="col s12">
-                                <p class="mb-0">Valor B:</p>
-                            </div>
+                            <p class="mb-0 col s12">Valor B:</p>
 
-                            <div class="col s12">
-                                <div class="input-field">
-                                    <input id="valueB" type="number" placeholder="Digite aqui o valor do B." step="any">
-                                </div>
+                            <div class="input-field col s12">
+                                <input id="valueB" type="number" placeholder="Digite aqui o valor do B." step="any">
                             </div>
                         </div>
                     </div>
 
                     <div class="col s12 m6 l4">
                         <div class="row mb-0">
-                            <div class="col s12">
-                                <p class="mb-0">Valor C:</p>
-                            </div>
+                            <p class="mb-0 col s12">Valor C:</p>
 
-                            <div class="col s12">
-                                <div class="input-field">
-                                    <input id="valueC" type="number" placeholder="Digite aqui o valor do C." step="any">
-                                </div>
+                            <div class="input-field col s12">
+                                <input id="valueC" type="number" placeholder="Digite aqui o valor do C." step="any">
                             </div>
                         </div>
                     </div>
@@ -165,4 +153,4 @@
     <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
-</html> 
+</html>

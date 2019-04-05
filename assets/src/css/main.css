@@ -33,7 +33,7 @@ body {
 
 header, main, footer, ul#slide-out, .fixed-action-btn {
     opacity: 0;
-    transition: opacity 125ms
+    transition: opacity 150ms
 }
 
 .slider {

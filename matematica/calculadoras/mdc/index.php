@@ -96,15 +96,13 @@
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Máximo Divisor Comum</h1>
 
-                <label>Calculadora para encontrar o Máximo Divisor Comum OnLine.</label>
+                <label>Calculadora OnLine para encontrar o Máximo Divisor Comum entre vários números.</label>
                 <div class="divider"></div>
 
-                <div class="row mt-2 mb-0">
-                    <div class="col s12">
-                        Números:
-                        <div class="input-field">
-                            <input id="numbers" type="text" placeholder="Ex: 10, 12, 28, 52, 78, 102, 1080, 123, 987, etc.">
-                        </div>
+                <div class="row">
+                    <p class="mb-0 col s12">Números:</p>
+                    <div class="input-field col s12">
+                        <input id="numbers" type="text" placeholder="Ex: 10, 12, 28, 52, 78, 102, 1080, 123, 987, etc.">
                     </div>
                 </div>
 
@@ -130,4 +128,4 @@
     <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
-</html> 
+</html>

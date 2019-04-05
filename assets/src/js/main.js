@@ -55,7 +55,7 @@ function matchMin(minWidth) {
 
 // Methods
 function animateIn(delay = 250) {
-    document.body.style.transition = `padding-left ${delay}ms, opacity 125ms`
+    document.body.style.transition = `padding-left ${delay}ms, opacity 150ms`
     document.body.style.paddingLeft = '300px'
 }
 
@@ -89,7 +89,7 @@ function updatePage(e, link) {
 
     setTimeout(function () {
         location = link.includes('#') ? link.replace(/[#]/g, '') : link
-    }, 125)
+    }, 150)
 }
 
 // Pave events

@@ -101,7 +101,7 @@
 
                 <h5>Informações</h5>
 
-                <div class="row mt-2">
+                <div class="row">
                     <div class="col s12 m6">
                         <div class="row mb-0">
                             <p class="mb-0 col s12">Nome do site:</p>

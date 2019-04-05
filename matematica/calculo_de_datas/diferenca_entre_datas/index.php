@@ -99,47 +99,31 @@
                 <label>Calcular Diferença entre Datas. Possui um leque de recursos disponíveis, como calcular idades, tempo, etc.</label>
                 <div class="divider"></div>
 
-                <div class="row mt-2 mb-0">
+                <div class="row">
                     <div class="col s12 m6">
                         <div class="row mb-0">
-                            <div class="col s12">
-                                <p class="mb-0">Data inicial:</p>
-                            </div>
-                            <div class="col s12">
-                                <div class="input-field">
-                                    <input id="beginDate" type="text" placeholder="Data inicial" class="datepicker">
-                                </div>
+                            <p class="mb-0 col s12">Data inicial:</p>
+                            <div class="input-field col s12">
+                                <input id="beginDate" type="text" placeholder="Data inicial" class="datepicker">
                             </div>
 
-                            <div class="col s12">
-                                <p class="mb-0">Horário inicial:</p>
-                            </div>
-                            <div class="col s12">
-                                <div class="input-field">
-                                    <input id="beginTime" type="text" placeholder="Horário atual" class="timepicker">
-                                </div>
+                            <p class="mb-0 col s12">Horário inicial:</p>
+                            <div class="input-field col s12">
+                                <input id="beginTime" type="text" placeholder="Horário atual" class="timepicker">
                             </div>
                         </div>
                     </div>
 
                     <div class="col s12 m6">
                         <div class="row mb-0">
-                            <div class="col s12">
-                                <p class="mb-0">Data final:</p>
-                            </div>
-                            <div class="col s12">
-                                <div class="input-field">
-                                    <input id="endDate" type="text" placeholder="Data final" class="datepicker">
-                                </div>
+                            <p class="mb-0 col s12">Data final:</p>
+                            <div class="input-field col s12">
+                                <input id="endDate" type="text" placeholder="Data final" class="datepicker">
                             </div>
 
-                            <div class="col s12">
-                                <p class="mb-0">Horário final:</p>
-                            </div>
-                            <div class="col s12">
-                                <div class="input-field">
-                                    <input id="endTime" type="text" placeholder="Horário atual" class="timepicker">
-                                </div>
+                            <p class="mb-0 col s12">Horário final:</p>
+                            <div class="input-field col s12">
+                                <input id="endTime" type="text" placeholder="Horário atual" class="timepicker">
                             </div>
                         </div>
                     </div>
@@ -174,4 +158,4 @@
     <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
-</html> 
+</html>

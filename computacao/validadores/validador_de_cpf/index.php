@@ -99,18 +99,15 @@
                 <label>Validador de CPF OnLine para validar CPFs para programadores testarem seus softwares em desenvolvimento.</label>
                 <div class="divider"></div>
 
-                <div class="row mb-0">
-                    <div class="col s12">
-                        <p class="mb-0">Digite o CPF:</p>
-                        <div class="row mb-0">
-                            <div class="input-field col s12">
-                                <input id="cpf" placeholder="Ex: 627.026.390-54 ou 62702639054" type="text" maxlength="14">
-                            </div>
-                        </div>
+                <div class="row">
+                    <p class="mb-0 col s12">Digite o CPF:</p>
+
+                    <div class="input-field col s12">
+                        <input id="cpf" placeholder="Ex: 627.026.390-54 ou 62702639054" type="text" maxlength="14">
                     </div>
                 </div>
 
-                <button title="Validar CPF" class="btn btn-center mt-2 waves-effect waves-dark black-text white" onclick="validate()">
+                <button title="Validar CPF" class="btn btn-center waves-effect waves-dark black-text white" onclick="validate()">
                     Validar CPF
                 </button>
                 <div class="divider mt-2"></div>
@@ -132,4 +129,4 @@
     <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
-</html> 
+</html>

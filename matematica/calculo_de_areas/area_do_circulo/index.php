@@ -96,13 +96,11 @@
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Área do Círculo</h1>
 
-                <label>R = Raio, D = Diâmetro (2 * R), PI = 3.141592653589793... (Math.PI.toFixed(48))</label>
+                <label>Calculador de Área do Círculo OnLine. R = Raio, D = Diâmetro (2 * R), PI = 3.141592653589793... (Math.PI.toFixed(48))</label>
                 <div class="divider"></div>
 
                 <div class="row mb-0">
-                    <div class="col s12">
-                        <p class="mb-0">Fórmulas:</p>
-                    </div>
+                    <p class="mb-0 col s12">Fórmulas:</p>
                     <div class="col s12 m6 l5">
                         <p>
                             <label>
@@ -122,12 +120,10 @@
                     </div>
                 </div>
 
-                <div class="row mb-0">
+                <div class="row">
                     <div class="col s12 m6 l4">
                         <div class="row mb-0">
-                            <div class="col s12">
-                                <p class="mb-0" id="formulasName">Raio:</p>
-                            </div>
+                            <p class="mb-0 col s12" id="formulasName">Raio:</p>
                             <div class="col s12">
                                 <div class="input-field">
                                     <input id="number" type="number" placeholder="Digite aqui o raio." min="0" value="1" step="any">
@@ -138,9 +134,7 @@
 
                     <div class="col s12 m6 l4">
                         <div class="row mb-0">
-                            <div class="col s12">
-                                <p class="mb-0">Medida:</p>
-                            </div>
+                            <p class="mb-0 col s12">Medida:</p>
                             <div class="col s12">
                                 <div class="input-field">
                                     <select id="measure">
@@ -159,30 +153,26 @@
 
                     <div class="col s12 m6 l4">
                         <div class="row mb-0">
-                            <div class="col s12">
-                                <p class="mb-0">Casas decimais:</p>
-                            </div>
-                            <div class="col s12">
-                                <div class="input-field">
-                                    <select id="decimal">
-                                        <option value="0">Nenhuma</option>
-                                        <option value="1">1</option>
-                                        <option value="2" selected>2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="15">15</option>
-                                        <option value="20">20</option>
-                                        <option value="30">30</option>
-                                        <option value="48">48</option>
-                                        <option value="-1">Automática</option>
-                                    </select>
-                                </div>
+                            <p class="mb-0 col s12">Casas decimais:</p>
+                            <div class="input-field col s12">
+                                <select id="decimal">
+                                    <option value="0">Nenhuma</option>
+                                    <option value="1">1</option>
+                                    <option value="2" selected>2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="48">48</option>
+                                    <option value="-1">Automática</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -210,4 +200,4 @@
     <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
-</html> 
+</html>

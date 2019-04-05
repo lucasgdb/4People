@@ -99,26 +99,20 @@
                 <label>Calculadora para calcular a Sequência de Fibonacci. Ex: 0, 1, 1, 2, 3, 5, 8, 13, etc...</label>
                 <div class="divider"></div>
 
-                <div class="row mt-2 mb-0">
+                <div class="row">
                     <div class="col s12 m6">
-                        <div class="row">
-                            <div class="col s12">
-                                <p class="mb-0">Calcular até o número:</p>
-                            </div>
+                        <div class="row mb-0">
+                            <p class="mb-0 col s12">Calcular até o número:</p>
 
-                            <div class="col s12">
-                                <div class="input-field">
-                                    <input id="number" type="number" placeholder="Digite aqui o número." min="0" step="1" value="5">
-                                </div>
+                            <div class="input-field col s12">
+                                <input id="number" type="number" placeholder="Digite aqui o número." min="0" step="1" value="5">
                             </div>
                         </div>
                     </div>
 
                     <div class="col s12 m6">
-                        <div class="row">
-                            <div class="col s12">
-                                <p class="mb-0">Quantidade de números:</p>
-                            </div>
+                        <div class="row mb-0">
+                            <p class="mb-0 col s12">Quantidade de números:</p>
 
                             <div class="col s12 m4">
                                 <p>
@@ -163,4 +157,4 @@
     <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
-</html> 
+</html>

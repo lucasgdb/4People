@@ -99,25 +99,21 @@
                 <label>Calculadora de Divisão OnLine que mostra o resultado da divisão entre dois números e o resto (módulo) entre eles.</label>
                 <div class="divider"></div>
 
-                <div class="row mt-2 mb-0">
+                <div class="row">
                     <div class="col s12 m6">
-                        <div class="col s12">
-                            <p class="mt-0 mb-0">Dividendo:</p>
-                        </div>
-                        <div class="col s12">
-                            <div class="input-field">
+                        <div class="row mb-0">
+                            <p class="mb-0 col s12">Dividendo:</p>
+                            <div class="input-field col s12">
                                 <input id="dividend" type="number" placeholder="Número a ser dividido" step="any">
                             </div>
                         </div>
                     </div>
 
                     <div class="col s12 m6">
-                        <div class="col s12">
-                            <p class="mt-0 mb-0">Divisor:</p>
-                        </div>
+                        <div class="row mb-0">
+                            <p class="mb-0 col s12">Divisor:</p>
 
-                        <div class="col s12">
-                            <div class="input-field">
+                            <div class="input-field col s12">
                                 <input id="divider" type="number" placeholder="Número que vai dividir" step="any">
                             </div>
                         </div>
@@ -140,10 +136,10 @@
 
     <?php include_once("$path/components/footer.php") ?>
 
-    <script src="<?= "$return/algorithms/division.js" ?>"></script>
+    <script src="<?= "$return/algorithms/divisionAndRest.js" ?>"></script>
     <script src="<?= "$return/src/js/materialize.min.js" ?>"></script>
     <script src="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.js"></script>
     <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
-</html> 
+</html>
