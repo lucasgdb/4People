@@ -101,7 +101,7 @@
 
                 <div class="row mb-0">
                     <div class="col s12 m6">
-                        <div class="card">
+                        <div class="card sticky-action">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Gerador de CPF<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -122,7 +122,7 @@
                     </div>
 
                     <div class="col s12 m6">
-                        <div class="card">
+                        <div class="card sticky-action">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Gerador de Senha<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -145,7 +145,7 @@
 
                 <div class="row mb-0">
                     <div class="col s12 m6">
-                        <div class="card">
+                        <div class="card sticky-action">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Gerador de Meta Tags<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -166,7 +166,7 @@
                     </div>
 
                     <div class="col s12 m6">
-                        <div class="card">
+                        <div class="card sticky-action">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Validador de CPF<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -189,7 +189,7 @@
 
                 <div class="row mb-0">
                     <div class="col s12 m6">
-                        <div class="card">
+                        <div class="card sticky-action">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Contador de Caracteres<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -210,7 +210,7 @@
                     </div>
 
                     <div class="col s12 m6">
-                        <div class="card">
+                        <div class="card sticky-action">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Meu IP<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -231,7 +231,7 @@
 
                 <div class="row mb-0">
                     <div class="col s12 m6">
-                        <div class="card">
+                        <div class="card sticky-action">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Conversor de Código Binário<i class="material-icons right">more_vert</i></span>
                                 <p>

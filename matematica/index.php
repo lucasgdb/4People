@@ -101,7 +101,7 @@
 
                 <div class="row mb-0">
                     <div class="col s12 m6">
-                        <div class="card">
+                        <div class="card sticky-action">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Fatorar Número<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -122,7 +122,7 @@
                     </div>
 
                     <div class="col s12 m6">
-                        <div class="card">
+                        <div class="card sticky-action">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Máximo Divisor Comum<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -145,7 +145,7 @@
 
                 <div class="row mb-0">
                     <div class="col s12 m6">
-                        <div class="card">
+                        <div class="card sticky-action">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Mínimo Múltiplo Comum<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -154,7 +154,7 @@
                             </div>
 
                             <div class="card-action grey lighten-1">
-                                <a class="black-text no-break" href="./calculadoras/mmmc/">Ferramenta &raquo;</a>
+                                <a class="black-text no-break" href="./calculadoras/mmc/">Ferramenta &raquo;</a>
                                 <a class="black-text no-break" href="./calculadoras/">Mais Ferramentas &raquo;</a>
                             </div>
 
@@ -166,7 +166,7 @@
                     </div>
 
                     <div class="col s12 m6">
-                        <div class="card">
+                        <div class="card sticky-action">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Índice de Massa Corporal<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -189,7 +189,7 @@
 
                 <div class="row mb-0">
                     <div class="col s12 m6">
-                        <div class="card">
+                        <div class="card sticky-action">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Porcentagem<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -198,8 +198,8 @@
                             </div>
 
                             <div class="card-action grey lighten-1">
-                                <a class="black-text no-break" href="./calculadora/porcentagem/">Ferramenta &raquo;</a>
-                                <a class="black-text no-break" href="./calculadora/">Mais Ferramentas &raquo;</a>
+                                <a class="black-text no-break" href="./calculadoras/porcentagem/">Ferramenta &raquo;</a>
+                                <a class="black-text no-break" href="./calculadoras/">Mais Ferramentas &raquo;</a>
                             </div>
 
                             <div class="card-reveal">
@@ -210,7 +210,7 @@
                     </div>
 
                     <div class="col s12 m6">
-                        <div class="card">
+                        <div class="card sticky-action">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Equação do 2° Grau<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -219,8 +219,8 @@
                             </div>
 
                             <div class="card-action grey lighten-1">
-                                <a class="black-text no-break" href="./calculadora/equacao_2_grau/">Ferramenta &raquo;</a>
-                                <a class="black-text no-break" href="./calculadora/">Mais Ferramentas &raquo;</a>
+                                <a class="black-text no-break" href="./calculadoras/equacao_2_grau/">Ferramenta &raquo;</a>
+                                <a class="black-text no-break" href="./calculadoras/">Mais Ferramentas &raquo;</a>
                             </div>
 
                             <div class="card-reveal">
@@ -233,7 +233,7 @@
 
                 <div class="row mb-0">
                     <div class="col s12 m6">
-                        <div class="card">
+                        <div class="card sticky-action">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Fibonacci<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -254,7 +254,7 @@
                     </div>
 
                     <div class="col s12 m6">
-                        <div class="card">
+                        <div class="card sticky-action">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Conversor de Temperatura<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -277,7 +277,7 @@
 
                 <div class="row mb-0">
                     <div class="col s12 m6">
-                        <div class="card">
+                        <div class="card sticky-action">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Divisão e Resto<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -298,7 +298,7 @@
                     </div>
 
                     <div class="col s12 m6">
-                        <div class="card">
+                        <div class="card sticky-action">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Área do Círculo<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -321,7 +321,7 @@
 
                 <div class="row mb-0">
                     <div class="col s12 m6">
-                        <div class="card">
+                        <div class="card sticky-action">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Área do Quadrado<i class="material-icons right">more_vert</i></span>
                                 <p>
@@ -342,7 +342,7 @@
                     </div>
 
                     <div class="col s12 m6">
-                        <div class="card">
+                        <div class="card sticky-action">
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Diferença entre Datas<i class="material-icons right">more_vert</i></span>
                                 <p>

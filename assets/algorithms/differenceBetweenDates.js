@@ -5,7 +5,9 @@ function compareDateBetween(beginDate, endDate) {
     const timeBetween = Math.abs(end.getTime() - begin.getTime())
     const formatter = Intl.NumberFormat('pt-BR')
 
-    let timeInMS = timeBetween
+    const method = end.getFullYear() - begin.getFullYear()
+
+    let timeInMS = timeBetween + (method % 4 === 0 ? 0 : 86400000)
     const years = Math.floor(timeInMS / 31557600000)
     timeInMS -= years * 31557600000
     const months = Math.floor(timeInMS / 2629800000)
