@@ -1,4 +1,7 @@
 const txtResult = document.querySelector('#result')
+const titleCount = document.querySelector('#titleCount')
+const descCount = document.querySelector('#descCount')
+const keywordCount = document.querySelector('#keywordCount')
 const txtSiteName = document.querySelector('#siteName')
 const txtTitle = document.querySelector('#title')
 const txtAuthor = document.querySelector('#author')
@@ -38,8 +41,8 @@ function generate() {
         `${metas.title}\n${metas.standards}\n${metas.contentLanguage}\n${metas.author}\n${metas.description}\n${metas.keywords}\n${metas.copyright}\n${metas.viewport}\n${metas.generator}\n${metas.rating}\n${metas.siteName}`
 }
 
-function countCharacters(event) {
-    event.path[1].querySelector('span').textContent = event.srcElement.value.length
+function countCharacters(event, input) {
+    input.textContent = event.target.value.length
 }
 
 function copyResult() {

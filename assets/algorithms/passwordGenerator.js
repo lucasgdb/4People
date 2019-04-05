@@ -108,9 +108,9 @@ function checkStrength(password = String) {
     if (length < 50) {
         return 'Inaceitável'
     } else if (length < 60) {
-        return 'Fraca'
+        return 'Baixo'
     } else if (length < 80) {
-        return 'Média'
+        return 'Mediana'
     } else if (length < 100) {
         return 'Boa'
     } else {

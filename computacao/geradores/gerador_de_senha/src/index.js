@@ -32,7 +32,12 @@ function generate() {
             true
         )
 
-        lblPasswordLength.textContent = password.strength
+        lblPasswordLength.style.color =
+            password.strength === 'Inaceitável' ? 'red' :
+            password.strength === 'Baixo' ? 'orangered' :
+            password.strength === 'Mediana' ? 'orange' :
+            password.strength === 'Boa' ? 'green' : 'blue'
+        lblPasswordLength.innerHTML = password.strength
         txtResult.value = password.password
     }
 }

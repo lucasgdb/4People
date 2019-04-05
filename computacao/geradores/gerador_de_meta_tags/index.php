@@ -166,20 +166,20 @@
                         </div>
                     </div>
 
-                    <p class="mb-0 col s12">Título do site. Caracteres usados: <span>0</span>. Recomendado: 63-90</p>
+                    <p class="mb-0 col s12">Título do site. Caracteres usados: <span id="titleCount">0</span>. Recomendado: 63-90</p>
                     <div class="input-field col s12">
-                        <input oninput="countCharacters(event)" id="title" type="text" placeholder="Ex: 4People - Ferramentas OnLine">
+                        <input oninput="countCharacters(event, titleCount)" id="title" type="text" placeholder="Ex: 4People - Ferramentas OnLine">
                     </div>
 
-                    <p class="mb-0 col s12">Descrição do site: Caracteres usados: <span>0</span>. Recomendado: 160-300</p>
+                    <p class="mb-0 col s12">Descrição do site: Caracteres usados: <span id="descCount">0</span>. Recomendado: 160-300</p>
                     <div class="input-field col s12">
-                        <input oninput="countCharacters(event)" id="description" type="text" placeholder="Ex. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+                        <input oninput="countCharacters(event, descCount)" id="description" type="text" placeholder="Ex. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
                     </div>
 
-                    <p class="mb-0 col s12">Palavras-chave do site: Caracteres usados: <span>0</span>. Recomendado: 160-200</p>
+                    <p class="mb-0 col s12">Palavras-chave do site: Caracteres usados: <span id="keywordCount">0</span>. Recomendado: 160-200</p>
                     <div class="input-field col s12">
 
-                        <input oninput="countCharacters(event)" id="keywords" type="text" placeholder="Ex: 4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
+                        <input oninput="countCharacters(event, keywordCount)" id="keywords" type="text" placeholder="Ex: 4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
                     </div>
                 </div>
 
