@@ -43,7 +43,7 @@
   - MaterializeCSS
   - PWA
 
-## Ferramentas prontas (19/101, 18.81%)
+## Ferramentas prontas
   - Geradores
     - Gerador de CPF
     - Gerador de Senha
@@ -54,6 +54,8 @@
     - Contador de Caracteres
   - Rede e Internet
     - Meu IP
+  - Tabelas e Padrões
+    - Código de Eventos das Teclas
   - Codificadores e Decodificadores
     - Conversor de Código Binário
   - Calculadoras
