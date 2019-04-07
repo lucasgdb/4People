@@ -1,17 +1,26 @@
 textarea {
     font-size: 25px;
     resize: vertical;
-    min-height: 150px;
+    min-height: 200px;
     overflow-y: scroll;
-    border: 0.5px solid rgb(190, 190, 190);
+    border-top: .5px solid rgb(190, 190, 190);
+    border-right: none;
+    border-bottom: .5px solid rgb(190, 190, 190);
+    border-left: .5px solid rgb(190, 190, 190);
     outline: none;
     color: #333;
-    transition: all .2s, height 0s
+    transition: border-top .2s, border-bottom .2s, border-left .2s, background-color .2s
 }
 
 textarea:focus {
-    border: .5px solid rgb(73, 73, 73);
+    border-top: .5px solid rgb(73, 73, 73);
+    border-bottom: .5px solid rgb(73, 73, 73);
+    border-left: .5px solid rgb(73, 73, 73);
     background-color: rgb(230, 230, 230)
+}
+
+textarea::placeholder {
+    transition: color .2s
 }
 
 textarea:focus::placeholder {
