@@ -14,7 +14,7 @@ function validate() {
             from.textContent = 'Aguardando...'
         }
 
-        txtResult.value = `${isCPF.CPF} é um CPF ${isCPF.isCPF ? 'válido.' : 'inválido.'}`
+        txtResult.value = `${isCPF.CPF} é um CPF ${isCPF.isCPF ? 'válido' : 'inválido'}.`
     } else {
         M.toast({
             html: 'CPF inválido.',
@@ -40,8 +40,8 @@ function copyResult() {
     }
 }
 
-txtCPF.oninput = function(e) {
+txtCPF.onkeyup = function(e) {
     if (e.which === 13) {
-        generate()
+        validate()
     }
 }

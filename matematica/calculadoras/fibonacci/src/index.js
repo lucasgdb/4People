@@ -29,3 +29,9 @@ function copyResult() {
         })
     }
 }
+
+txtNum.onkeyup = function (e) {
+    if (e.which === 13) {
+        calculate()
+    }
+}

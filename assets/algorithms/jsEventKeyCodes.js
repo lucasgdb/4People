@@ -173,6 +173,24 @@ const keyCodes = {
     255: 'toggle touchpad'
 }
 
-function getKeyCode(keyCode) {
-    return keyCodes[keyCode]
+const keyLocations = {
+    0: 'General keys',
+    1: 'Left-side modifier keys',
+    2: 'Right-side modifier keys',
+    3: 'Numpad'
+}
+
+function getKeyCode(keyCode, keyLocation) {
+    const kCode, kLocation
+    if (keyCode in keyCodes) {
+        kCode = keyCodes[keyCode]
+    }
+    if (keyLocation in keyLocations) {
+        kLocation = keyLocations[keyLocation]
+    }
+
+    return {
+        kCode,
+        kLocation
+    }
 }

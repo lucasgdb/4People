@@ -31,3 +31,15 @@ function copyResult() {
         })
     }
 }
+
+txtDividend.onkeyup = function (e) {
+    if (e.which === 13) {
+        txtDivider.select()
+    }
+}
+
+txtDivider.onkeyup = function (e) {
+    if (e.which === 13) {
+        calculate()
+    }
+}

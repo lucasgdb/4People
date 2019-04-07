@@ -33,3 +33,15 @@ function copyResult() {
         })
     }
 }
+
+txtWeight.onkeyup = function (e) {
+    if (e.which === 13) {
+        txtHeight.select()
+    }
+}
+
+txtHeight.onkeyup = function (e) {
+    if (e.which === 13) {
+        calculate()
+    }
+}
