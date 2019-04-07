@@ -103,6 +103,7 @@
                     <div class="col s12 m6">
                         <div class="row mb-0">
                             <p class="mb-0 col s12">Data inicial:</p>
+
                             <div class="input-field col s12">
                                 <input id="beginDate" type="text" placeholder="Data inicial" class="datepicker">
                             </div>
@@ -117,6 +118,7 @@
                     <div class="col s12 m6">
                         <div class="row mb-0">
                             <p class="mb-0 col s12">Data final:</p>
+                            
                             <div class="input-field col s12">
                                 <input id="endDate" type="text" placeholder="Data final" class="datepicker">
                             </div>
@@ -127,7 +129,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 <button title="Calcular a Diferença Entre Datas" class="btn btn-center waves-effect white black-text z-depth-2" onclick="calculate()">
@@ -137,12 +138,12 @@
                 <div class="divider mt-2"></div>
 
                 <ul class="collection mb-0">
-                    <li class="collection-item">Tempo decorrido: <span id="totalTime">0 anos, 0 meses e 0 dias</span></li>
-                    <li class="collection-item">Milissegundos: <span id="milliSecs">0</span></li>
-                    <li class="collection-item">Segundos: <span id="secs">0</span></li>
-                    <li class="collection-item">Minutos: <span id="mins">0</span></li>
-                    <li class="collection-item">Horas: <span id="hours">0</span></li>
-                    <li class="collection-item">Dias: <span id="days">0</span></li>
+                    <li class="collection-item">Tempo decorrido: <span id="totalTime">0 anos, 0 meses e 1 dia</span></li>
+                    <li class="collection-item">Milissegundos: <span id="milliSecs">86.400.000</span></li>
+                    <li class="collection-item">Segundos: <span id="secs">86.400</span></li>
+                    <li class="collection-item">Minutos: <span id="mins">1.440</span></li>
+                    <li class="collection-item">Horas: <span id="hours">24</span></li>
+                    <li class="collection-item">Dias: <span id="days">1</span></li>
                     <li class="collection-item">Meses: <span id="months">0</span></li>
                     <li class="collection-item">Anos: <span id="years">0</span></li>
                 </ul>

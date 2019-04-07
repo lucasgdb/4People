@@ -5,9 +5,9 @@ function compareDateBetween(beginDate, endDate) {
     const timeBetween = Math.abs(end.getTime() - begin.getTime())
     const formatter = Intl.NumberFormat('pt-BR')
 
-    const method = end.getFullYear() - begin.getFullYear()
+    const method = (end.getFullYear() - begin.getFullYear())
 
-    let timeInMS = timeBetween + (method % 4 === 0 ? 0 : 86400000)
+    let timeInMS = timeBetween + (method % 4 === 0 ? 0 : end.getFullYear() >= 2020 ? 0 : 86400000)
     const years = Math.floor(timeInMS / 31557600000)
     timeInMS -= years * 31557600000
     const months = Math.floor(timeInMS / 2629800000)
@@ -23,5 +23,13 @@ function compareDateBetween(beginDate, endDate) {
         "months": formatter.format(Math.trunc(timeBetween / 2629800000)), // difference time by 1 month in ms
         "years": formatter.format(Math.trunc(timeBetween / 31557600000)), // difference time by 1 year in ms
         "totalTime": `${formatter.format(years)} ano${years === 1 ? '' : 's'}, ${formatter.format(months)} m${months === 1 ? 'ês' : 'eses'} e ${formatter.format(days)} dia${days === 1 ? '' : 's'}`
+    }
+}
+
+function isLeapYear(year) {
+    if (year % 400 === 0 || year % 4 === 0 && year % 100 !== 0) {
+        return true
+    } else {
+        return false
     }
 }

@@ -6,7 +6,7 @@ function calculate() {
     if (txtDividend.value !== '' && txtDivider.value !== '' && txtDivider.value !== '0') {
         const result = calculateDivision(parseFloat(txtDividend.value), parseFloat(txtDivider.value))
         txtResult.value =
-            `Divisão: ${Number.isInteger(result.coeficient) ? result.coeficient : result.coeficient.toFixed(2)}, resto: ${result.rest}`
+            `Divisão: ${Number.isInteger(result.coeficient) ? result.coeficient : result.coeficient.toFixed(2)}, divisão inteira: ${result.integerCoeficient}, resto: ${result.rest}`
     } else {
         M.toast({
             html: 'Valor não permitido!',

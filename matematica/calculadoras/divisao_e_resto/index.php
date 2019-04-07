@@ -96,7 +96,7 @@
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Calcular Divisão e Resto</h1>
 
-                <label>Calculadora de Divisão OnLine que mostra o resultado da divisão entre dois números e o resto (módulo) entre eles.</label>
+                <label>Calculadora de Divisão OnLine que mostra o resultado da divisão comum e inteira entre dois números e o resto (módulo) entre eles.</label>
                 <div class="divider"></div>
 
                 <div class="row">
@@ -104,7 +104,7 @@
                         <div class="row mb-0">
                             <p class="mb-0 col s12">Dividendo:</p>
                             <div class="input-field col s12">
-                                <input id="dividend" type="number" placeholder="Número a ser dividido" step="any">
+                                <input id="dividend" type="number" placeholder="Número a ser dividido" step="any" value="1000">
                             </div>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
                             <p class="mb-0 col s12">Divisor:</p>
 
                             <div class="input-field col s12">
-                                <input id="divider" type="number" placeholder="Número que vai dividir" step="any">
+                                <input id="divider" type="number" placeholder="Número que vai dividir" step="any" value="4">
                             </div>
                         </div>
                     </div>
