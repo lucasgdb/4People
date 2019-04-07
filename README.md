@@ -8,16 +8,21 @@
   ![4people](assets/images/4People.png "4People - Início")
 
 ## Como contribuir
-  - Requisitos
-    - PHP
+  - Linux
     - Git
+    - Xampp ou PHP
 
   ```sh
-    git clone https://github.com/LucasNaja/4People.git
-    cd 4People
+    cd ~/Documents/ &&
+    git clone https://github.com/LucasNaja/4People.git &&
+    cd 4People &&
     php -S localhost:5500
   ```
 
+  - Windows
+    - Git
+    - Xampp
+      - htdocs
 ## Integrantes
   - **Lucas Bittencourt**
     - Programador
