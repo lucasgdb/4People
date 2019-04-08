@@ -108,14 +108,14 @@
                         <li class="grey lighten-1">
                             <div class="caption left-align">
                                 <h3 class="dark grey-text text-darken-4">MAIS RÁPIDO!</h3>
-                                <h5 class="light grey-text text-darken-4">Nossas ferramentas foram todas escritas em JavaScript, para maior velocidade e segurança.</h5>
+                                <h5 class="light grey-text text-darken-4">Nossas Ferramentas foram todas escritas em JavaScript, para maior velocidade e segurança.</h5>
                             </div>
                         </li>
 
                         <li class="grey lighten-1">
                             <div class="caption right-align">
-                                <h3 class="dark grey-text text-darken-4">MAIS ACESSÍVEL!</h3>
-                                <h5 class="light grey-text text-darken-4">Nosso site que permite que qualquer um acesse-o offline e tem suporte a PWA.</h5>
+                                <h3 class="dark grey-text text-darken-4">CÓDIGO ABERTO!</h3>
+                                <h5 class="light grey-text text-darken-4">O Projeto 4People é de Código Aberto para qualquer um estudar os algoritmos e até mesmo melhorá-los.</h5>
                             </div>
                         </li>
 
@@ -133,13 +133,6 @@
 
     <?php include_once("$path/components/footer.php") ?>
 
-    <!-- <script type='text/javascript'>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker
-                .register('./service-worker.js')
-                .then(() => console.log('worker registered!'))
-        }
-    </script> -->
     <script src="<?= "$return/src/js/materialize.min.js" ?>"></script>
     <script src="<?= "$return/src/js/index.js" ?>"></script>
     <script src="<?= "$return/src/js/main.js" ?>"></script>
