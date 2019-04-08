@@ -12,6 +12,7 @@ const paddingHeadersA = document.querySelectorAll('.active .active a')
 const header = document.querySelector('header')
 const main = document.querySelector('main')
 const footer = document.querySelector('footer')
+const spinner = document.querySelector('#spinner')
 
 // Left and right effects from sidebar
 let tr = false
@@ -137,9 +138,12 @@ window.onload = function () {
     main.style.opacity = '1'
     footer.style.opacity = '1'
     sidenav.el.style.opacity = '1'
-    document.querySelector('#spinner').remove()
+    spinner.style.opacity = '0'
     maxWidth.addListener(matchMax)
     minWidth.addListener(matchMin)
+    setTimeout(() => {
+        spinner.remove()
+    }, 200)
 }
 
 document.onkeydown = function (e) {

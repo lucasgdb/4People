@@ -31,7 +31,11 @@ body {
     transition: padding-left 300ms
 }
 
-header, main, footer, ul#slide-out, .fixed-action-btn {
+header,
+main,
+footer,
+ul#slide-out,
+.fixed-action-btn {
     opacity: 0;
     transition: opacity 150ms
 }
@@ -105,6 +109,7 @@ body>header+ul>li>.collapsible-header {
 }
 
 #spinner {
+    transition: opacity .2s;
     position: absolute;
     left: 50%;
     top: 50%;
