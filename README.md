@@ -23,15 +23,16 @@
     - Git
     - Xampp
       - htdocs
+
 ## Integrantes
   - **Lucas Bittencourt**
     - Programador
   - **Jairo Arcy**
     - Programador
   - **Renan de Mattos**
-    - Análise
+    - Analista
   - **Suzany Silva**
-    - Análise, teoria
+    - Analista
 
 ## Linguagens/Bibliotecas/Frameworks/Tecnologias
   - HTML
