@@ -4,8 +4,9 @@
 <html lang="pt-br">
 
 <head>
-    <?php include_once("$path/components/links.php") ?>
-    <link rel="stylesheet" href="<?= $return ?>/src/css/index.css">
+    <link rel="stylesheet" href="<?= "$return/src/css/materialize.min.css" ?>">
+    <link rel=" stylesheet" href="<?= "$return/src/css/main.css" ?>">
+    <link rel="stylesheet" href="<?= "$return/src/css/index.css" ?>">
     <title>4People - Ferramentas OnLine</title>
     <?php include_once("$path/components/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">

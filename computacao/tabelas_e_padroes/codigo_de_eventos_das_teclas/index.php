@@ -4,7 +4,8 @@
 <html lang="pt-br">
 
 <head>
-    <?php include_once("$path/components/links.php") ?>
+    <link rel="stylesheet" href="<?= "$return/src/css/materialize.min.css" ?>">
+    <link rel=" stylesheet" href="<?= "$return/src/css/main.css" ?>">
     <link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
     <title>Código de Eventos das Teclas - 4People</title>
     <?php include_once("$path/components/metas.php") ?>
@@ -169,7 +170,7 @@
                     </div>
 
                     <div class="col s12">
-                        <table class="responsive-table striped">
+                        <table class="responsive-table striped" lang="en-US">
                             <tr>
                                 <th>Key Code</th>
                                 <th>Event Key</th>

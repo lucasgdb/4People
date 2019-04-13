@@ -7,7 +7,7 @@
                     <p class="grey-text text-darken-4">
                         4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.
                         Feito com <img title="Coração" style="position:relative;top:4px" src="' . $return . '/images/heart.png" alt="Coração"> e <img title="JavaScript" style="position:relative;top:2.5px" src="' . $return . '/images/js.png" alt="JavaScript">.
-                        O projeto é de código aberto sob a licença <nobr><a href="https://github.com/LucasNaja/4People/blob/master/LICENSE" target="_blank">GPL-3.0</a></nobr>, no <a href="https://github.com/LucasNaja/4People" target="_blank">GitHub</a>.
+                        O projeto é de código aberto sob a licença <nobr><a href="https://github.com/LucasNaja/4People/blob/master/LICENSE" target="_blank" rel="noopener noreferrer nofollow">GPL-3.0</a></nobr>, no <a href="https://github.com/LucasNaja/4People" target="_blank">GitHub</a>.
                     </p>
                 </div>
 
@@ -15,10 +15,10 @@
                     <h5 class="black-text">Contato</h5>
                     <ul>
                         <li><a class="grey-text text-darken-4" href="' . $returnPage . '/sobre/">Sobre</a></li>
-                        <li><a class="grey-text text-darken-4" href="https://github.com/LucasNaja" target="_blank">GitHub</a></li>
-                        <li><a class="grey-text text-darken-4" href="https://facebook.com/Lucas.Naja0" target="_blank">Facebook</a></li>
-                        <li><a class="grey-text text-darken-4" href="https://dev.to/lucasnaja" target="_blank">Dev Community</a></li>
-                        <li><a class="grey-text text-darken-4" href="https://www.linkedin.com/in/lucas-bittencourt/" target="_blank">LinkedIn</a></li>
+                        <li><a class="grey-text text-darken-4" href="https://github.com/LucasNaja" target="_blank" rel="noopener noreferrer nofollow">GitHub</a></li>
+                        <li><a class="grey-text text-darken-4" href="https://facebook.com/Lucas.Naja0" target="_blank" rel="noopener noreferrer nofollow">Facebook</a></li>
+                        <li><a class="grey-text text-darken-4" href="https://dev.to/lucasnaja" target="_blank" rel="noopener noreferrer nofollow">Dev Community</a></li>
+                        <li><a class="grey-text text-darken-4" href="https://www.linkedin.com/in/lucas-bittencourt/" target="_blank" rel="noopener noreferrer nofollow">LinkedIn</a></li>
                     </ul>
                 </div>
             </div>

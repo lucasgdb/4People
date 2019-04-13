@@ -55,6 +55,7 @@
     - Contador de Caracteres
   - Rede e Internet
     - Meu IP
+    - Meu Navegador
   - Tabelas e Padrões
     - Código de Eventos das Teclas
   - Codificadores e Decodificadores

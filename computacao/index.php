@@ -4,7 +4,8 @@
 <html lang="pt-br">
 
 <head>
-    <?php include_once("$path/components/links.php") ?>
+    <link rel="stylesheet" href="<?= "$return/src/css/materialize.min.css" ?>">
+    <link rel=" stylesheet" href="<?= "$return/src/css/main.css" ?>">
     <link rel="stylesheet" href="<?= "$return/src/css/cards.css" ?>">
     <title>Computação - 4People</title>
     <?php include_once("$path/components/metas.php") ?>
