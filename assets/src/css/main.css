@@ -31,6 +31,10 @@ body {
     transition: padding-left 300ms
 }
 
+#menu {
+    outline: 0
+}
+
 header,
 main,
 footer,
@@ -80,7 +84,7 @@ body>header+ul>li>.collapsible-header {
 }
 
 .active>.collapsible-header {
-    border-bottom: none !important
+    border-bottom: 0 !important
 }
 
 .padding-headers .collapsible-header {

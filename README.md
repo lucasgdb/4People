@@ -56,6 +56,7 @@
   - Rede e Internet
     - Meu IP
     - Meu Navegador
+    - Buscar CEP
   - Tabelas e Padrões
     - Código de Eventos das Teclas
   - Codificadores e Decodificadores
@@ -67,6 +68,8 @@
     - Índice de Massa Corporal
     - Porcentagem
     - Equação do 2° Grau
+    - Números Primos
+    - Números Amigáveis
     - Fibonacci
     - Conversor de Temperatura
     - Divisão e Resto

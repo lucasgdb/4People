@@ -1,8 +1,10 @@
 const lblIp = document.querySelector('#ip')
-const lblCity = document.querySelector('#city')
+// const lblCity = document.querySelector('#city')
 const lblRegion = document.querySelector('#region')
 const lblRegionCode = document.querySelector('#regionCode')
 const lblCountry = document.querySelector('#country')
+const lblSymbol = document.querySelector('#symbol')
+const lblLanguage = document.querySelector('#language')
 const lblCountryCode = document.querySelector('#countryCode')
 const lblContinent = document.querySelector('#continent')
 const lblContinentCode = document.querySelector('#continentCode')
@@ -23,6 +25,8 @@ document.addEventListener('DOMContentLoaded', function () {
             lblRegionCode.textContent = data.region_code
             lblCountry.textContent = data.country_name
             lblCountryCode.textContent = data.country_code
+            lblSymbol.textContent = data.currency.symbol
+            lblLanguage.textContent = data.languages[0].native
             lblContinent.textContent = data.continent_name
             lblContinentCode.textContent = data.continent_code
             lblLatitude.textContent = data.latitude

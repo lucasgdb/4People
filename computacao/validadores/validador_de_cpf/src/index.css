@@ -15,9 +15,10 @@ textarea {
     font-size: 20px;
     resize: none;
     white-space: nowrap;
-    border-top: none;
-    border-right: none;
-    border-left: none;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: .5px solid rgb(190, 190, 190);
+    border-left: 0;
     outline: none;
     color: #333
 }
@@ -25,6 +26,10 @@ textarea {
 input[type=text]:focus {
     border-bottom: 1px solid #607d8b !important;
     box-shadow: 0 1px 0 0 #607d8b !important
+}
+
+input[type=text]::placeholder {
+    color: rgba(0, 0, 0, .4)
 }
 
 @media (min-width: 993px) {

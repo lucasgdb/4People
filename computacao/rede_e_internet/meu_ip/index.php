@@ -5,8 +5,7 @@
 
 <head>
     <link rel="stylesheet" href="<?= "$return/src/css/materialize.min.css" ?>">
-    <link rel=" stylesheet" href="<?= "$return/src/css/main.css" ?>">
-    <link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
+    <link rel="stylesheet" href="<?= "$return/src/css/main.css" ?>">
     <title>Meu IP - 4People</title>
     <?php include_once("$path/components/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
@@ -109,6 +108,8 @@
                         <p class="mt-0">País: <span id="country"></span></p>
                         <p class="mt-0">Código do país: <span id="countryCode"></span></p>
                         <p class="mt-0">Bandeira: <span id="flag"></span></p>
+                        <p class="mt-0">Moeda: <span id="symbol"></span></p>
+                        <p class="mt-0">Língua: <span id="language"></span></p>
                         <p class="mt-0">Continente: <span id="continent"></span></p>
                         <p class="mt-0">Código do continente: <span id="continentCode"></span></p>
                         <p class="mt-0">Latitude: <span id="latitude"></span></p>

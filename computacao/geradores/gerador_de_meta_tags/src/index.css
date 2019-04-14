@@ -12,8 +12,8 @@ textarea {
     resize: vertical;
     white-space: nowrap;
     min-height: 279px;
-    border-top: none;
-    border-left: none;
+    border-top: 0;
+    border-left: 0;
     outline: none;
     color: #333
 }

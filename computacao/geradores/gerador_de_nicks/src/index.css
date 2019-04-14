@@ -15,9 +15,10 @@
   font-size: 20px;
   resize: none;
   white-space: nowrap;
-  border-top: none;
-  border-right: none;
-  border-left: none;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: .5px solid rgb(190, 190, 190);
+  border-left: 0;
   outline: none;
   border-radius: 3px;
   color: #333

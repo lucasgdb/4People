@@ -10,7 +10,7 @@
 textarea {
     font-size: 20px;
     resize: none;
-    white-space: nowrap;
+    min-height: 150px;
     border-top: 0;
     border-right: 0;
     border-bottom: .5px solid rgb(190, 190, 190);
@@ -19,24 +19,13 @@ textarea {
     color: #333
 }
 
-input[type=number]:focus {
+input[type=text]:focus {
     border-bottom: 1px solid #607d8b !important;
     box-shadow: 0 1px 0 0 #607d8b !important
 }
 
-input[type=number]::placeholder {
+input[type=text]::placeholder {
     color: rgba(0, 0, 0, .4)
-}
-
-[type=radio]:checked+span:after,
-[type=radio].with-gap:checked+span:before,
-[type=radio].with-gap:checked+span:after {
-    border: 2px solid #607d8b
-}
-
-[type=radio]:checked+span:after,
-[type=radio].with-gap:checked+span:after {
-    background-color: #607d8b
 }
 
 @media (min-width: 993px) {

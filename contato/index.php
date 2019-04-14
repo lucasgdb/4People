@@ -5,7 +5,7 @@
 
 <head>
     <link rel="stylesheet" href="<?= "$return/src/css/materialize.min.css" ?>">
-    <link rel=" stylesheet" href="<?= "$return/src/css/main.css" ?>">
+    <link rel="stylesheet" href="<?= "$return/src/css/main.css" ?>">
     <link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
     <script src="<?= "$return/src/js/materialize.min.js" ?>"></script>
     <title>Fale Conosco - 4People</title>

@@ -1,4 +1,4 @@
-<?php include_once('../assets/asset.php') ?>
+<?php include_once('../../../assets/asset.php') ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -6,17 +6,18 @@
 <head>
     <link rel="stylesheet" href="<?= "$return/src/css/materialize.min.css" ?>">
     <link rel="stylesheet" href="<?= "$return/src/css/main.css" ?>">
-    <title>Outras Ferramentas - 4People</title>
+    <link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
+    <title>Buscar CEP - 4People</title>
     <?php include_once("$path/components/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-    <meta name="title" content="4People - Ferramentas OnLine">
-    <meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+    <meta name="title" content="Buscar CEP - 4People">
+    <meta name="description" content="Buscar CEP OnLine para ver informações do seu CEP. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="./outras_ferramentas/">
-    <meta property="og:title" content="Outras Ferramentas - 4People">
-    <meta name="twitter:title" content="Outras Ferramentas - 4People">
-    <meta property="og:url" content="./outras_ferramentas/">
-    <meta name="twitter:url" content="./outras_ferramentas/">
+    <meta name="msapplication-starturl" content="./computacao/rede_e_internet/buscar_cep/">
+    <meta property="og:title" content="Buscar CEP - 4People">
+    <meta name="twitter:title" content="Buscar CEP - 4People">
+    <meta property="og:url" content="./computacao/rede_e_internet/buscar_cep/">
+    <meta name="twitter:url" content="./computacao/rede_e_internet/buscar_cep/">
 </head>
 
 <body>
@@ -25,7 +26,7 @@
     <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
         <?php include_once("$path/components/logo.php") ?>
 
-        <li>
+        <li class="active">
             <div class="collapsible-header"><i class="material-icons">computer</i>Computação</div>
             <div class="collapsible-body">
                 <ul class="collapsible padding-headers">
@@ -41,7 +42,7 @@
                         <?php include_once("$path/components/computacao/funcoes_string.php") ?>
                     </li>
 
-                    <li>
+                    <li class="active">
                         <?php include_once("$path/components/computacao/rede_e_internet.php") ?>
                     </li>
 
@@ -75,7 +76,7 @@
             </div>
         </li>
 
-        <li class="active">
+        <li>
             <div class="collapsible-header"><i class="material-icons">build</i>Outras Ferramentas</div>
             <div class="collapsible-body">
                 <ul class="collapsible padding-headers">
@@ -94,10 +95,28 @@
     <main class="grey lighten-5">
         <div class="container">
             <div class="card-panel">
-                <h1 class="flow-text mt-2">Principais Ferramentas</h1>
+                <h1 class="flow-text mt-2">Buscar CEP</h1>
 
-                <label>Principais Ferramentas para usos do dia-a-dia do 4People</label>
+                <label>Busque informações de seu CEP, como Rua, Cidade, Bairro e Estado aqui.</label>
                 <div class="divider"></div>
+
+                <div class="row">
+                    <p class="mb-0 col s12">Digite seu CEP:</p>
+
+                    <div class="input-field col s12">
+                        <input id="cep" placeholder="Digite seu CEP aqui." type="text" maxlength="10">
+                    </div>
+                </div>
+
+                <button title="Buscar CEP" class="btn btn-center waves-effect waves-dark black-text white" onclick="search()">
+                    Buscar CEP
+                </button>
+                <div class="divider mt-2"></div>
+
+                <textarea id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
+                <button title="Copiar" class="btn waves-effect waves-dark black-text white" onclick="copyResult()">
+                    Copiar
+                </button>
             </div>
         </div>
     </main>
@@ -105,7 +124,9 @@
     <?php include_once("$path/components/footer.php") ?>
 
     <script src="<?= "$return/src/js/materialize.min.js" ?>"></script>
+    <script src="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/cep.js"></script>
+    <script src="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.js"></script>
     <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
-</html> 
+</html>

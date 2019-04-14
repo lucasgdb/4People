@@ -12,6 +12,10 @@ input[type=text]:focus {
     box-shadow: 0 1px 0 0 #607d8b !important
 }
 
+input[type=text]::placeholder {
+    color: rgba(0, 0, 0, .4)
+}
+
 .datepicker-date-display {
     background-color: #607d8b
 }

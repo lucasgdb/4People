@@ -1,4 +1,4 @@
-<?php include_once('../assets/asset.php') ?>
+<?php include_once('../../../assets/asset.php') ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -6,17 +6,18 @@
 <head>
     <link rel="stylesheet" href="<?= "$return/src/css/materialize.min.css" ?>">
     <link rel="stylesheet" href="<?= "$return/src/css/main.css" ?>">
-    <title>Outras Ferramentas - 4People</title>
+    <link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
+    <title>Números Primos - 4People</title>
     <?php include_once("$path/components/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-    <meta name="title" content="4People - Ferramentas OnLine">
+    <meta name="title" content="Números Primos - 4People">
     <meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
-    <meta name="msapplication-starturl" content="./outras_ferramentas/">
-    <meta property="og:title" content="Outras Ferramentas - 4People">
-    <meta name="twitter:title" content="Outras Ferramentas - 4People">
-    <meta property="og:url" content="./outras_ferramentas/">
-    <meta name="twitter:url" content="./outras_ferramentas/">
+    <meta name="msapplication-starturl" content="./matematica/calculadoras/numeros_primos/">
+    <meta property="og:title" content="Números Primos - 4People">
+    <meta name="twitter:title" content="Números Primos - 4People">
+    <meta property="og:url" content="./matematica/calculadoras/numeros_primos/">
+    <meta name="twitter:url" content="./matematica/calculadoras/numeros_primos/">
 </head>
 
 <body>
@@ -56,11 +57,11 @@
             </div>
         </li>
 
-        <li>
+        <li class="active">
             <div class="collapsible-header"><i class="material-icons">functions</i>Matemática</div>
             <div class="collapsible-body">
                 <ul class="collapsible padding-headers">
-                    <li>
+                    <li class="active">
                         <?php include_once("$path/components/matematica/calculadoras.php") ?>
                     </li>
 
@@ -75,7 +76,7 @@
             </div>
         </li>
 
-        <li class="active">
+        <li>
             <div class="collapsible-header"><i class="material-icons">build</i>Outras Ferramentas</div>
             <div class="collapsible-body">
                 <ul class="collapsible padding-headers">
@@ -94,18 +95,43 @@
     <main class="grey lighten-5">
         <div class="container">
             <div class="card-panel">
-                <h1 class="flow-text mt-2">Principais Ferramentas</h1>
+                <h1 class="flow-text mt-2">Números Primos</h1>
 
-                <label>Principais Ferramentas para usos do dia-a-dia do 4People</label>
+                <label>Calculadora de Números Primos OnLine para verificar se número é primo ou não.</label>
                 <div class="divider"></div>
+
+                <div class="row">
+                    <div class="col s12">
+                        <div class="row mb-0">
+                            <p class="mb-0 col s12">Números:</p>
+
+                            <div class="input-field col s12">
+                                <input id="numbers" type="text" placeholder="Digite aqui um ou mais números. Ex: 1, 3, 11, 20, 30, 40, 60">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button title="Calcular Números Primos" class="btn waves-effect waves-dark white black-text btn-center" onclick="calculate()">
+                    Calcular
+                </button>
+
+                <div class="divider mt-2"></div>
+
+                <textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
+                <button title="Copiar" class="btn waves-effect waves-dark white black-text" onclick="copyResult()">
+                    Copiar
+                </button>
             </div>
         </div>
     </main>
 
     <?php include_once("$path/components/footer.php") ?>
 
+    <script src="<?= "$return/algorithms/primeNumbers.js" ?>"></script>
     <script src="<?= "$return/src/js/materialize.min.js" ?>"></script>
+    <script src="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.js"></script>
     <script src="<?= "$return/src/js/main.js" ?>"></script>
 </body>
 
-</html> 
+</html>
