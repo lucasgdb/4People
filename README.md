@@ -44,7 +44,7 @@
   - MaterializeCSS
   - PWA
 
-## Ferramentas prontas
+## Ferramentas prontas (24)
   - Geradores
     - Gerador de CPF
     - Gerador de Senha
