@@ -35,13 +35,13 @@ body {
     outline: 0
 }
 
-header,
+nav,
 main,
 footer,
 ul#slide-out,
 .fixed-action-btn {
     opacity: 0;
-    transition: opacity 150ms
+    transition: opacity 150ms !important
 }
 
 .slider {

@@ -9,7 +9,7 @@ M.Collapsible.init(document.querySelectorAll('.padding-headers.collapsible'))
 const sidenav = M.Sidenav.getInstance(document.querySelector('#slide-out'))
 const navMobileA = document.querySelectorAll('#nav-mobile a')
 const paddingHeadersA = document.querySelectorAll('.active .active a')
-const header = document.querySelector('header')
+const nav = document.querySelector('nav')
 const main = document.querySelector('main')
 const footer = document.querySelector('footer')
 const spinner = document.querySelector('#spinner')
@@ -79,7 +79,7 @@ function sideOut() {
 
 function updatePage(e, link) {
     e.preventDefault()
-    header.style.opacity = '0'
+    nav.style.opacity = '0'
     main.style.opacity = '0'
     footer.style.opacity = '0'
     if (innerWidth < 993) {
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
 })
 
 window.onload = function () {
-    header.style.opacity = '1'
+    nav.style.opacity = '1'
     main.style.opacity = '1'
     footer.style.opacity = '1'
     sidenav.el.style.opacity = '1'
