@@ -5,7 +5,7 @@
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="' . $returnPage . '/computacao/funcoes_string/contador_de_caracteres/" title="Contador de Caracteres">Contador de Caracteres</a>
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="' . $returnPage . '/computacao/funcoes_string/contador_de_palavras/" title="Contador de Palavras">Contador de Palavras</a>
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="' . $returnPage . '/computacao/funcoes_string/converter_text_para_html/" title="Converter Texto para HTML">Converter Texto para HTML</a>
-        <a class="btn waves-effect white black-text z-depth-2 hoverable" href="' . $returnPage . '/computacao/funcoes_string/cortar_textos" title="Cortar Textos">Cortar Textos</a>
+        <a class="btn waves-effect white black-text z-depth-2 hoverable" href="' . $returnPage . '/computacao/funcoes_string/cortar_textos/" title="Cortar Textos">Cortar Textos</a>
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="' . $returnPage . '/computacao/funcoes_string/dividir_string/" title="Dividir String">Dividir String</a>
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="' . $returnPage . '/computacao/funcoes_string/informacoes_de_caracteres/" title="Informações de Caracteres">Informações de Caracteres</a>
         <a class="btn waves-effect white black-text z-depth-2 hoverable" href="' . $returnPage . '/computacao/funcoes_string/inverter_texto/" title="Inverter Texto">Inverter Texto</a>

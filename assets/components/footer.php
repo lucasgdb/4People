@@ -5,8 +5,8 @@
                 <div class="col l6 s12">
                     <h5 class="black-text">Sobre</h5>
                     <p class="grey-text text-darken-4">
-                        4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.
-                        Feito com <img title="Coração" style="position:relative;top:4px" src="' . $return . '/images/heart.png" alt="Coração"> e <img title="JavaScript" style="position:relative;top:2.5px" src="' . $return . '/images/js.png" alt="JavaScript">.
+                        4People é um site feito para ajudar estudantes, professores, Programadores e pessoas em suas atividades diárias.
+                        Feito com <img title="Coração" style="position:relative;top:4px" src="' . $return . '/images/heart.png" alt="Coração"> e <img title="JavaScript" style="position:relative;top:2.5px" src="' . $return . '/images/js.png" alt="JavaScript">
                         O projeto é de código aberto sob a licença <nobr><a href="https://github.com/LucasNaja/4People/blob/master/LICENSE" target="_blank" rel="noopener noreferrer nofollow">GPL-3.0</a></nobr>, no <a href="https://github.com/LucasNaja/4People" target="_blank">GitHub</a>.
                     </p>
                 </div>

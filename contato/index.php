@@ -36,7 +36,9 @@
         unset($_SESSION['msg']);
     }
 
-    include_once("$path/components/topComponents.php")
+    include_once("$path/components/noscript.php");
+    include_once("$path/components/spinner.php");
+    include_once("$path/components/header.php")
     ?>
 
     <ul id="slide-out" class="sidenav sidenav-fixed collapsible">
