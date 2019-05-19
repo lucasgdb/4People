@@ -4,23 +4,23 @@ const rbPonctuation = document.querySelector('[name=punctuation]')
 const ddState = document.querySelector('select')
 
 function generate() {
-    const CPF = generateCPF(rbPonctuation.checked, ddState.value)
-    txtResult.value = CPF
+	const CPF = generateCPF(rbPonctuation.checked, ddState.value)
+	txtResult.value = CPF
 }
 
 function copyResult() {
-    if (txtResult.value !== '') {
-        txtResult.select()
-        document.execCommand('copy')
+	if (txtResult.value !== '') {
+		txtResult.select()
+		document.execCommand('copy')
 
-        M.toast({
-            html: 'Copiado!',
-            classes: 'green'
-        })
-    } else {
-        M.toast({
-            html: 'Gere seu CPF primeiro.',
-            classes: 'red accent-4'
-        })
-    }
+		M.toast({
+			html: 'Copiado!',
+			classes: 'green'
+		})
+	} else {
+		M.toast({
+			html: 'Gere seu CPF primeiro.',
+			classes: 'red accent-4'
+		})
+	}
 }

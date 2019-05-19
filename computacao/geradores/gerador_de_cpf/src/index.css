@@ -1,50 +1,50 @@
 .input-field {
-    margin: 0
+	margin: 0
 }
 
 .btn-center {
-    left: 50%;
-    transform: translateX(-50%)
+	left: 50%;
+	transform: translateX(-50%)
 }
 
 textarea {
-    font-size: 20px;
-    resize: none;
-    white-space: nowrap;
-    border-top: 0;
-    border-right: 0;
-    border-bottom: .5px solid rgb(190, 190, 190);
-    border-left: 0;
-    outline: none;
-    color: #333
+	font-size: 20px;
+	resize: none;
+	white-space: nowrap;
+	border-top: 0;
+	border-right: 0;
+	border-bottom: .5px solid rgb(190, 190, 190);
+	border-left: 0;
+	outline: none;
+	color: #333
 }
 
 input[type=text]:focus {
-    border-bottom: 1px solid #607d8b !important;
-    box-shadow: 0 1px 0 0 #607d8b !important
+	border-bottom: 1px solid #607d8b !important;
+	box-shadow: 0 1px 0 0 #607d8b !important
 }
 
 [type=radio]:checked+span:after,
 [type=radio].with-gap:checked+span:before,
 [type=radio].with-gap:checked+span:after {
-    border: 2px solid #607d8b
+	border: 2px solid #607d8b
 }
 
 [type=radio]:checked+span:after,
 [type=radio].with-gap:checked+span:after {
-    background-color: #607d8b
+	background-color: #607d8b
 }
 
 .dropdown-content li>span {
-    color: #607d8b
+	color: #607d8b
 }
 
 .dropdown-content li.selected>span {
-    color: black
+	color: black
 }
 
 @media (min-width: 993px) {
-    textarea {
-        font-size: 25px
-    }
+	textarea {
+		font-size: 25px
+	}
 }

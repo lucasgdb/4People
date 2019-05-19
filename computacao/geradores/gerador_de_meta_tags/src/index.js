@@ -20,44 +20,44 @@ const ddRating = document.querySelector('#rating')
 M.FormSelect.init(document.querySelectorAll('select'))
 
 function generate() {
-    const metas = generateMetaTags(
-        txtSiteName.value,
-        txtTitle.value,
-        txtAuthor.value,
-        txtDescription.value,
-        txtKeywords.value,
-        txtCopyright.value,
-        txtLanguages.value,
-        nupInitialScale.value,
-        nupMinimumScale.value,
-        nupMaximumScale.value,
-        rbScalable.checked ? 'yes' : 'no',
-        rbShrinkToFit.checked ? 'yes' : 'no',
-        txtGenerator.value,
-        ddRating.value
-    )
+	const metas = generateMetaTags(
+		txtSiteName.value,
+		txtTitle.value,
+		txtAuthor.value,
+		txtDescription.value,
+		txtKeywords.value,
+		txtCopyright.value,
+		txtLanguages.value,
+		nupInitialScale.value,
+		nupMinimumScale.value,
+		nupMaximumScale.value,
+		rbScalable.checked ? 'yes' : 'no',
+		rbShrinkToFit.checked ? 'yes' : 'no',
+		txtGenerator.value,
+		ddRating.value
+	)
 
-    txtResult.value =
-        `${metas.title}\n${metas.standards}\n${metas.contentLanguage}\n${metas.author}\n${metas.description}\n${metas.keywords}\n${metas.copyright}\n${metas.viewport}\n${metas.generator}\n${metas.rating}\n${metas.siteName}`
+	txtResult.value =
+		`${metas.title}\n${metas.standards}\n${metas.contentLanguage}\n${metas.author}\n${metas.description}\n${metas.keywords}\n${metas.copyright}\n${metas.viewport}\n${metas.generator}\n${metas.rating}\n${metas.siteName}`
 }
 
 function countCharacters(event, input) {
-    input.textContent = event.target.value.length
+	input.textContent = event.target.value.length
 }
 
 function copyResult() {
-    if (txtResult.value !== '') {
-        txtResult.select()
-        document.execCommand('copy')
+	if (txtResult.value !== '') {
+		txtResult.select()
+		document.execCommand('copy')
 
-        M.toast({
-            html: 'Copiado!',
-            classes: 'green'
-        })
-    } else {
-        M.toast({
-            html: 'Gere suas Meta Tags primeiro.',
-            classes: 'red accent-4'
-        })
-    }
+		M.toast({
+			html: 'Copiado!',
+			classes: 'green'
+		})
+	} else {
+		M.toast({
+			html: 'Gere suas Meta Tags primeiro.',
+			classes: 'red accent-4'
+		})
+	}
 }

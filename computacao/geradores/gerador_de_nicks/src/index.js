@@ -5,19 +5,19 @@ const txtSelect = document.querySelector('select')
 const txtInput = document.querySelector('.areaText')
 
 function generate() {
-    if (txtSelect.value != '2' && txtSelect.value != '3') {
-        txtInput.className = 'col s12 areaText'
-        let nicks
-        nicks = generateNicks(txtName.value, txtSelect.value)
-        for (var i = 0; i <= txtResult.length; i++) {
-            txtResult[i].innerHTML = `${nicks}`
-        }
-    } else {
-        txtInput.className = 'col s12 areaText hide'
-        let nicks
-        nicks = generateNicks(txtName.value, txtSelect.value)
-        for (var i = 0; i <= txtResult.length; i++) {
-            txtResult[i].innerHTML = `${nicks}`
-        }
-    }
+	if (txtSelect.value != '2' && txtSelect.value != '3') {
+		txtInput.className = 'col s12 areaText'
+		let nicks
+		nicks = generateNicks(txtName.value, txtSelect.value)
+		for (var i = 0; i <= txtResult.length; i++) {
+			txtResult[i].innerHTML = `${nicks}`
+		}
+	} else {
+		txtInput.className = 'col s12 areaText hide'
+		let nicks
+		nicks = generateNicks(txtName.value, txtSelect.value)
+		for (var i = 0; i <= txtResult.length; i++) {
+			txtResult[i].innerHTML = `${nicks}`
+		}
+	}
 }
