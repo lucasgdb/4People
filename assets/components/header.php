@@ -1,5 +1,5 @@
 <header class="navbar-fixed">
-    <nav class="grey lighten-2">
+    <nav class="grey lighten-3">
         <a href="#!" id="menu" data-target="slide-out" class="sidenav-trigger show-on-large black-text"><i class="material-icons">menu</i></a>
         <div class="nav-wrapper">
             <a href="<?= $returnPage ?>" class="brand-logo center hide-on-large-only">4People</a>

@@ -1,4 +1,4 @@
-<footer class="page-footer grey lighten-2">
+<footer class="page-footer grey lighten-3">
     <div class="container">
         <div class="row">
             <div class="col l6 s12">
@@ -23,10 +23,10 @@
         </div>
 	 </div>
 	 
-    <div class="footer-copyright grey">
-        <div class="container white-text">
+    <div class="footer-copyright grey lighten-1">
+        <div class="container black-text">
             © 4People - 2019
-            <a class="right white-text" href="<?= $returnPage ?>/contato/"><i class="material-icons left" style="position:relative;top:-1px">email</i>Fale Conosco »</a>
+            <a class="right" href="<?= $returnPage ?>/contato/"><i class="material-icons left" style="position:relative;top:-1px">email</i>Fale Conosco »</a>
         </div>
     </div>
 </footer>
