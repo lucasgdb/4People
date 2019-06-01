@@ -10,7 +10,7 @@
     <title>Matemática - 4People</title>
     <?php include_once("$path/components/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-    <meta name="title" content="4People - Ferramentas OnLine">
+    <meta name="title" content="4People - Ferramentas Online">
     <meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
     <meta name="msapplication-starturl" content="./matematica/">
@@ -110,7 +110,7 @@
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Fatorar Número<i class="material-icons right">more_vert</i></span>
                                 <p>
-                                    Calculadora para Fatorar Números OnLine.
+                                    Calculadora para Fatorar Números Online.
                                 </p>
                             </div>
 
@@ -131,7 +131,7 @@
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Máximo Divisor Comum<i class="material-icons right">more_vert</i></span>
                                 <p>
-                                    Calculadora OnLine para encontrar o Máximo Divisor Comum entre vários números.
+                                    Calculadora Online para encontrar o Máximo Divisor Comum entre vários números.
                                 </p>
                             </div>
 
@@ -154,7 +154,7 @@
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Mínimo Múltiplo Comum<i class="material-icons right">more_vert</i></span>
                                 <p>
-                                    Calculadora OnLine para encontrar o Mínimo Múltiplo Comum entre vários números.
+                                    Calculadora Online para encontrar o Mínimo Múltiplo Comum entre vários números.
                                 </p>
                             </div>
 
@@ -175,7 +175,7 @@
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Índice de Massa Corporal<i class="material-icons right">more_vert</i></span>
                                 <p>
-                                    Calculadora de Índice de Massa Corporal OnLine para calcular o IMC e o seu peso ideal.
+                                    Calculadora de Índice de Massa Corporal Online para calcular o IMC e o seu peso ideal.
                                 </p>
                             </div>
 
@@ -198,7 +198,7 @@
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Porcentagem<i class="material-icons right">more_vert</i></span>
                                 <p>
-                                    Calculadora de Porcentagem OnLine com vários métodos para encontrar a porcentagem, como aumentos, descontos, proporções, etc.
+                                    Calculadora de Porcentagem Online com vários métodos para encontrar a porcentagem, como aumentos, descontos, proporções, etc.
                                 </p>
                             </div>
 
@@ -219,7 +219,7 @@
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Equação do 2° Grau<i class="material-icons right">more_vert</i></span>
                                 <p>
-                                    Cálculo da Equção do 2° Grau (Bhaskara) OnLine.
+                                    Cálculo da Equção do 2° Grau (Bhaskara) Online.
                                 </p>
                             </div>
 
@@ -263,7 +263,7 @@
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Conversor de Temperatura<i class="material-icons right">more_vert</i></span>
                                 <p>
-                                    Conversor de Temperatura OnLine para calcular Graus Celsius, Fahrenheit e Kelvin.
+                                    Conversor de Temperatura Online para calcular Graus Celsius, Fahrenheit e Kelvin.
                                 </p>
                             </div>
 
@@ -286,7 +286,7 @@
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Divisão e Resto<i class="material-icons right">more_vert</i></span>
                                 <p>
-                                    Calculadora de Divisão OnLine que mostra o resultado da divisão entre dois números e o resto (módulo) entre eles.
+                                    Calculadora de Divisão Online que mostra o resultado da divisão entre dois números e o resto (módulo) entre eles.
                                 </p>
                             </div>
 
@@ -307,7 +307,7 @@
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Área do Círculo<i class="material-icons right">more_vert</i></span>
                                 <p>
-                                    Calculador de Área do Círculo OnLine.
+                                    Calculador de Área do Círculo Online.
                                 </p>
                             </div>
 
@@ -330,7 +330,7 @@
                             <div class="card-content grey lighten-2">
                                 <span class="card-title activator no-select">Área do Quadrado<i class="material-icons right">more_vert</i></span>
                                 <p>
-                                    Calculador de Área do Quadrado OnLine.
+                                    Calculador de Área do Quadrado Online.
                                 </p>
                             </div>
 

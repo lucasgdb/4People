@@ -11,7 +11,7 @@
 	<?php include_once("$path/components/metas.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="Gerador de Senha - 4People">
-	<meta name="description" content="Gerador de Senha OnLine para gerar senhas personalizadas e fortes. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+	<meta name="description" content="Gerador de Senha Online para gerar senhas personalizadas e fortes. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
 	<meta name="application-name" content="4People">
 	<meta name="msapplication-starturl" content="./computacao/geradores/gerador_de_senha/">
 	<meta property="og:title" content="Gerador de Senha - 4People">
@@ -101,7 +101,7 @@
 			<div class="card-panel">
 				<h1 class="flow-text mt-2">Gerador de Senha</h1>
 
-				<label>Gerador de Senha OnLine para gerar senhas personalizadas e fortes.</label>
+				<label>Gerador de Senha Online para gerar senhas personalizadas e fortes.</label>
 				<div class="divider"></div>
 
 				<div class="row">

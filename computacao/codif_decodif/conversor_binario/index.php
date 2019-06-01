@@ -101,7 +101,7 @@
 			<div class="card-panel">
 				<h1 class="flow-text mt-2">Conversor Binário</h1>
 
-				<label>Tradutor OnLine de Código Binário. Basta digitar o código binário ou texto abaixo e clicar no botão para converter.</label>
+				<label>Tradutor Online de Código Binário. Basta digitar o código binário ou texto abaixo e clicar no botão para converter.</label>
 				<div class="divider"></div>
 
 				<textarea class="mt-2" id="text" placeholder="Digite aqui o texto" spellcheck="false"></textarea>

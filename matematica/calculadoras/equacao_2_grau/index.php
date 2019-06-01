@@ -101,7 +101,7 @@
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Equação do 2° Grau</h1>
 
-                <label>Cálculo da Equção do 2° Grau (Bhaskara) OnLine. &Delta; = B² - 4 * A * C, X = (-B +- √&Delta;) / 2 * A</label>
+                <label>Cálculo da Equção do 2° Grau (Bhaskara) Online. &Delta; = B² - 4 * A * C, X = (-B +- √&Delta;) / 2 * A</label>
                 <div class="divider"></div>
 
                 <div class="row">

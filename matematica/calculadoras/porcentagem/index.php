@@ -11,7 +11,7 @@
     <?php include_once("$path/components/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <meta name="title" content="Porcentagem - 4People">
-    <meta name="description" content="Calculadora OnLine para encontrar a porcentagem. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+    <meta name="description" content="Calculadora Online para encontrar a porcentagem. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
     <meta name="msapplication-starturl" content="./matematica/calculadoras/porcentagem/">
     <meta property="og:title" content="Porcentagem - 4People">
@@ -101,7 +101,7 @@
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Porcentagem</h1>
 
-                <label>Calculadora de Porcentagem OnLine com vários métodos para encontrar a porcentagem, como aumentos, descontos, proporções, etc.</label>
+                <label>Calculadora de Porcentagem Online com vários métodos para encontrar a porcentagem, como aumentos, descontos, proporções, etc.</label>
                 <div class="divider"></div>
 
                 <div class="row mb-0">

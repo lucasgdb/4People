@@ -10,7 +10,7 @@
 	<title>Computação - 4People</title>
 	<?php include_once("$path/components/metas.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-	<meta name="title" content="4People - Ferramentas OnLine">
+	<meta name="title" content="4People - Ferramentas Online">
 	<meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
 	<meta name="application-name" content="4People">
 	<meta name="msapplication-starturl" content="./computacao/">
@@ -110,7 +110,7 @@
 							<div class="card-content grey lighten-2">
 								<span class="card-title activator no-select">Gerador de CPF<i class="material-icons right">more_vert</i></span>
 								<p>
-									Gerador de CPF OnLine para Programadores testarem seus Softwares em desenvolvimento.
+									Gerador de CPF Online para Programadores testarem seus Softwares em desenvolvimento.
 								</p>
 							</div>
 
@@ -131,7 +131,7 @@
 							<div class="card-content grey lighten-2">
 								<span class="card-title activator no-select">Gerador de Senha<i class="material-icons right">more_vert</i></span>
 								<p>
-									Gerador de Senha OnLine para gerar senhas personalizadas e fortes.
+									Gerador de Senha Online para gerar senhas personalizadas e fortes.
 								</p>
 							</div>
 
@@ -154,7 +154,7 @@
 							<div class="card-content grey lighten-2">
 								<span class="card-title activator no-select">Gerador de Meta Tags<i class="material-icons right">more_vert</i></span>
 								<p>
-									Gerador de Meta Tags OnLine, feito para gerar várias das Meta Tags existentes.
+									Gerador de Meta Tags Online, feito para gerar várias das Meta Tags existentes.
 								</p>
 							</div>
 
@@ -175,7 +175,7 @@
 							<div class="card-content grey lighten-2">
 								<span class="card-title activator no-select">Validador de CPF<i class="material-icons right">more_vert</i></span>
 								<p>
-									Validador de CPF OnLine para Programadores testarem seus Softwares em desenvolvimento.
+									Validador de CPF Online para Programadores testarem seus Softwares em desenvolvimento.
 								</p>
 							</div>
 
@@ -198,7 +198,7 @@
 							<div class="card-content grey lighten-2">
 								<span class="card-title activator no-select">Contador de Caracteres<i class="material-icons right">more_vert</i></span>
 								<p>
-									Contador de Caracteres OnLine para contar os caracteres de um texto em vários níveis diferentes.
+									Contador de Caracteres Online para contar os caracteres de um texto em vários níveis diferentes.
 								</p>
 							</div>
 
@@ -240,7 +240,7 @@
 							<div class="card-content grey lighten-2">
 								<span class="card-title activator no-select">Conversor de Código Binário<i class="material-icons right">more_vert</i></span>
 								<p>
-									Codificador e Decodificador de Código Binário OnLine para converter código binário em texto e vice-versa.
+									Codificador e Decodificador de Código Binário Online para converter código binário em texto e vice-versa.
 								</p>
 							</div>
 							<div class="card-action grey lighten-1">

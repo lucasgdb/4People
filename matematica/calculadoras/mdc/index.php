@@ -11,7 +11,7 @@
     <?php include_once("$path/components/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <meta name="title" content="Máximo Divisor Comum - 4People">
-    <meta name="description" content="Calculadora para encontrar o Máximo Divisor Comum OnLine. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+    <meta name="description" content="Calculadora para encontrar o Máximo Divisor Comum Online. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
     <meta name="msapplication-starturl" content="./matematica/calculadoras/mdc/">
     <meta property="og:title" content="Máximo Divisor Comum - 4People">
@@ -101,7 +101,7 @@
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Máximo Divisor Comum</h1>
 
-                <label>Calculadora OnLine para encontrar o Máximo Divisor Comum entre vários números.</label>
+                <label>Calculadora Online para encontrar o Máximo Divisor Comum entre vários números.</label>
                 <div class="divider"></div>
 
                 <div class="row">

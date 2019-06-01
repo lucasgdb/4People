@@ -11,7 +11,7 @@
 	<?php include_once("$path/components/metas.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="Buscar CEP - 4People">
-	<meta name="description" content="Buscar CEP OnLine para ver informações do seu CEP. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+	<meta name="description" content="Buscar CEP Online para ver informações do seu CEP. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
 	<meta name="application-name" content="4People">
 	<meta name="msapplication-starturl" content="./computacao/rede_e_internet/buscar_cep/">
 	<meta property="og:title" content="Buscar CEP - 4People">

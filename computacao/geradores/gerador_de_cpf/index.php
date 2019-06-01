@@ -11,7 +11,7 @@
 	<?php include_once("$path/components/metas.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="Gerador de CPF - 4People">
-	<meta name="description" content="Gerador de CPF OnLine para gerar CPFs verdadeiros. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+	<meta name="description" content="Gerador de CPF Online para gerar CPFs verdadeiros. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
 	<meta name="application-name" content="4People">
 	<meta name="msapplication-starturl" content="./computacao/geradores/gerador_de_cpf/">
 	<meta property="og:title" content="Gerador de CPF - 4People">
@@ -101,7 +101,7 @@
 			<div class="card-panel">
 				<h1 class="flow-text mt-2">Gerador de CPF</h1>
 
-				<label>Gerador de CPF OnLine que gera CPFs verdadeiros para Programadores testarem seus Softwares em desenvolvimento.</label>
+				<label>Gerador de CPF Online que gera CPFs verdadeiros para Programadores testarem seus Softwares em desenvolvimento.</label>
 				<div class="divider"></div>
 
 				<div class="row">

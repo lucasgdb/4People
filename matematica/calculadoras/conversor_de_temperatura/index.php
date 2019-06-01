@@ -11,7 +11,7 @@
     <?php include_once("$path/components/metas.php") ?>
     <meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
     <meta name="title" content="Conversor de Temperatura - 4People">
-    <meta name="description" content="Conversor de Temperatura OnLine. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+    <meta name="description" content="Conversor de Temperatura Online. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
     <meta name="application-name" content="4People">
     <meta name="msapplication-starturl" content="./matematica/calculadoras/conversor_de_temperatura/">
     <meta property="og:title" content="Conversor de Temperatura - 4People">
@@ -101,7 +101,7 @@
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Conversor de Temperatura</h1>
 
-                <label>Conversor de Temperatura OnLine para calcular Graus Celsius, Fahrenheit e Kelvin.</label>
+                <label>Conversor de Temperatura Online para calcular Graus Celsius, Fahrenheit e Kelvin.</label>
                 <div class="divider"></div>
 
                 <div class="row mb-0" style="position:relative">

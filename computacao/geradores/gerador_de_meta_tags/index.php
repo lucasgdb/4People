@@ -11,7 +11,7 @@
 	<?php include_once("$path/components/metas.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="Gerador de Meta Tags - 4People">
-	<meta name="description" content="Gerar Meta Tags OnLine. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+	<meta name="description" content="Gerar Meta Tags Online. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
 	<meta name="application-name" content="4People">
 	<meta name="msapplication-starturl" content="./computacao/geradores/gerador_de_meta_tags/">
 	<meta property="og:title" content="Gerador de Meta Tags - 4People">
@@ -101,7 +101,7 @@
 			<div class="card-panel">
 				<h1 class="flow-text mt-2">Gerador de Meta Tags</h1>
 
-				<label>Gerador de Meta Tags OnLine, feito para gerar várias das Meta Tags existentes.</label>
+				<label>Gerador de Meta Tags Online, feito para gerar várias das Meta Tags existentes.</label>
 				<div class="divider"></div>
 
 				<h5>Informações</h5>
@@ -173,7 +173,7 @@
 
 					<p class="mb-0 col s12">Título do site. Caracteres usados: <span id="titleCount">0</span>. Recomendado: 63-90</p>
 					<div class="input-field col s12">
-						<input oninput="countCharacters(event, titleCount)" id="title" type="text" placeholder="Ex: 4People - Ferramentas OnLine">
+						<input oninput="countCharacters(event, titleCount)" id="title" type="text" placeholder="Ex: 4People - Ferramentas Online">
 					</div>
 
 					<p class="mb-0 col s12">Descrição do site: Caracteres usados: <span id="descCount">0</span>. Recomendado: 160-300</p>

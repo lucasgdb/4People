@@ -101,7 +101,7 @@
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Área do Círculo</h1>
 
-                <label>Calculador de Área do Círculo OnLine. R = Raio, D = Diâmetro (2 * R), PI = 3.141592653589793... (Math.PI.toFixed(48))</label>
+                <label>Calculador de Área do Círculo Online. R = Raio, D = Diâmetro (2 * R), PI = 3.141592653589793... (Math.PI.toFixed(48))</label>
                 <div class="divider"></div>
 
                 <div class="row mb-0">

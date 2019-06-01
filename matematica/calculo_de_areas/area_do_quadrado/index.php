@@ -101,7 +101,7 @@
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Área do Quadrado</h1>
 
-                <label>Calculador de Área do Quadrado OnLine. Área do Quadrado: Lado * Lado ou L²</label>
+                <label>Calculador de Área do Quadrado Online. Área do Quadrado: Lado * Lado ou L²</label>
                 <div class="divider"></div>
 
                 <div class="row">

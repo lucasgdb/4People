@@ -101,7 +101,7 @@
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Números Primos</h1>
 
-                <label>Calculadora de Números Primos OnLine para verificar se número é primo ou não.</label>
+                <label>Calculadora de Números Primos Online para verificar se número é primo ou não.</label>
                 <div class="divider"></div>
 
                 <div class="row">

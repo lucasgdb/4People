@@ -101,7 +101,7 @@
             <div class="card-panel">
                 <h1 class="flow-text mt-2">Índice de Massa Corporal</h1>
 
-                <label>Calculadora de Índice de Massa Corporal OnLine para calcular o IMC e o seu peso ideal.</label>
+                <label>Calculadora de Índice de Massa Corporal Online para calcular o IMC e o seu peso ideal.</label>
                 <div class="divider"></div>
 
                 <div class="row mb-0">
