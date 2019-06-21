@@ -6,6 +6,7 @@
 
 ## Imagem
   ![4people](assets/images/4People.png "4People - Início")
+	![4people](assets/images/4People_2.png "4People - Início")
 
 ## Como contribuir
   - Linux
