@@ -1,9 +1,9 @@
 function validateCPF(CPF = Array) {
-    if (CPF.filter(number => number === CPF[0]).length === 11) {
+    if (CPF.filter(number => number === CPF[0]).length >= 11) {
         return {
             "isCPF": false,
             "from": null,
-            "CPF": fixCPF(CPF).join('')
+            "CPF": fixCPF(CPF)
         }
     }
 
@@ -63,7 +63,7 @@ function validateCPF(CPF = Array) {
     return {
         isCPF,
         from,
-        "CPF": fixCPF(CPF).join('')
+        "CPF": fixCPF(CPF)
     }
 }
 
@@ -72,5 +72,5 @@ function fixCPF(CPF) {
     CPF.splice(7, 0, '.')
     CPF.splice(11, 0, '-')
 
-    return CPF
+    return CPF.join('')
 }

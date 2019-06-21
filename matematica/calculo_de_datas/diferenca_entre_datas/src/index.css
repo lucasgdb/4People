@@ -8,8 +8,8 @@
 }
 
 input[type=text]:focus {
-    border-bottom: 1px solid #607d8b !important;
-    box-shadow: 0 1px 0 0 #607d8b !important
+    border-bottom: 1px solid #1a237e !important;
+    box-shadow: 0 1px 0 0 #1a237e !important
 }
 
 input[type=text]::placeholder {
@@ -17,19 +17,19 @@ input[type=text]::placeholder {
 }
 
 .datepicker-date-display {
-    background-color: #607d8b
+    background-color: #1a237e
 }
 
 .datepicker-day-button:focus {
     color: white !important;
-    background-color: #a2b0b6
+    background-color: #1a237e
 }
 
 .datepicker-done,
 .datepicker-cancel,
 .select-dropdown li>span,
 .timepicker-close {
-    color: #607d8b !important
+    color: #1a237e !important
 }
 
 .is-today {
@@ -59,7 +59,7 @@ td.is-selected.is-today {
 }
 
 .timepicker-tick:hover {
-    background-color: #a2b0b6
+    background-color: #1a237e
 }
 
 .datepicker-controls .select-month input {

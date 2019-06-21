@@ -29,7 +29,7 @@ function copyResult() {
 		document.execCommand('copy')
 
 		M.toast({
-			html: 'Copiado!',
+			html: 'Copiado para a Área de Transferência.',
 			classes: 'green'
 		})
 	} else {

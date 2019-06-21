@@ -61,7 +61,6 @@ M.Timepicker.init(document.querySelectorAll('.timepicker'), {
     }
 })
 
-const totalTime = document.querySelector('#totalTime')
 const lblMilliSec = document.querySelector('#milliSecs')
 const lblSec = document.querySelector('#secs')
 const lblMin = document.querySelector('#mins')
@@ -88,7 +87,6 @@ function calculate() {
             endDate.date.toUTCString().replace('03:00:00', endTimeHour)
         )
 
-        totalTime.textContent = difference.totalTime
         lblMilliSec.textContent = difference.milliSeconds
         lblSec.textContent = difference.seconds
         lblMin.textContent = difference.minutes

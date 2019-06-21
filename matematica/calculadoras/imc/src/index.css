@@ -20,8 +20,8 @@ textarea {
 }
 
 input[type=number]:focus {
-    border-bottom: 1px solid #607d8b !important;
-    box-shadow: 0 1px 0 0 #607d8b !important
+    border-bottom: 1px solid #1a237e !important;
+    box-shadow: 0 1px 0 0 #1a237e !important
 }
 
 input[type=number]::placeholder {
@@ -31,12 +31,12 @@ input[type=number]::placeholder {
 [type=radio]:checked+span:after,
 [type=radio].with-gap:checked+span:before,
 [type=radio].with-gap:checked+span:after {
-    border: 2px solid #607d8b
+    border: 2px solid #1a237e
 }
 
 [type=radio]:checked+span:after,
 [type=radio].with-gap:checked+span:after {
-    background-color: #607d8b
+    background-color: #1a237e
 }
 
 @media (min-width: 993px) {

@@ -1,7 +1,7 @@
 // Materialize initalizations
 M.Sidenav.init(document.querySelectorAll('.sidenav'))
 M.Collapsible.init(document.querySelectorAll('.sidenav.collapsible'), {
-    accordion: false
+	accordion: false
 })
 M.Collapsible.init(document.querySelectorAll('.padding-headers.collapsible'))
 
@@ -14,24 +14,62 @@ const main = document.querySelector('main')
 const footer = document.querySelector('footer')
 const spinner = document.querySelector('#spinner')
 
+// Methods
+function animateIn(delay = 250) {
+	document.body.style.transition = `padding-left ${delay}ms, opacity 150ms`
+	document.body.style.paddingLeft = '300px'
+}
+
+function animateOut(delay = 250) {
+	document.body.style.transition = `padding-left ${delay}ms`
+	document.body.style.paddingLeft = '0'
+}
+
+function sideIn() {
+	sidenav._animateSidenavIn()
+	tr = false
+	sidenav.isOpen = true
+}
+
+function sideOut() {
+	sidenav._animateSidenavOut()
+	tr = true
+	sidenav.isClose = true
+}
+
+function updatePage(e, link) {
+	e.preventDefault()
+	nav.style.opacity = '0'
+	main.style.opacity = '0'
+	footer.style.opacity = '0'
+
+	if (innerWidth < 993) sidenav.close()
+	else sidenav.el.style.opacity = '0'
+
+	setTimeout(function () {
+		location = link.includes('#') ? link.replace(/[#]/g, '') : link
+	}, 150)
+}
+
 // Left and right effects from sidebar
 let tr = false
 
 document.querySelector('#menu').onclick = function () {
-    if (innerWidth >= 993) {
-        if (tr) {
-            sidenav.options.outDuration = 150
-            sideIn()
-            animateIn()
-            sessionStorage.removeItem('sideStatus')
-        } else {
-            sideOut()
-            animateOut()
-            sessionStorage.setItem('sideStatus', true)
-        }
-    } else if (sidenav.options.outDuration === 0) {
-        sidenav.options.outDuration = 200
-    }
+	if (innerWidth >= 993) {
+		if (tr) {
+			sidenav.options.outDuration = 150
+			sideIn()
+			animateIn()
+			sessionStorage.setItem('sideStatus', true)
+
+		} else {
+			sideOut()
+			animateOut()
+			sessionStorage.removeItem('sideStatus')
+		}
+	} else if (!sidenav.options.outDuration) {
+		sidenav.options.outDuration = 200
+	}
 }
 
 // Media Queries with pure JS
@@ -39,115 +77,78 @@ const maxWidth = window.matchMedia('(max-width: 992px)')
 const minWidth = window.matchMedia('(min-width: 993px)')
 
 function matchMax(maxWidth) {
-    if (maxWidth.matches && !tr) {
-        animateOut()
-    } else if (maxWidth.matches && tr) {
-        sidenav.options.outDuration = 0
-    }
+	if (maxWidth.matches && !tr) {
+		animateOut()
+	} else if (maxWidth.matches && tr) {
+		sidenav.options.outDuration = 0
+	}
 }
 
 function matchMin(minWidth) {
-    if (minWidth.matches) {
-        sessionStorage.removeItem('sideStatus')
-        animateIn(0)
-        tr = false
-    }
-}
-
-// Methods
-function animateIn(delay = 250) {
-    document.body.style.transition = `padding-left ${delay}ms, opacity 150ms`
-    document.body.style.paddingLeft = '300px'
-}
-
-function animateOut(delay = 250) {
-    document.body.style.transition = `padding-left ${delay}ms`
-    document.body.style.paddingLeft = '0'
-}
-
-function sideIn() {
-    sidenav._animateSidenavIn()
-    tr = false
-    sidenav.isOpen = true
-}
-
-function sideOut() {
-    sidenav._animateSidenavOut()
-    tr = true
-    sidenav.isClose = true
-}
-
-function updatePage(e, link) {
-    e.preventDefault()
-    nav.style.opacity = '0'
-    main.style.opacity = '0'
-    footer.style.opacity = '0'
-    if (innerWidth < 993) {
-        sidenav.close()
-    } else {
-        sidenav.el.style.opacity = '0'
-    }
-
-    setTimeout(function () {
-        location = link.includes('#') ? link.replace(/[#]/g, '') : link
-    }, 150)
+	if (minWidth.matches) {
+		setTimeout(() => {
+			sessionStorage.removeItem('sideStatus')
+			animateOut(0)
+			sideOut()
+		}, 0)
+	}
 }
 
 // Pave events
 document.addEventListener('DOMContentLoaded', function () {
-    const allAElements = document.querySelectorAll('a[href^="."]')
-    for (let i = 0; i < allAElements.length; i++) {
-        allAElements[i].onclick = function (event) {
-            const link = allAElements[i].getAttribute('href')
-            updatePage(event, link)
-        }
-    }
+	const allAElements = document.querySelectorAll('a[href^="."]')
+	for (let i = 0; i < allAElements.length; i++) {
+		allAElements[i].onclick = function (event) {
+			const link = allAElements[i].getAttribute('href')
+			updatePage(event, link)
+		}
+	}
 
-    if (sessionStorage.getItem('sideStatus') === 'true') {
-        sidenav.options.outDuration = 0
-        sideOut()
-        animateOut(0)
-    }
+	if (!sessionStorage.getItem('sideStatus')) {
+		sidenav.options.outDuration = 0
+		sideOut()
+		animateOut(0)
+	}
 
-    for (let i = 0; i < navMobileA.length; i++) {
-        if (navMobileA[i].getAttribute('href').split('/').filter(link => link !== '' && link !== '.').join('') === '') {
-            navMobileA[i].parentElement.setAttribute('class', 'active waves-effect')
-            return
-        }
+	for (let i = 0; i < navMobileA.length; i++) {
+		if (navMobileA[i].getAttribute('href').split('/').filter(link => link !== '' && link !== '.').join('') === '') {
+			navMobileA[i].parentElement.setAttribute('class', 'active waves-effect')
+			return
+		}
 
-        const path = navMobileA[i].getAttribute('href').split('/').filter(link => link !== '')
-        const pathName = location.pathname.split('/').filter(link => link !== '')
-        if (path[path.length - 1] === pathName[pathName.length - 1]) {
-            navMobileA[i].parentElement.setAttribute('class', 'active waves-effect')
-            break
-        }
-    }
+		const path = navMobileA[i].getAttribute('href').split('/').filter(link => link !== '')
+		const pathName = location.pathname.split('/').filter(link => link !== '')
+		if (path[path.length - 1] === pathName[pathName.length - 1]) {
+			navMobileA[i].parentElement.setAttribute('class', 'active waves-effect')
+			break
+		}
+	}
 
-    for (let i = 0; i < paddingHeadersA.length; i++) {
-        const path = paddingHeadersA[i].getAttribute('href').split('/').filter(link => link !== '')
-        const pathName = location.pathname.split('/').filter(link => link !== '')
-        if (path[path.length - 1] === pathName[pathName.length - 1]) {
-            paddingHeadersA[i].setAttribute('class', 'btn waves-effect grey lighten-2 black-text z-depth-2')
-            break
-        }
-    }
+	for (let i = 0; i < paddingHeadersA.length; i++) {
+		const path = paddingHeadersA[i].getAttribute('href').split('/').filter(link => link !== '')
+		const pathName = location.pathname.split('/').filter(link => link !== '')
+		if (path[path.length - 1] === pathName[pathName.length - 1]) {
+			paddingHeadersA[i].setAttribute('class', 'btn waves-effect grey lighten-2 black-text z-depth-2')
+			break
+		}
+	}
 })
 
 window.onload = function () {
-    nav.style.opacity = '1'
-    main.style.opacity = '1'
-    footer.style.opacity = '1'
-    sidenav.el.style.opacity = '1'
-    spinner.style.opacity = '0'
-    maxWidth.addListener(matchMax)
-    minWidth.addListener(matchMin)
-    setTimeout(() => {
-        spinner.remove()
-    }, 200)
+	nav.style.opacity = '1'
+	main.style.opacity = '1'
+	footer.style.opacity = '1'
+	sidenav.el.style.opacity = '1'
+	spinner.style.opacity = '0'
+	maxWidth.addListener(matchMax)
+	minWidth.addListener(matchMin)
+	setTimeout(() => {
+		spinner.remove()
+	}, 200)
 }
 
 document.onkeydown = function (e) {
-    if (e.keyCode === 116) {
-        updatePage(e, location.href)
-    }
+	if (e.keyCode === 116) {
+		updatePage(e, location.href)
+	}
 }

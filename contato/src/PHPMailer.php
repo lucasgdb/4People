@@ -1690,13 +1690,13 @@ class PHPMailer
 	 * Used to reject URLs and phar files from functions that access local file paths,
 	 * such as addAttachment.
 	 *
-	 * @param string $path A relative or absolute path to a file
+	 * @param string $assets A relative or absolute path to a file
 	 *
 	 * @return bool
 	 */
-	protected static function isPermittedPath($path)
+	protected static function isPermittedPath($assets)
 	{
-		return !preg_match('#^[a-z]+://#i', $path);
+		return !preg_match('#^[a-z]+://#i', $assets);
 	}
 
 	/**
@@ -2825,7 +2825,7 @@ class PHPMailer
 	 * Explicitly *does not* support passing URLs; PHPMailer is not an HTTP client.
 	 * If you need to do that, fetch the resource yourself and pass it in via a local file or string.
 	 *
-	 * @param string $path        Path to the attachment
+	 * @param string $assets        Path to the attachment
 	 * @param string $name        Overrides the attachment name
 	 * @param string $encoding    File encoding (see $Encoding)
 	 * @param string $type        File extension (MIME) type
@@ -2835,25 +2835,25 @@ class PHPMailer
 	 *
 	 * @return bool
 	 */
-	public function addAttachment($path, $name = '', $encoding = self::ENCODING_BASE64, $type = '', $disposition = 'attachment')
+	public function addAttachment($assets, $name = '', $encoding = self::ENCODING_BASE64, $type = '', $disposition = 'attachment')
 	{
 		try {
-			if (!static::isPermittedPath($path) || !@is_file($path)) {
-				throw new Exception($this->lang('file_access') . $path, self::STOP_CONTINUE);
+			if (!static::isPermittedPath($assets) || !@is_file($assets)) {
+				throw new Exception($this->lang('file_access') . $assets, self::STOP_CONTINUE);
 			}
 
 			// If a MIME type is not specified, try to work it out from the file name
 			if ('' == $type) {
-				$type = static::filenameToType($path);
+				$type = static::filenameToType($assets);
 			}
 
-			$filename = basename($path);
+			$filename = basename($assets);
 			if ('' == $name) {
 				$name = $filename;
 			}
 
 			$this->attachment[] = [
-				0 => $path,
+				0 => $assets,
 				1 => $filename,
 				2 => $name,
 				3 => $encoding,
@@ -2907,12 +2907,12 @@ class PHPMailer
 			if ($attachment[6] == $disposition_type) {
 				// Check for string attachment
 				$string = '';
-				$path = '';
+				$assets = '';
 				$bString = $attachment[5];
 				if ($bString) {
 					$string = $attachment[0];
 				} else {
-					$path = $attachment[0];
+					$assets = $attachment[0];
 				}
 
 				$inclhash = hash('sha256', serialize($attachment));
@@ -2992,7 +2992,7 @@ class PHPMailer
 				if ($bString) {
 					$mime[] = $this->encodeString($string, $encoding);
 				} else {
-					$mime[] = $this->encodeFile($path, $encoding);
+					$mime[] = $this->encodeFile($assets, $encoding);
 				}
 				if ($this->isError()) {
 					return '';
@@ -3010,22 +3010,22 @@ class PHPMailer
 	 * Encode a file attachment in requested format.
 	 * Returns an empty string on failure.
 	 *
-	 * @param string $path     The full path to the file
+	 * @param string $assets     The full path to the file
 	 * @param string $encoding The encoding to use; one of 'base64', '7bit', '8bit', 'binary', 'quoted-printable'
 	 *
 	 * @throws Exception
 	 *
 	 * @return string
 	 */
-	protected function encodeFile($path, $encoding = self::ENCODING_BASE64)
+	protected function encodeFile($assets, $encoding = self::ENCODING_BASE64)
 	{
 		try {
-			if (!static::isPermittedPath($path) || !file_exists($path)) {
-				throw new Exception($this->lang('file_open') . $path, self::STOP_CONTINUE);
+			if (!static::isPermittedPath($assets) || !file_exists($assets)) {
+				throw new Exception($this->lang('file_open') . $assets, self::STOP_CONTINUE);
 			}
-			$file_buffer = file_get_contents($path);
+			$file_buffer = file_get_contents($assets);
 			if (false === $file_buffer) {
-				throw new Exception($this->lang('file_open') . $path, self::STOP_CONTINUE);
+				throw new Exception($this->lang('file_open') . $assets, self::STOP_CONTINUE);
 			}
 			$file_buffer = $this->encodeString($file_buffer, $encoding);
 
@@ -3349,7 +3349,7 @@ class PHPMailer
 	 * the HTML refers to using the $cid value.
 	 * Never use a user-supplied path to a file!
 	 *
-	 * @param string $path        Path to the attachment
+	 * @param string $assets        Path to the attachment
 	 * @param string $cid         Content ID of the attachment; Use this to reference
 	 *                            the content when using an embedded image in HTML
 	 * @param string $name        Overrides the attachment name
@@ -3359,27 +3359,27 @@ class PHPMailer
 	 *
 	 * @return bool True on successfully adding an attachment
 	 */
-	public function addEmbeddedImage($path, $cid, $name = '', $encoding = self::ENCODING_BASE64, $type = '', $disposition = 'inline')
+	public function addEmbeddedImage($assets, $cid, $name = '', $encoding = self::ENCODING_BASE64, $type = '', $disposition = 'inline')
 	{
-		if (!static::isPermittedPath($path) || !@is_file($path)) {
-			$this->setError($this->lang('file_access') . $path);
+		if (!static::isPermittedPath($assets) || !@is_file($assets)) {
+			$this->setError($this->lang('file_access') . $assets);
 
 			return false;
 		}
 
 		// If a MIME type is not specified, try to work it out from the file name
 		if ('' == $type) {
-			$type = static::filenameToType($path);
+			$type = static::filenameToType($assets);
 		}
 
-		$filename = basename($path);
+		$filename = basename($assets);
 		if ('' == $name) {
 			$name = $filename;
 		}
 
 		// Append to $attachment array
 		$this->attachment[] = [
-			0 => $path,
+			0 => $assets,
 			1 => $filename,
 			2 => $name,
 			3 => $encoding,
@@ -4045,28 +4045,28 @@ class PHPMailer
 	 *
 	 * @see    http://www.php.net/manual/en/function.pathinfo.php#107461
 	 *
-	 * @param string     $path    A filename or path, does not need to exist as a file
+	 * @param string     $assets    A filename or path, does not need to exist as a file
 	 * @param int|string $options Either a PATHINFO_* constant,
 	 *                            or a string name to return only the specified piece
 	 *
 	 * @return string|array
 	 */
-	public static function mb_pathinfo($path, $options = null)
+	public static function mb_pathinfo($assets, $options = null)
 	{
 		$ret = ['dirname' => '', 'basename' => '', 'extension' => '', 'filename' => ''];
-		$pathinfo = [];
-		if (preg_match('#^(.*?)[\\\\/]*(([^/\\\\]*?)(\.([^\.\\\\/]+?)|))[\\\\/\.]*$#im', $path, $pathinfo)) {
-			if (array_key_exists(1, $pathinfo)) {
-				$ret['dirname'] = $pathinfo[1];
+		$assetsinfo = [];
+		if (preg_match('#^(.*?)[\\\\/]*(([^/\\\\]*?)(\.([^\.\\\\/]+?)|))[\\\\/\.]*$#im', $assets, $assetsinfo)) {
+			if (array_key_exists(1, $assetsinfo)) {
+				$ret['dirname'] = $assetsinfo[1];
 			}
-			if (array_key_exists(2, $pathinfo)) {
-				$ret['basename'] = $pathinfo[2];
+			if (array_key_exists(2, $assetsinfo)) {
+				$ret['basename'] = $assetsinfo[2];
 			}
-			if (array_key_exists(5, $pathinfo)) {
-				$ret['extension'] = $pathinfo[5];
+			if (array_key_exists(5, $assetsinfo)) {
+				$ret['extension'] = $assetsinfo[5];
 			}
-			if (array_key_exists(3, $pathinfo)) {
-				$ret['filename'] = $pathinfo[3];
+			if (array_key_exists(3, $assetsinfo)) {
+				$ret['filename'] = $assetsinfo[3];
 			}
 		}
 		switch ($options) {
