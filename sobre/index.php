@@ -54,47 +54,50 @@
 							<img title="Suzany Silva" class="responsive-img circle" src="../assets/images/suzany.jpg" alt="Suzany Silva">
 						</div>
 					</div>
-
 				</div>
 
-				<h2 class="flow-text">Informações</h2>
+				<div class="divider mb-0"></div>
+				<h2 class="flow-text mt-2 mb-2">Informações</h2>
 				<div class="divider"></div>
-				<p>
+				<p style="text-indent:20px">
 					<strong>4People</strong> é um projeto de TCC da Escola Técnica (Etec) Alfredo de Barros Santos de Guaratinguetá, no curso de Desenvolvimento de Sistemas.
-					O 4People foi feito por 2 programadores e 2 analistas.
+					O 4People foi feito por 2 Programadores e 2 Analistas.
 					Na criação foi utilizado HTML, CSS, JavaScript e PHP como linguagens.
 					O Editor de Texto que utilizamos foi o Visual Studio Code, da Microsoft.
+					O Projeto é de Código Aberto (<a href="https://github.com/lucasnaja/4People/blob/master/LICENSE" target="_blank" rel="noopener noreferrer nofollow">GPL-3.0</a>) e você pode contribuir com ele no <a href="https://github.com/lucasnaja/4People" target="_blank" rel="noopener noreferrer nofollow">GitHub</a>!
 				</p>
 
-				<h2 class="flow-text">Criadores</h2>
-				<div class="divider mt-0"></div>
+				<div class="divider"></div>
+				<h2 class="flow-text mt-2 mb-2">Sobre nós</h2>
+				<div class="divider"></div>
+
 				<ul class="browser-default">
 					<li>
-						Lucas Bittencourt
+						<span style="font-size:18px">Lucas Bittencourt</span>
 						<ul class="browser-default">
-							<li><a href="https://github.com/LucasNaja" target="_blank">GitHub</a></li>
-							<li><a href="https://www.facebook.com/Lucas.Naja0" target="_blank">Facebook</a></li>
-							<li><a href="https://dev.to/lucasnaja" target="_blank">Dev Community</a></li>
-							<li><a href="https://www.linkedin.com/in/lucas-bittencourt/" target="_blank">LinkedIn</a></li>
+							<li><a href="https://github.com/LucasNaja" target="_blank">GitHub »</a></li>
+							<li><a href="https://www.facebook.com/Lucas.Naja0" target="_blank">Facebook »</a></li>
+							<li><a href="https://dev.to/lucasnaja" target="_blank">Dev Community »</a></li>
+							<li><a href="https://www.linkedin.com/in/lucas-bittencourt/" target="_blank">LinkedIn »</a></li>
 						</ul>
 					</li>
 					<li>
-						Jairo Arcy
+						<span style="font-size:18px">Jairo Arcy</span>
 						<ul class="browser-default">
-							<li><a href="https://github.com/Jairo-Arcy" target="_blank">GitHub</a></li>
-							<li><a href="https://www.facebook.com/jairo.arcy" target="_blank">Facebook</a></li>
+							<li><a href="https://github.com/Jairo-Arcy" target="_blank">GitHub »</a></li>
+							<li><a href="https://www.facebook.com/jairo.arcy" target="_blank">Facebook »</a></li>
 						</ul>
 					</li>
 					<li>
-						Renan de Mattos
+						<span style="font-size:18px">Renan de Mattos</span>
 						<ul class="browser-default">
-							<li><a href="https://www.facebook.com/reenan.mattos" target="_blank">Facebook</a></li>
+							<li><a href="https://www.facebook.com/reenan.mattos" target="_blank">Facebook »</a></li>
 						</ul>
 					</li>
 					<li>
-						Suzany Silva
+						<span style="font-size:18px">Suzany Silva</span>
 						<ul class="browser-default">
-							<li><a href="https://www.facebook.com/suzany.castrodasilva" target="_blank">Facebook</a></li>
+							<li><a href="https://www.facebook.com/suzany.castrodasilva" target="_blank">Facebook »</a></li>
 						</ul>
 					</li>
 				</ul>

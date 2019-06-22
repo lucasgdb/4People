@@ -58,15 +58,12 @@ document.querySelector('#menu').onclick = function () {
 			sideIn()
 			animateIn()
 			sessionStorage.setItem('sideStatus', true)
-
 		} else {
 			sideOut()
 			animateOut()
 			sessionStorage.removeItem('sideStatus')
 		}
-	} else if (!sidenav.options.outDuration) {
-		sidenav.options.outDuration = 200
-	}
+	} else if (!sidenav.options.outDuration) sidenav.options.outDuration = 200
 }
 
 // Media Queries with pure JS
@@ -74,11 +71,8 @@ const maxWidth = window.matchMedia('(max-width: 992px)')
 const minWidth = window.matchMedia('(min-width: 993px)')
 
 function matchMax(maxWidth) {
-	if (maxWidth.matches && !tr) {
-		animateOut()
-	} else if (maxWidth.matches && tr) {
-		sidenav.options.outDuration = 0
-	}
+	if (maxWidth.matches && !tr) animateOut()
+	else if (maxWidth.matches && tr) sidenav.options.outDuration = 0
 }
 
 function matchMin(minWidth) {
@@ -96,10 +90,11 @@ function matchMin(minWidth) {
 document.addEventListener('DOMContentLoaded', function () {
 	const allAElements = document.querySelectorAll('a[href^="."]')
 
-	sessionStorage.removeItem('sideStatus')
-	sidenav.options.outDuration = 0
-	sideOut()
-	animateOut(0)
+	if (!sessionStorage.getItem('sideStatus')) {
+		sidenav.options.outDuration = 0
+		sideOut()
+		animateOut(0)
+	}
 
 	for (let i = 0; i < allAElements.length; i++) {
 		allAElements[i].onclick = function (event) {
@@ -126,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		const path = paddingHeadersA[i].getAttribute('href').split('/').filter(link => link !== '')
 		const pathName = location.pathname.split('/').filter(link => link !== '')
 		if (path[path.length - 1] === pathName[pathName.length - 1]) {
-			paddingHeadersA[i].classList.add('grey', 'lighten-3', 'black-text')
+			paddingHeadersA[i].classList.add('grey', 'lighten-4', 'black-text')
 			paddingHeadersA[i].querySelector('i').innerHTML = 'fiber_manual_record'
 			paddingHeadersA[i].parentElement.parentElement.parentElement.parentElement.querySelector('.collapsible-header').click()
 			break

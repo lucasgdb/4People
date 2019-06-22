@@ -12,7 +12,7 @@
 	</li>
 
 	<li class="<?= strpos($link, 'computacao') !== false ? 'active' : '' ?>">
-		<div class="collapsible-header"><i class="material-icons">computer</i>Computação<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+		<div class="collapsible-header"><i class="material-icons left">computer</i>Computação<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
 		<div class="collapsible-body">
 			<ul class="collapsible padding-headers">
 				<li>
@@ -128,7 +128,7 @@
 	</li>
 
 	<li class="<?= strpos($link, 'matematica') !== false ? 'active' : '' ?>">
-		<div class="collapsible-header"><i class="material-icons">functions</i>Matemática<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+		<div class="collapsible-header"><i class="material-icons left">functions</i>Matemática<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
 		<div class="collapsible-body">
 			<ul class="collapsible padding-headers">
 				<li>
@@ -192,7 +192,7 @@
 	</li>
 
 	<li class="<?= strpos($link, 'outras_ferramentas') !== false ? 'active' : '' ?>">
-		<div class="collapsible-header"><i class="material-icons">build</i>Outras Ferramentas<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+		<div class="collapsible-header"><i class="material-icons left">build</i>Outras Ferramentas<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
 		<div class="collapsible-body">
 			<ul class="collapsible padding-headers">
 				<li>
@@ -213,6 +213,20 @@
 							<li><a class="waves-effect" href="<?= $root ?>/outras_ferramentas/jogos/gerador_de_decks/" title="Gerador de Decks"><i class="material-icons left">keyboard_arrow_right</i>Gerador de Deck</a></li>
 						</ul>
 					</div>
+				</li>
+			</ul>
+		</div>
+	</li>
+
+	<li class="<?= strpos($link, 'sobre') !== false || strpos($link, 'contato') !== false ? 'active' : '' ?>">
+		<div class="collapsible-header"><i class="material-icons left">info</i>Outras Páginas<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+		<div class="collapsible-body">
+			<ul class="collapsible padding-headers">
+				<li>
+					<ul>
+						<li><a class="waves-effect" href="<?= $root ?>/sobre/" title="Sobre o 4People"><i class="material-icons left">keyboard_arrow_right</i>Sobre</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/contato/" title="Fale Conosco"><i class="material-icons left">keyboard_arrow_right</i>Fale Conosco</a></li>
+					</ul>
 				</li>
 			</ul>
 		</div>

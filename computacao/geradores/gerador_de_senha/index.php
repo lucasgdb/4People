@@ -35,7 +35,7 @@
 				<label>Gerador de Senha Online para gerar senhas personalizadas e fortes.</label>
 				<div class="divider"></div>
 
-				<div class="row">
+				<div class="row mb-0">
 					<p class="mb-0 col s12">Primeiro caractere</p>
 					<div class="col s6 m3">
 						<p>
@@ -76,7 +76,7 @@
 
 				<div class="divider"></div>
 
-				<div class="row">
+				<div class="row mb-0">
 					<p class="mb-0 col s12">Outros caracteres</p>
 					<div class="col s6 m3">
 						<p>
@@ -117,7 +117,7 @@
 
 				<div class="divider"></div>
 
-				<div class="row">
+				<div class="row mb-0">
 					<div class="col s12 m6">
 						<div class="row mb-0">
 							<p class="mb-0 col s12">Tamanho:</p>
@@ -140,6 +140,8 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="divider"></div>
 
 				<div class="row mb-0">
 					<div class="col s12 m6">
