@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		const path = paddingHeadersA[i].getAttribute('href').split('/').filter(link => link !== '')
 		const pathName = location.pathname.split('/').filter(link => link !== '')
 		if (path[path.length - 1] === pathName[pathName.length - 1]) {
-			paddingHeadersA[i].classList.add('grey', 'lighten-3')
+			paddingHeadersA[i].classList.add('grey', 'lighten-3', 'black-text')
 			paddingHeadersA[i].querySelector('i').innerHTML = 'fiber_manual_record'
 			paddingHeadersA[i].parentElement.parentElement.parentElement.parentElement.querySelector('.collapsible-header').click()
 			break

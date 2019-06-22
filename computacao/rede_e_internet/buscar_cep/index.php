@@ -1,11 +1,10 @@
 <?php include_once('../../../assets/assets.php') ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-	<link rel="stylesheet" href="<?= "$assets/src/css/materialize.min.css" ?>">
-	<link rel="stylesheet" href="<?= "$assets/src/css/main.css" ?>">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
 	<title>Buscar CEP - 4People</title>
 	<?php include_once("$assets/components/metas.php") ?>
@@ -31,7 +30,7 @@
 	<main>
 		<div class="container">
 			<div class="card-panel left-div-margin">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">computer</i>Buscar CEP</h1>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">wifi</i>Buscar CEP</h1>
 
 				<label>Busque informações de seu CEP, como Rua, Cidade, Bairro e Estado aqui.</label>
 				<div class="divider"></div>
@@ -78,10 +77,10 @@
 
 	<?php include_once("$assets/components/footer.php") ?>
 
-	<script src="<?= "$assets/src/js/materialize.min.js" ?>"></script>
+	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/cep.js"></script>
 	<script src="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.js"></script>
-	<script src="<?= "$assets/src/js/main.js" ?>"></script>
+	<script src="<?= $assets ?>/src/js/main.js"></script>
 </body>
 
 </html>

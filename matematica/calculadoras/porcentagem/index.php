@@ -1,11 +1,10 @@
 <?php include_once('../../../assets/assets.php') ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-	<link rel="stylesheet" href="<?= "$assets/src/css/materialize.min.css" ?>">
-	<link rel="stylesheet" href="<?= "$assets/src/css/main.css" ?>">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
 	<title>Porcentagem - 4People</title>
 	<?php include_once("$assets/components/metas.php") ?>
@@ -31,7 +30,7 @@
 	<main>
 		<div class="container">
 			<div class="card-panel left-div-margin">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">functions</i>Porcentagem</h1>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">exposure</i>Porcentagem</h1>
 
 				<label>Calculadora de Porcentagem Online com vários métodos para encontrar a porcentagem, como aumentos, descontos, proporções, etc.</label>
 				<div class="divider"></div>
@@ -318,10 +317,10 @@
 
 	<?php include_once("$assets/components/footer.php") ?>
 
-	<script src="<?= "$assets/algorithms/percentage.js" ?>"></script>
-	<script src="<?= "$assets/src/js/materialize.min.js" ?>"></script>
+	<script src="<?= $assets ?>/algorithms/percentage.js"></script>
+	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.js"></script>
-	<script src="<?= "$assets/src/js/main.js" ?>"></script>
+	<script src="<?= $assets ?>/src/js/main.js"></script>
 </body>
 
 </html>

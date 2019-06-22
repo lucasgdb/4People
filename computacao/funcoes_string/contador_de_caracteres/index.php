@@ -1,11 +1,10 @@
 <?php include_once('../../../assets/assets.php') ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-	<link rel="stylesheet" href="<?= "$assets/src/css/materialize.min.css" ?>">
-	<link rel="stylesheet" href="<?= "$assets/src/css/main.css" ?>">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
 	<title>Contador de Caracteres - 4People</title>
 	<?php include_once("$assets/components/metas.php") ?>
@@ -31,7 +30,7 @@
 	<main>
 		<div class="container">
 			<div class="card-panel left-div-margin">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">computer</i>Contador de Caracteres</h1>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">format_color_text</i>Contador de Caracteres</h1>
 
 				<label>Contador de letras, caracteres sem espaço, palavras, espaços, vogais, consoantes, números e linhas.</label>
 				<div class="divider"></div>
@@ -72,10 +71,10 @@
 
 	<?php include_once("$assets/components/footer.php") ?>
 
-	<script src="<?= "$assets/algorithms/charactersCount.js" ?>"></script>
-	<script src="<?= "$assets/src/js/materialize.min.js" ?>"></script>
+	<script src="<?= $assets ?>/algorithms/charactersCount.js"></script>
+	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.js"></script>
-	<script src="<?= "$assets/src/js/main.js" ?>"></script>
+	<script src="<?= $assets ?>/src/js/main.js"></script>
 </body>
 
 </html>

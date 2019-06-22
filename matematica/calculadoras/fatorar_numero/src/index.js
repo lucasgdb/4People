@@ -5,7 +5,7 @@ function factorize() {
     if (parseInt(txtNum.value) >= 1 && Number.isInteger(parseFloat(txtNum.value))) {
         const result = calculateFacorization(parseFloat(txtNum.value))
         txtResult.value =
-            `${txtNum.value} = ${result.result.join(' * ')} => ${result.amount.map(item => `${item.number}${item.toThe === 1 ? '' : `^${item.toThe}`}`).join(' * ')}`
+            `${txtNum.value} = ${result.result.join(' x ')} => ${result.amount.map(item => `${item.number}${item.toThe === 1 ? '' : `^${item.toThe}`}`).join(' x ')}`
     } else {
         M.toast({
             html: 'Valor não permitido!',

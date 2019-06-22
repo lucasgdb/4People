@@ -1,11 +1,10 @@
 <?php include_once('../../assets/assets.php') ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-	<link rel="stylesheet" href="<?= "$assets/src/css/materialize.min.css" ?>">
-	<link rel="stylesheet" href="<?= "$assets/src/css/main.css" ?>">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<title>Tabelas e Padrões - 4People</title>
 	<?php include_once("$assets/components/metas.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
@@ -30,7 +29,7 @@
 	<main>
 		<div class="container">
 			<div class="card-panel">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">computer</i>Tabelas e Padrões</h1>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">colorize</i>Tabelas e Padrões</h1>
 
 				<label>Ferramentas de Tabelas e Padrões do 4People</label>
 				<div class="divider"></div>
@@ -40,8 +39,8 @@
 
 	<?php include_once("$assets/components/footer.php") ?>
 
-	<script src="<?= "$assets/src/js/materialize.min.js" ?>"></script>
-	<script src="<?= "$assets/src/js/main.js" ?>"></script>
+	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
+	<script src="<?= $assets ?>/src/js/main.js"></script>
 </body>
 
 </html>

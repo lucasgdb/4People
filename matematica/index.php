@@ -1,12 +1,11 @@
 <?php include_once('../assets/assets.php') ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-	<link rel="stylesheet" href="<?= "$assets/src/css/materialize.min.css" ?>">
-	<link rel="stylesheet" href="<?= "$assets/src/css/main.css" ?>">
-	<link rel="stylesheet" href="<?= "$assets/src/css/cards.css" ?>">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/cards.css">
 	<title>Matemática - 4People</title>
 	<?php include_once("$assets/components/metas.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
@@ -307,8 +306,8 @@
 
 	<?php include_once("$assets/components/footer.php") ?>
 
-	<script src="<?= "$assets/src/js/materialize.min.js" ?>"></script>
-	<script src="<?= "$assets/src/js/main.js" ?>"></script>
+	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
+	<script src="<?= $assets ?>/src/js/main.js"></script>
 </body>
 
 </html>

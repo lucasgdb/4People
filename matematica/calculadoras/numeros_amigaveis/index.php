@@ -1,11 +1,10 @@
 <?php include_once('../../../assets/assets.php') ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-	<link rel="stylesheet" href="<?= "$assets/src/css/materialize.min.css" ?>">
-	<link rel="stylesheet" href="<?= "$assets/src/css/main.css" ?>">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
 	<title>Números Amigáveis - 4People</title>
 	<?php include_once("$assets/components/metas.php") ?>
@@ -31,7 +30,7 @@
 	<main>
 		<div class="container">
 			<div class="card-panel">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">functions</i>Números Amigáveis</h1>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">exposure</i>Números Amigáveis</h1>
 
 				<label>Números amigáveis são pares de números onde um deles é a soma dos divisores do outro. Por exemplo, os divisores de 220 são 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 e 110, cuja soma é 284. Por outro lado, os divisores de 284 são 1, 2, 4, 71 e 142 e a soma deles é 220.</label>
 				<div class="divider"></div>
@@ -65,7 +64,7 @@
 				<div class="divider mt-2"></div>
 
 				<textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
-				<button title="Copiar" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult()">
+				<button title="Copiar Resultado" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult()">
 					Copiar
 				</button>
 
@@ -92,10 +91,10 @@
 
 	<?php include_once("$assets/components/footer.php") ?>
 
-	<script src="<?= "$assets/algorithms/friendlyNumbers.js" ?>"></script>
-	<script src="<?= "$assets/src/js/materialize.min.js" ?>"></script>
+	<script src="<?= $assets ?>/algorithms/friendlyNumbers.js"></script>
+	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.js"></script>
-	<script src="<?= "$assets/src/js/main.js" ?>"></script>
+	<script src="<?= $assets ?>/src/js/main.js"></script>
 </body>
 
 </html>

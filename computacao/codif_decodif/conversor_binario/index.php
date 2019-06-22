@@ -1,11 +1,10 @@
 <?php include_once('../../../assets/assets.php') ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-	<link rel="stylesheet" href="<?= "$assets/src/css/materialize.min.css" ?>">
-	<link rel="stylesheet" href="<?= "$assets/src/css/main.css" ?>">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
 	<title>Conversor Binário - 4People</title>
 	<?php include_once("$assets/components/metas.php") ?>
@@ -31,7 +30,7 @@
 	<main>
 		<div class="container">
 			<div class="card-panel left-div-margin">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">computer</i>Conversor Binário</h1>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">textsms</i>Conversor Binário</h1>
 
 				<label>Tradutor Online de Código Binário. Basta digitar o código binário ou texto abaixo e clicar no botão para converter.</label>
 				<div class="divider"></div>
@@ -41,7 +40,7 @@
 				<button title="Converter texto para Binário" class="btn waves-effect waves-light indigo darken-4" onclick="convertToBinary()">
 					Converter para Binário
 				</button>
-				<button title="Copiar texto" class="btn waves-effect waves-light indigo darken-4 right" onclick="copyResult(txtText)">
+				<button title="Copiar Texto" class="btn waves-effect waves-light indigo darken-4 right" onclick="copyResult(txtText)">
 					Copiar
 				</button>
 
@@ -77,10 +76,10 @@
 
 	<?php include_once("$assets/components/footer.php") ?>
 
-	<script src="<?= "$assets/algorithms/binaryConverter.js" ?>"></script>
-	<script src="<?= "$assets/src/js/materialize.min.js" ?>"></script>
+	<script src="<?= $assets ?>/algorithms/binaryConverter.js"></script>
+	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.js"></script>
-	<script src="<?= "$assets/src/js/main.js" ?>"></script>
+	<script src="<?= $assets ?>/src/js/main.js"></script>
 </body>
 
 </html>

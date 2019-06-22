@@ -1,11 +1,10 @@
 <?php include_once('../../../assets/assets.php') ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-	<link rel="stylesheet" href="<?= "$assets/src/css/materialize.min.css" ?>">
-	<link rel="stylesheet" href="<?= "$assets/src/css/main.css" ?>">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
 	<title>Índice de Massa Corporal - 4People</title>
 	<?php include_once("$assets/components/metas.php") ?>
@@ -31,7 +30,7 @@
 	<main>
 		<div class="container">
 			<div class="card-panel left-div-margn">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">functions</i>Índice de Massa Corporal</h1>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">exposure</i>Índice de Massa Corporal</h1>
 
 				<label>Calculadora de Índice de Massa Corporal Online para calcular o IMC e o seu peso ideal.</label>
 				<div class="divider"></div>
@@ -88,7 +87,7 @@
 				<div class="divider mt-2"></div>
 
 				<textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
-				<button title="Copiar" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult()">
+				<button title="Copiar IMC" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult()">
 					Copiar
 				</button>
 
@@ -115,10 +114,10 @@
 
 	<?php include_once("$assets/components/footer.php") ?>
 
-	<script src="<?= "$assets/algorithms/BMI.js" ?>"></script>
-	<script src="<?= "$assets/src/js/materialize.min.js" ?>"></script>
+	<script src="<?= $assets ?>/algorithms/BMI.js"></script>
+	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.js"></script>
-	<script src="<?= "$assets/src/js/main.js" ?>"></script>
+	<script src="<?= $assets ?>/src/js/main.js"></script>
 </body>
 
 </html>

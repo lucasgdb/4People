@@ -1,11 +1,10 @@
 <?php include_once('../../../assets/assets.php') ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-	<link rel="stylesheet" href="<?= "$assets/src/css/materialize.min.css" ?>">
-	<link rel="stylesheet" href="<?= "$assets/src/css/main.css" ?>">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
 	<title>Gerador de CPF - 4People</title>
 	<?php include_once("$assets/components/metas.php") ?>
@@ -31,7 +30,7 @@
 	<main>
 		<div class="container">
 			<div class="card-panel left-div-margin">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">computer</i>Gerador de CPF</h1>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">autorenew</i>Gerador de CPF</h1>
 
 				<label>Gerador de CPF Online que gera CPFs verdadeiros para Programadores testarem seus Softwares em desenvolvimento.</label>
 				<div class="divider"></div>
@@ -41,7 +40,7 @@
 						<div class="row mb-0">
 							<p class="mb-0 col s12">Gerar com pontuação:</p>
 
-							<div class="col s12 m3">
+							<div class="col s12 m3 l2">
 								<p>
 									<label>
 										<input class="with-gap" name="punctuation" type="radio" checked>
@@ -50,7 +49,7 @@
 								</p>
 							</div>
 
-							<div class="col s12 m3">
+							<div class="col s12 m9 l10">
 								<p>
 									<label>
 										<input class="with-gap" name="punctuation" type="radio">
@@ -134,10 +133,10 @@
 
 	<?php include_once("$assets/components/footer.php") ?>
 
-	<script src="<?= "$assets/algorithms/CPFGenerator.js" ?>"></script>
-	<script src="<?= "$assets/src/js/materialize.min.js" ?>"></script>
+	<script src="<?= $assets ?>/algorithms/CPFGenerator.js"></script>
+	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.js"></script>
-	<script src="<?= "$assets/src/js/main.js" ?>"></script>
+	<script src="<?= $assets ?>/src/js/main.js"></script>
 </body>
 
 </html>
