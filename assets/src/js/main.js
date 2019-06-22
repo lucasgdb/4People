@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			paddingHeadersA[i].classList.add('grey', 'lighten-4', 'black-text')
 			paddingHeadersA[i].querySelector('i').innerHTML = 'fiber_manual_record'
 			paddingHeadersA[i].parentElement.parentElement.parentElement.parentElement.querySelector('.collapsible-header').click()
-			break
+			return
 		}
 	}
 })
