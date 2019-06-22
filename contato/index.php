@@ -1,4 +1,5 @@
 <?php include_once('../assets/assets.php') ?>
+<?php session_start() ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -7,7 +8,6 @@
 	<link rel="stylesheet" href="<?= "$assets/src/css/materialize.min.css" ?>">
 	<link rel="stylesheet" href="<?= "$assets/src/css/main.css" ?>">
 	<link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
-	<script src="<?= "$assets/src/js/materialize.min.js" ?>"></script>
 	<title>Fale Conosco - 4People</title>
 	<?php include_once("$assets/components/metas.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
@@ -23,19 +23,6 @@
 
 <body class="grey lighten-3">
 	<?php
-	session_start();
-
-	if (isset($_SESSION['msg'])) {
-		$msg = $_SESSION['msg']['type'];
-		if ($msg === 'error') {
-			echo '<script>M.toast({html:"Não foi possível enviar o e-mail.",classes:"red accent-4"})</script>';
-		} else if ($msg === 'success') {
-			echo '<script>M.toast({html:"E-mail enviado com sucesso! Aguarde retorno.",classes:"green"})</script>';
-		}
-
-		unset($_SESSION['msg']);
-	}
-
 	include_once("$assets/components/noscript.php");
 	include_once("$assets/components/spinner.php");
 	include_once("$assets/components/header.php")
@@ -112,8 +99,8 @@
 
 	<main>
 		<div class="container">
-			<div class="card-panel">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">computer</i>Fale Conosco</h1>
+			<div class="card-panel left-div-margin">
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">email</i>Fale Conosco</h1>
 
 				<label>Alguma dúvida? Algum bug? Deseja alguma ferramenta nova? Por favor, nos contate e deixe-nos sabendo de qualquer coisa.</label>
 				<div class="divider"></div>
@@ -121,7 +108,7 @@
 				<h5>Dados</h5>
 
 				<form class="mt-2" action="mail.php" method="post">
-					<div class="row">
+					<div class="row mb-0">
 						<div class="input-field col s12 m6">
 							<input placeholder="Ex: Lucas" oninvalid="this.setCustomValidity('Por favor, preencha esse campo com seu nome.')" oninput="setCustomValidity('')" name="firstName" id="firstName" type="text" class="validate" required>
 							<label for="firstName">Nome</label>
@@ -131,9 +118,7 @@
 							<input placeholder="Ex: Bittencourt" oninvalid="this.setCustomValidity('Por favor, preencha esse campo com seu sobrenome.')" oninput="setCustomValidity('')" name="lastName" id="lastName" type="text" class="validate" required>
 							<label for="lastName">Sobrenome</label>
 						</div>
-					</div>
 
-					<div class="row">
 						<div class="input-field col s12">
 							<input placeholder="Ex: lucasnaja0@gmail.com" oninvalid="this.setCustomValidity('Por favor, preencha esse campo com seu e-mail.')" oninput="setCustomValidity('')" name="email" id="email" type="email" class="validate" required>
 							<label for="email">E-mail</label>
@@ -145,17 +130,43 @@
 					<h5>Informações</h5>
 					<textarea name="subject" placeholder="Mensagem" oninvalid="this.setCustomValidity('Por favor, preencha esse campo.')" oninput="setCustomValidity('')" spellcheck="false" required></textarea>
 
-					<button title="Enviar" class="btn waves-effect waves-dark white black-text" type="submit">
+					<button title="Enviar" class="btn waves-effect waves-light indigo darken-4" type="submit">
 						Enviar
 					</button>
 				</form>
+
+				<div class="left-div indigo darken-4"></div>
 			</div>
 		</div>
 	</main>
 
 	<?php include_once("$assets/components/footer.php") ?>
 
+	<script src="<?= "$assets/src/js/materialize.min.js" ?>"></script>
 	<script src="<?= "$assets/src/js/main.js" ?>"></script>
+	<?php
+	if (isset($_SESSION['msg'])) {
+		$msg = $_SESSION['msg']['type'];
+
+		unset($_SESSION['msg']);
+	}
+	?>
+
+	<?php if ($msg === 'error') : ?>
+		<script>
+			M.toast({
+				html: "Não foi possível enviar o e-mail.",
+				classes: "red accent-4"
+			})
+		</script>
+	<?php elseif ($msg === 'success') : ?>
+		<script>
+			M.toast({
+				html: "E-mail enviado com sucesso! Aguarde retorno.",
+				classes: "green"
+			})
+		</script>
+	<?php endif ?>
 </body>
 
 </html>

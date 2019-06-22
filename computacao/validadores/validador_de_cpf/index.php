@@ -113,7 +113,7 @@
 				</div>
 
 				<div class="divider mb-2"></div>
-				<button title="Validar CPF" class="btn btn-center waves-effect waves-light indigo darken-4" onclick="validate()">
+				<button title="Validar CPF" class="btn btn-center waves-effect waves-light indigo darken-4 z-depth-2" onclick="validate()">
 					Validar CPF
 				</button>
 				<div class="divider mt-2"></div>
@@ -123,6 +123,22 @@
 				<button title="Copiar Validação" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult()">
 					Copiar
 				</button>
+
+				<div class="left-div indigo darken-4"></div>
+			</div>
+
+			<div class="card-panel left-div-margin">
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">trending_up</i>Veja também:</h1>
+				<div class="divider"></div>
+
+				<ul class="collection with-header mb-0">
+					<li class="collection-item">
+						<div>Gerador de Senhas<a href="#!" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+					</li>
+					<li class="collection-item">
+						<div>Gerador de Cartão de Crédito<a href="#!" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+					</li>
+				</ul>
 
 				<div class="left-div indigo darken-4"></div>
 			</div>

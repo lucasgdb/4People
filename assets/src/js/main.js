@@ -47,7 +47,7 @@ function updatePage(e, link) {
 	else sidenav.el.style.opacity = '0'
 
 	setTimeout(function () {
-		location = link.includes('#') ? link.replace(/[#]/g, '') : link
+		location = link.includes('#') || link.includes('!') ? link.replace(/[#!]/g, '') : link
 	}, 150)
 }
 
@@ -87,9 +87,10 @@ function matchMax(maxWidth) {
 function matchMin(minWidth) {
 	if (minWidth.matches) {
 		setTimeout(() => {
-			sessionStorage.removeItem('sideStatus')
-			animateOut(0)
-			sideOut()
+			if (!sessionStorage.getItem('sideStatus')) {
+				animateOut(0)
+				sideOut()
+			} else animateIn(0)
 		}, 0)
 	}
 }
@@ -104,22 +105,21 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 
-	if (!sessionStorage.getItem('sideStatus')) {
-		sidenav.options.outDuration = 0
-		sideOut()
-		animateOut(0)
-	}
+	sessionStorage.removeItem('sideStatus')
+	sidenav.options.outDuration = 0
+	sideOut()
+	animateOut(0)
 
 	for (let i = 0; i < navMobileA.length; i++) {
 		if (navMobileA[i].getAttribute('href').split('/').filter(link => link !== '' && link !== '.').join('') === '') {
-			navMobileA[i].parentElement.setAttribute('class', 'active waves-effect')
+			navMobileA[i].parentElement.classList.add('active')
 			return
 		}
 
 		const path = navMobileA[i].getAttribute('href').split('/').filter(link => link !== '')
 		const pathName = location.pathname.split('/').filter(link => link !== '')
 		if (path[path.length - 1] === pathName[pathName.length - 1]) {
-			navMobileA[i].parentElement.setAttribute('class', 'active waves-effect')
+			navMobileA[i].parentElement.classList.add('active')
 			break
 		}
 	}
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		const path = paddingHeadersA[i].getAttribute('href').split('/').filter(link => link !== '')
 		const pathName = location.pathname.split('/').filter(link => link !== '')
 		if (path[path.length - 1] === pathName[pathName.length - 1]) {
-			paddingHeadersA[i].setAttribute('class', 'btn waves-effect grey lighten-2 black-text z-depth-2')
+			paddingHeadersA[i].setAttribute('class', 'btn waves-effect waves-light indigo darken-4 z-depth-2')
 			break
 		}
 	}

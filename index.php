@@ -27,7 +27,7 @@
 	include_once("$assets/components/header.php")
 	?>
 
-	<ul id="slide-out" class="sidenav sidenav-fixed collapsible">
+	<ul id="slide-out" class="sidenav sidenav-fixed collapsible grey lighten-5">
 		<?php include_once("$assets/components/logo.php") ?>
 
 		<li class="active">
@@ -107,7 +107,7 @@
 				<div class="slider">
 					<ul class="slides">
 						<li class="grey lighten-2">
-							<img>
+							<img alt=".">
 							<div class="caption center-align">
 								<h3 class="dark grey-text text-darken-4">FEITO PARA TODOS!</h3>
 								<h5 class="light grey-text text-darken-4">Possuímos ferramentas para Programadores, professores, estudantes e usuários comuns.</h5>

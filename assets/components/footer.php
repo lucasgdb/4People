@@ -6,7 +6,7 @@
                 <p>
                     4People é um site feito para ajudar estudantes, professores, Programadores e pessoas em suas atividades diárias.
                     Feito com <img title="Coração" style="position:relative;top:4px" src="<?= $assets ?>/images/heart.png" alt="Coração"> e <img title="JavaScript" style="position:relative;top:2.5px" src="<?= $assets ?>/images/js.png" alt="JavaScript">
-                    O projeto é de código aberto sob a licença <nobr><a href="https://github.com/LucasNaja/4People/blob/master/LICENSE" target="_blank" rel="noopener noreferrer nofollow">GPL-3.0</a></nobr>, no <a href="https://github.com/LucasNaja/4People" target="_blank" rel="noopener noreferrer nofollow">GitHub</a>.
+                    O projeto é de código aberto sob a licença <nobr><a style="text-decoration:underline" class="white-text" href="https://github.com/LucasNaja/4People/blob/master/LICENSE" target="_blank" rel="noopener noreferrer nofollow">GPL-3.0</a></nobr>, no <a style="text-decoration:underline" class="white-text" href="https://github.com/LucasNaja/4People" target="_blank" rel="noopener noreferrer nofollow">GitHub</a>.
                 </p>
             </div>
 
@@ -22,11 +22,11 @@
             </div>
         </div>
 	 </div>
-	 
-    <div class="footer-copyright">
+ 
+    <div class="footer-copyright" style="background-color:#10165a">
         <div class="container white-text">
             © 4People - 2019
-            <a class="right" href="<?= $root ?>/contato/"><i class="material-icons left" style="position:relative;top:-1px">email</i>Fale Conosco »</a>
+            <a class="right white-text" href="<?= $root ?>/contato/"><i class="material-icons left" style="position:relative;top:-1px">email</i>Fale Conosco »</a>
         </div>
     </div>
 </footer>

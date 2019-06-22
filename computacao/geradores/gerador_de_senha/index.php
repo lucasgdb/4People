@@ -144,7 +144,7 @@
 				</div>
 
 				<div class="divider"></div>
-				
+
 				<div class="row">
 					<p class="mb-0 col s12">Outros caracteres</p>
 					<div class="col s6 m3">
@@ -240,7 +240,7 @@
 				</div>
 
 				<div class="divider mb-2"></div>
-				<button title="Gerar Senha" class="btn btn-center waves-effect waves-light indigo darken-4" onclick="generate()">
+				<button title="Gerar Senha" class="btn btn-center waves-effect waves-light indigo darken-4 z-depth-2" onclick="generate()">
 					Gerar senha
 				</button>
 				<div class="divider mt-2"></div>
@@ -250,6 +250,22 @@
 				<button title="Copiar Senha" class="btn waves-effect indigo darken-4" onclick="copyResult()">
 					Copiar
 				</button>
+
+				<div class="left-div indigo darken-4"></div>
+			</div>
+
+			<div class="card-panel left-div-margin">
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">trending_up</i>Veja também:</h1>
+				<div class="divider"></div>
+
+				<ul class="collection with-header mb-0">
+					<li class="collection-item">
+						<div>Gerador de Senhas<a href="#!" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+					</li>
+					<li class="collection-item">
+						<div>Gerador de Cartão de Crédito<a href="#!" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+					</li>
+				</ul>
 
 				<div class="left-div indigo darken-4"></div>
 			</div>

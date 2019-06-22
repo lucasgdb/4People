@@ -104,7 +104,7 @@
 				<label>Calcular Diferença entre Datas. Possui um leque de recursos disponíveis, como calcular idades, tempo, etc.</label>
 				<div class="divider"></div>
 
-				<div class="row">
+				<div class="row mb-0">
 					<div class="col s12 m6">
 						<div class="row mb-0">
 							<p class="mb-0 col s12">Data inicial:</p>
@@ -150,6 +150,22 @@
 					<li class="collection-item">Dias: <span id="days">1</span></li>
 					<li class="collection-item">Meses: <span id="months">0</span></li>
 					<li class="collection-item">Anos: <span id="years">0</span></li>
+				</ul>
+
+				<div class="left-div indigo darken-4"></div>
+			</div>
+
+			<div class="card-panel left-div-margin">
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">trending_up</i>Veja também:</h1>
+				<div class="divider"></div>
+
+				<ul class="collection with-header mb-0">
+					<li class="collection-item">
+						<div>Gerador de Senhas<a href="#!" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+					</li>
+					<li class="collection-item">
+						<div>Gerador de Cartão de Crédito<a href="#!" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+					</li>
 				</ul>
 
 				<div class="left-div indigo darken-4"></div>

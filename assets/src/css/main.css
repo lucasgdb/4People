@@ -52,10 +52,6 @@ main {
 	flex: 1 0 auto
 }
 
-footer {
-	border-top: 1px solid #bbbbbb
-}
-
 .mb-2 {
 	margin-bottom: 10px
 }
@@ -69,7 +65,7 @@ footer {
 }
 
 .mb-0 {
-	margin-bottom: 0
+	margin-bottom: 0 !important
 }
 
 .collapsible-header,
@@ -83,9 +79,9 @@ footer {
 	border-bottom: 1px solid #e0e0e0 !important
 }
 
-body>header+ul>li:nth-child(2) {
+/* body>header+ul>li:nth-child(2) {
 	border-top: 1px solid #e0e0e0 !important
-}
+} */
 
 body>header+ul>li>.collapsible-header {
 	padding-left: 8px !important
@@ -117,7 +113,12 @@ body>header+ul>li>.collapsible-header {
 }
 
 .sidenav {
-	height: 100% !important
+	height: 100vh !important;
+	padding-bottom: 0
+}
+
+.collapsible {
+	padding-top: 0 !important
 }
 
 #spinner {
@@ -140,17 +141,24 @@ body>header+ul>li>.collapsible-header {
 	border-top-right-radius: 2px
 }
 
-.container {
-	width: 100%
-}
-
 .card-panel {
 	margin-top: 14px
 }
 
+@media (max-width: 600px) {
+	.container {
+		width: 100%
+	}
+
+	.collapsible {
+		-webkit-box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2);
+		box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 0 1px 7px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -1px rgba(0, 0, 0, 0.2)
+	}
+}
+
 @media (min-width: 601px) {
 	.container {
-		width: 95%
+		width: 90% !important
 	}
 
 	.right-div {
@@ -204,10 +212,6 @@ body>header+ul>li>.collapsible-header {
 		padding-left: 300px
 	}
 
-	.container {
-		width: 85% !important
-	}
-
 	.sidenav::-webkit-scrollbar {
 		width: 5px;
 		height: 5px
@@ -216,10 +220,6 @@ body>header+ul>li>.collapsible-header {
 	.sidenav::-webkit-scrollbar-thumb {
 		background-color: #1a237e;
 		border-radius: 8px
-	}
-
-	.sidenav::-webkit-scrollbar-track {
-		background-color: #ccc
 	}
 }
 

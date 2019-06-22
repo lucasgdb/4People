@@ -6,14 +6,13 @@ require_once('src/Exception.php');
 require_once('src/PHPMailer.php');
 require_once('src/SMTP.php');
 
-$firstName = $_POST['firstName'];
-$lastName = $_POST['lastName'];
-$email = $_POST['email'];
-$message = $_POST['subject'];
+$firstName = filter_input(INPUT_POST, 'firstName', FILTER_DEFAULT);
+$lastName = filter_input(INPUT_POST, 'lastName', FILTER_DEFAULT);
+$email = filter_input(INPUT_POST, 'email', FILTER_DEFAULT);
+$message = filter_input(INPUT_POST, 'subject', FILTER_DEFAULT);
 
 $mail = new PHPMailer(true);
 
-session_start();
 try {
 	// Server settings
 	$mail->SMTPDebug = 0;
@@ -37,14 +36,13 @@ try {
 	$mail->Body = "Nome: $firstName $lastName<br>E-mail: $email<br>Mensagem: $message";
 	$mail->AltBody = 'Mensagem recebida do 4People';
 
-	if ($mail->send()) {
-		$_SESSION['msg']['type'] = 'success';
-		header('Location: ./');
-	} else {
-		$_SESSION['msg']['type'] = 'error';
-		header('Location: ./');
-	}
+	session_start();
+
+	if ($mail->send()) $_SESSION['msg']['type'] = 'success';
+	else $_SESSION['msg']['type'] = 'error';
+
+	header('Location: ./');
 } catch (Exception $e) {
 	$_SESSION['msg']['type'] = 'error';
-	header('Location: ./');
+	echo $e->getMessage();
 }

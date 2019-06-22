@@ -105,7 +105,7 @@
 				<div class="divider"></div>
 
 				<div class="row mb-0">
-					<div class="col s12 m6">
+					<div class="col s12 l6">
 						<div class="card sticky-action">
 							<div class="card-content grey lighten-3">
 								<span class="card-title activator no-select">Fatorar Número<i class="material-icons right">more_vert</i></span>
@@ -114,9 +114,9 @@
 								</p>
 							</div>
 
-							<div class="card-action indigo darken-3">
-								<a class="white-text no-break" href="./calculadoras/fatorar_numero/">Ferramenta &raquo;</a>
-								<a class="white-text no-break" href="./calculadoras/">Mais Ferramentas &raquo;</a>
+							<div class="card-action grey lighten-1">
+								<a class="black-text no-break" href="./calculadoras/fatorar_numero/">Ferramenta &raquo;</a>
+								<a class="black-text no-break" href="./calculadoras/">Mais Ferramentas &raquo;</a>
 							</div>
 
 							<div class="card-reveal grey lighten-3">
@@ -126,9 +126,9 @@
 						</div>
 					</div>
 
-					<div class="col s12 m6">
+					<div class="col s12 l6">
 						<div class="card sticky-action">
-							<div class="card-content grey lighten-2">
+							<div class="card-content grey lighten-3">
 								<span class="card-title activator no-select">Máximo Divisor Comum<i class="material-icons right">more_vert</i></span>
 								<p>
 									Calculadora Online para encontrar o Máximo Divisor Comum entre vários números.
@@ -149,9 +149,9 @@
 				</div>
 
 				<div class="row mb-0">
-					<div class="col s12 m6">
+					<div class="col s12 l6">
 						<div class="card sticky-action">
-							<div class="card-content grey lighten-2">
+							<div class="card-content grey lighten-3">
 								<span class="card-title activator no-select">Mínimo Múltiplo Comum<i class="material-icons right">more_vert</i></span>
 								<p>
 									Calculadora Online para encontrar o Mínimo Múltiplo Comum entre vários números.
@@ -170,9 +170,9 @@
 						</div>
 					</div>
 
-					<div class="col s12 m6">
+					<div class="col s12 l6">
 						<div class="card sticky-action">
-							<div class="card-content grey lighten-2">
+							<div class="card-content grey lighten-3">
 								<span class="card-title activator no-select">Índice de Massa Corporal<i class="material-icons right">more_vert</i></span>
 								<p>
 									Calculadora de Índice de Massa Corporal Online para calcular o IMC e o seu peso ideal.
@@ -193,9 +193,9 @@
 				</div>
 
 				<div class="row mb-0">
-					<div class="col s12 m6">
+					<div class="col s12 l6">
 						<div class="card sticky-action">
-							<div class="card-content grey lighten-2">
+							<div class="card-content grey lighten-3">
 								<span class="card-title activator no-select">Porcentagem<i class="material-icons right">more_vert</i></span>
 								<p>
 									Calculadora de Porcentagem Online com vários métodos para encontrar a porcentagem, como aumentos, descontos, proporções, etc.
@@ -214,9 +214,9 @@
 						</div>
 					</div>
 
-					<div class="col s12 m6">
+					<div class="col s12 l6">
 						<div class="card sticky-action">
-							<div class="card-content grey lighten-2">
+							<div class="card-content grey lighten-3">
 								<span class="card-title activator no-select">Equação do 2° Grau<i class="material-icons right">more_vert</i></span>
 								<p>
 									Cálculo da Equção do 2° Grau (Bhaskara) Online.
@@ -237,9 +237,9 @@
 				</div>
 
 				<div class="row mb-0">
-					<div class="col s12 m6">
+					<div class="col s12 l6">
 						<div class="card sticky-action">
-							<div class="card-content grey lighten-2">
+							<div class="card-content grey lighten-3">
 								<span class="card-title activator no-select">Fibonacci<i class="material-icons right">more_vert</i></span>
 								<p>
 									Calculadora para calcular a Sequência de Fibonacci. Ex: 0, 1, 1, 2, 3, 5, 8, 13, etc...
@@ -258,9 +258,9 @@
 						</div>
 					</div>
 
-					<div class="col s12 m6">
+					<div class="col s12 l6">
 						<div class="card sticky-action">
-							<div class="card-content grey lighten-2">
+							<div class="card-content grey lighten-3">
 								<span class="card-title activator no-select">Conversor de Temperatura<i class="material-icons right">more_vert</i></span>
 								<p>
 									Conversor de Temperatura Online para calcular Graus Celsius, Fahrenheit e Kelvin.
@@ -281,9 +281,9 @@
 				</div>
 
 				<div class="row mb-0">
-					<div class="col s12 m6">
+					<div class="col s12 l6">
 						<div class="card sticky-action">
-							<div class="card-content grey lighten-2">
+							<div class="card-content grey lighten-3">
 								<span class="card-title activator no-select">Divisão e Resto<i class="material-icons right">more_vert</i></span>
 								<p>
 									Calculadora de Divisão Online que mostra o resultado da divisão entre dois números e o resto (módulo) entre eles.
@@ -302,9 +302,9 @@
 						</div>
 					</div>
 
-					<div class="col s12 m6">
+					<div class="col s12 l6">
 						<div class="card sticky-action">
-							<div class="card-content grey lighten-2">
+							<div class="card-content grey lighten-3">
 								<span class="card-title activator no-select">Área do Círculo<i class="material-icons right">more_vert</i></span>
 								<p>
 									Calculador de Área do Círculo Online.
@@ -325,9 +325,9 @@
 				</div>
 
 				<div class="row mb-0">
-					<div class="col s12 m6">
+					<div class="col s12 l6">
 						<div class="card sticky-action">
-							<div class="card-content grey lighten-2">
+							<div class="card-content grey lighten-3">
 								<span class="card-title activator no-select">Área do Quadrado<i class="material-icons right">more_vert</i></span>
 								<p>
 									Calculador de Área do Quadrado Online.
@@ -346,9 +346,9 @@
 						</div>
 					</div>
 
-					<div class="col s12 m6">
+					<div class="col s12 l6">
 						<div class="card sticky-action">
-							<div class="card-content grey lighten-2">
+							<div class="card-content grey lighten-3">
 								<span class="card-title activator no-select">Diferença entre Datas<i class="material-icons right">more_vert</i></span>
 								<p>
 									Calcular Diferença entre Datas. Possui um leque de recursos disponíveis, como calcular idades, tempo, etc.
