@@ -104,12 +104,16 @@ body>header+ul>li>.collapsible-header {
 }
 
 .collapsible-body a {
-	height: 35px;
-	width: 100%
+	margin-bottom: 1px;
+	border: 1px solid #e0e0e0
+}
+
+.collapsible-body a i {
+	margin-right: 4px !important
 }
 
 .padding-headers .collapsible-body {
-	padding: 0 8.5px
+	padding: 0
 }
 
 .sidenav {
@@ -220,6 +224,10 @@ body>header+ul>li>.collapsible-header {
 	.sidenav::-webkit-scrollbar-thumb {
 		background-color: #1a237e;
 		border-radius: 8px
+	}
+
+	.sidenav::-webkit-scrollbar-track {
+		background-color: #e0e0e0
 	}
 }
 

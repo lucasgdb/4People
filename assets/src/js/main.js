@@ -1,14 +1,11 @@
 // Materialize initalizations
 M.Sidenav.init(document.querySelectorAll('.sidenav'))
-M.Collapsible.init(document.querySelectorAll('.sidenav.collapsible'), {
-	accordion: false
-})
-M.Collapsible.init(document.querySelectorAll('.padding-headers.collapsible'))
+M.Collapsible.init(document.querySelectorAll('.collapsible'))
 
 // Constants
 const sidenav = M.Sidenav.getInstance(document.querySelector('#slide-out'))
 const navMobileA = document.querySelectorAll('#nav-mobile a')
-const paddingHeadersA = document.querySelectorAll('.active .active a')
+const paddingHeadersA = document.querySelectorAll('.collapsible-body ul li a')
 const nav = document.querySelector('nav')
 const main = document.querySelector('main')
 const footer = document.querySelector('footer')
@@ -98,17 +95,18 @@ function matchMin(minWidth) {
 // Pave events
 document.addEventListener('DOMContentLoaded', function () {
 	const allAElements = document.querySelectorAll('a[href^="."]')
+
+	sessionStorage.removeItem('sideStatus')
+	sidenav.options.outDuration = 0
+	sideOut()
+	animateOut(0)
+
 	for (let i = 0; i < allAElements.length; i++) {
 		allAElements[i].onclick = function (event) {
 			const link = allAElements[i].getAttribute('href')
 			updatePage(event, link)
 		}
 	}
-
-	sessionStorage.removeItem('sideStatus')
-	sidenav.options.outDuration = 0
-	sideOut()
-	animateOut(0)
 
 	for (let i = 0; i < navMobileA.length; i++) {
 		if (navMobileA[i].getAttribute('href').split('/').filter(link => link !== '' && link !== '.').join('') === '') {
@@ -120,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		const pathName = location.pathname.split('/').filter(link => link !== '')
 		if (path[path.length - 1] === pathName[pathName.length - 1]) {
 			navMobileA[i].parentElement.classList.add('active')
-			break
+			return
 		}
 	}
 
@@ -128,7 +126,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		const path = paddingHeadersA[i].getAttribute('href').split('/').filter(link => link !== '')
 		const pathName = location.pathname.split('/').filter(link => link !== '')
 		if (path[path.length - 1] === pathName[pathName.length - 1]) {
-			paddingHeadersA[i].setAttribute('class', 'btn waves-effect waves-light indigo darken-4 z-depth-2')
+			paddingHeadersA[i].classList.add('grey', 'lighten-3')
+			paddingHeadersA[i].querySelector('i').innerHTML = 'fiber_manual_record'
+			paddingHeadersA[i].parentElement.parentElement.parentElement.parentElement.querySelector('.collapsible-header').click()
 			break
 		}
 	}

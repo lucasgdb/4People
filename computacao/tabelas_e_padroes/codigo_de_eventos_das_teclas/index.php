@@ -24,78 +24,10 @@
 	<?php
 	include_once("$assets/components/noscript.php");
 	include_once("$assets/components/spinner.php");
-	include_once("$assets/components/header.php")
+	include_once("$assets/components/header.php");
+	include_once("$assets/components/sidenav.php")
 	?>
-
-	<ul id="slide-out" class="sidenav sidenav-fixed collapsible">
-		<?php include_once("$assets/components/logo.php") ?>
-
-		<li class="active">
-			<div class="collapsible-header"><i class="material-icons">computer</i>Computação</div>
-			<div class="collapsible-body">
-				<ul class="collapsible padding-headers">
-					<li>
-						<?php include_once("$assets/components/computacao/geradores.php") ?>
-					</li>
-
-					<li>
-						<?php include_once("$assets/components/computacao/validadores.php") ?>
-					</li>
-
-					<li>
-						<?php include_once("$assets/components/computacao/funcoes_string.php") ?>
-					</li>
-
-					<li>
-						<?php include_once("$assets/components/computacao/rede_e_internet.php") ?>
-					</li>
-
-					<li>
-						<?php include_once("$assets/components/computacao/codif_decodif.php") ?>
-					</li>
-
-					<li class="active">
-						<?php include_once("$assets/components/computacao/tabelas_e_padroes.php") ?>
-					</li>
-				</ul>
-			</div>
-		</li>
-
-		<li>
-			<div class="collapsible-header"><i class="material-icons">functions</i>Matemática</div>
-			<div class="collapsible-body">
-				<ul class="collapsible padding-headers">
-					<li>
-						<?php include_once("$assets/components/matematica/calculadoras.php") ?>
-					</li>
-
-					<li>
-						<?php include_once("$assets/components/matematica/calculo_de_areas.php") ?>
-					</li>
-
-					<li>
-						<?php include_once("$assets/components/matematica/calculo_de_datas.php") ?>
-					</li>
-				</ul>
-			</div>
-		</li>
-
-		<li>
-			<div class="collapsible-header"><i class="material-icons">build</i>Outras Ferramentas</div>
-			<div class="collapsible-body">
-				<ul class="collapsible padding-headers">
-					<li>
-						<?php include_once("$assets/components/outras_ferramentas/dia_a_dia.php") ?>
-					</li>
-
-					<li>
-						<?php include_once("$assets/components/outras_ferramentas/jogos.php") ?>
-					</li>
-				</ul>
-			</div>
-		</li>
-	</ul>
-
+	
 	<main>
 		<div class="container">
 			<div class="card-panel left-div-margin">
