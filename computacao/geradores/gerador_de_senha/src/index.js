@@ -8,7 +8,7 @@ const cbStrength = document.querySelector('#strength')
 const txtLength = document.querySelector('#length')
 const lblPasswordLength = document.querySelector('#passwordLength')
 
-function generate() {
+const generate = () => {
 	if (!cbOtherChars[0].checked && !cbOtherChars[1].checked &&
 		!cbOtherChars[2].checked && !cbOtherChars[3].checked
 	) {
@@ -42,7 +42,7 @@ function generate() {
 	}
 }
 
-function copyResult() {
+const copyResult = () => {
 	if (txtResult.value !== '') {
 		txtResult.select()
 		document.execCommand('copy')
@@ -64,10 +64,7 @@ const clearInput = () => {
 	txtResult.value = ''
 }
 
-cbStrength.onchange = function () {
-	if (this.checked) {
-		lblPasswordLength.parentElement.hidden = false
-	} else {
-		lblPasswordLength.parentElement.hidden = true
-	}
+cbStrength.onchange = () => {
+	if (this.checked) lblPasswordLength.parentElement.hidden = false
+	else lblPasswordLength.parentElement.hidden = true
 }

@@ -8,9 +8,8 @@ const consonants = document.querySelector('#consonants')
 const numbers = document.querySelector('#numbers')
 const lines = document.querySelector('#lines')
 
-function countChars() {
+const countChars = () => {
 	const result = countCharacters(txtText.value)
-
 	const formatter = Intl.NumberFormat('pt-BR')
 
 	chars.textContent = formatter.format(result.totalCharacters)

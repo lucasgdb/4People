@@ -10,15 +10,12 @@
 	transform: translate(-50%, -50%)
 }
 
-input[type=number]:focus, input[type=text]:focus {
+input[type=number]:focus,
+input[type=text]:focus {
 	border-bottom: 1px solid #1a237e !important;
 	box-shadow: 0 1px 0 0 #1a237e !important
 }
 
 .dropdown-content li>span {
-	color: #607d8b
-}
-
-.dropdown-content li.selected>span {
 	color: black
 }

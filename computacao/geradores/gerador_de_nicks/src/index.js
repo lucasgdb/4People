@@ -4,7 +4,7 @@ const txtResult = document.querySelectorAll('#result')
 const txtSelect = document.querySelector('select')
 const txtInput = document.querySelector('.areaText')
 
-function generate() {
+const generate = () => {
 	if (txtSelect.value != '2' && txtSelect.value != '3') {
 		txtInput.className = 'col s12 areaText'
 		let nicks

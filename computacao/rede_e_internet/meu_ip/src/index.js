@@ -14,7 +14,7 @@ const lblOrganization = document.querySelector('#organization')
 const lblCallingCode = document.querySelector('#callingCode')
 const lblFlag = document.querySelector('#flag')
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
 	fetch('https://api.ipdata.co/?api-key=2cdd235eefa704006ffc48a6212ebae13f9f4afd8c9f1846d7a2ae12')
 		.then(result => result.text())
 		.then(json => JSON.parse(json))

@@ -9,48 +9,46 @@ const txtDecimal = document.querySelector('#decimal')
 
 const names = ['Raio', 'Diâmetro']
 txtFormulas.forEach((txtFormula, index) => {
-    txtFormula.onclick = function () {
-        lblFormula.textContent = `${names[index]}:`
-    }
+	txtFormula.onclick = () => {
+		lblFormula.textContent = `${names[index]}:`
+	}
 })
 
-function calculate() {
-    if (txtNumber.value !== '') {
-        let area
-        if (txtFormulas[0].checked) {
-            area = calculateCircleAreaRadius(parseFloat(txtNumber.value))
-        } else {
-            area = calculateCircleAreaDiameter(parseFloat(txtNumber.value))
-        }
+const calculate = () => {
+	if (txtNumber.value !== '') {
+		let area
+		if (txtFormulas[0].checked) {
+			area = calculateCircleAreaRadius(parseFloat(txtNumber.value))
+		} else {
+			area = calculateCircleAreaDiameter(parseFloat(txtNumber.value))
+		}
 
-        txtResult.value = `${txtDecimal.value === '-1' ? area : area.toFixed(parseInt(txtDecimal.value), 10)}${txtMeasure.value}²`
-    } else {
-        M.toast({
-            html: 'Valor não permitido!',
-            classes: 'red accent-4'
-        })
-    }
+		txtResult.value = `${txtDecimal.value === '-1' ? area : area.toFixed(parseInt(txtDecimal.value), 10)}${txtMeasure.value}²`
+	} else {
+		M.toast({
+			html: 'Valor não permitido!',
+			classes: 'red accent-4'
+		})
+	}
 }
 
-function copyResult() {
-    if (txtResult.value !== '') {
-        txtResult.select()
-        document.execCommand('copy')
+const copyResult = () => {
+	if (txtResult.value !== '') {
+		txtResult.select()
+		document.execCommand('copy')
 
-        M.toast({
-            html: 'Copiado para a Área de Transferência.',
-            classes: 'green'
-        })
-    } else {
-        M.toast({
-            html: 'Calcule a área primeiro.',
-            classes: 'red accent-4'
-        })
-    }
+		M.toast({
+			html: 'Copiado para a Área de Transferência.',
+			classes: 'green'
+		})
+	} else {
+		M.toast({
+			html: 'Calcule a área primeiro.',
+			classes: 'red accent-4'
+		})
+	}
 }
 
-txtNumber.onkeyup = function (e) {
-    if (e.which === 13) {
-        calculate()
-    }
+txtNumber.onkeyup = e => {
+	if (e.which === 13) calculate()
 }

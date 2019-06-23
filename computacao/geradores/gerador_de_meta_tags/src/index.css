@@ -39,9 +39,5 @@ input[type=text]:focus {
 }
 
 .dropdown-content li>span {
-	color: #607d8b
-}
-
-.dropdown-content li.selected>span {
 	color: black
 }

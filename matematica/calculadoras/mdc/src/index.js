@@ -1,7 +1,7 @@
 const txtResult = document.querySelector('#result')
 const txtNums = document.querySelector('#numbers')
 
-function calculate() {
+const calculate = () => {
 	const numbers = txtNums.value.split(',').join(' ').split(' ').map(number => parseInt(number.trim())).filter(number => number > 0 && number > 1)
 
 	if (numbers.length !== 0) {
@@ -15,7 +15,7 @@ function calculate() {
 	}
 }
 
-function copyResult() {
+const copyResult = () => {
 	if (txtResult.value !== '') {
 		txtResult.select()
 		document.execCommand('copy')
@@ -36,8 +36,6 @@ const clearInput = () => {
 	txtResult.value = ''
 }
 
-txtNums.onkeyup = function (e) {
-	if (e.which === 13) {
-		calculate()
-	}
+txtNums.onkeyup = e => {
+	if (e.which === 13) calculate()
 }

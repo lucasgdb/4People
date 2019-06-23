@@ -1,7 +1,7 @@
 const txtResult = document.querySelector('#result')
 const txtNum = document.querySelector('#number')
 
-function factorize() {
+const factorize = () => {
 	if (parseInt(txtNum.value) >= 1 && Number.isInteger(parseFloat(txtNum.value))) {
 		const result = calculateFacorization(parseFloat(txtNum.value))
 		txtResult.innerHTML =
@@ -14,7 +14,7 @@ function factorize() {
 	}
 }
 
-function copyResult() {
+const copyResult = () => {
 	if (txtResult.value !== '') {
 		txtResult.select()
 		document.execCommand('copy')
@@ -35,8 +35,6 @@ const clearInput = () => {
 	txtResult.innerHTML = ''
 }
 
-txtNum.onkeyup = function (e) {
-	if (e.which === 13) {
-		factorize()
-	}
+txtNum.onkeyup = e => {
+	if (e.which === 13) factorize()
 }

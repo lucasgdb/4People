@@ -3,7 +3,7 @@ const txtResult = document.querySelector('#result')
 const txtCPF = document.querySelector('#cpf')
 const lblFrom = document.querySelector('#from')
 
-function validate() {
+const validate = () => {
 	const CPF = txtCPF.value.split('').filter(item => Number.isInteger(parseInt(item))).map(item => parseInt(item))
 
 	if (txtCPF.value !== '' && CPF.length >= 11) {
@@ -21,7 +21,7 @@ function validate() {
 	}
 }
 
-function copyResult() {
+const copyResult = () => {
 	if (txtResult.value !== '') {
 		txtResult.select()
 		document.execCommand('copy')
@@ -43,8 +43,6 @@ const clearInput = () => {
 	txtResult.value = ''
 }
 
-txtCPF.onkeyup = function (e) {
-	if (e.which === 13) {
-		validate()
-	}
+txtCPF.onkeyup = e => {
+	if (e.which === 13) validate()
 }

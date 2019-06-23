@@ -35,6 +35,30 @@
 				<label>Conversor de Temperatura Online para calcular Graus Celsius, Fahrenheit e Kelvin.</label>
 				<div class="divider"></div>
 
+				<div class="row mb-0">
+					<p class="mb-0 col s12">Casas decimais:</p>
+					<div class="input-field col s12">
+						<select id="decimal">
+							<option value="0">Nenhuma</option>
+							<option value="1">1</option>
+							<option value="2" selected>2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+							<option value="30">30</option>
+							<option value="48">48</option>
+							<option value="-1">Automática</option>
+						</select>
+					</div>
+				</div>
+
 				<div class="row mb-0" style="position:relative">
 					<div class="input-field col s5">
 						<input type="number" id="txtFirst" placeholder="Temperatura" step="any" value="0">

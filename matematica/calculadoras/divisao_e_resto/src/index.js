@@ -2,7 +2,7 @@ const txtResult = document.querySelector('#result')
 const txtDividend = document.querySelector('#dividend')
 const txtDivider = document.querySelector('#divider')
 
-function calculate() {
+const calculate = () => {
 	if (txtDividend.value !== '' && txtDivider.value !== '' && txtDivider.value !== '0') {
 		const result = calculateDivision(parseFloat(txtDividend.value), parseFloat(txtDivider.value))
 		txtResult.value =
@@ -15,7 +15,7 @@ function calculate() {
 	}
 }
 
-function copyResult() {
+const copyResult = () => {
 	if (txtResult.value !== '') {
 		txtResult.select()
 		document.execCommand('copy')
@@ -36,14 +36,10 @@ const clearInput = () => {
 	txtResult.value = ''
 }
 
-txtDividend.onkeyup = function (e) {
-	if (e.which === 13) {
-		txtDivider.select()
-	}
+txtDividend.onkeyup = e => {
+	if (e.which === 13) txtDivider.select()
 }
 
-txtDivider.onkeyup = function (e) {
-	if (e.which === 13) {
-		calculate()
-	}
+txtDivider.onkeyup = e => {
+	if (e.which === 13) calculate()
 }

@@ -155,7 +155,7 @@
 					<div class="col s12">
 						O valor
 						<div class="input-field mt-2 mb-0 inline lesser">
-							<input id="ninethNumber" type="number" placeholder="Ex: 50" step="any">
+							<input id="ninthNumber" type="number" placeholder="Ex: 50" step="any">
 						</div>
 						sobre o valor
 						<div class="input-field mt-2 mb-0 inline lesser">
@@ -279,16 +279,16 @@
 						</div>
 						. Qual o valor X?
 						<div class="input-field mb-0 inline">
-							<textarea id="ninethResult" placeholder="Resultado" spellcheck="false" readonly></textarea>
+							<textarea id="ninthResult" placeholder="Resultado" spellcheck="false" readonly></textarea>
 						</div>
 					</div>
 
 					<div class="col s12">
-						<button title="Calcular" class="btn waves-effect waves-light indigo darken-4" onclick="calculateNineth()">
+						<button title="Calcular" class="btn waves-effect waves-light indigo darken-4" onclick="calculateNinth()">
 							Calcular
 						</button>
 
-						<button title="Copiar" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult(txtNinethResult)">
+						<button title="Copiar" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult(txtNinthResult)">
 							Copiar
 						</button>
 					</div>

@@ -4,7 +4,7 @@ const loc = document.querySelector('#location')
 const which = document.querySelector('#which')
 const code = document.querySelector('#code')
 
-window.onkeydown = function (e) {
+window.onkeydown = e => {
 	e.preventDefault()
 	if (e.which !== 116) {
 		digit.textContent = e.which

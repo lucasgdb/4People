@@ -1,19 +1,15 @@
 const txtText = document.querySelector('#text')
 const txtBinaryCode = document.querySelector('#binary')
 
-function convertToBinary() {
-	if (txtText.value !== '') {
-		txtBinaryCode.value = textToBinary(txtText.value)
-	}
+const convertToBinary = () => {
+	if (txtText.value !== '') txtBinaryCode.value = textToBinary(txtText.value)
 }
 
-function convertToText() {
-	if (txtBinaryCode.value !== '') {
-		txtText.value = binaryToText(txtBinaryCode.value)
-	}
+const convertToText = () => {
+	if (txtBinaryCode.value !== '') txtText.value = binaryToText(txtBinaryCode.value)
 }
 
-function copyResult(txt) {
+const copyResult = txt => {
 	if (txt.value !== '') {
 		txt.select()
 		document.execCommand('copy')

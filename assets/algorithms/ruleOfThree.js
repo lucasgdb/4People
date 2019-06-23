@@ -1,3 +1,1 @@
-function ruleOfThree(a, b, c) {
-    return b * c / a
-}
+const ruleOfThree = (a, b, c) => b * c / a

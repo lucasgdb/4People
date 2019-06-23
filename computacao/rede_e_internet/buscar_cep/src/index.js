@@ -1,15 +1,15 @@
 const txtResult = document.querySelector('#result')
 const txtCEP = document.querySelector('#cep')
 
-async function search() {
+const search = async () => {
 	txtResult.value = await cep(txtCEP.value)
 		.then(data =>
-			`CEP: ${data.cep}\nEstado: ${data.state}\nCidade: ${data.city}\nRua: ${data.street}\nBairro: ${data.neighborhood}`
+			`CEP: ${data.cep}\nEstado: ${data.state}\nCidade: ${data.city}${data.street ? `\nRua: ${data.street}` : ''}${data.neighborhood ? `\nBairro: ${data.neighborhood}` : ''}`
 		)
 		.catch(err => err.message)
 }
 
-function copyResult() {
+const copyResult = () => {
 	if (txtResult.value !== '') {
 		txtResult.select()
 		document.execCommand('copy')
@@ -30,8 +30,6 @@ const clearInput = () => {
 	txtResult.value = ''
 }
 
-txtCEP.onkeyup = function (e) {
-	if (e.which === 13) {
-		search()
-	}
+txtCEP.onkeyup = e => {
+	if (e.which === 13) search()
 }

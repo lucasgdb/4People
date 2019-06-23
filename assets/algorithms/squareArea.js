@@ -1,3 +1,1 @@
-function calculateSquareArea(side) {
-    return side ** 2
-}
+const calculateSquareArea = side => side ** 2

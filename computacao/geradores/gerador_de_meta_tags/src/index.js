@@ -19,7 +19,7 @@ const ddRating = document.querySelector('#rating')
 
 M.FormSelect.init(document.querySelectorAll('select'))
 
-function generate() {
+const generate = () => {
 	const metas = generateMetaTags(
 		txtSiteName.value,
 		txtTitle.value,
@@ -41,11 +41,11 @@ function generate() {
 		`${metas.title}\n${metas.standards}\n${metas.contentLanguage}\n${metas.author}\n${metas.description}\n${metas.keywords}\n${metas.copyright}\n${metas.viewport}\n${metas.generator}\n${metas.rating}\n${metas.siteName}`
 }
 
-function countCharacters(event, input) {
+const countCharacters = (event, input) => {
 	input.textContent = event.target.value.length
 }
 
-function copyResult() {
+const copyResult = () => {
 	if (txtResult.value !== '') {
 		txtResult.select()
 		document.execCommand('copy')

@@ -1,7 +1,7 @@
 const txtResult = document.querySelector('#result')
 const txtNumbers = document.querySelector('#numbers')
 
-function calculate() {
+const calculate = () => {
 	if (txtNumbers.value !== '') {
 		const primeNumbers = isPrimeNumber(txtNumbers.value.split(',').join(' ').split(' ').map(number => parseInt(number)).filter(number => number > 1))
 		txtResult.textContent = `Números primos: ${primeNumbers.length === 0 ? 'Nenhum' : primeNumbers.join(', ')}`

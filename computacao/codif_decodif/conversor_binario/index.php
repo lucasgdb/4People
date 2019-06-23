@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
-	<title>Conversor Binário - 4People</title>
+	<title>Binário, Octal e Hexadecimal - 4People</title>
 	<?php include_once("$assets/components/metas.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="Conversor de Código Binário - 4People">

@@ -3,7 +3,7 @@ const txtValueA = document.querySelector('#valueA')
 const txtValueB = document.querySelector('#valueB')
 const txtValueC = document.querySelector('#valueC')
 
-function calculate() {
+const calculate = () => {
 	if (txtValueA.value !== '' && parseInt(txtValueA.value) !== 0 && txtValueB.value !== '' && txtValueC.value !== '') {
 		let bhaskara = calculateBhaskara(
 			parseFloat(txtValueA.value),
@@ -15,13 +15,9 @@ function calculate() {
 		bhaskara.x1 = Number.isInteger(bhaskara.x1) ? bhaskara.x1 : bhaskara.x1.toFixed(2)
 		bhaskara.x2 = Number.isInteger(bhaskara.x2) ? bhaskara.x2 : bhaskara.x2.toFixed(2)
 
-		if (bhaskara.delta < 0) {
-			txtResult.value = `Δ: ${bhaskara.delta}. ${bhaskara.msg}`
-		} else if (bhaskara.delta === 0) {
-			txtResult.value = `Δ: ${bhaskara.delta}. Conj. Solução: { ${bhaskara.x1}, ${bhaskara.x2} }. ${bhaskara.msg}`
-		} else {
-			txtResult.value = `Δ: ${bhaskara.delta}. Conj. Solução: { ${bhaskara.x1}, ${bhaskara.x2} }. ${bhaskara.msg}`
-		}
+		if (bhaskara.delta < 0) txtResult.value = `Δ: ${bhaskara.delta}. ${bhaskara.msg}`
+		else if (bhaskara.delta === 0) txtResult.value = `Δ: ${bhaskara.delta}. Conj. Solução: { ${bhaskara.x1}, ${bhaskara.x2} }. ${bhaskara.msg}`
+		else txtResult.value = `Δ: ${bhaskara.delta}. Conj. Solução: { ${bhaskara.x1}, ${bhaskara.x2} }. ${bhaskara.msg}`
 	} else {
 		M.toast({
 			html: 'Valor não permitido!',
@@ -30,7 +26,7 @@ function calculate() {
 	}
 }
 
-function copyResult() {
+const copyResult = () => {
 	if (txtResult.value !== '') {
 		txtResult.select()
 		document.execCommand('copy')
@@ -51,20 +47,14 @@ const clearInput = () => {
 	txtResult.value = ''
 }
 
-txtValueA.onkeyup = function (e) {
-	if (e.which === 13) {
-		txtValueB.select()
-	}
+txtValueA.onkeyup = e => {
+	if (e.which === 13) txtValueB.select()
 }
 
-txtValueB.onkeyup = function (e) {
-	if (e.which === 13) {
-		txtValueC.select()
-	}
+txtValueB.onkeyup = e => {
+	if (e.which === 13) txtValueC.select()
 }
 
-valueC.onkeyup = function (e) {
-	if (e.which === 13) {
-		calculate()
-	}
+valueC.onkeyup = e => {
+	if (e.which === 13) calculate()
 }

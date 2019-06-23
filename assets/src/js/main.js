@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	for (let i = 0; i < allAElements.length; i++) {
-		allAElements[i].onclick = function (event) {
+		allAElements[i].onclick = event => {
 			const link = allAElements[i].getAttribute('href')
 			updatePage(event, link)
 		}
@@ -120,7 +120,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		const pathName = location.pathname.split('/').filter(link => link !== '')
 		if (path[path.length - 1] === pathName[pathName.length - 1]) {
 			paddingHeadersA[i].classList.add('grey', 'lighten-4', 'black-text')
-			paddingHeadersA[i].querySelector('i').innerHTML = 'fiber_manual_record'
+			const icon = paddingHeadersA[i].querySelector('i')
+			icon.innerHTML = 'fiber_manual_record'
+			icon.classList.add('indigo-text', 'text-darken-4')
 			paddingHeadersA[i].parentElement.parentElement.parentElement.parentElement.querySelector('.collapsible-header').click()
 			return
 		}
