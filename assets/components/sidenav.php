@@ -219,7 +219,7 @@
 	</li>
 
 	<li class="<?= strpos($link, 'sobre') !== false || strpos($link, 'contato') !== false ? 'active' : '' ?>">
-		<div class="collapsible-header"><i class="material-icons left">info</i>Outras Páginas<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+		<div class="collapsible-header"><i class="material-icons left">insert_link</i>Outras Páginas<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
 		<div class="collapsible-body">
 			<ul class="collapsible padding-headers">
 				<li>

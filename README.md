@@ -5,8 +5,8 @@
   O **_4People_** disponibiliza ferramentas que vão desde Geradores (Senhas, CPF, RG, Portfólio) até ferramentas para o uso no cotidiano (Sorteadores, Progresso do Ano, etc.) e ferramentas para jogos (Gerador de Decks, Calculadoras, etc.)
 
 ## Imagem
-  ![4people](assets/images/4People.png "4People - Início")
-	![4people](assets/images/4People_2.png "4People - Início")
+![4people](assets/images/4People.png "4People - Início")
+![4people](assets/images/4People_2.png "4People - Início")
 
 ## Como contribuir
   - Linux
@@ -35,15 +35,13 @@
   - **Suzany Silva**
     - Analista
 
-## Linguagens/Bibliotecas/Frameworks/Tecnologias
+## Tecnologias usadas
   - HTML
   - CSS
   - JavaScript 
   - PHP
   - PHPMailer
-  - FakerJS
   - MaterializeCSS
-  - PWA
 
 ## Ferramentas prontas (24)
   - Geradores
