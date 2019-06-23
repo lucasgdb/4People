@@ -1,4 +1,4 @@
-function compareDateBetween(beginDate, endDate) {
+const compareDateBetween = (beginDate, endDate) => {
 	const begin = new Date(beginDate)
 	const end = new Date(endDate)
 

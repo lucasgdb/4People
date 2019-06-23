@@ -12,29 +12,29 @@ const footer = document.querySelector('footer')
 const spinner = document.querySelector('#spinner')
 
 // Methods
-function animateIn(delay = 250) {
+const animateIn = (delay = 250) => {
 	document.body.style.transition = `padding-left ${delay}ms, opacity 150ms`
 	document.body.style.paddingLeft = '300px'
 }
 
-function animateOut(delay = 250) {
+const animateOut = (delay = 250) => {
 	document.body.style.transition = `padding-left ${delay}ms`
 	document.body.style.paddingLeft = '0'
 }
 
-function sideIn() {
+const sideIn = () => {
 	sidenav._animateSidenavIn()
 	tr = false
 	sidenav.isOpen = true
 }
 
-function sideOut() {
+const sideOut = () => {
 	sidenav._animateSidenavOut()
 	tr = true
 	sidenav.isClose = true
 }
 
-function updatePage(e, link) {
+const updatePage = (e, link) => {
 	e.preventDefault()
 	nav.style.opacity = '0'
 	main.style.opacity = '0'
@@ -43,7 +43,7 @@ function updatePage(e, link) {
 	if (innerWidth < 993) sidenav.close()
 	else sidenav.el.style.opacity = '0'
 
-	setTimeout(function () {
+	setTimeout(() => {
 		location = link.includes('#') || link.includes('!') ? link.replace(/[#!]/g, '') : link
 	}, 150)
 }
@@ -68,12 +68,12 @@ const sidenavEffect = () => {
 const maxWidth = window.matchMedia('(max-width: 992px)')
 const minWidth = window.matchMedia('(min-width: 993px)')
 
-function matchMax(maxWidth) {
+const matchMax = maxWidth => {
 	if (maxWidth.matches && !tr) animateOut()
 	else if (maxWidth.matches && tr) sidenav.options.outDuration = 0
 }
 
-function matchMin(minWidth) {
+const matchMin = minWidth => {
 	if (minWidth.matches) {
 		setTimeout(() => {
 			if (!sessionStorage.getItem('sideStatus')) {
@@ -85,7 +85,7 @@ function matchMin(minWidth) {
 }
 
 // Pave events
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
 	const allAElements = document.querySelectorAll('a[href^="."]')
 
 	if (!sessionStorage.getItem('sideStatus')) {
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 })
 
-window.onload = function () {
+window.onload = () => {
 	nav.style.opacity = '1'
 	main.style.opacity = '1'
 	footer.style.opacity = '1'
@@ -140,8 +140,6 @@ window.onload = function () {
 	}, 200)
 }
 
-document.onkeydown = function (e) {
-	if (e.keyCode === 116) {
-		updatePage(e, location.href)
-	}
+document.onkeydown = e => {
+	if (e.keyCode === 116) updatePage(e, location.href)
 }

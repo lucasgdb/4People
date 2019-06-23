@@ -33,10 +33,11 @@
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">info_outline</i>Sobre o 4People</h1>
 
 				<label>4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.</label>
-				<div class="divider"></div>
+				<div class="divider mb-0"></div>
 
-				<h2 class="flow-text mt-2 center-align">Criadores do 4People</h2>
-				<div class="row mt-2">
+				<h2 class="flow-text mt-2 mb-2">Criadores</h2>
+				<div class="divider"></div>
+				<div class="row mt-2 mb-2">
 					<div class="col s12 m8 offset-m2">
 						<div class="col s3">
 							<img title="Lucas Bittencourt" class="responsive-img circle" src="../assets/images/lucas.jpg" alt="Lucas Bittencourt">
@@ -71,7 +72,7 @@
 				<h2 class="flow-text mt-2 mb-2">Sobre nós</h2>
 				<div class="divider"></div>
 
-				<ul class="browser-default">
+				<ul class="browser-default mb-0">
 					<li>
 						<span style="font-size:18px">Lucas Bittencourt</span>
 						<ul class="browser-default">

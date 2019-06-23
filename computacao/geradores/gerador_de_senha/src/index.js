@@ -59,6 +59,11 @@ function copyResult() {
 	}
 }
 
+const clearInput = () => {
+	lblPasswordLength.innerHTML = ''
+	txtResult.value = ''
+}
+
 cbStrength.onchange = function () {
 	if (this.checked) {
 		lblPasswordLength.parentElement.hidden = false

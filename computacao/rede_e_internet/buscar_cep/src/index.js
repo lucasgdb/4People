@@ -26,6 +26,10 @@ function copyResult() {
 	}
 }
 
+const clearInput = () => {
+	txtResult.value = ''
+}
+
 txtCEP.onkeyup = function (e) {
 	if (e.which === 13) {
 		search()

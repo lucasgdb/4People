@@ -67,6 +67,9 @@
 				<button title="Copiar Resultado" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult()">
 					Copiar
 				</button>
+				<button title="Limpar Resultado" class="btn waves-effect waves-light indigo darken-4" onclick="clearInput()">
+					Limpar
+				</button>
 
 				<div class="left-div indigo darken-4"></div>
 			</div>

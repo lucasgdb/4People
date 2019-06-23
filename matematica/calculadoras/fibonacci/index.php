@@ -77,6 +77,9 @@
 				<button title="Copiar a Sequência Fibonacci" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult()">
 					Copiar
 				</button>
+				<button title="Limpar a Sequência Fibonacci" class="btn waves-effect waves-light indigo darken-4" onclick="clearInput()">
+					Limpar
+				</button>
 
 				<div class="left-div indigo darken-4"></div>
 			</div>

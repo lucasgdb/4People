@@ -61,3 +61,7 @@ function copyResult() {
 		})
 	}
 }
+
+const clearInput = () => {
+	txtResult.value = ''
+}

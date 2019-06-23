@@ -32,7 +32,7 @@
 			<div class="card-panel left-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">exposure</i>Fatorar Número</h1>
 
-				<label>Calculadora para Fatorar Números Online.</label>
+				<label>Calculadora Online para Fatorar Números.</label>
 				<div class="divider"></div>
 
 				<div class="row mb-0">
@@ -49,9 +49,12 @@
 				</button>
 				<div class="divider mt-2"></div>
 
-				<textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
-				<button title="Copiar Fatoração" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult()">
+				<div class="mt-2" id="result" placeholder="Resultado" contenteditable="true"></div>
+				<button title="Copiar Fatoração" class="btn waves-effect waves-light indigo darken-4 mt-2" onclick="copyResult()">
 					Copiar
+				</button>
+				<button title="Limpar Fatoração" class="btn waves-effect waves-light indigo darken-4 mt-2" onclick="clearInput()">
+					Limpar
 				</button>
 
 				<div class="left-div indigo darken-4"></div>

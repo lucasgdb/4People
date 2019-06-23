@@ -1,4 +1,4 @@
-function calculateFacorization(number) {
+const calculateFacorization = (number) => {
 	if (number != 1) {
 		let by = 2
 		let result = []
@@ -10,11 +10,8 @@ function calculateFacorization(number) {
 				count++
 			}
 
-			if (count === 0) {
-				by++
-			} else {
-				result.push(by)
-			}
+			if (count === 0) by++
+			else result.push(by)
 		} while (number > 1)
 
 		const noRepeatedResults = [...new Set(result)]
@@ -42,14 +39,11 @@ function calculateFacorization(number) {
 	}
 }
 
-function countItems(array, item) {
+const countItems = (array, item) => {
 	let sum = 0
 	for (let i = 0; i < array.length; i++) {
-		if (array[i] === item) {
-			sum++
-		} else if (sum > 0 && array[i] !== item) {
-			break
-		}
+		if (array[i] === item) sum++
+		else if (sum > 0 && array[i] !== item) return sum
 	}
 
 	return sum

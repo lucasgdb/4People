@@ -34,6 +34,10 @@ function copyResult() {
     }
 }
 
+const clearInput = () => {
+	txtResult.value = ''
+}
+
 txtWeight.onkeyup = function (e) {
     if (e.which === 13) {
         txtHeight.select()

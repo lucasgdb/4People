@@ -1,18 +1,16 @@
 M.FormSelect.init(document.querySelectorAll('select'))
 const txtResult = document.querySelector('#result')
 const txtCPF = document.querySelector('#cpf')
-const from = document.querySelector('#from')
+const lblFrom = document.querySelector('#from')
 
 function validate() {
 	const CPF = txtCPF.value.split('').filter(item => Number.isInteger(parseInt(item))).map(item => parseInt(item))
 
 	if (txtCPF.value !== '' && CPF.length >= 11) {
 		const isCPF = validateCPF(CPF)
-		if (isCPF.isCPF) {
-			from.textContent = isCPF.from
-		} else {
-			from.textContent = 'Aguardando...'
-		}
+
+		if (isCPF.isCPF) lblFrom.textContent = isCPF.from
+		else lblFrom.textContent = 'Aguardando...'
 
 		txtResult.value = `${isCPF.CPF} é um CPF ${isCPF.isCPF ? 'válido' : 'inválido'}.`
 	} else {
@@ -38,6 +36,11 @@ function copyResult() {
 			classes: 'red accent-4'
 		})
 	}
+}
+
+const clearInput = () => {
+	lblFrom.textContent = 'Aguardando...'
+	txtResult.value = ''
 }
 
 txtCPF.onkeyup = function (e) {
