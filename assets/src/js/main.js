@@ -51,19 +51,17 @@ function updatePage(e, link) {
 // Left and right effects from sidebar
 let tr = false
 
-document.querySelector('#menu').onclick = function () {
-	if (innerWidth >= 993) {
-		if (tr) {
-			sidenav.options.outDuration = 150
-			sideIn()
-			animateIn()
-			sessionStorage.setItem('sideStatus', true)
-		} else {
-			sideOut()
-			animateOut()
-			sessionStorage.removeItem('sideStatus')
-		}
-	} else if (!sidenav.options.outDuration) sidenav.options.outDuration = 200
+const sidenavEffect = () => {
+	if (tr) {
+		sidenav.options.outDuration = 150
+		sideIn()
+		animateIn()
+		sessionStorage.setItem('sideStatus', true)
+	} else {
+		sideOut()
+		animateOut()
+		sessionStorage.removeItem('sideStatus')
+	}
 }
 
 // Media Queries with pure JS

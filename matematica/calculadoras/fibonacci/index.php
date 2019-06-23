@@ -50,18 +50,14 @@
 						<div class="row mb-0">
 							<p class="mb-0 col s12">Quantidade de números:</p>
 
-							<div class="col s12 m4 l3">
+							<div class="col s12">
 								<p>
 									<label>
 										<input class="with-gap" name="type" type="radio" checked />
 										<span>Todos</span>
 									</label>
-								</p>
-							</div>
 
-							<div class="col s12 m8 l9">
-								<p>
-									<label>
+									<label class="ml-4">
 										<input class="with-gap" name="type" type="radio" />
 										<span>Último</span>
 									</label>

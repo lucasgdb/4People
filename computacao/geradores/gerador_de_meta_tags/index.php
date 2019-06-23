@@ -157,18 +157,15 @@
 					<div class="col s12 m6">
 						<div class="row mb-0">
 							<p class="mb-0 col s12">Escalável:</p>
-							<div class="col s4 m3">
+
+							<div class="col s12">
 								<p>
 									<label>
 										<input class="with-gap" name="scalable" type="radio" checked>
 										<span>Sim</span>
 									</label>
-								</p>
-							</div>
 
-							<div class="col s4 m3">
-								<p>
-									<label>
+									<label class="ml-4">
 										<input class="with-gap" name="scalable" type="radio">
 										<span>Não</span>
 									</label>
@@ -180,18 +177,15 @@
 					<div class="col s12 m6">
 						<div class="row mb-0">
 							<p class="mb-0 col s12">Encolher para caber:</p>
-							<div class="col s4 m3">
+
+							<div class="col s12">
 								<p>
 									<label>
 										<input class="with-gap" name="shrinkToFit" type="radio" checked>
 										<span>Sim</span>
 									</label>
-								</p>
-							</div>
 
-							<div class="col s4 m3">
-								<p>
-									<label>
+									<label class="ml-4">
 										<input class="with-gap" name="shrinkToFit" type="radio">
 										<span>Não</span>
 									</label>

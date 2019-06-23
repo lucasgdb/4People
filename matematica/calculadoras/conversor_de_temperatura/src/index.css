@@ -10,19 +10,15 @@
 	transform: translate(-50%, -50%)
 }
 
-input[type=number]:focus {
+input[type=number]:focus, input[type=text]:focus {
 	border-bottom: 1px solid #1a237e !important;
 	box-shadow: 0 1px 0 0 #1a237e !important
 }
 
-input[type=number]::placeholder {
-	color: rgba(0, 0, 0, .4)
+.dropdown-content li>span {
+	color: #607d8b
 }
 
-.select-wrapper ul li>span {
+.dropdown-content li.selected>span {
 	color: black
-}
-
-.select-wrapper input.select-dropdown:focus {
-	border-bottom: 1px solid #1a237e !important
 }

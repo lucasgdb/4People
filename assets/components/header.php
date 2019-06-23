@@ -1,6 +1,7 @@
 <header class="navbar-fixed">
 	<nav class="indigo darken-4">
-		<a href="#!" id="menu" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a>
+		<a href="#" onclick="sidenavEffect()" id="menu" data-target="slide-out" class="sidenav-trigger hide-on-med-and-down show-on-large"><i class="material-icons">menu</i></a>
+		<a href="#" data-target="slide-out" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
 		<div class="nav-wrapper">
 			<a href="<?= $root ?>" class="brand-logo center hide-on-large-only">4People</a>
 			<ul id="nav-mobile" class="left hide-on-med-and-down">

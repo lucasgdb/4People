@@ -1,12 +1,14 @@
 <?php $link = $_SERVER['REQUEST_URI'] ?>
-<ul id="slide-out" class="sidenav sidenav-fixed collapsible grey lighten-5" style="padding-left:9px">
+<ul id="slide-out" class="sidenav sidenav-fixed collapsible grey lighten-5">
 	<li style="position:relative">
 		<div class="user-view mb-0" style="border-bottom:1px solid #e0e0e0">
 			<div class="background grey lighten-4"></div>
 			<img class="circle" src="<?= $assets ?>/images/logo.png" alt="Logo">
 			<span class="name black-text">4People - Ferramentas Online</span>
-			<a href="https://github.com/LucasNaja/4People" target="_blank" rel="noopener noreferrer nofollow"><span class="email">Projeto de TCC »</span></a>
+			<a class="linkHover" href="https://github.com/LucasNaja/4People" target="_blank" rel="noopener noreferrer nofollow"><span class="email">Projeto de TCC »</span></a>
 		</div>
+
+		<div class="left-div indigo darken-4" style="border-radius:0"></div>
 	</li>
 
 	<li class="<?= strpos($link, 'computacao') !== false ? 'active' : '' ?>">
@@ -222,13 +224,14 @@
 			<ul class="collapsible padding-headers">
 				<li>
 					<ul>
-						<li><a class="waves-effect" href="<?= $root ?>/sobre/" title="Sobre o 4People"><i class="material-icons left">keyboard_arrow_right</i>Sobre</a></li>
+					<li><a class="waves-effect" href="<?= $root ?>/sobre/" title="Sobre o 4People"><i class="material-icons left">keyboard_arrow_right</i>Sobre</a></li>
 						<li><a class="waves-effect" href="<?= $root ?>/contato/" title="Fale Conosco"><i class="material-icons left">keyboard_arrow_right</i>Fale Conosco</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/computacao/" title="Computação"><i class="material-icons left">keyboard_arrow_right</i>Computação</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/matematica/" title="Matemática"><i class="material-icons left">keyboard_arrow_right</i>Matemática</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/outras_ferramentas/" title="Outras Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Outras Ferramentas</a></li>
 					</ul>
 				</li>
 			</ul>
 		</div>
 	</li>
-
-	<div class="left-div indigo darken-4" style="border-radius:0"></div>
 </ul>

@@ -13,11 +13,11 @@
             <div class="col l4 offset-l2 s12">
                 <h5>Contato</h5>
                 <ul>
-                    <li><a class="white-text" href="<?= $root ?>/sobre/">Sobre »</a></li>
-                    <li><a class="white-text" href="https://github.com/LucasNaja" target="_blank" rel="noopener noreferrer nofollow">GitHub »</a></li>
-                    <li><a class="white-text" href="https://facebook.com/Lucas.Naja0" target="_blank" rel="noopener noreferrer nofollow">Facebook »</a></li>
-                    <li><a class="white-text" href="https://dev.to/lucasnaja" target="_blank" rel="noopener noreferrer nofollow">Dev Community »</a></li>
-                    <li><a class="white-text" href="https://www.linkedin.com/in/lucas-bittencourt/" target="_blank" rel="noopener noreferrer nofollow">LinkedIn »</a></li>
+                    <li><a class="white-text linkHover" href="<?= $root ?>/sobre/">Sobre »</a></li>
+                    <li><a class="white-text linkHover" href="https://github.com/LucasNaja" target="_blank" rel="noopener noreferrer nofollow">GitHub »</a></li>
+                    <li><a class="white-text linkHover" href="https://facebook.com/Lucas.Naja0" target="_blank" rel="noopener noreferrer nofollow">Facebook »</a></li>
+                    <li><a class="white-text linkHover" href="https://dev.to/lucasnaja" target="_blank" rel="noopener noreferrer nofollow">Dev Community »</a></li>
+                    <li><a class="white-text linkHover" href="https://www.linkedin.com/in/lucas-bittencourt/" target="_blank" rel="noopener noreferrer nofollow">LinkedIn »</a></li>
                 </ul>
             </div>
         </div>
@@ -26,7 +26,7 @@
     <div class="footer-copyright" style="background-color:#10165a">
         <div class="container white-text">
             © 4People - 2019
-            <a class="right white-text" href="<?= $root ?>/contato/"><i class="material-icons left" style="position:relative;top:-1px">email</i>Fale Conosco »</a>
+            <a class="right white-text linkHover" href="<?= $root ?>/contato/"><i class="material-icons left" style="position:relative;top:-1px">email</i>Fale Conosco »</a>
         </div>
     </div>
 </footer>

@@ -38,18 +38,14 @@
 				<div class="row mb-0">
 					<p class="mb-0 col s12">Sexo:</p>
 
-					<div class="col s6 m3 l2">
+					<div class="col s12">
 						<p>
 							<label>
 								<input class="with-gap" name="sex" type="radio" checked />
 								<span>Homem</span>
 							</label>
-						</p>
-					</div>
 
-					<div class="col s6 m3 l2">
-						<p>
-							<label>
+							<label class="ml-4">
 								<input class="with-gap" name="sex" type="radio" />
 								<span>Mulher</span>
 							</label>

@@ -64,7 +64,7 @@
 					O 4People foi feito por 2 Programadores e 2 Analistas.
 					Na criação foi utilizado HTML, CSS, JavaScript e PHP como linguagens.
 					O Editor de Texto que utilizamos foi o Visual Studio Code, da Microsoft.
-					O Projeto é de Código Aberto (<a href="https://github.com/lucasnaja/4People/blob/master/LICENSE" target="_blank" rel="noopener noreferrer nofollow">GPL-3.0</a>) e você pode contribuir com ele no <a href="https://github.com/lucasnaja/4People" target="_blank" rel="noopener noreferrer nofollow">GitHub</a>!
+					O Projeto é de Código Aberto (<a class="linkHover" href="https://github.com/lucasnaja/4People/blob/master/LICENSE" target="_blank" rel="noopener noreferrer nofollow">GPL-3.0</a>) e você pode contribuir com ele no <a class="linkHover" href="https://github.com/lucasnaja/4People" target="_blank" rel="noopener noreferrer nofollow">GitHub</a>!
 				</p>
 
 				<div class="divider"></div>
@@ -75,29 +75,29 @@
 					<li>
 						<span style="font-size:18px">Lucas Bittencourt</span>
 						<ul class="browser-default">
-							<li><a href="https://github.com/LucasNaja" target="_blank">GitHub »</a></li>
-							<li><a href="https://www.facebook.com/Lucas.Naja0" target="_blank">Facebook »</a></li>
-							<li><a href="https://dev.to/lucasnaja" target="_blank">Dev Community »</a></li>
-							<li><a href="https://www.linkedin.com/in/lucas-bittencourt/" target="_blank">LinkedIn »</a></li>
+							<li><a class="linkHover" href="https://github.com/LucasNaja" target="_blank">GitHub »</a></li>
+							<li><a class="linkHover" href="https://www.facebook.com/Lucas.Naja0" target="_blank">Facebook »</a></li>
+							<li><a class="linkHover" href="https://dev.to/lucasnaja" target="_blank">Dev Community »</a></li>
+							<li><a class="linkHover" href="https://www.linkedin.com/in/lucas-bittencourt/" target="_blank">LinkedIn »</a></li>
 						</ul>
 					</li>
 					<li>
 						<span style="font-size:18px">Jairo Arcy</span>
 						<ul class="browser-default">
-							<li><a href="https://github.com/Jairo-Arcy" target="_blank">GitHub »</a></li>
-							<li><a href="https://www.facebook.com/jairo.arcy" target="_blank">Facebook »</a></li>
+							<li><a class="linkHover" href="https://github.com/Jairo-Arcy" target="_blank">GitHub »</a></li>
+							<li><a class="linkHover" href="https://www.facebook.com/jairo.arcy" target="_blank">Facebook »</a></li>
 						</ul>
 					</li>
 					<li>
 						<span style="font-size:18px">Renan de Mattos</span>
 						<ul class="browser-default">
-							<li><a href="https://www.facebook.com/reenan.mattos" target="_blank">Facebook »</a></li>
+							<li><a class="linkHover" href="https://www.facebook.com/reenan.mattos" target="_blank">Facebook »</a></li>
 						</ul>
 					</li>
 					<li>
 						<span style="font-size:18px">Suzany Silva</span>
 						<ul class="browser-default">
-							<li><a href="https://www.facebook.com/suzany.castrodasilva" target="_blank">Facebook »</a></li>
+							<li><a class="linkHover" href="https://www.facebook.com/suzany.castrodasilva" target="_blank">Facebook »</a></li>
 						</ul>
 					</li>
 				</ul>

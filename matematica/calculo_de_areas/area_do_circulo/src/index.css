@@ -19,7 +19,8 @@ textarea {
 	color: #333
 }
 
-input[type=number]:focus {
+input[type=number]:focus,
+input[type=text]:focus {
 	border-bottom: 1px solid #1a237e !important;
 	box-shadow: 0 1px 0 0 #1a237e !important
 }
@@ -28,12 +29,12 @@ input[type=number]::placeholder {
 	color: rgba(0, 0, 0, .4)
 }
 
-.select-wrapper ul li>span {
-	color: black
+.dropdown-content li>span {
+	color: #607d8b
 }
 
-.select-wrapper input.select-dropdown:focus {
-	border-bottom: 1px solid #1a237e !important
+.dropdown-content li.selected>span {
+	color: black
 }
 
 [type=radio]:checked+span:after,

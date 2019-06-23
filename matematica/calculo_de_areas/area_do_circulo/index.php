@@ -37,18 +37,15 @@
 
 				<div class="row mb-0">
 					<p class="mb-0 col s12">Fórmulas:</p>
-					<div class="col s12 m6">
+
+					<div class="col s12">
 						<p>
 							<label>
 								<input class="with-gap" name="formula" type="radio" checked />
 								<span>Fórmula do Raio (PI * R²)</span>
 							</label>
-						</p>
-					</div>
 
-					<div class="col s12 m6">
-						<p>
-							<label>
+							<label class="ml-4">
 								<input class="with-gap" name="formula" type="radio" />
 								<span>Fórmula do Diâmetro (PI * D² / 4)</span>
 							</label>

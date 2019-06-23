@@ -40,18 +40,14 @@
 						<div class="row mb-0">
 							<p class="mb-0 col s12">Gerar com pontuação:</p>
 
-							<div class="col s12 m3 l2">
+							<div class="col s12">
 								<p>
 									<label>
 										<input class="with-gap" name="punctuation" type="radio" checked>
 										<span>Sim</span>
 									</label>
-								</p>
-							</div>
 
-							<div class="col s12 m9 l10">
-								<p>
-									<label>
+									<label class="ml-4">
 										<input class="with-gap" name="punctuation" type="radio">
 										<span>Não</span>
 									</label>
