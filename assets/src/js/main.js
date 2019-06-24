@@ -123,7 +123,9 @@ document.addEventListener('DOMContentLoaded', () => {
 			const icon = paddingHeadersA[i].querySelector('i')
 			icon.innerHTML = 'fiber_manual_record'
 			icon.classList.add('indigo-text', 'text-darken-4')
-			paddingHeadersA[i].parentElement.parentElement.parentElement.parentElement.querySelector('.collapsible-header').click()
+			header = paddingHeadersA[i].parentElement.parentElement.parentElement.parentElement.querySelector('.collapsible-header')
+			if (header) header.click()
+
 			return
 		}
 	}

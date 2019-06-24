@@ -9,7 +9,7 @@
 	white-space: nowrap
 }
 
-@media (min-width: 600px) {
+@media (min-width: 993px) {
 	.card-content {
 		min-height: 155px
 	}
