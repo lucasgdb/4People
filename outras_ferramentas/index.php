@@ -32,7 +32,7 @@
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">build</i>Principais Ferramentas</h1>
 
 				<label>Principais Ferramentas para usos do dia-a-dia do 4People</label>
-				<div class="divider"></div>
+				<div class="divider mb-2"></div>
 
 				<div class="left-div indigo darken-4"></div>
 			</div>

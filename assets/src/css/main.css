@@ -149,6 +149,11 @@ body>header+ul>li>.collapsible-header {
 	.container {
 		width: 100%
 	}
+
+	.footer-copyright {
+		padding-left: 10px !important;
+		padding-right: 10px !important
+	}
 }
 
 @media (min-width: 601px) {

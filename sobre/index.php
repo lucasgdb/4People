@@ -57,7 +57,7 @@
 					</div>
 				</div>
 
-				<div class="divider mb-0" style="margin-top:-4px"></div>
+				<div class="divider mb-0" style="margin-top:-5px"></div>
 				<h2 class="flow-text mt-2 mb-2">Informações</h2>
 				<div class="divider"></div>
 				<p style="text-indent:20px">
