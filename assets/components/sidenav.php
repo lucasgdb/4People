@@ -191,17 +191,17 @@
 		</div>
 	</li>
 
-	<li class="<?= strpos($link, 'outras_ferramentas') !== false ? 'active' : '' ?>">
-		<div class="collapsible-header"><i class="material-icons left">build</i>Outras Ferramentas<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+	<li class="<?= strpos($link, 'mais_ferramentas') !== false ? 'active' : '' ?>">
+		<div class="collapsible-header"><i class="material-icons left">build</i>Mais Ferramentas<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
 		<div class="collapsible-body">
 			<ul class="collapsible padding-headers">
 				<li>
 					<div style="position:relative" class="collapsible-header" title="Dia a Dia"><i class="material-icons">today</i>Dia a dia<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
 					<div class="collapsible-body">
 						<ul>
-							<li><a class="waves-effect" href="<?= $root ?>/outras_ferramentas/dia_a_dia/progresso_do_ano/" title="Progresso do Ano"><i class="material-icons left">keyboard_arrow_right</i>Progresso do Ano</a></li>
-							<li><a class="waves-effect" href="<?= $root ?>/outras_ferramentas/dia_a_dia/sorteador_de_pessoas/" title="Sorteador de Pessoas"><i class="material-icons left">keyboard_arrow_right</i>Sorteador de Pessoas</a></li>
-							<li><a class="waves-effect" href="<?= $root ?>/outras_ferramentas/dia_a_dia/sorteador_de_numeros/" title="Sorteador de Números"><i class="material-icons left">keyboard_arrow_right</i>Sorteador de Números</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/mais_ferramentas/dia_a_dia/progresso_do_ano/" title="Progresso do Ano"><i class="material-icons left">keyboard_arrow_right</i>Progresso do Ano</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/mais_ferramentas/dia_a_dia/sorteador_de_pessoas/" title="Sorteador de Pessoas"><i class="material-icons left">keyboard_arrow_right</i>Sorteador de Pessoas</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/mais_ferramentas/dia_a_dia/sorteador_de_numeros/" title="Sorteador de Números"><i class="material-icons left">keyboard_arrow_right</i>Sorteador de Números</a></li>
 						</ul>
 					</div>
 				</li>
@@ -210,7 +210,7 @@
 					<div style="position:relative" class="collapsible-header" title="Jogos"><i class="material-icons">videogame_asset</i>Jogos<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
 					<div class="collapsible-body">
 						<ul>
-							<li><a class="waves-effect" href="<?= $root ?>/outras_ferramentas/jogos/gerador_de_decks/" title="Gerador de Decks"><i class="material-icons left">keyboard_arrow_right</i>Gerador de Deck</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/mais_ferramentas/jogos/gerador_de_decks/" title="Gerador de Decks"><i class="material-icons left">keyboard_arrow_right</i>Gerador de Deck</a></li>
 						</ul>
 					</div>
 				</li>
@@ -228,7 +228,7 @@
 						<li><a class="waves-effect" href="<?= $root ?>/contato/" title="Fale Conosco"><i class="material-icons left">keyboard_arrow_right</i>Fale Conosco</a></li>
 						<li><a class="waves-effect" href="<?= $root ?>/computacao/" title="Computação"><i class="material-icons left">keyboard_arrow_right</i>Computação</a></li>
 						<li><a class="waves-effect" href="<?= $root ?>/matematica/" title="Matemática"><i class="material-icons left">keyboard_arrow_right</i>Matemática</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/outras_ferramentas/" title="Outras Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Outras Ferramentas</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/mais_ferramentas/" title="Mais Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Mais Ferramentas</a></li>
 					</ul>
 				</li>
 			</ul>

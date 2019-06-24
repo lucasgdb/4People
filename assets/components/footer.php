@@ -14,8 +14,8 @@
                 <h5>Contato</h5>
                 <ul>
                     <li><a class="white-text linkHover" href="<?= $root ?>/sobre/">Sobre »</a></li>
-                    <li><a class="white-text linkHover" href="https://github.com/LucasNaja" target="_blank" rel="noopener noreferrer nofollow">GitHub »</a></li>
-                    <li><a class="white-text linkHover" href="https://facebook.com/Lucas.Naja0" target="_blank" rel="noopener noreferrer nofollow">Facebook »</a></li>
+                    <li><a class="white-text linkHover" href="https://github.com/lucasnaja" target="_blank" rel="noopener noreferrer nofollow">GitHub »</a></li>
+                    <li><a class="white-text linkHover" href="https://facebook.com/lucas8bit" target="_blank" rel="noopener noreferrer nofollow">Facebook »</a></li>
                     <li><a class="white-text linkHover" href="https://dev.to/lucasnaja" target="_blank" rel="noopener noreferrer nofollow">Dev Community »</a></li>
                     <li><a class="white-text linkHover" href="https://www.linkedin.com/in/lucas-bittencourt/" target="_blank" rel="noopener noreferrer nofollow">LinkedIn »</a></li>
                 </ul>
