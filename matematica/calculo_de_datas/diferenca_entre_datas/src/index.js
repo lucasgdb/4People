@@ -96,7 +96,7 @@ const calculate = () => {
 		lblYears.textContent = difference.years
 	} else {
 		M.toast({
-			html: 'Selecione as datas primeiro.',
+			html: 'Selecione as duas datas primeiro.',
 			classes: 'red accent-4'
 		})
 	}

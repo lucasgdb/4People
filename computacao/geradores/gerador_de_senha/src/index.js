@@ -53,7 +53,7 @@ const copyResult = () => {
 		})
 	} else {
 		M.toast({
-			html: 'Gere sua senha primeiro.',
+			html: 'Não foi possível copiar a Senha.',
 			classes: 'red accent-4'
 		})
 	}

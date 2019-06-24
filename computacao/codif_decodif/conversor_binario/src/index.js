@@ -20,7 +20,7 @@ const copyResult = txt => {
 		})
 	} else {
 		M.toast({
-			html: 'Converta-o primeiro.',
+			html: 'Não foi possível copiar.',
 			classes: 'red accent-4'
 		})
 	}

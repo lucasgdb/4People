@@ -8,7 +8,7 @@ const calculate = () => {
 		txtResult.textContent = `${txtNumber1.value} e ${txtNumber2.value} ${primeNumbers ? 'são números amigáveis!' : 'não são números amigáveis!'}`
 	} else {
 		M.toast({
-			html: 'Valor não permitido!',
+			html: 'Valor não permitido.',
 			classes: 'red accent-4'
 		})
 	}

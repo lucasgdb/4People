@@ -28,7 +28,7 @@ const copyResult = txtComponent => {
 		})
 	} else {
 		M.toast({
-			html: 'Calcule a área primeiro.',
+			html: 'Não foi possível copiar.',
 			classes: 'red accent-4'
 		})
 	}

@@ -50,9 +50,6 @@
 				<div class="divider mt-2"></div>
 
 				<div class="mt-2" id="result" placeholder="Resultado" contenteditable="true"></div>
-				<button title="Copiar Fatoração" class="btn waves-effect waves-light indigo darken-4 mt-2" onclick="copyResult()">
-					Copiar
-				</button>
 				<button title="Limpar Fatoração" class="btn waves-effect waves-light indigo darken-4 mt-2" onclick="clearInput()">
 					Limpar
 				</button>

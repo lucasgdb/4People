@@ -9,7 +9,7 @@ const calculate = () => {
 		txtResult.value = `${GCD.gcd} = ${GCD.result}`
 	} else {
 		M.toast({
-			html: 'Valor não permitido!',
+			html: 'Valor não permitido.',
 			classes: 'red accent-4'
 		})
 	}
@@ -26,7 +26,7 @@ const copyResult = () => {
 		})
 	} else {
 		M.toast({
-			html: 'Ache o MDC primeiro.',
+			html: 'Não foi possível copiar o MDC.',
 			classes: 'red accent-4'
 		})
 	}

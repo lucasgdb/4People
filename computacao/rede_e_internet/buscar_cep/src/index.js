@@ -20,7 +20,7 @@ const copyResult = () => {
 		})
 	} else {
 		M.toast({
-			html: 'Busque seu CEP primeiro.',
+			html: 'Não foi possível copiar.',
 			classes: 'red accent-4'
 		})
 	}

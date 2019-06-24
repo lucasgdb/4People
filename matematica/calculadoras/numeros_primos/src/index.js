@@ -7,7 +7,7 @@ const calculate = () => {
 		txtResult.textContent = `Números primos: ${primeNumbers.length === 0 ? 'Nenhum' : primeNumbers.join(', ')}`
 	} else {
 		M.toast({
-			html: 'Valor não permitido!',
+			html: 'Valor não permitido.',
 			classes: 'red accent-4'
 		})
 	}

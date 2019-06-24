@@ -7,7 +7,7 @@ const calculate = () => {
 		txtResult.value = calculateFibonacci(BigInt(txtNum.value), !type.checked)
 	} else {
 		M.toast({
-			html: 'Valor não permitido!',
+			html: 'Valor não permitido.',
 			classes: 'red accent-4'
 		})
 	}
@@ -24,7 +24,7 @@ const copyResult = () => {
 		})
 	} else {
 		M.toast({
-			html: 'Fatore o número primeiro.',
+			html: 'Não foi possível copiar.',
 			classes: 'red accent-4'
 		})
 	}

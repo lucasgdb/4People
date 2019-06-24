@@ -32,7 +32,7 @@ const copyResult = () => {
 		})
 	} else {
 		M.toast({
-			html: 'Valide seu CPF primeiro.',
+			html: 'Não foi possível copiar.',
 			classes: 'red accent-4'
 		})
 	}

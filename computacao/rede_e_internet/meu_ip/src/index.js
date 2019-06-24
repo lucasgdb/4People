@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			lblFlag.innerHTML = `<img style="position:relative;top:4px" src="${data.flag}" alt="${data.country_code}">`
 		}).catch(err => {
 			M.toast({
-				html: 'Houve um erro! Verifique sua conexão.',
+				html: 'Houve um erro. Verifique sua conexão.',
 				classes: 'red accent-4'
 			})
 		})

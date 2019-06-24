@@ -41,8 +41,8 @@ const generate = () => {
 		`${metas.title}\n${metas.standards}\n${metas.contentLanguage}\n${metas.author}\n${metas.description}\n${metas.keywords}\n${metas.copyright}\n${metas.viewport}\n${metas.generator}\n${metas.rating}\n${metas.siteName}`
 }
 
-const countCharacters = (event, input) => {
-	input.textContent = event.target.value.length
+const countCharacters = (e, input) => {
+	input.textContent = e.target.value.length
 }
 
 const copyResult = () => {
@@ -56,7 +56,7 @@ const copyResult = () => {
 		})
 	} else {
 		M.toast({
-			html: 'Gere suas Meta Tags primeiro.',
+			html: 'Não foi possível copiar as Meta Tags.',
 			classes: 'red accent-4'
 		})
 	}

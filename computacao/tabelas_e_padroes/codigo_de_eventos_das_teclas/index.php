@@ -26,7 +26,7 @@
 	include_once("$assets/components/header.php");
 	include_once("$assets/components/sidenav.php")
 	?>
-	
+
 	<main>
 		<div class="container">
 			<div class="card-panel left-div-margin">

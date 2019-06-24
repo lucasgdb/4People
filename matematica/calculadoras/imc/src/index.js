@@ -11,7 +11,7 @@ const calculate = () => {
 			`IMC: ${Number.isInteger(imcResult.bmi) ? imcResult.bmi.toFixed(1) : imcResult.bmi.toFixed(2)}! Resultado: ${imcResult.description}. Peso ideal: ${imcResult.idealWeight.toFixed(2)}kg`
 	} else {
 		M.toast({
-			html: 'Valor não permitido!',
+			html: 'Valor não permitido.',
 			classes: 'red accent-4'
 		})
 	}
@@ -28,7 +28,7 @@ const copyResult = () => {
 		})
 	} else {
 		M.toast({
-			html: 'Calcule o IMC primeiro.',
+			html: 'Não foi possível copiar o IMC.',
 			classes: 'red accent-4'
 		})
 	}

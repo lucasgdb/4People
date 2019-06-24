@@ -19,7 +19,7 @@ const copyResult = () => {
 		})
 	} else {
 		M.toast({
-			html: 'Gere seu CPF primeiro.',
+			html: 'Não foi possível copiar o CPF.',
 			classes: 'red accent-4'
 		})
 	}

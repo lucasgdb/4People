@@ -9,7 +9,7 @@ const calculate = () => {
 			`Divisão: ${Number.isInteger(result.coeficient) ? result.coeficient : result.coeficient.toFixed(2)}, divisão inteira: ${result.integerCoeficient}, resto: ${result.rest}`
 	} else {
 		M.toast({
-			html: 'Valor não permitido!',
+			html: 'Valor não permitido.',
 			classes: 'red accent-4'
 		})
 	}
@@ -26,7 +26,7 @@ const copyResult = () => {
 		})
 	} else {
 		M.toast({
-			html: 'Calcule a equação primeiro.',
+			html: 'Não foi possível copiar.',
 			classes: 'red accent-4'
 		})
 	}

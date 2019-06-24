@@ -28,7 +28,7 @@ const txtEighteenthNumber = document.querySelector('#eighteenthNumber')
 
 const message = () => {
 	M.toast({
-		html: 'Valor não permitido!',
+		html: 'Valor não permitido.',
 		classes: 'red accent-4'
 	})
 }
@@ -98,7 +98,7 @@ const copyResult = result => {
 		})
 	} else {
 		M.toast({
-			html: 'Calcule o resultado primeiro.',
+			html: 'Não foi possível copiar.',
 			classes: 'red accent-4'
 		})
 	}

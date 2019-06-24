@@ -9,7 +9,7 @@ const calculate = () => {
 		txtResult.value = `${LCM.lcm} = ${LCM.result}`
 	} else {
 		M.toast({
-			html: 'Valor não permitido!',
+			html: 'Valor não permitido.',
 			classes: 'red accent-4'
 		})
 	}
@@ -26,7 +26,7 @@ const copyResult = () => {
 		})
 	} else {
 		M.toast({
-			html: 'Ache o MMC primeiro.',
+			html: 'Não foi possível copiar o MMC.',
 			classes: 'red accent-4'
 		})
 	}

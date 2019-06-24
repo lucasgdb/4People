@@ -95,9 +95,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	for (let i = 0; i < allAElements.length; i++) {
-		allAElements[i].onclick = event => {
+		allAElements[i].onclick = e => {
 			const link = allAElements[i].getAttribute('href')
-			updatePage(event, link)
+			updatePage(e, link)
 		}
 	}
 
@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		const path = paddingHeadersA[i].getAttribute('href').split('/').filter(link => link !== '')
 		const pathName = location.pathname.split('/').filter(link => link !== '')
 		if (path[path.length - 1] === pathName[pathName.length - 1]) {
-			paddingHeadersA[i].classList.add('grey', 'lighten-4', 'black-text')
+			paddingHeadersA[i].classList.add('grey', 'lighten-3', 'black-text')
 			const icon = paddingHeadersA[i].querySelector('i')
 			icon.innerHTML = 'fiber_manual_record'
 			icon.classList.add('indigo-text', 'text-darken-4')

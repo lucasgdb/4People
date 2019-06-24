@@ -26,7 +26,7 @@ const calculate = () => {
 		txtResult.value = `${txtDecimal.value === '-1' ? area : area.toFixed(parseInt(txtDecimal.value), 10)}${txtMeasure.value}²`
 	} else {
 		M.toast({
-			html: 'Valor não permitido!',
+			html: 'Valor não permitido.',
 			classes: 'red accent-4'
 		})
 	}
@@ -43,10 +43,14 @@ const copyResult = () => {
 		})
 	} else {
 		M.toast({
-			html: 'Calcule a área primeiro.',
+			html: 'Não foi possível copiar.',
 			classes: 'red accent-4'
 		})
 	}
+}
+
+const clearInput = () => {
+	txtResult.value = ''
 }
 
 txtNumber.onkeyup = e => {

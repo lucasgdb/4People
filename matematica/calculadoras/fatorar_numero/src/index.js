@@ -8,24 +8,7 @@ const factorize = () => {
 			`${txtNum.value} = ${result.result.join(' x ')} => ${result.amount.map(item => `${item.number}${item.toThe === 1 ? '' : `<sup>${item.toThe}</sup>`}`).join(' x ')}`
 	} else {
 		M.toast({
-			html: 'Valor não permitido!',
-			classes: 'red accent-4'
-		})
-	}
-}
-
-const copyResult = () => {
-	if (txtResult.value !== '') {
-		txtResult.select()
-		document.execCommand('copy')
-
-		M.toast({
-			html: 'Copiado para a Área de Transferência.',
-			classes: 'green'
-		})
-	} else {
-		M.toast({
-			html: 'Fatore o número primeiro.',
+			html: 'Valor não permitido.',
 			classes: 'red accent-4'
 		})
 	}
