@@ -68,6 +68,48 @@
 					</ul>
 				</div>
 
+				<div class="divider mt-2 mb-2"></div>
+
+				<div class="row mb-0">
+					<div class="col s12 l6">
+						<div class="card blue hoverable">
+							<div class="card-content white-text">
+								<span class="card-title"><i class="material-icons left">accessibility</i>Visitas</span>
+								<p style="font-size:16px">Usuários que visitaram: 605</p>
+							</div>
+
+							<div class="top-div blue darken-4"></div>
+						</div>
+					</div>
+
+					<div class="col s12 l6">
+						<div class="card red hoverable">
+							<div class="card-content white-text">
+								<span class="card-title"><i class="material-icons left">whatshot</i>Ferramenta mais popular</span>
+								<p style="font-size:16px">Ferramenta: Diferença entre Datas</p>
+							</div>
+
+							<div class="top-div red darken-4"></div>
+						</div>
+					</div>
+
+					<div class="col s12">
+						<div class="card green hoverable">
+							<div class="card-content white-text">
+								<span class="card-title"><i class="material-icons left">trending_up</i>Ferramentas mais populares</span>
+								<p style="font-size:16px">1° Lugar: Diferença entre Datas</p>
+								<div class="divider mb-1"></div>
+								<p style="font-size:16px">2° Lugar: Gerador de Senha</p>
+								<div class="divider mb-1"></div>
+								<p style="font-size:16px">3° Lugar: Equação do 2° Grau</p>
+								<div class="divider"></div>
+							</div>
+
+							<div class="top-div green darken-4"></div>
+						</div>
+					</div>
+				</div>
+
 				<div class="left-div indigo darken-4"></div>
 			</div>
 		</div>

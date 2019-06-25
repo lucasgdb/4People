@@ -1,39 +1,39 @@
 .input-field {
-    margin: 0
+	margin: 0
 }
 
 .btn-center {
-    left: 50%;
-    transform: translateX(-50%)
+	left: 50%;
+	transform: translateX(-50%)
 }
 
 input[type=text]:focus {
-    border-bottom: 1px solid #1a237e !important;
-    box-shadow: 0 1px 0 0 #1a237e !important
+	border-bottom: 1px solid #1a237e !important;
+	box-shadow: 0 1px 0 0 #1a237e !important
 }
 
 input[type=text]::placeholder {
-    color: rgba(0, 0, 0, .4)
+	color: rgba(0, 0, 0, .4)
 }
 
 .datepicker-date-display {
-    background-color: #1a237e
+	background-color: #1a237e
 }
 
 .datepicker-day-button:focus {
-    color: white !important;
-    background-color: #1a237e
+	color: white !important;
+	background-color: #1a237e
 }
 
 .datepicker-done,
 .datepicker-cancel,
 .select-dropdown li>span,
 .timepicker-close {
-    color: #1a237e !important
+	color: #1a237e !important
 }
 
 .is-today {
-    color: #2196f3 !important
+	color: #2196f3 !important
 }
 
 td.is-selected,
@@ -42,26 +42,26 @@ td.is-selected,
 .month-next:active,
 .month-next:focus,
 .timepicker-digital-display {
-    background-color: #1a237e !important
+	background-color: #1a237e !important
 }
 
 td.is-selected.is-today {
-    color: white !important
+	color: white !important
 }
 
 .timepicker-canvas-bg,
 .timepicker-canvas-bearing {
-    fill: #607d8b !important
+	fill: #607d8b !important
 }
 
 .timepicker-canvas line {
-    stroke: #607d8b
+	stroke: #607d8b
 }
 
 .timepicker-tick:hover {
-    background-color: #1a237e
+	background-color: #1a237e
 }
 
 .datepicker-controls .select-month input {
-    width: 80px
+	width: 80px
 }

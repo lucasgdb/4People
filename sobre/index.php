@@ -76,7 +76,7 @@
 					<li>
 						<span style="font-size:18px">Lucas Bittencourt</span>
 						<ul class="browser-default">
-							<li><a class="linkHover" href="https://github.com/LucasNaja" target="_blank">GitHub »</a></li>
+							<li><a class="linkHover" href="https://github.com/lucasnaja" target="_blank">GitHub »</a></li>
 							<li><a class="linkHover" href="https://www.facebook.com/Lucas.Naja0" target="_blank">Facebook »</a></li>
 							<li><a class="linkHover" href="https://dev.to/lucasnaja" target="_blank">Dev Community »</a></li>
 							<li><a class="linkHover" href="https://www.linkedin.com/in/lucas-bittencourt/" target="_blank">LinkedIn »</a></li>

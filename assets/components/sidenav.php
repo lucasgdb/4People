@@ -1,14 +1,14 @@
 <?php $link = $_SERVER['REQUEST_URI'] ?>
 <ul id="slide-out" class="sidenav sidenav-fixed collapsible grey lighten-5">
 	<li style="position:relative">
-		<div class="user-view mb-0" style="border-bottom:1px solid #e0e0e0">
+		<div class="user-view mb-0 left-div-margin-mobile" style="border-bottom:1px solid #e0e0e0">
 			<div class="background grey lighten-4"></div>
 			<img class="circle" src="<?= $assets ?>/images/logo.png" alt="Logo">
 			<span class="name black-text">4People - Ferramentas Online</span>
-			<a class="linkHover" href="https://github.com/LucasNaja/4People" target="_blank" rel="noopener noreferrer nofollow"><span class="email">Projeto de TCC »</span></a>
+			<a class="linkHover" href="https://github.com/lucasnaja/4People" target="_blank" rel="noopener noreferrer nofollow"><span class="email">Projeto de TCC »</span></a>
 		</div>
 
-		<div class="left-div indigo darken-4" style="border-radius:0"></div>
+		<div class="left-div-mobile indigo darken-4" style="border-radius:0"></div>
 	</li>
 
 	<li class="<?= strpos($link, 'computacao') !== false ? 'active' : '' ?>">
@@ -16,7 +16,7 @@
 		<div class="collapsible-body">
 			<ul class="collapsible padding-headers">
 				<li>
-					<div style="position:relative" class="collapsible-header" title="Geradores"><i class="material-icons">autorenew</i>Geradores<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+					<div style="position:relative" class="collapsible-header"><i class="material-icons">autorenew</i>Geradores<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
 					<div class="collapsible-body">
 						<ul>
 							<li><a class="waves-effect" href="<?= $root ?>/computacao/geradores/gerador_de_certidoes/" title="Gerador de Certidões"><i class="material-icons left">keyboard_arrow_right</i>Gerador de Certidões</a></li>
@@ -47,7 +47,7 @@
 				</li>
 
 				<li>
-					<div style="position:relative" class="collapsible-header" title="Validadores"><i class="material-icons">check</i>Validadores<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+					<div style="position:relative" class="collapsible-header"><i class="material-icons">check</i>Validadores<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
 					<div class="collapsible-body">
 						<ul>
 							<li><a class="waves-effect" href="<?= $root ?>/computacao/validadores/validador_de_cartao_de_credito/" title="Validador de Cartão de Crédito"><i class="material-icons left">keyboard_arrow_right</i>Validador de Cartão de Crédito</a></li>
@@ -66,7 +66,7 @@
 				</li>
 
 				<li>
-					<div style="position:relative" class="collapsible-header" title="Funções String"><i class="material-icons">format_color_text</i>Funções String<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+					<div style="position:relative" class="collapsible-header"><i class="material-icons">format_color_text</i>Funções String<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
 					<div class="collapsible-body">
 						<ul>
 							<li><a class="waves-effect" href="<?= $root ?>/computacao/funcoes_string/colocar_em_ordem_alfabetica/" title="Colocar em Ordem Alfabética"><i class="material-icons left">keyboard_arrow_right</i>Colocar em Ordem Alfabética</a></li>
@@ -87,7 +87,7 @@
 				</li>
 
 				<li>
-					<div style="position:relative" class="collapsible-header" title="Rede e Internet"><i class="material-icons">wifi</i>Rede e Internet<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+					<div style="position:relative" class="collapsible-header"><i class="material-icons">wifi</i>Rede e Internet<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
 					<div class="collapsible-body">
 						<ul>
 							<li><a class="waves-effect" href="<?= $root ?>/computacao/rede_e_internet/meu_ip/" title="Meu IP"><i class="material-icons left">keyboard_arrow_right</i>Meu IP</a></li>
@@ -99,7 +99,7 @@
 				</li>
 
 				<li>
-					<div style="position:relative" class="collapsible-header" title="Codificadores e Decodificadores"><i class="material-icons">textsms</i>Codific. e Decodif.<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+					<div style="position:relative" class="collapsible-header"><i class="material-icons">textsms</i>Codific. e Decodif.<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
 					<div class="collapsible-body">
 						<ul>
 							<li><a class="waves-effect" href="<?= $root ?>/computacao/codif_decodif/base64_codif_decodif/" title="Base64 - Codificador e Decodificador"><i class="material-icons left">keyboard_arrow_right</i>Base64</a></li>
@@ -114,7 +114,7 @@
 				</li>
 
 				<li>
-					<div style="position:relative" class="collapsible-header" title="Tabelas e Padrões"><i class="material-icons">colorize</i>Tabelas e Padrões<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+					<div style="position:relative" class="collapsible-header"><i class="material-icons">colorize</i>Tabelas e Padrões<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
 					<div class="collapsible-body">
 						<ul>
 							<li><a class="waves-effect" href="<?= $root ?>/computacao/tabelas_e_padroes/color_picker/" title="Color Picker"><i class="material-icons left">keyboard_arrow_right</i>Color Picker</a></li>
@@ -132,7 +132,7 @@
 		<div class="collapsible-body">
 			<ul class="collapsible padding-headers">
 				<li>
-					<div style="position:relative" class="collapsible-header" title="Calculadoras"><i class="material-icons">exposure</i>Calculadoras<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+					<div style="position:relative" class="collapsible-header"><i class="material-icons">exposure</i>Calculadoras<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
 					<div class="collapsible-body">
 						<ul>
 							<li><a class="waves-effect" href="<?= $root ?>/matematica/calculadoras/traduzir_numeros_romanos/" title="Traduzir Números Romanos"><i class="material-icons left">keyboard_arrow_right</i>Traduzir Números Romanos</a></li>
@@ -157,7 +157,7 @@
 				</li>
 
 				<li>
-					<div style="position:relative" class="collapsible-header" title="Cálculo de Áreas"><i class="material-icons">compare</i>Cálculo de Áreas<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+					<div style="position:relative" class="collapsible-header"><i class="material-icons">compare</i>Cálculo de Áreas<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
 					<div class="collapsible-body">
 						<ul>
 							<li><a class="waves-effect" href="<?= $root ?>/matematica/calculo_de_areas/area_do_circulo/" title="Área do Círculo"><i class="material-icons left">keyboard_arrow_right</i>Área do Círculo</a></li>
@@ -178,7 +178,7 @@
 				</li>
 
 				<li>
-					<div style="position:relative" class="collapsible-header" title="Cálculo de Datas"><i class="material-icons">timer</i>Cálculo de Datas<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+					<div style="position:relative" class="collapsible-header"><i class="material-icons">timer</i>Cálculo de Datas<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
 					<div class="collapsible-body">
 						<ul>
 							<li><a class="waves-effect" href="<?= $root ?>/matematica/calculo_de_datas/diferenca_entre_datas/" title="Diferença entre Datas"><i class="material-icons left">keyboard_arrow_right</i>Diferença entre Datas</a></li>
@@ -196,7 +196,7 @@
 		<div class="collapsible-body">
 			<ul class="collapsible padding-headers">
 				<li>
-					<div style="position:relative" class="collapsible-header" title="Dia a Dia"><i class="material-icons">today</i>Dia a dia<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+					<div style="position:relative" class="collapsible-header"><i class="material-icons">today</i>Dia a dia<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
 					<div class="collapsible-body">
 						<ul>
 							<li><a class="waves-effect" href="<?= $root ?>/mais_ferramentas/dia_a_dia/progresso_do_ano/" title="Progresso do Ano"><i class="material-icons left">keyboard_arrow_right</i>Progresso do Ano</a></li>
@@ -207,7 +207,7 @@
 				</li>
 
 				<li>
-					<div style="position:relative" class="collapsible-header" title="Jogos"><i class="material-icons">videogame_asset</i>Jogos<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+					<div style="position:relative" class="collapsible-header"><i class="material-icons">videogame_asset</i>Jogos<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
 					<div class="collapsible-body">
 						<ul>
 							<li><a class="waves-effect" href="<?= $root ?>/mais_ferramentas/jogos/gerador_de_decks/" title="Gerador de Decks"><i class="material-icons left">keyboard_arrow_right</i>Gerador de Deck</a></li>
@@ -224,7 +224,7 @@
 			<ul class="collapsible padding-headers">
 				<li>
 					<ul>
-					<li><a class="waves-effect" href="<?= $root ?>/sobre/" title="Sobre o 4People"><i class="material-icons left">keyboard_arrow_right</i>Sobre</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/sobre/" title="Sobre o 4People"><i class="material-icons left">keyboard_arrow_right</i>Sobre</a></li>
 						<li><a class="waves-effect" href="<?= $root ?>/contato/" title="Fale Conosco"><i class="material-icons left">keyboard_arrow_right</i>Fale Conosco</a></li>
 						<li><a class="waves-effect" href="<?= $root ?>/computacao/" title="Computação"><i class="material-icons left">keyboard_arrow_right</i>Computação</a></li>
 						<li><a class="waves-effect" href="<?= $root ?>/matematica/" title="Matemática"><i class="material-icons left">keyboard_arrow_right</i>Matemática</a></li>

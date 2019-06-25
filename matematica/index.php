@@ -52,7 +52,7 @@
 
 							<div class="card-reveal grey lighten-5">
 								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/factorization.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/factorization.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -73,7 +73,7 @@
 
 							<div class="card-reveal">
 								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/GCD.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/GCD.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -96,7 +96,7 @@
 
 							<div class="card-reveal">
 								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/LCM.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/LCM.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -117,7 +117,7 @@
 
 							<div class="card-reveal">
 								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/BMI.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/BMI.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -140,7 +140,7 @@
 
 							<div class="card-reveal">
 								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/percentage.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/percentage.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -161,7 +161,7 @@
 
 							<div class="card-reveal">
 								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/bhaskara.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/bhaskara.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -184,7 +184,7 @@
 
 							<div class="card-reveal">
 								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/fibonacci.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/fibonacci.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -205,7 +205,7 @@
 
 							<div class="card-reveal">
 								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/temperatureConvertor.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/temperatureConvertor.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -228,7 +228,7 @@
 
 							<div class="card-reveal">
 								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/divisionAndRest.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/divisionAndRest.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -249,7 +249,7 @@
 
 							<div class="card-reveal">
 								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/circleArea.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/circleArea.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -272,7 +272,7 @@
 
 							<div class="card-reveal">
 								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/squareArea.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/squareArea.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -293,7 +293,7 @@
 
 							<div class="card-reveal">
 								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/passwordGenerator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/passwordGenerator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>

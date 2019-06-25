@@ -23,8 +23,8 @@
 <meta name="twitter:description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
 <meta name="twitter:image" content="<?= $assets ?>/images/4People.png">
 <meta name="twitter:image:alt" content="Print da página inicial do 4People.">
-<meta name="twitter:creator" content="@LucasNaja0">
-<meta name="twitter:site" content="@LucasNaja0">
+<meta name="twitter:creator" content="@lucasnaja0">
+<meta name="twitter:site" content="@lucasnaja0">
 
 <meta name="robots" content="index,follow,noodp">
 <meta name="robots" content="noydir">

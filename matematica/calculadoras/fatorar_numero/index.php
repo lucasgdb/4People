@@ -39,7 +39,7 @@
 					<p class="mb-0 col s12">Número:</p>
 
 					<div class="input-field col s12">
-						<input id="number" type="number" placeholder="Digite aqui o número." min="1" step="1" value="10">
+						<input id="number" type="number" placeholder="Digite aqui o número." min="1" step="1" value="100">
 					</div>
 				</div>
 

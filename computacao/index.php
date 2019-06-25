@@ -52,7 +52,7 @@
 
 							<div class="card-reveal grey lighten-5">
 								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/CPFGenerator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/CPFGenerator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -73,7 +73,7 @@
 
 							<div class="card-reveal grey lighten-5">
 								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/passwordGenerator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/passwordGenerator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -96,7 +96,7 @@
 
 							<div class="card-reveal grey lighten-5">
 								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/metaTagsGenerator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/metaTagsGenerator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -117,7 +117,7 @@
 
 							<div class="card-reveal grey lighten-5">
 								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/CPFValidator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/CPFValidator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -140,7 +140,7 @@
 
 							<div class="card-reveal grey lighten-5">
 								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/charactersCount.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/charactersCount.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -159,7 +159,7 @@
 							</div>
 							<div class="card-reveal grey lighten-5">
 								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/LucasNaja/4People/blob/master/computacao/rede_e_internet/meu_ip/src/index.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+								<p><a href="https://github.com/lucasnaja/4People/blob/master/computacao/rede_e_internet/meu_ip/src/index.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -180,7 +180,7 @@
 							</div>
 							<div class="card-reveal grey lighten-5">
 								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/LucasNaja/4People/blob/master/assets/algorithms/binaryConverter.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/binaryConverter.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>

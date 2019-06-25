@@ -1,3 +1,26 @@
 .indicators .active {
 	background-color: #1a237e !important
 }
+
+.slides li {
+	border: 1px solid rgb(180, 180, 180)
+}
+
+.mb-1 {
+	margin-bottom: 5px
+}
+
+@media (max-width: 600px) {
+	.card-panel {
+		padding-left: 0;
+		padding-right: 0
+	}
+}
+
+@media (min-width: 600px) {
+	.card * {
+		user-select: none !important;
+		-moz-user-select: none !important;
+		-webkit-user-select: none !important
+	}
+}

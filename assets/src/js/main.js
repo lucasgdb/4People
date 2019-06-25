@@ -56,11 +56,12 @@ const sidenavEffect = () => {
 		sidenav.options.outDuration = 150
 		sideIn()
 		animateIn()
-		sessionStorage.setItem('sideStatus', true)
+		sessionStorage.removeItem('sideStatus')
 	} else {
 		sideOut()
 		animateOut()
-		sessionStorage.removeItem('sideStatus')
+		sessionStorage.setItem('sideStatus', true)
+
 	}
 }
 
@@ -70,13 +71,13 @@ const minWidth = window.matchMedia('(min-width: 993px)')
 
 const matchMax = maxWidth => {
 	if (maxWidth.matches && !tr) animateOut()
-	else if (maxWidth.matches && tr) sidenav.options.outDuration = 0
+	else if (maxWidth.matches && tr) sidenav.options.outDuration = 150
 }
 
 const matchMin = minWidth => {
 	if (minWidth.matches) {
 		setTimeout(() => {
-			if (!sessionStorage.getItem('sideStatus')) {
+			if (sessionStorage.getItem('sideStatus')) {
 				animateOut(0)
 				sideOut()
 			} else animateIn(0)
@@ -88,7 +89,7 @@ const matchMin = minWidth => {
 document.addEventListener('DOMContentLoaded', () => {
 	const allAElements = document.querySelectorAll('a[href^="."]')
 
-	if (!sessionStorage.getItem('sideStatus')) {
+	if (sessionStorage.getItem('sideStatus')) {
 		sidenav.options.outDuration = 0
 		sideOut()
 		animateOut(0)
@@ -119,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		const path = paddingHeadersA[i].getAttribute('href').split('/').filter(link => link !== '')
 		const pathName = location.pathname.split('/').filter(link => link !== '')
 		if (path[path.length - 1] === pathName[pathName.length - 1]) {
-			paddingHeadersA[i].classList.add('grey', 'lighten-3', 'black-text')
+			paddingHeadersA[i].classList.add('grey', 'lighten-4', 'black-text')
 			const icon = paddingHeadersA[i].querySelector('i')
 			icon.innerHTML = 'fiber_manual_record'
 			icon.classList.add('indigo-text', 'text-darken-4')

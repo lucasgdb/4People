@@ -15,7 +15,7 @@
 
   ```sh
     cd ~/Documents/ &&
-    git clone https://github.com/LucasNaja/4People.git &&
+    git clone https://github.com/lucasnaja/4People.git &&
     cd 4People &&
     php -S localhost:5500
   ```
