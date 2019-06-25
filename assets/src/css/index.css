@@ -6,6 +6,10 @@
 	border: 1px solid rgb(180, 180, 180)
 }
 
+.card-panel {
+	padding-bottom: 6px !important
+}
+
 .mb-1 {
 	margin-bottom: 5px
 }

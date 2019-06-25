@@ -5,6 +5,7 @@
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/cards.css">
 	<title>Mais Ferramentas - 4People</title>
 	<?php include_once("$assets/components/metas.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
