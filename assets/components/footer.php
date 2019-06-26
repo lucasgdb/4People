@@ -2,7 +2,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="col s12 l6">
-				<h5>Sobre</h5><div class="divider grey"></div>
+				<h5>Sobre</h5>
+				<div class="divider grey"></div>
+				
 				<p>
 					4People é um site feito para ajudar estudantes, professores, Programadores e pessoas em suas atividades diárias.
 					Feito com <nobr><img title="Café" style="position:relative;top:2px" src="<?= $assets ?>/images/coffee.png" alt="Coração"> e <img title="JavaScript" style="position:relative;top:2.5px" src="<?= $assets ?>/images/js.png" alt="JavaScript">.</nobr>

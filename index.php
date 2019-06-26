@@ -72,25 +72,25 @@
 
 				<div class="row mb-0">
 					<div class="col s12">
-						<div class="card teal hoverable">
+						<div class="card indigo hoverable">
 							<div class="card-content white-text">
 								<span class="card-title"><i class="material-icons left">trending_up</i>Ferramentas mais populares</span>
 								<ul class="collection with-header mb-0">
-									<li class="collection-item teal">
-										<div>Diferença entre Datas<a href="<?= $root ?>/matematica/calculo_de_datas/diferenca_entre_datas/" class="secondary-content"><i class="material-icons teal-text text-darken-4">send</i></a></div>
+									<li class="collection-item indigo">
+										<div>Diferença entre Datas<a href="<?= $root ?>/matematica/calculo_de_datas/diferenca_entre_datas/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
 									</li>
 
-									<li class="collection-item teal">
-										<div>Gerador de Senha<a href="<?= $root ?>/computacao/geradores/gerador_de_senha/" class="secondary-content"><i class="material-icons teal-text text-darken-4">send</i></a></div>
+									<li class="collection-item indigo">
+										<div>Gerador de Senha<a href="<?= $root ?>/computacao/geradores/gerador_de_senha/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
 									</li>
 
-									<li class="collection-item teal">
-										<div>Equação do 2° Grau<a href="<?= $root ?>/matematica/calculadoras/equacao_2_grau/" class="secondary-content"><i class="material-icons teal-text text-darken-4">send</i></a></div>
+									<li class="collection-item indigo">
+										<div>Equação do 2° Grau<a href="<?= $root ?>/matematica/calculadoras/equacao_2_grau/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
 									</li>
 								</ul>
 							</div>
 
-							<div class="top-div teal darken-4"></div>
+							<div class="top-div indigo darken-4"></div>
 						</div>
 					</div>
 				</div>
@@ -121,13 +121,13 @@
 
 				<div class="row mb-0">
 					<div class="col s12 l6">
-						<div class="card blue-grey hoverable">
+						<div class="card teal hoverable">
 							<div class="card-content white-text">
 								<span class="card-title"><i class="material-icons left">group</i>Visitas</span>
 								<p style="font-size:16px">Usuários que já visitaram: 1245</p>
 							</div>
 
-							<div class="top-div blue-grey darken-4"></div>
+							<div class="top-div teal darken-4"></div>
 						</div>
 					</div>
 
