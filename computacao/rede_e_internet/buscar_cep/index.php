@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
 	<title>Buscar CEP - 4People</title>
-	<?php include_once("$assets/components/metas.php") ?>
+	<?php include_once("$assets/components/meta_tags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="Buscar CEP - 4People">
 	<meta name="description" content="Buscar CEP Online para ver informações do seu CEP. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">

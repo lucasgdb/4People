@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
 	<title>Sobre - 4People</title>
-	<?php include_once("$assets/components/metas.php") ?>
+	<?php include_once("$assets/components/meta_tags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="Sobre - 4People">
 	<meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
@@ -29,7 +29,7 @@
 
 	<main>
 		<div class="container">
-			<div class="card-panel left-div-margin">
+			<div class="card-panel top-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">info_outline</i>Sobre o 4People</h1>
 
 				<label>4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.</label>
@@ -40,24 +40,24 @@
 				<div class="row mt-2 mb-2">
 					<div class="col s12 m8 offset-m2">
 						<div class="col s3">
-							<img title="Lucas Bittencourt" class="responsive-img circle" src="../assets/images/lucas.jpg" alt="Lucas Bittencourt">
+							<img title="Lucas Bittencourt" class="responsive-img circle materialboxed" src="../assets/images/lucas_bittencourt.jpg" alt="Lucas Bittencourt">
 						</div>
 
 						<div class="col s3">
-							<img title="Jairo Arcy" class="responsive-img circle" src="../assets/images/jairo_arcy.jpg" alt="Jairo Arcy">
+							<img title="Jairo Arcy" class="responsive-img circle materialboxed" src="../assets/images/jairo_arcy.jpeg" alt="Jairo Arcy">
 						</div>
 
 						<div class="col s3">
-							<img title="Renan de Mattos" class="responsive-img circle" src="../assets/images/renan.jpg" alt="Renan de Mattos">
+							<img title="Renan de Mattos" class="responsive-img circle materialboxed" src="../assets/images/renan_mattos.jpg" alt="Renan de Mattos">
 						</div>
 
 						<div class="col s3">
-							<img title="Suzany Silva" class="responsive-img circle" src="../assets/images/suzany.jpg" alt="Suzany Silva">
+							<img title="Suzany Silva" class="responsive-img circle materialboxed" src="../assets/images/suzany_silva.jpg" alt="Suzany Silva">
 						</div>
 					</div>
 				</div>
 
-				<div class="divider mb-0" style="margin-top:-5px"></div>
+				<div class="divider mb-0"></div>
 				<h2 class="flow-text mt-2 mb-2">Informações</h2>
 				<div class="divider"></div>
 				<p style="text-indent:20px">
@@ -103,7 +103,7 @@
 					</li>
 				</ul>
 
-				<div class="left-div indigo darken-4"></div>
+				<div class="top-div indigo darken-4"></div>
 			</div>
 		</div>
 	</main>
@@ -112,6 +112,9 @@
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
+	<script>
+		M.Materialbox.init(document.querySelectorAll('.materialboxed'))
+	</script>
 </body>
 
 </html>

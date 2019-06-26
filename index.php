@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/index.css">
 	<title>4People - Ferramentas Online</title>
-	<?php include_once("$assets/components/metas.php") ?>
+	<?php include_once("$assets/components/meta_tags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="4People - Ferramentas Online">
 	<meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
@@ -29,7 +29,7 @@
 
 	<main>
 		<div class="container">
-			<div class="card-panel left-div-margin">
+			<div class="card-panel top-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">home</i>4People - Página Inicial</h1>
 				<label>Ferramentas Online para estudantes e professores.</label>
 
@@ -71,6 +71,31 @@
 				<div class="divider mt-2 mb-2"></div>
 
 				<div class="row mb-0">
+					<div class="col s12">
+						<div class="card teal hoverable">
+							<div class="card-content white-text">
+								<span class="card-title"><i class="material-icons left">trending_up</i>Ferramentas mais populares</span>
+								<ul class="collection with-header mb-0">
+									<li class="collection-item teal">
+										<div>Diferença entre Datas<a href="<?= $root ?>/matematica/calculo_de_datas/diferenca_entre_datas/" class="secondary-content"><i class="material-icons teal-text text-darken-4">send</i></a></div>
+									</li>
+
+									<li class="collection-item teal">
+										<div>Gerador de Senha<a href="<?= $root ?>/computacao/geradores/gerador_de_senha/" class="secondary-content"><i class="material-icons teal-text text-darken-4">send</i></a></div>
+									</li>
+
+									<li class="collection-item teal">
+										<div>Equação do 2° Grau<a href="<?= $root ?>/matematica/calculadoras/equacao_2_grau/" class="secondary-content"><i class="material-icons teal-text text-darken-4">send</i></a></div>
+									</li>
+								</ul>
+							</div>
+
+							<div class="top-div teal darken-4"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row mb-0">
 					<div class="col s12 l6">
 						<div class="card green hoverable">
 							<div class="card-content white-text">
@@ -92,47 +117,33 @@
 							<div class="top-div blue darken-4"></div>
 						</div>
 					</div>
+				</div>
 
+				<div class="row mb-0">
 					<div class="col s12 l6">
-						<div class="card red hoverable">
+						<div class="card blue-grey hoverable">
 							<div class="card-content white-text">
 								<span class="card-title"><i class="material-icons left">group</i>Visitas</span>
 								<p style="font-size:16px">Usuários que já visitaram: 1245</p>
 							</div>
 
-							<div class="top-div red darken-4"></div>
+							<div class="top-div blue-grey darken-4"></div>
 						</div>
 					</div>
 
 					<div class="col s12 l6">
-						<div class="card deep-orange hoverable">
+						<div class="card red hoverable">
 							<div class="card-content white-text">
 								<span class="card-title"><i class="material-icons left">build</i>Ferramentas</span>
 								<p style="font-size:16px">Quantidade de Ferramentas: 115</p>
 							</div>
 
-							<div class="top-div deep-orange darken-4"></div>
-						</div>
-					</div>
-
-					<div class="col s12">
-						<div class="card teal hoverable">
-							<div class="card-content white-text">
-								<span class="card-title"><i class="material-icons left">trending_up</i>Ferramentas mais populares</span>
-								<p style="font-size:16px">1° Lugar: Diferença entre Datas</p>
-								<div class="divider mb-1"></div>
-								<p style="font-size:16px">2° Lugar: Gerador de Senha</p>
-								<div class="divider mb-1"></div>
-								<p style="font-size:16px">3° Lugar: Equação do 2° Grau</p>
-								<div class="divider"></div>
-							</div>
-
-							<div class="top-div teal darken-4"></div>
+							<div class="top-div red darken-4"></div>
 						</div>
 					</div>
 				</div>
 
-				<div class="left-div indigo darken-4"></div>
+				<div class="top-div indigo darken-4"></div>
 			</div>
 		</div>
 	</main>

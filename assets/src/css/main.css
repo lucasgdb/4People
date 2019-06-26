@@ -147,7 +147,7 @@ body>header+ul>li>.collapsible-header {
 
 .top-div {
 	width: 100%;
-	height: 9px;
+	height: 10px;
 	top: 0;
 	border-top-left-radius: 2px;
 	border-top-right-radius: 2px;
@@ -219,6 +219,10 @@ body>header+ul>li>.collapsible-header {
 
 	.left-div-margin {
 		padding-left: 29px !important
+	}
+
+	.top-div-margin {
+		padding-top: 29px !important
 	}
 
 	.card-panel {

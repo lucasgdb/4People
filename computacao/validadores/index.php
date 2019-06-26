@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<title>Validadores - 4People</title>
-	<?php include_once("$assets/components/metas.php") ?>
+	<?php include_once("$assets/components/meta_tags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="Validadores - 4People">
 	<meta name="description" content="Validadores. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">

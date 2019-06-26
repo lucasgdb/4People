@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
 	<title>Porcentagem - 4People</title>
-	<?php include_once("$assets/components/metas.php") ?>
+	<?php include_once("$assets/components/meta_tags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="Porcentagem - 4People">
 	<meta name="description" content="Calculadora Online para encontrar a porcentagem. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
