@@ -23,7 +23,7 @@
 }
 
 body {
-	font-family: sans-serif, Arial;
+	font-family: Arial, sans-serif, Arial;
 	height: 100%;
 	display: flex;
 	min-height: 100vh;

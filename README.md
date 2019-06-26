@@ -43,7 +43,7 @@
   - PHPMailer
   - MaterializeCSS
 
-## Ferramentas prontas (24)
+## Ferramentas prontas (24/115)
   - Geradores
     - Gerador de CPF
     - Gerador de Senha
