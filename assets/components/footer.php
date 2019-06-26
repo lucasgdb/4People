@@ -2,16 +2,16 @@
 	<div class="container">
 		<div class="row">
 			<div class="col s12 l6">
-				<h5>Sobre</h5><div class="divider grey darken-1"></div>
+				<h5>Sobre</h5><div class="divider grey"></div>
 				<p>
 					4People é um site feito para ajudar estudantes, professores, Programadores e pessoas em suas atividades diárias.
-					Feito com <nobr><img title="Coração" style="position:relative;top:4px" src="<?= $assets ?>/images/heart.png" alt="Coração"> e <img title="JavaScript" style="position:relative;top:2.5px" src="<?= $assets ?>/images/js.png" alt="JavaScript">.</nobr>
+					Feito com <nobr><img title="Café" style="position:relative;top:2px" src="<?= $assets ?>/images/coffee.png" alt="Coração"> e <img title="JavaScript" style="position:relative;top:2.5px" src="<?= $assets ?>/images/js.png" alt="JavaScript">.</nobr>
 					O projeto é de código aberto sob a licença <a style="text-decoration:underline" class="white-text" href="https://github.com/lucasnaja/4People/blob/master/LICENSE" target="_blank" rel="noopener noreferrer nofollow">GPL-3.0</a>, no <a style="text-decoration:underline" class="white-text" href="https://github.com/lucasnaja/4People" target="_blank" rel="noopener noreferrer nofollow">GitHub</a>.
 				</p>
 			</div>
 
 			<div class="col s12 l6">
-				<h5>Contato</h5><div class="divider grey darken-1"></div>
+				<h5>Contato</h5><div class="divider grey"></div>
 				<ul>
 					<li><a class="white-text linkHover" href="<?= $root ?>/sobre/">Sobre »</a></li>
 					<li><a class="white-text linkHover" href="https://github.com/lucasnaja" target="_blank" rel="noopener noreferrer nofollow">GitHub »</a></li>

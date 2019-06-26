@@ -211,7 +211,7 @@ body>header+ul>li>.collapsible-header {
 		border-bottom-left-radius: 2px
 	}
 
-	.bottom-div,
+	/* .bottom-div, */
 	.left-div {
 		left: 0;
 		position: absolute

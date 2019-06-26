@@ -61,7 +61,7 @@
 
 						<li class="grey lighten-2">
 							<div class="caption center-align">
-								<h3 class="dark grey-text text-darken-4">O MELHOR!</h3>
+								<h3 class="dark grey-text text-darken-4">O MAIS ATUALIZADO!</h3>
 								<h5 class="light grey-text text-darken-4">O 4People possui as melhores ferramentas atualizadas. Tá sentindo falta de alguma? Por favor, nos envie um <a href="./contato/">e-mail</a>.</h5>
 							</div>
 						</li>
@@ -72,10 +72,21 @@
 
 				<div class="row mb-0">
 					<div class="col s12 l6">
+						<div class="card green hoverable">
+							<div class="card-content white-text">
+								<span class="card-title"><i class="material-icons left">accessibility</i>Usuários registrados</span>
+								<p style="font-size:16px">Usuários que se registraram: 605</p>
+							</div>
+
+							<div class="top-div green darken-4"></div>
+						</div>
+					</div>
+
+					<div class="col s12 l6">
 						<div class="card blue hoverable">
 							<div class="card-content white-text">
-								<span class="card-title"><i class="material-icons left">accessibility</i>Visitas</span>
-								<p style="font-size:16px">Usuários que visitaram: 605</p>
+								<span class="card-title"><i class="material-icons left">group</i>Usuários Online</span>
+								<p style="font-size:16px">Usuários online no 4People: 1</p>
 							</div>
 
 							<div class="top-div blue darken-4"></div>
@@ -85,16 +96,27 @@
 					<div class="col s12 l6">
 						<div class="card red hoverable">
 							<div class="card-content white-text">
-								<span class="card-title"><i class="material-icons left">whatshot</i>Ferramenta mais popular</span>
-								<p style="font-size:16px">Ferramenta: Diferença entre Datas</p>
+								<span class="card-title"><i class="material-icons left">group</i>Visitas</span>
+								<p style="font-size:16px">Usuários que já visitaram: 1245</p>
 							</div>
 
 							<div class="top-div red darken-4"></div>
 						</div>
 					</div>
 
+					<div class="col s12 l6">
+						<div class="card deep-orange hoverable">
+							<div class="card-content white-text">
+								<span class="card-title"><i class="material-icons left">build</i>Ferramentas</span>
+								<p style="font-size:16px">Quantidade de Ferramentas: 115</p>
+							</div>
+
+							<div class="top-div deep-orange darken-4"></div>
+						</div>
+					</div>
+
 					<div class="col s12">
-						<div class="card green hoverable">
+						<div class="card teal hoverable">
 							<div class="card-content white-text">
 								<span class="card-title"><i class="material-icons left">trending_up</i>Ferramentas mais populares</span>
 								<p style="font-size:16px">1° Lugar: Diferença entre Datas</p>
@@ -105,7 +127,7 @@
 								<div class="divider"></div>
 							</div>
 
-							<div class="top-div green darken-4"></div>
+							<div class="top-div teal darken-4"></div>
 						</div>
 					</div>
 				</div>
@@ -114,6 +136,34 @@
 			</div>
 		</div>
 	</main>
+
+	<div id="agreements" class="modal">
+		<div class="modal-content">
+			<h4>Termos de uso</h4>
+			<div class="divider"></div>
+			<p>
+				O 4People tem como intenção ajudar estudantes, Programadores, analistas, etc. no seu dia a dia.
+				Normalmente necessários parar testar seus softwares em desenvolvimento.
+				A má utilização das Ferramentas é de total responsabilidade do usuário.
+				Os algoritmos são públicos e de código aberto, não contendo acesso a dados existentes e de pessoas reais.
+			</p>
+
+			<p class="mb-0">
+				<label>
+					<input type="checkbox">
+					<span>Eu li e aceito os termos de uso</span>
+				</label>
+			</p>
+		</div>
+
+		<div class="divider"></div>
+
+		<div class="modal-footer">
+			<a href="#" class="modal-close waves-effect btn-flat" disabled>Aceito</a>
+		</div>
+
+		<div class="left-div indigo darken-4" style="border-radius:0 !important"></div>
+	</div>
 
 	<?php include_once("$assets/components/footer.php") ?>
 
