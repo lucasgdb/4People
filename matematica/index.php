@@ -29,7 +29,7 @@
 
 	<main>
 		<div class="container">
-			<div class="card-panel left-div-margin">
+			<div class="card-panel z-depth-2 left-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">functions</i>Principais Ferramentas</h1>
 
 				<label>Principais Ferramentas de Matemática do 4People</label>

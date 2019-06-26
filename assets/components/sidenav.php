@@ -221,7 +221,7 @@
 	<li class="<?= strpos($link, 'sobre') !== false || strpos($link, 'contato') !== false ? 'active' : '' ?>">
 		<div class="collapsible-header"><i class="material-icons left">insert_link</i>Outras Páginas<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
 		<div class="collapsible-body">
-			<ul class="collapsible padding-headers">
+			<ul class="collapsible padding-headers padding-buttons">
 				<li>
 					<ul>
 						<li><a class="waves-effect" href="<?= $root ?>/sobre/" title="Sobre o 4People"><i class="material-icons left">keyboard_arrow_right</i>Sobre</a></li>

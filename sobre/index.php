@@ -29,7 +29,7 @@
 
 	<main>
 		<div class="container">
-			<div class="card-panel top-div-margin">
+			<div class="card-panel z-depth-2 top-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">info_outline</i>Sobre o 4People</h1>
 
 				<label>4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.</label>
