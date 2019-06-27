@@ -7,7 +7,7 @@
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-	<link rel="stylesheet" href="<?= pathinfo($_SERVER['PHP_SELF'])['dirname'] ?>/src/index.css">
+	<link rel="stylesheet" href="src/index.css">
 	<title>Fale Conosco - 4People</title>
 	<?php include_once("$assets/components/meta_tags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
@@ -81,24 +81,23 @@
 		$msg = $_SESSION['msg']['type'];
 
 		unset($_SESSION['msg']);
-	}
-	?>
 
-	<?php if ($msg === 'error') : ?>
-		<script>
-			M.toast({
-				html: "Não foi possível enviar o e-mail.",
-				classes: "red accent-4"
-			})
-		</script>
-	<?php elseif ($msg === 'success') : ?>
-		<script>
-			M.toast({
-				html: "E-mail enviado com sucesso! Aguarde retorno.",
-				classes: "green"
-			})
-		</script>
-	<?php endif ?>
+		if ($msg === 'error') : ?>
+			<script>
+				M.toast({
+					html: "Não foi possível enviar o e-mail.",
+					classes: "red accent-4"
+				})
+			</script>
+		<?php elseif ($msg === 'success') : ?>
+			<script>
+				M.toast({
+					html: "E-mail enviado com sucesso! Aguarde retorno.",
+					classes: "green"
+				})
+			</script>
+		<?php endif ?>
+	<?php } ?>
 </body>
 
 </html>

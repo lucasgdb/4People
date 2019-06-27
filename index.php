@@ -1,13 +1,19 @@
-<?php include_once('assets/assets.php') ?>
+<?php
+$assets = 'assets';
+$root = '.';
+$url = $_SERVER['REQUEST_URI'];
+
+if ($url[strlen($url) - 1] !== '/') header("location: $url/")
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
-	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-	<link rel="stylesheet" href="<?= $assets ?>/src/css/index.css">
+	<link rel="stylesheet" href="assets/src/css/materialize.min.css">
+	<link rel="stylesheet" href="assets/src/css/main.css">
+	<link rel="stylesheet" href="assets/src/css/index.css">
 	<title>4People - Ferramentas Online</title>
-	<?php include_once("$assets/components/meta_tags.php") ?>
+	<?php include_once("assets/components/meta_tags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="4People - Ferramentas Online">
 	<meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
@@ -21,10 +27,10 @@
 
 <body class="grey lighten-3">
 	<?php
-	include_once("$assets/components/noscript.php");
-	include_once("$assets/components/spinner.php");
-	include_once("$assets/components/header.php");
-	include_once("$assets/components/sidenav.php")
+	include_once("assets/components/noscript.php");
+	include_once("assets/components/spinner.php");
+	include_once("assets/components/header.php");
+	include_once("assets/components/sidenav.php")
 	?>
 
 	<main>
@@ -74,7 +80,7 @@
 					<div class="col s12">
 						<div class="card indigo z-depth-2">
 							<div class="card-content white-text">
-								<span class="card-title"><i class="material-icons left">trending_up</i>Ferramentas mais populares</span>
+								<span class="card-title"><i class="material-icons left">trending_up</i>As 3 Ferramentas mais populares</span>
 								<ul class="collection with-header mb-0">
 									<li class="collection-item indigo">
 										<div style="font-size:16px">Diferença entre Datas<a href="<?= $root ?>/matematica/calculo_de_datas/diferenca_entre_datas/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
@@ -109,7 +115,7 @@
 						<div class="card blue z-depth-2">
 							<div class="card-content white-text">
 								<span class="card-title"><i class="material-icons left">public</i>Usuários Online</span>
-								<p style="font-size:16px">Usuários online no 4People: 1</p>
+								<p style="font-size:16px">Usuários Online no 4People: 1</p>
 							</div>
 
 							<div class="top-div blue darken-4"></div>
@@ -174,11 +180,11 @@
 		<div class="left-div indigo darken-4" style="border-radius:0 !important"></div>
 	</div>
 
-	<?php include_once("$assets/components/footer.php") ?>
+	<?php include_once("assets/components/footer.php") ?>
 
-	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
-	<script src="<?= $assets ?>/src/js/index.js"></script>
-	<script src="<?= $assets ?>/src/js/main.js"></script>
+	<script src="assets/src/js/materialize.min.js"></script>
+	<script src="assets/src/js/index.js"></script>
+	<script src="assets/src/js/main.js"></script>
 </body>
 
 </html>
