@@ -66,10 +66,10 @@
 
 				<ul class="collection with-header mb-0">
 					<li class="collection-item">
-						<div>Gerador de Senhas<a href="#!" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+						<div>Meu IP<a href="<?= $root ?>/computacao/rede_e_internet/meu_ip/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
 					</li>
 					<li class="collection-item">
-						<div>Gerador de Cartão de Crédito<a href="#!" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+						<div>Meu Navegador<a href="<?= $root ?>/computacao/rede_e_internet/meu_navegador/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
 					</li>
 				</ul>
 

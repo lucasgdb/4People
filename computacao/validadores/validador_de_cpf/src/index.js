@@ -9,10 +9,10 @@ const validate = () => {
 	if (txtCPF.value !== '' && CPF.length >= 11) {
 		const isCPF = validateCPF(CPF)
 
-		if (isCPF.isCPF) lblFrom.textContent = isCPF.from
-		else lblFrom.textContent = 'Aguardando...'
+		if (isCPF.isCPF) lblFrom.innerHTML = `<i class="material-icons left green-text">done</i>${isCPF.from}`
+		else lblFrom.innerHTML = '<i class="material-icons left red-text">close</i>CPF Inválido.'
 
-		txtResult.value = `${isCPF.CPF} é um CPF ${isCPF.isCPF ? 'válido' : 'inválido'}.`
+		txtResult.value = `${isCPF.CPF} é um CPF ${isCPF.isCPF ? 'Válido' : 'Inválido'}.`
 	} else {
 		M.toast({
 			html: 'CPF inválido.',

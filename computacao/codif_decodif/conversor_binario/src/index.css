@@ -22,6 +22,10 @@ textarea:focus::placeholder {
 	color: grey
 }
 
+.ml-2 {
+	margin-left: 5px
+}
+
 @media (min-width: 600px) {
 	textarea {
 		border-right: 0

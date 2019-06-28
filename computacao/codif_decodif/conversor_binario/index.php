@@ -40,6 +40,9 @@
 				<button title="Converter texto para Binário" class="btn waves-effect waves-light indigo darken-4" onclick="convertToBinary()">
 					Converter para Binário
 				</button>
+				<button title="Limpar Validação" class="btn waves-effect waves-light indigo darken-4 ml-2 right" onclick="clearInput(txtText)">
+					Limpar
+				</button>
 				<button title="Copiar Texto" class="btn waves-effect waves-light indigo darken-4 right" onclick="copyResult(txtText)">
 					Copiar
 				</button>
@@ -48,6 +51,9 @@
 
 				<button title="Converter Código Binário para texto" class="btn waves-effect waves-light indigo darken-4" onclick="convertToText()">
 					Converter para Texto
+				</button>
+				<button title="Limpar Validação" class="btn waves-effect waves-light indigo darken-4 ml-2 right" onclick="clearInput(txtBinaryCode)">
+					Limpar
 				</button>
 				<button title="Copiar Código Binário" class="btn waves-effect waves-light indigo darken-4 right" onclick="copyResult(txtBinaryCode)">
 					Copiar
@@ -62,10 +68,10 @@
 
 				<ul class="collection with-header mb-0">
 					<li class="collection-item">
-						<div>Gerador de Senhas<a href="#!" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+						<div>Base 64 - Codificador & Decodificador<a href="#" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
 					</li>
 					<li class="collection-item">
-						<div>Gerador de Cartão de Crédito<a href="#!" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+						<div>MD5 - Codificador<a href="#" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
 					</li>
 				</ul>
 

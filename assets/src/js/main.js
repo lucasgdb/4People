@@ -122,8 +122,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (path[path.length - 1] === pathName[pathName.length - 1]) {
 			paddingHeadersA[i].classList.add('grey', 'lighten-4', 'black-text')
 			const icon = paddingHeadersA[i].querySelector('i')
-			icon.innerHTML = 'fiber_manual_record'
+			icon.innerHTML = 'radio_button_checked'
 			icon.classList.add('indigo-text', 'text-darken-4')
+			icon.style.fontSize = '20px'
 			header = paddingHeadersA[i].parentElement.parentElement.parentElement.parentElement.querySelector('.collapsible-header')
 			if (header) header.click()
 

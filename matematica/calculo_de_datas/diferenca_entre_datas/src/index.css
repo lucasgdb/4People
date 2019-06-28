@@ -27,9 +27,17 @@ input[type=text]::placeholder {
 
 .datepicker-done,
 .datepicker-cancel,
-.select-dropdown li>span,
 .timepicker-close {
 	color: #1a237e !important
+}
+
+.select-dropdown li>span {
+	color: black
+}
+
+.select-dropdown li.selected>span {
+	color: #1a237e;
+	background-color: rgb(238, 238, 238)
 }
 
 .is-today {
@@ -41,8 +49,13 @@ td.is-selected,
 .month-prev:focus,
 .month-next:active,
 .month-next:focus,
+.month-prev:active svg,
+.month-prev:focus svg,
+.month-next:active svg,
+.month-next:focus svg,
 .timepicker-digital-display {
-	background-color: #1a237e !important
+	background-color: #1a237e !important;
+	fill: white
 }
 
 td.is-selected.is-today {
@@ -51,15 +64,15 @@ td.is-selected.is-today {
 
 .timepicker-canvas-bg,
 .timepicker-canvas-bearing {
-	fill: #607d8b !important
+	fill: white !important
 }
 
 .timepicker-canvas line {
-	stroke: #607d8b
+	stroke: #1a237e
 }
 
 .timepicker-tick:hover {
-	background-color: #1a237e
+	background-color: white
 }
 
 .datepicker-controls .select-month input {

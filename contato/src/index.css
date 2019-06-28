@@ -31,7 +31,7 @@ textarea:focus::placeholder {
 }
 
 label.active {
-	color: #607d8b !important
+	color: rgb(17, 17, 17) !important
 }
 
 input[type=text]:focus,

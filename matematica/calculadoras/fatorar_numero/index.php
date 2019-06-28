@@ -63,10 +63,10 @@
 
 				<ul class="collection with-header mb-0">
 					<li class="collection-item">
-						<div>Gerador de Senhas<a href="#!" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+						<div>Máximo Divisor Comum<a href="<?= $root ?>/matematica/calculadoras/mdc/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
 					</li>
 					<li class="collection-item">
-						<div>Gerador de Cartão de Crédito<a href="#!" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+						<div>Mínimo Divisor Comum<a href="<?= $root ?>/matematica/calculadoras/mmc/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
 					</li>
 				</ul>
 

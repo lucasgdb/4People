@@ -25,3 +25,7 @@ const copyResult = txt => {
 		})
 	}
 }
+
+const clearInput = component => {
+	component.value = ''
+}

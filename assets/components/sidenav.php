@@ -182,8 +182,8 @@
 					<div class="collapsible-body">
 						<ul>
 							<li><a class="waves-effect" href="<?= $root ?>/matematica/calculo_de_datas/diferenca_entre_datas/" title="Diferença entre Datas"><i class="material-icons left">keyboard_arrow_right</i>Diferença entre Datas</a></li>
-							<li><a class="waves-effect" href="<?= $root ?>/matematica/calculo_de_datas/somar_dias_em_datas/" title="Somar Dias em Datas"><i class="material-icons left">keyboard_arrow_right</i>Somar Dias em Datas</a></li>
-							<li><a class="waves-effect" href="<?= $root ?>/matematica/calculo_de_datas/subtrair_dias_em_datas/" title="Subtrair Dias em Datas"><i class="material-icons left">keyboard_arrow_right</i>Subtrair Dias em Datas</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/matematica/calculo_de_datas/somar_dias_em_datas/" title="Somar em Datas"><i class="material-icons left">keyboard_arrow_right</i>Somar em Datas</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/matematica/calculo_de_datas/subtrair_dias_em_datas/" title="Subtrair em Datas"><i class="material-icons left">keyboard_arrow_right</i>Subtrair em Datas</a></li>
 						</ul>
 					</div>
 				</li>
@@ -224,11 +224,11 @@
 			<ul class="collapsible padding-headers padding-buttons">
 				<li>
 					<ul>
-						<li><a class="waves-effect" href="<?= $root ?>/sobre/" title="Sobre o 4People"><i class="material-icons left">keyboard_arrow_right</i>Sobre</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/contato/" title="Fale Conosco"><i class="material-icons left">keyboard_arrow_right</i>Fale Conosco</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/computacao/" title="Computação"><i class="material-icons left">keyboard_arrow_right</i>Computação</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/matematica/" title="Matemática"><i class="material-icons left">keyboard_arrow_right</i>Matemática</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/mais_ferramentas/" title="Mais Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Mais Ferramentas</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/sobre/" title="Sobre - 4People"><i class="material-icons left">keyboard_arrow_right</i>Sobre</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/contato/" title="Fale Conosco - 4People"><i class="material-icons left">keyboard_arrow_right</i>Fale Conosco</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/computacao/" title="Computação - 4People"><i class="material-icons left">keyboard_arrow_right</i>Computação</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/matematica/" title="Matemática - 4People"><i class="material-icons left">keyboard_arrow_right</i>Matemática</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/mais_ferramentas/" title="Mais Ferramentas - 4People"><i class="material-icons left">keyboard_arrow_right</i>Mais Ferramentas</a></li>
 					</ul>
 				</li>
 			</ul>
