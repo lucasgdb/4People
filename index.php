@@ -68,7 +68,7 @@ if ($url[strlen($url) - 1] !== '/') header("location: $url/")
 						<li class="grey lighten-2">
 							<div class="caption center-align">
 								<h3 class="dark grey-text text-darken-4">O MAIS ATUALIZADO!</h3>
-								<h5 class="light grey-text text-darken-4">O 4People possui as melhores ferramentas atualizadas. Tá sentindo falta de alguma? Por favor, nos envie um <a href="./contato/">e-mail</a>.</h5>
+								<h5 class="light grey-text text-darken-4">O 4People possui as melhores ferramentas atualizadas. Tá sentindo falta de alguma? Por favor, nos envie um <a href="./4People/contato/">e-mail</a>.</h5>
 							</div>
 						</li>
 					</ul>

@@ -40,19 +40,39 @@
 				<div class="row mt-2 mb-2">
 					<div class="col s12 m8 offset-m2">
 						<div class="col s3">
-							<img title="Lucas Bittencourt" class="responsive-img circle materialboxed" src="<?= $assets ?>/images/lucas_bittencourt.jpg" alt="Lucas Bittencourt">
+							<div class="shadow-container">
+								<div class="shadow">
+									<p>Lucas Bittencourt</p>
+								</div>
+								<img title="Lucas Bittencourt" class="responsive-img circle" src="<?= $assets ?>/images/lucas_bittencourt.jpg" alt="Lucas Bittencourt">
+							</div>
 						</div>
 
 						<div class="col s3">
-							<img title="Jairo Arcy" class="responsive-img circle materialboxed" src="<?= $assets ?>/images/jairo_arcy.jpeg" alt="Jairo Arcy">
+							<div class="shadow-container">
+								<div class="shadow">
+									<p>Jairo Arcy</p>
+								</div>
+								<img title="Jairo Arcy" class="responsive-img circle" src="<?= $assets ?>/images/jairo_arcy.jpeg" alt="Jairo Arcy">
+							</div>
 						</div>
 
 						<div class="col s3">
-							<img title="Renan de Mattos" class="responsive-img circle materialboxed" src="<?= $assets ?>/images/renan_mattos.jpg" alt="Renan de Mattos">
+							<div class="shadow-container">
+								<div class="shadow">
+									<p>Renan Mattos</p>
+								</div>
+								<img title="Renan de Mattos" class="responsive-img circle" src="<?= $assets ?>/images/renan_mattos.jpg" alt="Renan de Mattos">
+							</div>
 						</div>
 
 						<div class="col s3">
-							<img title="Suzany Silva" class="responsive-img circle materialboxed" src="<?= $assets ?>/images/suzany_silva.jpg" alt="Suzany Silva">
+							<div class="shadow-container">
+								<div class="shadow">
+									<p>Suzany Silva</p>
+								</div>
+								<img title="Suzany Silva" class="responsive-img circle" src="<?= $assets ?>/images/suzany_silva.jpg" alt="Suzany Silva">
+							</div>
 						</div>
 					</div>
 				</div>
@@ -112,9 +132,6 @@
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
-	<script>
-		M.Materialbox.init(document.querySelectorAll('.materialboxed'))
-	</script>
 </body>
 
 </html>
