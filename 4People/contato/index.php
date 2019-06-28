@@ -1,4 +1,4 @@
-<?php include_once('../assets/assets.php') ?>
+<?php include_once('../../assets/assets.php') ?>
 <?php session_start() ?>
 
 <!DOCTYPE html>

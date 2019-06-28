@@ -1,4 +1,4 @@
-<?php include_once('../assets/assets.php') ?>
+<?php include_once('../../assets/assets.php') ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -40,19 +40,19 @@
 				<div class="row mt-2 mb-2">
 					<div class="col s12 m8 offset-m2">
 						<div class="col s3">
-							<img title="Lucas Bittencourt" class="responsive-img circle materialboxed" src="../assets/images/lucas_bittencourt.jpg" alt="Lucas Bittencourt">
+							<img title="Lucas Bittencourt" class="responsive-img circle materialboxed" src="<?= $assets ?>/images/lucas_bittencourt.jpg" alt="Lucas Bittencourt">
 						</div>
 
 						<div class="col s3">
-							<img title="Jairo Arcy" class="responsive-img circle materialboxed" src="../assets/images/jairo_arcy.jpeg" alt="Jairo Arcy">
+							<img title="Jairo Arcy" class="responsive-img circle materialboxed" src="<?= $assets ?>/images/jairo_arcy.jpeg" alt="Jairo Arcy">
 						</div>
 
 						<div class="col s3">
-							<img title="Renan de Mattos" class="responsive-img circle materialboxed" src="../assets/images/renan_mattos.jpg" alt="Renan de Mattos">
+							<img title="Renan de Mattos" class="responsive-img circle materialboxed" src="<?= $assets ?>/images/renan_mattos.jpg" alt="Renan de Mattos">
 						</div>
 
 						<div class="col s3">
-							<img title="Suzany Silva" class="responsive-img circle materialboxed" src="../assets/images/suzany_silva.jpg" alt="Suzany Silva">
+							<img title="Suzany Silva" class="responsive-img circle materialboxed" src="<?= $assets ?>/images/suzany_silva.jpg" alt="Suzany Silva">
 						</div>
 					</div>
 				</div>
