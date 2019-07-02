@@ -28,7 +28,7 @@
 
 	<div class="footer-copyright" style="background-color:#10165a">
 		<div class="container white-text">
-			© 4People - <?= date('Y') ?> (v0.0.1)
+			© 4People - <?= date('Y') ?>
 			<a class="right white-text linkHover" href="<?= $root ?>/4People/contato/"><i class="material-icons left" style="position:relative;top:-1px">email</i>Fale Conosco »</a>
 		</div>
 	</div>
