@@ -16,7 +16,7 @@
 				<h5>Contato</h5>
 				<div class="divider grey"></div>
 				<ul>
-					<li><a class="white-text linkHover" href="<?= $root ?>/4People/sobre/">Sobre »</a></li>
+					<li><a class="white-text linkHover" href="<?= $root ?>/sobre/">Sobre »</a></li>
 					<li><a class="white-text linkHover" href="https://github.com/lucasnaja" target="_blank" rel="noopener noreferrer nofollow">GitHub »</a></li>
 					<li><a class="white-text linkHover" href="https://facebook.com/lucas8bit" target="_blank" rel="noopener noreferrer nofollow">Facebook »</a></li>
 					<li><a class="white-text linkHover" href="https://dev.to/lucasnaja" target="_blank" rel="noopener noreferrer nofollow">Dev Community »</a></li>
@@ -29,7 +29,7 @@
 	<div class="footer-copyright" style="background-color:#10165a">
 		<div class="container white-text">
 			© 4People - <?= date('Y') ?>
-			<a class="right white-text linkHover" href="<?= $root ?>/4People/contato/"><i class="material-icons left" style="position:relative;top:-1px">email</i>Fale Conosco »</a>
+			<a class="right white-text linkHover" href="<?= $root ?>/contato/"><i class="material-icons left" style="position:relative;top:-1px">email</i>Fale Conosco »</a>
 		</div>
 	</div>
 </footer>

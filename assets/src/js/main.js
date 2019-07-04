@@ -6,6 +6,8 @@ M.Collapsible.init(document.querySelectorAll('.collapsible'))
 const sidenav = M.Sidenav.getInstance(document.querySelector('#slide-out'))
 const navMobileA = document.querySelectorAll('#nav-mobile a')
 const paddingHeadersA = document.querySelectorAll('.collapsible-body ul li a')
+const mainCollButtons = document.querySelectorAll('#slide-out > li:not(:first-child) > .collapsible-header')
+const secCollButtons = document.querySelectorAll('.padding-headers:not(.padding-buttons) > li > .collapsible-header')
 const nav = document.querySelector('nav')
 const main = document.querySelector('main')
 const footer = document.querySelector('footer')
@@ -61,7 +63,6 @@ const sidenavEffect = () => {
 		sideOut()
 		animateOut()
 		sessionStorage.setItem('sideStatus', true)
-
 	}
 }
 
@@ -102,6 +103,35 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
+	for (let i = 0; i < secCollButtons.length; i++) {
+		secCollButtons[i].addEventListener('click', () => {
+			const icon = secCollButtons[i].querySelector(':last-child')
+			icon.innerHTML = icon.innerHTML === 'arrow_drop_down' ? 'arrow_drop_up' : 'arrow_drop_down'
+
+			const containerButtons = secCollButtons[i].parentElement.parentElement.querySelectorAll('.collapsible > li > .collapsible-header')
+			for (let j = 0; j < containerButtons.length; j++) {
+				if (secCollButtons[i] !== containerButtons[j]) {
+					const icon = containerButtons[j].querySelector(':last-child')
+					icon.innerHTML = 'arrow_drop_down'
+				}
+			}
+		})
+	}
+
+	for (let i = 0; i < mainCollButtons.length; i++) {
+		mainCollButtons[i].addEventListener('click', () => {
+			const icon = mainCollButtons[i].querySelector(':last-child')
+			icon.innerHTML = icon.innerHTML === 'arrow_drop_down' ? 'arrow_drop_up' : 'arrow_drop_down'
+
+			for (let j = 0; j < mainCollButtons.length; j++) {
+				if (mainCollButtons[i] !== mainCollButtons[j]) {
+					const icon = mainCollButtons[j].querySelector(':last-child')
+					icon.innerHTML = 'arrow_drop_down'
+				}
+			}
+		})
+	}
+
 	for (let i = 0; i < navMobileA.length; i++) {
 		if (navMobileA[i].getAttribute('href').split('/').filter(link => link !== '' && link !== '.').join('') === '') {
 			navMobileA[i].parentElement.classList.add('active')
@@ -125,6 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			icon.innerHTML = 'radio_button_checked'
 			icon.classList.add('indigo-text', 'text-darken-4')
 			icon.style.fontSize = '20px'
+
 			header = paddingHeadersA[i].parentElement.parentElement.parentElement.parentElement.querySelector('.collapsible-header')
 			if (header) header.click()
 

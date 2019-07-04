@@ -1,4 +1,4 @@
-<?php include_once('../../assets/assets.php') ?>
+<?php include_once('../assets/assets.php') ?>
 <?php session_start() ?>
 
 <!DOCTYPE html>
@@ -14,11 +14,11 @@
 	<meta name="title" content="Contato - 4People">
 	<meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
 	<meta name="application-name" content="4People">
-	<meta name="msapplication-starturl" content="./4People/contato/">
+	<meta name="msapplication-starturl" content="./c/">
 	<meta property="og:title" content="Contato - 4People">
 	<meta name="twitter:title" content="Contato - 4People">
-	<meta property="og:url" content="./4People/contato/">
-	<meta name="twitter:url" content="./4People/contato/">
+	<meta property="og:url" content="./contato/">
+	<meta name="twitter:url" content="./contato/">
 </head>
 
 <body class="grey lighten-3">

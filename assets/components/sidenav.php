@@ -11,8 +11,10 @@
 		<div class="left-div-mobile indigo darken-4" style="border-radius:0"></div>
 	</li>
 
-	<li class="<?= strpos($link, 'computacao') !== false ? 'active' : '' ?>">
-		<div class="collapsible-header"><i class="material-icons left">computer</i>Computação<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+	<?php $comp = strpos($link, 'computacao') !== false ?>
+
+	<li class="<?= $comp ? 'active' : '' ?>">
+		<div class="collapsible-header"><i class="material-icons left">computer</i>Computação<i class="material-icons" style="position:absolute;right:0"><?= $comp ? 'arrow_drop_up' : 'arrow_drop_down' ?></i></div>
 		<div class="collapsible-body">
 			<ul class="collapsible padding-headers">
 				<li>
@@ -127,8 +129,10 @@
 		</div>
 	</li>
 
-	<li class="<?= strpos($link, 'matematica') !== false ? 'active' : '' ?>">
-		<div class="collapsible-header"><i class="material-icons left">functions</i>Matemática<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+	<?php $math = strpos($link, 'matematica') !== false ?>
+
+	<li class="<?= $math ? 'active' : '' ?>">
+		<div class="collapsible-header"><i class="material-icons left">functions</i>Matemática<i class="material-icons" style="position:absolute;right:0"><?= $math ? 'arrow_drop_up' : 'arrow_drop_down' ?></i></div>
 		<div class="collapsible-body">
 			<ul class="collapsible padding-headers">
 				<li>
@@ -191,8 +195,10 @@
 		</div>
 	</li>
 
-	<li class="<?= strpos($link, 'mais_ferramentas') !== false ? 'active' : '' ?>">
-		<div class="collapsible-header"><i class="material-icons left">build</i>Mais Ferramentas<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+	<?php $more_tools = strpos($link, 'mais_ferramentas') !== false ?>
+
+	<li class="<?= $more_tools ? 'active' : '' ?>">
+		<div class="collapsible-header"><i class="material-icons left">build</i>Mais Ferramentas<i class="material-icons" style="position:absolute;right:0"><?= $more_tools ? 'arrow_drop_up' : 'arrow_drop_down' ?></i></div>
 		<div class="collapsible-body">
 			<ul class="collapsible padding-headers">
 				<li>
@@ -218,14 +224,16 @@
 		</div>
 	</li>
 
-	<li class="<?= strpos($link, 'sobre') !== false || strpos($link, 'contato') !== false ? 'active' : '' ?>">
-		<div class="collapsible-header"><i class="material-icons left">insert_link</i>Outras Páginas<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+	<?php $other_pages = strpos($link, 'sobre') !== false || strpos($link, 'contato') !== false ?>
+
+	<li class="<?= $other_pages ? 'active' : '' ?>">
+		<div class="collapsible-header"><i class="material-icons left">insert_link</i>Outras Páginas<i class="material-icons" style="position:absolute;right:0"><?= $other_pages ? 'arrow_drop_up' : 'arrow_drop_down' ?></i></div>
 		<div class="collapsible-body">
 			<ul class="collapsible padding-headers padding-buttons">
 				<li>
 					<ul>
-						<li><a class="waves-effect" href="<?= $root ?>/4People/sobre/" title="Sobre - 4People"><i class="material-icons left">keyboard_arrow_right</i>Sobre</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/4People/contato/" title="Fale Conosco - 4People"><i class="material-icons left">keyboard_arrow_right</i>Fale Conosco</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/sobre/" title="Sobre - 4People"><i class="material-icons left">keyboard_arrow_right</i>Sobre</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/contato/" title="Fale Conosco - 4People"><i class="material-icons left">keyboard_arrow_right</i>Fale Conosco</a></li>
 						<li><a class="waves-effect" href="<?= $root ?>/computacao/" title="Computação - 4People"><i class="material-icons left">keyboard_arrow_right</i>Computação</a></li>
 						<li><a class="waves-effect" href="<?= $root ?>/matematica/" title="Matemática - 4People"><i class="material-icons left">keyboard_arrow_right</i>Matemática</a></li>
 						<li><a class="waves-effect" href="<?= $root ?>/mais_ferramentas/" title="Mais Ferramentas - 4People"><i class="material-icons left">keyboard_arrow_right</i>Mais Ferramentas</a></li>
