@@ -173,6 +173,10 @@ body>header+ul>li>.collapsible-header {
 	padding-left: 29px !important
 }
 
+.collapsible-header :last-child {
+	transition: transform 400ms
+}
+
 @media (max-width: 600px) {
 	.container {
 		width: 100%
