@@ -81,7 +81,7 @@
 
 	<?php include_once("$assets/components/footer.php") ?>
 
-	<script src="<?= $assets ?>/algorithms/CPFValidator.js"></script>
+	<script src="<?= $assets ?>/algorithms/validators/CPFValidator.js"></script>
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="src/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>

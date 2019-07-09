@@ -82,7 +82,7 @@
 
 	<?php include_once("$assets/components/footer.php") ?>
 
-	<script src="<?= $assets ?>/algorithms/binaryConverter.js"></script>
+	<script src="<?= $assets ?>/algorithms/encoders_decoders/binaryConverter.js"></script>
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="src/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
