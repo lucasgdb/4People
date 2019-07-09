@@ -174,7 +174,7 @@ body>header+ul>li>.collapsible-header {
 }
 
 .collapsible-header :last-child {
-	transition: transform 400ms
+	transition: transform 300ms
 }
 
 @media (max-width: 600px) {

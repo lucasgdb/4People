@@ -1,3 +1,1 @@
-const calculatePentagonArea = side => {
-	return 5 * (side * side) / (4 * .7265425280053608)
-}
+const calculatePentagonArea = side => 5 * side ** 2 / 2.906170112021443
