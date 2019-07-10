@@ -1,0 +1,73 @@
+.top-div {
+	width: 100%;
+	height: 10px;
+	top: 0;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	left: 0;
+	position: absolute
+}
+
+.left-div-mobile {
+	width: 10px;
+	height: 100%;
+	top: 0;
+	border-top-left-radius: 2px;
+	border-bottom-left-radius: 2px;
+	left: 0;
+	position: absolute
+}
+
+.left-div-margin-mobile {
+	padding-left: 29px !important
+}
+
+@media (min-width: 601px) {
+	.right-div {
+		position: absolute;
+		width: 9px;
+		height: 100%;
+		top: 0;
+		right: 0;
+		border-top-right-radius: 2px;
+		border-bottom-right-radius: 2px
+	}
+
+	.bottom-div {
+		width: 100%;
+		height: 9px;
+		bottom: 0;
+		border-bottom-left-radius: 2px;
+		border-bottom-right-radius: 2px
+	}
+
+	.left-div {
+		width: 10px;
+		height: 100%;
+		top: 0;
+		border-top-left-radius: 2px;
+		border-bottom-left-radius: 2px
+	}
+
+	/* .bottom-div, */
+	.left-div {
+		left: 0;
+		position: absolute
+	}
+
+	.left-div-margin {
+		padding-left: 29px !important
+	}
+
+	.top-div-margin {
+		padding-top: 29px !important
+	}
+
+	.card-panel {
+		position: relative !important
+	}
+
+	.linkHover:hover {
+		text-decoration: underline
+	}
+}
