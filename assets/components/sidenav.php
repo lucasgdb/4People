@@ -1,10 +1,15 @@
-<?php $link = $_SERVER['REQUEST_URI'] ?>
+<?php
+$link = $_SERVER['REQUEST_URI'];
+session_start();
+$logged = $_SESSION['logged'];
+$userName = $logged ? $_SESSION['logged']['name'] : ''
+?>
 <ul id="slide-out" class="sidenav sidenav-fixed collapsible grey lighten-5">
 	<li style="position:relative">
 		<div class="user-view mb-0 left-div-margin-mobile" style="border-bottom:1px solid #e0e0e0">
 			<div class="background grey lighten-4"></div>
 			<img class="circle" src="<?= $assets ?>/images/logo.png" alt="Logo">
-			<span class="name black-text">4People - Ferramentas Online</span>
+			<span class="name black-text"><?= $logged ? "Usuário: $userName" : '4People - Ferramentas Online' ?></span>
 			<a class="linkHover" href="https://github.com/lucasnaja/4People" target="_blank" rel="noopener noreferrer nofollow"><span class="email">Projeto de TCC »</span></a>
 		</div>
 

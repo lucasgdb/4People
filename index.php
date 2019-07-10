@@ -13,7 +13,7 @@ if ($url[strlen($url) - 1] !== '/') header("location: $url/")
 	<link rel="stylesheet" href="assets/src/css/main.css">
 	<link rel="stylesheet" href="assets/src/css/index.css">
 	<title>4People - Ferramentas Online</title>
-	<?php include_once("assets/components/meta_tags.php") ?>
+	<?php include_once('assets/components/meta_tags.php') ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="4People - Ferramentas Online">
 	<meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
@@ -27,10 +27,10 @@ if ($url[strlen($url) - 1] !== '/') header("location: $url/")
 
 <body class="grey lighten-3">
 	<?php
-	include_once("assets/components/noscript.php");
-	include_once("assets/components/spinner.php");
-	include_once("assets/components/header.php");
-	include_once("assets/components/sidenav.php")
+	include_once('assets/components/noscript.php');
+	include_once('assets/components/spinner.php');
+	include_once('assets/components/header.php');
+	include_once('assets/components/sidenav.php')
 	?>
 
 	<main>
@@ -43,31 +43,31 @@ if ($url[strlen($url) - 1] !== '/') header("location: $url/")
 
 				<div class="slider">
 					<ul class="slides">
-						<li class="grey lighten-2">
+						<li class="grey lighten-3">
 							<img alt=".">
-							<div class="caption center-align">
-								<h3 class="dark grey-text text-darken-4">FEITO PARA TODOS!</h3>
+							<div class="caption left-align">
+								<h3 class="dark grey-text text-darken-4"><i style="top:-5px" class="material-icons left medium">favorite</i> FEITO PARA TODOS!</h3>
 								<h5 class="light grey-text text-darken-4">Possuímos ferramentas para Programadores, professores, estudantes e usuários comuns.</h5>
 							</div>
 						</li>
 
-						<li class="grey lighten-2">
+						<li class="grey lighten-3">
 							<div class="caption left-align">
-								<h3 class="dark grey-text text-darken-4">MAIS RÁPIDO!</h3>
+								<h3 class="dark grey-text text-darken-4"><i style="top:-5px" class="material-icons left medium">fast_forward</i> MAIS RÁPIDO!</h3>
 								<h5 class="light grey-text text-darken-4">Nossas Ferramentas foram todas escritas em JavaScript, para maior velocidade e segurança.</h5>
 							</div>
 						</li>
 
-						<li class="grey lighten-2">
+						<li class="grey lighten-3">
 							<div class="caption right-align">
-								<h3 class="dark grey-text text-darken-4">CÓDIGO ABERTO!</h3>
+								<h3 class="dark grey-text text-darken-4">CÓDIGO ABERTO! <i style="top:-5px" class="material-icons right medium">code</i></h3>
 								<h5 class="light grey-text text-darken-4">O Projeto 4People é de Código Aberto para qualquer um estudar os algoritmos e até mesmo melhorá-los.</h5>
 							</div>
 						</li>
 
-						<li class="grey lighten-2">
-							<div class="caption center-align">
-								<h3 class="dark grey-text text-darken-4">O MAIS ATUALIZADO!</h3>
+						<li class="grey lighten-3">
+							<div class="caption right-align">
+								<h3 class="dark grey-text text-darken-4"><i style="top:-5px" class="material-icons right medium">free_breakfast</i>O MAIS ATUALIZADO!</h3>
 								<h5 class="light grey-text text-darken-4">O 4People possui as melhores ferramentas atualizadas. Tá sentindo falta de alguma? Por favor, nos envie um <a href="./contato/">e-mail</a>.</h5>
 							</div>
 						</li>
@@ -104,7 +104,14 @@ if ($url[strlen($url) - 1] !== '/') header("location: $url/")
 						<div class="card green z-depth-2">
 							<div class="card-content white-text">
 								<span class="card-title"><i class="material-icons left">accessibility</i>Usuários registrados</span>
-								<p style="font-size:16px">Usuários que se registraram: 605</p>
+								<?php
+								include_once('assets/connection.php');
+								$sql = $database->prepare('SELECT COUNT(user_id) FROM users');
+
+								$sql->execute();
+								$total = $sql->fetchColumn()
+								?>
+								<p style="font-size:16px">Usuários que se registraram: <?= $total ?></p>
 							</div>
 
 							<div class="top-div green darken-4"></div>
@@ -180,7 +187,7 @@ if ($url[strlen($url) - 1] !== '/') header("location: $url/")
 		<div class="left-div indigo darken-4" style="border-radius:0 !important"></div>
 	</div>
 
-	<?php include_once("assets/components/footer.php") ?>
+	<?php include_once('assets/components/footer.php') ?>
 
 	<script src="assets/src/js/materialize.min.js"></script>
 	<script src="assets/src/js/index.js"></script>
