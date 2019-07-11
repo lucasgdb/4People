@@ -31,32 +31,30 @@ if ($_SESSION['logged']) header('location: ../../')
 	<main>
 		<div class="container">
 			<div class="card-panel z-depth-2 left-div-margin">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person</i>4People - Página de Login</h1>
-				<label>Faça login e receba muitas vantagens!</label>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person</i>4People - Login Administrativo</h1>
+				<label>Painel de Login Administrativo</label>
 
 				<div class="divider" style="margin-bottom:5px"></div>
 
 				<form style="margin-top:15px" action="src/login.php" method="post">
 					<div class="row mb-0">
 						<div class="input-field col s12">
-							<i class="material-icons prefix">mail</i>
-							<input title="Preencha este campo com seu e-mail." placeholder="E-mail do Usuário" class="validate" type="email" name="user_email" oninvalid="if (this.value === '') this.setCustomValidity('Preencha este campo com seu e-mail.'); else this.setCustomValidity('Este e-mail não é válido.')" oninput="setCustomValidity('')" required>
-							<label>E-mail</label>
-							<span class="helper-text" data-error="E-mail inválido." data-success="E-mail válido.">Ex: lucasnaja0@gmail.com</span>
+							<i class="material-icons prefix">account_circle</i>
+							<input minlength="8" title="Preencha este campo com seu Login." placeholder="Login de Usuário" class="validate" type="text" name="user_nickname" oninvalid="this.setCustomValidity('Preencha este campo com seu Login.')" oninput="setCustomValidity('')" required>
+							<label>Login</label>
+							<span class="helper-text" data-error="Login inválido." data-success="Login válido.">Aguardando...</span>
 						</div>
 
 						<div class="input-field col s12">
 							<i class="material-icons prefix">more</i>
-							<input minlength="6" title="Preencha este campo com sua senha." placeholder="Senha do Usuário" class="validate" type="password" name="user_password" oninvalid="this.setCustomValidity('Preencha este campo com sua senha.')" oninput="setCustomValidity('')" required>
+							<input minlength="6" title="Preencha este campo com sua senha." placeholder="Senha de Usuário" class="validate" type="password" name="user_password" oninvalid="this.setCustomValidity('Preencha este campo com sua senha.')" oninput="setCustomValidity('')" required>
 							<label>Senha</label>
 							<span class="helper-text" data-error="Senha inválida." data-success="Senha válida.">Aguardando...</span>
 						</div>
 
 						<div class="col s12" style="margin-top:5px">
-							<a title="Voltar ao 4People" class="btn indigo darken-4" href="../../">Voltar</a>
-							<input title="Logar no 4People" class="btn indigo darken-4" title="Logar" type="submit" value="Entrar">
-							<a class="btn btn-flat waves-effect right" href="#">Esqueci minha senha</a>
-							<a class="btn btn-flat waves-effect right" href="../registro/">Registrar-se</a>
+							<a title="Voltar ao 4People" class="btn indigo darken-4" href="../../"><i class="material-icons left">arrow_back</i>Voltar</a>
+							<input title="Logar no 4People" class="btn indigo darken-4 right" title="Logar" type="submit" value="Entrar">
 						</div>
 					</div>
 				</form>

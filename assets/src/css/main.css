@@ -51,6 +51,7 @@ main {
 .collapsible-header,
 .collapsible-body,
 .btn,
+i.material-icons,
 [data-target="slide-out"] {
 	user-select: none !important;
 	-webkit-user-select: none !important

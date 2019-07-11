@@ -42,14 +42,14 @@
 						<li class="grey lighten-3">
 							<img alt=".">
 							<div class="caption left-align">
-								<h3 class="dark grey-text text-darken-4"><i style="top:5px" class="material-icons left small">favorite</i> FEITO PARA TODOS!</h3>
+								<h3 class="dark grey-text text-darken-4"><i style="top:9px" class="material-icons left small">favorite</i> FEITO PARA TODOS!</h3>
 								<h5 class="light grey-text text-darken-4">Possuímos ferramentas para Programadores, professores, estudantes e usuários comuns.</h5>
 							</div>
 						</li>
 
 						<li class="grey lighten-3">
 							<div class="caption left-align">
-								<h3 class="dark grey-text text-darken-4"><i style="top:7px" class="material-icons left small">fast_forward</i> MAIS RÁPIDO!</h3>
+								<h3 class="dark grey-text text-darken-4"><i style="top:10px" class="material-icons left small">fast_forward</i> MAIS RÁPIDO!</h3>
 								<h5 class="light grey-text text-darken-4">Nossas Ferramentas foram todas escritas em JavaScript, para maior velocidade e segurança.</h5>
 							</div>
 						</li>
@@ -96,24 +96,19 @@
 						</div>
 					</div>
 
-					<div class="col s12 l6">
-						<div class="card green z-depth-2">
+					<div class="col s12">
+						<div class="card teal z-depth-2">
 							<div class="card-content white-text">
-								<span class="card-title"><i class="material-icons left">accessibility</i>Usuários registrados</span>
-								<?php
-								include_once('assets/connection.php');
-								$sql = $database->prepare('SELECT COUNT(user_id) FROM users');
-
-								$sql->execute();
-								$total = $sql->fetchColumn()
-								?>
-								<p style="font-size:16px">Usuários que se registraram: <?= $total ?></p>
+								<span class="card-title"><i class="material-icons left">group</i>Visitas</span>
+								<p style="font-size:16px">Usuários que já visitaram: 10.245</p>
 							</div>
 
-							<div class="top-div green darken-4"></div>
+							<div class="top-div teal darken-4"></div>
 						</div>
 					</div>
+				</div>
 
+				<div class="row mb-0">
 					<div class="col s12 l6">
 						<div class="card blue z-depth-2">
 							<div class="card-content white-text">
@@ -122,19 +117,6 @@
 							</div>
 
 							<div class="top-div blue darken-4"></div>
-						</div>
-					</div>
-				</div>
-
-				<div class="row mb-0">
-					<div class="col s12 l6">
-						<div class="card teal z-depth-2">
-							<div class="card-content white-text">
-								<span class="card-title"><i class="material-icons left">group</i>Visitas</span>
-								<p style="font-size:16px">Usuários que já visitaram: 1245</p>
-							</div>
-
-							<div class="top-div teal darken-4"></div>
 						</div>
 					</div>
 

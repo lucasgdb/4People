@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 10, 2019 at 09:31 PM
+-- Generation Time: Jul 11, 2019 at 05:40 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -49,16 +49,15 @@ CREATE TABLE `users` (
   `user_nickname` varchar(45) NOT NULL,
   `user_email` varchar(255) NOT NULL,
   `user_password` varchar(32) NOT NULL,
-  `user_image` varchar(255) DEFAULT NULL,
-  `user_level` bit(1) DEFAULT b'0'
+  `user_image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_name`, `user_nickname`, `user_email`, `user_password`, `user_image`, `user_level`) VALUES
-(1, 'Lucas Bittencourt', 'lucasnaja', 'lucasnaja0@gmail.com', '202cb962ac59075b964b07152d234b70', NULL, b'1');
+INSERT INTO `users` (`user_id`, `user_name`, `user_nickname`, `user_email`, `user_password`, `user_image`) VALUES
+(1, 'Lucas Bittencourt', 'lucasnaja', 'lucasnaja0@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL);
 
 --
 -- Indexes for dumped tables
@@ -75,8 +74,8 @@ ALTER TABLE `tools`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `user_nickname` (`user_nickname`),
-  ADD UNIQUE KEY `user_email` (`user_email`);
+  ADD UNIQUE KEY `user_email` (`user_email`),
+  ADD UNIQUE KEY `user_nickname` (`user_nickname`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -92,7 +91,7 @@ ALTER TABLE `tools`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
