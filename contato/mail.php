@@ -1,4 +1,5 @@
 <?php
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -27,7 +28,7 @@ try {
 	$mail->Port = 587;
 
 	// Recipients
-	$mail->setFrom("$email", '4People');
+	$mail->setFrom($email, '4People');
 	$mail->addAddress("4people.onlinetools@gmail.com", "$firstName $lastName");
 
 	// Content
@@ -44,5 +45,5 @@ try {
 	header('Location: ./');
 } catch (Exception $e) {
 	$_SESSION['msg']['type'] = 'error';
-	echo $e->getMessage();
+	header('Location: ./');
 }

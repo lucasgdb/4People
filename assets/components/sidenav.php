@@ -1,7 +1,7 @@
 <?php
 $link = $_SERVER['REQUEST_URI'];
-session_start();
-$logged = $_SESSION['logged'];
+
+$logged = isset($_SESSION['logged']);
 $userName = $logged ? $_SESSION['logged']['name'] : '';
 $image = $logged ? $_SESSION['logged']['image'] : ''
 ?>
@@ -20,7 +20,7 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 	<?php $comp = strpos($link, 'computacao') !== false ?>
 
 	<li class="<?= $comp ? 'active' : '' ?>">
-		<div class="collapsible-header"><i class="material-icons left">computer</i>Computação<i class="material-icons" style="position:absolute;right:0<?= $comp ? ';transform:rotateZ(180deg)' : '' ?>">arrow_drop_down</i></div>
+		<div class="collapsible-header"><i class="material-icons left">computer</i>Computação<i class="material-icons" style="position:absolute;right:0<?= $comp ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
 		<div class="collapsible-body">
 			<ul class="collapsible padding-headers">
 				<li>
@@ -138,7 +138,7 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 	<?php $math = strpos($link, 'matematica') !== false ?>
 
 	<li class="<?= $math ? 'active' : '' ?>">
-		<div class="collapsible-header"><i class="material-icons left">functions</i>Matemática<i class="material-icons" style="position:absolute;right:0<?= $math ? ';transform:rotateZ(180deg)' : '' ?>">arrow_drop_down</i></div>
+		<div class="collapsible-header"><i class="material-icons left">functions</i>Matemática<i class="material-icons" style="position:absolute;right:0<?= $math ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
 		<div class="collapsible-body">
 			<ul class="collapsible padding-headers">
 				<li>
@@ -204,7 +204,7 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 	<?php $more_tools = strpos($link, 'mais_ferramentas') !== false ?>
 
 	<li class="<?= $more_tools ? 'active' : '' ?>">
-		<div class="collapsible-header"><i class="material-icons left">build</i>Mais Ferramentas<i class="material-icons" style="position:absolute;right:0<?= $more_tools ? ';transform:rotateZ(180deg)' : '' ?>">arrow_drop_down</i></div>
+		<div class="collapsible-header"><i class="material-icons left">build</i>Mais Ferramentas<i class="material-icons" style="position:absolute;right:0<?= $more_tools ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
 		<div class="collapsible-body">
 			<ul class="collapsible padding-headers">
 				<li>
@@ -233,7 +233,7 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 	<?php $other_pages = strpos($link, 'sobre') !== false || strpos($link, 'contato') !== false ?>
 
 	<li class="<?= $other_pages ? 'active' : '' ?>">
-		<div class="collapsible-header"><i class="material-icons left">insert_link</i>Outras Páginas<i class="material-icons" style="position:absolute;right:0<?= $other_pages ? ';transform:rotateZ(180deg)' : '' ?>">arrow_drop_down</i></div>
+		<div class="collapsible-header"><i class="material-icons left">insert_link</i>Outras Páginas<i class="material-icons" style="position:absolute;right:0<?= $other_pages ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
 		<div class="collapsible-body">
 			<ul class="collapsible padding-headers padding-buttons">
 				<li>

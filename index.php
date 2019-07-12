@@ -124,7 +124,14 @@
 						<div class="card red z-depth-2">
 							<div class="card-content white-text">
 								<span class="card-title"><i class="material-icons left">build</i>Ferramentas</span>
-								<p style="font-size:16px">Quantidade de Ferramentas: 115</p>
+								<?php
+								include_once('assets/connection.php');
+								$sql = $database->query('SELECT COUNT(tool_id) FROM tools');
+								$sql->execute();
+
+								$count = $sql->fetchColumn()
+								?>
+								<p style="font-size:16px">Quantidade de Ferramentas: <?= $count ?></p>
 							</div>
 
 							<div class="top-div red darken-4"></div>

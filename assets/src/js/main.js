@@ -8,6 +8,7 @@ const navMobileA = document.querySelectorAll('#nav-mobile a')
 const paddingHeadersA = document.querySelectorAll('.collapsible-body ul li a')
 const mainCollButtons = document.querySelectorAll('#slide-out > li:not(:first-child) > .collapsible-header')
 const secCollButtons = document.querySelectorAll('.padding-headers:not(.padding-buttons) > li > .collapsible-header')
+const body = document.body
 const nav = document.querySelector('nav')
 const main = document.querySelector('main')
 const footer = document.querySelector('footer')
@@ -15,13 +16,13 @@ const spinner = document.querySelector('#spinner')
 
 // Methods
 const animateIn = (delay = 250) => {
-	document.body.style.transition = `padding-left ${delay}ms, opacity 150ms`
-	document.body.style.paddingLeft = '300px'
+	body.style.transition = `padding-left ${delay}ms, opacity 150ms`
+	body.style.paddingLeft = '300px'
 }
 
 const animateOut = (delay = 250) => {
-	document.body.style.transition = `padding-left ${delay}ms`
-	document.body.style.paddingLeft = '0'
+	body.style.transition = `padding-left ${delay}ms`
+	body.style.paddingLeft = '0'
 }
 
 const sideIn = () => {
@@ -107,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		secCollButtons[i].addEventListener('click', () => {
 			const icon = secCollButtons[i].querySelector(':last-child')
 			icon.style.transform =
-				icon.style.transform === 'rotateZ(180deg)' ? 'rotateZ(0)' : 'rotateZ(180deg)'
+				icon.style.transform === 'rotateZ(-180deg)' ? 'rotateZ(0)' : 'rotateZ(-180deg)'
 
 			const containerButtons = secCollButtons[i].parentElement.parentElement.querySelectorAll('.collapsible > li > .collapsible-header')
 			for (let j = 0; j < containerButtons.length; j++) {
@@ -123,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		mainCollButtons[i].addEventListener('click', () => {
 			const icon = mainCollButtons[i].querySelector(':last-child')
 			icon.style.transform =
-				icon.style.transform === 'rotateZ(180deg)' ? 'rotateZ(0)' : 'rotateZ(180deg)'
+				icon.style.transform === 'rotateZ(-180deg)' ? 'rotateZ(0)' : 'rotateZ(-180deg)'
 
 			for (let j = 0; j < mainCollButtons.length; j++) {
 				if (mainCollButtons[i] !== mainCollButtons[j]) {

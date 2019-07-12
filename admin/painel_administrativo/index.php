@@ -1,8 +1,7 @@
 <?php
 include_once('../../assets/assets.php');
-session_start();
 
-if (!$_SESSION['logged']) header('location: ../../../')
+if (!isset($_SESSION['logged'])) header('location: ../../../')
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -38,7 +37,7 @@ if (!$_SESSION['logged']) header('location: ../../../')
 		<div class="container">
 			<div class="card-panel z-depth-2 top-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">verified_user</i>4People - Painel Administrativo</h1>
-				<label>Ferramentas Online para estudantes e professores.</label>
+				<label>Painel Administrativo do 4People</label>
 
 				<div class="divider" style="margin-bottom:5px"></div>
 

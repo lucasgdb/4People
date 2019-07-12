@@ -5,6 +5,10 @@
 	-moz-user-select: none
 }
 
+.bold {
+	font-weight: bold
+}
+
 .no-break {
 	white-space: nowrap
 }

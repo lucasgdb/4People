@@ -1,8 +1,7 @@
 <?php
 include_once('../../assets/assets.php');
-session_start();
 
-if ($_SESSION['logged']) header('location: ../../')
+if (isset($_SESSION['logged'])) header('location: ../../')
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

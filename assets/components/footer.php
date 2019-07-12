@@ -21,7 +21,7 @@
 					<li><a class="white-text linkHover" href="https://facebook.com/lucas8bit" target="_blank" rel="noopener noreferrer nofollow">Facebook »</a></li>
 					<li><a class="white-text linkHover" href="https://dev.to/lucasnaja" target="_blank" rel="noopener noreferrer nofollow">Dev Community »</a></li>
 					<li><a class="white-text linkHover" href="https://www.linkedin.com/in/lucas-bittencourt/" target="_blank" rel="noopener noreferrer nofollow">LinkedIn »</a></li>
-					<?php if (!$_SESSION['logged']) : ?>
+					<?php if (!isset($_SESSION['logged'])) : ?>
 						<li><a class="white-text linkHover" href="<?= $root ?>/admin/login/">Painel Administrativo »</a></li>
 					<?php endif ?>
 				</ul>

@@ -5,7 +5,7 @@
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-   <link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/cards.css">
 	<title>Computação - 4People</title>
@@ -52,9 +52,9 @@
 								<a class="white-text no-break" href="./geradores/">Mais Ferramentas &raquo;</a>
 							</div>
 
-							<div class="card-reveal grey lighten-5">
-								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/CPFGenerator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+							<div class="card-reveal indigo">
+								<span class="card-title white-text no-select">Código Fonte<i class="material-icons right">close</i></span>
+								<p class="white-text"><a class="linkHover bold white-text" href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/CPFGenerator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -73,9 +73,9 @@
 								<a class="white-text no-break" href="./geradores/">Mais Ferramentas &raquo;</a>
 							</div>
 
-							<div class="card-reveal grey lighten-5">
-								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/passwordGenerator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+							<div class="card-reveal indigo">
+								<span class="card-title white-text no-select">Código Fonte<i class="material-icons right">close</i></span>
+								<p class="white-text"><a class="linkHover bold white-text" href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/passwordGenerator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -96,9 +96,9 @@
 								<a class="white-text no-break" href="./geradores/">Mais Ferramentas &raquo;</a>
 							</div>
 
-							<div class="card-reveal grey lighten-5">
-								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/metaTagsGenerator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+							<div class="card-reveal indigo">
+								<span class="card-title white-text no-select">Código Fonte<i class="material-icons right">close</i></span>
+								<p class="white-text"><a class="linkHover bold white-text" href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/metaTagsGenerator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -117,9 +117,9 @@
 								<a class="white-text no-break" href="./validadores/">Mais Ferramentas &raquo;</a>
 							</div>
 
-							<div class="card-reveal grey lighten-5">
-								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/CPFValidator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+							<div class="card-reveal indigo">
+								<span class="card-title white-text no-select">Código Fonte<i class="material-icons right">close</i></span>
+								<p class="white-text"><a class="linkHover bold white-text" href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/CPFValidator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -140,9 +140,9 @@
 								<a class="white-text no-break" href="./funcoes_string/">Mais Ferramentas &raquo;</a>
 							</div>
 
-							<div class="card-reveal grey lighten-5">
-								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/charactersCount.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+							<div class="card-reveal indigo">
+								<span class="card-title white-text no-select">Código Fonte<i class="material-icons right">close</i></span>
+								<p class="white-text"><a class="linkHover bold white-text" href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/charactersCount.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -159,9 +159,9 @@
 								<a class="white-text no-break" href="./rede_e_internet/meu_ip/">Ferramenta &raquo;</a>
 								<a class="white-text no-break" href="./rede_e_internet/">Mais Ferramentas &raquo;</a>
 							</div>
-							<div class="card-reveal grey lighten-5">
-								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/lucasnaja/4People/blob/master/computacao/rede_e_internet/meu_ip/src/index.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+							<div class="card-reveal indigo">
+								<span class="card-title white-text no-select">Código Fonte<i class="material-icons right">close</i></span>
+								<p class="white-text"><a class="linkHover bold white-text" href="https://github.com/lucasnaja/4People/blob/master/computacao/rede_e_internet/meu_ip/src/index.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
@@ -180,9 +180,9 @@
 								<a class="white-text no-break" href="./codif_decodif/conversor_binario/">Ferramenta &raquo;</a>
 								<a class="white-text no-break" href="./codif_decodif/">Mais Ferramentas &raquo;</a>
 							</div>
-							<div class="card-reveal grey lighten-5">
-								<span class="card-title grey-text text-darken-4 no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p><a href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/binaryConverter.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+							<div class="card-reveal indigo">
+								<span class="card-title white-text no-select">Código Fonte<i class="material-icons right">close</i></span>
+								<p class="white-text"><a class="linkHover bold white-text" href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/binaryConverter.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 							</div>
 						</div>
 					</div>
