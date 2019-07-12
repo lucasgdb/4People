@@ -26,29 +26,29 @@
 
 input[type=number]:focus,
 input[type=text]:focus {
-	border-bottom: 1px solid #607d8b !important;
-	box-shadow: 0 1px 0 0 #607d8b !important
+	border-bottom: 1px solid #1a237e !important;
+	box-shadow: 0 1px 0 0 #1a237e !important
 }
 
 [type=radio]:checked+span:after,
 [type=radio].with-gap:checked+span:before,
 [type=radio].with-gap:checked+span:after {
-	border: 2px solid #607d8b
+	border: 2px solid #1a237e
 }
 
 [type=radio]:checked+span:after,
 [type=radio].with-gap:checked+span:after {
-	background-color: #607d8b
+	background-color: #1a237e
 }
 
 [type=checkbox]:checked+span:not(.lever):before {
-	border-right: 2px solid #607d8b;
-	border-bottom: 2px solid #607d8b
+	border-right: 2px solid #1a237e;
+	border-bottom: 2px solid #1a237e
 }
 
 [type=checkbox].filled-in:checked+span:not(.lever):after {
-	border: 2px solid #607d8b;
-	background-color: #607d8b
+	border: 2px solid #1a237e;
+	background-color: #1a237e
 }
 
 .card {
