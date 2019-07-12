@@ -9,7 +9,7 @@
 				<?php
 				if ($_SESSION['logged']) : ?>
 					<li title="Painel Administrativo" class="waves-effect"><a href="<?= $root ?>/admin/painel_administrativo/"><i class="material-icons left">verified_user</i>Painel Administrativo</a></li>
-					<li title="Sair" class="waves-effect"><a href="<?= $assets ?>/exit.php"><i class="material-icons left">close</i>Sair</a></li>
+					<li title="Sair" class="waves-effect"><a href="<?= $root ?>/admin/exit.php"><i class="material-icons left">close</i>Sair</a></li>
 				<?php else : ?>
 					<li title="Computação" class="waves-effect"><a href="<?= $root ?>/computacao/"><i class="material-icons left">computer</i>Computação</a></li>
 					<li title="Matemática" class="waves-effect"><a href="<?= $root ?>/matematica/"><i class="material-icons left">functions</i>Matemática</a></li>

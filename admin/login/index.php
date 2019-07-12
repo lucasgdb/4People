@@ -31,8 +31,8 @@ if ($_SESSION['logged']) header('location: ../../')
 	<main>
 		<div class="container">
 			<div class="card-panel z-depth-2 left-div-margin">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person</i>4People - Login Administrativo</h1>
-				<label>Painel de Login Administrativo</label>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person</i>Painel Administrativo - Login</h1>
+				<label>Painel de Login Administrativo. Área restrita a usuários!</label>
 
 				<div class="divider" style="margin-bottom:5px"></div>
 
@@ -46,7 +46,7 @@ if ($_SESSION['logged']) header('location: ../../')
 						</div>
 
 						<div class="input-field col s12">
-							<i class="material-icons prefix">more</i>
+							<i class="material-icons prefix">https</i>
 							<input minlength="6" title="Preencha este campo com sua senha." placeholder="Senha de Usuário" class="validate" type="password" name="user_password" oninvalid="this.setCustomValidity('Preencha este campo com sua senha.')" oninput="setCustomValidity('')" required>
 							<label>Senha</label>
 							<span class="helper-text" data-error="Senha inválida." data-success="Senha válida.">Aguardando...</span>

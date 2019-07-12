@@ -1,5 +1,5 @@
 <?php
-include_once('../../assets/assets.php');
+include_once('../../../../assets/assets.php');
 session_start();
 
 if ($_SESSION['logged']) header('location: ../../')

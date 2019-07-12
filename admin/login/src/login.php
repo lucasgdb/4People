@@ -18,6 +18,7 @@ try {
 		session_start();
 		$_SESSION['logged']['email'] = $user_email;
 		$_SESSION['logged']['name'] = $data[0]['user_name'];
+		$_SESSION['logged']['image'] = $data[0]['user_image'];
 		header('Location: ../../../');
 	} else {
 		header('Location: ../');

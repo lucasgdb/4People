@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col s12 l6">
-				<h5>Sobre</h5>
+				<h5>Sobre o 4People</h5>
 				<div class="divider grey"></div>
 
 				<p>
@@ -13,7 +13,7 @@
 			</div>
 
 			<div class="col s12 l6">
-				<h5>Contato</h5>
+				<h5>Links</h5>
 				<div class="divider grey"></div>
 				<ul>
 					<li><a class="white-text linkHover" href="<?= $root ?>/sobre/">Sobre »</a></li>
@@ -21,6 +21,9 @@
 					<li><a class="white-text linkHover" href="https://facebook.com/lucas8bit" target="_blank" rel="noopener noreferrer nofollow">Facebook »</a></li>
 					<li><a class="white-text linkHover" href="https://dev.to/lucasnaja" target="_blank" rel="noopener noreferrer nofollow">Dev Community »</a></li>
 					<li><a class="white-text linkHover" href="https://www.linkedin.com/in/lucas-bittencourt/" target="_blank" rel="noopener noreferrer nofollow">LinkedIn »</a></li>
+					<?php if (!$_SESSION['logged']) : ?>
+						<li><a class="white-text linkHover" href="<?= $root ?>/admin/login/">Painel Administrativo »</a></li>
+					<?php endif ?>
 				</ul>
 			</div>
 		</div>
