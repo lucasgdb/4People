@@ -5,7 +5,7 @@
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-   <link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>Gerador de Nicks - 4People</title>
@@ -31,7 +31,7 @@
 
 	<main>
 		<div class="container">
-			<div class="card-panel">
+			<div class="card-panel left-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">autorenew</i>Gerador de Nicks</h1>
 
 				<label>Gerador de Nicks Online para gerar diversos tipos de nicks aleatórios.</label>
@@ -39,12 +39,12 @@
 
 				<div class="row mb-0">
 					<div class="input-field col s12">
-						<select>
-							<option value="1" onclick="generate()" selected>Apartir do seu nome</option>
-							<option value="2" onclick="generate()">Aleatório</option>
-							<option value="3" onclick="generate()">Nome + Adjetivo</option>
-							<option value="4" onclick="generate()">Antes do seu nome</option>
-							<option value="5" onclick="generate()">Depois do seu nome</option>
+						<select class="center">
+							<option class="white-text" value="1" selected>Apartir do seu nome</option>
+							<option class="white-text" value="2">Aleatório</option>
+							<option class="white-text" value="3">Nome + Adjetivo</option>
+							<option class="white-text" value="4">Antes do seu nome</option>
+							<option class="white-text" value="5">Depois do seu nome</option>
 						</select>
 					</div>
 
@@ -56,49 +56,12 @@
 					</div>
 				</div>
 
-				<button title="Gerar Nicks" class="btn btn-center waves-effect waves-dark black-text white" style="margin-top:10px;" onclick="generate()">
+				<button title="Gerar Nicks" class="btn btn-center waves-effect waves-dark indigo darken-4 white-text" style="margin-top:10px;">
 					Gerar Nicks
 				</button>
-				<div class="divider mt-2"></div>
 
-				<div class="row mt-2 mb-0" id="areaResult">
-					<div class="card col s5 left"><i class="material-icons right copycontent">content_copy</i>
-						<p id="result"></p>
-					</div>
-					<div class="card col s5 left"><i class="material-icons right copycontent">content_copy</i>
-						<p id="result"></p>
-					</div>
-					<div class="card col s5 left"><i class="material-icons right copycontent">content_copy</i>
-						<p id="result"></p>
-					</div>
-					<div class="card col s5 left"><i class="material-icons right copycontent">content_copy</i>
-						<p id="result"></p>
-					</div>
-					<div class="card col s5 left"><i class="material-icons right copycontent">content_copy</i>
-						<p id="result"></p>
-					</div>
-					<div class="card col s5 left"><i class="material-icons right copycontent">content_copy</i>
-						<p id="result"></p>
-					</div>
-					<div class="card col s5 left"><i class="material-icons right copycontent">content_copy</i>
-						<p id="result"></p>
-					</div>
-					<div class="card col s5 left"><i class="material-icons right copycontent">content_copy</i>
-						<p id="result"></p>
-					</div>
-					<div class="card col s5 left"><i class="material-icons right copycontent">content_copy</i>
-						<p id="result"></p>
-					</div>
-					<div class="card col s5 left"><i class="material-icons right copycontent">content_copy</i>
-						<p id="result"></p>
-					</div>
-					<div class="card col s5 left"><i class="material-icons right copycontent">content_copy</i>
-						<p id="result"></p>
-					</div>
-					<div class="card col s5 left"><i class="material-icons right copycontent">content_copy</i>
-						<p id="result"></p>
-					</div>
-				</div>
+				<div class="divider mt-2"></div>
+				<div class="left-div indigo darken-4"></div>
 			</div>
 		</div>
 	</main>
