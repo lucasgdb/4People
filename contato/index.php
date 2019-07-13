@@ -6,7 +6,7 @@
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-   <link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>Fale Conosco - 4People</title>
@@ -38,23 +38,22 @@
 				<label>Alguma dúvida? Algum bug? Deseja alguma ferramenta nova? Por favor, nos contate e deixe-nos sabendo de qualquer coisa.</label>
 				<div class="divider"></div>
 
-				<h5>Dados</h5>
+				<h5>Dados de contato</h5>
 
-				<form class="mt-2" action="mail.php" method="post">
+				<form class="mt-2" action="src/send_mail.php" method="post">
 					<div class="row mb-0">
-						<div class="input-field col s12 m6">
-							<input placeholder="Ex: Lucas" oninvalid="this.setCustomValidity('Por favor, preencha esse campo com seu nome.')" oninput="setCustomValidity('')" name="firstName" id="firstName" type="text" class="validate" required>
-							<label for="firstName">Nome</label>
-						</div>
-
-						<div class="input-field col s12 m6">
-							<input placeholder="Ex: Bittencourt" oninvalid="this.setCustomValidity('Por favor, preencha esse campo com seu sobrenome.')" oninput="setCustomValidity('')" name="lastName" id="lastName" type="text" class="validate" required>
-							<label for="lastName">Sobrenome</label>
+						<div class="input-field col s12">
+							<i class="material-icons prefix">account_circle</i>
+							<input placeholder="Nome completo" name="name" id="name" type="text" class="validate" oninvalid="this.setCustomValidity('Preencha este campo com seu nome.')" oninput="setCustomValidity('')" required>
+							<label for="name">Nome</label>
+							<span class="helper-text" data-error="Nome inválido." data-success="Nome válido.">Ex: Lucas Bittencourt</span>
 						</div>
 
 						<div class="input-field col s12">
-							<input placeholder="Ex: lucasnaja0@gmail.com" oninvalid="this.setCustomValidity('Por favor, preencha esse campo com seu e-mail.')" oninput="setCustomValidity('')" name="email" id="email" type="email" class="validate" required>
+						<i class="material-icons prefix">mail</i>
+							<input placeholder="E-mail de usuário" name="email" id="email" type="email" class="validate" oninvalid="this.setCustomValidity('Por favor, preencha esse campo com seu e-mail.')" oninput="setCustomValidity('')" required>
 							<label for="email">E-mail</label>
+							<span class="helper-text" data-error="E-mail inválido." data-success="E-mail válido.">Ex: lucasnaja0@gmail.com</span>
 						</div>
 					</div>
 

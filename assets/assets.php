@@ -1,5 +1,4 @@
 <?php
-session_start();
 $url = $_SERVER['REQUEST_URI'];
 if ($url[strlen($url) - 1] !== '/') header("location: $url/");
 

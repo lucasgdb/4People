@@ -18,7 +18,7 @@ $image = $_SESSION['logged']['image']
 	<?php $people = strpos($link, 'mensagens') !== false || strpos($link, 'manutencao') !== false ?>
 
 	<li class="<?= $people ? 'active' : '' ?>">
-		<div class="collapsible-header"><i class="material-icons left">free_breakfast</i>4People<i class="material-icons" style="position:absolute;right:0<?= $people ? ';transform:rotateZ(180deg)' : '' ?>">arrow_drop_down</i></div>
+		<div class="collapsible-header"><i class="material-icons left">free_breakfast</i>4People<i class="material-icons" style="position:absolute;right:0<?= $people ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
 		<div class="collapsible-body">
 			<ul class="collapsible padding-headers padding-buttons">
 				<li>
@@ -31,32 +31,16 @@ $image = $_SESSION['logged']['image']
 		</div>
 	</li>
 
-	<?php $admins = strpos($link, 'administradores') !== false ?>
+	<?php $controls = strpos($link, 'administradores') !== false || strpos($link, 'ferramentas') !== false ?>
 
-	<li class="<?= $admins ? 'active' : '' ?>">
-		<div class="collapsible-header"><i class="material-icons left">group</i>Administradores<i class="material-icons" style="position:absolute;right:0<?= $admins ? ';transform:rotateZ(180deg)' : '' ?>">arrow_drop_down</i></div>
+	<li class="<?= $controls ? 'active' : '' ?>">
+		<div class="collapsible-header"><i class="material-icons left">insert_chart</i>Controles<i class="material-icons" style="position:absolute;right:0<?= $controls ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
 		<div class="collapsible-body">
 			<ul class="collapsible padding-headers padding-buttons">
 				<li>
 					<ul>
 						<li><a class="waves-effect" href="#" title="Controle de Administradores"><i class="material-icons left">keyboard_arrow_right</i>Controle de Administradores</a></li>
-						<li><a class="waves-effect" href="#" title="Adicionar Administrador"><i class="material-icons left">keyboard_arrow_right</i>Adicionar Administrador</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</li>
-
-	<?php $tools = strpos($link, 'administradores') !== false ?>
-
-	<li class="<?= $tools ? 'active' : '' ?>">
-		<div class="collapsible-header"><i class="material-icons left">build</i>Ferramentas<i class="material-icons" style="position:absolute;right:0<?= $tools ? ';transform:rotateZ(180deg)' : '' ?>">arrow_drop_down</i></div>
-		<div class="collapsible-body">
-			<ul class="collapsible padding-headers padding-buttons">
-				<li>
-					<ul>
 						<li><a class="waves-effect" href="#" title="Controle de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Ferramentas</a></li>
-						<li><a class="waves-effect" href="#" title="Adicionar Ferramenta"><i class="material-icons left">keyboard_arrow_right</i>Adicionar Ferramenta</a></li>
 					</ul>
 				</li>
 			</ul>
