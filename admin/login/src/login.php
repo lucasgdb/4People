@@ -43,6 +43,11 @@ try {
 					header('Location: ../');
 					exit();
 				}
+			} else {
+				$sql = $database->prepare('DELETE FROM banneds WHERE banned_ip=:banned_ip');
+
+				$sql->bindValue(':banned_ip', $ip);
+				$sql->execute();
 			}
 		}
 
