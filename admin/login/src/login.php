@@ -5,13 +5,13 @@ try {
 	include_once('../../painel_administrativo/src/IP.php');
 
 	$ip = get_ip_address();
-	$user_nickname = filter_input(INPUT_POST, 'user_nickname', FILTER_DEFAULT);
-	$user_password = cript(filter_input(INPUT_POST, 'user_password', FILTER_DEFAULT));
+	$admin_nickname = filter_input(INPUT_POST, 'admin_nickname', FILTER_DEFAULT);
+	$admin_password = cript(filter_input(INPUT_POST, 'admin_password', FILTER_DEFAULT));
 
-	$sql = $database->prepare('SELECT user_name, user_image FROM users WHERE user_nickname=:user_nickname and user_password=:user_password');
+	$sql = $database->prepare('SELECT admin_id, admin_name, admin_image FROM admins WHERE admin_nickname=:admin_nickname and admin_password=:admin_password');
 
-	$sql->bindValue(":user_nickname", $user_nickname);
-	$sql->bindValue(":user_password", $user_password);
+	$sql->bindValue(":admin_nickname", $admin_nickname);
+	$sql->bindValue(":admin_password", $admin_password);
 	$sql->execute();
 
 	session_start();
@@ -51,8 +51,9 @@ try {
 			}
 		}
 
-		$_SESSION['logged']['name'] = $data['user_name'];
-		$_SESSION['logged']['image'] = $data['user_image'];
+		$_SESSION['logged']['name'] = $data['admin_name'];
+		$_SESSION['logged']['image'] = $data['admin_image'];
+		$_SESSION['logged']['id'] = $data['admin_id'];
 		header('Location: ../../painel_administrativo/');
 	} else {
 		$sql = $database->prepare('SELECT banned_status, banned_amount FROM banneds WHERE banned_ip=:banned_ip');

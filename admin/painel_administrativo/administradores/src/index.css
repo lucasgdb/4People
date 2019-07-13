@@ -20,22 +20,3 @@ input[type=password]:not(.browser-default):focus.invalid~label {
 .input-field .prefix.active {
 	color: #1a237e
 }
-
-.mb-0 {
-	margin-bottom: 0
-}
-
-.btn-flat:hover {
-	background-color: unset
-}
-
-@media (max-width: 600px) {
-	.card-panel {
-		margin-top: 0;
-		border-radius: 0
-	}
-
-	.container {
-		width: 100%
-	}
-}

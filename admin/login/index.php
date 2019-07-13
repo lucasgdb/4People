@@ -1,7 +1,7 @@
 <?php
 include_once('../../assets/assets.php');
 
-if (isset($_SESSION['logged'])) header('Location: ../../')
+if (isset($_SESSION['logged'])) header("Location: $root")
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -11,7 +11,7 @@ if (isset($_SESSION['logged'])) header('Location: ../../')
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
-	<title>4People - Fazer Login</title>
+	<title>Painel de Login</title>
 	<?php include_once("$assets/components/meta_tags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="4People - Ferramentas Online">
@@ -39,14 +39,14 @@ if (isset($_SESSION['logged'])) header('Location: ../../')
 					<div class="row mb-0">
 						<div class="input-field col s12">
 							<i class="material-icons prefix">account_circle</i>
-							<input minlength="8" title="Preencha este campo com seu Login." placeholder="Login de Usuário" class="validate" type="text" name="user_nickname" oninvalid="this.setCustomValidity('Preencha este campo com seu Login.')" oninput="setCustomValidity('')" required>
+							<input minlength="4" title="Preencha este campo com seu Login." placeholder="Login de Administrador" class="validate" type="text" name="admin_nickname" oninvalid="this.setCustomValidity('Preencha este campo com seu Login.')" oninput="setCustomValidity('')" required>
 							<label>Login</label>
 							<span class="helper-text" data-error="Login inválido." data-success="Login válido.">Aguardando...</span>
 						</div>
 
 						<div class="input-field col s12">
 							<i class="material-icons prefix">https</i>
-							<input minlength="6" title="Preencha este campo com sua senha." placeholder="Senha de Usuário" class="validate" type="password" name="user_password" oninvalid="this.setCustomValidity('Preencha este campo com sua senha.')" oninput="setCustomValidity('')" required>
+							<input minlength="6" title="Preencha este campo com sua senha." placeholder="Senha de Administrador" class="validate" type="password" name="admin_password" oninvalid="this.setCustomValidity('Preencha este campo com sua senha.')" oninput="setCustomValidity('')" required>
 							<label>Senha</label>
 							<span class="helper-text" data-error="Senha inválida." data-success="Senha válida.">Aguardando...</span>
 						</div>
@@ -88,10 +88,10 @@ if (isset($_SESSION['logged'])) header('Location: ../../')
 								<?php if ($count > 3) : ?>
 									<span class="btn-flat red-text">Você foi bloqueado de fazer login por <?= isset($seconds) ? "$seconds segundo" . ($seconds > 1 ? 's' : '') : "$minutes minuto" . ($minutes > 1 ? 's' : '') ?>.</span>
 								<?php else : ?>
-									<span class="btn-flat">Número de tentativas: <?= $count ?>/3</span>
+									<span class="btn-flat">Número de tentativas falhas: <?= $count ?>/3</span>
 								<?php endif ?>
 							<?php endif ?>
-							<input title="Logar no 4People" class="btn indigo darken-4 right" title="Logar" type="submit" value="Entrar">
+							<input title="Logar no 4People" class="btn indigo darken-4 right" type="submit" value="Entrar">
 						</div>
 					</div>
 				</form>

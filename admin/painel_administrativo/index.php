@@ -1,7 +1,7 @@
 <?php
 include_once('../../assets/assets.php');
 
-if (!isset($_SESSION['logged'])) header('Location: ../../../')
+if (!isset($_SESSION['logged'])) header("Location: $root")
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -11,7 +11,6 @@ if (!isset($_SESSION['logged'])) header('Location: ../../../')
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
-	<link rel="stylesheet" href="<?= $assets ?>/src/css/index.css">
 	<title>4People - Ferramentas Online</title>
 	<?php include_once("$assets/components/meta_tags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
@@ -36,7 +35,7 @@ if (!isset($_SESSION['logged'])) header('Location: ../../../')
 	<main>
 		<div class="container">
 			<div class="card-panel z-depth-2 top-div-margin">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">verified_user</i>4People - Painel Administrativo</h1>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">verified_user</i>Painel Administrativo</h1>
 				<label>Painel Administrativo do 4People</label>
 
 				<div class="divider" style="margin-bottom:5px"></div>
