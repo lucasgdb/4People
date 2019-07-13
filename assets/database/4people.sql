@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 12, 2019 at 05:03 AM
+-- Generation Time: Jul 13, 2019 at 10:17 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -25,6 +25,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `banneds`
+--
+
+CREATE TABLE `banneds` (
+  `banned_ip` bigint(15) NOT NULL,
+  `banned_status` tinyint(1) NOT NULL DEFAULT 0,
+  `banned_datetime` datetime DEFAULT NULL,
+  `banned_amount` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tools`
 --
 
@@ -36,6 +49,14 @@ CREATE TABLE `tools` (
   `tool_visits` bigint(20) UNSIGNED NOT NULL,
   `tool_active` bit(1) NOT NULL DEFAULT b'1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `tools`
+--
+
+INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_type`, `tool_visits`, `tool_active`) VALUES
+(1, 'Gerador de Certidões', 'gerador_de_certidoes', 0, 12, b'1'),
+(2, 'Gerador de CNH', 'gerador_de_cnh', 0, 12, b'1');
 
 -- --------------------------------------------------------
 
@@ -57,12 +78,18 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_nickname`, `user_email`, `user_password`, `user_image`) VALUES
-(1, 'Lucas Bittencourt', 'lucasnaja', 'lucasnaja0@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'lucas_bittencourt.jpg'),
-(2, 'Jairo Arcy', 'jairo_arcy', 'jairo_arcy@hotmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL);
+(1, 'Lucas Bittencourt', 'lucasnaja', 'lucasnaja0@gmail.com', '66eccf32c43c345b4e4b88bd529dc384', 'lucas_bittencourt.jpg'),
+(2, 'Jairo Arcy', 'jairo_arcy', 'jairo_arcy@hotmail.com', '66eccf32c43c345b4e4b88bd529dc384', NULL);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `banneds`
+--
+ALTER TABLE `banneds`
+  ADD PRIMARY KEY (`banned_ip`);
 
 --
 -- Indexes for table `tools`
@@ -86,7 +113,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `tools`
 --
 ALTER TABLE `tools`
-  MODIFY `tool_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `tool_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`

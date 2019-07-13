@@ -15,8 +15,8 @@ try {
 		$sql->bindValue(':user_email', $user_email);
 		$sql->bindValue(':user_password', MD5($user_password));
 
-		if ($sql->execute()) header('location: ../../login/');
-		else header('location: ../');
+		if ($sql->execute()) header('Location: ../../login/');
+		else header('Location: ../');
 	} else header('Location: ../');
 } catch (PDOException $e) {
 	echo 'Um erro ocorreu! Erro: ' . $e->getMessage();

@@ -1,7 +1,7 @@
 <?php
 session_start();
 $url = $_SERVER['REQUEST_URI'];
-if ($url[strlen($url) - 1] !== '/') header("location: $url/");
+if ($url[strlen($url) - 1] !== '/') header("Location: $url/");
 
 $p = pathinfo($_SERVER['SCRIPT_FILENAME'])['dirname'];
 $assets = '';

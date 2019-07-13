@@ -28,6 +28,7 @@ i.material-icons {
 }
 
 .btn-flat:hover {
+	cursor: text;
 	background-color: unset
 }
 

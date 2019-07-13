@@ -1,7 +1,7 @@
 <?php
 include_once('../../assets/assets.php');
 
-if (!isset($_SESSION['logged'])) header('location: ../../../')
+if (!isset($_SESSION['logged'])) header('Location: ../../../')
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -45,34 +45,6 @@ if (!isset($_SESSION['logged'])) header('location: ../../../')
 			</div>
 		</div>
 	</main>
-
-	<div id="agreements" class="modal">
-		<div class="modal-content">
-			<h4>Termos de uso</h4>
-			<div class="divider"></div>
-			<p>
-				O 4People tem como intenção ajudar estudantes, Programadores, analistas, etc. no seu dia a dia.
-				Normalmente necessários parar testar seus softwares em desenvolvimento.
-				A má utilização das Ferramentas é de total responsabilidade do usuário.
-				Os algoritmos são públicos e de código aberto, não contendo acesso a dados existentes e de pessoas reais.
-			</p>
-
-			<p class="mb-0">
-				<label>
-					<input type="checkbox">
-					<span>Eu li e aceito os termos de uso</span>
-				</label>
-			</p>
-		</div>
-
-		<div class="divider"></div>
-
-		<div class="modal-footer">
-			<a href="#" class="modal-close waves-effect btn-flat" disabled>Aceito</a>
-		</div>
-
-		<div class="left-div indigo darken-4" style="border-radius:0 !important"></div>
-	</div>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/index.js"></script>

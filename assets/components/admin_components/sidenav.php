@@ -41,6 +41,8 @@ $image = $_SESSION['logged']['image']
 					<ul>
 						<li><a class="waves-effect" href="#" title="Controle de Administradores"><i class="material-icons left">keyboard_arrow_right</i>Controle de Administradores</a></li>
 						<li><a class="waves-effect" href="#" title="Controle de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Ferramentas</a></li>
+						<li><a class="waves-effect" href="#" title="Controle de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Logins falhos</a></li>
+						<li><a class="waves-effect" href="#" title="Controle de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de usuários banidos</a></li>
 					</ul>
 				</li>
 			</ul>

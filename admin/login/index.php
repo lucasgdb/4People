@@ -1,7 +1,7 @@
 <?php
 include_once('../../assets/assets.php');
 
-if (isset($_SESSION['logged'])) header('location: ../../')
+if (isset($_SESSION['logged'])) header('Location: ../../')
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -53,6 +53,44 @@ if (isset($_SESSION['logged'])) header('location: ../../')
 
 						<div class="col s12" style="margin-top:5px">
 							<a title="Voltar ao 4People" class="btn indigo darken-4" href="../../"><i class="material-icons left">arrow_back</i>Voltar</a>
+							<?php
+							include_once('../../assets/connection.php');
+							include_once('../painel_administrativo/src/IP.php');
+
+							$ip = get_ip_address();
+							$sql = $database->prepare('SELECT banned_amount, banned_datetime FROM banneds WHERE banned_ip=:banned_ip');
+
+							$sql->bindValue(":banned_ip", $ip);
+							$sql->execute();
+
+							if ($sql->rowCount()) {
+								$data = $sql->fetchAll()[0];
+								$count = $data['banned_amount'];
+
+								if ($count > 3) {
+									$banned_datetime = new DateTime($data['banned_datetime']);
+									$now = new DateTime();
+
+									$minutes = 30 - $now->diff($banned_datetime)->format('%i');
+
+									if ($minutes === 0) $seconds = 60 - $now->diff($banned_datetime)->format('%s');
+									else if ($minutes < 0) {
+										$sql = $database->prepare('DELETE FROM banneds WHERE banned_ip=:banned_ip');
+
+										$sql->bindValue(':banned_ip', $ip);
+										$sql->execute();
+										unset($count);
+									}
+								}
+							}
+							?>
+							<?php if (isset($count)) : ?>
+								<?php if ($count > 3) : ?>
+									<span class="btn-flat red-text">Você foi bloqueado de fazer login por <?= isset($seconds) ? "$seconds segundo" . ($seconds > 1 ? 's' : '') : "$minutes minuto" . ($minutes > 1 ? 's' : '') ?>.</span>
+								<?php else : ?>
+									<span class="btn-flat">Número de tentativas: <?= $count ?>/3</span>
+								<?php endif ?>
+							<?php endif ?>
 							<input title="Logar no 4People" class="btn indigo darken-4 right" title="Logar" type="submit" value="Entrar">
 						</div>
 					</div>
