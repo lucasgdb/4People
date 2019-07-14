@@ -41,7 +41,7 @@ if (!isset($_SESSION['logged'])) header("Location: $root")
 
 				<div class="divider" style="margin-bottom:5px"></div>
 
-				<form style="margin-top:15px" action="src/insert_admin.php" method="post">
+				<form style="margin-top:15px" action="src/insert_admin.php" method="post" enctype="multipart/form-data">
 					<div class="row mb-0">
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">person</i>
@@ -76,6 +76,13 @@ if (!isset($_SESSION['logged'])) header("Location: $root")
 							<input minlength="6" title="Preencha novamente este campo com sua senha." placeholder="Repitir a senha do Administrador" class="validate" type="password" name="admin_password_again" oninvalid="this.setCustomValidity('Preencha novamente este campo com sua senha.')" oninput="setCustomValidity('')" required>
 							<label>Repitir senha</label>
 							<span class="helper-text" data-error="Senha inválida. Tamanho mínimo: 6" data-success="Senha válida.">Aguardando...</span>
+						</div>
+
+						<div class="file-field input-field col s12">
+							<i class="material-icons prefix">cloud_upload</i>
+							<input type="file" name="admin_image" accept=".png, .jpg, .jpeg">
+							<input style="width:calc(100% - 3rem)" placeholder="Selecionar imagem" type="text" class="file-path validate">
+							<label>Imagem</label>
 						</div>
 
 						<div class="col s12" style="margin-top:5px">

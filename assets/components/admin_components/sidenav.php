@@ -1,7 +1,7 @@
 <?php
 $link = $_SERVER['REQUEST_URI'];
 
-$image = $_SESSION['logged']['image']
+$image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 ?>
 <ul id="slide-out" class="sidenav sidenav-fixed collapsible grey lighten-5">
 	<li style="position:relative">

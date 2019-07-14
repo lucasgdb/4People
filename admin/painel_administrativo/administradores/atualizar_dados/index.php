@@ -47,7 +47,7 @@ if (!isset($_SESSION['logged'])) header("Location: $root")
 				extract($data[0]);
 				?>
 
-				<form style="margin-top:15px" action="../src/update_admin.php" method="post">
+				<form style="margin-top:15px" action="../src/update_admin.php" method="post" enctype="multipart/form-data">
 					<div class="row mb-0">
 						<input type="hidden" value="<?= $admin_id ?>" name="admin_id">
 						<div class="input-field col s12 m6">
@@ -78,6 +78,14 @@ if (!isset($_SESSION['logged'])) header("Location: $root")
 							<span class="helper-text" data-error="Senha inválida. Tamanho mínimo: 6" data-success="Senha válida.">Aguardando...</span>
 						</div>
 
+						<div class="file-field input-field col s12">
+							<i class="material-icons prefix">cloud_upload</i>
+							<input type="file" name="admin_image" accept=".png, .jpg, .jpeg">
+							<input value="<?= $admin_image ?>" name="admin_image_text" style="width:calc(100% - 6rem)" placeholder="Selecionar imagem" type="text" class="file-path">
+							<i class="material-icons prefix red-text" style="cursor:pointer" onclick="admin_image_text.value = ''">close</i>
+							<label>Imagem</label>
+						</div>
+
 						<div class="col s12" style="margin-top:5px">
 							<div class="divider"></div>
 							<a href="../" class="btn indigo darken-4 mt-2"><i class="material-icons left">arrow_back</i>Voltar</a>
@@ -91,6 +99,9 @@ if (!isset($_SESSION['logged'])) header("Location: $root")
 		</div>
 	</main>
 
+	<script>
+		const admin_image_text = document.querySelector('[name="admin_image_text"]')
+	</script>
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 </body>
 

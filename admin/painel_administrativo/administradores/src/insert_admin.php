@@ -10,13 +10,22 @@ try {
 		$admin_name = filter_input(INPUT_POST, 'admin_name', FILTER_DEFAULT);
 		$admin_nickname = filter_input(INPUT_POST, 'admin_nickname', FILTER_DEFAULT);
 		$admin_email = filter_input(INPUT_POST, 'admin_email', FILTER_DEFAULT);
+		$admin_image = $_FILES['admin_image'];
 
-		$sql = $database->prepare('INSERT INTO admins VALUES (DEFAULT, :admin_name, :admin_nickname, :admin_email, :admin_password, NULL)');
+		if (isset($admin_image)) {
+			$ext = strtolower(pathinfo($_FILES['admin_image']['name'], PATHINFO_EXTENSION));
+			$long_name = $admin_nickname . '.' .  $ext;
+
+			move_uploaded_file($_FILES['admin_image']['tmp_name'], "../../../../assets/images/admin_images/$long_name");
+		}
+
+		$sql = $database->prepare('INSERT INTO admins VALUES (DEFAULT, :admin_name, :admin_nickname, :admin_email, :admin_password, :admin_image)');
 
 		$sql->bindValue(':admin_name', $admin_name);
 		$sql->bindValue(':admin_nickname', $admin_nickname);
 		$sql->bindValue(':admin_email', $admin_email);
 		$sql->bindValue(':admin_password', cript($admin_password));
+		$sql->bindValue(':admin_image', isset($long_name) ? $long_name : NULL);
 
 		$sql->execute();
 	}
