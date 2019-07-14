@@ -80,7 +80,7 @@ if (!isset($_SESSION['logged'])) header("Location: $root")
 
 						<div class="file-field input-field col s12">
 							<i class="material-icons prefix">cloud_upload</i>
-							<input type="file" name="admin_image" accept=".png, .jpg, .jpeg">
+							<input type="file" name="admin_image" accept=".png, .jpg, .jpeg, .svg, .gif">
 							<input value="<?= $admin_image ?>" name="admin_image_text" style="width:calc(100% - 6rem)" placeholder="Selecionar imagem" type="text" class="file-path">
 							<i class="material-icons prefix red-text" style="cursor:pointer" onclick="admin_image_text.value = ''">close</i>
 							<label>Imagem</label>
