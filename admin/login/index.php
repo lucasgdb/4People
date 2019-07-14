@@ -31,7 +31,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 		<div class="container">
 			<div class="card-panel z-depth-2 left-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person</i>Painel Administrativo - Login</h1>
-				<label>Painel de Login Administrativo. Área restrita a usuários!</label>
+				<label>Painel de Login Administrativo. Área restrita!</label>
 
 				<div class="divider" style="margin-bottom:5px"></div>
 

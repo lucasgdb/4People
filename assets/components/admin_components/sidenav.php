@@ -7,7 +7,7 @@ $image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 	<li style="position:relative">
 		<div class="user-view mb-0 left-div-margin-mobile" style="border-bottom:1px solid #e0e0e0">
 			<div class="background grey lighten-4"></div>
-			<img class="circle" src="<?= $assets ?>/images/<?= $image ? 'admin_images/' . $image : 'logo.png' ?>" alt="Logo">
+			<img class="circle" src="<?= $assets ?>/images/<?= $image ? 'admin_images/' . $image : 'logo.png' ?>" alt="Foto">
 			<span class="name black-text">Admin: <?= $_SESSION['logged']['name'] ?></span>
 			<a class="linkHover" href="<?= $root ?>/admin/painel_administrativo/administradores/atualizar_dados/?admin_id=<?= $_SESSION['logged']['id'] ?>"><span class="email">Editar perfil »</span></a>
 		</div>
@@ -41,8 +41,8 @@ $image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 					<ul>
 						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/administradores/" title="Controle de Administradores"><i class="material-icons left">keyboard_arrow_right</i>Controle de Administradores</a></li>
 						<li><a class="waves-effect" href="#" title="Controle de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Ferramentas</a></li>
-						<li><a class="waves-effect" href="#" title="Controle de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Logins falhos</a></li>
-						<li><a class="waves-effect" href="#" title="Controle de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de usuários banidos</a></li>
+						<li><a class="waves-effect" href="#" title="Controle de Logins falhos"><i class="material-icons left">keyboard_arrow_right</i>Controle de Logins falhos</a></li>
+						<li><a class="waves-effect" href="#" title="Controle de Usuários banidos"><i class="material-icons left">keyboard_arrow_right</i>Controle de Usuários banidos</a></li>
 					</ul>
 				</li>
 			</ul>

@@ -11,26 +11,29 @@ try {
 	$admin_image = $_FILES['admin_image'];
 	$admin_image_text = filter_input(INPUT_POST, 'admin_image_text', FILTER_DEFAULT);
 
+	$oldData = $database->prepare('SELECT admin_password, admin_image FROM admins WHERE admin_id=:admin_id');
+	$oldData->bindValue(':admin_id', $admin_id);
+	$oldData->execute();
+
+	$data = $oldData->fetchAll()[0];
+	$current_password = $data['admin_password'];
+	$current_admin_image = $data['admin_image'];
+
 	if (isset($admin_image)) {
 		$ext = strtolower(pathinfo($_FILES['admin_image']['name'], PATHINFO_EXTENSION));
 
 		if ($ext) {
 			$long_name = $admin_nickname . '.' . $ext;
 
+			if ($current_admin_image) unlink("../../../../assets/images/admin_images/$current_admin_image");
 			move_uploaded_file($_FILES['admin_image']['tmp_name'], "../../../../assets/images/admin_images/$long_name");
 		} else unset($ext);
 	}
 
 	if (isset($admin_image_text) && $admin_image_text === '') {
 		$no_image = '';
+		if ($current_admin_image) unlink("../../../../assets/images/admin_images/$current_admin_image");
 	}
-
-	$oldData = $database->prepare("SELECT admin_password, admin_image FROM admins");
-	$oldData->execute();
-
-	$data = $oldData->fetchAll()[0];
-	$current_password = $data['admin_password'];
-	$current_admin_image = $data['admin_image'];
 
 	$sql = $database->prepare(
 		'UPDATE admins

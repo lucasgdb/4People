@@ -28,3 +28,14 @@ input[type=password]:not(.browser-default):focus.invalid~label {
 .mb-0 {
 	margin-bottom: 0
 }
+
+@media (max-width: 600px) {
+	.card-panel {
+		margin-top: 0;
+		border-radius: 0
+	}
+
+	.container {
+		width: 100%
+	}
+}
