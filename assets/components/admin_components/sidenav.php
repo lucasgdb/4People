@@ -24,6 +24,8 @@ $image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 				<li>
 					<ul>
 						<li><a class="waves-effect" href="#" title="Mensagens dos usuários"><i class="material-icons left">keyboard_arrow_right</i>Mensagens dos usuários</a></li>
+						<li><a class="waves-effect" href="#" title="Logs de Logins falhos"><i class="material-icons left">keyboard_arrow_right</i>Logs de Logins falhos</a></li>
+						<li><a class="waves-effect" href="#" title="Logs de Administradores"><i class="material-icons left">keyboard_arrow_right</i>Logs de Administradores</a></li>
 						<li><a class="waves-effect" href="#" title="Manutenção do site"><i class="material-icons left">keyboard_arrow_right</i>Manutenção do site</a></li>
 					</ul>
 				</li>
@@ -41,7 +43,6 @@ $image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 					<ul>
 						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/administradores/" title="Controle de Administradores"><i class="material-icons left">keyboard_arrow_right</i>Controle de Administradores</a></li>
 						<li><a class="waves-effect" href="#" title="Controle de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Ferramentas</a></li>
-						<li><a class="waves-effect" href="#" title="Controle de Logins falhos"><i class="material-icons left">keyboard_arrow_right</i>Controle de Logins falhos</a></li>
 						<li><a class="waves-effect" href="#" title="Controle de Usuários banidos"><i class="material-icons left">keyboard_arrow_right</i>Controle de Usuários banidos</a></li>
 					</ul>
 				</li>

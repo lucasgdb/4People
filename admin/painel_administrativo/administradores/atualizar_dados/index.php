@@ -1,7 +1,10 @@
 <?php
 include_once('../../../../assets/assets.php');
 
-if (!isset($_SESSION['logged'])) header("Location: $root")
+if (!isset($_SESSION['logged'])) {
+	header("HTTP/1.0 404 Not Found");
+	exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -11,7 +14,7 @@ if (!isset($_SESSION['logged'])) header("Location: $root")
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
-	<title>Painel de Login</title>
+	<title>Controle de Administradores - Atualizar Dados</title>
 	<?php include_once("$assets/components/meta_tags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="4People - Ferramentas Online">
@@ -29,9 +32,9 @@ if (!isset($_SESSION['logged'])) header("Location: $root")
 
 	<main>
 		<div class="container">
-			<div class="card-panel z-depth-2 left-div-margin">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person</i>Controle de Administradores - Atualizar dados</h1>
-				<label>Atualizar dados de um Administrador do 4People</label>
+			<div class="card-panel z-depth-3 left-div-margin" style="padding-bottom:10px">
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">edit</i>Controle de Administradores - Atualizar Dados</h1>
+				<label>Atualizar Dados de um Administrador do 4People</label>
 
 				<div class="divider" style="margin-bottom:5px"></div>
 
@@ -87,10 +90,13 @@ if (!isset($_SESSION['logged'])) header("Location: $root")
 							<span class="helper-text">.png, .jpg, .jpeg, .svg, .gif</span>
 						</div>
 
-						<div class="col s12" style="margin-top:5px">
+						<div class="col s12">
 							<div class="divider"></div>
-							<a href="../" class="btn indigo darken-4 mt-2" title="Cancelar edição"><i class="material-icons left">arrow_back</i>Cancelar</a>
-							<input class="btn indigo darken-4 mt-2 right" title="Salvar dados" type="submit" value="Salvar dados">
+							<a href="../" class="btn indigo darken-4 mt-2 z-depth-0" title="Cancelar Edição"><i class="material-icons left">arrow_back</i>Cancelar</a>
+							<button title="Salvar Dados" class="btn indigo darken-4 mt-2 right z-depth-0">
+								<i class="material-icons left">save</i>Salvar
+								<input style="display:none" type="submit" value="">
+							</button>
 						</div>
 					</div>
 				</form>

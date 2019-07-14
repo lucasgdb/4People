@@ -1,5 +1,10 @@
 <?php
 try {
+	session_start();
+	if (!isset($_SESSION['logged'])) {
+		header("HTTP/1.0 404 Not Found");
+		exit();
+	}
 	include_once('../../../../assets/connection.php');
 	include_once('../../src/MD5.php');
 
@@ -18,17 +23,14 @@ try {
 	$data = $oldData->fetchAll()[0];
 	$current_password = $data['admin_password'];
 	$current_admin_image = $data['admin_image'];
+	$ext = strtolower(pathinfo($_FILES['admin_image']['name'], PATHINFO_EXTENSION));
 
-	if (isset($admin_image)) {
-		$ext = strtolower(pathinfo($_FILES['admin_image']['name'], PATHINFO_EXTENSION));
+	if ($ext) {
+		$long_name = $admin_nickname . '.' . $ext;
 
-		if ($ext) {
-			$long_name = $admin_nickname . '.' . $ext;
-
-			if ($current_admin_image) unlink("../../../../assets/images/admin_images/$current_admin_image");
-			move_uploaded_file($_FILES['admin_image']['tmp_name'], "../../../../assets/images/admin_images/$long_name");
-		} else unset($ext);
-	}
+		if ($current_admin_image) unlink("../../../../assets/images/admin_images/$current_admin_image");
+		move_uploaded_file($_FILES['admin_image']['tmp_name'], "../../../../assets/images/admin_images/$long_name");
+	} else unset($ext);
 
 	if (isset($admin_image_text) && $admin_image_text === '') {
 		$no_image = '';
@@ -49,11 +51,9 @@ try {
 	$sql->bindValue(':admin_nickname', $admin_nickname);
 	$sql->bindValue(':admin_email', $admin_email);
 	$sql->bindValue(':admin_password', $admin_password === '' ? $current_password : cript($admin_password));
-	$sql->bindValue(':admin_image', isset($no_image) ? NULL : (isset($long_name) ? $long_name : $current_admin_image));
-
+	$sql->bindValue(':admin_image', isset($no_image) ? NULL : ($ext ? $long_name : $current_admin_image));
 	$sql->bindValue(':admin_id', $admin_id);
 
-	session_start();
 	if ($sql->execute() && $_SESSION['logged']['id'] === $admin_id) {
 		$_SESSION['logged']['name'] = $admin_name;
 		if (isset($no_image)) unset($_SESSION['logged']['image']);

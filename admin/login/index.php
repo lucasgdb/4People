@@ -29,7 +29,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 
 	<main>
 		<div class="container">
-			<div class="card-panel z-depth-2 left-div-margin">
+			<div class="card-panel z-depth-3 left-div-margin" style="padding-bottom:10px">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person</i>Painel Administrativo - Login</h1>
 				<label>Painel de Login Administrativo. Área restrita!</label>
 
@@ -52,7 +52,8 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 						</div>
 
 						<div class="col s12" style="margin-top:5px">
-							<a title="Voltar ao 4People" class="btn indigo darken-4" href="../../"><i class="material-icons left">arrow_back</i>Voltar</a>
+							<div class="divider"></div>
+							<a title="Voltar ao 4People" class="btn indigo darken-4 mt-2 z-depth-0" href="../../"><i class="material-icons left">arrow_back</i>Voltar</a>
 							<?php
 							include_once('../../assets/connection.php');
 							include_once('../painel_administrativo/src/IP.php');
@@ -91,7 +92,10 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 									<span class="btn-flat">Número de tentativas falhas: <?= $count ?>/3</span>
 								<?php endif ?>
 							<?php endif ?>
-							<input title="Logar no 4People" class="btn indigo darken-4 right" type="submit" value="Entrar">
+							<button title="Logar no 4People" class="btn indigo darken-4 mt-2 z-depth-0 right">
+								<i class="material-icons right">arrow_forward</i>Entrar
+								<input style="display:none" type="submit" value="">
+							</button>
 						</div>
 					</div>
 				</form>

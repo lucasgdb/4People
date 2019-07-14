@@ -1,15 +1,18 @@
 <?php
 include_once('../../../assets/assets.php');
 
-if (!isset($_SESSION['logged'])) header("Location: $root")
+if (!isset($_SESSION['logged'])) {
+	header("HTTP/1.0 404 Not Found");
+	exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
-	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>4People - Ferramentas Online</title>
@@ -35,9 +38,9 @@ if (!isset($_SESSION['logged'])) header("Location: $root")
 
 	<main>
 		<div class="container">
-			<div class="card-panel z-depth-2 top-div-margin">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">verified_user</i>Controle de Administradores</h1>
-				<label>Controle de Administradores do 4People</label>
+			<div class="card-panel z-depth-2 top-div-margin" style="padding-bottom:10px">
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person_add</i>Adicionar um Administrador</h1>
+				<label>Adicionar um novo Administrador ao 4People</label>
 
 				<div class="divider" style="margin-bottom:5px"></div>
 
@@ -86,9 +89,12 @@ if (!isset($_SESSION['logged'])) header("Location: $root")
 							<span class="helper-text">.png, .jpg, .jpeg, .svg, .gif</span>
 						</div>
 
-						<div class="col s12" style="margin-top:5px">
+						<div class="col s12">
 							<div class="divider"></div>
-							<input title="Inserir um Administrador no 4People" class="btn indigo darken-4 mt-2" type="submit" value="Inserir">
+							<button title="Inserir um Administrador no 4People" class="btn indigo darken-4 mt-2 z-depth-0">
+								<i class="material-icons left">person_add</i>Inserir
+								<input style="display:none" type="submit" value="">
+							</button>
 						</div>
 					</div>
 				</form>
@@ -96,7 +102,7 @@ if (!isset($_SESSION['logged'])) header("Location: $root")
 				<div class="top-div indigo darken-4"></div>
 			</div>
 
-			<div class="card-panel left-div-margin">
+			<div class="card-panel left-div-margin" style="padding-bottom:10px">
 				<h2 class="flow-text" style="margin: 0 0 5px"><i class="material-icons left">format_list_bulleted</i>Lista de Administradores</h2>
 				<label>Lista de Administradores registrados</label>
 				<div class="divider"></div>
