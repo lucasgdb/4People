@@ -182,10 +182,10 @@
 
 				<p class="mb-0">Força de senha: <span id="passwordLength"></span></p>
 				<textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
-				<button title="Copiar Senha" class="btn waves-effect indigo darken-4" onclick="copyResult()">
+				<button title="Copiar Senha" class="btn waves-effect indigo darken-4 mt-1 z-depth-0" onclick="copyResult()">
 					Copiar
 				</button>
-				<button title="Limpar Senha" class="btn waves-effect waves-light indigo darken-4" onclick="clearInput()">
+				<button title="Limpar Senha" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="clearInput()">
 					Limpar
 				</button>
 

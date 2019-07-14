@@ -37,7 +37,7 @@
 				<label>Gerador de CPF Online que gera CPFs verdadeiros para Programadores testarem seus Softwares em desenvolvimento.</label>
 				<div class="divider"></div>
 
-				<div class="row mb-0">
+				<div class="row mb-0" style="position:relative">
 					<div class="col s12 m6">
 						<div class="row mb-0">
 							<p class="mb-0 col s12">Gerar com pontuação:</p>
@@ -104,10 +104,10 @@
 				<div class="divider mt-2"></div>
 
 				<textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
-				<button title="Copiar CPF" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult()">
+				<button title="Copiar CPF" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="copyResult()">
 					Copiar
 				</button>
-				<button title="Limpar CPF" class="btn waves-effect waves-light indigo darken-4" onclick="clearInput()">
+				<button title="Limpar CPF" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="clearInput()">
 					Limpar
 				</button>
 

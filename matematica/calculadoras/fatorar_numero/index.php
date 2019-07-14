@@ -51,8 +51,8 @@
 				</button>
 				<div class="divider mt-2"></div>
 
-				<div class="mt-2" id="result" placeholder="Resultado" contenteditable="true"></div>
-				<button title="Limpar Fatoração" class="btn waves-effect waves-light indigo darken-4 mt-2" onclick="clearInput()">
+				<div class="mt-2" id="result" placeholder="Resultado" contenteditable="false"></div>
+				<button title="Limpar Fatoração" class="btn waves-effect waves-light indigo darken-4 mt-2 z-depth-0" onclick="clearInput()">
 					Limpar
 				</button>
 

@@ -93,10 +93,10 @@
 					</div>
 
 					<div class="col s12">
-						<button title="Copiar" class="btn waves-effect left waves-light indigo darken-4" onclick="copyResult(txtFirst)">
+						<button title="Copiar" class="btn waves-effect left waves-light indigo darken-4 z-depth-0" onclick="copyResult(txtFirst)">
 							Copiar
 						</button>
-						<button title="Copiar" class="btn waves-effect right waves-light indigo darken-4" onclick="copyResult(txtSecond)">
+						<button title="Copiar" class="btn waves-effect right waves-light indigo darken-4 z-depth-0" onclick="copyResult(txtSecond)">
 							Copiar
 						</button>
 					</div>

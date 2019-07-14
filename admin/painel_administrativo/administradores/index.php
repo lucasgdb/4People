@@ -76,7 +76,7 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">more</i>
-							<input id="admin_password_again" minlength="6" title="Preencha novamente este campo com sua senha." placeholder="Repitir a senha do Administrador" class="validate" type="password" name="admin_password_again" oninvalid="this.setCustomValidity('Preencha novamente este campo com sua senha.')" oninput="setCustomValidity('')" required>
+							<input id="admin_password_again" minlength="6" title="Preencha novamente este campo com a senha." placeholder="Repitir a senha do Administrador" class="validate" type="password" name="admin_password_again" oninvalid="this.setCustomValidity('Preencha novamente este campo com a senha.')" oninput="setCustomValidity('')" required>
 							<label class="active" for="admin_password_again">Repitir senha</label>
 							<span class="helper-text" data-error="Senha inválida. Tamanho mínimo: 6" data-success="Senha válida.">Aguardando...</span>
 						</div>

@@ -39,25 +39,25 @@
 
 				<textarea class="mt-2" id="text" placeholder="Digite aqui o texto" spellcheck="false"></textarea>
 
-				<button title="Converter texto para Binário" class="btn waves-effect waves-light indigo darken-4" onclick="convertToBinary()">
+				<button title="Converter texto para Binário" class="btn waves-effect waves-light indigo darken-4 mt-1" onclick="convertToBinary()">
 					Converter para Binário
 				</button>
-				<button title="Limpar Validação" class="btn waves-effect waves-light indigo darken-4 ml-2 right" onclick="clearInput(txtText)">
+				<button title="Limpar Validação" class="btn waves-effect waves-light indigo darken-4 ml-2 mt-1 z-depth-0 right" onclick="clearInput(txtText)">
 					Limpar
 				</button>
-				<button title="Copiar Texto" class="btn waves-effect waves-light indigo darken-4 right" onclick="copyResult(txtText)">
+				<button title="Copiar Texto" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0 right" onclick="copyResult(txtText)">
 					Copiar
 				</button>
 
 				<textarea class="mt-2" id="binary" placeholder="Digite aqui o código binário" spellcheck="false"></textarea>
 
-				<button title="Converter Código Binário para texto" class="btn waves-effect waves-light indigo darken-4" onclick="convertToText()">
+				<button title="Converter Código Binário para texto" class="btn waves-effect waves-light indigo darken-4 mt-1" onclick="convertToText()">
 					Converter para Texto
 				</button>
-				<button title="Limpar Validação" class="btn waves-effect waves-light indigo darken-4 ml-2 right" onclick="clearInput(txtBinaryCode)">
+				<button title="Limpar Validação" class="btn waves-effect waves-light indigo darken-4 ml-2 mt-1 z-depth-0 right" onclick="clearInput(txtBinaryCode)">
 					Limpar
 				</button>
-				<button title="Copiar Código Binário" class="btn waves-effect waves-light indigo darken-4 right" onclick="copyResult(txtBinaryCode)">
+				<button title="Copiar Código Binário" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0 right" onclick="copyResult(txtBinaryCode)">
 					Copiar
 				</button>
 
