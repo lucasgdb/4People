@@ -51,7 +51,7 @@ try {
 	$sql->bindValue(':admin_nickname', $admin_nickname);
 	$sql->bindValue(':admin_email', $admin_email);
 	$sql->bindValue(':admin_password', $admin_password === '' ? $current_password : cript($admin_password));
-	$sql->bindValue(':admin_image', isset($no_image) ? NULL : ($ext ? $long_name : $current_admin_image));
+	$sql->bindValue(':admin_image', isset($no_image) ? NULL : (isset($ext) && $ext ? $long_name : $current_admin_image));
 	$sql->bindValue(':admin_id', $admin_id);
 
 	if ($sql->execute() && $_SESSION['logged']['id'] === $admin_id) {
