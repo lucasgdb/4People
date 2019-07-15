@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 14, 2019 at 02:10 AM
+-- Generation Time: Jul 15, 2019 at 11:30 PM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -42,8 +42,7 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`admin_id`, `admin_name`, `admin_nickname`, `admin_email`, `admin_password`, `admin_image`) VALUES
-(1, 'Lucas Bittencourt', 'lucasnaja', 'lucasnaja0@gmail.com', '66eccf32c43c345b4e4b88bd529dc384', 'lucasnaja.jpg'),
-(9, 'Jairo Arcy', 'jairo_arcy', 'jairo_arcy@gmail.com', '66eccf32c43c345b4e4b88bd529dc384', 'jairo_arcy.jpeg');
+(34, 'Lucas Bittencourt', 'lucasnaja', 'lucasnaja0@gmail.com', '66eccf32c43c345b4e4b88bd529dc384', 'lucasnaja.jpg');
 
 -- --------------------------------------------------------
 
@@ -54,7 +53,8 @@ INSERT INTO `admins` (`admin_id`, `admin_name`, `admin_nickname`, `admin_email`,
 CREATE TABLE `banneds` (
   `banned_ip` bigint(15) NOT NULL,
   `banned_status` tinyint(1) NOT NULL DEFAULT 0,
-  `banned_datetime` datetime DEFAULT NULL,
+  `banned_begin` datetime DEFAULT NULL,
+  `banned_end` datetime DEFAULT NULL,
   `banned_amount` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -113,7 +113,7 @@ ALTER TABLE `tools`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `tools`
