@@ -150,7 +150,8 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 						<p class="btn-flat mb-0">Um erro inesperado aconteceu.</p>
 					<?php endif ?>
 				<?php endif ?>
-				<div class="left-div indigo darken-4"></div>
+
+				<div class="left-div indigo darken-4" style="border-radius:0"></div>
 			</div>
 		</div>
 	</main>

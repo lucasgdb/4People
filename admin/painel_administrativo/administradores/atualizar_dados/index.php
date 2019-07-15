@@ -101,7 +101,7 @@ if (!isset($_SESSION['logged'])) {
 					</div>
 				</form>
 
-				<div class="left-div indigo darken-4"></div>
+				<div class="left-div indigo darken-4" style="border-radius:0"></div>
 			</div>
 		</div>
 	</main>
