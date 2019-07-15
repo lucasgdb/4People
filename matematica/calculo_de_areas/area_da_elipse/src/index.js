@@ -1,29 +1,14 @@
 M.FormSelect.init(document.querySelectorAll('select'))
 
 const txtResult = document.querySelector('#result')
-const txtFormulas = document.querySelectorAll('[name=formula]')
-const lblFormula = document.querySelector('#formulasName')
-const txtNumber = document.querySelector('#number')
+const txtLongerShaft = document.querySelector('#longerShaft')
+const txtShorterShaft = document.querySelector('#shorterShaft')
 const txtMeasure = document.querySelector('#measure')
 const txtDecimal = document.querySelector('#decimal')
 
-const names = ['Raio', 'Diâmetro']
-txtFormulas.forEach((txtFormula, index) => {
-	txtFormula.onclick = () => {
-		lblFormula.textContent = `${names[index]}:`
-		txtNumber.setAttribute('placeholder', `Digite aqui o ${names[index]}.`)
-	}
-})
-
 const calculate = () => {
-	if (txtNumber.value !== '') {
-		let area
-		if (txtFormulas[0].checked) {
-			area = calculateCircleAreaRadius(parseFloat(txtNumber.value))
-		} else {
-			area = calculateCircleAreaDiameter(parseFloat(txtNumber.value))
-		}
-
+	if (txtMeasure.value !== '') {
+		const area = calculateEllipseArea(parseFloat(txtLongerShaft.value), parseFloat(txtShorterShaft.value))
 		txtResult.value = `${txtDecimal.value === '-1' ? area : area.toFixed(parseInt(txtDecimal.value), 10)}${txtMeasure.value}²`
 	} else {
 		M.toast({
@@ -54,6 +39,10 @@ const clearInput = () => {
 	txtResult.value = ''
 }
 
-txtNumber.onkeyup = e => {
+txtLongerShaft.onkeyup = e => {
+	if (e.which === 13) txtShorterShaft.focus()
+}
+
+txtShorterShaft.onkeyup = e => {
 	if (e.which === 13) calculate()
 }

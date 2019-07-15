@@ -8,17 +8,17 @@
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
-	<title>Área do Retângulo - 4People</title>
+	<title>Área do Elipse - 4People</title>
 	<?php include_once("$assets/components/meta_tags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-	<meta name="title" content="Área do Retângulo - 4People">
-	<meta name="description" content="Calcular área do Retângulo. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
+	<meta name="title" content="Área da Elipse - 4People">
+	<meta name="description" content="Calcular área da Elipse. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
 	<meta name="application-name" content="4People">
-	<meta name="msapplication-starturl" content="./matematica/calculo_de_areas/area_do_retangulo/">
-	<meta property="og:title" content="Área do Retângulo - 4People">
-	<meta name="twitter:title" content="Área do Retângulo - 4People">
-	<meta property="og:url" content="./matematica/calculo_de_areas/area_do_retangulo/">
-	<meta name="twitter:url" content="./matematica/calculo_de_areas/area_do_retangulo/">
+	<meta name="msapplication-starturl" content="./matematica/calculo_de_areas/area_da_elipse/">
+	<meta property="og:title" content="Área da Elipse - 4People">
+	<meta name="twitter:title" content="Área da Elipse - 4People">
+	<meta property="og:url" content="./matematica/calculo_de_areas/area_da_elipse/">
+	<meta name="twitter:url" content="./matematica/calculo_de_areas/area_da_elipse/">
 </head>
 
 <body class="grey lighten-3">
@@ -32,26 +32,26 @@
 	<main>
 		<div class="container">
 			<div class="card-panel left-div-margin">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">compare</i>Área do Retângulo</h1>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">compare</i>Área da Elipse</h1>
 
-				<label>Calculador de Área do Retângulo Online. Área do Retângulo = Base * Altura</label>
+				<label>Calculador de Área da Elipse Online. π = PI, Área da Elipse = π * Eixo maior * Eixo menor</label>
 				<div class="divider"></div>
 
 				<div class="row mb-0">
 					<div class="col s12 m6">
 						<div class="row mb-0">
-							<p class="mb-0 col s12">Base:</p>
+							<p class="mb-0 col s12">Semi Eixo maior:</p>
 							<div class="input-field col s12">
-								<input id="base" type="number" placeholder="Digite aqui a Base." min="0" value="10" step="any">
+								<input id="longerShaft" type="number" placeholder="Digite aqui o Eixo maior." min="0" value="10" step="any">
 							</div>
 						</div>
 					</div>
 
 					<div class="col s12 m6">
 						<div class="row mb-0">
-							<p class="mb-0 col s12">Altura:</p>
+							<p class="mb-0 col s12">Semi Eixo menor:</p>
 							<div class="input-field col s12">
-								<input id="height" type="number" placeholder="Digite aqui a Altura." min="0" value="5" step="any">
+								<input id="shorterShaft" type="number" placeholder="Digite aqui o Eixo menor." min="0" value="5" step="any">
 							</div>
 						</div>
 					</div>
@@ -137,7 +137,7 @@
 
 	<?php include_once("$assets/components/footer.php") ?>
 
-	<script src="<?= $assets ?>/algorithms/areas_calculator/rectangleArea.js"></script>
+	<script src="<?= $assets ?>/algorithms/areas_calculator/ellipseArea.js"></script>
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="src/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>

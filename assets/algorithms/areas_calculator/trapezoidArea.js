@@ -1,1 +1,1 @@
-const calculateTrapezoidArea = (shorterBase, longerBase, height) => (shorterBase + longerBase) * height / 2
+const calculateTrapezoidArea = (longerBase, shorterBase, height) => (longerBase + shorterBase) * height / 2

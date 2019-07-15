@@ -38,16 +38,16 @@
 				<div class="divider"></div>
 
 				<div class="row mb-0">
-					<div class="col s12 m6 l4">
+					<div class="col s12 m4">
 						<div class="row mb-0">
 							<p class="mb-0 col s12">Lado:</p>
 							<div class="input-field col s12">
-								<input id="side" type="number" placeholder="Digite aqui o raio." min="0" value="10" step="any">
+								<input id="side" type="number" placeholder="Digite aqui o Lado." min="0" value="10" step="any">
 							</div>
 						</div>
 					</div>
 
-					<div class="col s12 m6 l4">
+					<div class="col s12 m4">
 						<div class="row mb-0">
 							<p class="mb-0 col s12">Medida:</p>
 							<div class="input-field col s12">
@@ -64,7 +64,7 @@
 						</div>
 					</div>
 
-					<div class="col s12 m6 l4">
+					<div class="col s12 m4">
 						<div class="row mb-0">
 							<p class="mb-0 col s12">Casas decimais:</p>
 							<div class="input-field col s12">
@@ -98,10 +98,10 @@
 				<div class="divider mt-2"></div>
 
 				<textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
-				<button title="Copiar Área" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult()">
+				<button title="Copiar Área" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="copyResult()">
 					Copiar
 				</button>
-				<button title="Limpar Fatoração" class="btn waves-effect waves-light indigo darken-4" onclick="clearInput()">
+				<button title="Limpar" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="clearInput()">
 					Limpar
 				</button>
 
