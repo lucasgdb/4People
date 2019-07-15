@@ -40,10 +40,15 @@ const clearInput = () => {
 	txtResult.value = ''
 }
 
-txtBase.onkeyup = e => {
+txtLongerBase.onkeyup = e => {
+	if (e.which === 13) txtShorterBase.focus()
+}
+
+txtShorterBase.onkeyup = e => {
 	if (e.which === 13) txtHeight.focus()
 }
 
 txtHeight.onkeyup = e => {
 	if (e.which === 13) calculate()
 }
+
