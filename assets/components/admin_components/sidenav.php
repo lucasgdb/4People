@@ -1,15 +1,15 @@
 <?php
 $link = $_SERVER['REQUEST_URI'];
 
-$image = $_SESSION['logged']['image']
+$image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 ?>
 <ul id="slide-out" class="sidenav sidenav-fixed collapsible grey lighten-5">
 	<li style="position:relative">
 		<div class="user-view mb-0 left-div-margin-mobile" style="border-bottom:1px solid #e0e0e0">
 			<div class="background grey lighten-4"></div>
-			<img class="circle" src="<?= $assets ?>/images/<?= $image ? 'admin_images/' . $image : 'logo.png' ?>" alt="Logo">
+			<img class="circle" src="<?= $assets ?>/images/<?= $image ? 'admin_images/' . $image : 'logo.png' ?>" alt="Foto">
 			<span class="name black-text">Admin: <?= $_SESSION['logged']['name'] ?></span>
-			<a class="linkHover" href="#"><span class="email">Editar perfil »</span></a>
+			<a class="linkHover" href="<?= $root ?>/admin/painel_administrativo/administradores/atualizar_dados/?admin_id=<?= $_SESSION['logged']['id'] ?>"><span class="email">Editar perfil »</span></a>
 		</div>
 
 		<div class="left-div-mobile indigo darken-4" style="border-radius:0"></div>
@@ -24,6 +24,8 @@ $image = $_SESSION['logged']['image']
 				<li>
 					<ul>
 						<li><a class="waves-effect" href="#" title="Mensagens dos usuários"><i class="material-icons left">keyboard_arrow_right</i>Mensagens dos usuários</a></li>
+						<li><a class="waves-effect" href="#" title="Logs de Logins falhos"><i class="material-icons left">keyboard_arrow_right</i>Logs de Logins falhos</a></li>
+						<li><a class="waves-effect" href="#" title="Logs de Administradores"><i class="material-icons left">keyboard_arrow_right</i>Logs de Administradores</a></li>
 						<li><a class="waves-effect" href="#" title="Manutenção do site"><i class="material-icons left">keyboard_arrow_right</i>Manutenção do site</a></li>
 					</ul>
 				</li>
@@ -39,8 +41,9 @@ $image = $_SESSION['logged']['image']
 			<ul class="collapsible padding-headers padding-buttons">
 				<li>
 					<ul>
-						<li><a class="waves-effect" href="#" title="Controle de Administradores"><i class="material-icons left">keyboard_arrow_right</i>Controle de Administradores</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/administradores/" title="Controle de Administradores"><i class="material-icons left">keyboard_arrow_right</i>Controle de Administradores</a></li>
 						<li><a class="waves-effect" href="#" title="Controle de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Ferramentas</a></li>
+						<li><a class="waves-effect" href="#" title="Controle de Usuários banidos"><i class="material-icons left">keyboard_arrow_right</i>Controle de Usuários banidos</a></li>
 					</ul>
 				</li>
 			</ul>

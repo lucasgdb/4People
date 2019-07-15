@@ -18,6 +18,10 @@
 	position: absolute
 }
 
+.card-panel {
+	padding-bottom: 10px
+}
+
 .left-div-margin-mobile {
 	padding-left: 29px !important
 }

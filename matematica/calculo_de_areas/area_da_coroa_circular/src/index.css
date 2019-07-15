@@ -1,0 +1,40 @@
+.input-field {
+	margin: 0
+}
+
+.btn-center {
+	left: 50%;
+	transform: translateX(-50%)
+}
+
+textarea {
+	font-size: 20px;
+	resize: vertical;
+	white-space: nowrap;
+	border-top: 0;
+	border-right: 0;
+	border-bottom: .5px solid rgb(190, 190, 190);
+	border-left: 0;
+	outline: none;
+	color: #333
+}
+
+input[type=number]:focus,
+input[type=text]:focus {
+	border-bottom: 1px solid #1a237e !important;
+	box-shadow: 0 1px 0 0 #1a237e !important
+}
+
+input[type=number]::placeholder {
+	color: rgba(0, 0, 0, .4)
+}
+
+.dropdown-content li>span {
+	color: black
+}
+
+@media (min-width: 993px) {
+	textarea {
+		font-size: 25px
+	}
+}

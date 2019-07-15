@@ -11,6 +11,7 @@ const names = ['Raio', 'Diâmetro']
 txtFormulas.forEach((txtFormula, index) => {
 	txtFormula.onclick = () => {
 		lblFormula.textContent = `${names[index]}:`
+		txtNumber.setAttribute('placeholder', `Digite aqui o ${names[index]}.`)
 	}
 })
 

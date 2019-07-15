@@ -1,6 +1,4 @@
-<?php 
-include_once('assets/assets.php');
-?>
+<?php include_once('assets/assets.php') ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 

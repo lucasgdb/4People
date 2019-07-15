@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 12, 2019 at 05:03 AM
+-- Generation Time: Jul 14, 2019 at 02:10 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -25,6 +25,42 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admins`
+--
+
+CREATE TABLE `admins` (
+  `admin_id` int(11) NOT NULL,
+  `admin_name` varchar(64) NOT NULL,
+  `admin_nickname` varchar(28) NOT NULL,
+  `admin_email` varchar(255) NOT NULL,
+  `admin_password` varchar(32) NOT NULL,
+  `admin_image` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`admin_id`, `admin_name`, `admin_nickname`, `admin_email`, `admin_password`, `admin_image`) VALUES
+(1, 'Lucas Bittencourt', 'lucasnaja', 'lucasnaja0@gmail.com', '66eccf32c43c345b4e4b88bd529dc384', 'lucasnaja.jpg'),
+(9, 'Jairo Arcy', 'jairo_arcy', 'jairo_arcy@gmail.com', '66eccf32c43c345b4e4b88bd529dc384', 'jairo_arcy.jpeg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `banneds`
+--
+
+CREATE TABLE `banneds` (
+  `banned_ip` bigint(15) NOT NULL,
+  `banned_status` tinyint(1) NOT NULL DEFAULT 0,
+  `banned_datetime` datetime DEFAULT NULL,
+  `banned_amount` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tools`
 --
 
@@ -37,32 +73,31 @@ CREATE TABLE `tools` (
   `tool_active` bit(1) NOT NULL DEFAULT b'1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `users`
+-- Dumping data for table `tools`
 --
 
-CREATE TABLE `users` (
-  `user_id` int(11) NOT NULL,
-  `user_name` varchar(255) NOT NULL,
-  `user_nickname` varchar(45) NOT NULL,
-  `user_email` varchar(255) NOT NULL,
-  `user_password` varchar(32) NOT NULL,
-  `user_image` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`user_id`, `user_name`, `user_nickname`, `user_email`, `user_password`, `user_image`) VALUES
-(1, 'Lucas Bittencourt', 'lucasnaja', 'lucasnaja0@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'lucas_bittencourt.jpg'),
-(2, 'Jairo Arcy', 'jairo_arcy', 'jairo_arcy@hotmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL);
+INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_type`, `tool_visits`, `tool_active`) VALUES
+(1, 'Gerador de Certidões', 'gerador_de_certidoes', 0, 12, b'1'),
+(2, 'Gerador de CNH', 'gerador_de_cnh', 0, 12, b'1');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`admin_id`),
+  ADD UNIQUE KEY `admin_nickname` (`admin_nickname`),
+  ADD UNIQUE KEY `admin_email` (`admin_email`);
+
+--
+-- Indexes for table `banneds`
+--
+ALTER TABLE `banneds`
+  ADD PRIMARY KEY (`banned_ip`);
 
 --
 -- Indexes for table `tools`
@@ -71,28 +106,20 @@ ALTER TABLE `tools`
   ADD PRIMARY KEY (`tool_id`);
 
 --
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `user_email` (`user_email`),
-  ADD UNIQUE KEY `user_nickname` (`user_nickname`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tools`
 --
 ALTER TABLE `tools`
-  MODIFY `tool_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `tool_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -20,5 +20,7 @@
 	-webkit-font-feature-settings: 'liga';
 	font-feature-settings: 'liga';
 	-webkit-font-smoothing: antialiased;
-	position: relative
+	position: relative;
+	user-select: none !important;
+	-webkit-user-select: none !important
 }

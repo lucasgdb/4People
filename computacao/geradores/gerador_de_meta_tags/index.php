@@ -204,10 +204,10 @@
 				<div class="divider mt-2"></div>
 
 				<textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false"></textarea>
-				<button title="Copiar Meta Tags" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult()">
+				<button title="Copiar Meta Tags" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="copyResult()">
 					Copiar
 				</button>
-				<button title="Limpar Meta Tags" class="btn waves-effect waves-light indigo darken-4" onclick="clearInput()">
+				<button title="Limpar Meta Tags" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="clearInput()">
 					Limpar
 				</button>
 

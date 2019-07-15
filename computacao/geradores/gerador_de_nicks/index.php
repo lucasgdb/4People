@@ -40,19 +40,11 @@
 				<div class="row mb-0">
 					<div class="input-field col s12">
 						<select class="center">
-<<<<<<< HEAD
-							<option class="white-text"  value="1" selected>Apartir do seu nome</option>
-							<option class="white-text"  value="2">Aleatório</option>
-							<option class="white-text"  value="3">Nome + Adjetivo</option>
-							<option class="white-text"  value="4">Antes do seu nome</option>
-							<option class="white-text"  value="5">Depois do seu nome</option>
-=======
-							<option class="white-text" value="1" selected>Apartir do seu nome</option>
-							<option class="white-text" value="2">Aleatório</option>
-							<option class="white-text" value="3">Nome + Adjetivo</option>
-							<option class="white-text" value="4">Antes do seu nome</option>
-							<option class="white-text" value="5">Depois do seu nome</option>
->>>>>>> d65080097144ecd22709ed6e2cd4cf909aa97f56
+							<option value="1" selected>Apartir do seu nome</option>
+							<option value="2">Aleatório</option>
+							<option value="3">Nome + Adjetivo</option>
+							<option value="4">Antes do seu nome</option>
+							<option value="5">Depois do seu nome</option>
 						</select>
 					</div>
 
@@ -64,22 +56,15 @@
 					</div>
 				</div>
 
-<<<<<<< HEAD
-				<button title="Gerar Nicks" class="btn btn-center waves-effect waves-dark indigo white-text" style="margin-top:10px;">
-					Gerar Nicks
-				</button>
-				<div class="divider mt-2"></div>
-						<div class="left-div indigo"></div>
-					</div>
-				</div>
-=======
-				<button title="Gerar Nicks" class="btn btn-center waves-effect waves-dark indigo darken-4 white-text" style="margin-top:10px;">
+				<button title="Gerar Nicks" class="btn btn-center waves-effect waves-dark indigo darken-4 white-text" style="margin-top:10px;" onclick="generate()">
 					Gerar Nicks
 				</button>
 
 				<div class="divider mt-2"></div>
+					<div class="row mb-0 card-blocks center">		
+					</div> 
+
 				<div class="left-div indigo darken-4"></div>
->>>>>>> d65080097144ecd22709ed6e2cd4cf909aa97f56
 			</div>
 		</div>
 	</main>

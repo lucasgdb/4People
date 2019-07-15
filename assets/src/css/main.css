@@ -43,6 +43,10 @@ main {
 	margin-top: 0
 }
 
+.mt-1 {
+	margin-top: 4px
+}
+
 .mb-0 {
 	margin-bottom: 0 !important
 }
@@ -50,7 +54,6 @@ main {
 .collapsible-header,
 .collapsible-body,
 .btn,
-i.material-icons,
 [data-target="slide-out"] {
 	user-select: none !important;
 	-webkit-user-select: none !important
