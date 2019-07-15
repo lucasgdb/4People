@@ -20,3 +20,9 @@ input[type=password]:not(.browser-default):focus.invalid~label {
 .input-field .prefix.active {
 	color: #1a237e
 }
+
+@media (max-width: 600px) {
+	.modal {
+		width: 90%
+	}
+}

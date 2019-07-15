@@ -37,20 +37,6 @@ const sideOut = () => {
 	sidenav.isClose = true
 }
 
-const updatePage = (e, link) => {
-	e.preventDefault()
-	nav.style.opacity = '0'
-	main.style.opacity = '0'
-	if (footer) footer.style.opacity = '0'
-
-	if (innerWidth < 993) sidenav.close()
-	else sidenav.el.style.opacity = '0'
-
-	setTimeout(() => {
-		location = link.includes('#') || link.includes('!') ? link.replace(/[#!]/g, '') : link
-	}, 150)
-}
-
 // Left and right effects from sidebar
 let tr = false
 
@@ -89,19 +75,10 @@ const matchMin = minWidth => {
 
 // Pave events
 document.addEventListener('DOMContentLoaded', () => {
-	const allAElements = document.querySelectorAll('a[href^="."]')
-
 	if (sessionStorage.getItem('sideStatus')) {
 		sidenav.options.outDuration = 0
 		sideOut()
 		animateOut(0)
-	}
-
-	for (let i = 0; i < allAElements.length; i++) {
-		allAElements[i].onclick = e => {
-			const link = allAElements[i].getAttribute('href')
-			updatePage(e, link)
-		}
 	}
 
 	for (let i = 0; i < secCollButtons.length; i++) {
@@ -178,8 +155,4 @@ window.onload = () => {
 	setTimeout(() => {
 		spinner.remove()
 	}, 200)
-}
-
-document.onkeydown = e => {
-	if (e.keyCode === 116) updatePage(e, location.href)
 }
