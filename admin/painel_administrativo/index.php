@@ -41,7 +41,7 @@ if (!isset($_SESSION['logged'])) {
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">verified_user</i>Painel Administrativo</h1>
 				<label>Painel Administrativo do 4People</label>
 
-				<div class="divider" style="margin-bottom:5px"></div>
+				<div class="divider"></div>
 
 				<div class="top-div indigo darken-4"></div>
 			</div>

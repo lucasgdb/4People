@@ -42,7 +42,7 @@ if (!isset($_SESSION['logged'])) {
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person_add</i>Adicionar um Administrador</h1>
 				<label>Adicionar um novo Administrador ao 4People</label>
 
-				<div class="divider" style="margin-bottom:5px"></div>
+				<div class="divider"></div>
 
 				<form style="margin-top:15px" action="src/insert_admin.php" method="post" enctype="multipart/form-data">
 					<div class="row mb-0">
@@ -74,14 +74,7 @@ if (!isset($_SESSION['logged'])) {
 							<span class="helper-text" data-error="Senha inválida. Tamanho mínimo: 6" data-success="Senha válida.">Aguardando...</span>
 						</div>
 
-						<div class="input-field col s12 m6">
-							<i class="material-icons prefix">more</i>
-							<input id="admin_password_again" minlength="6" title="Preencha novamente este campo com a senha." placeholder="Repitir a senha do Administrador" class="validate" type="password" name="admin_password_again" oninvalid="this.setCustomValidity('Preencha novamente este campo com a senha.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="admin_password_again">Repitir senha</label>
-							<span class="helper-text" data-error="Senha inválida. Tamanho mínimo: 6" data-success="Senha válida.">Aguardando...</span>
-						</div>
-
-						<div class="file-field input-field col s12">
+						<div class="file-field input-field col s12 m6">
 							<i class="material-icons prefix">cloud_upload</i>
 							<input type="file" name="admin_image" accept=".png, .jpg, .jpeg, .svg, .gif">
 							<input style="width:calc(100% - 3rem)" placeholder="Selecionar imagem" type="text" class="file-path">

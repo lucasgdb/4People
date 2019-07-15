@@ -5,6 +5,7 @@ try {
 		header("HTTP/1.0 404 Not Found");
 		exit();
 	}
+
 	include_once('../../../../assets/connection.php');
 
 	$admin_id = filter_input(INPUT_GET, 'admin_id', FILTER_DEFAULT);
@@ -14,13 +15,11 @@ try {
 	$sql->execute();
 
 	$admin_image = $sql->fetchColumn();
-	if ($admin_image) {
-		unlink("../../../../assets/images/admin_images/$admin_image");
+	if ($admin_image) unlink("../../../../assets/images/admin_images/$admin_image");
 
-		if ($admin_id === $_SESSION['logged']['id']) {
-			unset($_SESSION['logged']);
-			header('Location: ../../../login/');
-		} else header('Location: ../');
+	if ($admin_id === $_SESSION['logged']['id']) {
+		unset($_SESSION['logged']);
+		header('Location: ../../../../');
 	} else header('Location: ../');
 
 	$sql = $database->prepare('DELETE FROM admins WHERE admin_id=:admin_id');

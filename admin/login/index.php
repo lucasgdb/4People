@@ -33,73 +33,123 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person</i>Painel Administrativo - Login</h1>
 				<label>Painel de Login Administrativo. Área restrita!</label>
 
-				<div class="divider" style="margin-bottom:5px"></div>
+				<div class="divider"></div>
 
-				<form style="margin-top:15px" action="src/login.php" method="post">
-					<div class="row mb-0">
-						<div class="input-field col s12">
-							<i class="material-icons prefix">account_circle</i>
-							<input minlength="4" title="Preencha este campo com seu Login." placeholder="Login de Administrador" class="validate" type="text" name="admin_nickname" oninvalid="this.setCustomValidity('Preencha este campo com seu Login.')" oninput="setCustomValidity('')" required>
-							<label>Login</label>
-							<span class="helper-text" data-error="Login inválido." data-success="Login válido.">Aguardando...</span>
-						</div>
+				<?php
+				include_once("$assets/connection.php");
+				$sql = $database->prepare('SELECT COUNT(admin_id) FROM admins');
+				$sql->execute();
 
-						<div class="input-field col s12">
-							<i class="material-icons prefix">https</i>
-							<input minlength="6" title="Preencha este campo com sua senha." placeholder="Senha de Administrador" class="validate" type="password" name="admin_password" oninvalid="this.setCustomValidity('Preencha este campo com sua senha.')" oninput="setCustomValidity('')" required>
-							<label>Senha</label>
-							<span class="helper-text" data-error="Senha inválida." data-success="Senha válida.">Aguardando...</span>
-						</div>
+				$admin_amount = $sql->fetchColumn();
 
-						<div class="col s12" style="margin-top:5px">
-							<div class="divider"></div>
-							<a title="Voltar ao 4People" class="btn indigo darken-4 mt-2 z-depth-0" href="../../"><i class="material-icons left">arrow_back</i>Voltar</a>
-							<?php
-							include_once('../../assets/connection.php');
-							include_once('../painel_administrativo/src/IP.php');
+				if ($admin_amount > 0) : ?>
+					<form style="margin-top:15px" action="src/login.php" method="post">
+						<div class="row mb-0">
+							<div class="input-field col s12">
+								<i class="material-icons prefix">account_circle</i>
+								<input minlength="4" title="Preencha este campo com seu Login." placeholder="Login de Administrador" class="validate" type="text" name="admin_nickname" oninvalid="this.setCustomValidity('Preencha este campo com seu Login.')" oninput="setCustomValidity('')" required>
+								<label>Login</label>
+								<span class="helper-text" data-error="Login inválido." data-success="Login válido.">Aguardando...</span>
+							</div>
 
-							$ip = get_ip_address();
-							$sql = $database->prepare('SELECT banned_amount, banned_datetime FROM banneds WHERE banned_ip=:banned_ip');
+							<div class="input-field col s12">
+								<i class="material-icons prefix">https</i>
+								<input minlength="6" title="Preencha este campo com sua senha." placeholder="Senha de Administrador" class="validate" type="password" name="admin_password" oninvalid="this.setCustomValidity('Preencha este campo com sua senha.')" oninput="setCustomValidity('')" required>
+								<label>Senha</label>
+								<span class="helper-text" data-error="Senha inválida." data-success="Senha válida.">Aguardando...</span>
+							</div>
 
-							$sql->bindValue(":banned_ip", $ip);
-							$sql->execute();
+							<div class="col s12" style="margin-top:5px">
+								<div class="divider"></div>
+								<a title="Voltar ao 4People" class="btn indigo darken-4 mt-2 z-depth-0" href="../../"><i class="material-icons left">arrow_back</i>Voltar</a>
+								<?php
+								include_once('../../assets/connection.php');
+								include_once('../painel_administrativo/src/IP.php');
 
-							if ($sql->rowCount()) {
-								$data = $sql->fetchAll()[0];
-								$count = $data['banned_amount'];
+								$ip = get_ip_address();
+								$sql = $database->prepare('SELECT banned_amount, banned_datetime FROM banneds WHERE banned_ip=:banned_ip');
 
-								if ($count > 3) {
-									$banned_datetime = new DateTime($data['banned_datetime']);
-									$now = new DateTime();
+								$sql->bindValue(":banned_ip", $ip);
+								$sql->execute();
 
-									$minutes = 30 - $now->diff($banned_datetime)->format('%i');
+								if ($sql->rowCount()) {
+									$data = $sql->fetchAll()[0];
+									$count = $data['banned_amount'];
 
-									if ($minutes === 0) $seconds = 60 - $now->diff($banned_datetime)->format('%s');
-									else if ($minutes < 0) {
-										$sql = $database->prepare('DELETE FROM banneds WHERE banned_ip=:banned_ip');
+									if ($count > 3) {
+										$banned_datetime = new DateTime($data['banned_datetime']);
+										$now = new DateTime();
 
-										$sql->bindValue(':banned_ip', $ip);
-										$sql->execute();
-										unset($count);
+										$minutes = 30 - $now->diff($banned_datetime)->format('%i');
+
+										if ($minutes === 0) $seconds = 60 - $now->diff($banned_datetime)->format('%s');
+										else if ($minutes < 0) {
+											$sql = $database->prepare('DELETE FROM banneds WHERE banned_ip=:banned_ip');
+
+											$sql->bindValue(':banned_ip', $ip);
+											$sql->execute();
+											unset($count);
+										}
 									}
 								}
-							}
-							?>
-							<?php if (isset($count)) : ?>
-								<?php if ($count > 3) : ?>
-									<span class="btn-flat red-text">Você foi bloqueado de fazer login por <?= isset($seconds) ? "$seconds segundo" . ($seconds > 1 ? 's' : '') : "$minutes minuto" . ($minutes > 1 ? 's' : '') ?>.</span>
-								<?php else : ?>
-									<span class="btn-flat">Número de tentativas falhas: <?= $count ?>/3</span>
+								?>
+								<?php if (isset($count)) : ?>
+									<?php if ($count > 3) : ?>
+										<span class="btn-flat red-text">Você foi bloqueado de fazer login por <?= isset($seconds) ? "$seconds segundo" . ($seconds > 1 ? 's' : '') : "$minutes minuto" . ($minutes > 1 ? 's' : '') ?>.</span>
+									<?php else : ?>
+										<span class="btn-flat">Número de tentativas falhas: <?= $count ?>/3</span>
+									<?php endif ?>
 								<?php endif ?>
-							<?php endif ?>
-							<button title="Logar no 4People" class="btn indigo darken-4 mt-2 z-depth-0 right">
-								<i class="material-icons right">arrow_forward</i>Entrar
-								<input style="display:none" type="submit" value="">
-							</button>
+								<button title="Logar no 4People" class="btn indigo darken-4 mt-2 z-depth-0 right">
+									<i class="material-icons right">arrow_forward</i>Entrar
+									<input style="display:none" type="submit" value="">
+								</button>
+							</div>
 						</div>
-					</div>
-				</form>
+					</form>
+				<?php else : ?>
+					<?php
+					include_once('../painel_administrativo/src/MD5.php');
+					$sql = $database->prepare('INSERT INTO admins VALUES (DEFAULT, "Administrador", :admin_nickname, :admin_email, :admin_password, NULL)');
 
+					function generateRandomString($len, $specialChars = false): String
+					{
+						$upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+						$lowerCase = 'abcdefghijklmnopqrstuvwxyz';
+						if ($specialChars) $special = '!@#$%&*()[]{}<>';
+						$number = '0123456789';
+
+						$allCharacters = $upperCase . $lowerCase . (isset($special) ? $special : '') . $number;
+						$string = '';
+
+						for ($i = 0; $i < $len; $i++) {
+							$string .= $allCharacters[mt_rand(0, strlen($allCharacters) - 1)];
+						}
+
+						return $string;
+					}
+
+					$admin_nickname = generateRandomString(18);
+					$admin_email = "$admin_nickname@gmail.com";
+					$admin_password = generateRandomString(28, true);
+
+					$sql->bindValue(':admin_nickname', $admin_nickname);
+					$sql->bindValue(':admin_email', $admin_email);
+					$sql->bindValue(':admin_password', cript($admin_password));
+
+					if ($sql->execute()) : ?>
+						<?php
+						include_once('src/send_email.php');
+
+						if ($mail->send()) : ?>
+							<p class="btn-flat mb-0">Um login foi criado e enviado para o e-mail do 4People.</p>
+						<?php else : ?>
+							<p class="btn-flat mb-0">Um erro inesperado aconteceu.</p>
+						<?php endif ?>
+					<?php else : ?>
+						<p class="btn-flat mb-0">Um erro inesperado aconteceu.</p>
+					<?php endif ?>
+				<?php endif ?>
 				<div class="left-div indigo darken-4"></div>
 			</div>
 		</div>

@@ -4,6 +4,7 @@ try {
 		header("HTTP/1.0 404 Not Found");
 		exit();
 	}
+	
 	include_once("$assets/connection.php");
 
 	$sql = $database->prepare("SELECT * FROM admins");

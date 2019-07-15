@@ -36,7 +36,7 @@ if (!isset($_SESSION['logged'])) {
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">edit</i>Controle de Administradores - Atualizar Dados</h1>
 				<label>Atualizar Dados de um Administrador do 4People</label>
 
-				<div class="divider" style="margin-bottom:5px"></div>
+				<div class="divider"></div>
 
 				<?php
 				include_once("$assets/connection.php");
@@ -92,7 +92,7 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="col s12">
 							<div class="divider"></div>
-							<a href="../" class="btn indigo darken-4 mt-2 z-depth-0" title="Cancelar Edição"><i class="material-icons left">arrow_back</i>Cancelar</a>
+							<a href="../" class="btn indigo darken-4 mt-2 z-depth-0" title="Cancelar Edição"><i class="material-icons left">close</i>Cancelar</a>
 							<button title="Salvar Dados" class="btn indigo darken-4 mt-2 right z-depth-0">
 								<i class="material-icons left">save</i>Salvar
 								<input style="display:none" type="submit" value="">
