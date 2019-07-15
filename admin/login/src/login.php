@@ -18,30 +18,29 @@ try {
 	if ($sql->rowCount()) {
 		$data = $sql->fetchAll()[0];
 
-		$sql = $database->prepare('SELECT banned_status, banned_datetime FROM banneds WHERE banned_ip=:banned_ip');
+		$sql = $database->prepare('SELECT banned_amount FROM banneds WHERE banned_ip=:banned_ip');
 
 		$sql->bindValue(':banned_ip', $ip);
 		$sql->execute();
 
 		if ($sql->rowCount()) {
-			$banned_data = $sql->fetchAll()[0];
-			$banned_status = $banned_data['banned_status'];
-			$banned_datetime = $banned_data['banned_datetime'];
+			$banned_amount = $sql->fetchColumn();
 
-			if ($banned_status === '1') {
-				$banned_datetime = new DateTime($banned_datetime);
-				$now = new DateTime();
+			if ($banned_amount === '4') {
+				$sql = $database->prepare('SELECT banned_begin, banned_end FROM banneds WHERE banned_ip=:banned_ip AND banned_begin <= :current_time AND banned_end >= :current_time');
 
-				$difference = $now->diff($banned_datetime)->format('%i');
+				$sql->bindValue(':banned_ip', $ip);
+				$sql->bindValue(":current_time", date('Y-m-d H:i:s'));
+				$sql->execute();
 
-				if ($difference > 29) {
+				if ($sql->rowCount()) {
+					header('Location: ../');
+					exit();
+				} else {
 					$sql = $database->prepare('DELETE FROM banneds WHERE banned_ip=:banned_ip');
 
 					$sql->bindValue(':banned_ip', $ip);
 					$sql->execute();
-				} else {
-					header('Location: ../');
-					exit();
 				}
 			} else {
 				$sql = $database->prepare('DELETE FROM banneds WHERE banned_ip=:banned_ip');
@@ -56,42 +55,39 @@ try {
 		$_SESSION['logged']['id'] = $data['admin_id'];
 		header('Location: ../../painel_administrativo/');
 	} else {
-		$sql = $database->prepare('SELECT banned_status, banned_amount FROM banneds WHERE banned_ip=:banned_ip');
+		$sql = $database->prepare('SELECT banned_amount FROM banneds WHERE banned_ip=:banned_ip');
 
 		$sql->bindValue(':banned_ip', $ip);
 		$sql->execute();
 
 		if ($sql->rowCount()) {
-			$data = $sql->fetchAll()[0];
-			$banned_status = $data['banned_status'];
+			$banned_amount = $sql->fetchColumn();
 
-			if ($banned_status !== '1') {
-				$banned_amount = ++$data['banned_amount'];
-
-				if ($banned_amount > 3) {
-					$sql = $database->prepare(
-						'UPDATE banneds
-						SET banned_status=:banned_status, banned_datetime=:banned_datetime, banned_amount="4"
+			if ($banned_amount === '3') {
+				$sql = $database->prepare(
+					'UPDATE banneds
+						SET banned_begin=:banned_begin,
+							banned_end=:banned_end,
+							banned_amount="4"
 						WHERE banned_ip=:banned_ip'
-					);
+				);
 
-					$sql->bindValue(':banned_status', '1');
-					$sql->bindValue(':banned_datetime', date("Y-m-d H:i:s"));
-					$sql->bindValue(':banned_ip', $ip);
+				$sql->bindValue(':banned_begin', date('Y-m-d H:i:s'));
+				$sql->bindValue(':banned_end', date('Y-m-d H:i:s', strtotime('+30 minutes')));
+				$sql->bindValue(':banned_ip', $ip);
 
-					$sql->execute();
-				} else {
-					$sql = $database->prepare(
-						'UPDATE banneds
+				$sql->execute();
+			} else {
+				$sql = $database->prepare(
+					'UPDATE banneds
 						SET banned_amount=:banned_amount
 						WHERE banned_ip=:banned_ip'
-					);
+				);
 
-					$sql->bindValue(':banned_amount', $banned_amount);
-					$sql->bindValue(':banned_ip', $ip);
+				$sql->bindValue(':banned_amount', ++$banned_amount);
+				$sql->bindValue(':banned_ip', $ip);
 
-					$sql->execute();
-				}
+				$sql->execute();
 			}
 		} else {
 			$sql = $database->prepare('INSERT INTO banneds (banned_ip) VALUES(:banned_ip)');

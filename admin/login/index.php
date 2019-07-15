@@ -63,43 +63,51 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 								<div class="divider"></div>
 								<a title="Voltar ao 4People" class="btn indigo darken-4 mt-2 z-depth-0" href="../../"><i class="material-icons left">arrow_back</i>Voltar</a>
 								<?php
-								include_once('../../assets/connection.php');
+								include_once("$assets/connection.php");
 								include_once('../painel_administrativo/src/IP.php');
 
 								$ip = get_ip_address();
-								$sql = $database->prepare('SELECT banned_amount, banned_datetime FROM banneds WHERE banned_ip=:banned_ip');
+								$sql = $database->prepare('SELECT banned_amount FROM banneds WHERE banned_ip=:banned_ip');
 
 								$sql->bindValue(":banned_ip", $ip);
 								$sql->execute();
 
 								if ($sql->rowCount()) {
-									$data = $sql->fetchAll()[0];
-									$count = $data['banned_amount'];
+									$banned_amount = $sql->fetchColumn();
 
-									if ($count > 3) {
-										$banned_datetime = new DateTime($data['banned_datetime']);
-										$now = new DateTime();
+									if ($banned_amount > 3) {
+										$sql = $database->prepare('SELECT banned_begin, banned_end FROM banneds WHERE banned_ip=:banned_ip AND banned_begin <= :current_time AND banned_end >= :current_time');
 
-										$minutes = 30 - $now->diff($banned_datetime)->format('%i');
+										$sql->bindValue(":banned_ip", $ip);
+										$sql->bindValue(":current_time", date('Y-m-d H:i:s'));
 
-										if ($minutes === 0) $seconds = 60 - $now->diff($banned_datetime)->format('%s');
-										else if ($minutes < 0) {
+										$sql->execute();
+
+										if ($sql->rowCount()) {
+											$data = $sql->fetchAll()[0];
+											$banned_begin = new DateTime($data['banned_begin']);
+											$banned_end = new DateTime($data['banned_end']);
+											$current_time = new DateTime();
+
+											$time = $current_time->diff($banned_end)->format('%I:%S');
+										} else {
 											$sql = $database->prepare('DELETE FROM banneds WHERE banned_ip=:banned_ip');
 
 											$sql->bindValue(':banned_ip', $ip);
 											$sql->execute();
-											unset($count);
+											unset($banned_amount);
 										}
 									}
 								}
 								?>
-								<?php if (isset($count)) : ?>
-									<?php if ($count > 3) : ?>
-										<span class="btn-flat red-text">Você foi bloqueado de fazer login por <?= isset($seconds) ? "$seconds segundo" . ($seconds > 1 ? 's' : '') : "$minutes minuto" . ($minutes > 1 ? 's' : '') ?>.</span>
+								<?php if (isset($banned_amount)) : ?>
+									<?php if ($banned_amount > 3) : ?>
+										<span class="btn-flat red-text">Você foi bloqueado de logar por <?= $time ?></span>
 									<?php else : ?>
-										<span class="btn-flat">Número de tentativas falhas: <?= $count ?>/3</span>
+										<span class="btn-flat">Número de tentativas falhas: <?= $banned_amount ?>/3</span>
 									<?php endif ?>
 								<?php endif ?>
+
 								<button title="Logar no 4People" class="btn indigo darken-4 mt-2 z-depth-0 right">
 									<i class="material-icons right">arrow_forward</i>Entrar
 									<input style="display:none" type="submit" value="">
