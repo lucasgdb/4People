@@ -68,7 +68,7 @@ if (!isset($_SESSION['logged'])) {
 						</div>
 
 						<div class="input-field col s12 m6">
-							<i class="material-icons prefix">more</i>
+							<i class="material-icons prefix">https</i>
 							<input id="admin_password" minlength="6" title="Preencha este campo com a senha." placeholder="Senha do Administrador" class="validate" type="password" name="admin_password" oninvalid="this.setCustomValidity('Preencha este campo com a senha.')" oninput="setCustomValidity('')" required>
 							<label class="active" for="admin_password">Senha</label>
 							<span class="helper-text" data-error="Senha inválida. Tamanho mínimo: 6" data-success="Senha válida.">Aguardando...</span>
