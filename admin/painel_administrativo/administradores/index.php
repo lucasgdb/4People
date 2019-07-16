@@ -123,7 +123,7 @@ if (!isset($_SESSION['logged'])) {
 	<div id="removeAdmin" class="modal">
 		<div class="modal-content left-div-margin">
 			<h4>Remover Administrador</h4>
-			<p>Você tem certeza que deseja remover este Administrador?</p>
+			<p class="mb-0">Você tem certeza que deseja remover este Administrador?</p>
 
 			<div class="left-div indigo darken-4" style="border-radius:0"></div>
 		</div>
@@ -131,8 +131,8 @@ if (!isset($_SESSION['logged'])) {
 		<div class="divider"></div>
 
 		<div class="modal-footer">
-			<button title="Cancelar" class="modal-close waves-effect btn-flat"><i class="material-icons red-text" style="font-size:30px">close</i></button>
-			<a id="linkRemoveAdmin" title="Remover Administrador" class="modal-close waves-effect btn-flat"><i class="material-icons green-text" style="font-size:30px">check</i></a>
+			<button title="Cancelar" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left red-text" style="font-size:30px">close</i>Não</button>
+			<a id="linkRemoveAdmin" title="Remover Administrador" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left green-text" style="font-size:30px">check</i>Sim</a>
 		</div>
 	</div>
 

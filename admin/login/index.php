@@ -102,9 +102,9 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 								?>
 								<?php if (isset($banned_amount)) : ?>
 									<?php if ($banned_amount > 3) : ?>
-										<span class="btn-flat red-text">Você foi bloqueado de logar por <?= $time ?></span>
+										<span class="btn-flat mt-2 red-text">Você foi bloqueado de logar por <?= $time ?></span>
 									<?php else : ?>
-										<span class="btn-flat">Número de tentativas falhas: <?= $banned_amount ?>/3</span>
+										<span class="btn-flat mt-2 btn-flat-hover">Número de tentativas falhas: <?= $banned_amount ?>/3</span>
 									<?php endif ?>
 								<?php endif ?>
 
@@ -150,12 +150,12 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 						include_once('src/send_email.php');
 
 						if ($mail->send()) : ?>
-							<p class="btn-flat mb-0">Um login foi criado e enviado para o e-mail do 4People.</p>
+							<p class="btn-flat mb-0"><a class="linkHover" href=".">Um login foi criado e enviado para o e-mail do 4People.</a></p>
 						<?php else : ?>
-							<p class="btn-flat mb-0">Um erro inesperado aconteceu.</p>
+							<p class="btn-flat mb-0"><a class="linkHover" href=".">Um erro inesperado aconteceu.</a></p>
 						<?php endif ?>
 					<?php else : ?>
-						<p class="btn-flat mb-0">Um erro inesperado aconteceu.</p>
+						<p class="btn-flat mb-0"><a class="linkHover" href=".">Um erro inesperado aconteceu.</a></p>
 					<?php endif ?>
 				<?php endif ?>
 
