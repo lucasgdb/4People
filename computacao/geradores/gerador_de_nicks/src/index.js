@@ -13,7 +13,7 @@ const generate = () => {
 		html +=
 			`<div class="col s12 l6">
 				<div class="card mb-0 indigo white-text center-align z-depth-0">
-					<p id="nameNick">
+					<p>
 						${nick}
 						<i title="Copiar" data-clipboard-text="${nick}" class="material-icons right">content_copy</i>
 					</p>
@@ -38,7 +38,6 @@ const generate = () => {
 		})
 	})
 }
-
 
 txtSelect.onchange = () => {
 	if (txtSelect.value === '2') {
