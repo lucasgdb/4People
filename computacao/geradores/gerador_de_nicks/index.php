@@ -55,7 +55,6 @@
 						</div>
 					</div>
 				</div>
-
 				<button title="Gerar Nicks" class="btn btn-center waves-effect waves-dark indigo darken-4 white-text" style="margin-top:10px;" onclick="generate()">
 					Gerar Nicks
 				</button>
@@ -63,7 +62,6 @@
 				<div class="divider mt-2"></div>
 					<div class="row mb-0 card-blocks center">		
 					</div> 
-
 				<div class="left-div indigo darken-4"></div>
 			</div>
 		</div>

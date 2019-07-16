@@ -44,7 +44,7 @@
 
 					<div class="col s12 m6">
 						<div class="card hoverable">
-							<div class="card-action grey lighten-4">
+							<div class="card-action grey lighten-3">
 								<p class="center-align flow-text mt-0 mb-0">event.key</p>
 							</div>
 
@@ -60,7 +60,7 @@
 
 					<div class="col s12 m6">
 						<div class="card hoverable">
-							<div class="card-action grey lighten-4">
+							<div class="card-action grey lighten-3">
 								<p class="center-align flow-text mt-0 mb-0">event.location</p>
 							</div>
 
@@ -76,7 +76,7 @@
 
 					<div class="col s12 m6">
 						<div class="card hoverable">
-							<div class="card-action grey lighten-4">
+							<div class="card-action grey lighten-3">
 								<p class="center-align flow-text mt-0 mb-0">event.which</p>
 							</div>
 
@@ -92,7 +92,7 @@
 
 					<div class="col s12 m6">
 						<div class="card hoverable">
-							<div class="card-action grey lighten-4">
+							<div class="card-action grey lighten-3">
 								<p class="center-align flow-text mt-0 mb-0">event.code</p>
 							</div>
 

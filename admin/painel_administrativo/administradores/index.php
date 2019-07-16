@@ -68,7 +68,7 @@ if (!isset($_SESSION['logged'])) {
 						</div>
 
 						<div class="input-field col s12 m6">
-							<i class="material-icons prefix">more</i>
+							<i class="material-icons prefix">https</i>
 							<input id="admin_password" minlength="6" title="Preencha este campo com a senha." placeholder="Senha do Administrador" class="validate" type="password" name="admin_password" oninvalid="this.setCustomValidity('Preencha este campo com a senha.')" oninput="setCustomValidity('')" required>
 							<label class="active" for="admin_password">Senha</label>
 							<span class="helper-text" data-error="Senha inválida. Tamanho mínimo: 6" data-success="Senha válida.">Aguardando...</span>
@@ -119,10 +119,32 @@ if (!isset($_SESSION['logged'])) {
 			</div>
 		</div>
 	</main>
+	<div id="removeAdmin" class="modal">
+		<div class="modal-content left-div-margin">
+			<h4>Remover Administrador</h4>
+			<p>Você tem certeza que deseja remover este Administrador?</p>
+
+			<div class="left-div indigo darken-4" style="border-radius:0"></div>
+		</div>
+
+		<div class="divider"></div>
+
+		<div class="modal-footer">
+			<button title="Cancelar" class="modal-close waves-effect btn-flat"><i class="material-icons red-text" style="font-size:30px">close</i></button>
+			<a id="linkRemoveAdmin" title="Remover Administrador" class="modal-close waves-effect btn-flat"><i class="material-icons green-text" style="font-size:30px">check</i></a>
+		</div>
+	</div>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
+	<script>
+		const linkRemoveAdmin = document.querySelector('#linkRemoveAdmin')
+
+		const changeLink = link => linkRemoveAdmin.href = link
+
+		M.Modal.init(document.querySelectorAll('.modal'))
+	</script>
 </body>
 
 </html>
