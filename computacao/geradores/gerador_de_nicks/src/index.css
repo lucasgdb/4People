@@ -1,115 +1,39 @@
 .input-field {
-    margin: 0
-}
-
-.mb-0 {
-    margin-bottom: 0
+	margin: 0
 }
 
 .btn-center {
-    left: 50%;
-    transform: translateX(-50%)
-}
-
-#areaResult {
-    font-size: 20px;
-    resize: none;
-    white-space: nowrap;
-    border-top: 0;
-    border-right: 0;
-    border-bottom: .5px solid rgb(190, 190, 190);
-    border-left: 0;
-    outline: none;
-    border-radius: 3px;
-    color: #333
+	left: 50%;
+	transform: translateX(-50%)
 }
 
 input[type=number]:focus,
 input[type=text]:focus {
-    border-bottom: 1px solid #1a237e !important;
-    box-shadow: 0 1px 0 0 #1a237e !important
+	border-bottom: 1px solid #1a237e !important;
+	box-shadow: 0 1px 0 0 #1a237e !important
 }
 
-[type=radio]:checked+span:after,
-[type=radio].with-gap:checked+span:before,
-[type=radio].with-gap:checked+span:after {
-    border: 2px solid #1a237e
-}
-
-[type=radio]:checked+span:after,
-[type=radio].with-gap:checked+span:after {
-    background-color: #1a237e
-}
-
-[type=checkbox]:checked+span:not(.lever):before {
-    border-right: 2px solid #1a237e;
-    border-bottom: 2px solid #1a237e
-}
-
-[type=checkbox].filled-in:checked+span:not(.lever):after {
-    border: 2px solid #1a237e;
-    background-color: #1a237e
-}
-
-.card {
-    transform: translateX(10px);
-    margin-right: 30px;
-}
-
-#result {
-    margin: 0;
-}
-
-.copycontent {
-    margin-top: 5px;
-    margin-bottom: 5px
-}
-
-.select-wrapper ul li>span {
-    color: black
+.dropdown-content li>span {
+	color: black
 }
 
 .select-wrapper input.select-dropdown:focus {
-    border-bottom: 1px solid #607d8b !important
+	border-bottom: 1px solid #607d8b !important
 }
 
-ul.dropdown-content {
-    background: #3f51b5;
+.dropdown-content li>span {
+	color: black
 }
 
-ul.dropdown-content li span {
-    color: white
+.card {
+	padding: 1px 5px
 }
 
-.card-blocks {
-    height: 0;
-    overflow: hidden;
-    transition: .3s !important;
-    padding: 7px;
+.card i {
+	cursor: pointer;
+	transition: all .3s
 }
 
-.nick-card {
-    transform: translateX(2px);
+.card i:hover {
+	color: #1a237e
 }
-
-.nick-icon {
-    margin: 0;
-    padding: 0;
-    transition: all .3s;
-}
-
-.nick-icon:hover {
-    color: #1a237e;
-}
-
-@media (min-width: 993px) {
-    .card {
-        margin-right: 40px;
-        transform: translateX(30px)
-    }
-    .nick-card {
-        transform: translateX(100px);
-    }
-}
-
-@media (min-width: 640px) {}

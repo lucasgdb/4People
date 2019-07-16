@@ -41,31 +41,29 @@
 					<div class="input-field col s12">
 						<select class="center" id="selectNick">
 							<option value="1" selected>Apartir do seu nome</option>
-							<option value="2" >Aleatório</option>
-							<option value="3" >Nome + Adjetivo</option>
-							<option value="4" >Antes do seu nome</option>
-							<option value="5" >Depois do seu nome</option>
+							<option value="2">Aleatório</option>
+							<option value="3">Nome + Adjetivo</option>
+							<option value="4">Antes do seu nome</option>
+							<option value="5">Depois do seu nome</option>
 						</select>
 					</div>
 
-					<p class="mb-0 col s12 text-input">Digite seu nome:</p>
-					<div class="col s12 areaText">
+					<p id="typeName" class="mb-0 col s12">Digite seu nome:</p>
+					<div class="col s12">
 						<div class="input-field">
 							<input id="name" type="text" placeholder="Digite aqui o seu nome" step="any" class="">
-							<input id="blockNumber" type="number" class="hide" placeholder="Digite o numero de nicks" step="any">
+							<input id="blocksAmount" type="number" class="hide" placeholder="Digite o número de Nicks" value="20" step="1">
 						</div>
 					</div>
 				</div>
 
-				<button title="Gerar Nicks" class="btn btn-center waves-effect waves-dark indigo darken-4 white-text" style="margin-top:10px;" onclick="generate()">
+				<div class="divider mb-2"></div>
+				<button title="Gerar Nicks" class="btn btn-center waves-effect waves-dark indigo darken-4 white-text" onclick="generate()">
 					Gerar Nicks
 				</button>
-
 				<div class="divider mt-2"></div>
 
-
-					<div class="row mb-0 card-blocks center">		
-					</div> 
+				<div class="row mb-0" id="card-container"></div>
 
 				<div class="left-div indigo darken-4"></div>
 			</div>
