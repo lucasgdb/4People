@@ -39,7 +39,7 @@ if (!isset($_SESSION['logged'])) {
 				<div class="divider"></div>
 
 				<?php
-				include_once("$assets/php/connection.php");
+				include_once("$assets/php/Connection.php");
 				$admin_id = filter_input(INPUT_GET, 'admin_id', FILTER_DEFAULT);
 
 				$sql = $database->prepare('SELECT * FROM admins WHERE admin_id=:admin_id LIMIT 1');

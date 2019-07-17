@@ -7,7 +7,7 @@ try {
 	}
 
 	$assets = '../../../../assets';
-	include_once("$assets/php/connection.php");
+	include_once("$assets/php/Connection.php");
 	include_once("$assets/php/MD5.php");
 
 	$admin_id = filter_input(INPUT_POST, 'admin_id', FILTER_DEFAULT);

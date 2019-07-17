@@ -6,7 +6,7 @@ try {
 		exit();
 	}
 
-	include_once('../../../../assets/php/connection.php');
+	include_once('../../../../assets/php/Connection.php');
 
 	$admin_id = filter_input(INPUT_GET, 'admin_id', FILTER_DEFAULT);
 

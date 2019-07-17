@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PHPMailer - PHP email creation and transport class.
  * PHP Version 5.5.
@@ -769,7 +770,7 @@ class PHPMailer
 	public function __construct($exceptions = null)
 	{
 		if (null !== $exceptions) {
-			$this->exceptions = (bool)$exceptions;
+			$this->exceptions = (bool) $exceptions;
 		}
 		//Pick an appropriate debug output format automatically
 		$this->Debugoutput = (strpos(PHP_SAPI, 'cli') !== false ? 'echo' : 'html');
@@ -1024,7 +1025,7 @@ class PHPMailer
 			$this->setError($error_message);
 			$this->edebug($error_message);
 			if ($this->exceptions) {
-				throw new Exception($error_message);
+				// throw new Exception($error_message);
 			}
 
 			return false;
@@ -1076,7 +1077,7 @@ class PHPMailer
 			$this->setError($error_message);
 			$this->edebug($error_message);
 			if ($this->exceptions) {
-				throw new Exception($error_message);
+				// throw new Exception($error_message);
 			}
 
 			return false;
@@ -1091,7 +1092,7 @@ class PHPMailer
 			$this->setError($error_message);
 			$this->edebug($error_message);
 			if ($this->exceptions) {
-				throw new Exception($error_message);
+				// throw new Exception($error_message);
 			}
 
 			return false;
@@ -1202,7 +1203,7 @@ class PHPMailer
 			$this->setError($error_message);
 			$this->edebug($error_message);
 			if ($this->exceptions) {
-				throw new Exception($error_message);
+				// throw new Exception($error_message);
 			}
 
 			return false;
@@ -1286,7 +1287,7 @@ class PHPMailer
                  * @copyright 2009-2010 Michael Rushton
                  * Feel free to use and redistribute this code. But please keep this copyright notice.
                  */
-				return (bool)preg_match(
+				return (bool) preg_match(
 					'/^(?!(?>(?1)"?(?>\\\[ -~]|[^"])"?(?1)){255,})(?!(?>(?1)"?(?>\\\[ -~]|[^"])"?(?1)){65,}@)' .
 						'((?>(?>(?>((?>(?>(?>\x0D\x0A)?[\t ])+|(?>[\t ]*\x0D\x0A)?[\t ]+)?)(\((?>(?2)' .
 						'(?>[\x01-\x08\x0B\x0C\x0E-\'*-\[\]-\x7F]|\\\[\x00-\x7F]|(?3)))*(?2)\)))+(?2))|(?2))?)' .
@@ -1304,14 +1305,14 @@ class PHPMailer
                  *
                  * @see http://www.whatwg.org/specs/web-apps/current-work/#e-mail-state-(type=email)
                  */
-				return (bool)preg_match(
+				return (bool) preg_match(
 					'/^[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}' .
 						'[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/sD',
 					$address
 				);
 			case 'php':
 			default:
-				return (bool)filter_var($address, FILTER_VALIDATE_EMAIL);
+				return (bool) filter_var($address, FILTER_VALIDATE_EMAIL);
 		}
 	}
 
@@ -1439,7 +1440,7 @@ class PHPMailer
 				call_user_func_array([$this, 'addAnAddress'], $params);
 			}
 			if (count($this->to) + count($this->cc) + count($this->bcc) < 1) {
-				throw new Exception($this->lang('provide_address'), self::STOP_CRITICAL);
+				// throw new Exception($this->lang('provide_address'), self::STOP_CRITICAL);
 			}
 
 			// Validate From, Sender, and ConfirmReadingTo addresses
@@ -1459,7 +1460,7 @@ class PHPMailer
 					$this->setError($error_message);
 					$this->edebug($error_message);
 					if ($this->exceptions) {
-						throw new Exception($error_message);
+						// throw new Exception($error_message);
 					}
 
 					return false;
@@ -1474,7 +1475,7 @@ class PHPMailer
 			$this->setMessageType();
 			// Refuse to send an empty message unless we are specifically allowing it
 			if (!$this->AllowEmpty and empty($this->Body)) {
-				throw new Exception($this->lang('empty_message'), self::STOP_CRITICAL);
+				// throw new Exception($this->lang('empty_message'), self::STOP_CRITICAL);
 			}
 
 			//Trim subject consistently
@@ -1603,7 +1604,7 @@ class PHPMailer
 			foreach ($this->SingleToArray as $toAddr) {
 				$mail = @popen($sendmail, 'w');
 				if (!$mail) {
-					throw new Exception($this->lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
+					// throw new Exception($this->lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
 				}
 				fwrite($mail, 'To: ' . $toAddr . "\n");
 				fwrite($mail, $header);
@@ -1620,13 +1621,13 @@ class PHPMailer
 					[]
 				);
 				if (0 !== $result) {
-					throw new Exception($this->lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
+					// throw new Exception($this->lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
 				}
 			}
 		} else {
 			$mail = @popen($sendmail, 'w');
 			if (!$mail) {
-				throw new Exception($this->lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
+				// throw new Exception($this->lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
 			}
 			fwrite($mail, $header);
 			fwrite($mail, $body);
@@ -1642,7 +1643,7 @@ class PHPMailer
 				[]
 			);
 			if (0 !== $result) {
-				throw new Exception($this->lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
+				// throw new Exception($this->lang('execute') . $this->Sendmail, self::STOP_CRITICAL);
 			}
 		}
 
@@ -1751,7 +1752,7 @@ class PHPMailer
 			ini_set('sendmail_from', $old_from);
 		}
 		if (!$result) {
-			throw new Exception($this->lang('instantiate'), self::STOP_CRITICAL);
+			// throw new Exception($this->lang('instantiate'), self::STOP_CRITICAL);
 		}
 
 		return true;
@@ -1806,7 +1807,7 @@ class PHPMailer
 	{
 		$bad_rcpt = [];
 		if (!$this->smtpConnect($this->SMTPOptions)) {
-			throw new Exception($this->lang('smtp_connect_failed'), self::STOP_CRITICAL);
+			// throw new Exception($this->lang('smtp_connect_failed'), self::STOP_CRITICAL);
 		}
 		//Sender already validated in preSend()
 		if ('' == $this->Sender) {
@@ -1816,7 +1817,7 @@ class PHPMailer
 		}
 		if (!$this->smtp->mail($smtp_from)) {
 			$this->setError($this->lang('from_failed') . $smtp_from . ' : ' . implode(',', $this->smtp->getError()));
-			throw new Exception($this->ErrorInfo, self::STOP_CRITICAL);
+			// throw new Exception($this->ErrorInfo, self::STOP_CRITICAL);
 		}
 
 		$callbacks = [];
@@ -1837,7 +1838,7 @@ class PHPMailer
 
 		// Only send the DATA command if we have viable recipients
 		if ((count($this->all_recipients) > count($bad_rcpt)) and !$this->smtp->data($header . $body)) {
-			throw new Exception($this->lang('data_not_accepted'), self::STOP_CRITICAL);
+			// throw new Exception($this->lang('data_not_accepted'), self::STOP_CRITICAL);
 		}
 
 		$smtp_transaction_id = $this->smtp->getLastTransactionID();
@@ -1868,10 +1869,10 @@ class PHPMailer
 			foreach ($bad_rcpt as $bad) {
 				$errstr .= $bad['to'] . ': ' . $bad['error'];
 			}
-			throw new Exception(
-				$this->lang('recipients_failed') . $errstr,
-				self::STOP_CONTINUE
-			);
+			// throw new Exception(
+			// 	$this->lang('recipients_failed') . $errstr,
+			// 	self::STOP_CONTINUE
+			// );
 		}
 
 		return true;
@@ -1951,12 +1952,12 @@ class PHPMailer
 			if ('tls' === $secure or 'ssl' === $secure) {
 				//Check for an OpenSSL constant rather than using extension_loaded, which is sometimes disabled
 				if (!$sslext) {
-					throw new Exception($this->lang('extension_missing') . 'openssl', self::STOP_CRITICAL);
+					// throw new Exception($this->lang('extension_missing') . 'openssl', self::STOP_CRITICAL);
 				}
 			}
 			$host = $hostinfo[3];
 			$port = $this->Port;
-			$tport = (int)$hostinfo[4];
+			$tport = (int) $hostinfo[4];
 			if ($tport > 0 and $tport < 65536) {
 				$port = $tport;
 			}
@@ -1978,7 +1979,7 @@ class PHPMailer
 					}
 					if ($tls) {
 						if (!$this->smtp->startTLS()) {
-							throw new Exception($this->lang('connect_host'));
+							// throw new Exception($this->lang('connect_host'));
 						}
 						// We must resend EHLO after TLS negotiation
 						$this->smtp->hello($hello);
@@ -1990,7 +1991,7 @@ class PHPMailer
 							$this->AuthType,
 							$this->oauth
 						)) {
-							throw new Exception($this->lang('authenticate'));
+							// throw new Exception($this->lang('authenticate'));
 						}
 					}
 
@@ -2098,7 +2099,7 @@ class PHPMailer
 		}
 		$this->language = $PHPMAILER_LANG;
 
-		return (bool)$foundlang; // Returns false if language not found
+		return (bool) $foundlang; // Returns false if language not found
 	}
 
 	/**
@@ -2499,7 +2500,7 @@ class PHPMailer
 			$bytes = openssl_random_pseudo_bytes($len);
 		} else {
 			//Use a hash to force the length to the same as the other methods
-			$bytes = hash('sha256', uniqid((string)mt_rand(0, mt_getrandmax()), true), true);
+			$bytes = hash('sha256', uniqid((string) mt_rand(0, mt_getrandmax()), true), true);
 		}
 
 		//We don't care about messing up base64 format here, just want a random string
@@ -2670,12 +2671,12 @@ class PHPMailer
 		if ($this->isError()) {
 			$body = '';
 			if ($this->exceptions) {
-				throw new Exception($this->lang('empty_message'), self::STOP_CRITICAL);
+				// throw new Exception($this->lang('empty_message'), self::STOP_CRITICAL);
 			}
 		} elseif ($this->sign_key_file) {
 			try {
 				if (!defined('PKCS7_TEXT')) {
-					throw new Exception($this->lang('extension_missing') . 'openssl');
+					// throw new Exception($this->lang('extension_missing') . 'openssl');
 				}
 				$file = fopen('php://temp', 'rb+');
 				$signed = fopen('php://temp', 'rb+');
@@ -2711,7 +2712,7 @@ class PHPMailer
 					$body = $parts[1];
 				} else {
 					fclose($signed);
-					throw new Exception($this->lang('signing') . openssl_error_string());
+					// throw new Exception($this->lang('signing') . openssl_error_string());
 				}
 			} catch (Exception $exc) {
 				$body = '';
@@ -2839,7 +2840,7 @@ class PHPMailer
 	{
 		try {
 			if (!static::isPermittedPath($assets) || !@is_file($assets)) {
-				throw new Exception($this->lang('file_access') . $assets, self::STOP_CONTINUE);
+				// throw new Exception($this->lang('file_access') . $assets, self::STOP_CONTINUE);
 			}
 
 			// If a MIME type is not specified, try to work it out from the file name
@@ -3021,11 +3022,11 @@ class PHPMailer
 	{
 		try {
 			if (!static::isPermittedPath($assets) || !file_exists($assets)) {
-				throw new Exception($this->lang('file_open') . $assets, self::STOP_CONTINUE);
+				// throw new Exception($this->lang('file_open') . $assets, self::STOP_CONTINUE);
 			}
 			$file_buffer = file_get_contents($assets);
 			if (false === $file_buffer) {
-				throw new Exception($this->lang('file_open') . $assets, self::STOP_CONTINUE);
+				// throw new Exception($this->lang('file_open') . $assets, self::STOP_CONTINUE);
 			}
 			$file_buffer = $this->encodeString($file_buffer, $encoding);
 
@@ -3191,7 +3192,7 @@ class PHPMailer
 	 */
 	public function has8bitChars($text)
 	{
-		return (bool)preg_match('/[\x80-\xFF]/', $text);
+		return (bool) preg_match('/[\x80-\xFF]/', $text);
 	}
 
 	/**
@@ -3670,13 +3671,13 @@ class PHPMailer
 		}
 		//Looks like a bracketed IPv6 address
 		if (trim($host, '[]') != $host) {
-			return (bool)filter_var(trim($host, '[]'), FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
+			return (bool) filter_var(trim($host, '[]'), FILTER_VALIDATE_IP, FILTER_FLAG_IPV6);
 		}
 		//If removing all the dots results in a numeric string, it must be an IPv4 address.
 		//Need to check this first because otherwise things like `999.0.0.0` are considered valid host names
 		if (is_numeric(str_replace('.', '', $host))) {
 			//Is it a valid IPv4 address?
-			return (bool)filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
+			return (bool) filter_var($host, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
 		}
 		if (filter_var('http://' . $host, FILTER_VALIDATE_URL)) {
 			//Is it a syntactically valid hostname?
@@ -3830,7 +3831,7 @@ class PHPMailer
 						$cid,
 						$filename,
 						static::ENCODING_BASE64,
-						static::_mime_types((string)static::mb_pathinfo($filename, PATHINFO_EXTENSION))
+						static::_mime_types((string) static::mb_pathinfo($filename, PATHINFO_EXTENSION))
 					)) {
 						$message = preg_replace(
 							'/' . $images[1][$imgindex] . '=["\']' . preg_quote($url, '/') . '["\']/Ui',
@@ -4222,7 +4223,7 @@ class PHPMailer
 	{
 		if (!defined('PKCS7_TEXT')) {
 			if ($this->exceptions) {
-				throw new Exception($this->lang('extension_missing') . 'openssl');
+				// throw new Exception($this->lang('extension_missing') . 'openssl');
 			}
 
 			return '';
@@ -4431,7 +4432,7 @@ class PHPMailer
 	 */
 	public static function hasLineLongerThanMax($str)
 	{
-		return (bool)preg_match('/^(.{' . (self::MAX_LINE_LENGTH + strlen(static::$LE)) . ',})/m', $str);
+		return (bool) preg_match('/^(.{' . (self::MAX_LINE_LENGTH + strlen(static::$LE)) . ',})/m', $str);
 	}
 
 	/**

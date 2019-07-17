@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PHPMailer RFC821 SMTP email transport class.
  * PHP Version 5.5.
@@ -346,8 +347,8 @@ class SMTP
 			$this->setError(
 				'Failed to connect to server',
 				'',
-				(string)$errno,
-				(string)$errstr
+				(string) $errno,
+				(string) $errstr
 			);
 			$this->edebug(
 				'SMTP ERROR: ' . $this->error['error']
@@ -405,7 +406,7 @@ class SMTP
 		);
 		restore_error_handler();
 
-		return (bool)$crypto_ok;
+		return (bool) $crypto_ok;
 	}
 
 	/**
@@ -941,7 +942,7 @@ class SMTP
 
 		$this->edebug('SERVER -> CLIENT: ' . $this->last_reply, self::DEBUG_SERVER);
 
-		if (!in_array($code, (array)$expect)) {
+		if (!in_array($code, (array) $expect)) {
 			$this->setError(
 				"$command command failed",
 				$detail,
@@ -1294,7 +1295,7 @@ class SMTP
 		$this->setError(
 			$notice,
 			$errmsg,
-			(string)$errno
+			(string) $errno
 		);
 		$this->edebug(
 			"$notice Error #$errno: $errmsg [$errfile line $errline]",

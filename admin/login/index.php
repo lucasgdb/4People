@@ -36,7 +36,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 				<div class="divider"></div>
 
 				<?php
-				include_once("$assets/php/connection.php");
+				include_once("$assets/php/Connection.php");
 				$sql = $database->prepare('SELECT COUNT(admin_id) FROM admins LIMIT 1');
 				$sql->execute();
 
@@ -63,7 +63,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 								<div class="divider"></div>
 								<a title="Voltar ao 4People" class="btn indigo darken-4 mt-2 z-depth-0" href="../../"><i class="material-icons left">arrow_back</i>Voltar</a>
 								<?php
-								include_once("$assets/php/connection.php");
+								include_once("$assets/php/Connection.php");
 								include_once("$assets/php/IP.php");
 
 								$ip = get_ip_address();

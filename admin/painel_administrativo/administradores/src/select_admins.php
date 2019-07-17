@@ -5,7 +5,7 @@ try {
 		exit();
 	}
 
-	include_once("$assets/php/connection.php");
+	include_once("$assets/php/Connection.php");
 
 	$sql = $database->prepare("SELECT * FROM admins");
 	$sql->execute();
