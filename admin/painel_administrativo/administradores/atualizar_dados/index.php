@@ -42,12 +42,11 @@ if (!isset($_SESSION['logged'])) {
 				include_once("$assets/php/connection.php");
 				$admin_id = filter_input(INPUT_GET, 'admin_id', FILTER_DEFAULT);
 
-				$sql = $database->prepare('SELECT * FROM admins WHERE admin_id=:admin_id');
+				$sql = $database->prepare('SELECT * FROM admins WHERE admin_id=:admin_id LIMIT 1');
 				$sql->bindValue(':admin_id', $admin_id);
 				$sql->execute();
 
-				$data = $sql->fetchAll();
-				extract($data[0]);
+				extract($sql->fetch());
 				?>
 
 				<form style="margin-top:15px" action="../src/update_admin.php" method="post" enctype="multipart/form-data">

@@ -9,7 +9,7 @@ try {
 	$admin_nickname = filter_input(INPUT_POST, 'admin_nickname', FILTER_DEFAULT);
 	$admin_password = cript(filter_input(INPUT_POST, 'admin_password', FILTER_DEFAULT));
 
-	$sql = $database->prepare('SELECT admin_id, admin_name, admin_image FROM admins WHERE admin_nickname=:admin_nickname and admin_password=:admin_password');
+	$sql = $database->prepare('SELECT admin_id, admin_name, admin_image FROM admins WHERE admin_nickname=:admin_nickname and admin_password=:admin_password LIMIT 1');
 
 	$sql->bindValue(":admin_nickname", $admin_nickname);
 	$sql->bindValue(":admin_password", $admin_password);
@@ -17,9 +17,9 @@ try {
 
 	session_start();
 	if ($sql->rowCount()) {
-		$data = $sql->fetchAll()[0];
+		extract($sql->fetch());
 
-		$sql = $database->prepare('SELECT banned_amount FROM banneds WHERE banned_ip=:banned_ip');
+		$sql = $database->prepare('SELECT banned_amount FROM banneds WHERE banned_ip=:banned_ip LIMIT 1');
 
 		$sql->bindValue(':banned_ip', $ip);
 		$sql->execute();
@@ -28,7 +28,7 @@ try {
 			$banned_amount = $sql->fetchColumn();
 
 			if ($banned_amount === '4') {
-				$sql = $database->prepare('SELECT banned_begin, banned_end FROM banneds WHERE banned_ip=:banned_ip AND banned_begin <= :current_time AND banned_end >= :current_time');
+				$sql = $database->prepare('SELECT banned_begin, banned_end FROM banneds WHERE banned_ip=:banned_ip AND banned_begin <= :current_time AND banned_end >= :current_time LIMIT 1');
 
 				$sql->bindValue(':banned_ip', $ip);
 				$sql->bindValue(":current_time", date('Y-m-d H:i:s'));
@@ -38,25 +38,25 @@ try {
 					header('Location: ../');
 					exit();
 				} else {
-					$sql = $database->prepare('DELETE FROM banneds WHERE banned_ip=:banned_ip');
+					$sql = $database->prepare('DELETE FROM banneds WHERE banned_ip=:banned_ip LIMIT 1');
 
 					$sql->bindValue(':banned_ip', $ip);
 					$sql->execute();
 				}
 			} else {
-				$sql = $database->prepare('DELETE FROM banneds WHERE banned_ip=:banned_ip');
+				$sql = $database->prepare('DELETE FROM banneds WHERE banned_ip=:banned_ip LIMIT 1');
 
 				$sql->bindValue(':banned_ip', $ip);
 				$sql->execute();
 			}
 		}
 
-		$_SESSION['logged']['name'] = $data['admin_name'];
-		$_SESSION['logged']['image'] = $data['admin_image'];
-		$_SESSION['logged']['id'] = $data['admin_id'];
+		$_SESSION['logged']['name'] = $admin_name;
+		$_SESSION['logged']['image'] = $admin_image;
+		$_SESSION['logged']['id'] = $admin_id;
 		header('Location: ../../painel_administrativo/');
 	} else {
-		$sql = $database->prepare('SELECT banned_amount FROM banneds WHERE banned_ip=:banned_ip');
+		$sql = $database->prepare('SELECT banned_amount FROM banneds WHERE banned_ip=:banned_ip LIMIT 1');
 
 		$sql->bindValue(':banned_ip', $ip);
 		$sql->execute();

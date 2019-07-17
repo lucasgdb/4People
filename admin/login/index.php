@@ -37,7 +37,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 
 				<?php
 				include_once("$assets/php/connection.php");
-				$sql = $database->prepare('SELECT COUNT(admin_id) FROM admins');
+				$sql = $database->prepare('SELECT COUNT(admin_id) FROM admins LIMIT 1');
 				$sql->execute();
 
 				$admin_amount = $sql->fetchColumn();
@@ -76,7 +76,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 									$banned_amount = $sql->fetchColumn();
 
 									if ($banned_amount > 3) {
-										$sql = $database->prepare('SELECT banned_begin, banned_end FROM banneds WHERE banned_ip=:banned_ip AND banned_begin <= :current_time AND banned_end >= :current_time');
+										$sql = $database->prepare('SELECT banned_begin, banned_end FROM banneds WHERE banned_ip=:banned_ip AND banned_begin <= :current_time AND banned_end >= :current_time LIMIT 1');
 
 										$sql->bindValue(":banned_ip", $ip);
 										$sql->bindValue(":current_time", date('Y-m-d H:i:s'));
@@ -84,9 +84,10 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 										$sql->execute();
 
 										if ($sql->rowCount()) {
-											$data = $sql->fetchAll()[0];
-											$banned_begin = new DateTime($data['banned_begin']);
-											$banned_end = new DateTime($data['banned_end']);
+											extract($sql->fetch());
+
+											$banned_begin = new DateTime($banned_begin);
+											$banned_end = new DateTime($banned_end);
 											$current_time = new DateTime();
 
 											$time = $current_time->diff($banned_end)->format('%I:%S');

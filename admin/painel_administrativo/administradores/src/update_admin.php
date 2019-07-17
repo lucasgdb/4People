@@ -18,11 +18,11 @@ try {
 	$admin_image = $_FILES['admin_image'];
 	$admin_image_text = filter_input(INPUT_POST, 'admin_image_text', FILTER_DEFAULT);
 
-	$oldData = $database->prepare('SELECT admin_password, admin_image FROM admins WHERE admin_id=:admin_id');
-	$oldData->bindValue(':admin_id', $admin_id);
-	$oldData->execute();
+	$current_data = $database->prepare('SELECT admin_password, admin_image FROM admins WHERE admin_id=:admin_id LIMIT 1');
+	$current_data->bindValue(':admin_id', $admin_id);
+	$current_data->execute();
 
-	$data = $oldData->fetchAll()[0];
+	$data = $current_data->fetch();
 	$current_password = $data['admin_password'];
 	$current_admin_image = $data['admin_image'];
 	$ext = strtolower(pathinfo($_FILES['admin_image']['name'], PATHINFO_EXTENSION));
