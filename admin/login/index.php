@@ -36,7 +36,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 				<div class="divider"></div>
 
 				<?php
-				include_once("$assets/connection.php");
+				include_once("$assets/php/connection.php");
 				$sql = $database->prepare('SELECT COUNT(admin_id) FROM admins');
 				$sql->execute();
 
@@ -63,8 +63,8 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 								<div class="divider"></div>
 								<a title="Voltar ao 4People" class="btn indigo darken-4 mt-2 z-depth-0" href="../../"><i class="material-icons left">arrow_back</i>Voltar</a>
 								<?php
-								include_once("$assets/connection.php");
-								include_once('../painel_administrativo/src/IP.php');
+								include_once("$assets/php/connection.php");
+								include_once("$assets/php/IP.php");
 
 								$ip = get_ip_address();
 								$sql = $database->prepare('SELECT banned_amount FROM banneds WHERE banned_ip=:banned_ip');
@@ -117,7 +117,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 					</form>
 				<?php else : ?>
 					<?php
-					include_once('../painel_administrativo/src/MD5.php');
+					include_once("$assets/php/MD5.php");
 					$sql = $database->prepare('INSERT INTO admins VALUES (DEFAULT, "Administrador", :admin_nickname, :admin_email, :admin_password, NULL)');
 
 					function generateRandomString($len, $specialChars = false): String

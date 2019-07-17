@@ -3,9 +3,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require_once("$root/contato/src/Exception.php");
-require_once("$root/contato/src/PHPMailer.php");
-require_once("$root/contato/src/SMTP.php");
+require_once("$assets/php/Exception.php");
+require_once("$assets/php/PHPMailer.php");
+require_once("$assets/php/SMTP.php");
 
 $mail = new PHPMailer(true);
 

@@ -23,7 +23,7 @@ const generate = () => {
 
 	cardContainer.innerHTML = html
 
-	const clipboard = new ClipboardJS(document.querySelectorAll('.card i'));
+	const clipboard = new ClipboardJS(document.querySelectorAll('.card i'))
 	clipboard.on('success', () => {
 		M.toast({
 			html: 'Copiado para Área de Tranferência.',

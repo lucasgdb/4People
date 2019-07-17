@@ -3,9 +3,10 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require_once('Exception.php');
-require_once('PHPMailer.php');
-require_once('SMTP.php');
+$assets = '../../assets/';
+require_once("$assets/php/Exception.php");
+require_once("$assets/php/PHPMailer.php");
+require_once("$assets/php/SMTP.php");
 
 $name = filter_input(INPUT_POST, 'name', FILTER_DEFAULT);
 $email = filter_input(INPUT_POST, 'email', FILTER_DEFAULT);

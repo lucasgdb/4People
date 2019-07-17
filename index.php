@@ -125,7 +125,7 @@
 							<div class="card-content white-text">
 								<span class="card-title"><i class="material-icons left">build</i>Ferramentas</span>
 								<?php
-								include_once('assets/connection.php');
+								include_once("$assets/php/connection.php");
 								$sql = $database->query('SELECT COUNT(tool_id) FROM tools');
 								$sql->execute();
 

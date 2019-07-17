@@ -1,8 +1,9 @@
 <?php
 try {
-	include_once('../../../assets/connection.php');
-	include_once('../../painel_administrativo/src/MD5.php');
-	include_once('../../painel_administrativo/src/IP.php');
+	$assets = '../../../assets';
+	include_once("$assets/php/connection.php");
+	include_once("$assets/php/MD5.php");
+	include_once("$assets/php/IP.php");
 
 	$ip = get_ip_address();
 	$admin_nickname = filter_input(INPUT_POST, 'admin_nickname', FILTER_DEFAULT);

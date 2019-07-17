@@ -123,7 +123,7 @@ if (!isset($_SESSION['logged'])) {
 	<div id="removeAdmin" class="modal">
 		<div class="modal-content left-div-margin">
 			<h4>Remover Administrador</h4>
-			<p class="mb-0">Você tem certeza que deseja remover este Administrador?</p>
+			<p class="mb-0">Você tem certeza que deseja remover <span id="admin"></span> da Administração?</p>
 
 			<div class="left-div indigo darken-4" style="border-radius:0"></div>
 		</div>
@@ -141,8 +141,12 @@ if (!isset($_SESSION['logged'])) {
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script>
 		const linkRemoveAdmin = document.querySelector('#linkRemoveAdmin')
+		const lblAdmin = document.querySelector('#admin')
 
-		const changeLink = link => linkRemoveAdmin.href = link
+		const changeLink = (link, admin) => {
+			linkRemoveAdmin.href = link
+			lblAdmin.innerHTML = admin
+		}
 
 		M.Modal.init(document.querySelectorAll('.modal'))
 	</script>

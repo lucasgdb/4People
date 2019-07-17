@@ -6,8 +6,9 @@ try {
 		exit();
 	}
 
-	include_once('../../../../assets/connection.php');
-	include_once('../../src/MD5.php');
+	$assets = '../../../../assets';
+	include_once("$assets/php/connection.php");
+	include_once("$assets/php/MD5.php");
 
 	$admin_id = filter_input(INPUT_POST, 'admin_id', FILTER_DEFAULT);
 	$admin_name = trim(filter_input(INPUT_POST, 'admin_name', FILTER_DEFAULT));
