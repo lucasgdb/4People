@@ -13,7 +13,6 @@
 				<?php else : ?>
 					<li title="Computação" class="waves-effect"><a href="<?= $root ?>/computacao/"><i class="material-icons left">computer</i>Computação</a></li>
 					<li title="Matemática" class="waves-effect"><a href="<?= $root ?>/matematica/"><i class="material-icons left">functions</i>Matemática</a></li>
-					<li title="Mais Ferramentas" class="waves-effect"><a href="<?= $root ?>/mais_ferramentas/"><i class="material-icons left">build</i>Mais Ferramentas</a></li>
 				<?php endif ?>
 			</ul>
 		</div>
