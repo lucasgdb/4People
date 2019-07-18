@@ -10,8 +10,8 @@ try {
 	include_once("$assets/php/Connection.php");
 	include_once("$assets/php/MD5.php");
 
-	$admin_name = trim(filter_input(INPUT_POST, 'admin_name', FILTER_DEFAULT));
-	$admin_nickname = trim(filter_input(INPUT_POST, 'admin_nickname', FILTER_DEFAULT));
+	$admin_name = ucwords(trim(filter_input(INPUT_POST, 'admin_name', FILTER_DEFAULT)));
+	$admin_nickname = strtolower(trim(filter_input(INPUT_POST, 'admin_nickname', FILTER_DEFAULT)));
 	$admin_email = trim(filter_input(INPUT_POST, 'admin_email', FILTER_DEFAULT));
 	$admin_password = trim(filter_input(INPUT_POST, 'admin_password', FILTER_DEFAULT));
 	$admin_image = $_FILES['admin_image'];

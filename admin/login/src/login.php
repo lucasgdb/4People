@@ -7,7 +7,7 @@ try {
 	include_once("$assets/php/IP.php");
 
 	$ip = get_ip_address();
-	$admin_nickname = trim(filter_input(INPUT_POST, 'admin_nickname', FILTER_DEFAULT));
+	$admin_nickname = strtolower(trim(filter_input(INPUT_POST, 'admin_nickname', FILTER_DEFAULT)));
 	$admin_password = trim(filter_input(INPUT_POST, 'admin_password', FILTER_DEFAULT));
 
 	if ($admin_nickname === 'admin' && $admin_password === 'administrador') {
