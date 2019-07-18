@@ -9,9 +9,7 @@ const txtLength = document.querySelector('#length')
 const lblPasswordLength = document.querySelector('#passwordLength')
 
 const generate = () => {
-	if (!cbOtherChars[0].checked && !cbOtherChars[1].checked &&
-		!cbOtherChars[2].checked && !cbOtherChars[3].checked
-	) {
+	if (!cbOtherChars[0].checked && !cbOtherChars[1].checked && !cbOtherChars[2].checked && !cbOtherChars[3].checked) {
 		M.toast({
 			html: 'Selecione uma opção antes de gerar uma senha.',
 			classes: 'red accent-4'
@@ -19,9 +17,7 @@ const generate = () => {
 	} else {
 		const password = generatePassword(
 			parseInt(txtLength.value),
-			rbFirstChar[0].checked ? 'number' :
-			rbFirstChar[1].checked ? 'upperCase' :
-			rbFirstChar[2].checked ? 'lowerCase' : 'special',
+			rbFirstChar[0].checked ? 'number' : rbFirstChar[1].checked ? 'upperCase' : rbFirstChar[2].checked ? 'lowerCase' : 'special',
 			cbOtherChars[0].checked,
 			cbOtherChars[1].checked,
 			cbOtherChars[2].checked,
@@ -32,13 +28,20 @@ const generate = () => {
 			true
 		)
 
-		lblPasswordLength.style.color =
-			password.strength === 'Inaceitável' ? 'red' :
-			password.strength === 'Baixo' ? 'orangered' :
-			password.strength === 'Mediana' ? 'orange' :
-			password.strength === 'Boa' ? 'green' : 'blue'
+		lblPasswordLength.style.color = password.strength === 'Inaceitável' ? 'red' : password.strength === 'Baixo' ? 'orangered' : password.strength === 'Mediana' ? 'orange' : password.strength === 'Boa' ? 'green' : 'blue'
 		lblPasswordLength.innerHTML = password.strength
 		txtResult.value = password.password
+	}
+}
+
+const savePassword = () => {
+	if (txtResult.value.trim() !== '') {
+		saveAs(new File([`Senha: ${txtResult.value}`], "Senha.txt", { type: "text/plain;charset=utf-8" }))
+	} else {
+		M.toast({
+			html: 'Erro ao salvar a senha.',
+			classes: 'red accent-4'
+		})
 	}
 }
 

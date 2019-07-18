@@ -5,7 +5,7 @@
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-   <link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>Gerador de Senha - 4People</title>
@@ -185,6 +185,9 @@
 				<button title="Copiar Senha" class="btn waves-effect indigo darken-4 mt-1 z-depth-0" onclick="copyResult()">
 					Copiar
 				</button>
+				<button title="Salvar Senha" class="btn waves-effect indigo darken-4 mt-1 z-depth-0" onclick="savePassword()">
+					Salvar
+				</button>
 				<button title="Limpar Senha" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="clearInput()">
 					Limpar
 				</button>
@@ -214,6 +217,7 @@
 
 	<script src="<?= $assets ?>/algorithms/generators/passwordGenerator.js"></script>
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
+	<script src="src/fileSaver.min.js"></script>
 	<script src="src/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 </body>
