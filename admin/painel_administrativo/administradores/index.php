@@ -15,7 +15,7 @@ if (!isset($_SESSION['logged'])) {
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
-	<title>4People - Ferramentas Online</title>
+	<title>Controle de Administradores</title>
 	<?php include_once("$assets/components/meta_tags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="4People - Ferramentas Online">
