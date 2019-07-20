@@ -88,7 +88,6 @@ try {
 					$sql->bindValue(':banned_begin', date('Y-m-d H:i:s'));
 					$sql->bindValue(':banned_end', date('Y-m-d H:i:s', strtotime('+30 minutes')));
 					$sql->bindValue(':banned_ip', $ip);
-
 					$sql->execute();
 				} else {
 					$sql = $database->prepare(
@@ -99,14 +98,12 @@ try {
 
 					$sql->bindValue(':banned_amount', ++$banned_amount);
 					$sql->bindValue(':banned_ip', $ip);
-
 					$sql->execute();
 				}
 			} else {
 				$sql = $database->prepare('INSERT INTO banneds (banned_ip) VALUES(:banned_ip)');
 
 				$sql->bindValue(':banned_ip', $ip);
-
 				$sql->execute();
 			}
 

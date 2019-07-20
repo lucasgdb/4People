@@ -5,7 +5,6 @@ M.Collapsible.init(document.querySelectorAll('.collapsible'))
 // Constants
 const sidenav = M.Sidenav.getInstance(document.querySelector('#slide-out'))
 const navMobileA = document.querySelectorAll('#nav-mobile a')
-const paddingHeadersA = document.querySelectorAll('.collapsible-body ul li a')
 const mainCollButtons = document.querySelectorAll('#slide-out > li:not(:first-child) > .collapsible-header')
 const secCollButtons = document.querySelectorAll('.padding-headers:not(.padding-buttons) > li > .collapsible-header')
 const body = document.body
@@ -115,31 +114,14 @@ document.addEventListener('DOMContentLoaded', () => {
 	for (let i = 0; i < navMobileA.length; i++) {
 		if (navMobileA[i].getAttribute('href').split('/').filter(link => link !== '' && link !== '.').join('') === '') {
 			navMobileA[i].parentElement.classList.add('active')
-			return
+			break
 		}
 
 		const path = navMobileA[i].getAttribute('href').split('/').filter(link => link !== '')
 		const pathName = location.pathname.split('/').filter(link => link !== '')
 		if (path[path.length - 1] === pathName[pathName.length - 1]) {
 			navMobileA[i].parentElement.classList.add('active')
-			return
-		}
-	}
-
-	for (let i = 0; i < paddingHeadersA.length; i++) {
-		const path = paddingHeadersA[i].getAttribute('href').split('/').filter(link => link !== '')
-		const pathName = location.pathname.split('/').filter(link => link !== '')
-		if (path[path.length - 1] === pathName[pathName.length - 1]) {
-			paddingHeadersA[i].classList.add('grey', 'lighten-4', 'black-text')
-			const icon = paddingHeadersA[i].querySelector('i')
-			icon.innerHTML = 'radio_button_checked'
-			icon.classList.add('indigo-text', 'text-darken-4')
-			icon.style.fontSize = '20px'
-
-			header = paddingHeadersA[i].parentElement.parentElement.parentElement.parentElement.querySelector('.collapsible-header')
-			if (header) header.click()
-
-			return
+			break
 		}
 	}
 })

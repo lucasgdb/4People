@@ -39,13 +39,16 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 						$sql = $database->prepare('SELECT * FROM tools WHERE tool_active="1" AND section_id=:section_id');
 						$sql->bindValue(':section_id', $section_id);
 						$sql->execute();
+
+						$active = strpos($link, "$type_path/$section_path") !== false
 						?>
-						<li>
-							<div style="position:relative" class="collapsible-header"><i class="material-icons"><?= $section_icon ?></i><?= $section_name ?><i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+						<li class="<?= $active ? 'active' : '' ?>">
+							<div style="position:relative" class="collapsible-header"><i class="material-icons"><?= $section_icon ?></i><?= $section_name ?><i class="material-icons" style="position:absolute;right:0<?= $active ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
 							<div class="collapsible-body">
 								<ul>
 									<?php foreach ($sql as $data) : extract($data) ?>
-										<li><a class="waves-effect" href="<?= $root ?>/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" title="<?= $tool_name ?>"><i class="material-icons left">keyboard_arrow_right</i><?= $tool_name ?></a></li>
+										<?php $active = strpos($link, "$type_path/$section_path/$tool_path") !== false ?>
+										<li><a class="waves-effect <?= $active ? 'grey lighten-4 black-text' : '' ?>" href="<?= $root ?>/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" title="<?= $tool_name ?>"><i class="material-icons <?= $active ? 'indigo-text text-darken-4' : '' ?> left" style="<?= $active ? 'font-size:20px' : '' ?>"><?= $active ? 'radio_button_checked' : 'keyboard_arrow_right' ?></i><?= $tool_name ?></a></li>
 									<?php endforeach ?>
 								</ul>
 							</div>
@@ -91,3 +94,8 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 		</li>
 	<?php endif ?>
 </ul>
+
+<script>
+	const paddingHeadersA = document.querySelectorAll('.padding-buttons ul li a')
+</script>
+<script src="<?= $assets ?>/src/js/sidenav.js"></script>

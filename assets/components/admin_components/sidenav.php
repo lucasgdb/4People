@@ -81,3 +81,8 @@ $image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 		</div>
 	</li>
 </ul>
+
+<script>
+	const paddingHeadersA = document.querySelectorAll('.collapsible-body ul li a')
+</script>
+<script src="<?= $assets ?>/src/js/sidenav.js"></script>
