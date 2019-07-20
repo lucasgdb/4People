@@ -40,37 +40,53 @@ if (!isset($_SESSION['logged'])) {
 
 				<?php
 				include_once("$assets/php/Connection.php");
-				$type_id = filter_input(INPUT_GET, 'type_id', FILTER_DEFAULT);
+				$section_id = filter_input(INPUT_GET, 'section_id', FILTER_DEFAULT);
 
-				$sql = $database->prepare('SELECT * FROM types WHERE type_id=:type_id LIMIT 1');
-				$sql->bindValue(':type_id', $type_id);
+				$sql = $database->prepare('SELECT * FROM sections WHERE section_id=:section_id LIMIT 1');
+				$sql->bindValue(':section_id', $section_id);
 				$sql->execute();
 
 				extract($sql->fetch());
+				$t_id = $type_id
 				?>
 
-				<form style="margin-top:15px" action="../src/update_type.php" method="post">
+				<form style="margin-top:15px" action="../src/update_section.php" method="post">
 					<div class="row mb-0">
-						<input type="hidden" value="<?= $type_id ?>" name="type_id">
+						<input type="hidden" value="<?= $section_id ?>" name="section_id">
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">format_size</i>
-							<input value="<?= $type_name ?>" id="type_name" title="Preencha este campo com o nome." placeholder="Tipo de Ferramenta" class="validate" type="text" name="type_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="type_name">Nome</label>
-							<span class="helper-text" data-error="Tipo de Ferramenta inválido." data-success="Tipo de Ferramenta válida.">Ex: Computação</span>
+							<input value="<?= $section_name ?>" id="section_name" title="Preencha este campo com o nome." placeholder="Tipo de Seção" class="validate" type="text" name="section_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
+							<label class="active" for="section_name">Nome</label>
+							<span class="helper-text" data-error="Tipo de Seção inválida." data-success="Tipo de Seção válida.">Ex: Geradores</span>
 						</div>
 
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">folder</i>
-							<input value="<?= $type_path ?>" id="type_path" title="Preencha este campo com o caminho." placeholder="Caminho da Ferramenta" class="validate" type="text" name="type_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="type_path">Path</label>
-							<span class="helper-text" data-error="Caminho de Ferramenta inválido." data-success="Caminho de Ferramenta válido.">Ex: computacao</span>
+							<input value="<?= $section_path ?>" id="section_path" title="Preencha este campo com o caminho." placeholder="Caminho da Seção" class="validate" type="text" name="section_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
+							<label class="active" for="section_path">Path</label>
+							<span class="helper-text" data-error="Caminho de Seção inválido." data-success="Caminho de Seção válido.">Ex: geradores</span>
 						</div>
 
-						<div class="input-field col s12">
-							<i class="material-icons prefix"><?= $type_icon ?></i>
-							<input value="<?= $type_icon ?>" id="type_icon" title="Preencha este campo com o ícone." placeholder="Ícone de Ferramenta" class="validate" type="text" name="type_icon" oninvalid="this.setCustomValidity('Preencha este campo com o ícone.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="type_icon">Ícone</label>
-							<span class="helper-text" data-error="Ícone de Ferramenta inválido." data-success="Ícone de Ferramenta válido.">Ex: computer</span>
+						<div class="input-field col s12 m6">
+							<i class="material-icons prefix"><?= $section_icon ?></i>
+							<input value="<?= $section_icon ?>" id="section_icon" title="Preencha este campo com o ícone." placeholder="Ícone de Seção" class="validate" type="text" name="section_icon" oninvalid="this.setCustomValidity('Preencha este campo com o ícone.')" oninput="setCustomValidity('')" required>
+							<label class="active" for="section_icon">Ícone</label>
+							<span class="helper-text" data-error="Ícone de Seção inválido." data-success="Ícone de Seção válido.">Ex: autorenew</span>
+						</div>
+
+						<div class="input-field col s12 m6">
+							<i class="material-icons prefix">folder</i>
+							<select name="type_id">
+								<?php
+								$sql = $database->prepare('SELECT type_id, type_name FROM types');
+								$sql->execute();
+
+								foreach ($sql as $data) : extract($data) ?>
+									<option value="<?= $type_id ?>" <?= $t_id === $type_id ? 'selected' : '' ?>><?= $type_name ?></option>
+								<?php endforeach ?>
+							</select>
+							<label>Tipo</label>
+							<span class="helper-text">Caminho da Seção</span>
 						</div>
 
 						<div class="col s12">
@@ -90,6 +106,9 @@ if (!isset($_SESSION['logged'])) {
 	</main>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
+	<script>
+		M.FormSelect.init(document.querySelectorAll('select'))
+	</script>
 </body>
 
 </html>

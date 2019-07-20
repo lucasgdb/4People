@@ -106,16 +106,16 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 				</li>
 
 				<li>
-					<div style="position:relative" class="collapsible-header"><i class="material-icons">textsms</i>Codific. e Decodif.<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+					<div style="position:relative" class="collapsible-header"><i class="material-icons">textsms</i>Codif. e Decodif.<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
 					<div class="collapsible-body">
 						<ul>
-							<li><a class="waves-effect" href="<?= $root ?>/computacao/codif_decodif/base64_codif_decodif/" title="Base64 - Codificador e Decodificador"><i class="material-icons left">keyboard_arrow_right</i>Base64</a></li>
-							<li><a class="waves-effect" href="<?= $root ?>/computacao/codif_decodif/codificar_md5/" title="MD5 - Codificador"><i class="material-icons left">keyboard_arrow_right</i>MD5</a></li>
-							<li><a class="waves-effect" href="<?= $root ?>/computacao/codif_decodif/codificar_sha1/" title="SHA1 - Codificador"><i class="material-icons left">keyboard_arrow_right</i>SHA1</a></li>
-							<li><a class="waves-effect" href="<?= $root ?>/computacao/codif_decodif/conversor_binario/" title="Binário, Octal e Hexadecimal - Codificador e Decodificador"><i class="material-icons left">keyboard_arrow_right</i>Binário, Octal e Hexadecimal</a></li>
-							<li><a class="waves-effect" href="<?= $root ?>/computacao/codif_decodif/url_codif_decodif/" title="URL - Codificador e Decodificador"><i class="material-icons left">keyboard_arrow_right</i>URL</a></li>
-							<li><a class="waves-effect" href="<?= $root ?>/computacao/codif_decodif/calcular_crc32/" title="Calcular CRC32"><i class="material-icons left">keyboard_arrow_right</i>Calcular CRC32</a></li>
-							<li><a class="waves-effect" href="<?= $root ?>/computacao/codif_decodif/gerador_de_qrcode/" title="Gerador de QRCode"><i class="material-icons left">keyboard_arrow_right</i>Gerador de QRCode</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/computacao/codif_e_decodif/base64_codif_decodif/" title="Base64 - Codificador e Decodificador"><i class="material-icons left">keyboard_arrow_right</i>Base64</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/computacao/codif_e_decodif/codificar_md5/" title="MD5 - Codificador"><i class="material-icons left">keyboard_arrow_right</i>MD5</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/computacao/codif_e_decodif/codificar_sha1/" title="SHA1 - Codificador"><i class="material-icons left">keyboard_arrow_right</i>SHA1</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/computacao/codif_e_decodif/conversor_binario/" title="Binário, Octal e Hexadecimal - Codificador e Decodificador"><i class="material-icons left">keyboard_arrow_right</i>Binário, Octal e Hexadecimal</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/computacao/codif_e_decodif/url_codif_decodif/" title="URL - Codificador e Decodificador"><i class="material-icons left">keyboard_arrow_right</i>URL</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/computacao/codif_e_decodif/calcular_crc32/" title="Calcular CRC32"><i class="material-icons left">keyboard_arrow_right</i>Calcular CRC32</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/computacao/codif_e_decodif/gerador_de_qrcode/" title="Gerador de QRCode"><i class="material-icons left">keyboard_arrow_right</i>Gerador de QRCode</a></li>
 						</ul>
 					</div>
 				</li>

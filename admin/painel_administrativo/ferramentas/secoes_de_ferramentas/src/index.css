@@ -21,6 +21,10 @@ input[type=password]:not(.browser-default):focus.invalid~label {
 	color: #1a237e
 }
 
+.dropdown-content li>span {
+	color: black
+}
+
 @media (max-width: 600px) {
 	.modal {
 		width: 90%

@@ -15,7 +15,7 @@ if (!isset($_SESSION['logged'])) {
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
-	<title>Controle de Ferramentas</title>
+	<title>Tipos de Ferramentas</title>
 	<?php include_once("$assets/components/meta_tags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="4People - Ferramentas Online">
@@ -39,8 +39,8 @@ if (!isset($_SESSION['logged'])) {
 	<main>
 		<div class="container">
 			<div class="card-panel z-depth-2 top-div-margin" style="padding-bottom:10px">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person_add</i>Adicionar um tipo de Ferramenta</h1>
-				<label>Adicionar um novo Tipo de Ferramenta no 4People</label>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person_add</i>Adicionar um tipo de Ferramentas</h1>
+				<label>Adicionar um novo Tipo de Ferramentas no 4People</label>
 
 				<div class="divider"></div>
 
@@ -69,7 +69,7 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="col s12">
 							<div class="divider"></div>
-							<button title="Inserir um Administrador no 4People" class="btn indigo darken-4 mt-2 z-depth-0">
+							<button title="Inserir Tipo de Ferramentas no 4People" class="btn indigo darken-4 mt-2 z-depth-0">
 								<i class="material-icons left">person_add</i>Inserir
 								<input style="display:none" type="submit" value="">
 							</button>

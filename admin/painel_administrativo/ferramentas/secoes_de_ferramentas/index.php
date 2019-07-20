@@ -15,7 +15,7 @@ if (!isset($_SESSION['logged'])) {
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
-	<title>Controle de Ferramentas</title>
+	<title>Seções de Ferramentas</title>
 	<?php include_once("$assets/components/meta_tags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="4People - Ferramentas Online">
@@ -39,37 +39,52 @@ if (!isset($_SESSION['logged'])) {
 	<main>
 		<div class="container">
 			<div class="card-panel z-depth-2 top-div-margin" style="padding-bottom:10px">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person_add</i>Adicionar um tipo de Ferramenta</h1>
-				<label>Adicionar um novo Tipo de Ferramenta no 4People</label>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person_add</i>Adicionar uma Seção de Ferramentas</h1>
+				<label>Adicionar uma novo Seção de Ferramentas no 4People</label>
 
 				<div class="divider"></div>
 
-				<form style="margin-top:15px" action="src/insert_type.php" method="post">
+				<form style="margin-top:15px" action="src/insert_section.php" method="post">
 					<div class="row mb-0">
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">format_size</i>
-							<input id="type_name" title="Preencha este campo com o nome." placeholder="Tipo de Ferramenta" class="validate" type="text" name="type_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="type_name">Nome</label>
-							<span class="helper-text" data-error="Tipo de Ferramenta inválido." data-success="Tipo de Ferramenta válida.">Ex: Computação</span>
+							<input id="section_name" title="Preencha este campo com o nome." placeholder="Tipo de Seção" class="validate" type="text" name="section_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
+							<label class="active" for="section_name">Nome</label>
+							<span class="helper-text" data-error="Tipo de Seção inválida." data-success="Tipo de Seção válida.">Ex: Geradores</span>
 						</div>
 
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">folder</i>
-							<input id="type_path" title="Preencha este campo com o caminho." placeholder="Caminho da Ferramenta" class="validate" type="text" name="type_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="type_path">Path</label>
-							<span class="helper-text" data-error="Caminho de Ferramenta inválido." data-success="Caminho de Ferramenta válido.">Ex: computacao</span>
+							<input id="section_path" title="Preencha este campo com o caminho." placeholder="Caminho da Seção" class="validate" type="text" name="section_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
+							<label class="active" for="section_path">Path</label>
+							<span class="helper-text" data-error="Caminho de Seção inválido." data-success="Caminho de Seção válido.">Ex: geradores</span>
 						</div>
 
-						<div class="input-field col s12">
+						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">insert_emoticon</i>
-							<input id="type_icon" title="Preencha este campo com o ícone." placeholder="Ícone de Ferramenta" class="validate" type="text" name="type_icon" oninvalid="this.setCustomValidity('Preencha este campo com o ícone.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="type_icon">Ícone</label>
-							<span class="helper-text" data-error="Ícone de Ferramenta inválido." data-success="Ícone de Ferramenta válido.">Ex: computer</span>
+							<input id="section_icon" title="Preencha este campo com o ícone." placeholder="Ícone de Seção" class="validate" type="text" name="section_icon" oninvalid="this.setCustomValidity('Preencha este campo com o ícone.')" oninput="setCustomValidity('')" required>
+							<label class="active" for="section_icon">Ícone</label>
+							<span class="helper-text" data-error="Ícone de Seção inválido." data-success="Ícone de Seção válido.">Ex: autorenew</span>
+						</div>
+
+						<div class="input-field col s12 m6">
+							<i class="material-icons prefix">folder</i>
+							<select name="type_id">
+								<?php
+								$sql = $database->prepare('SELECT type_id, type_name FROM types');
+								$sql->execute();
+
+								foreach ($sql as $data) : extract($data) ?>
+									<option value="<?= $type_id ?>"><?= $type_name ?></option>
+								<?php endforeach ?>
+							</select>
+							<label>Tipo</label>
+							<span class="helper-text">Caminho da Seção</span>
 						</div>
 
 						<div class="col s12">
 							<div class="divider"></div>
-							<button title="Inserir um Administrador no 4People" class="btn indigo darken-4 mt-2 z-depth-0">
+							<button title="Inserir Seção no 4People" class="btn indigo darken-4 mt-2 z-depth-0">
 								<i class="material-icons left">person_add</i>Inserir
 								<input style="display:none" type="submit" value="">
 							</button>
@@ -91,12 +106,13 @@ if (!isset($_SESSION['logged'])) {
 							<th>Nome</th>
 							<th>Caminho</th>
 							<th>Ícone</th>
+							<th>Tipo</th>
 							<th>Operações</th>
 						</tr>
 					</thead>
 
 					<tbody>
-						<?php include_once('src/select_types.php') ?>
+						<?php include_once('src/select_sections.php') ?>
 					</tbody>
 				</table>
 
@@ -105,10 +121,10 @@ if (!isset($_SESSION['logged'])) {
 		</div>
 	</main>
 
-	<div id="removeType" class="modal">
+	<div id="removeSection" class="modal">
 		<div class="modal-content left-div-margin">
 			<h4>Remover Tipo</h4>
-			<p class="mb-0">Você tem certeza que deseja remover <span id="type"></span>?</p>
+			<p class="mb-0">Você tem certeza que deseja remover <span id="section"></span>?</p>
 
 			<div class="left-div indigo darken-4" style="border-radius:0"></div>
 		</div>
@@ -117,7 +133,7 @@ if (!isset($_SESSION['logged'])) {
 
 		<div class="modal-footer">
 			<button title="Cancelar" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left red-text" style="font-size:30px">close</i>Não</button>
-			<a id="linkRemoveType" title="Remover Tipo" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left green-text" style="font-size:30px">check</i>Sim</a>
+			<a id="linkRemoveSection" title="Remover Tipo" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left green-text" style="font-size:30px">check</i>Sim</a>
 		</div>
 	</div>
 
@@ -125,12 +141,13 @@ if (!isset($_SESSION['logged'])) {
 	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script>
-		const linkRemoveType = document.querySelector('#linkRemoveType')
-		const lblType = document.querySelector('#type')
+		M.FormSelect.init(document.querySelectorAll('select'))
+		const linkRemoveSection = document.querySelector('#linkRemoveSection')
+		const lblSection = document.querySelector('#section')
 
-		const changeLink = (link, type) => {
-			linkRemoveType.href = link
-			lblType.innerHTML = type
+		const changeLink = (link, section) => {
+			linkRemoveSection.href = link
+			lblSection.innerHTML = section
 		}
 
 		M.Modal.init(document.querySelectorAll('.modal'))

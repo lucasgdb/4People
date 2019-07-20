@@ -47,11 +47,11 @@ $image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 						<?php
 						include_once("$assets/php/Connection.php");
 
-						$sql = $database->prepare("SELECT COUNT(type_id) as types_count FROM types LIMIT 1");
+						$sql = $database->prepare("SELECT COUNT(type_id) AS types_count FROM types LIMIT 1");
 						$sql->execute();
 						$types_count = $sql->fetchColumn();
 
-						$sql = $database->prepare("SELECT COUNT(section_id) as sections_count FROM sections LIMIT 1");
+						$sql = $database->prepare("SELECT COUNT(section_id) AS sections_count FROM sections LIMIT 1");
 						$sql->execute();
 						$sections_count = $sql->fetchColumn();
 
