@@ -70,7 +70,7 @@ const generatePassword = (
 
 	return {
 		password,
-		"strength": verifyPasswordStrength ? checkStrength(password) : null
+		strength: verifyPasswordStrength ? checkStrength(password) : null
 	}
 }
 

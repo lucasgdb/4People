@@ -89,7 +89,7 @@ if (!isset($_SESSION['logged'])) {
 			</div>
 
 			<div class="card-panel z-depth-2 top-div-margin" style="padding-bottom:10px">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">build</i>Filtrar Ferramentas</h1>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">filter_list</i>Filtrar Ferramentas</h1>
 				<label>Filtro de Ferramentas do 4People</label>
 
 				<div class="divider"></div>
@@ -101,7 +101,7 @@ if (!isset($_SESSION['logged'])) {
 							<select name="type_id">
 								<option value="-1">Selecione um Tipo</option>
 								<?php
-								$sql = $database->prepare("SELECT type_id, type_name FROM types ORDER BY type_id");
+								$sql = $database->prepare('SELECT type_id, type_name FROM types ORDER BY type_id');
 								$sql->execute();
 
 								$type_id_get = filter_input(INPUT_GET, 'type_id', FILTER_DEFAULT);
@@ -119,7 +119,7 @@ if (!isset($_SESSION['logged'])) {
 							<select name="section_id">
 								<option value="-1">Selecione uma Seção</option>
 								<?php
-								$sql = $database->prepare("SELECT section_id, section_name FROM sections ORDER BY section_id");
+								$sql = $database->prepare('SELECT section_id, section_name FROM sections ORDER BY section_id');
 								$sql->execute();
 
 								$section_id_get = filter_input(INPUT_GET, 'section_id', FILTER_DEFAULT);
@@ -152,7 +152,7 @@ if (!isset($_SESSION['logged'])) {
 								<input style="display:none" title="Filtrar Ferramentas" type="submit">
 							</button>
 
-							<a title="Limpar Filtro" href="." class="btn indigo darken-4 mt-2 waves-effect waves-light z-depth-0"><i class="material-icons left">format_clear</i>Limpar</a>
+							<a title="Limpar Filtro" href="." class="btn indigo darken-4 mt-2 waves-effect waves-light right z-depth-0"><i class="material-icons left">format_clear</i>Limpar</a>
 						</div>
 					</div>
 				</form>

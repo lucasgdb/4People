@@ -76,19 +76,25 @@
 					<div class="col s12">
 						<div class="card indigo z-depth-2">
 							<div class="card-content white-text">
+								<?php
+								$sql = $database->prepare(
+									'SELECT tools.tool_name, tools.tool_path, sections.section_path, types.type_path FROM tools
+									INNER JOIN sections ON sections.section_id = tools.section_id
+									INNER JOIN types ON types.type_id = sections.type_id
+									WHERE tool_active="1"
+									ORDER BY tool_visits DESC, tool_id
+									LIMIT 3'
+								);
+
+								$sql->execute()
+								?>
 								<span class="card-title"><i class="material-icons left">trending_up</i>As 3 Ferramentas mais populares</span>
 								<ul class="collection with-header mb-0">
-									<li class="collection-item indigo">
-										<div style="font-size:16px">Diferença entre Datas<a href="<?= $root ?>/matematica/calculo_de_datas/diferenca_entre_datas/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
-									</li>
-
-									<li class="collection-item indigo">
-										<div style="font-size:16px">Gerador de Senha<a href="<?= $root ?>/computacao/geradores/gerador_de_senha/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
-									</li>
-
-									<li class="collection-item indigo">
-										<div style="font-size:16px">Equação do 2° Grau<a href="<?= $root ?>/matematica/calculadoras/equacao_2_grau/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
-									</li>
+									<?php foreach ($sql as $data) : extract($data) ?>
+										<li class="collection-item indigo">
+											<div style="font-size:16px"><?= $tool_name ?><a href="<?= $root ?>/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+										</li>
+									<?php endforeach ?>
 								</ul>
 							</div>
 

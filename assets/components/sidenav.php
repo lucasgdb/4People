@@ -19,12 +19,11 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 	<?php
 	include_once("$assets/php/Connection.php");
 	$sql = $database->prepare('SELECT * FROM types');
-
 	$sql->execute();
 
 	foreach ($sql as $data) : extract($data) ?>
 		<?php
-		$sql = $database->prepare('SELECT * FROM sections WHERE type_id=:type_id');
+		$sql = $database->prepare('SELECT section_id, section_name, section_path, section_icon FROM sections WHERE type_id=:type_id');
 		$sql->bindValue(':type_id', $type_id);
 		$sql->execute();
 
@@ -36,7 +35,7 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 				<ul class="collapsible padding-headers">
 					<?php foreach ($sql as $data) : extract($data) ?>
 						<?php
-						$sql = $database->prepare('SELECT * FROM tools WHERE tool_active="1" AND section_id=:section_id');
+						$sql = $database->prepare('SELECT tool_id, tool_name, tool_path, tool_visits FROM tools WHERE tool_active="1" AND section_id=:section_id');
 						$sql->bindValue(':section_id', $section_id);
 						$sql->execute();
 
@@ -47,7 +46,17 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 							<div class="collapsible-body">
 								<ul>
 									<?php foreach ($sql as $data) : extract($data) ?>
-										<?php $active = strpos($link, "$type_path/$section_path/$tool_path") !== false ?>
+										<?php
+										$active = strpos($link, "$type_path/$section_path/$tool_path") !== false;
+
+										if ($active) {
+											$sql = $database->prepare('UPDATE tools SET tool_visits=:tool_visits WHERE tool_id=:tool_id');
+
+											$sql->bindValue(':tool_visits', ++$tool_visits);
+											$sql->bindValue(':tool_id', $tool_id);
+											$sql->execute();
+										}
+										?>
 										<li><a class="waves-effect <?= $active ? 'grey lighten-4 black-text' : '' ?>" href="<?= $root ?>/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" title="<?= $tool_name ?>"><i class="material-icons <?= $active ? 'indigo-text text-darken-4' : '' ?> left" style="<?= $active ? 'font-size:20px' : '' ?>"><?= $active ? 'radio_button_checked' : 'keyboard_arrow_right' ?></i><?= $tool_name ?></a></li>
 									<?php endforeach ?>
 								</ul>

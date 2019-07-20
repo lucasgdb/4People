@@ -19,8 +19,8 @@ const calculateFacorization = (number) => {
 		const amount = []
 		for (let i = 0; i < noRepeatedResults.length; i++) {
 			amount.push({
-				"number": noRepeatedResults[i],
-				"toThe": countItems(result, noRepeatedResults[i])
+				number: noRepeatedResults[i],
+				toThe: countItems(result, noRepeatedResults[i])
 			})
 		}
 
@@ -30,10 +30,10 @@ const calculateFacorization = (number) => {
 		}
 	} else {
 		return {
-			"result": [1],
-			"amount": [{
-				"number": [1],
-				"toThe": 1
+			result: [1],
+			amount: [{
+				number: [1],
+				toThe: 1
 			}]
 		}
 	}

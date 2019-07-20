@@ -42,7 +42,7 @@ if (!isset($_SESSION['logged'])) {
 				include_once("$assets/php/Connection.php");
 				$admin_id = filter_input(INPUT_GET, 'admin_id', FILTER_DEFAULT);
 
-				$sql = $database->prepare('SELECT * FROM admins WHERE admin_id=:admin_id LIMIT 1');
+				$sql = $database->prepare('SELECT admin_id, admin_name, admin_nickname, admin_email, admin_image FROM admins WHERE admin_id=:admin_id LIMIT 1');
 				$sql->bindValue(':admin_id', $admin_id);
 				
 				$sql->execute();
@@ -91,7 +91,7 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="col s12">
 							<div class="divider"></div>
-							<a href="../" class="btn indigo darken-4 mt-2 z-depth-0" title="Cancelar Edição"><i class="material-icons left">close</i>Cancelar</a>
+							<a href="../" class="btn indigo darken-4 mt-2 z-depth-0" title="Cancelar edição"><i class="material-icons left">close</i>Cancelar</a>
 							<button title="Salvar Dados" class="btn indigo darken-4 mt-2 right z-depth-0">
 								<i class="material-icons left">save</i>Salvar
 								<input style="display:none" type="submit" value="">

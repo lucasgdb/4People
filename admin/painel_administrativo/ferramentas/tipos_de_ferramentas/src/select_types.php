@@ -7,7 +7,7 @@ try {
 
 	include_once("$assets/php/Connection.php");
 
-	$sql = $database->prepare("SELECT * FROM types");
+	$sql = $database->prepare('SELECT * FROM types');
 	$sql->execute();
 
 	foreach ($sql as $key) : extract($key) ?>

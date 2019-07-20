@@ -29,6 +29,10 @@ input[type=password]:not(.browser-default):focus.invalid~label {
 	margin-bottom: 0
 }
 
+.dropdown-content li>span {
+	color: black
+}
+
 @media (max-width: 600px) {
 	.card-panel {
 		margin-top: 0;
