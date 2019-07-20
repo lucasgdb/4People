@@ -1,8 +1,8 @@
+const txtName = document.querySelector('#name')
 const nicks = [
     'off',
     'Desu',
     'Sasha',
-    'Das',
     'Mann',
     'Storm',
     'Elvis',
@@ -15,6 +15,23 @@ const nicks = [
     'Smash',
     'Jefferson',
     'Helssing',
+    'ryu',
+    'Wander',
+    'Agro',
+    'Ceaseless',
+    'Adele',
+    'fr4nk',
+    'sm4r',
+    'Gunner',
+    'Yappy',
+    'Secretaria',
+    'Meow',
+    'The',
+    'Lavish',
+    'TheLuxuriant',
+    'Dovahkin',
+    'Fus',
+    'Silver',
 ]
 const sufixNicks = [
     'OfChaos',
@@ -26,7 +43,14 @@ const sufixNicks = [
     'JS',
     'kun',
     'Sama',
-    'Seiya'
+    'Seiya',
+    'BR',
+    'm3rc1ful',
+    'Xyu',
+    'TheInquisitive',
+    'Perpetual',
+    'OfTrapdoor',
+    'row'
 ]
 const prefixNicks = [
     'General',
@@ -36,14 +60,45 @@ const prefixNicks = [
     'Van',
     'gai',
     'Cruiser',
+    'OfSplosh',
     '4',
+    'kui',
+    'Chico',
+    'OfMutter',
+    'Merci',
+    'sm4r',
+    'Portal',
+    'Das',
+    'Thunder',
+    'Gunner',
+    'Buster',
+    'meow',
+    'Booris',
+    'Jazzy',
+    'Zero',
+    'Rei',
+    'Statues',
+    'Corizon',
+    'Quizzical',
+    'da1'
 ]
 
 const generateNicks = (name, option) => {
     //var randomName = faker.name.findName()
-    if (option == '2') return name += nicks[parseInt(Math.random() * nicks.length)]
-    else if (option == '1') return name += nicks[parseInt(Math.random() * nicks.length)]
-    else if (option == '3') return prefixNicks[parseInt(Math.random() * prefixNicks.length)] = nicks[parseInt(Math.random()) * nicks.length] = sufixNicks[parseInt(Math.random() * sufixNicks.length)]
-    else if (option == '4') return prefixNicks[parseInt(Math.random() * prefixNicks.length)] = name
-    else if (option == '5') return name = sufixNicks[parseInt(Math.random() * prefixNicks.length)]
+    nicksName = nicks[parseInt(Math.random() * nicks.length)];
+    prefixName = prefixNicks[parseInt(Math.random() * prefixNicks.length)];
+    sufixName = sufixNicks[parseInt(Math.random() * sufixNicks.length)];
+    if (option == '1') {
+        const letters = 'aeios'
+        const modifiedLetters = '43106'
+        for (let i = 0; i < letters.length; i++) {
+            if (parseInt(Math.random() * 2) === 1) {
+                name = name.replace(new RegExp(letters[i], 'g'), modifiedLetters[i])
+            }
+        }
+        return `${name}${nicksName}`
+    } else if (option == '2') return `${prefixName}${nicksName}${sufixName}`
+    else if (option == '3') return `${nicksName}${sufixName}`
+    else if (option == '4') return `${prefixName}${name}`
+    else if (option == '5') return `${name}${sufixName}`
 }

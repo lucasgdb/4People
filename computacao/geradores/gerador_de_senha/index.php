@@ -5,7 +5,7 @@
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-   <link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>Gerador de Senha - 4People</title>
@@ -185,9 +185,27 @@
 				<button title="Copiar Senha" class="btn waves-effect indigo darken-4 mt-1 z-depth-0" onclick="copyResult()">
 					Copiar
 				</button>
+				<button title="Salvar Senha" class="btn waves-effect indigo darken-4 mt-1 z-depth-0 modal-trigger" href="#modal1">
+					Salvar
+				</button>
 				<button title="Limpar Senha" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="clearInput()">
 					Limpar
 				</button>
+
+				<div id="modal1" class="modal">
+    				<div class="modal-content">
+      				<h4>Salvar</h4>
+						<div class="row">
+        					<div class="input-field col s12">
+          					<input id="namePassword" type="text" value="Senha" class="validate">
+          					<label for="email">Nome da senha</label>
+        					</div>
+     					</div>
+    				</div>
+    				<div class="modal-footer">
+      				<a href="#!" class="modal-close waves-effect waves-green btn-flat"  onclick="savePassword()">Salvar</a>
+    				</div>
+  				</div>
 
 				<div class="left-div indigo darken-4"></div>
 			</div>
@@ -214,6 +232,7 @@
 
 	<script src="<?= $assets ?>/algorithms/generators/passwordGenerator.js"></script>
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
+	<script src="src/fileSaver.min.js"></script>
 	<script src="src/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 </body>
