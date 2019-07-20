@@ -2,7 +2,7 @@
 include_once('../../../../assets/assets.php');
 
 if (!isset($_SESSION['logged'])) {
-	header("HTTP/1.0 404 Not Found");
+	header('HTTP/1.0 404 Not Found');
 	exit();
 }
 ?>
@@ -44,8 +44,8 @@ if (!isset($_SESSION['logged'])) {
 
 				$sql = $database->prepare('SELECT * FROM admins WHERE admin_id=:admin_id LIMIT 1');
 				$sql->bindValue(':admin_id', $admin_id);
+				
 				$sql->execute();
-
 				extract($sql->fetch());
 				?>
 

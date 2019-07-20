@@ -2,7 +2,7 @@
 include_once('../../../../../assets/assets.php');
 
 if (!isset($_SESSION['logged'])) {
-	header("HTTP/1.0 404 Not Found");
+	header('HTTP/1.0 404 Not Found');
 	exit();
 }
 ?>
@@ -33,8 +33,8 @@ if (!isset($_SESSION['logged'])) {
 	<main>
 		<div class="container">
 			<div class="card-panel z-depth-3 left-div-margin" style="padding-bottom:10px">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">edit</i>Tipos de Ferramentas - Atualizar Dados</h1>
-				<label>Atualizar Dados de um Tipo de Ferramenta do 4People</label>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">edit</i>Seção de Ferramentas - Atualizar Dados</h1>
+				<label>Atualizar Dados de uma Seção do 4People</label>
 
 				<div class="divider"></div>
 

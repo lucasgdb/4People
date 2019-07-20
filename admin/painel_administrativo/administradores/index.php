@@ -2,7 +2,7 @@
 include_once('../../../assets/assets.php');
 
 if (!isset($_SESSION['logged'])) {
-	header("HTTP/1.0 404 Not Found");
+	header('HTTP/1.0 404 Not Found');
 	exit();
 }
 ?>

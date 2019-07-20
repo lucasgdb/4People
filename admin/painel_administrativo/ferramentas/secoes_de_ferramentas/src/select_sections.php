@@ -7,11 +7,19 @@ try {
 
 	include_once("$assets/php/Connection.php");
 
+	$condition = '';
+
+	if (isset($type_id_get) && $type_id_get !== '-1') $condition = "AND types.type_id=:type_id_get";
+
 	$sql = $database->prepare(
-		'SELECT s.*, t.type_name FROM sections s
-		INNER JOIN types t ON t.type_id = s.type_id
-		ORDER BY t.type_id'
+		"SELECT sections.*, types.type_name FROM sections
+		INNER JOIN types ON types.type_id = sections.type_id
+		$condition
+		ORDER BY types.type_id"
 	);
+
+	if (isset($type_id_get) && $type_id_get !== '-1') $sql->bindValue(':type_id_get', $type_id_get);
+
 	$sql->execute();
 
 	foreach ($sql as $key) : extract($key) ?>

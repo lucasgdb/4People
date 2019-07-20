@@ -33,7 +33,7 @@ $image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 		</div>
 	</li>
 
-	<?php $controls = strpos($link, 'administradores') !== false || strpos($link, 'tipos_de_ferramentas') !== false || strpos($link, 'secoes_de_ferramentas') !== false ?>
+	<?php $controls = strpos($link, 'administradores') !== false || strpos($link, 'ferramentas') ?>
 
 	<li class="<?= $controls ? 'active' : '' ?>">
 		<div class="collapsible-header"><i class="material-icons left">insert_chart</i>Controles<i class="material-icons" style="position:absolute;right:0<?= $controls ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>

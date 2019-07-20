@@ -14,7 +14,7 @@ if (!isset($_SESSION['logged'])) {
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
-	<title>Tipos de Ferramentas - Atualizar Dados</title>
+	<title>Controle de Ferramentas - Atualizar Dados</title>
 	<?php include_once("$assets/components/meta_tags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="4People - Ferramentas Online">
@@ -33,60 +33,63 @@ if (!isset($_SESSION['logged'])) {
 	<main>
 		<div class="container">
 			<div class="card-panel z-depth-3 left-div-margin" style="padding-bottom:10px">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">edit</i>Seção de Ferramentas - Atualizar Dados</h1>
-				<label>Atualizar Dados de uma Seção do 4People</label>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">edit</i>Tipos de Ferramentas - Atualizar Dados</h1>
+				<label>Atualizar Dados de um Tipo de Ferramenta do 4People</label>
 
 				<div class="divider"></div>
 
 				<?php
 				include_once("$assets/php/Connection.php");
-				$section_id = filter_input(INPUT_GET, 'section_id', FILTER_DEFAULT);
+				$tool_id = filter_input(INPUT_GET, 'tool_id', FILTER_DEFAULT);
 
-				$sql = $database->prepare('SELECT * FROM sections WHERE section_id=:section_id LIMIT 1');
-				$sql->bindValue(':section_id', $section_id);
+				$sql = $database->prepare('SELECT * FROM tools WHERE tool_id=:tool_id LIMIT 1');
+				$sql->bindValue(':tool_id', $tool_id);
 				$sql->execute();
 
 				extract($sql->fetch());
-				$t_id = $type_id
+				$s_id = $section_id
 				?>
 
-				<form style="margin-top:15px" action="../src/update_section.php" method="post">
+				<form style="margin-top:15px" action="../src/update_tool.php" method="post">
 					<div class="row mb-0">
-						<input type="hidden" value="<?= $section_id ?>" name="section_id">
+						<input type="hidden" value="<?= $tool_id ?>" name="tool_id">
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">format_size</i>
-							<input value="<?= $section_name ?>" id="section_name" title="Preencha este campo com o nome." placeholder="Tipo de Seção" class="validate" type="text" name="section_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="section_name">Nome</label>
-							<span class="helper-text" data-error="Seção de Ferramenta inválida." data-success="Seção de Ferramenta válida.">Ex: Geradores</span>
+							<input value="<?= $tool_name ?>" id="tool_name" title="Preencha este campo com o nome." placeholder="Nomoe de Ferramenta" class="validate" type="text" name="tool_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
+							<label class="active" for="tool_name">Nome</label>
+							<span class="helper-text" data-error="Ferramenta inválida." data-success="Ferramenta válida.">Ex: Gerador de CPF</span>
 						</div>
 
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">folder</i>
-							<input value="<?= $section_path ?>" id="section_path" title="Preencha este campo com o caminho." placeholder="Caminho da Seção" class="validate" type="text" name="section_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="section_path">Path</label>
-							<span class="helper-text" data-error="Caminho de Seção inválido." data-success="Caminho de Seção válido.">Ex: geradores</span>
-						</div>
-
-						<div class="input-field col s12 m6">
-							<i class="material-icons prefix"><?= $section_icon ?></i>
-							<input value="<?= $section_icon ?>" id="section_icon" title="Preencha este campo com o ícone." placeholder="Ícone de Seção" class="validate" type="text" name="section_icon" oninvalid="this.setCustomValidity('Preencha este campo com o ícone.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="section_icon">Ícone</label>
-							<span class="helper-text" data-error="Ícone de Seção inválido." data-success="Ícone de Seção válido.">Ex: autorenew</span>
+							<input value="<?= $tool_path ?>" id="tool_path" title="Preencha este campo com o caminho." placeholder="Caminho da Seção" class="validate" type="text" name="tool_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
+							<label class="active" for="tool_path">Path</label>
+							<span class="helper-text" data-error="Caminho de Ferramenta inválido." data-success="Caminho de Ferramenta válido.">Ex: gerador_de_cpf</span>
 						</div>
 
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">folder</i>
-							<select name="type_id">
+							<select name="section_id">
 								<?php
-								$sql = $database->prepare('SELECT type_id, type_name FROM types');
+								$sql = $database->prepare('SELECT section_id, section_name FROM sections ORDER BY section_id');
 								$sql->execute();
 
 								foreach ($sql as $data) : extract($data) ?>
-									<option value="<?= $type_id ?>" <?= $t_id === $type_id ? 'selected' : '' ?>><?= $type_name ?></option>
+									<option value="<?= $section_id ?>" <?= $s_id === $section_id ? 'selected' : '' ?>><?= $section_name ?></option>
 								<?php endforeach ?>
 							</select>
-							<label>Tipo</label>
-							<span class="helper-text">Caminho da Seção</span>
+							<label>Seção</label>
+							<span class="helper-text">Seção da Ferramenta</span>
+						</div>
+
+						<div class="input-field col s12 m6">
+							<i class="material-icons prefix"><?= $tool_active ? 'check' : 'close' ?></i>
+							<select name="tool_active">
+								<option value="0">Desativado</option>
+								<option value="1" <?= $tool_active ? 'selected' : '' ?>>Ativado</option>
+							</select>
+							<label>Status</label>
+							<span class="helper-text">Status da Ferramenta</span>
 						</div>
 
 						<div class="col s12">

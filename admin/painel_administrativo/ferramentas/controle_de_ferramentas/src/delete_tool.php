@@ -8,11 +8,11 @@ try {
 
 	include_once('../../../../../assets/php/Connection.php');
 
-	$type_id = filter_input(INPUT_GET, 'type_id', FILTER_DEFAULT);
+	$tool_id = filter_input(INPUT_GET, 'tool_id', FILTER_DEFAULT);
 
-	$sql = $database->prepare('DELETE FROM types WHERE type_id=:type_id');
-	$sql->bindValue(':type_id', $type_id);
-	
+	$sql = $database->prepare('DELETE FROM tools WHERE tool_id=:tool_id');
+	$sql->bindValue(':tool_id', $tool_id);
+
 	$sql->execute();
 	header('Location: ../');
 } catch (PDOException $e) {

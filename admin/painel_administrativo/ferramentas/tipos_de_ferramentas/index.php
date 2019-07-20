@@ -2,7 +2,7 @@
 include_once('../../../../assets/assets.php');
 
 if (!isset($_SESSION['logged'])) {
-	header("HTTP/1.0 404 Not Found");
+	header('HTTP/1.0 404 Not Found');
 	exit();
 }
 ?>
@@ -39,7 +39,7 @@ if (!isset($_SESSION['logged'])) {
 	<main>
 		<div class="container">
 			<div class="card-panel z-depth-2 top-div-margin" style="padding-bottom:10px">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person_add</i>Adicionar um tipo de Ferramentas</h1>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">folder</i>Adicionar um Tipo de Ferramentas</h1>
 				<label>Adicionar um novo Tipo de Ferramentas no 4People</label>
 
 				<div class="divider"></div>
@@ -70,7 +70,7 @@ if (!isset($_SESSION['logged'])) {
 						<div class="col s12">
 							<div class="divider"></div>
 							<button title="Inserir Tipo de Ferramentas no 4People" class="btn indigo darken-4 mt-2 z-depth-0">
-								<i class="material-icons left">person_add</i>Inserir
+								<i class="material-icons left">folder</i>Inserir
 								<input style="display:none" type="submit" value="">
 							</button>
 						</div>
