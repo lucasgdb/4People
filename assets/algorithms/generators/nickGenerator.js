@@ -50,7 +50,24 @@ const sufixNicks = [
     'TheInquisitive',
     'Perpetual',
     'OfTrapdoor',
-    'row'
+    'row',
+    'sun',
+    'titan',
+    'san',
+    'punish',
+    'dragon-eyes',
+    'Sword',
+    'HitKill',
+    'grim',
+    'potter',
+    'Gryffindor',
+    'Slytherin',
+    'Ravenclaw',
+    'Hufflepuff',
+    'BurguerZone',
+    'suzano',
+    'headOf',
+    'Dev'
 ]
 
 const prefixNicks = [
@@ -89,16 +106,16 @@ const generateNicks = (name, option) => {
     nicksName = nicks[parseInt(Math.random() * nicks.length)]
     prefixName = prefixNicks[parseInt(Math.random() * prefixNicks.length)]
     sufixName = sufixNicks[parseInt(Math.random() * sufixNicks.length)]
-  
+
     if (option == '1') {
         const letters = 'aeios'
         const modifiedLetters = '43106'
         for (let i = 0; i < letters.length; i++) {
-            if (parseInt(Math.random() * 2) === 1) {
+            if (parseInt(Math.random() * 4) === 1) {
                 name = name.replace(new RegExp(letters[i], 'g'), modifiedLetters[i])
             }
         }
-        return `${name}${nicksName}`
+        return `${name}${sufixName}`
     } else if (option == '2') return `${prefixName}${nicksName}${sufixName}`
     else if (option == '3') return `${nicksName}${sufixName}`
     else if (option == '4') return `${prefixName}${name}`
