@@ -1,7 +1,8 @@
 M.FormSelect.init(document.querySelectorAll('select'))
 const txtSelect = document.querySelector('#selectNick')
 const cardContainer = document.querySelector('#card-container')
-    //const txtName = document.querySelector('#name')
+//const txtName = document.querySelector('#name')
+
 const lblTypeName = document.querySelector('#typeName')
 const lblBlockAmount = document.querySelector('#blocksAmount')
 
@@ -44,11 +45,8 @@ const generate = () => {
                 classes: 'red accent-4'
             })
         })
-
-
     }
 }
-
 
 txtSelect.onchange = () => {
     if (txtSelect.value === '2') {

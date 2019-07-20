@@ -1,4 +1,3 @@
-const txtName = document.querySelector('#name')
 const nicks = [
     'off',
     'Desu',
@@ -31,8 +30,9 @@ const nicks = [
     'TheLuxuriant',
     'Dovahkin',
     'Fus',
-    'Silver',
+    'Silver'
 ]
+
 const sufixNicks = [
     'OfChaos',
     'Senpai',
@@ -52,6 +52,7 @@ const sufixNicks = [
     'OfTrapdoor',
     'row'
 ]
+
 const prefixNicks = [
     'General',
     'Smash',
@@ -85,9 +86,10 @@ const prefixNicks = [
 
 const generateNicks = (name, option) => {
     //var randomName = faker.name.findName()
-    nicksName = nicks[parseInt(Math.random() * nicks.length)];
-    prefixName = prefixNicks[parseInt(Math.random() * prefixNicks.length)];
-    sufixName = sufixNicks[parseInt(Math.random() * sufixNicks.length)];
+    nicksName = nicks[parseInt(Math.random() * nicks.length)]
+    prefixName = prefixNicks[parseInt(Math.random() * prefixNicks.length)]
+    sufixName = sufixNicks[parseInt(Math.random() * sufixNicks.length)]
+  
     if (option == '1') {
         const letters = 'aeios'
         const modifiedLetters = '43106'

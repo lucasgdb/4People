@@ -185,27 +185,12 @@
 				<button title="Copiar Senha" class="btn waves-effect indigo darken-4 mt-1 z-depth-0" onclick="copyResult()">
 					Copiar
 				</button>
-				<button title="Salvar Senha" class="btn waves-effect indigo darken-4 mt-1 z-depth-0 modal-trigger" href="#modal1">
+				<button title="Salvar Senha" class="btn waves-effect indigo darken-4 mt-1 z-depth-0" onclick="savePassword()">
 					Salvar
 				</button>
 				<button title="Limpar Senha" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="clearInput()">
 					Limpar
 				</button>
-
-				<div id="modal1" class="modal">
-    				<div class="modal-content">
-      				<h4>Salvar</h4>
-						<div class="row">
-        					<div class="input-field col s12">
-          					<input id="namePassword" type="text" value="Senha" class="validate">
-          					<label for="email">Nome da senha</label>
-        					</div>
-     					</div>
-    				</div>
-    				<div class="modal-footer">
-      				<a href="#!" class="modal-close waves-effect waves-green btn-flat"  onclick="savePassword()">Salvar</a>
-    				</div>
-  				</div>
 
 				<div class="left-div indigo darken-4"></div>
 			</div>
