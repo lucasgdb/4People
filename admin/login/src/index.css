@@ -31,7 +31,7 @@ i.material-icons {
 	margin-bottom: 0
 }
 
-.btn-flat:hover {
+.btn-flat-hover:hover {
 	cursor: text;
 	background-color: unset
 }

@@ -2,26 +2,27 @@
 try {
 	session_start();
 	if (!isset($_SESSION['logged'])) {
-		header("HTTP/1.0 404 Not Found");
+		header('HTTP/1.0 404 Not Found');
 		exit();
 	}
 
-	include_once('../../../../assets/connection.php');
-	include_once('../../src/MD5.php');
+	$assets = '../../../../assets';
+	include_once("$assets/php/Connection.php");
+	include_once("$assets/php/MD5.php");
 
 	$admin_id = filter_input(INPUT_POST, 'admin_id', FILTER_DEFAULT);
-	$admin_name = trim(filter_input(INPUT_POST, 'admin_name', FILTER_DEFAULT));
+	$admin_name = ucwords(trim(filter_input(INPUT_POST, 'admin_name', FILTER_DEFAULT)));
 	$admin_nickname = trim(filter_input(INPUT_POST, 'admin_nickname', FILTER_DEFAULT));
 	$admin_email = trim(filter_input(INPUT_POST, 'admin_email', FILTER_DEFAULT));
 	$admin_password = trim(filter_input(INPUT_POST, 'admin_password', FILTER_DEFAULT));
 	$admin_image = $_FILES['admin_image'];
 	$admin_image_text = filter_input(INPUT_POST, 'admin_image_text', FILTER_DEFAULT);
 
-	$oldData = $database->prepare('SELECT admin_password, admin_image FROM admins WHERE admin_id=:admin_id');
-	$oldData->bindValue(':admin_id', $admin_id);
-	$oldData->execute();
+	$current_data = $database->prepare('SELECT admin_password, admin_image FROM admins WHERE admin_id=:admin_id LIMIT 1');
+	$current_data->bindValue(':admin_id', $admin_id);
+	$current_data->execute();
 
-	$data = $oldData->fetchAll()[0];
+	$data = $current_data->fetch();
 	$current_password = $data['admin_password'];
 	$current_admin_image = $data['admin_image'];
 	$ext = strtolower(pathinfo($_FILES['admin_image']['name'], PATHINFO_EXTENSION));

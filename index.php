@@ -1,4 +1,5 @@
 <?php include_once('assets/assets.php') ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -125,7 +126,7 @@
 							<div class="card-content white-text">
 								<span class="card-title"><i class="material-icons left">build</i>Ferramentas</span>
 								<?php
-								include_once('assets/connection.php');
+								include_once("$assets/php/Connection.php");
 								$sql = $database->query('SELECT COUNT(tool_id) FROM tools');
 								$sql->execute();
 

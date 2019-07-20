@@ -2,7 +2,7 @@
 include_once('../../../assets/assets.php');
 
 if (!isset($_SESSION['logged'])) {
-	header("HTTP/1.0 404 Not Found");
+	header('HTTP/1.0 404 Not Found');
 	exit();
 }
 ?>
@@ -15,7 +15,7 @@ if (!isset($_SESSION['logged'])) {
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
-	<title>4People - Ferramentas Online</title>
+	<title>Controle de Administradores</title>
 	<?php include_once("$assets/components/meta_tags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="4People - Ferramentas Online">
@@ -75,7 +75,7 @@ if (!isset($_SESSION['logged'])) {
 						</div>
 
 						<div class="file-field input-field col s12 m6">
-							<i class="material-icons prefix">cloud_upload</i>
+							<i class="material-icons prefix">image</i>
 							<input type="file" name="admin_image" accept=".png, .jpg, .jpeg, .svg, .gif">
 							<input style="width:calc(100% - 3rem)" placeholder="Selecionar imagem" type="text" class="file-path">
 							<label class="active">Imagem</label>
@@ -119,10 +119,11 @@ if (!isset($_SESSION['logged'])) {
 			</div>
 		</div>
 	</main>
+
 	<div id="removeAdmin" class="modal">
 		<div class="modal-content left-div-margin">
 			<h4>Remover Administrador</h4>
-			<p>Você tem certeza que deseja remover este Administrador?</p>
+			<p class="mb-0">Você tem certeza que deseja remover <span id="admin"></span> da Administração?</p>
 
 			<div class="left-div indigo darken-4" style="border-radius:0"></div>
 		</div>
@@ -130,8 +131,8 @@ if (!isset($_SESSION['logged'])) {
 		<div class="divider"></div>
 
 		<div class="modal-footer">
-			<button title="Cancelar" class="modal-close waves-effect btn-flat"><i class="material-icons red-text" style="font-size:30px">close</i></button>
-			<a id="linkRemoveAdmin" title="Remover Administrador" class="modal-close waves-effect btn-flat"><i class="material-icons green-text" style="font-size:30px">check</i></a>
+			<button title="Cancelar" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left red-text" style="font-size:30px">close</i>Não</button>
+			<a id="linkRemoveAdmin" title="Remover Administrador" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left green-text" style="font-size:30px">check</i>Sim</a>
 		</div>
 	</div>
 
@@ -140,8 +141,12 @@ if (!isset($_SESSION['logged'])) {
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script>
 		const linkRemoveAdmin = document.querySelector('#linkRemoveAdmin')
+		const lblAdmin = document.querySelector('#admin')
 
-		const changeLink = link => linkRemoveAdmin.href = link
+		const changeLink = (link, admin) => {
+			linkRemoveAdmin.href = link
+			lblAdmin.innerHTML = admin
+		}
 
 		M.Modal.init(document.querySelectorAll('.modal'))
 	</script>

@@ -2,7 +2,7 @@
 include_once('../../../../assets/assets.php');
 
 if (!isset($_SESSION['logged'])) {
-	header("HTTP/1.0 404 Not Found");
+	header('HTTP/1.0 404 Not Found');
 	exit();
 }
 ?>
@@ -39,15 +39,14 @@ if (!isset($_SESSION['logged'])) {
 				<div class="divider"></div>
 
 				<?php
-				include_once("$assets/connection.php");
+				include_once("$assets/php/Connection.php");
 				$admin_id = filter_input(INPUT_GET, 'admin_id', FILTER_DEFAULT);
 
-				$sql = $database->prepare('SELECT * FROM admins WHERE admin_id=:admin_id');
+				$sql = $database->prepare('SELECT * FROM admins WHERE admin_id=:admin_id LIMIT 1');
 				$sql->bindValue(':admin_id', $admin_id);
+				
 				$sql->execute();
-
-				$data = $sql->fetchAll();
-				extract($data[0]);
+				extract($sql->fetch());
 				?>
 
 				<form style="margin-top:15px" action="../src/update_admin.php" method="post" enctype="multipart/form-data">
@@ -82,7 +81,7 @@ if (!isset($_SESSION['logged'])) {
 						</div>
 
 						<div class="file-field input-field col s12 l6">
-							<i class="material-icons prefix">cloud_upload</i>
+							<i class="material-icons prefix">image</i>
 							<input type="file" name="admin_image" accept=".png, .jpg, .jpeg, .svg, .gif">
 							<input value="<?= $admin_image ?>" name="admin_image_text" style="width:calc(100% - 4.5rem)" placeholder="Selecionar imagem" type="text" class="file-path">
 							<i class="material-icons prefix red-text" style="cursor:pointer" onclick="admin_image_text.value = ''">close</i>

@@ -36,8 +36,8 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 				<div class="divider"></div>
 
 				<?php
-				include_once("$assets/connection.php");
-				$sql = $database->prepare('SELECT COUNT(admin_id) FROM admins');
+				include_once("$assets/php/Connection.php");
+				$sql = $database->prepare('SELECT COUNT(admin_id) FROM admins LIMIT 1');
 				$sql->execute();
 
 				$admin_amount = $sql->fetchColumn();
@@ -63,8 +63,8 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 								<div class="divider"></div>
 								<a title="Voltar ao 4People" class="btn indigo darken-4 mt-2 z-depth-0" href="../../"><i class="material-icons left">arrow_back</i>Voltar</a>
 								<?php
-								include_once("$assets/connection.php");
-								include_once('../painel_administrativo/src/IP.php');
+								include_once("$assets/php/Connection.php");
+								include_once("$assets/php/IP.php");
 
 								$ip = get_ip_address();
 								$sql = $database->prepare('SELECT banned_amount FROM banneds WHERE banned_ip=:banned_ip');
@@ -76,7 +76,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 									$banned_amount = $sql->fetchColumn();
 
 									if ($banned_amount > 3) {
-										$sql = $database->prepare('SELECT banned_begin, banned_end FROM banneds WHERE banned_ip=:banned_ip AND banned_begin <= :current_time AND banned_end >= :current_time');
+										$sql = $database->prepare('SELECT banned_begin, banned_end FROM banneds WHERE banned_ip=:banned_ip AND banned_begin <= :current_time AND banned_end >= :current_time LIMIT 1');
 
 										$sql->bindValue(":banned_ip", $ip);
 										$sql->bindValue(":current_time", date('Y-m-d H:i:s'));
@@ -84,9 +84,10 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 										$sql->execute();
 
 										if ($sql->rowCount()) {
-											$data = $sql->fetchAll()[0];
-											$banned_begin = new DateTime($data['banned_begin']);
-											$banned_end = new DateTime($data['banned_end']);
+											extract($sql->fetch());
+
+											$banned_begin = new DateTime($banned_begin);
+											$banned_end = new DateTime($banned_end);
 											$current_time = new DateTime();
 
 											$time = $current_time->diff($banned_end)->format('%I:%S');
@@ -102,9 +103,9 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 								?>
 								<?php if (isset($banned_amount)) : ?>
 									<?php if ($banned_amount > 3) : ?>
-										<span class="btn-flat red-text">Você foi bloqueado de logar por <?= $time ?></span>
+										<span class="btn-flat mt-2 red-text">Você foi bloqueado de logar por <?= $time ?></span>
 									<?php else : ?>
-										<span class="btn-flat">Número de tentativas falhas: <?= $banned_amount ?>/3</span>
+										<span class="btn-flat mt-2 btn-flat-hover">Número de tentativas falhas: <?= $banned_amount ?>/3</span>
 									<?php endif ?>
 								<?php endif ?>
 
@@ -117,7 +118,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 					</form>
 				<?php else : ?>
 					<?php
-					include_once('../painel_administrativo/src/MD5.php');
+					include_once("$assets/php/MD5.php");
 					$sql = $database->prepare('INSERT INTO admins VALUES (DEFAULT, "Administrador", :admin_nickname, :admin_email, :admin_password, NULL)');
 
 					function generateRandomString($len, $specialChars = false): String
@@ -150,12 +151,12 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 						include_once('src/send_email.php');
 
 						if ($mail->send()) : ?>
-							<p class="btn-flat mb-0">Um login foi criado e enviado para o e-mail do 4People.</p>
+							<p class="btn-flat mb-0"><a class="linkHover" href=".">Um login foi criado e enviado para o e-mail do 4People.</a></p>
 						<?php else : ?>
-							<p class="btn-flat mb-0">Um erro inesperado aconteceu.</p>
+							<p class="btn-flat mb-0"><a class="linkHover" href=".">Um erro inesperado aconteceu.</a></p>
 						<?php endif ?>
 					<?php else : ?>
-						<p class="btn-flat mb-0">Um erro inesperado aconteceu.</p>
+						<p class="btn-flat mb-0"><a class="linkHover" href=".">Um erro inesperado aconteceu.</a></p>
 					<?php endif ?>
 				<?php endif ?>
 

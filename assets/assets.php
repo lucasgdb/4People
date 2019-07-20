@@ -1,8 +1,15 @@
 <?php
 session_start();
 $url = $_SERVER['REQUEST_URI'];
-if ($url[strlen($url) - 1] !== '/') {
+
+$pos = strpos($url, '?');
+
+if (strpos($url, '?') === false && $url[strlen($url) - 1] !== '/') {
 	header("Location: $url/");
+	exit();
+} else if ($pos && $url[$pos - 1] !== '/') {
+	$url = preg_replace('/[?]/', '/?', $url, 1);
+	header("Location: $url");
 	exit();
 }
 

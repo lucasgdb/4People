@@ -2,15 +2,15 @@
 try {
 	session_start();
 	if (!isset($_SESSION['logged'])) {
-		header("HTTP/1.0 404 Not Found");
+		header('HTTP/1.0 404 Not Found');
 		exit();
 	}
 
-	include_once('../../../../assets/connection.php');
+	include_once('../../../../assets/php/Connection.php');
 
 	$admin_id = filter_input(INPUT_GET, 'admin_id', FILTER_DEFAULT);
 
-	$sql = $database->prepare('SELECT admin_image FROM admins WHERE admin_id=:admin_id');
+	$sql = $database->prepare('SELECT admin_image FROM admins WHERE admin_id=:admin_id LIMIT 1');
 	$sql->bindValue(':admin_id', $admin_id);
 	$sql->execute();
 
