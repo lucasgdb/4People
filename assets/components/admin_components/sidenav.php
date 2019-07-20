@@ -33,7 +33,7 @@ $image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 		</div>
 	</li>
 
-	<?php $controls = strpos($link, 'administradores') !== false || strpos($link, 'ferramentas') !== false ?>
+	<?php $controls = strpos($link, 'administradores') !== false || strpos($link, 'ferramentas') ?>
 
 	<li class="<?= $controls ? 'active' : '' ?>">
 		<div class="collapsible-header"><i class="material-icons left">insert_chart</i>Controles<i class="material-icons" style="position:absolute;right:0<?= $controls ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
@@ -42,8 +42,25 @@ $image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 				<li>
 					<ul>
 						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/administradores/" title="Controle de Administradores"><i class="material-icons left">keyboard_arrow_right</i>Controle de Administradores</a></li>
-						<li><a class="waves-effect" href="#" title="Controle de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Ferramentas</a></li>
-						<li><a class="waves-effect" href="#" title="Controle de Usuários banidos"><i class="material-icons left">keyboard_arrow_right</i>Controle de Usuários banidos</a></li>
+						<li><a class="waves-effect" href="#" title="Controle de usuários banidos"><i class="material-icons left">keyboard_arrow_right</i>Controle de Banimentos</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/ferramentas/tipos_de_ferramentas/" title="Controle de Tipos de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Ferramenas - Controle de Tipos</a></li>
+						<?php
+						include_once("$assets/php/Connection.php");
+
+						$sql = $database->prepare("SELECT COUNT(type_id) AS types_count FROM types LIMIT 1");
+						$sql->execute();
+						$types_count = $sql->fetchColumn();
+
+						$sql = $database->prepare("SELECT COUNT(section_id) AS sections_count FROM sections LIMIT 1");
+						$sql->execute();
+						$sections_count = $sql->fetchColumn();
+
+						if ($types_count) : ?>
+							<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/ferramentas/secoes_de_ferramentas/" title="Controle de Seções de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Ferramentas - Controle de Seções</a></li>
+						<?php endif ?>
+						<?php if ($sections_count) : ?>
+							<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/ferramentas/controle_de_ferramentas/" title="Controle de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Ferramentas</a></li>
+						<?php endif ?>
 					</ul>
 				</li>
 			</ul>

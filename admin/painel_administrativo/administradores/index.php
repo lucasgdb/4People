@@ -2,7 +2,7 @@
 include_once('../../../assets/assets.php');
 
 if (!isset($_SESSION['logged'])) {
-	header("HTTP/1.0 404 Not Found");
+	header('HTTP/1.0 404 Not Found');
 	exit();
 }
 ?>
@@ -15,7 +15,7 @@ if (!isset($_SESSION['logged'])) {
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
-	<title>4People - Ferramentas Online</title>
+	<title>Controle de Administradores</title>
 	<?php include_once("$assets/components/meta_tags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="4People - Ferramentas Online">
@@ -75,7 +75,7 @@ if (!isset($_SESSION['logged'])) {
 						</div>
 
 						<div class="file-field input-field col s12 m6">
-							<i class="material-icons prefix">cloud_upload</i>
+							<i class="material-icons prefix">image</i>
 							<input type="file" name="admin_image" accept=".png, .jpg, .jpeg, .svg, .gif">
 							<input style="width:calc(100% - 3rem)" placeholder="Selecionar imagem" type="text" class="file-path">
 							<label class="active">Imagem</label>

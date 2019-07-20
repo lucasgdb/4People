@@ -13,7 +13,7 @@
 
 ## Ferramentas prontas (35/115)
 - Computação
-	- 10
+	- 11
 - Matemática
 	- 25
 
