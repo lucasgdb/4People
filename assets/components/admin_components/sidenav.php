@@ -33,7 +33,7 @@ $image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 		</div>
 	</li>
 
-	<?php $controls = strpos($link, 'administradores') !== false ?>
+	<?php $controls = strpos($link, 'administradores') !== false || strpos($link, 'tipos_de_ferramentas') !== false || strpos($link, 'secoes_de_ferramentas') !== false ?>
 
 	<li class="<?= $controls ? 'active' : '' ?>">
 		<div class="collapsible-header"><i class="material-icons left">insert_chart</i>Controles<i class="material-icons" style="position:absolute;right:0<?= $controls ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
@@ -42,22 +42,8 @@ $image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 				<li>
 					<ul>
 						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/administradores/" title="Controle de Administradores"><i class="material-icons left">keyboard_arrow_right</i>Controle de Administradores</a></li>
-						<li><a class="waves-effect" href="#" title="Controle de Usuários banidos"><i class="material-icons left">keyboard_arrow_right</i>Controle de Banimento</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-	</li>
-
-	<?php $tools = strpos($link, 'ferramentas') !== false ?>
-
-	<li class="<?= $tools ? 'active' : '' ?>">
-		<div class="collapsible-header"><i class="material-icons left">build</i>Ferramentas<i class="material-icons" style="position:absolute;right:0<?= $tools ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
-		<div class="collapsible-body">
-			<ul class="collapsible padding-headers padding-buttons">
-				<li>
-					<ul>
-						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/ferramentas/tipos_de_ferramentas/" title="Tipos de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Tipos de Ferramentas</a></li>
+						<li><a class="waves-effect" href="#" title="Controle de usuários banidos"><i class="material-icons left">keyboard_arrow_right</i>Controle de Banimentos</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/ferramentas/tipos_de_ferramentas/" title="Controle de Tipos de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Ferramenas - Controle de Tipos</a></li>
 						<?php
 						include_once("$assets/php/Connection.php");
 
@@ -70,7 +56,7 @@ $image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 						$sections_count = $sql->fetchColumn();
 
 						if ($types_count) : ?>
-							<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/ferramentas/secoes_de_ferramentas/" title="Seções de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Seções de Ferramentas</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/ferramentas/secoes_de_ferramentas/" title="Controle de Seções de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Ferramentas - Controle de Seções</a></li>
 						<?php endif ?>
 						<?php if ($sections_count) : ?>
 							<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/ferramentas/controle_de_ferramentas/" title="Controle de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Ferramentas</a></li>
