@@ -11,7 +11,17 @@
 - JavaScript
 - PHP
 
-## Ferramentas prontas (35/115)
+## Algumas Features
+- Painel Administrativo
+	- Controle de Administradores
+		- Upload de imagem
+	- Controle de Ferramentas
+		- Ativar/Desativar Ferramentas
+- Proteção contra Brute-Force
+- Proteção contra SQL Injection
+- Ferramentas escritas em JavaScript
+
+## Ferramentas prontas (36/115)
 - Computação
 	- 11
 - Matemática
