@@ -14,6 +14,7 @@
 ## Algumas Features
 - Painel Administrativo
 	- Controle de Administradores
+		- Primeiro login gera um Admin e envia pro e-mail
 		- Upload de imagem
 	- Controle de Ferramentas
 		- Ativar/Desativar Ferramentas
