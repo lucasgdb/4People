@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 20, 2019 at 05:16 PM
+-- Generation Time: Jul 21, 2019 at 11:39 AM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -97,7 +97,9 @@ CREATE TABLE `tools` (
   `tool_id` int(11) NOT NULL,
   `tool_name` varchar(255) NOT NULL,
   `tool_path` varchar(255) NOT NULL,
-  `tool_visits` bigint(20) UNSIGNED NOT NULL,
+  `tool_description` text DEFAULT NULL,
+  `tool_link` text DEFAULT NULL,
+  `tool_visits` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `tool_active` tinyint(1) NOT NULL DEFAULT 1,
   `section_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -106,43 +108,43 @@ CREATE TABLE `tools` (
 -- Dumping data for table `tools`
 --
 
-INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_visits`, `tool_active`, `section_id`) VALUES
-(7, 'Gerador de CPF', 'gerador_de_cpf', 0, 1, 2),
-(8, 'Gerador de Senha', 'gerador_de_senha', 0, 1, 2),
-(9, 'Gerador de Meta Tags', 'gerador_de_meta_tags', 0, 1, 2),
-(10, 'Gerador de Nicks', 'gerador_de_nicks', 0, 1, 2),
-(11, 'Validador de CPF', 'validador_de_cpf', 0, 1, 4),
-(12, 'Contador de Caracteres', 'contador_de_caracteres', 0, 1, 5),
-(13, 'Meu IP', 'meu_ip', 0, 1, 6),
-(14, 'Meu Navegador', 'meu_navegador', 0, 1, 6),
-(15, 'Buscar CEP', 'buscar_cep', 0, 1, 6),
-(16, 'Binário, Octal e Hexadecimal', 'conversor_binario', 0, 1, 7),
-(17, 'Código de Evento das Teclas', 'codigo_de_eventos_das_teclas', 0, 1, 8),
-(18, 'Fatorar Número', 'fatorar_numero', 0, 1, 12),
-(19, 'Máximo Divisor Comum', 'mdc', 0, 1, 12),
-(20, 'Mínimo Múltiplo Comum', 'mmc', 0, 1, 12),
-(21, 'Índice de Massa Corporal', 'imc', 0, 1, 12),
-(22, 'Porcentagem', 'porcentagem', 0, 1, 12),
-(23, 'Equação do 2° Grau', 'equacao_2_grau', 0, 1, 12),
-(24, 'Números Primos', 'numeros_primos', 0, 1, 12),
-(25, 'Números Amigáveis', 'numeros_amigaveis', 0, 1, 12),
-(26, 'Fibonacci', 'fibonacci', 0, 1, 12),
-(27, 'Conversor de Temperatura', 'conversor_de_temperatura', 0, 1, 12),
-(28, 'Divisão e Resto', 'divisao_e_resto', 0, 1, 12),
-(29, 'Área do Círculo', 'area_do_circulo', 0, 1, 10),
-(30, 'Área do Quadrado', 'area_do_quadrado', 0, 1, 10),
-(31, 'Área do Retângulo', 'area_do_retangulo', 0, 1, 10),
-(32, 'Área do Triângulo', 'area_do_triangulo', 0, 1, 10),
-(33, 'Área do Pentágono', 'area_do_pentagono', 0, 1, 10),
-(34, 'Área do Hexágono', 'area_do_hexagono', 0, 1, 10),
-(35, 'Área do Polígono Regular', 'area_do_poligono_regular', 0, 1, 10),
-(36, 'Área do Losango', 'area_do_losango', 0, 1, 10),
-(37, 'Área do Trapézio', 'area_do_trapezio', 0, 1, 10),
-(38, 'Área do Paralelogramo', 'area_do_paralelogramo', 0, 1, 10),
-(39, 'Área da Elipse', 'area_da_elipse', 0, 1, 10),
-(40, 'Área da Coroa Ciricular', 'area_da_coroa_circular', 0, 1, 10),
-(41, 'Área do Setor Circular', 'area_do_setor_circular', 0, 1, 10),
-(42, 'Diferença entre Datas', 'diferenca_entre_datas', 0, 1, 11);
+INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_description`, `tool_link`, `tool_visits`, `tool_active`, `section_id`) VALUES
+(7, 'Gerador de CPF', 'gerador_de_cpf', 'Gerador de CPF Online para Programadores testarem seus Softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/CPFGenerator.js', 6, 1, 2),
+(8, 'Gerador de Senha', 'gerador_de_senha', 'Gerador de Senha Online para gerar senhas personalizadas e fortes.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/passwordGenerator.js', 2, 1, 2),
+(9, 'Gerador de Meta Tags', 'gerador_de_meta_tags', 'Gerador de Meta Tags Online, feito para gerar várias das Meta Tags existentes.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/metaTagsGenerator.js', 1, 1, 2),
+(10, 'Gerador de Nicks', 'gerador_de_nicks', 'Gerador de Nicks Online para gerar diversos tipos de nicks aleatórios.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/nickGenerator.js', 2, 1, 2),
+(11, 'Validador de CPF', 'validador_de_cpf', 'Validador de CPF Online para validar CPFs para programadores testarem seus softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/validators/CPFValidator.js', 2, 1, 4),
+(12, 'Contador de Caracteres', 'contador_de_caracteres', 'Contador de letras, caracteres sem espaço, palavras, espaços, vogais, consoantes, números e linhas.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/string_functions/charactersCount.js', 1, 1, 5),
+(13, 'Meu IP', 'meu_ip', 'Veja seu IP e muito mais informações aqui.', 'https://github.com/lucasnaja/4People/blob/master/computacao/rede_e_internet/meu_ip/src/index.js', 1, 1, 6),
+(14, 'Meu Navegador', 'meu_navegador', 'Veja seu Navegador aqui.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/network_and_internet/myWebBrowser.js', 1, 1, 6),
+(15, 'Buscar CEP', 'buscar_cep', 'Busque informações de seu CEP, como Rua, Cidade, Bairro e Estado aqui.', 'https://github.com/lucasnaja/4People/blob/master/computacao/rede_e_internet/buscar_cep/src/index.js', 1, 1, 6),
+(16, 'Binário, Octal e Hexadecimal', 'conversor_binario', 'Tradutor Online de Código Binário. Basta digitar o código binário ou texto abaixo e clicar no botão para converter.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/encoders_decoders/binaryConverter.js', 2, 1, 7),
+(17, 'Código de Evento das Teclas', 'codigo_de_eventos_das_teclas', 'Código de Eventos das Teclas para descobrir cada keyCode da tecla e criar eventos em sua linguagem de preferência.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/tables_and_patterns/jsEventKeyCodes.js', 1, 1, 8),
+(18, 'Fatorar Número', 'fatorar_numero', '', '', 1, 1, 12),
+(19, 'Máximo Divisor Comum', 'mdc', '', '', 0, 1, 12),
+(20, 'Mínimo Múltiplo Comum', 'mmc', '', '', 0, 1, 12),
+(21, 'Índice de Massa Corporal', 'imc', '', '', 0, 1, 12),
+(22, 'Porcentagem', 'porcentagem', '', '', 0, 1, 12),
+(23, 'Equação do 2° Grau', 'equacao_2_grau', '', '', 0, 1, 12),
+(24, 'Números Primos', 'numeros_primos', '', '', 0, 1, 12),
+(25, 'Números Amigáveis', 'numeros_amigaveis', '', '', 0, 1, 12),
+(26, 'Fibonacci', 'fibonacci', '', '', 0, 1, 12),
+(27, 'Conversor de Temperatura', 'conversor_de_temperatura', '', '', 0, 1, 12),
+(28, 'Divisão e Resto', 'divisao_e_resto', '', '', 0, 1, 12),
+(29, 'Área do Círculo', 'area_do_circulo', 'Calculador de Área do Círculo Online. R = Raio, D = Diâmetro (2 * R), PI = 3.141592653589793... (Math.PI.toFixed(48))', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/circleArea.js', 5, 1, 10),
+(30, 'Área do Quadrado', 'area_do_quadrado', 'Calculador de Área do Quadrado Online. Área do Quadrado = Lado * Lado ou L²', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/squareArea.js', 3, 1, 10),
+(31, 'Área do Retângulo', 'area_do_retangulo', 'Calculador de Área do Retângulo Online. Área do Retângulo = Base * Altura', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/rectangleArea.js', 2, 1, 10),
+(32, 'Área do Triângulo', 'area_do_triangulo', 'Calculador de Área do Triângulo Online. Área do Triângulo = Base * Altura / 2', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/triangleArea.js', 2, 1, 10),
+(33, 'Área do Pentágono', 'area_do_pentagono', 'Calculador de Área do Pentágono Online. Área do Pentágono = (5 * Lado²) / (4 * tan(36°))', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/pentagonArea.js', 2, 1, 10),
+(34, 'Área do Hexágono', 'area_do_hexagono', 'Calculador de Área do Hexágono Online. Área do Hexágono = (6 * Lado²) / (4 * tan(30°))', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/hexagonArea.js', 1, 1, 10),
+(35, 'Área do Polígono Regular', 'area_do_poligono_regular', 'Calculador de Área do Polígono Regular Online. π = PI, Área do Polígono Regular = (Lado² * Qntd de Lados) / (4 * tan(π / 10))', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/regularPolygonArea.js', 1, 1, 10),
+(36, 'Área do Losango', 'area_do_losango', 'Calculador de Área do Losango Online. Área do Losango = (Diagonal1 * Diagonal2) / 2', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/diamondArea.js', 1, 1, 10),
+(37, 'Área do Trapézio', 'area_do_trapezio', 'Calculador de Área do Trapézio Online. B = Base maior, b = Base menor, A = Altura, Área do Trapézio = (B + b) * A / 2', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/trapezoidArea.js', 1, 1, 10),
+(38, 'Área do Paralelogramo', 'area_do_paralelogramo', 'Calculador de Área do Paralelogramo Online. Área do Paralelogramo = Base * Altura', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/parallelogramArea.js', 1, 1, 10),
+(39, 'Área da Elipse', 'area_da_elipse', 'Calculador de Área da Elipse Online. π = PI, Área da Elipse = π * Eixo maior * Eixo menor', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/ellipseArea.js', 1, 1, 10),
+(40, 'Área da Coroa Ciricular', 'area_da_coroa_circular', 'Calculador de Área da Coroa Circular Online. π = PI, R = Raio maior, r = Raio menor, Área da Coroa Circular = π * (R² - r²)', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/circularCrownArea.js', 2, 1, 10),
+(41, 'Área do Setor Circular', 'area_do_setor_circular', 'Calculador de Área do Setor Circular Online. π = PI, Área do Setor Circular = π * (Raio² * Ângulo) / 360', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/circularSectorArea.js', 1, 1, 10),
+(42, 'Diferença entre Datas', 'diferenca_entre_datas', 'Calcular Diferença entre Datas. Possui um leque de recursos disponíveis, como calcular idades, tempo, etc.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/dates_calculator/differenceBetweenDates.js', 2, 1, 11);
 
 -- --------------------------------------------------------
 
@@ -231,7 +233,7 @@ ALTER TABLE `sections`
 -- AUTO_INCREMENT for table `tools`
 --
 ALTER TABLE `tools`
-  MODIFY `tool_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `tool_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `types`
