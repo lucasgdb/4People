@@ -55,7 +55,7 @@ const sufixNicks = [
     'titan',
     'san',
     'punish',
-    'dragon-eyes',
+    'Dragon-eyes',
     'Sword',
     'HitKill',
     'grim',
