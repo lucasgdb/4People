@@ -38,10 +38,11 @@
 				<div class="divider mb-2"></div>
 
 				<div class="row mb-0">
-					<?php
-					include_once("$assets/php/Connection.php");
-					$sql = $database->prepare(
-						'SELECT
+					<div class="col s12 m6">
+						<?php
+						include_once("$assets/php/Connection.php");
+						$sql = $database->prepare(
+							'SELECT
 							sections.section_path, sections.section_icon, tools.tool_name, tools.tool_path, tools.tool_description, tools.tool_link
 							FROM tools
 							INNER JOIN sections ON sections.section_id = tools.section_id
@@ -49,12 +50,15 @@
 							WHERE tools.tool_active="1" AND types.type_name="Matemática"
 							ORDER BY tools.tool_visits DESC
 							LIMIT 10'
-					);
+						);
 
-					$sql->execute()
-					?>
-					<div class="col s12">
-						<?php foreach ($sql as $data) : extract($data) ?>
+						$sql->execute();
+
+						$data = $sql->fetchAll();
+						$length = count($data);
+						$half = (int) ($length / 2);
+
+						for ($i = 0; $i < $half; $i++) : extract($data[$i]) ?>
 							<div class="card sticky-action z-depth-2">
 								<div class="card-content grey lighten-5">
 									<span class="card-title activator no-select left-div-margin" style="position:relative">
@@ -65,7 +69,7 @@
 									</span>
 									<div class="divider"></div>
 									<p class="mt-2">
-										<i class="material-icons left"><?= $section_icon ?></i>
+
 										<?= $tool_description ?>
 									</p>
 								</div>
@@ -81,7 +85,38 @@
 									<p class="white-text"><a class="linkHover bold white-text" href="<?= $tool_link ?>" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 								</div>
 							</div>
-						<?php endforeach ?>
+						<?php endfor ?>
+					</div>
+
+					<div class="col s12 m6">
+						<?php for ($i = $half; $i < $length; $i++) : extract($data[$i]) ?>
+							<div class="card sticky-action z-depth-2">
+								<div class="card-content grey lighten-5">
+									<span class="card-title activator no-select left-div-margin" style="position:relative">
+										<?= $tool_name ?>
+										<i class="material-icons right">more_vert</i>
+
+										<div class="left-div indigo darken-4" style="border-radius:0"></div>
+									</span>
+									<div class="divider"></div>
+									<p class="mt-2">
+
+										<?= $tool_description ?>
+									</p>
+								</div>
+
+								<div class="card-action indigo darken-4">
+									<a class="white-text no-break" href="./<?= $section_path ?>/<?= $tool_path ?>/">Ferramenta &raquo;</a>
+									<a class="white-text no-break" href="./<?= $section_path ?>/">Mais Ferramentas &raquo;</a>
+								</div>
+
+								<div class="card-reveal indigo">
+									<span class="card-title white-text no-select"><i style="top:5px" class="material-icons left">code</i>Código Fonte<i class="material-icons right">close</i></span>
+									<div class="divider"></div>
+									<p class="white-text"><a class="linkHover bold white-text" href="<?= $tool_link ?>" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+								</div>
+							</div>
+						<?php endfor ?>
 					</div>
 				</div>
 

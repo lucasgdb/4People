@@ -122,11 +122,11 @@ if (!isset($_SESSION['logged'])) {
 
 				<div class="row mt-2">
 					<div class="col s12 m6">
-						<canvas id="status" width="3" height="2"></canvas>
+						<canvas id="status" width="3" height="2">Esse browser não suporta Canvas.</canvas>
 					</div>
 
 					<div class="col s12 m6">
-						<canvas id="tools" width="3" height="2"></canvas>
+						<canvas id="tools" width="3" height="2">Esse browser não suporta Canvas.</canvas>
 					</div>
 				</div>
 
