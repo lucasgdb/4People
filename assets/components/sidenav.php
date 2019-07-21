@@ -35,7 +35,7 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 				<ul class="collapsible padding-headers">
 					<?php foreach ($sql as $data) : extract($data) ?>
 						<?php
-						$sql = $database->prepare('SELECT tool_id, tool_name, tool_path, tool_visits FROM tools WHERE tool_active="1" AND section_id=:section_id');
+						$sql = $database->prepare('SELECT tool_id, tool_name, tool_path, tool_description, tool_visits FROM tools WHERE tool_active="1" AND section_id=:section_id');
 						$sql->bindValue(':section_id', $section_id);
 						$sql->execute();
 
@@ -50,6 +50,7 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 										$active = strpos($link, "$type_path/$section_path/$tool_path") !== false;
 
 										if ($active) {
+											$description = $tool_description;
 											$sql = $database->prepare('UPDATE tools SET tool_visits=:tool_visits WHERE tool_id=:tool_id');
 
 											$sql->bindValue(':tool_visits', ++$tool_visits);
@@ -78,9 +79,13 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 					<ul>
 						<li><a class="waves-effect" href="<?= $root ?>/sobre/" title="Sobre - 4People"><i class="material-icons left">keyboard_arrow_right</i>Sobre</a></li>
 						<li><a class="waves-effect" href="<?= $root ?>/contato/" title="Fale Conosco - 4People"><i class="material-icons left">keyboard_arrow_right</i>Fale Conosco</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/computacao/" title="Computação - 4People"><i class="material-icons left">keyboard_arrow_right</i>Computação</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/matematica/" title="Matemática - 4People"><i class="material-icons left">keyboard_arrow_right</i>Matemática</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/mais_ferramentas/" title="Mais Ferramentas - 4People"><i class="material-icons left">keyboard_arrow_right</i>Mais Ferramentas</a></li>
+						<?php
+						$sql = $database->prepare('SELECT type_name, type_path FROM types');
+						$sql->execute();
+
+						foreach ($sql as $data) : extract($data) ?>
+							<li><a class="waves-effect" href="<?= $root ?>/<?= $type_path ?>/" title="<?= $type_name ?>"><i class="material-icons left">keyboard_arrow_right</i><?= $type_name ?></a></li>
+						<?php endforeach ?>
 					</ul>
 				</li>
 			</ul>

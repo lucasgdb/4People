@@ -38,153 +38,50 @@
 				<div class="divider mb-2"></div>
 
 				<div class="row mb-0">
-					<div class="col s12 l6">
-						<div class="card sticky-action z-depth-2">
-							<div class="card-content grey lighten-5">
-								<span class="card-title activator no-select">Gerador de CPF<i class="material-icons right">more_vert</i></span>
-								<p>
-									Gerador de CPF Online para Programadores testarem seus Softwares em desenvolvimento.
-								</p>
-							</div>
+					<?php
+					include_once("$assets/php/Connection.php");
+					$sql = $database->prepare(
+						'SELECT
+							sections.section_path, sections.section_icon, tools.tool_name, tools.tool_path, tools.tool_description, tools.tool_link
+							FROM tools
+							INNER JOIN sections ON sections.section_id = tools.section_id
+							INNER JOIN types ON types.type_id = sections.type_id
+							WHERE tools.tool_active="1" AND types.type_name="Computação"
+							ORDER BY tools.tool_visits DESC
+							LIMIT 10'
+					);
 
-							<div class="card-action indigo darken-4">
-								<a class="white-text no-break" href="./geradores/gerador_de_cpf/">Ferramenta &raquo;</a>
-								<a class="white-text no-break" href="./geradores/">Mais Ferramentas &raquo;</a>
-							</div>
+					$sql->execute()
+					?>
+					<div class="col s12">
+						<?php foreach ($sql as $data) : extract($data) ?>
+							<div class="card sticky-action z-depth-2">
+								<div class="card-content grey lighten-5">
+									<span class="card-title activator no-select left-div-margin" style="position:relative">
+										<?= $tool_name ?>
+										<i class="material-icons right">more_vert</i>
 
-							<div class="card-reveal indigo">
-								<span class="card-title white-text no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p class="white-text"><a class="linkHover bold white-text" href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/CPFGenerator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
-							</div>
-						</div>
-					</div>
+										<div class="left-div indigo darken-4" style="border-radius:0"></div>
+									</span>
+									<div class="divider"></div>
+									<p class="mt-2">
+										<i class="material-icons left"><?= $section_icon ?></i>
+										<?= $tool_description ?>
+									</p>
+								</div>
 
-					<div class="col s12 l6">
-						<div class="card sticky-action z-depth-2">
-							<div class="card-content grey lighten-5">
-								<span class="card-title activator no-select">Gerador de Senha<i class="material-icons right">more_vert</i></span>
-								<p>
-									Gerador de Senha Online para gerar senhas personalizadas e fortes.
-								</p>
-							</div>
+								<div class="card-action indigo darken-4">
+									<a class="white-text no-break" href="./<?= $section_path ?>/<?= $tool_path ?>/">Ferramenta &raquo;</a>
+									<a class="white-text no-break" href="./<?= $section_path ?>/">Mais Ferramentas &raquo;</a>
+								</div>
 
-							<div class="card-action indigo darken-4">
-								<a class="white-text no-break" href="./geradores/gerador_de_senha/">Ferramenta &raquo;</a>
-								<a class="white-text no-break" href="./geradores/">Mais Ferramentas &raquo;</a>
+								<div class="card-reveal indigo">
+									<span class="card-title white-text no-select"><i style="top:5px" class="material-icons left">code</i>Código Fonte<i class="material-icons right">close</i></span>
+									<div class="divider"></div>
+									<p class="white-text"><a class="linkHover bold white-text" href="<?= $tool_link ?>" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+								</div>
 							</div>
-
-							<div class="card-reveal indigo">
-								<span class="card-title white-text no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p class="white-text"><a class="linkHover bold white-text" href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/passwordGenerator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="row mb-0">
-					<div class="col s12 l6">
-						<div class="card sticky-action z-depth-2">
-							<div class="card-content grey lighten-5">
-								<span class="card-title activator no-select">Gerador de Meta Tags<i class="material-icons right">more_vert</i></span>
-								<p>
-									Gerador de Meta Tags Online, feito para gerar várias das Meta Tags existentes.
-								</p>
-							</div>
-
-							<div class="card-action indigo darken-4">
-								<a class="white-text no-break" href="./geradores/gerador_de_meta_tags/">Ferramenta &raquo;</a>
-								<a class="white-text no-break" href="./geradores/">Mais Ferramentas &raquo;</a>
-							</div>
-
-							<div class="card-reveal indigo">
-								<span class="card-title white-text no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p class="white-text"><a class="linkHover bold white-text" href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/metaTagsGenerator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col s12 l6">
-						<div class="card sticky-action z-depth-2">
-							<div class="card-content grey lighten-5">
-								<span class="card-title activator no-select">Validador de CPF<i class="material-icons right">more_vert</i></span>
-								<p>
-									Validador de CPF Online para Programadores testarem seus Softwares em desenvolvimento.
-								</p>
-							</div>
-
-							<div class="card-action indigo darken-4">
-								<a class="white-text no-break" href="./validadores/validador_de_cpf/">Ferramenta &raquo;</a>
-								<a class="white-text no-break" href="./validadores/">Mais Ferramentas &raquo;</a>
-							</div>
-
-							<div class="card-reveal indigo">
-								<span class="card-title white-text no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p class="white-text"><a class="linkHover bold white-text" href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/validators/CPFValidator.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="row mb-0">
-					<div class="col s12 l6">
-						<div class="card sticky-action z-depth-2">
-							<div class="card-content grey lighten-5">
-								<span class="card-title activator no-select">Contador de Caracteres<i class="material-icons right">more_vert</i></span>
-								<p>
-									Contador de Caracteres Online para contar os caracteres de um texto em vários níveis diferentes.
-								</p>
-							</div>
-
-							<div class="card-action indigo darken-4">
-								<a class="white-text no-break" href="./funcoes_string/contador_de_caracteres/">Ferramenta &raquo;</a>
-								<a class="white-text no-break" href="./funcoes_string/">Mais Ferramentas &raquo;</a>
-							</div>
-
-							<div class="card-reveal indigo">
-								<span class="card-title white-text no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p class="white-text"><a class="linkHover bold white-text" href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/string_functions/charactersCount.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col s12 l6">
-						<div class="card sticky-action z-depth-2">
-							<div class="card-content grey lighten-5">
-								<span class="card-title activator no-select">Meu IP<i class="material-icons right">more_vert</i></span>
-								<p>
-									Veja seu IP, localização, provedora, longitude, latitude, e muito mais.
-								</p>
-							</div>
-							<div class="card-action indigo darken-4">
-								<a class="white-text no-break" href="./rede_e_internet/meu_ip/">Ferramenta &raquo;</a>
-								<a class="white-text no-break" href="./rede_e_internet/">Mais Ferramentas &raquo;</a>
-							</div>
-							<div class="card-reveal indigo">
-								<span class="card-title white-text no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p class="white-text"><a class="linkHover bold white-text" href="https://github.com/lucasnaja/4People/blob/master/computacao/rede_e_internet/meu_ip/src/index.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="row mb-0">
-					<div class="col s12 l6">
-						<div class="card sticky-action z-depth-2">
-							<div class="card-content grey lighten-5">
-								<span class="card-title activator no-select">Conversor de Código Binário<i class="material-icons right">more_vert</i></span>
-								<p>
-									Codificador e Decodificador de Código Binário Online para converter código binário em texto e vice-versa.
-								</p>
-							</div>
-							<div class="card-action indigo darken-4">
-								<a class="white-text no-break" href="./codif_decodif/conversor_binario/">Ferramenta &raquo;</a>
-								<a class="white-text no-break" href="./codif_decodif/">Mais Ferramentas &raquo;</a>
-							</div>
-							<div class="card-reveal indigo">
-								<span class="card-title white-text no-select">Código Fonte<i class="material-icons right">close</i></span>
-								<p class="white-text"><a class="linkHover bold white-text" href="https://github.com/lucasnaja/4People/blob/master/assets/algorithms/encoders_decoders/binaryConverter.js" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
-							</div>
-						</div>
+						<?php endforeach ?>
 					</div>
 				</div>
 

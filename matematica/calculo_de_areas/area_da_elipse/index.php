@@ -34,7 +34,7 @@
 			<div class="card-panel left-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">compare</i>Área da Elipse</h1>
 
-				<label>Calculador de Área da Elipse Online. π = PI, Área da Elipse = π * Eixo maior * Eixo menor</label>
+				<label><?= $description ?></label>
 				<div class="divider"></div>
 
 				<div class="row mb-0">

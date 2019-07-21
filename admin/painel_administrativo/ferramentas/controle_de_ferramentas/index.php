@@ -49,18 +49,19 @@ if (!isset($_SESSION['logged'])) {
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">format_size</i>
 							<input id="tool_name" title="Preencha este campo com o nome." placeholder="Nome de Ferramenta" class="validate" type="text" name="tool_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="tool_name">Nome</label>
+							<label class="active" for="tool_name">Nome *</label>
 							<span class="helper-text" data-error="Ferramenta inválida." data-success="Ferramenta válida.">Ex: Gerador de CPF</span>
 						</div>
 
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">folder</i>
-							<input id="tool_path" title="Preencha este campo com o caminho." placeholder="Caminho da Seção" class="validate" type="text" name="tool_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="tool_path">Path</label>
+							<input id="tool_path" title="Preencha este campo com o caminho." placeholder="Caminho da Ferramenta" class="validate" type="text" name="tool_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
+							<label class="active" for="tool_path">Path *</label>
 							<span class="helper-text" data-error="Caminho de Ferramenta inválido." data-success="Caminho de Ferramenta válido.">Ex: gerador_de_cpf</span>
 						</div>
 
-						<div class="input-field col s12">
+
+						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">folder</i>
 							<select name="section_id">
 								<?php
@@ -71,8 +72,32 @@ if (!isset($_SESSION['logged'])) {
 									<option value="<?= $section_id ?>"><?= $section_name ?></option>
 								<?php endforeach ?>
 							</select>
-							<label>Seção</label>
+							<label>Seção *</label>
 							<span class="helper-text">Seção da Ferramenta</span>
+						</div>
+
+						<div class="input-field col s12 m6">
+							<i class="material-icons prefix">check</i>
+							<select name="tool_active">
+								<option value="0">Desativado</option>
+								<option value="1" selected>Ativado</option>
+							</select>
+							<label>Status *</label>
+							<span class="helper-text">Status da Ferramenta</span>
+						</div>
+
+						<div class="input-field col s12 m6">
+							<i class="material-icons prefix">description</i>
+							<input id="tool_description" title="Preencha este campo com a descrição." placeholder="Descrição da Ferramenta" class="validate" type="text" name="tool_description" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')">
+							<label class="active" for="tool_description">Descrição</label>
+							<span class="helper-text">Ex: Gerador de CPF Online para Programadores testarem seus Softwares em desenvolvimento.</span>
+						</div>
+
+						<div class="input-field col s12 m6">
+							<i class="material-icons prefix">link</i>
+							<input id="tool_link" title="Preencha este campo com o caminho." placeholder="Link da Ferramenta no GitHub" class="validate" type="text" name="tool_link" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')">
+							<label class="active" for="tool_link">Link</label>
+							<span class="helper-text">Ex: https://github.com/lucasnaja/4People</span>
 						</div>
 
 						<div class="col s12">

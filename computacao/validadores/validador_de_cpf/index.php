@@ -34,7 +34,7 @@
 			<div class="card-panel left-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">check</i>Validador de CPF</h1>
 
-				<label>Validador de CPF Online para validar CPFs para programadores testarem seus softwares em desenvolvimento.</label>
+				<label><?= $description ?></label>
 				<div class="divider"></div>
 
 				<div class="row mb-0">

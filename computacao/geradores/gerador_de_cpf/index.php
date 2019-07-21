@@ -34,7 +34,7 @@
 			<div class="card-panel left-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">autorenew</i>Gerador de CPF</h1>
 
-				<label>Gerador de CPF Online que gera CPFs verdadeiros para Programadores testarem seus Softwares em desenvolvimento.</label>
+				<label><?= $description ?></label>
 				<div class="divider"></div>
 
 				<div class="row mb-0" style="position:relative">

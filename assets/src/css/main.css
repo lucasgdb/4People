@@ -32,7 +32,7 @@ main {
 }
 
 .mt-2 {
-	margin-top: 10px
+	margin-top: 10px !important
 }
 
 .ml-4 {

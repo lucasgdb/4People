@@ -34,7 +34,7 @@
 			<div class="card-panel left-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">compare</i>Área do Losango</h1>
 
-				<label>Calculador de Área do Losango Online. Área do Losango = (Diagonal1 * Diagonal2) / 2</label>
+				<label><?= $description ?></label>
 				<div class="divider"></div>
 
 				<div class="row mb-0">
