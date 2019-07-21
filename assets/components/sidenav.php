@@ -18,7 +18,7 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 
 	<?php
 	include_once("$assets/php/Connection.php");
-	$sql = $database->prepare('SELECT * FROM types');
+	$sql = $database->prepare('SELECT * FROM types ORDER BY type_name');
 	$sql->execute();
 
 	foreach ($sql as $data) : extract($data) ?>
@@ -35,7 +35,7 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 				<ul class="collapsible padding-headers">
 					<?php foreach ($sql as $data) : extract($data) ?>
 						<?php
-						$sql = $database->prepare('SELECT tool_id, tool_name, tool_path, tool_description, tool_visits FROM tools WHERE tool_active="1" AND section_id=:section_id');
+						$sql = $database->prepare('SELECT tool_id, tool_name, tool_path, tool_description, tool_visits FROM tools WHERE tool_active="1" AND section_id=:section_id ORDER BY tool_visits DESC');
 						$sql->bindValue(':section_id', $section_id);
 						$sql->execute();
 

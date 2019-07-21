@@ -186,8 +186,8 @@ if (!isset($_SESSION['logged'])) {
 			</div>
 
 			<div class="card-panel left-div-margin" style="padding-bottom:10px">
-				<h2 class="flow-text" style="margin: 0 0 5px"><i class="material-icons left">format_list_bulleted</i>Lista de Tipos de Ferramentas</h2>
-				<label>Lista de Tipos de Ferramentas</label>
+				<h2 class="flow-text" style="margin: 0 0 5px"><i class="material-icons left">format_list_bulleted</i>Lista de Ferramentas</h2>
+				<label>Lista de Ferramentas do 4People</label>
 				<div class="divider"></div>
 
 				<table class="centered highlight responsive-table">
@@ -224,7 +224,7 @@ if (!isset($_SESSION['logged'])) {
 
 		<div class="modal-footer">
 			<button title="Cancelar" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left red-text" style="font-size:30px">close</i>Não</button>
-			<a id="linkRemoveTool" title="Remover Tipo" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left green-text" style="font-size:30px">check</i>Sim</a>
+			<a id="linkRemoveTool" title="Remover Ferramenta" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left green-text" style="font-size:30px">check</i>Sim</a>
 		</div>
 	</div>
 

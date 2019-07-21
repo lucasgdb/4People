@@ -14,6 +14,7 @@ if (!isset($_SESSION['logged'])) {
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
+	<link rel="stylesheet" href="src/chart.min.css">
 	<title>4People - Ferramentas Online</title>
 	<?php include_once("$assets/components/meta_tags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
@@ -43,6 +44,92 @@ if (!isset($_SESSION['logged'])) {
 
 				<div class="divider"></div>
 
+				<div class="row mb-0">
+					<div class="col s12 m6">
+						<div class="card z-depth-2">
+							<div class="card-content left-div-margin" style="padding-bottom:4px">
+								<div class="row mb-0">
+									<div class="col s12 center-align">
+										<p>Administradores</p>
+										<div class="divider"></div>
+										<a href="administradores/">
+											<i class="material-icons large" style="color:#212121">supervisor_account</i>
+										</a>
+									</div>
+								</div>
+
+								<div class="left-div indigo darken-4"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col s12 m6">
+						<div class="card z-depth-2">
+							<div class="card-content left-div-margin" style="padding-bottom:4px">
+								<div class="row mb-0">
+									<div class="col s12 center-align">
+										<p>Banimentos</p>
+										<div class="divider"></div>
+										<a href="#">
+											<i class="material-icons large" style="color:#212121">block</i>
+										</a>
+									</div>
+								</div>
+
+								<div class="left-div indigo darken-4"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col s12 m6">
+						<div class="card z-depth-2">
+							<div class="card-content left-div-margin" style="padding-bottom:4px">
+								<div class="row mb-0">
+									<div class="col s12 center-align">
+										<p>Ferramentas</p>
+										<div class="divider"></div>
+										<a href="ferramentas/tipos_de_ferramentas/">
+											<i class="material-icons large" style="color:#212121">build</i>
+										</a>
+									</div>
+								</div>
+
+								<div class="left-div indigo darken-4"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col s12 m6">
+						<div class="card z-depth-2">
+							<div class="card-content left-div-margin" style="padding-bottom:4px">
+								<div class="row mb-0">
+									<div class="col s12 center-align">
+										<p>Mensagens</p>
+										<div class="divider"></div>
+										<a href="#">
+											<i class="material-icons large" style="color:#212121">question_answer</i>
+										</a>
+									</div>
+								</div>
+
+								<div class="left-div indigo darken-4"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="divider mt-2"></div>
+
+				<div class="row mt-2">
+					<div class="col s12 m6">
+						<canvas id="status" width="3" height="2"></canvas>
+					</div>
+
+					<div class="col s12 m6">
+						<canvas id="tools" width="3" height="2"></canvas>
+					</div>
+				</div>
+
 				<div class="top-div indigo darken-4"></div>
 			</div>
 		</div>
@@ -51,6 +138,48 @@ if (!isset($_SESSION['logged'])) {
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
+	<script src="src/chart.min.js"></script>
+	<script>
+		new Chart(document.querySelector('#status').getContext('2d'), {
+			type: 'pie',
+			data: {
+				datasets: [{
+					data: [10, 20, 30],
+					backgroundColor: [
+						'#f44336',
+						'#009688',
+						'#2196f3'
+					]
+				}],
+
+				labels: [
+					'Administradores',
+					'Usuários banidos',
+					'Mensagens'
+				]
+			}
+		})
+
+		new Chart(document.querySelector('#tools').getContext('2d'), {
+			type: 'pie',
+			data: {
+				datasets: [{
+					data: [10, 20, 30],
+					backgroundColor: [
+						'#2196f3',
+						'#009688',
+						'#f44336'
+					]
+				}],
+
+				labels: [
+					'Gerador de CPF',
+					'Gerdor de Senha',
+					'Diferença entre Datas'
+				]
+			}
+		})
+	</script>
 </body>
 
 </html>

@@ -82,7 +82,7 @@ if (!isset($_SESSION['logged'])) {
 
 			<div class="card-panel left-div-margin" style="padding-bottom:10px">
 				<h2 class="flow-text" style="margin: 0 0 5px"><i class="material-icons left">format_list_bulleted</i>Lista de Tipos de Ferramentas</h2>
-				<label>Lista de Tipos de Ferramentas</label>
+				<label>Lista de Tipos de Ferramentas do 4People</label>
 				<div class="divider"></div>
 
 				<table class="centered highlight responsive-table">
