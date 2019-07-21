@@ -34,7 +34,7 @@
 			<div class="card-panel left-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">compare</i>Área do Polígono Regular</h1>
 
-				<label>Calculador de Área do Polígono Regular Online. π = PI, Área do Polígono Regular = (Lado² * Qntd de Lados) / (4 * tan(π / 10))</label>
+				<label><?= $description ?></label>
 				<div class="divider"></div>
 
 				<div class="row mb-0">

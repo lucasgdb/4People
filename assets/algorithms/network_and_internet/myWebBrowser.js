@@ -8,7 +8,7 @@ const myWebBrowser = () => {
 	const isBlink = (isChrome || isOpera) && !!window.CSS
 
 	return {
-		"browser": isOpera ? 'Opera' : isFirefox ? 'Mozilla Firefox' : isSafari ? 'Safari' : isIE ? 'Internet Explorer' : isEdge ? 'Edge' : isChrome ? 'Google Chrome' : isBlink ? 'Blink' : 'Desconhecido. Nos envie uma mensagem em "Contate-nos".',
-		"language": navigator.language
+		browser: isOpera ? 'Opera' : isFirefox ? 'Mozilla Firefox' : isSafari ? 'Safari' : isIE ? 'Internet Explorer' : isEdge ? 'Edge' : isChrome ? 'Google Chrome' : isBlink ? 'Blink' : 'Desconhecido. Nos envie uma mensagem em "Contate-nos".',
+		language: navigator.language
 	}
 }

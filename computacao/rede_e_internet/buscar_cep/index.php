@@ -34,7 +34,7 @@
 			<div class="card-panel left-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">wifi</i>Buscar CEP</h1>
 
-				<label>Busque informações de seu CEP, como Rua, Cidade, Bairro e Estado aqui.</label>
+				<label><?= $description ?></label>
 				<div class="divider"></div>
 
 				<div class="row mb-0">

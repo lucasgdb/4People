@@ -48,22 +48,22 @@ if (!isset($_SESSION['logged'])) {
 					<div class="row mb-0">
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">format_size</i>
-							<input id="section_name" title="Preencha este campo com o nome." placeholder="Tipo de Seção" class="validate" type="text" name="section_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="section_name">Nome</label>
+							<input id="section_name" title="Preencha este campo com o nome." placeholder="Nome de Seção" class="validate" type="text" name="section_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
+							<label class="active" for="section_name">Nome *</label>
 							<span class="helper-text" data-error="Seção de Ferramenta inválida." data-success="Seção de Ferramenta válida.">Ex: Geradores</span>
 						</div>
 
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">folder</i>
 							<input id="section_path" title="Preencha este campo com o caminho." placeholder="Caminho da Seção" class="validate" type="text" name="section_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="section_path">Path</label>
+							<label class="active" for="section_path">Path *</label>
 							<span class="helper-text" data-error="Caminho de Seção inválido." data-success="Caminho de Seção válido.">Ex: geradores</span>
 						</div>
 
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">insert_emoticon</i>
 							<input id="section_icon" title="Preencha este campo com o ícone." placeholder="Ícone de Seção" class="validate" type="text" name="section_icon" oninvalid="this.setCustomValidity('Preencha este campo com o ícone.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="section_icon">Ícone</label>
+							<label class="active" for="section_icon">Ícone *</label>
 							<span class="helper-text" data-error="Ícone de Seção inválido." data-success="Ícone de Seção válido.">Ex: autorenew</span>
 						</div>
 
@@ -78,7 +78,7 @@ if (!isset($_SESSION['logged'])) {
 									<option value="<?= $type_id ?>"><?= $type_name ?></option>
 								<?php endforeach ?>
 							</select>
-							<label>Tipo</label>
+							<label>Tipo *</label>
 							<span class="helper-text">Caminho da Seção</span>
 						</div>
 
@@ -96,7 +96,7 @@ if (!isset($_SESSION['logged'])) {
 			</div>
 
 			<div class="card-panel z-depth-2 top-div-margin" style="padding-bottom:10px">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">build</i>Filtrar Tipos</h1>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">filter_list</i>Filtrar Tipos</h1>
 				<label>Filtro de Tipos de Ferramentas do 4People</label>
 
 				<div class="divider"></div>
@@ -108,7 +108,7 @@ if (!isset($_SESSION['logged'])) {
 							<select name="type_id">
 								<option value="-1">Selecione um Tipo</option>
 								<?php
-								$sql = $database->prepare("SELECT type_id, type_name FROM types ORDER BY type_id");
+								$sql = $database->prepare('SELECT type_id, type_name FROM types ORDER BY type_id');
 								$sql->execute();
 
 								$type_id_get = filter_input(INPUT_GET, 'type_id', FILTER_DEFAULT);
@@ -128,7 +128,7 @@ if (!isset($_SESSION['logged'])) {
 								<input style="display:none" title="Filtrar Ferramentas" type="submit">
 							</button>
 
-							<a title="Limpar Filtro" href="." class="btn indigo darken-4 mt-2 waves-effect waves-light z-depth-0"><i class="material-icons left">format_clear</i>Limpar</a>
+							<a title="Limpar Filtro" href="." class="btn indigo darken-4 mt-2 waves-effect waves-light right z-depth-0"><i class="material-icons left">format_clear</i>Limpar</a>
 						</div>
 					</div>
 				</form>
@@ -137,8 +137,8 @@ if (!isset($_SESSION['logged'])) {
 			</div>
 
 			<div class="card-panel left-div-margin" style="padding-bottom:10px">
-				<h2 class="flow-text" style="margin: 0 0 5px"><i class="material-icons left">format_list_bulleted</i>Lista de Tipos de Ferramentas</h2>
-				<label>Lista de Tipos de Ferramentas</label>
+				<h2 class="flow-text" style="margin: 0 0 5px"><i class="material-icons left">format_list_bulleted</i>Lista de Seções do 4People</h2>
+				<label>Lista de Seções do 4People</label>
 				<div class="divider"></div>
 
 				<table class="centered highlight responsive-table">
@@ -174,7 +174,7 @@ if (!isset($_SESSION['logged'])) {
 
 		<div class="modal-footer">
 			<button title="Cancelar" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left red-text" style="font-size:30px">close</i>Não</button>
-			<a id="linkRemoveSection" title="Remover Tipo" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left green-text" style="font-size:30px">check</i>Sim</a>
+			<a id="linkRemoveSection" title="Remover Seção" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left green-text" style="font-size:30px">check</i>Sim</a>
 		</div>
 	</div>
 

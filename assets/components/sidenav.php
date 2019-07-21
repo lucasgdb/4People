@@ -18,13 +18,12 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 
 	<?php
 	include_once("$assets/php/Connection.php");
-	$sql = $database->prepare('SELECT * FROM types');
-
+	$sql = $database->prepare('SELECT * FROM types ORDER BY type_name');
 	$sql->execute();
 
 	foreach ($sql as $data) : extract($data) ?>
 		<?php
-		$sql = $database->prepare('SELECT * FROM sections WHERE type_id=:type_id');
+		$sql = $database->prepare('SELECT section_id, section_name, section_path, section_icon FROM sections WHERE type_id=:type_id');
 		$sql->bindValue(':type_id', $type_id);
 		$sql->execute();
 
@@ -36,16 +35,30 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 				<ul class="collapsible padding-headers">
 					<?php foreach ($sql as $data) : extract($data) ?>
 						<?php
-						$sql = $database->prepare('SELECT * FROM tools WHERE tool_active="1" AND section_id=:section_id');
+						$sql = $database->prepare('SELECT tool_id, tool_name, tool_path, tool_description, tool_visits FROM tools WHERE tool_active="1" AND section_id=:section_id ORDER BY tool_visits DESC');
 						$sql->bindValue(':section_id', $section_id);
 						$sql->execute();
+
+						$active = strpos($link, "$type_path/$section_path") !== false
 						?>
-						<li>
-							<div style="position:relative" class="collapsible-header"><i class="material-icons"><?= $section_icon ?></i><?= $section_name ?><i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
+						<li class="<?= $active ? 'active' : '' ?>">
+							<div style="position:relative" class="collapsible-header"><i class="material-icons"><?= $section_icon ?></i><?= $section_name ?><i class="material-icons" style="position:absolute;right:0<?= $active ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
 							<div class="collapsible-body">
 								<ul>
 									<?php foreach ($sql as $data) : extract($data) ?>
-										<li><a class="waves-effect" href="<?= $root ?>/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" title="<?= $tool_name ?>"><i class="material-icons left">keyboard_arrow_right</i><?= $tool_name ?></a></li>
+										<?php
+										$active = strpos($link, "$type_path/$section_path/$tool_path") !== false;
+
+										if ($active) {
+											$description = $tool_description;
+											$sql = $database->prepare('UPDATE tools SET tool_visits=:tool_visits WHERE tool_id=:tool_id');
+
+											$sql->bindValue(':tool_visits', ++$tool_visits);
+											$sql->bindValue(':tool_id', $tool_id);
+											$sql->execute();
+										}
+										?>
+										<li><a class="waves-effect <?= $active ? 'grey lighten-4 black-text' : '' ?>" href="<?= $root ?>/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" title="<?= $tool_name ?>"><i class="material-icons <?= $active ? 'indigo-text text-darken-4' : '' ?> left" style="<?= $active ? 'font-size:20px' : '' ?>"><?= $active ? 'radio_button_checked' : 'keyboard_arrow_right' ?></i><?= $tool_name ?></a></li>
 									<?php endforeach ?>
 								</ul>
 							</div>
@@ -66,9 +79,13 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 					<ul>
 						<li><a class="waves-effect" href="<?= $root ?>/sobre/" title="Sobre - 4People"><i class="material-icons left">keyboard_arrow_right</i>Sobre</a></li>
 						<li><a class="waves-effect" href="<?= $root ?>/contato/" title="Fale Conosco - 4People"><i class="material-icons left">keyboard_arrow_right</i>Fale Conosco</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/computacao/" title="Computação - 4People"><i class="material-icons left">keyboard_arrow_right</i>Computação</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/matematica/" title="Matemática - 4People"><i class="material-icons left">keyboard_arrow_right</i>Matemática</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/mais_ferramentas/" title="Mais Ferramentas - 4People"><i class="material-icons left">keyboard_arrow_right</i>Mais Ferramentas</a></li>
+						<?php
+						$sql = $database->prepare('SELECT type_name, type_path FROM types');
+						$sql->execute();
+
+						foreach ($sql as $data) : extract($data) ?>
+							<li><a class="waves-effect" href="<?= $root ?>/<?= $type_path ?>/" title="<?= $type_name ?>"><i class="material-icons left">keyboard_arrow_right</i><?= $type_name ?></a></li>
+						<?php endforeach ?>
 					</ul>
 				</li>
 			</ul>
@@ -91,3 +108,8 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 		</li>
 	<?php endif ?>
 </ul>
+
+<script>
+	const paddingHeadersA = document.querySelectorAll('.padding-buttons ul li a')
+</script>
+<script src="<?= $assets ?>/src/js/sidenav.js"></script>

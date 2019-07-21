@@ -42,7 +42,7 @@ if (!isset($_SESSION['logged'])) {
 				include_once("$assets/php/Connection.php");
 				$admin_id = filter_input(INPUT_GET, 'admin_id', FILTER_DEFAULT);
 
-				$sql = $database->prepare('SELECT * FROM admins WHERE admin_id=:admin_id LIMIT 1');
+				$sql = $database->prepare('SELECT admin_id, admin_name, admin_nickname, admin_email, admin_image FROM admins WHERE admin_id=:admin_id LIMIT 1');
 				$sql->bindValue(':admin_id', $admin_id);
 				
 				$sql->execute();
@@ -55,21 +55,21 @@ if (!isset($_SESSION['logged'])) {
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">person</i>
 							<input id="admin_name" value="<?= $admin_name ?>" minlength="4" title="Preencha este campo com o nome." placeholder="Login de Administrador" class="validate" type="text" name="admin_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="admin_name">Nome</label>
+							<label class="active" for="admin_name">Nome *</label>
 							<span class="helper-text" data-error="Nome de Administrador inválido." data-success="Nome de Administrador válido.">Ex: Lucas Bittencourt</span>
 						</div>
 
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">account_circle</i>
 							<input id="admin_nickname" value="<?= $admin_nickname ?>" minlength="8" title="Preencha este campo com o login." placeholder="Login de Administrador" class="validate" type="text" name="admin_nickname" oninvalid="this.setCustomValidity('Preencha este campo com o login.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="admin_nickname">Login</label>
+							<label class="active" for="admin_nickname">Login *</label>
 							<span class="helper-text" data-error="Login de Administrador inválido. Tamanho mínimo: 8" data-success="Login de Administrador válido.">Ex: lucasnaja</span>
 						</div>
 
 						<div class="input-field col s12">
 							<i class="material-icons prefix">mail</i>
 							<input id="admin_email" value="<?= $admin_email ?>" title="Preencha este campo com o e-mail." placeholder="E-mail do Administrador" class="validate" type="email" name="admin_email" oninvalid="if (this.value === '') this.setCustomValidity('Preencha este campo com o e-mail.'); else this.setCustomValidity('Este e-mail não é válido.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="admin_email">E-mail</label>
+							<label class="active" for="admin_email">E-mail *</label>
 							<span class="helper-text" data-error="E-mail inválido." data-success="E-mail válido.">Ex: lucasnaja0@gmail.com</span>
 						</div>
 
@@ -91,7 +91,7 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="col s12">
 							<div class="divider"></div>
-							<a href="../" class="btn indigo darken-4 mt-2 z-depth-0" title="Cancelar Edição"><i class="material-icons left">close</i>Cancelar</a>
+							<a href="../" class="btn indigo darken-4 mt-2 z-depth-0" title="Cancelar edição"><i class="material-icons left">close</i>Cancelar</a>
 							<button title="Salvar Dados" class="btn indigo darken-4 mt-2 right z-depth-0">
 								<i class="material-icons left">save</i>Salvar
 								<input style="display:none" type="submit" value="">

@@ -56,21 +56,21 @@ if (!isset($_SESSION['logged'])) {
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">format_size</i>
 							<input value="<?= $section_name ?>" id="section_name" title="Preencha este campo com o nome." placeholder="Tipo de Seção" class="validate" type="text" name="section_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="section_name">Nome</label>
+							<label class="active" for="section_name">Nome *</label>
 							<span class="helper-text" data-error="Seção de Ferramenta inválida." data-success="Seção de Ferramenta válida.">Ex: Geradores</span>
 						</div>
 
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">folder</i>
 							<input value="<?= $section_path ?>" id="section_path" title="Preencha este campo com o caminho." placeholder="Caminho da Seção" class="validate" type="text" name="section_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="section_path">Path</label>
+							<label class="active" for="section_path">Path *</label>
 							<span class="helper-text" data-error="Caminho de Seção inválido." data-success="Caminho de Seção válido.">Ex: geradores</span>
 						</div>
 
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix"><?= $section_icon ?></i>
 							<input value="<?= $section_icon ?>" id="section_icon" title="Preencha este campo com o ícone." placeholder="Ícone de Seção" class="validate" type="text" name="section_icon" oninvalid="this.setCustomValidity('Preencha este campo com o ícone.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="section_icon">Ícone</label>
+							<label class="active" for="section_icon">Ícone *</label>
 							<span class="helper-text" data-error="Ícone de Seção inválido." data-success="Ícone de Seção válido.">Ex: autorenew</span>
 						</div>
 
@@ -85,13 +85,13 @@ if (!isset($_SESSION['logged'])) {
 									<option value="<?= $type_id ?>" <?= $t_id === $type_id ? 'selected' : '' ?>><?= $type_name ?></option>
 								<?php endforeach ?>
 							</select>
-							<label>Tipo</label>
+							<label>Tipo *</label>
 							<span class="helper-text">Caminho da Seção</span>
 						</div>
 
 						<div class="col s12">
 							<div class="divider"></div>
-							<a href="../" class="btn indigo darken-4 mt-2 z-depth-0" title="Cancelar Edição"><i class="material-icons left">close</i>Cancelar</a>
+							<a href="../" class="btn indigo darken-4 mt-2 z-depth-0" title="Cancelar edição"><i class="material-icons left">close</i>Cancelar</a>
 							<button title="Salvar Dados" class="btn indigo darken-4 mt-2 right z-depth-0">
 								<i class="material-icons left">save</i>Salvar
 								<input style="display:none" type="submit" value="">

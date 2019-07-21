@@ -2,10 +2,10 @@ M.Datepicker.init(document.querySelectorAll('.datepicker'), {
 	format: 'mmmm dd (dddd), yyyy',
 	yearRange: 25,
 	i18n: {
-		"cancel": '',
-		"clear": 'Limpar',
-		"done": 'Selecionar',
-		"months": [
+		cancel: '',
+		clear: 'Limpar',
+		done: 'Selecionar',
+		months: [
 			'Janeiro',
 			'Fevereiro',
 			'Março',
@@ -19,7 +19,7 @@ M.Datepicker.init(document.querySelectorAll('.datepicker'), {
 			'Novembro',
 			'Dezembro'
 		],
-		"monthsShort": [
+		monthsShort: [
 			'Jan',
 			'Fev',
 			'Mar',
@@ -33,7 +33,7 @@ M.Datepicker.init(document.querySelectorAll('.datepicker'), {
 			'Nov',
 			'Dez'
 		],
-		"weekdays": [
+		weekdays: [
 			'Domingo',
 			'Segunda',
 			'Terça',
@@ -42,7 +42,7 @@ M.Datepicker.init(document.querySelectorAll('.datepicker'), {
 			'Sexta',
 			'Sábado'
 		],
-		"weekdaysShort": [
+		weekdaysShort: [
 			'Dom',
 			'Seg',
 			'Ter',
@@ -55,9 +55,9 @@ M.Datepicker.init(document.querySelectorAll('.datepicker'), {
 })
 M.Timepicker.init(document.querySelectorAll('.timepicker'), {
 	i18n: {
-		'cancel': 'Cancelar',
-		'clear': 'Limpar',
-		'done': 'Selecionar'
+		cancel: 'Cancelar',
+		clear: 'Limpar',
+		done: 'Selecionar'
 	}
 })
 

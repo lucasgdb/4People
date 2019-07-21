@@ -71,42 +71,40 @@ const sufixNicks = [
 ]
 
 const prefixNicks = [
-    'General',
-    'Smash',
-    'Stein',
-    'boy',
-    'Van',
-    'gai',
-    'Cruiser',
-    'OfSplosh',
-    '4',
-    'kui',
-    'Chico',
-    'OfMutter',
-    'Merci',
-    'sm4r',
-    'Portal',
-    'Das',
-    'Thunder',
-    'Gunner',
-    'Buster',
-    'meow',
-    'Booris',
-    'Jazzy',
-    'Zero',
-    'Rei',
-    'Statues',
-    'Corizon',
-    'Quizzical',
-    'da1'
+	'General',
+	'Smash',
+	'Stein',
+	'boy',
+	'Van',
+	'gai',
+	'Cruiser',
+	'OfSplosh',
+	'4',
+	'kui',
+	'Chico',
+	'OfMutter',
+	'Merci',
+	'sm4r',
+	'Portal',
+	'Das',
+	'Thunder',
+	'Gunner',
+	'Buster',
+	'meow',
+	'Booris',
+	'Jazzy',
+	'Zero',
+	'Rei',
+	'Statues',
+	'Corizon',
+	'Quizzical',
+	'da1'
 ]
 
 const generateNicks = (name, option) => {
-    //var randomName = faker.name.findName()
     nicksName = nicks[parseInt(Math.random() * nicks.length)]
     prefixName = prefixNicks[parseInt(Math.random() * prefixNicks.length)]
     sufixName = sufixNicks[parseInt(Math.random() * sufixNicks.length)]
-
     if (option == '1') {
         const letters = 'aeios'
         const modifiedLetters = '43106'

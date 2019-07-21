@@ -18,7 +18,7 @@ $assets = '';
 $root = '.';
 
 do {
-	if (is_dir($p . '/assets')) {
+	if (is_dir($p . '/assets/')) {
 		$assets .= 'assets';
 		if ($root[strlen($root) - 1] === '/') $root = substr($root, 0, -1);
 

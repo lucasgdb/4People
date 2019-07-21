@@ -13,12 +13,8 @@
 	white-space: nowrap
 }
 
-.card-panel {
-	padding-bottom: 6px !important
-}
-
 @media (min-width: 993px) {
 	.card-content {
-		min-height: 155px
+		min-height: 150px
 	}
 }

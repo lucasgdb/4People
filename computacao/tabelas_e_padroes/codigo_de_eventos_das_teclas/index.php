@@ -34,7 +34,7 @@
 			<div class="card-panel left-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">colorize</i>Código de Eventos das Teclas</h1>
 
-				<label>Código de Eventos das Teclas para descobrir cada keyCode da tecla e criar eventos em sua linguagem de preferência.</label>
+				<label><?= $description ?></label>
 				<div class="divider"></div>
 
 				<div class="row mb-0">

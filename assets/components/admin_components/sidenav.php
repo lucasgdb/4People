@@ -23,6 +23,7 @@ $image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 			<ul class="collapsible padding-headers padding-buttons">
 				<li>
 					<ul>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/" title="Painel Administrativo"><i class="material-icons left">keyboard_arrow_right</i>Painel Administrativo</a></li>
 						<li><a class="waves-effect" href="#" title="Mensagens dos usuários"><i class="material-icons left">keyboard_arrow_right</i>Mensagens dos usuários</a></li>
 						<li><a class="waves-effect" href="#" title="Logs de Logins falhos"><i class="material-icons left">keyboard_arrow_right</i>Logs de Logins falhos</a></li>
 						<li><a class="waves-effect" href="#" title="Logs de Administradores"><i class="material-icons left">keyboard_arrow_right</i>Logs de Administradores</a></li>
@@ -43,20 +44,20 @@ $image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 					<ul>
 						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/administradores/" title="Controle de Administradores"><i class="material-icons left">keyboard_arrow_right</i>Controle de Administradores</a></li>
 						<li><a class="waves-effect" href="#" title="Controle de usuários banidos"><i class="material-icons left">keyboard_arrow_right</i>Controle de Banimentos</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/ferramentas/tipos_de_ferramentas/" title="Controle de Tipos de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Ferramenas - Controle de Tipos</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/ferramentas/tipos_de_ferramentas/" title="Controle de Tipos de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Tipos</a></li>
 						<?php
 						include_once("$assets/php/Connection.php");
 
-						$sql = $database->prepare("SELECT COUNT(type_id) AS types_count FROM types LIMIT 1");
+						$sql = $database->prepare('SELECT COUNT(type_id) AS types_count FROM types LIMIT 1');
 						$sql->execute();
 						$types_count = $sql->fetchColumn();
 
-						$sql = $database->prepare("SELECT COUNT(section_id) AS sections_count FROM sections LIMIT 1");
+						$sql = $database->prepare('SELECT COUNT(section_id) AS sections_count FROM sections LIMIT 1');
 						$sql->execute();
 						$sections_count = $sql->fetchColumn();
 
 						if ($types_count) : ?>
-							<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/ferramentas/secoes_de_ferramentas/" title="Controle de Seções de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Ferramentas - Controle de Seções</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/ferramentas/secoes_de_ferramentas/" title="Controle de Seções de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Seções</a></li>
 						<?php endif ?>
 						<?php if ($sections_count) : ?>
 							<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/ferramentas/controle_de_ferramentas/" title="Controle de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Ferramentas</a></li>
@@ -81,3 +82,8 @@ $image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 		</div>
 	</li>
 </ul>
+
+<script>
+	const paddingHeadersA = document.querySelectorAll('.collapsible-body ul li a')
+</script>
+<script src="<?= $assets ?>/src/js/sidenav.js"></script>

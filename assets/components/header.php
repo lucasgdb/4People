@@ -11,8 +11,14 @@
 					<li title="Painel Administrativo" class="waves-effect"><a href="<?= $root ?>/admin/painel_administrativo/"><i class="material-icons left">verified_user</i>Painel Administrativo</a></li>
 					<li title="Sair" class="waves-effect"><a href="<?= $root ?>/admin/exit.php"><i class="material-icons left">close</i>Sair</a></li>
 				<?php else : ?>
-					<li title="Computação" class="waves-effect"><a href="<?= $root ?>/computacao/"><i class="material-icons left">computer</i>Computação</a></li>
-					<li title="Matemática" class="waves-effect"><a href="<?= $root ?>/matematica/"><i class="material-icons left">functions</i>Matemática</a></li>
+					<?php
+					include_once("$assets/php/Connection.php");
+					$sql = $database->prepare('SELECT type_name, type_path, type_icon FROM types');
+					$sql->execute();
+
+					foreach ($sql as $data) : extract($data) ?>
+						<li title="<?= $type_name ?>" class="waves-effect"><a href="<?= $root ?>/<?= $type_path ?>/"><i class="material-icons left"><?= $type_icon ?></i><?= $type_name ?></a></li>
+					<?php endforeach ?>
 				<?php endif ?>
 			</ul>
 		</div>

@@ -34,7 +34,7 @@
 			<div class="card-panel left-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">format_color_text</i>Contador de Caracteres</h1>
 
-				<label>Contador de letras, caracteres sem espaço, palavras, espaços, vogais, consoantes, números e linhas.</label>
+				<label><?= $description ?></label>
 				<div class="divider"></div>
 
 				<textarea class="mt-2" id="text" placeholder="Digite aqui o texto" oninput="countChars()"></textarea>

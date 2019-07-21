@@ -7,7 +7,7 @@ try {
 
 	include_once("$assets/php/Connection.php");
 
-	$sql = $database->prepare("SELECT * FROM admins");
+	$sql = $database->prepare('SELECT admin_id, admin_name, admin_nickname, admin_email FROM admins');
 	$sql->execute();
 
 	foreach ($sql as $key) : extract($key) ?>

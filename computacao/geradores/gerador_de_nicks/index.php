@@ -34,7 +34,7 @@
 			<div class="card-panel left-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">autorenew</i>Gerador de Nicks</h1>
 
-				<label>Gerador de Nicks Online para gerar diversos tipos de nicks aleatórios.</label>
+				<label><?= $description ?></label>
 				<div class="divider"></div>
 
 				<div class="row mb-0">
@@ -71,6 +71,7 @@
 	</main>
 
 	<?php include_once("$assets/components/footer.php") ?>
+	
 	<script src="<?= $assets ?>/algorithms/generators/nickGenerator.js"></script>
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="src/clipboard.min.js"></script>

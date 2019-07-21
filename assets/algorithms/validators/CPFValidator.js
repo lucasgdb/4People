@@ -1,9 +1,9 @@
 const validateCPF = (CPF = Array) => {
 	if (CPF.filter(number => number === CPF[0]).length >= 11) {
 		return {
-			"isCPF": false,
-			"from": null,
-			"CPF": fixCPF(CPF)
+			isCPF: false,
+			from: null,
+			CPF: fixCPF(CPF)
 		}
 	}
 
@@ -46,7 +46,7 @@ const validateCPF = (CPF = Array) => {
 	return {
 		isCPF,
 		from,
-		"CPF": fixCPF(CPF)
+		CPF: fixCPF(CPF)
 	}
 }
 

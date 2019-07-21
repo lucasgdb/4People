@@ -34,7 +34,7 @@
 			<div class="card-panel left-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">compare</i>Área do Quadrado</h1>
 
-				<label>Calculador de Área do Quadrado Online. Área do Quadrado = Lado * Lado ou L²</label>
+				<label><?= $description ?></label>
 				<div class="divider"></div>
 
 				<div class="row mb-0">

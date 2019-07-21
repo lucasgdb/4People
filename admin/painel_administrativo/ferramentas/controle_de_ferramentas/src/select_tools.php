@@ -26,7 +26,7 @@ try {
 		INNER JOIN sections ON sections.section_id = tools.section_id
 		INNER JOIN types ON types.type_id = sections.type_id
 		$condition
-		ORDER BY types.type_id, sections.section_id"
+		ORDER BY types.type_id, sections.section_id, tools.tool_visits DESC"
 	);
 
 	if (isset($type_id_get) && $type_id_get !== '-1') $sql->bindValue(':type_id_get', $type_id_get);

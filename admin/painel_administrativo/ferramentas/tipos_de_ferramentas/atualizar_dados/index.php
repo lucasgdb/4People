@@ -33,8 +33,8 @@ if (!isset($_SESSION['logged'])) {
 	<main>
 		<div class="container">
 			<div class="card-panel z-depth-3 left-div-margin" style="padding-bottom:10px">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">edit</i>Seção de Ferramentas - Atualizar Dados</h1>
-				<label>Atualizar Dados de uma Seção do 4People</label>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">edit</i>Tipo de Ferramentas - Atualizar Dados</h1>
+				<label>Atualizar Dados de um Tipo de Ferramenta do 4People</label>
 
 				<div class="divider"></div>
 
@@ -55,27 +55,27 @@ if (!isset($_SESSION['logged'])) {
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">format_size</i>
 							<input value="<?= $type_name ?>" id="type_name" title="Preencha este campo com o nome." placeholder="Tipo de Ferramenta" class="validate" type="text" name="type_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="type_name">Nome</label>
+							<label class="active" for="type_name">Nome *</label>
 							<span class="helper-text" data-error="Tipo de Ferramenta inválido." data-success="Tipo de Ferramenta válida.">Ex: Computação</span>
 						</div>
 
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">folder</i>
 							<input value="<?= $type_path ?>" id="type_path" title="Preencha este campo com o caminho." placeholder="Caminho da Ferramenta" class="validate" type="text" name="type_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="type_path">Path</label>
+							<label class="active" for="type_path">Path *</label>
 							<span class="helper-text" data-error="Caminho de Ferramenta inválido." data-success="Caminho de Ferramenta válido.">Ex: computacao</span>
 						</div>
 
 						<div class="input-field col s12">
 							<i class="material-icons prefix"><?= $type_icon ?></i>
 							<input value="<?= $type_icon ?>" id="type_icon" title="Preencha este campo com o ícone." placeholder="Ícone de Ferramenta" class="validate" type="text" name="type_icon" oninvalid="this.setCustomValidity('Preencha este campo com o ícone.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="type_icon">Ícone</label>
+							<label class="active" for="type_icon">Ícone *</label>
 							<span class="helper-text" data-error="Ícone de Ferramenta inválido." data-success="Ícone de Ferramenta válido.">Ex: computer</span>
 						</div>
 
 						<div class="col s12">
 							<div class="divider"></div>
-							<a href="../" class="btn indigo darken-4 mt-2 z-depth-0" title="Cancelar Edição"><i class="material-icons left">close</i>Cancelar</a>
+							<a href="../" class="btn indigo darken-4 mt-2 z-depth-0" title="Cancelar edição"><i class="material-icons left">close</i>Cancelar</a>
 							<button title="Salvar Dados" class="btn indigo darken-4 mt-2 right z-depth-0">
 								<i class="material-icons left">save</i>Salvar
 								<input style="display:none" type="submit" value="">

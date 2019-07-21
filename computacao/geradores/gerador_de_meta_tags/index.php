@@ -34,7 +34,7 @@
 			<div class="card-panel left-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">autorenew</i>Gerador de Meta Tags</h1>
 
-				<label>Gerador de Meta Tags Online, feito para gerar várias das Meta Tags existentes.</label>
+				<label><?= $description ?></label>
 				<div class="divider"></div>
 
 				<h5>Informações</h5>

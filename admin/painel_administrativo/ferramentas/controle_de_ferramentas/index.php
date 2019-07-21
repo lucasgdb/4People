@@ -49,18 +49,19 @@ if (!isset($_SESSION['logged'])) {
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">format_size</i>
 							<input id="tool_name" title="Preencha este campo com o nome." placeholder="Nome de Ferramenta" class="validate" type="text" name="tool_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="tool_name">Nome</label>
+							<label class="active" for="tool_name">Nome *</label>
 							<span class="helper-text" data-error="Ferramenta inválida." data-success="Ferramenta válida.">Ex: Gerador de CPF</span>
 						</div>
 
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">folder</i>
-							<input id="tool_path" title="Preencha este campo com o caminho." placeholder="Caminho da Seção" class="validate" type="text" name="tool_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="tool_path">Path</label>
+							<input id="tool_path" title="Preencha este campo com o caminho." placeholder="Caminho da Ferramenta" class="validate" type="text" name="tool_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
+							<label class="active" for="tool_path">Path *</label>
 							<span class="helper-text" data-error="Caminho de Ferramenta inválido." data-success="Caminho de Ferramenta válido.">Ex: gerador_de_cpf</span>
 						</div>
 
-						<div class="input-field col s12">
+
+						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">folder</i>
 							<select name="section_id">
 								<?php
@@ -71,8 +72,32 @@ if (!isset($_SESSION['logged'])) {
 									<option value="<?= $section_id ?>"><?= $section_name ?></option>
 								<?php endforeach ?>
 							</select>
-							<label>Seção</label>
+							<label>Seção *</label>
 							<span class="helper-text">Seção da Ferramenta</span>
+						</div>
+
+						<div class="input-field col s12 m6">
+							<i class="material-icons prefix">check</i>
+							<select name="tool_active">
+								<option value="0">Desativado</option>
+								<option value="1" selected>Ativado</option>
+							</select>
+							<label>Status *</label>
+							<span class="helper-text">Status da Ferramenta</span>
+						</div>
+
+						<div class="input-field col s12 m6">
+							<i class="material-icons prefix">description</i>
+							<input id="tool_description" title="Preencha este campo com a descrição." placeholder="Descrição da Ferramenta" class="validate" type="text" name="tool_description" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')">
+							<label class="active" for="tool_description">Descrição</label>
+							<span class="helper-text">Ex: Gerador de CPF Online para Programadores testarem seus Softwares em desenvolvimento.</span>
+						</div>
+
+						<div class="input-field col s12 m6">
+							<i class="material-icons prefix">link</i>
+							<input id="tool_link" title="Preencha este campo com o caminho." placeholder="Link da Ferramenta no GitHub" class="validate" type="text" name="tool_link" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')">
+							<label class="active" for="tool_link">Link</label>
+							<span class="helper-text">Ex: https://github.com/lucasnaja/4People</span>
 						</div>
 
 						<div class="col s12">
@@ -89,7 +114,7 @@ if (!isset($_SESSION['logged'])) {
 			</div>
 
 			<div class="card-panel z-depth-2 top-div-margin" style="padding-bottom:10px">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">build</i>Filtrar Ferramentas</h1>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">filter_list</i>Filtrar Ferramentas</h1>
 				<label>Filtro de Ferramentas do 4People</label>
 
 				<div class="divider"></div>
@@ -101,7 +126,7 @@ if (!isset($_SESSION['logged'])) {
 							<select name="type_id">
 								<option value="-1">Selecione um Tipo</option>
 								<?php
-								$sql = $database->prepare("SELECT type_id, type_name FROM types ORDER BY type_id");
+								$sql = $database->prepare('SELECT type_id, type_name FROM types ORDER BY type_id');
 								$sql->execute();
 
 								$type_id_get = filter_input(INPUT_GET, 'type_id', FILTER_DEFAULT);
@@ -119,7 +144,7 @@ if (!isset($_SESSION['logged'])) {
 							<select name="section_id">
 								<option value="-1">Selecione uma Seção</option>
 								<?php
-								$sql = $database->prepare("SELECT section_id, section_name FROM sections ORDER BY section_id");
+								$sql = $database->prepare('SELECT section_id, section_name FROM sections ORDER BY section_id');
 								$sql->execute();
 
 								$section_id_get = filter_input(INPUT_GET, 'section_id', FILTER_DEFAULT);
@@ -152,7 +177,7 @@ if (!isset($_SESSION['logged'])) {
 								<input style="display:none" title="Filtrar Ferramentas" type="submit">
 							</button>
 
-							<a title="Limpar Filtro" href="." class="btn indigo darken-4 mt-2 waves-effect waves-light z-depth-0"><i class="material-icons left">format_clear</i>Limpar</a>
+							<a title="Limpar Filtro" href="." class="btn indigo darken-4 mt-2 waves-effect waves-light right z-depth-0"><i class="material-icons left">format_clear</i>Limpar</a>
 						</div>
 					</div>
 				</form>
@@ -161,8 +186,8 @@ if (!isset($_SESSION['logged'])) {
 			</div>
 
 			<div class="card-panel left-div-margin" style="padding-bottom:10px">
-				<h2 class="flow-text" style="margin: 0 0 5px"><i class="material-icons left">format_list_bulleted</i>Lista de Tipos de Ferramentas</h2>
-				<label>Lista de Tipos de Ferramentas</label>
+				<h2 class="flow-text" style="margin: 0 0 5px"><i class="material-icons left">format_list_bulleted</i>Lista de Ferramentas</h2>
+				<label>Lista de Ferramentas do 4People</label>
 				<div class="divider"></div>
 
 				<table class="centered highlight responsive-table">
@@ -199,7 +224,7 @@ if (!isset($_SESSION['logged'])) {
 
 		<div class="modal-footer">
 			<button title="Cancelar" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left red-text" style="font-size:30px">close</i>Não</button>
-			<a id="linkRemoveTool" title="Remover Tipo" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left green-text" style="font-size:30px">check</i>Sim</a>
+			<a id="linkRemoveTool" title="Remover Ferramenta" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left green-text" style="font-size:30px">check</i>Sim</a>
 		</div>
 	</div>
 

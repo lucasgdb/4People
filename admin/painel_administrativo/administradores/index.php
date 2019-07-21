@@ -49,28 +49,28 @@ if (!isset($_SESSION['logged'])) {
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">person</i>
 							<input id="admin_name" minlength="4" title="Preencha este campo com o nome." placeholder="Login de Administrador" class="validate" type="text" name="admin_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="admin_name">Nome</label>
+							<label class="active" for="admin_name">Nome *</label>
 							<span class="helper-text" data-error="Nome de Administrador inválido." data-success="Nome de Administrador válido.">Ex: Lucas Bittencourt</span>
 						</div>
 
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">account_circle</i>
 							<input id="admin_nickname" minlength="8" title="Preencha este campo com o login." placeholder="Login de Administrador" class="validate" type="text" name="admin_nickname" oninvalid="this.setCustomValidity('Preencha este campo com o login.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="admin_nickname">Login</label>
+							<label class="active" for="admin_nickname">Login *</label>
 							<span class="helper-text" data-error="Login de Administrador inválido. Tamanho mínimo: 8" data-success="Login de Administrador válido.">Ex: lucasnaja</span>
 						</div>
 
 						<div class="input-field col s12">
 							<i class="material-icons prefix">mail</i>
 							<input id="admin_email" title="Preencha este campo com o e-mail." placeholder="E-mail do Administrador" class="validate" type="email" name="admin_email" oninvalid="if (this.value === '') this.setCustomValidity('Preencha este campo com o e-mail.'); else this.setCustomValidity('Este e-mail não é válido.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="admin_email">E-mail</label>
+							<label class="active" for="admin_email">E-mail *</label>
 							<span class="helper-text" data-error="E-mail inválido." data-success="E-mail válido.">Ex: lucasnaja0@gmail.com</span>
 						</div>
 
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">https</i>
 							<input id="admin_password" minlength="6" title="Preencha este campo com a senha." placeholder="Senha do Administrador" class="validate" type="password" name="admin_password" oninvalid="this.setCustomValidity('Preencha este campo com a senha.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="admin_password">Senha</label>
+							<label class="active" for="admin_password">Senha *</label>
 							<span class="helper-text" data-error="Senha inválida. Tamanho mínimo: 6" data-success="Senha válida.">Aguardando...</span>
 						</div>
 

@@ -69,7 +69,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 								$ip = get_ip_address();
 								$sql = $database->prepare('SELECT banned_amount FROM banneds WHERE banned_ip=:banned_ip');
 
-								$sql->bindValue(":banned_ip", $ip);
+								$sql->bindValue(':banned_ip', $ip);
 								$sql->execute();
 
 								if ($sql->rowCount()) {
@@ -78,8 +78,8 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 									if ($banned_amount > 3) {
 										$sql = $database->prepare('SELECT banned_begin, banned_end FROM banneds WHERE banned_ip=:banned_ip AND banned_begin <= :current_time AND banned_end >= :current_time LIMIT 1');
 
-										$sql->bindValue(":banned_ip", $ip);
-										$sql->bindValue(":current_time", date('Y-m-d H:i:s'));
+										$sql->bindValue(':banned_ip', $ip);
+										$sql->bindValue(':current_time', date('Y-m-d H:i:s'));
 
 										$sql->execute();
 
