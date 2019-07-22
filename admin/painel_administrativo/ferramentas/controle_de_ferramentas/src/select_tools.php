@@ -9,16 +9,16 @@ try {
 
 	$condition = '';
 
-	if (isset($type_id_get) && $type_id_get !== '-1') $condition = "WHERE types.type_id=:type_id_get";
+	if (isset($type_id_get) && $type_id_get !== '-1') $condition = "WHERE types.type_id = :type_id_get";
 
 	if (isset($section_id_get) && $section_id_get !== '-1') {
 		$condition .= $condition === '' ? 'WHERE ' : ' AND ';
-		$condition .= "sections.section_id=:section_id_get";
+		$condition .= "sections.section_id = :section_id_get";
 	}
 
 	if (isset($tool_active_get) && $tool_active_get !== '-1') {
 		$condition .= $condition === '' ? 'WHERE ' : ' AND ';
-		$condition .= "tools.tool_active=:tool_active_get";
+		$condition .= "tools.tool_active = :tool_active_get";
 	}
 
 	$sql = $database->prepare(

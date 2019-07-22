@@ -42,7 +42,7 @@ if (!isset($_SESSION['logged'])) {
 				include_once("$assets/php/Connection.php");
 				$section_id = filter_input(INPUT_GET, 'section_id', FILTER_DEFAULT);
 
-				$sql = $database->prepare('SELECT * FROM sections WHERE section_id=:section_id LIMIT 1');
+				$sql = $database->prepare('SELECT * FROM sections WHERE section_id = :section_id LIMIT 1');
 				$sql->bindValue(':section_id', $section_id);
 				$sql->execute();
 

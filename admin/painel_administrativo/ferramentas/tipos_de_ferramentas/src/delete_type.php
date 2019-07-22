@@ -10,7 +10,7 @@ try {
 
 	$type_id = filter_input(INPUT_GET, 'type_id', FILTER_DEFAULT);
 
-	$sql = $database->prepare('DELETE FROM types WHERE type_id=:type_id');
+	$sql = $database->prepare('DELETE FROM types WHERE type_id = :type_id');
 	$sql->bindValue(':type_id', $type_id);
 	
 	$sql->execute();

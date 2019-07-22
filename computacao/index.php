@@ -42,12 +42,11 @@
 						<?php
 						include_once("$assets/php/Connection.php");
 						$sql = $database->prepare(
-							'SELECT
-							sections.section_path, sections.section_icon, tools.tool_name, tools.tool_path, tools.tool_description, tools.tool_link
+							'SELECT sections.section_path, sections.section_icon, tools.tool_name, tools.tool_path, tools.tool_description, tools.tool_link
 							FROM tools
 							INNER JOIN sections ON sections.section_id = tools.section_id
 							INNER JOIN types ON types.type_id = sections.type_id
-							WHERE tools.tool_active="1" AND types.type_name="Computação"
+							WHERE tools.tool_active = "1" AND types.type_name = "Computação"
 							ORDER BY tools.tool_visits DESC
 							LIMIT 10'
 						);

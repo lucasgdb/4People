@@ -18,7 +18,7 @@ try {
 	$admin_image = $_FILES['admin_image'];
 	$admin_image_text = filter_input(INPUT_POST, 'admin_image_text', FILTER_DEFAULT);
 
-	$current_data = $database->prepare('SELECT admin_password, admin_image FROM admins WHERE admin_id=:admin_id LIMIT 1');
+	$current_data = $database->prepare('SELECT admin_password, admin_image FROM admins WHERE admin_id = :admin_id LIMIT 1');
 	$current_data->bindValue(':admin_id', $admin_id);
 	$current_data->execute();
 
@@ -41,12 +41,12 @@ try {
 
 	$sql = $database->prepare(
 		'UPDATE admins
-		SET admin_name=:admin_name,
-			admin_nickname=:admin_nickname,
-			admin_email=:admin_email,
-			admin_password=:admin_password,
-			admin_image=:admin_image
-		WHERE admin_id=:admin_id'
+		SET admin_name = :admin_name,
+			admin_nickname = :admin_nickname,
+			admin_email = :admin_email,
+			admin_password = :admin_password,
+			admin_image = :admin_image
+		WHERE admin_id = :admin_id'
 	);
 
 	$sql->bindValue(':admin_name', $admin_name);

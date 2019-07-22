@@ -67,7 +67,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 								include_once("$assets/php/IP.php");
 
 								$ip = get_ip_address();
-								$sql = $database->prepare('SELECT banned_amount FROM banneds WHERE banned_ip=:banned_ip');
+								$sql = $database->prepare('SELECT banned_amount FROM banneds WHERE banned_ip = :banned_ip');
 
 								$sql->bindValue(':banned_ip', $ip);
 								$sql->execute();
@@ -76,7 +76,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 									$banned_amount = $sql->fetchColumn();
 
 									if ($banned_amount > 3) {
-										$sql = $database->prepare('SELECT banned_begin, banned_end FROM banneds WHERE banned_ip=:banned_ip AND banned_begin <= :current_time AND banned_end >= :current_time LIMIT 1');
+										$sql = $database->prepare('SELECT banned_begin, banned_end FROM banneds WHERE banned_ip = :banned_ip AND banned_begin <= :current_time AND banned_end >= :current_time LIMIT 1');
 
 										$sql->bindValue(':banned_ip', $ip);
 										$sql->bindValue(':current_time', date('Y-m-d H:i:s'));
@@ -92,7 +92,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 
 											$time = $current_time->diff($banned_end)->format('%I:%S');
 										} else {
-											$sql = $database->prepare('DELETE FROM banneds WHERE banned_ip=:banned_ip');
+											$sql = $database->prepare('DELETE FROM banneds WHERE banned_ip = :banned_ip');
 
 											$sql->bindValue(':banned_ip', $ip);
 											$sql->execute();

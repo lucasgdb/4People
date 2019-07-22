@@ -81,7 +81,7 @@
 									'SELECT tools.tool_name, tools.tool_path, sections.section_path, types.type_path FROM tools
 									INNER JOIN sections ON sections.section_id = tools.section_id
 									INNER JOIN types ON types.type_id = sections.type_id
-									WHERE tool_active="1"
+									WHERE tool_active = "1"
 									ORDER BY tool_visits DESC, tool_id
 									LIMIT 3'
 								);
@@ -101,15 +101,34 @@
 							<div class="top-div indigo darken-4"></div>
 						</div>
 					</div>
+				</div>
 
-					<div class="col s12">
+				<div class="row mb-0">
+					<div class="col s12 m6">
 						<div class="card teal z-depth-2">
 							<div class="card-content white-text">
 								<span class="card-title"><i class="material-icons left">group</i>Visitas</span>
-								<p style="font-size:16px">Usuários que já visitaram: 10.245</p>
+								<p style="font-size:16px">Usuários que já visitaram: <span id="totalVisits">10245</span></p>
 							</div>
 
 							<div class="top-div teal darken-4"></div>
+						</div>
+					</div>
+
+					<div class="col s12 m6">
+						<div class="card red z-depth-2">
+							<div class="card-content white-text">
+								<span class="card-title"><i class="material-icons left">group</i>Pessoas ajudadas</span>
+								<?php
+								$sql = $database->prepare('SELECT SUM(tool_visits) FROM tools WHERE tool_active = "1" LIMIT 1');
+								$sql->execute();
+
+								$total_visits = $sql->fetchColumn()
+								?>
+								<p style="font-size:16px">Nossas Ferramentas foram usadas <span id="toolVisits"><?= $total_visits ?></span> vezes</p>
+							</div>
+
+							<div class="top-div red darken-4"></div>
 						</div>
 					</div>
 				</div>
@@ -127,7 +146,7 @@
 					</div>
 
 					<div class="col s12 l6">
-						<div class="card red z-depth-2">
+						<div class="card green z-depth-2">
 							<div class="card-content white-text">
 								<span class="card-title"><i class="material-icons left">build</i>Ferramentas</span>
 								<?php
@@ -140,7 +159,7 @@
 								<p style="font-size:16px">Quantidade de Ferramentas: <?= $count ?></p>
 							</div>
 
-							<div class="top-div red darken-4"></div>
+							<div class="top-div green darken-4"></div>
 						</div>
 					</div>
 				</div>
@@ -183,6 +202,21 @@
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
+	<script>
+		const lblTotalVisits = document.querySelector('#totalVisits')
+		const lblToolVisits = document.querySelector('#toolVisits')
+
+		const formatter = Intl.NumberFormat('pt-BR')
+
+		const formatNumbers = elements => {
+			for (let i = 0; i < elements.length; i++) {
+				const number = elements[i].textContent
+				elements[i].textContent = formatter.format(number)
+			}
+		}
+
+		formatNumbers([lblTotalVisits, lblToolVisits])
+	</script>
 </body>
 
 </html>

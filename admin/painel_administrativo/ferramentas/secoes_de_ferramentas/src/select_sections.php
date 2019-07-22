@@ -9,7 +9,7 @@ try {
 
 	$condition = '';
 
-	if (isset($type_id_get) && $type_id_get !== '-1') $condition = "AND types.type_id=:type_id_get";
+	if (isset($type_id_get) && $type_id_get !== '-1') $condition = "AND types.type_id = :type_id_get";
 
 	$sql = $database->prepare(
 		"SELECT sections.*, types.type_name FROM sections

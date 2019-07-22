@@ -42,7 +42,7 @@ if (!isset($_SESSION['logged'])) {
 				include_once("$assets/php/Connection.php");
 				$type_id = filter_input(INPUT_GET, 'type_id', FILTER_DEFAULT);
 
-				$sql = $database->prepare('SELECT * FROM types WHERE type_id=:type_id LIMIT 1');
+				$sql = $database->prepare('SELECT * FROM types WHERE type_id = :type_id LIMIT 1');
 				$sql->bindValue(':type_id', $type_id);
 				$sql->execute();
 

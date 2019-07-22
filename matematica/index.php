@@ -47,7 +47,7 @@
 							FROM tools
 							INNER JOIN sections ON sections.section_id = tools.section_id
 							INNER JOIN types ON types.type_id = sections.type_id
-							WHERE tools.tool_active="1" AND types.type_name="Matemática"
+							WHERE tools.tool_active = "1" AND types.type_name = "Matemática"
 							ORDER BY tools.tool_visits DESC
 							LIMIT 10'
 						);

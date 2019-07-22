@@ -144,7 +144,7 @@ if (!isset($_SESSION['logged'])) {
 			type: 'pie',
 			data: {
 				datasets: [{
-					data: [10, 20, 30],
+					data: [1, 3, 2],
 					backgroundColor: [
 						'#f44336',
 						'#009688',

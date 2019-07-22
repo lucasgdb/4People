@@ -14,7 +14,7 @@ try {
 	$section_icon = trim(filter_input(INPUT_POST, 'section_icon', FILTER_DEFAULT));
 	$type_id = filter_input(INPUT_POST, 'type_id', FILTER_DEFAULT);
 
-	$sql = $database->prepare('UPDATE sections SET section_name=:section_name, section_path=:section_path, section_icon=:section_icon, type_id=:type_id WHERE section_id=:section_id');
+	$sql = $database->prepare('UPDATE sections SET section_name = :section_name, section_path = :section_path, section_icon = :section_icon, type_id = :type_id WHERE section_id = :section_id');
 
 	$sql->bindValue(':section_name', $section_name);
 	$sql->bindValue(':section_path', $section_path);

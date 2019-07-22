@@ -10,7 +10,7 @@ try {
 
 	$tool_id = filter_input(INPUT_GET, 'tool_id', FILTER_DEFAULT);
 
-	$sql = $database->prepare('DELETE FROM tools WHERE tool_id=:tool_id');
+	$sql = $database->prepare('DELETE FROM tools WHERE tool_id = :tool_id');
 	$sql->bindValue(':tool_id', $tool_id);
 
 	$sql->execute();

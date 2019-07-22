@@ -42,7 +42,7 @@ if (!isset($_SESSION['logged'])) {
 				include_once("$assets/php/Connection.php");
 				$tool_id = filter_input(INPUT_GET, 'tool_id', FILTER_DEFAULT);
 
-				$sql = $database->prepare('SELECT tool_id, tool_name, tool_path, tool_description, tool_link, tool_active, section_id FROM tools WHERE tool_id=:tool_id LIMIT 1');
+				$sql = $database->prepare('SELECT tool_id, tool_name, tool_path, tool_description, tool_link, tool_active, section_id FROM tools WHERE tool_id = :tool_id LIMIT 1');
 				$sql->bindValue(':tool_id', $tool_id);
 				$sql->execute();
 

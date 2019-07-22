@@ -16,7 +16,7 @@ try {
 	$tool_active = filter_input(INPUT_POST, 'tool_active', FILTER_DEFAULT);
 	$section_id = filter_input(INPUT_POST, 'section_id', FILTER_DEFAULT);
 
-	$sql = $database->prepare('UPDATE tools SET tool_name=:tool_name, tool_path=:tool_path, tool_description=:tool_description, tool_link=:tool_link, tool_active=:tool_active, section_id=:section_id WHERE tool_id=:tool_id');
+	$sql = $database->prepare('UPDATE tools SET tool_name = :tool_name, tool_path = :tool_path, tool_description = :tool_description, tool_link = :tool_link, tool_active = :tool_active, section_id = :section_id WHERE tool_id = :tool_id');
 
 	$sql->bindValue(':tool_name', $tool_name);
 	$sql->bindValue(':tool_path', $tool_path);
