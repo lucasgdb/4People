@@ -71,7 +71,7 @@ if (!isset($_SESSION['logged'])) {
 										<p>Banimentos</p>
 										<div class="divider"></div>
 										<a href="#">
-											<i class="material-icons large" style="color:#212121">block</i>
+											<i class="material-icons large" style="color:#212121">close</i>
 										</a>
 									</div>
 								</div>
@@ -87,7 +87,7 @@ if (!isset($_SESSION['logged'])) {
 								<div class="row mb-0">
 									<div class="col s12 center-align">
 										<p>Ferramentas</p>
-										<div class="divider"></div>
+										<div class="divider mb-2"></div>
 										<a href="ferramentas/tipos_de_ferramentas/">
 											<i class="material-icons large" style="color:#212121">build</i>
 										</a>
@@ -105,7 +105,7 @@ if (!isset($_SESSION['logged'])) {
 								<div class="row mb-0">
 									<div class="col s12 center-align">
 										<p>Mensagens</p>
-										<div class="divider"></div>
+										<div class="divider mb-2"></div>
 										<a href="#">
 											<i class="material-icons large" style="color:#212121">question_answer</i>
 										</a>
@@ -120,15 +120,8 @@ if (!isset($_SESSION['logged'])) {
 
 				<div class="divider mt-2"></div>
 
-				<div class="row mt-2">
-					<div class="col s12 m6">
-						<canvas id="status" width="3" height="2">Esse browser não suporta Canvas.</canvas>
-					</div>
-
-					<div class="col s12 m6">
-						<canvas id="tools" width="3" height="2">Esse browser não suporta Canvas.</canvas>
-					</div>
-				</div>
+				<canvas class="mt-2 mb-2" id="tools" width="3" height="1">Esse browser não suporta Canvas.</canvas>
+				<canvas id="status" width="3" height="1">Esse browser não suporta Canvas.</canvas>
 
 				<div class="top-div indigo darken-4"></div>
 			</div>
@@ -139,6 +132,11 @@ if (!isset($_SESSION['logged'])) {
 	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script src="src/chart.min.js"></script>
+	<?php
+	$sql = $database->prepare('SELECT tool_name, tool_visits FROM tools WHERE tool_active = "1" ORDER BY tool_visits DESC LIMIT 3');
+
+	$sql->execute();
+	?>
 	<script>
 		new Chart(document.querySelector('#status').getContext('2d'), {
 			type: 'pie',
@@ -160,23 +158,26 @@ if (!isset($_SESSION['logged'])) {
 			}
 		})
 
+		const data = []
+		const labels = []
+
+		<?php foreach ($sql as $data) : extract($data) ?>
+			data.push('<?= $tool_visits ?>')
+			labels.push('<?= $tool_name ?>')
+		<?php endforeach ?>
+
 		new Chart(document.querySelector('#tools').getContext('2d'), {
 			type: 'pie',
 			data: {
 				datasets: [{
-					data: [10, 20, 30],
+					data,
 					backgroundColor: [
 						'#2196f3',
 						'#009688',
 						'#f44336'
 					]
 				}],
-
-				labels: [
-					'Gerador de CPF',
-					'Gerdor de Senha',
-					'Diferença entre Datas'
-				]
+				labels
 			}
 		})
 	</script>
