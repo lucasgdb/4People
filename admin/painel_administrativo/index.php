@@ -138,32 +138,23 @@ $admin_panel = true
 	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script src="src/chart.min.js"></script>
-	<?php
-	$sql = $database->prepare('SELECT tool_name, tool_visits FROM tools WHERE tool_active = "1" ORDER BY tool_visits DESC LIMIT 3');
-
-	$sql->execute()
-	?>
 	<script>
 		M.Tooltip.init(document.querySelectorAll('.tooltiped'))
-		new Chart(document.querySelector('#status').getContext('2d'), {
-			type: 'pie',
-			data: {
-				datasets: [{
-					data: [1, 3, 2],
-					backgroundColor: [
-						'#f44336',
-						'#009688',
-						'#2196f3'
-					]
-				}],
 
-				labels: [
-					'Administradores',
-					'Usuários banidos',
-					'Mensagens'
-				]
-			}
-		})
+		const getRandomColor = () => {
+			var letters = '0123456789ABCDEF'.split('')
+			var color = '#'
+
+			for (var i = 0; i < 6; i++) color += letters[Math.floor(Math.random() * 16)]
+
+			return color
+		}
+
+		<?php
+		$sql = $database->prepare('SELECT tool_name, tool_visits FROM tools WHERE tool_active = "1" ORDER BY tool_visits DESC LIMIT 10');
+
+		$sql->execute()
+		?>
 
 		const data = []
 		const labels = []
@@ -173,18 +164,54 @@ $admin_panel = true
 			labels.push('<?= $tool_name ?>')
 		<?php endforeach ?>
 
-		new Chart(document.querySelector('#tools').getContext('2d'), {
+		new Chart(document.querySelector('#status').getContext('2d'), {
 			type: 'pie',
 			data: {
 				datasets: [{
 					data,
 					backgroundColor: [
-						'#2196f3',
-						'#009688',
-						'#f44336'
+						getRandomColor(),
+						getRandomColor(),
+						getRandomColor(),
+						getRandomColor(),
+						getRandomColor(),
+						getRandomColor(),
+						getRandomColor(),
+						getRandomColor(),
+						getRandomColor(),
+						getRandomColor()
 					]
 				}],
 				labels
+			}
+		})
+
+		<?php
+		$sql = $database->prepare('SELECT tool_name, tool_visits FROM tools WHERE tool_active = "1" ORDER BY tool_visits DESC LIMIT 3');
+
+		$sql->execute()
+		?>
+
+		const data2 = []
+		const labels2 = []
+
+		<?php foreach ($sql as $data) : extract($data) ?>
+			data2.push('<?= $tool_visits ?>')
+			labels2.push('<?= $tool_name ?>')
+		<?php endforeach ?>
+
+		new Chart(document.querySelector('#tools').getContext('2d'), {
+			type: 'pie',
+			data: {
+				datasets: [{
+					data: data2,
+					backgroundColor: [
+						getRandomColor(),
+						getRandomColor(),
+						getRandomColor()
+					]
+				}],
+				labels: labels2
 			}
 		})
 	</script>

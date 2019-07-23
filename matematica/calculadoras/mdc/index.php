@@ -34,7 +34,7 @@
 			<div class="card-panel left-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">exposure</i>Máximo Divisor Comum</h1>
 
-				<label>Calculadora Online para encontrar o Máximo Divisor Comum entre vários números.</label>
+				<label><?= $description ?></label>
 				<div class="divider"></div>
 
 				<div class="row m-0">

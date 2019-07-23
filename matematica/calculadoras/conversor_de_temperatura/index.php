@@ -34,7 +34,7 @@
 			<div class="card-panel left-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">exposure</i>Conversor de Temperatura</h1>
 
-				<label>Conversor de Temperatura Online para calcular Graus Celsius, Fahrenheit e Kelvin.</label>
+				<label><?= $description ?></label>
 				<div class="divider"></div>
 
 				<div class="row mb-0">
@@ -125,7 +125,7 @@
 
 	<?php include_once("$assets/components/footer.php") ?>
 
-	<script src="<?= $assets ?>/algorithms/calculators/temperatureConverter.js"></script>
+	<script src="<?= $assets ?>/algorithms/calculators/temperatureConversor.js"></script>
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="src/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>

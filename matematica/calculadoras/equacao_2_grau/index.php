@@ -34,7 +34,7 @@
 			<div class="card-panel left-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">exposure</i>Equação do 2° Grau</h1>
 
-				<label>Cálculo da Equção do 2° Grau (Bhaskara) Online. &Delta; = B² - 4 * A * C, X = (-B +- √&Delta;) / 2 * A</label>
+				<label><?= $description ?></label>
 				<div class="divider"></div>
 
 				<div class="row mb-0">

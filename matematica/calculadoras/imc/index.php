@@ -34,7 +34,7 @@
 			<div class="card-panel left-div-margn">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">exposure</i>Índice de Massa Corporal</h1>
 
-				<label>Calculadora de Índice de Massa Corporal Online para calcular o IMC e o seu peso ideal.</label>
+				<label><?= $description ?></label>
 				<div class="divider"></div>
 
 				<div class="row mb-0">

@@ -34,7 +34,7 @@
 			<div class="card-panel">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">exposure</i>Números Amigáveis</h1>
 
-				<label>Números amigáveis são pares de números onde um deles é a soma dos divisores do outro. Por exemplo, os divisores de 220 são 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 e 110, cuja soma é 284. Por outro lado, os divisores de 284 são 1, 2, 4, 71 e 142 e a soma deles é 220.</label>
+				<label><?= $description ?></label>
 				<div class="divider"></div>
 
 				<div class="row">
