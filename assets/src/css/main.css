@@ -1,3 +1,7 @@
+html {
+	scroll-behavior: smooth
+}
+
 body {
 	font-family: Arial, sans-serif, Arial;
 	display: flex;

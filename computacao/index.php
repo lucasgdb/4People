@@ -60,11 +60,11 @@
 						for ($i = 0; $i < $half; $i++) : extract($data[$i]) ?>
 							<div class="card sticky-action z-depth-2">
 								<div class="card-content grey lighten-5">
-									<span class="card-title activator no-select left-div-margin" style="position:relative">
+									<span class="card-title activator no-select left-div-margin-mobile" style="position:relative">
 										<?= $tool_name ?>
 										<i class="material-icons right">more_vert</i>
 
-										<div class="left-div indigo darken-4" style="border-radius:0"></div>
+										<div class="left-div-mobile indigo darken-4" style="border-radius:0"></div>
 									</span>
 									<div class="divider"></div>
 									<p class="mt-2">
@@ -91,11 +91,11 @@
 						<?php for ($i = $half; $i < $length; $i++) : extract($data[$i]) ?>
 							<div class="card sticky-action z-depth-2">
 								<div class="card-content grey lighten-5">
-									<span class="card-title activator no-select left-div-margin" style="position:relative">
+									<span class="card-title activator no-select left-div-margin-mobile" style="position:relative">
 										<?= $tool_name ?>
 										<i class="material-icons right">more_vert</i>
 
-										<div class="left-div indigo darken-4" style="border-radius:0"></div>
+										<div class="left-div-mobile indigo darken-4" style="border-radius:0"></div>
 									</span>
 									<div class="divider"></div>
 									<p class="mt-2">

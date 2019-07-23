@@ -15,7 +15,7 @@ $image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 		<div class="left-div-mobile indigo darken-4" style="border-radius:0"></div>
 	</li>
 
-	<?php $people = strpos($link, 'mensagens') !== false || strpos($link, 'manutencao') !== false ?>
+	<?php $people = strpos($link, 'mensagens') !== false || strpos($link, 'manutencao') !== false || isset($admin_panel) && $admin_panel === true ?>
 
 	<li class="<?= $people ? 'active' : '' ?>">
 		<div class="collapsible-header"><i class="material-icons left">free_breakfast</i>4People<i class="material-icons" style="position:absolute;right:0<?= $people ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>

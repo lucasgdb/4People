@@ -92,7 +92,7 @@
 								<ul class="collection with-header mb-0">
 									<?php foreach ($sql as $data) : extract($data) ?>
 										<li class="collection-item indigo">
-											<div style="font-size:16px"><?= $tool_name ?><a href="<?= $root ?>/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+											<div style="font-size:16px"><?= $tool_name ?><a title="Usar <?= $tool_name ?>" href="<?= $root ?>/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
 										</li>
 									<?php endforeach ?>
 								</ul>

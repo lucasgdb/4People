@@ -5,6 +5,8 @@ if (!isset($_SESSION['logged'])) {
 	header('HTTP/1.0 404 Not Found');
 	exit();
 }
+
+$admin_panel = true
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -38,7 +40,7 @@ if (!isset($_SESSION['logged'])) {
 
 	<main>
 		<div class="container">
-			<div class="card-panel z-depth-2 top-div-margin">
+			<div class="card-panel z-depth-2 left-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">verified_user</i>Painel Administrativo</h1>
 				<label>Painel Administrativo do 4People</label>
 
@@ -47,72 +49,72 @@ if (!isset($_SESSION['logged'])) {
 				<div class="row mb-0">
 					<div class="col s12 m6">
 						<div class="card z-depth-2">
-							<div class="card-content left-div-margin" style="padding-bottom:4px">
+							<div class="card-content left-div-margin-mobile" style="padding-bottom:4px">
 								<div class="row mb-0">
 									<div class="col s12 center-align">
 										<p>Administradores</p>
 										<div class="divider"></div>
-										<a href="administradores/">
+										<a class="tooltiped" data-tooltip="Administradores" href="administradores/">
 											<i class="material-icons large" style="color:#212121">supervisor_account</i>
 										</a>
 									</div>
 								</div>
 
-								<div class="left-div indigo darken-4"></div>
+								<div class="left-div-mobile indigo darken-4"></div>
 							</div>
 						</div>
 					</div>
 
 					<div class="col s12 m6">
 						<div class="card z-depth-2">
-							<div class="card-content left-div-margin" style="padding-bottom:4px">
+							<div class="card-content left-div-margin-mobile" style="padding-bottom:4px">
 								<div class="row mb-0">
 									<div class="col s12 center-align">
 										<p>Banimentos</p>
 										<div class="divider"></div>
-										<a href="#">
+										<a class="tooltiped" data-tooltip="Banimentos" href="#">
 											<i class="material-icons large" style="color:#212121">close</i>
 										</a>
 									</div>
 								</div>
 
-								<div class="left-div indigo darken-4"></div>
+								<div class="left-div-mobile indigo darken-4"></div>
 							</div>
 						</div>
 					</div>
 
 					<div class="col s12 m6">
 						<div class="card z-depth-2">
-							<div class="card-content left-div-margin" style="padding-bottom:4px">
+							<div class="card-content left-div-margin-mobile" style="padding-bottom:4px">
 								<div class="row mb-0">
 									<div class="col s12 center-align">
 										<p>Ferramentas</p>
 										<div class="divider mb-2"></div>
-										<a href="ferramentas/tipos_de_ferramentas/">
+										<a class="tooltiped" data-tooltip="<?= $sections_count ? 'Controle de Ferramentas' : ($types_count ? 'Seções de Ferramentas' : 'Tipos de Ferramentas') ?>" href="<?= $sections_count ? 'ferramentas/controle_de_ferramentas/' : ($types_count ? 'ferramentas/secoes_de_ferramentas/' : 'ferramentas/tipos_de_ferramentas/') ?>">
 											<i class="material-icons large" style="color:#212121">build</i>
 										</a>
 									</div>
 								</div>
 
-								<div class="left-div indigo darken-4"></div>
+								<div class="left-div-mobile indigo darken-4"></div>
 							</div>
 						</div>
 					</div>
 
 					<div class="col s12 m6">
 						<div class="card z-depth-2">
-							<div class="card-content left-div-margin" style="padding-bottom:4px">
+							<div class="card-content left-div-margin-mobile" style="padding-bottom:4px">
 								<div class="row mb-0">
 									<div class="col s12 center-align">
 										<p>Mensagens</p>
 										<div class="divider mb-2"></div>
-										<a href="#">
+										<a class="tooltiped" data-tooltip="Mensagens" href="#">
 											<i class="material-icons large" style="color:#212121">question_answer</i>
 										</a>
 									</div>
 								</div>
 
-								<div class="left-div indigo darken-4"></div>
+								<div class="left-div-mobile indigo darken-4"></div>
 							</div>
 						</div>
 					</div>
@@ -120,10 +122,14 @@ if (!isset($_SESSION['logged'])) {
 
 				<div class="divider mt-2"></div>
 
-				<canvas class="mt-2 mb-2" id="tools" width="3" height="1">Esse browser não suporta Canvas.</canvas>
-				<canvas id="status" width="3" height="1">Esse browser não suporta Canvas.</canvas>
+				<div class="card z-depth-1" style="padding:8px 0">
+					<canvas class="mt-2 mb-2" id="tools" width="3" height="1">Esse browser não suporta Canvas.</canvas>
+				</div>
+				<div class="card mb-2 z-depth-1" style="padding:8px 0">
+					<canvas id="status" width="3" height="1">Esse browser não suporta Canvas.</canvas>
+				</div>
 
-				<div class="top-div indigo darken-4"></div>
+				<div class="left-div indigo darken-4"></div>
 			</div>
 		</div>
 	</main>
@@ -135,9 +141,10 @@ if (!isset($_SESSION['logged'])) {
 	<?php
 	$sql = $database->prepare('SELECT tool_name, tool_visits FROM tools WHERE tool_active = "1" ORDER BY tool_visits DESC LIMIT 3');
 
-	$sql->execute();
+	$sql->execute()
 	?>
 	<script>
+		M.Tooltip.init(document.querySelectorAll('.tooltiped'))
 		new Chart(document.querySelector('#status').getContext('2d'), {
 			type: 'pie',
 			data: {
@@ -181,6 +188,7 @@ if (!isset($_SESSION['logged'])) {
 			}
 		})
 	</script>
+
 </body>
 
 </html>
