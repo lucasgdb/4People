@@ -37,9 +37,13 @@ const generate = () => {
 const savePassword = () => {
 	if (txtResult.value.trim() !== '') {
 		saveAs(new File([`Senha: ${txtResult.value}`], "Senha.txt", { type: "text/plain;charset=utf-8" }))
+		M.toast({
+			html: 'Senha salva com sucesso.',
+			classes: 'green'
+		})
 	} else {
 		M.toast({
-			html: 'Erro ao salvar a senha.',
+			html: 'Não foi possível salvar a senha.',
 			classes: 'red accent-4'
 		})
 	}

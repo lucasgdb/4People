@@ -5,7 +5,7 @@
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-   <link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>Diferença entre Datas - 4People</title>
@@ -76,6 +76,7 @@
 				<div class="divider mt-2"></div>
 
 				<ul class="collection mb-0">
+					<li class="collection-item">Diferença: <span id="all">0 ano(s), 0 mese(s), 1 dia(s), 0 hora(s) e 0 minuto(s)</span></li>
 					<li class="collection-item">Milissegundos: <span id="milliSecs">86.400.000</span></li>
 					<li class="collection-item">Segundos: <span id="secs">86.400</span></li>
 					<li class="collection-item">Minutos: <span id="mins">1.440</span></li>

@@ -61,6 +61,7 @@ M.Timepicker.init(document.querySelectorAll('.timepicker'), {
 	}
 })
 
+const lblAll = document.querySelector('#all')
 const lblMilliSec = document.querySelector('#milliSecs')
 const lblSec = document.querySelector('#secs')
 const lblMin = document.querySelector('#mins')
@@ -73,20 +74,39 @@ const endDate = M.Datepicker.getInstance(document.querySelector('#endDate'))
 const beginTime = M.Timepicker.getInstance(document.querySelector('#beginTime'))
 const endTime = M.Timepicker.getInstance(document.querySelector('#endTime'))
 
-const calculate = () => {
+const calculate = async () => {
 	if (beginDate.date !== undefined && endDate.date !== undefined) {
 		const cTime = new Date()
+
 		const beginTimeHour = beginTime.time === undefined || beginTime.el.value === '' ?
 			`${cTime.getHours()}:${cTime.getMinutes()}:${cTime.getSeconds()}` :
 			`${calculateAMorPM(beginTime.time, beginTime.amOrPm)}:${cTime.getSeconds()}`
+
 		const endTimeHour = endTime.time === undefined || endTime.el.value === '' ?
 			`${cTime.getHours()}:${cTime.getMinutes()}:${cTime.getSeconds()}` :
 			`${calculateAMorPM(endTime.time, endTime.amOrPm)}:${cTime.getSeconds()}`
+
+		const newBeginDate = beginDate.date.toUTCString().replace('03:00:00', beginTimeHour)
+		const newEndDate = endDate.date.toUTCString().replace('03:00:00', endTimeHour)
+
 		const difference = compareDateBetween(
-			beginDate.date.toUTCString().replace('03:00:00', beginTimeHour),
-			endDate.date.toUTCString().replace('03:00:00', endTimeHour)
+			newBeginDate,
+			newEndDate
 		)
 
+		const result = await fetch(
+			'src/full_difference.php',
+			{
+				method: 'POST',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/x-www-form-urlencoded'
+				},
+				body: `begin=${newBeginDate}&end=${newEndDate}`
+			}
+		).then(response => response.json())
+
+		lblAll.textContent = result['difference']
 		lblMilliSec.textContent = difference.milliSeconds
 		lblSec.textContent = difference.seconds
 		lblMin.textContent = difference.minutes
@@ -105,11 +125,8 @@ const calculate = () => {
 const calculateAMorPM = (time, type) => {
 	let hour = time.split(':')[0]
 
-	if (type === 'AM') {
-		hour = hour === '12' ? '00' : hour
-	} else {
-		hour = hour === '00' || hour === '12' ? hour : parseInt(hour) + 12
-	}
+	if (type === 'AM') hour = hour === '12' ? '00' : hour
+	else hour = hour === '00' || hour === '12' ? hour : parseInt(hour) + 12
 
 	return `${hour}:${time.split(':')[1]}`
 }
