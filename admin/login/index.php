@@ -47,15 +47,15 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 						<div class="row mb-0">
 							<div class="input-field col s12">
 								<i class="material-icons prefix">account_circle</i>
-								<input minlength="4" title="Preencha este campo com seu Login." placeholder="Login de Administrador" class="validate" type="text" name="admin_nickname" oninvalid="this.setCustomValidity('Preencha este campo com seu Login.')" oninput="setCustomValidity('')" required>
-								<label>Login</label>
+								<input id="admin_nickname" minlength="4" title="Preencha este campo com seu Login." placeholder="Login de Administrador" class="validate" type="text" name="admin_nickname" oninvalid="this.setCustomValidity('Preencha este campo com seu Login.')" oninput="setCustomValidity('')" required>
+								<label class="active" for="admin_nickname">Login</label>
 								<span class="helper-text" data-error="Login inválido." data-success="Login válido.">Aguardando...</span>
 							</div>
 
 							<div class="input-field col s12">
 								<i class="material-icons prefix">https</i>
-								<input minlength="6" title="Preencha este campo com sua senha." placeholder="Senha de Administrador" class="validate" type="password" name="admin_password" oninvalid="this.setCustomValidity('Preencha este campo com sua senha.')" oninput="setCustomValidity('')" required>
-								<label>Senha</label>
+								<input id="admin_password" minlength="6" title="Preencha este campo com sua senha." placeholder="Senha de Administrador" class="validate" type="password" name="admin_password" oninvalid="this.setCustomValidity('Preencha este campo com sua senha.')" oninput="setCustomValidity('')" required>
+								<label class="active" for="admin_password">Senha</label>
 								<span class="helper-text" data-error="Senha inválida." data-success="Senha válida.">Aguardando...</span>
 							</div>
 

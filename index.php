@@ -177,7 +177,7 @@
 				O 4People tem como intenção ajudar estudantes, Programadores, analistas, etc. no seu dia a dia.
 				Normalmente necessários parar testar seus softwares em desenvolvimento.
 				A má utilização das Ferramentas é de total responsabilidade do usuário.
-				Os algoritmos são públicos e de código aberto, não contendo acesso a dados existentes e de pessoas reais.
+				Os algoritmos são públicos e de código aberto, não contendo acesso a dados de pessoas reais.
 			</p>
 
 			<p class="mb-0">

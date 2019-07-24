@@ -27,7 +27,9 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 		$sql->bindValue(':type_id', $type_id);
 		$sql->execute();
 
-		$active = strpos($link, $type_path) !== false
+		$active = strpos($link, $type_path) !== false;
+
+		if ($active) $icon = $type_icon
 		?>
 		<li class="<?= $active ? 'active' : '' ?>">
 			<div class="collapsible-header"><i class="material-icons left"><?= $type_icon ?></i><?= $type_name ?><i class="material-icons" style="position:absolute;right:0<?= $active ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
@@ -100,7 +102,7 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 					<li>
 						<ul>
 							<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/" title="Ir ao Painel Administrativo"><i class="material-icons left">keyboard_arrow_right</i>Painel Administrativo</a></li>
-							<li><a class="waves-effect" href="<?= $root ?>/admin/exit.php" title="Sair"><i class="material-icons left">keyboard_arrow_right</i>Sair</a></li>
+							<li><a class="waves-effect" href="<?= $assets ?>/php/Logout.php" title="Sair"><i class="material-icons left">keyboard_arrow_right</i>Sair</a></li>
 						</ul>
 					</li>
 				</ul>

@@ -45,14 +45,14 @@
 						<div class="input-field col s12">
 							<i class="material-icons prefix">account_circle</i>
 							<input placeholder="Nome completo" name="name" id="name" type="text" class="validate" oninvalid="this.setCustomValidity('Preencha este campo com seu nome.')" oninput="setCustomValidity('')" required>
-							<label for="name">Nome</label>
+							<label class="active" for="name">Nome</label>
 							<span class="helper-text" data-error="Nome inválido." data-success="Nome válido.">Ex: Lucas Bittencourt</span>
 						</div>
 
 						<div class="input-field col s12">
-						<i class="material-icons prefix">mail</i>
-							<input placeholder="E-mail de usuário" name="email" id="email" type="email" class="validate" oninvalid="this.setCustomValidity('Por favor, preencha esse campo com seu e-mail.')" oninput="setCustomValidity('')" required>
-							<label for="email">E-mail</label>
+							<i class="material-icons prefix">mail</i>
+							<input placeholder="E-mail para contato" name="email" id="email" type="email" class="validate" oninvalid="this.setCustomValidity('Por favor, preencha este campo com seu e-mail.')" oninput="setCustomValidity('')" required>
+							<label class="active" for="email">E-mail</label>
 							<span class="helper-text" data-error="E-mail inválido." data-success="E-mail válido.">Ex: lucasnaja0@gmail.com</span>
 						</div>
 					</div>
