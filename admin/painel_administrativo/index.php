@@ -141,15 +141,6 @@ $admin_panel = true
 	<script>
 		M.Tooltip.init(document.querySelectorAll('.tooltiped'))
 
-		const getRandomColor = () => {
-			const letters = '0123456789ABCDEF'
-			let color = '#'
-
-			for (let i = 0; i < 6; i++) color += letters[Math.floor(Math.random() * 16)]
-
-			return color
-		}
-
 		<?php
 		$sql = $database->prepare('SELECT tool_name, tool_visits FROM tools WHERE tool_active = "1" ORDER BY tool_visits DESC LIMIT 10');
 
@@ -163,6 +154,9 @@ $admin_panel = true
 			data.push('<?= $tool_visits ?>')
 			labels.push('<?= $tool_name ?>')
 		<?php endforeach ?>
+
+		const randomNumber = () => Math.floor(Math.random() * 256)
+		const getRandomColor = () => `rgb(${randomNumber()}, ${randomNumber()}, ${randomNumber()})`
 
 		new Chart(document.querySelector('#status').getContext('2d'), {
 			type: 'pie',

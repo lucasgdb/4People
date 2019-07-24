@@ -22,18 +22,18 @@ const generatePassword = (
 	if (lowerCase) characters += lowerCases
 	if (special) characters += specials
 
-	if (firstChar === 'number') password += numbers[parseInt(Math.random() * numbers.length)]
-	else if (firstChar === 'upperCase') password += upperCases[parseInt(Math.random() * upperCases.length)]
-	else if (firstChar === 'lowerCase') password += lowerCases[parseInt(Math.random() * lowerCases.length)]
-	else password += specials[parseInt(Math.random() * specials.length)]
+	if (firstChar === 'number') password += numbers[Math.floor(Math.random() * numbers.length)]
+	else if (firstChar === 'upperCase') password += upperCases[Math.floor(Math.random() * upperCases.length)]
+	else if (firstChar === 'lowerCase') password += lowerCases[Math.floor(Math.random() * lowerCases.length)]
+	else password += specials[Math.floor(Math.random() * specials.length)]
 
 	for (let i = 1; i < length; i++) {
-		let char = characters[parseInt(Math.random() * characters.length)]
+		let char = characters[Math.floor(Math.random() * characters.length)]
 
 		do {
 			const passChar = password[i - 1]
 			if (excludeEqualChars) {
-				while (passChar === char) char = characters[parseInt(Math.random() * characters.length)]
+				while (passChar === char) char = characters[Math.floor(Math.random() * characters.length)]
 			}
 
 			if (excludeSimilarChars) {
@@ -59,7 +59,7 @@ const generatePassword = (
 					passChar === 'g' && char === 'q' ||
 					passChar === 'q' && char === 'g'
 				) {
-					char = characters[parseInt(Math.random() * characters.length)]
+					char = characters[Math.floor(Math.random() * characters.length)]
 				}
 
 			}
