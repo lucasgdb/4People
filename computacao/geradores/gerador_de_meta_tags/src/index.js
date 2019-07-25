@@ -45,6 +45,24 @@ const countCharacters = (e, input) => {
 	input.textContent = e.target.value.length
 }
 
+const savePassword = () => {
+	if (txtResult.value.trim()) {
+		saveAs(new File(
+			[
+				`<!DOCTYPE html>\n<html lang="pt-br">\n\n<head>\n${txtResult.value.split('\n').map(line => `\t${line}\n`).join('')}</head>\n\n<body>\n\n</body>\n\n</html>`
+			], "index.html", { type: "text/html;charset=utf-8" }))
+		M.toast({
+			html: 'Meta Tags salvas com sucesso.',
+			classes: 'green'
+		})
+	} else {
+		M.toast({
+			html: 'Não foi possível salvar as Meta Tags.',
+			classes: 'red accent-4'
+		})
+	}
+}
+
 const copyResult = () => {
 	if (txtResult.value !== '') {
 		txtResult.select()

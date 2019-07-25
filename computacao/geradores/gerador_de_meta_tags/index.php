@@ -5,7 +5,7 @@
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-   <link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>Gerador de Meta Tags - 4People</title>
@@ -203,9 +203,12 @@
 				</button>
 				<div class="divider mt-2"></div>
 
-				<textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false"></textarea>
+				<textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
 				<button title="Copiar Meta Tags" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="copyResult()">
 					Copiar
+				</button>
+				<button title="Salvar Meta Tags" class="btn waves-effect indigo darken-4 mt-1 z-depth-0" onclick="savePassword()">
+					Salvar
 				</button>
 				<button title="Limpar Meta Tags" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="clearInput()">
 					Limpar
@@ -236,6 +239,7 @@
 
 	<script src="<?= $assets ?>/algorithms/generators/metaTagsGenerator.js"></script>
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
+	<script src="<?= $assets ?>/src/js/fileSaver.min.js"></script>
 	<script src="src/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 </body>

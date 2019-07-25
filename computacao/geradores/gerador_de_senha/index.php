@@ -217,7 +217,7 @@
 
 	<script src="<?= $assets ?>/algorithms/generators/passwordGenerator.js"></script>
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
-	<script src="src/fileSaver.min.js"></script>
+	<script src="<?= $assets ?>/src/js/fileSaver.min.js"></script>
 	<script src="src/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 </body>
