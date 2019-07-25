@@ -34,7 +34,7 @@ $image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 		</div>
 	</li>
 
-	<?php $controls = strpos($link, 'administradores') !== false || strpos($link, 'ferramentas') ?>
+	<?php $controls = strpos($link, 'administradores') !== false || strpos($link, 'ferramentas') !== false || strpos($link, 'banimentos') !== false ?>
 
 	<li class="<?= $controls ? 'active' : '' ?>">
 		<div class="collapsible-header"><i class="material-icons left">insert_chart</i>Controles<i class="material-icons" style="position:absolute;right:0<?= $controls ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
@@ -43,7 +43,7 @@ $image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 				<li>
 					<ul>
 						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/administradores/" title="Controle de Administradores"><i class="material-icons left">keyboard_arrow_right</i>Controle de Administradores</a></li>
-						<li><a class="waves-effect" href="#" title="Controle de usuários banidos"><i class="material-icons left">keyboard_arrow_right</i>Controle de Banimentos</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/banimentos/" title="Controle de usuários banidos"><i class="material-icons left">keyboard_arrow_right</i>Controle de Banimentos</a></li>
 						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/ferramentas/tipos_de_ferramentas/" title="Controle de Tipos de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Tipos</a></li>
 						<?php
 						include_once("$assets/php/Connection.php");

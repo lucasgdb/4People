@@ -45,7 +45,7 @@ const countCharacters = (e, input) => {
 	input.textContent = e.target.value.length
 }
 
-const savePassword = () => {
+const saveMetaTags = () => {
 	if (txtResult.value.trim()) {
 		saveAs(new File(
 			[

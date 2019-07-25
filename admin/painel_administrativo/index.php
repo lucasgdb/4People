@@ -17,17 +17,8 @@ $admin_panel = true
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/chart.min.css">
-	<title>4People - Ferramentas Online</title>
-	<?php include_once("$assets/components/meta_tags.php") ?>
-	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-	<meta name="title" content="4People - Ferramentas Online">
-	<meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
-	<meta name="application-name" content="4People">
-	<meta name="msapplication-starturl" content="./">
-	<meta property="og:title" content="4People - Ferramentas Online">
-	<meta name="twitter:title" content="4People - Ferramentas Online">
-	<meta property="og:url" content="./">
-	<meta name="twitter:url" content="./">
+	<title>Painel Administrativo - 4People</title>
+	<?php include_once("$assets/components/admin_components/meta_tags.php") ?>
 </head>
 
 <body class="grey lighten-3">
@@ -72,7 +63,7 @@ $admin_panel = true
 									<div class="col s12 center-align">
 										<p>Banimentos</p>
 										<div class="divider"></div>
-										<a class="tooltiped" data-tooltip="Banimentos" href="#">
+										<a class="tooltiped" data-tooltip="Banimentos" href="banimentos/">
 											<i class="material-icons large" style="color:#212121">close</i>
 										</a>
 									</div>

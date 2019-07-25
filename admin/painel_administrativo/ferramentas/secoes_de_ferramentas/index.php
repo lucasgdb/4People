@@ -15,17 +15,8 @@ if (!isset($_SESSION['logged'])) {
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
-	<title>Seções de Ferramentas</title>
-	<?php include_once("$assets/components/meta_tags.php") ?>
-	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-	<meta name="title" content="4People - Ferramentas Online">
-	<meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
-	<meta name="application-name" content="4People">
-	<meta name="msapplication-starturl" content="./">
-	<meta property="og:title" content="4People - Ferramentas Online">
-	<meta name="twitter:title" content="4People - Ferramentas Online">
-	<meta property="og:url" content="./">
-	<meta name="twitter:url" content="./">
+	<title>Seções de Ferramentas - 4People</title>
+	<?php include_once("$assets/components/admin_components/meta_tags.php") ?>
 </head>
 
 <body class="grey lighten-3">

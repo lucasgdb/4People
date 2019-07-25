@@ -12,16 +12,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>Painel de Login</title>
-	<?php include_once("$assets/components/meta_tags.php") ?>
-	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-	<meta name="title" content="4People - Ferramentas Online">
-	<meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
-	<meta name="application-name" content="4People">
-	<meta name="msapplication-starturl" content="./">
-	<meta property="og:title" content="4People - Ferramentas Online">
-	<meta name="twitter:title" content="4People - Ferramentas Online">
-	<meta property="og:url" content="./">
-	<meta name="twitter:url" content="./">
+	<?php include_once("$assets/components/admin_components/meta_tags.php") ?>
 </head>
 
 <body style="background:#242b38">

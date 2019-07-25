@@ -26,8 +26,7 @@
 <meta name="twitter:creator" content="@lucasnaja0">
 <meta name="twitter:site" content="@lucasnaja0">
 
-<meta name="robots" content="index,follow,noodp">
-<meta name="robots" content="noydir">
+<meta name="robots" content="all">
 <meta name="slurp" content="noydir">
 <meta name="generator" content="Microsoft Visual Studio Code">
 <meta name="rating" content="general">

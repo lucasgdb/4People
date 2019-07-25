@@ -207,7 +207,7 @@
 				<button title="Copiar Meta Tags" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="copyResult()">
 					Copiar
 				</button>
-				<button title="Salvar Meta Tags" class="btn waves-effect indigo darken-4 mt-1 z-depth-0" onclick="savePassword()">
+				<button title="Salvar Meta Tags" class="btn waves-effect indigo darken-4 mt-1 z-depth-0" onclick="saveMetaTags()">
 					Salvar
 				</button>
 				<button title="Limpar Meta Tags" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="clearInput()">
