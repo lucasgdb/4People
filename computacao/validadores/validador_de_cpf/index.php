@@ -51,7 +51,7 @@
 				</button>
 				<div class="divider mt-2"></div>
 
-				<p class="mb-0">Origem do CPF: <span id="from">Aguardando...</span></p>
+				<p class="mb-2">Origem do CPF: <span id="from">Aguardando...</span></p>
 				<textarea id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
 				<button title="Copiar Validação" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="copyResult()">
 					Copiar

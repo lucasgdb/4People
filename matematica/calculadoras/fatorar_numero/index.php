@@ -5,7 +5,7 @@
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-   <link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>Fatorar Número - 4People</title>
@@ -52,6 +52,9 @@
 				<div class="divider mt-2"></div>
 
 				<div class="mt-2" id="result" placeholder="Resultado" contenteditable="false"></div>
+				<button id="save" title="Copiar Resultado" class="btn waves-effect waves-light indigo darken-4 mt-2 z-depth-0">
+					Copiar
+				</button>
 				<button title="Limpar Fatoração" class="btn waves-effect waves-light indigo darken-4 mt-2 z-depth-0" onclick="clearInput()">
 					Limpar
 				</button>
@@ -81,6 +84,7 @@
 
 	<script src="<?= $assets ?>/algorithms/calculators/factorization.js"></script>
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
+	<script src="<?= $assets ?>/src/js/clipboard.min.js"></script>
 	<script src="src/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 </body>

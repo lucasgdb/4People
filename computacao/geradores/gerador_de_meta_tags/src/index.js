@@ -64,7 +64,7 @@ const saveMetaTags = () => {
 }
 
 const copyResult = () => {
-	if (txtResult.value !== '') {
+	if (txtResult.value.trim()) {
 		txtResult.select()
 		document.execCommand('copy')
 
