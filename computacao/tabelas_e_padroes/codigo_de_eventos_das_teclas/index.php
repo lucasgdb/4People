@@ -21,7 +21,7 @@
 	<meta name="twitter:url" content="./computacao/tabelas_e_padroes/codigo_de_eventos_das_teclas">
 </head>
 
-<body class="grey lighten-3">
+<body class="grey lighten-4">
 	<?php
 	include_once("$assets/components/noscript.php");
 	include_once("$assets/components/spinner.php");

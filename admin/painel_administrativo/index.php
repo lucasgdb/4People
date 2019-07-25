@@ -21,7 +21,7 @@ $admin_panel = true
 	<?php include_once("$assets/components/admin_components/meta_tags.php") ?>
 </head>
 
-<body class="grey lighten-3">
+<body class="grey lighten-4">
 	<?php
 	include_once("$assets/components/noscript.php");
 	include_once("$assets/components/spinner.php");

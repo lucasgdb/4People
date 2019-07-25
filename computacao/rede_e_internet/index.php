@@ -20,7 +20,7 @@
 	<meta name="twitter:url" content="./computacao/rede_e_internet/">
 </head>
 
-<body class="grey lighten-3">
+<body class="grey lighten-4">
 	<?php
 	include_once("$assets/components/noscript.php");
 	include_once("$assets/components/spinner.php");

@@ -99,8 +99,8 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="col s12">
 							<div class="divider"></div>
-							<a href="../" class="btn indigo darken-4 mt-2 z-depth-0" title="Cancelar edição"><i class="material-icons left">close</i>Cancelar</a>
-							<button title="Salvar Dados" class="btn indigo darken-4 mt-2 right z-depth-0">
+							<a href="../" class="btn waves-effect waves-light indigo darken-4 mt-2 z-depth-0" title="Cancelar edição"><i class="material-icons left">close</i>Cancelar</a>
+							<button title="Salvar Dados" class="btn waves-effect waves-light indigo darken-4 mt-2 right z-depth-0">
 								<i class="material-icons left">save</i>Salvar
 								<input style="display:none" type="submit" value="">
 							</button>

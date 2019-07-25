@@ -74,8 +74,8 @@ $image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 			<ul class="collapsible padding-headers padding-buttons">
 				<li>
 					<ul>
-						<li><a class="waves-effect" href="<?= $root ?>/" title="Voltar ao Início"><i class="material-icons left">keyboard_arrow_right</i>Voltar ao Início</a></li>
-						<li><a class="waves-effect" href="<?= $assets ?>/php/Logout.php" title="Sair"><i class="material-icons left">keyboard_arrow_right</i>Sair</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/" title="Voltar ao Início"><i class="material-icons left">home</i>Voltar ao Início</a></li>
+						<li><a class="waves-effect" href="<?= $assets ?>/php/Logout.php" title="Sair"><i class="material-icons left">exit_to_app</i>Sair</a></li>
 					</ul>
 				</li>
 			</ul>

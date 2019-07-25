@@ -19,7 +19,7 @@ if (!isset($_SESSION['logged'])) {
 	<?php include_once("$assets/components/admin_components/meta_tags.php") ?>
 </head>
 
-<body class="grey lighten-3">
+<body class="grey lighten-4">
 	<?php
 	include_once("$assets/components/noscript.php");
 	include_once("$assets/components/spinner.php");
@@ -60,7 +60,7 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="col s12">
 							<div class="divider"></div>
-							<button title="Inserir Tipo de Ferramentas no 4People" class="btn indigo darken-4 mt-2 z-depth-0">
+							<button title="Inserir Tipo de Ferramentas no 4People" class="btn waves-effect waves-light indigo darken-4 mt-2 z-depth-0">
 								<i class="material-icons left">folder</i>Inserir
 								<input style="display:none" type="submit" value="">
 							</button>

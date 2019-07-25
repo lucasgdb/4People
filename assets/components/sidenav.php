@@ -101,8 +101,8 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 				<ul class="collapsible padding-headers padding-buttons">
 					<li>
 						<ul>
-							<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/" title="Ir ao Painel Administrativo"><i class="material-icons left">keyboard_arrow_right</i>Painel Administrativo</a></li>
-							<li><a class="waves-effect" href="<?= $assets ?>/php/Logout.php" title="Sair"><i class="material-icons left">keyboard_arrow_right</i>Sair</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/" title="Ir ao Painel Administrativo"><i class="material-icons left">verified_user</i>Painel Administrativo</a></li>
+							<li><a class="waves-effect" href="<?= $assets ?>/php/Logout.php" title="Sair"><i class="material-icons left">exit_to_app</i>Sair</a></li>
 						</ul>
 					</li>
 				</ul>

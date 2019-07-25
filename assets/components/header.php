@@ -9,7 +9,7 @@
 				<?php
 				if (isset($_SESSION['logged'])) : ?>
 					<li title="Painel Administrativo" class="waves-effect"><a href="<?= $root ?>/admin/painel_administrativo/"><i class="material-icons left">verified_user</i>Painel Administrativo</a></li>
-					<li title="Sair" class="waves-effect"><a href="<?= $assets ?>/php/Logout.php"><i class="material-icons left">close</i>Sair</a></li>
+					<li title="Sair" class="waves-effect"><a href="<?= $assets ?>/php/Logout.php"><i class="material-icons left">exit_to_app</i>Sair</a></li>
 				<?php else : ?>
 					<?php
 					include_once("$assets/php/Connection.php");
