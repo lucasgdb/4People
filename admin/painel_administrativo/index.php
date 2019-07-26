@@ -99,7 +99,7 @@ $admin_panel = true
 									<div class="col s12 center-align">
 										<p>Mensagens</p>
 										<div class="divider mb-2"></div>
-										<a class="tooltiped" data-tooltip="Mensagens" href="#">
+										<a class="tooltiped" data-tooltip="Mensagens" href="mensagens/">
 											<i class="material-icons large" style="color:#212121">question_answer</i>
 										</a>
 									</div>

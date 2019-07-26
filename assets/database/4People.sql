@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Jul 25, 2019 at 05:17 PM
+-- Generation Time: Jul 26, 2019 at 07:44 AM
 -- Server version: 8.0.16
 -- PHP Version: 7.2.19
 
@@ -60,6 +60,22 @@ CREATE TABLE `banneds` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `messages`
+--
+
+CREATE TABLE `messages` (
+  `message_id` int(11) NOT NULL,
+  `message_name` varchar(45) NOT NULL,
+  `message_email` varchar(45) NOT NULL,
+  `message_subject` varchar(45) NOT NULL,
+  `message_content` text NOT NULL,
+  `message_time` datetime NOT NULL,
+  `message_read` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sections`
 --
 
@@ -109,11 +125,11 @@ CREATE TABLE `tools` (
 
 INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_description`, `tool_link`, `tool_visits`, `tool_active`, `section_id`) VALUES
 (7, 'Gerador de CPF', 'gerador_de_cpf', 'Gerador de CPF Online para Programadores testarem seus Softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/CPFGenerator.js', 20, 1, 2),
-(8, 'Gerador de Senha', 'gerador_de_senha', 'Gerador de Senha Online para gerar senhas personalizadas e fortes.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/passwordGenerator.js', 21, 1, 2),
-(9, 'Gerador de Meta Tags', 'gerador_de_meta_tags', 'Gerador de Meta Tags Online, feito para gerar várias das Meta Tags existentes.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/metaTagsGenerator.js', 19, 1, 2),
+(8, 'Gerador de Senha', 'gerador_de_senha', 'Gerador de Senha Online para gerar senhas personalizadas e fortes.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/passwordGenerator.js', 22, 1, 2),
+(9, 'Gerador de Meta Tags', 'gerador_de_meta_tags', 'Gerador de Meta Tags Online, feito para gerar várias das Meta Tags existentes.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/metaTagsGenerator.js', 21, 1, 2),
 (10, 'Gerador de Nicks', 'gerador_de_nicks', 'Gerador de Nicks Online para gerar diversos tipos de nicks aleatórios.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/nickGenerator.js', 10, 1, 2),
 (11, 'Validador de CPF', 'validador_de_cpf', 'Validador de CPF Online para validar CPFs para programadores testarem seus softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/validators/CPFValidator.js', 14, 1, 4),
-(12, 'Contador de Caracteres', 'contador_de_caracteres', 'Contador de letras, caracteres sem espaço, palavras, espaços, vogais, consoantes, números e linhas.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/string_functions/charactersCount.js', 4, 1, 5),
+(12, 'Contador de Caracteres', 'contador_de_caracteres', 'Contador de letras, caracteres sem espaço, palavras, espaços, vogais, consoantes, números e linhas.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/string_functions/charactersCount.js', 6, 1, 5),
 (13, 'Meu IP', 'meu_ip', 'Veja seu IP e muito mais informações aqui.', 'https://github.com/lucasnaja/4People/blob/master/computacao/rede_e_internet/meu_ip/src/index.js', 8, 1, 6),
 (14, 'Meu Navegador', 'meu_navegador', 'Veja seu Navegador aqui.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/network_and_internet/myWebBrowser.js', 4, 1, 6),
 (15, 'Buscar CEP', 'buscar_cep', 'Busque informações de seu CEP, como Rua, Cidade, Bairro e Estado aqui.', 'https://github.com/lucasnaja/4People/blob/master/computacao/rede_e_internet/buscar_cep/src/index.js', 6, 1, 6),
@@ -185,6 +201,12 @@ ALTER TABLE `banneds`
   ADD PRIMARY KEY (`banned_ip`);
 
 --
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`message_id`);
+
+--
 -- Indexes for table `sections`
 --
 ALTER TABLE `sections`
@@ -221,6 +243,12 @@ ALTER TABLE `types`
 --
 ALTER TABLE `admins`
   MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `sections`

@@ -96,8 +96,8 @@ if (!isset($_SESSION['logged'])) {
 					<div style="margin-top:15px" class="row mb-0">
 						<div class="input-field col s12">
 							<i class="material-icons prefix">folder</i>
-							<select name="type_id">
-								<option value="-1">Selecione um Tipo</option>
+							<select name="type_id" required>
+								<option value="">Selecione um Tipo</option>
 								<?php
 								$sql = $database->prepare('SELECT type_id, type_name FROM types ORDER BY type_id');
 								$sql->execute();
@@ -164,8 +164,8 @@ if (!isset($_SESSION['logged'])) {
 		<div class="divider"></div>
 
 		<div class="modal-footer">
-			<button title="Cancelar" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left red-text" style="font-size:30px">close</i>Não</button>
-			<a id="linkRemoveSection" title="Remover Seção" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left green-text" style="font-size:30px">check</i>Sim</a>
+			<button title="Cancelar" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left red-text" style="font-size:27px">close</i>Não</button>
+			<a id="linkRemoveSection" title="Remover Seção" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left green-text" style="font-size:27px">check</i>Sim</a>
 		</div>
 	</div>
 

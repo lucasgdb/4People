@@ -40,19 +40,19 @@
 
 				<h5>Dados de contato</h5>
 
-				<form class="mt-2" action="src/send_email.php" method="post">
+				<form class="mt-2" action="src/send_message.php" method="post">
 					<div class="row mb-0">
 						<div class="input-field col s12">
 							<i class="material-icons prefix">account_circle</i>
-							<input placeholder="Nome completo" name="name" id="name" type="text" class="validate" oninvalid="this.setCustomValidity('Preencha este campo com seu nome.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="name">Nome</label>
+							<input maxlength="45" placeholder="Nome completo" name="message_name" id="message_name" type="text" class="validate" oninvalid="this.setCustomValidity('Preencha este campo com seu nome.')" oninput="setCustomValidity('')" required>
+							<label class="active" for="message_name">Nome</label>
 							<span class="helper-text" data-error="Nome inválido." data-success="Nome válido.">Ex: Lucas Bittencourt</span>
 						</div>
 
 						<div class="input-field col s12">
 							<i class="material-icons prefix">mail</i>
-							<input placeholder="E-mail para contato" name="email" id="email" type="email" class="validate" oninvalid="this.setCustomValidity('Por favor, preencha este campo com seu e-mail.')" oninput="setCustomValidity('')" required>
-							<label class="active" for="email">E-mail</label>
+							<input maxlength="45" placeholder="E-mail para contato" name="message_email" id="message_email" type="email" class="validate" oninvalid="this.setCustomValidity('Preencha este campo com seu e-mail.')" oninput="setCustomValidity('')" required>
+							<label class="active" for="message_email">E-mail</label>
 							<span class="helper-text" data-error="E-mail inválido." data-success="E-mail válido.">Ex: lucasnaja0@gmail.com</span>
 						</div>
 					</div>
@@ -60,9 +60,23 @@
 					<div class="divider"></div>
 
 					<h5>Informações</h5>
-					<textarea name="subject" placeholder="Mensagem" oninvalid="this.setCustomValidity('Por favor, preencha esse campo.')" oninput="setCustomValidity('')" spellcheck="false" required></textarea>
+					<div class="row mb-0">
+						<div class="input-field col s12">
+							<select name="message_subject" required>
+								<option value="" disabled selected>Escolha um título</option>
+								<option value="Bug (mal funcionamento)">Bug (mal funcionamento)</option>
+								<option value="Erro (erro visual)">Erro (erro visual)</option>
+								<option value="Sugestão (visual)">Sugestão (visual)</option>
+								<option value="Sugestão (ferramenta)">Sugestão (ferramenta)</option>
+							</select>
+							<label>Título</label>
+							<span class="helper-text">Selecionar assunto de mensagem</span>
+						</div>
+					</div>
 
-					<button title="Enviar" class="btn waves-effect waves-light indigo darken-4" type="submit">
+					<textarea name="message_content" placeholder="Mensagem" oninvalid="this.setCustomValidity('Preencha este campo com a mensagem.')" oninput="setCustomValidity('')" spellcheck="false" required></textarea>
+
+					<button title="Enviar Mensagem" class="btn waves-effect waves-light indigo darken-4 z-depth-0" type="submit">
 						Enviar
 					</button>
 				</form>
@@ -76,6 +90,9 @@
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
+	<script>
+		M.FormSelect.init(document.querySelectorAll('select'))
+	</script>
 	<?php
 	if (isset($_SESSION['msg'])) {
 		$msg = $_SESSION['msg']['type'];

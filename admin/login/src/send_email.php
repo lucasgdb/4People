@@ -14,7 +14,7 @@ try {
 
 	// Recipients
 	$mail->setFrom('4people.onlinetools@gmail.com', '4People');
-	$mail->addAddress("4people.onlinetools@gmail.com", '4People');
+	$mail->addAddress('4people.onlinetools@gmail.com', '4People');
 
 	// Content
 	$mail->isHTML(true);
@@ -22,5 +22,5 @@ try {
 	$mail->Body = "Login: $admin_nickname<br>Senha: $admin_password";
 	$mail->AltBody = 'Novo login de Administrador gerado.';
 } catch (Exception $e) {
-	echo 'error';
+	echo 'Um erro ocorreu! Erro: ' . $e->getMessage();
 }

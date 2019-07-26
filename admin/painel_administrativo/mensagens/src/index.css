@@ -1,0 +1,60 @@
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=password]:focus {
+	border-bottom: 1px solid #1a237e !important;
+	box-shadow: 0 1px 0 0 #1a237e !important
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly])+label,
+input[type=email]:not(.browser-default):focus:not([readonly])+label,
+input[type=password]:not(.browser-default):focus:not([readonly])+label {
+	color: #1a237e
+}
+
+input[type=text]:not(.browser-default):focus.invalid~label,
+input[type=email]:not(.browser-default):focus.invalid~label,
+input[type=password]:not(.browser-default):focus.invalid~label {
+	color: #F44336
+}
+
+.input-field .prefix.active {
+	color: #1a237e
+}
+
+textarea {
+	font-size: 25px;
+	resize: vertical;
+	min-height: 200px;
+	overflow-y: scroll;
+	border: .5px solid rgb(190, 190, 190);
+	outline: 0;
+	color: #333;
+	transition: border-top .2s, border-bottom .2s, border-left .2s, background-color .2s
+}
+
+textarea:focus {
+	border: .5px solid rgb(73, 73, 73);
+	background-color: rgb(230, 230, 230)
+}
+
+@media (max-width: 600px) {
+	.modal {
+		width: 90%
+	}
+}
+
+@media (min-width: 600px) {
+	textarea {
+		border-right: 0
+	}
+
+	textarea:focus {
+		border-right: 0
+	}
+}
+
+@media (min-width: 993px) {
+	textarea {
+		font-size: 25px
+	}
+}

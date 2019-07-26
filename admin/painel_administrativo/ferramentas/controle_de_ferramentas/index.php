@@ -214,8 +214,8 @@ if (!isset($_SESSION['logged'])) {
 		<div class="divider"></div>
 
 		<div class="modal-footer">
-			<button title="Cancelar" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left red-text" style="font-size:30px">close</i>Não</button>
-			<a id="linkRemoveTool" title="Remover Ferramenta" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left green-text" style="font-size:30px">check</i>Sim</a>
+			<button title="Cancelar" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left red-text" style="font-size:27px">close</i>Não</button>
+			<a id="linkRemoveTool" title="Remover Ferramenta" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left green-text" style="font-size:27px">check</i>Sim</a>
 		</div>
 	</div>
 
