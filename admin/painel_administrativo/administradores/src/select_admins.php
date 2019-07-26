@@ -16,7 +16,7 @@ try {
 			<td><?= $admin_nickname ?></td>
 			<td><?= $admin_email ?></td>
 			<td>
-				<a title="Editar Administrador" href="atualizar_dados/?admin_id=<?= $admin_id ?>"><i class="material-icons green-text">edit</i></a>
+				<a class="material-icons green-text" title="Editar Administrador" href="atualizar_dados/?admin_id=<?= $admin_id ?>">edit</a>
 				<i onclick="changeLink('src/delete_admin.php?admin_id=<?= $admin_id ?>', '<?= $admin_name ?>')" class="material-icons red-text modal-trigger" style="cursor:pointer" title="Remover Administrador" data-target="removeAdmin">clear</i>
 			</td>
 		</tr>

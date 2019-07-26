@@ -34,7 +34,7 @@ if (!isset($_SESSION['logged'])) {
 				<label>Adicionar um novo Administrador ao 4People</label>
 
 				<div class="divider"></div>
-
+				
 				<form style="margin-top:15px" action="src/insert_admin.php" method="post" enctype="multipart/form-data">
 					<div class="row mb-0">
 						<div class="input-field col s12 m6">

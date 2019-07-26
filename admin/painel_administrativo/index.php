@@ -43,7 +43,7 @@ $admin_panel = true
 							<div class="card-content left-div-margin-mobile" style="padding-bottom:4px">
 								<div class="row mb-0">
 									<div class="col s12 center-align">
-										<p>Administradores</p>
+										<h6 class="mt-0">Administradores</h6>
 										<div class="divider"></div>
 										<a class="tooltiped" data-tooltip="Administradores" href="administradores/">
 											<i class="material-icons large" style="color:#212121">supervisor_account</i>
@@ -54,6 +54,30 @@ $admin_panel = true
 								<div class="left-div-mobile indigo darken-4"></div>
 							</div>
 						</div>
+
+						<div class="card z-depth-2">
+							<div class="card-content left-div-margin-mobile" style="padding-bottom:4px">
+								<div class="row mb-0">
+									<div class="col s12 center-align">
+										<?php
+										include_once("$assets/php/Connection.php");
+
+										$sql = $database->prepare('SELECT COUNT(message_id) FROM messages WHERE message_read = "0"');
+										$sql->execute();
+
+										$count = $sql->fetchColumn()
+										?>
+										<h6 class="mt-0" style="position:relative">Mensagens<span class="new badge" style="position:absolute;right:0" data-badge-caption="nova<?= $count === '1' ? '' : 's' ?>"><?= $count ?></span></h6>
+										<div class="divider mb-2"></div>
+										<a class="tooltiped" data-tooltip="Mensagens" href="mensagens/">
+											<i class="material-icons large" style="color:#212121">question_answer</i>
+										</a>
+									</div>
+								</div>
+
+								<div class="left-div-mobile indigo darken-4"></div>
+							</div>
+						</div>
 					</div>
 
 					<div class="col s12 m6">
@@ -61,7 +85,7 @@ $admin_panel = true
 							<div class="card-content left-div-margin-mobile" style="padding-bottom:4px">
 								<div class="row mb-0">
 									<div class="col s12 center-align">
-										<p>Banimentos</p>
+										<h6 class="mt-0">Banimentos</h6>
 										<div class="divider"></div>
 										<a class="tooltiped" data-tooltip="Banimentos" href="banimentos/">
 											<i class="material-icons large" style="color:#212121">close</i>
@@ -72,35 +96,15 @@ $admin_panel = true
 								<div class="left-div-mobile indigo darken-4"></div>
 							</div>
 						</div>
-					</div>
 
-					<div class="col s12 m6">
 						<div class="card z-depth-2">
 							<div class="card-content left-div-margin-mobile" style="padding-bottom:4px">
 								<div class="row mb-0">
 									<div class="col s12 center-align">
-										<p>Ferramentas</p>
+										<h6 class="mt-0">Ferramentas</h6>
 										<div class="divider mb-2"></div>
 										<a class="tooltiped" data-tooltip="<?= $sections_count ? 'Controle de Ferramentas' : ($types_count ? 'Seções de Ferramentas' : 'Tipos de Ferramentas') ?>" href="<?= $sections_count ? 'ferramentas/controle_de_ferramentas/' : ($types_count ? 'ferramentas/secoes_de_ferramentas/' : 'ferramentas/tipos_de_ferramentas/') ?>">
 											<i class="material-icons large" style="color:#212121">build</i>
-										</a>
-									</div>
-								</div>
-
-								<div class="left-div-mobile indigo darken-4"></div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col s12 m6">
-						<div class="card z-depth-2">
-							<div class="card-content left-div-margin-mobile" style="padding-bottom:4px">
-								<div class="row mb-0">
-									<div class="col s12 center-align">
-										<p>Mensagens</p>
-										<div class="divider mb-2"></div>
-										<a class="tooltiped" data-tooltip="Mensagens" href="mensagens/">
-											<i class="material-icons large" style="color:#212121">question_answer</i>
 										</a>
 									</div>
 								</div>
@@ -146,25 +150,22 @@ $admin_panel = true
 			labels.push('<?= $tool_name ?>')
 		<?php endforeach ?>
 
-		const randomNumber = () => Math.floor(Math.random() * 256)
-		const getRandomColor = () => `rgb(${randomNumber()}, ${randomNumber()}, ${randomNumber()})`
-
 		new Chart(document.querySelector('#status').getContext('2d'), {
 			type: 'pie',
 			data: {
 				datasets: [{
 					data,
 					backgroundColor: [
-						getRandomColor(),
-						getRandomColor(),
-						getRandomColor(),
-						getRandomColor(),
-						getRandomColor(),
-						getRandomColor(),
-						getRandomColor(),
-						getRandomColor(),
-						getRandomColor(),
-						getRandomColor()
+						'#009688',
+						'#f44336',
+						'#2196f3',
+						'#00bcd4',
+						'#cddc39',
+						'#ff9800',
+						'#795548',
+						'#3f51b5',
+						'#e91e63',
+						'#9c27b0'
 					]
 				}],
 				labels
@@ -191,9 +192,9 @@ $admin_panel = true
 				datasets: [{
 					data: data2,
 					backgroundColor: [
-						getRandomColor(),
-						getRandomColor(),
-						getRandomColor()
+						'#009688',
+						'#f44336',
+						'#2196f3'
 					]
 				}],
 				labels: labels2

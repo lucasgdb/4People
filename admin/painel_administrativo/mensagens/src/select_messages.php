@@ -21,7 +21,7 @@ try {
 			<td><?= $message_email ?></td>
 			<td><?= $message_subject ?></td>
 			<td>
-				<i onclick="changeMessage('src/update_message.php?message_id=<?= $message_id ?>', '<?= $message_id ?>', '<?= $message_name ?>', '<?= $message_email ?>', '<?= $message_subject ?>', '<?= $message_content ?>', <?= $message_read === '1' ?>)" class="material-icons <?= $message_read === '1' ? 'grey-text' : 'green-text' ?> text-darken-1 modal-trigger" style="cursor:pointer" title="Ler Mensagem" data-target="readMessage">remove_red_eye</i>
+				<i onclick="changeMessage('src/update_message.php?message_id=<?= $message_id ?>', '<?= $message_id ?>', '<?= $message_name ?>', '<?= $message_email ?>', '<?= $message_subject ?>', '<?= preg_replace('/[^[:alnum:]áãâàéẽêèíĩîìóôõòúûũù]/', ' ', $message_content) ?>', <?= $message_read === '1' ?>)" class="material-icons <?= $message_read === '1' ? 'grey-text' : 'green-text' ?> text-darken-1 modal-trigger" style="cursor:pointer" title="Ler Mensagem" data-target="readMessage">remove_red_eye</i>
 				<i onclick="changeLink('src/delete_message.php?message_id=<?= $message_id ?>', '<?= $message_name ?>', '<?= $message_email ?>')" class="material-icons red-text modal-trigger" style="cursor:pointer" title="Remover Mensagem" data-target="removeMessage">clear</i>
 			</td>
 		</tr>

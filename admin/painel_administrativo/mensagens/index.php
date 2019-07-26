@@ -69,9 +69,9 @@ if (!isset($_SESSION['logged'])) {
 		<div class="divider"></div>
 
 		<div class="modal-footer">
-			<a id="linkMasAsRead" title="Marcar como lida" class="waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left">remove_red_eye</i>Marcar como lida</a>
-			<button title="Responder Mensagem" class="modal-close waves-effect waves-light btn-flat teal white-text modal-trigger" data-target="replyEmail"><i class="material-icons left">reply</i>Responder</button>
-			<a title="Fechar" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text">Fechar</a>
+			<a id="linkMasAsRead" title="Marcar como lida" class="btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">remove_red_eye</i>Marcar como lida</a>
+			<button title="Responder Mensagem" class="modal-close btn waves-effect waves-light teal z-depth-0 modal-trigger" data-target="replyEmail"><i class="material-icons left">reply</i>Responder</button>
+			<a title="Fechar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Fechar</a>
 		</div>
 	</div>
 
@@ -94,8 +94,8 @@ if (!isset($_SESSION['logged'])) {
 			<div class="divider"></div>
 
 			<div class="modal-footer">
-				<button title="Voltar" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text modal-trigger" data-target="readMessage"><i class="material-icons left">arrow_back</i>Voltar</button>
-				<button title="Responder Mensagem" class="btn waves-effect waves-light teal">
+				<button title="Voltar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0 modal-trigger" data-target="readMessage"><i class="material-icons left">arrow_back</i>Voltar</button>
+				<button title="Responder Mensagem" class="btn waves-effect waves-light tea z-depth-0">
 					<i class="material-icons right">send</i>Responder
 					<input style="display:none" type="submit" value="">
 				</button>
@@ -148,8 +148,8 @@ if (!isset($_SESSION['logged'])) {
 				linkMarkAsRead.href = link
 			} else linkMarkAsRead.classList.add('hide')
 
-			lblMessageSubject.innerHTML = `${subject} - ${name} &lt;${email}&gt;`
-			lblMessageSubjectTitle.innerHTML = `${subject} - ${name} &lt;${email}&gt;`
+			lblMessageSubject.innerHTML = `Título: ${subject} - ${name} &lt;${email}&gt;`
+			lblMessageSubjectTitle.innerHTML = `Título: ${subject} - ${name} &lt;${email}&gt;`
 			lblMessageID.value = id
 			lblMessageNameReply.value = name
 			lblMessageEmailReply.value = email
