@@ -127,12 +127,12 @@ $admin_panel = true
 					</div>
 				</div>
 
-				<div class="divider mt-2"></div>
+				<div class="divider"></div>
 
-				<div class="card z-depth-1" style="padding:8px 0">
+				<div class="card z-depth-2" style="padding:8px 0">
 					<canvas class="mt-2 mb-2" id="tools" width="3" height="1">Esse browser não suporta Canvas.</canvas>
 				</div>
-				<div class="card mb-2 z-depth-1" style="padding:8px 0">
+				<div class="card mb-2 z-depth-2" style="padding:8px 0">
 					<canvas id="status" width="3" height="1">Esse browser não suporta Canvas.</canvas>
 				</div>
 

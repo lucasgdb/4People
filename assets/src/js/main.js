@@ -8,6 +8,7 @@ const navMobileA = document.querySelectorAll('#nav-mobile a')
 const mainCollButtons = document.querySelectorAll('#slide-out > li:not(:first-child) > .collapsible-header')
 const secCollButtons = document.querySelectorAll('.padding-headers:not(.padding-buttons) > li > .collapsible-header')
 const body = document.body
+const container = document.querySelector('.container')
 const nav = document.querySelector('nav')
 const main = document.querySelector('main')
 const footer = document.querySelector('footer')
@@ -17,11 +18,13 @@ const spinner = document.querySelector('#spinner')
 const animateIn = (delay = 250) => {
 	body.style.transition = `padding-left ${delay}ms, opacity 150ms`
 	body.style.paddingLeft = '300px'
+	container.style.width = '90%'
 }
 
 const animateOut = (delay = 250) => {
 	body.style.transition = `padding-left ${delay}ms`
 	body.style.paddingLeft = '0'
+	container.style.width = '70%'
 }
 
 const sideIn = () => {

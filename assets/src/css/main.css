@@ -128,9 +128,15 @@ body>header+ul>li>.collapsible-header {
 	transition: transform 300ms
 }
 
+@media (max-width: 992px) {
+	.container {
+		width: 90% !important
+	}
+}
+
 @media (max-width: 600px) {
 	.container {
-		width: 100%
+		width: 100% !important
 	}
 
 	.footer-copyright {
@@ -140,16 +146,17 @@ body>header+ul>li>.collapsible-header {
 }
 
 @media (min-width: 601px) {
-	.container {
-		width: 90% !important
-	}
-
 	.linkHover:hover {
 		text-decoration: underline
 	}
 }
 
 @media (min-width: 993px) {
+	.container {
+		transition: width 300ms;
+		width: 90%
+	}
+
 	body {
 		padding-left: 300px
 	}

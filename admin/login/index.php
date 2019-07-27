@@ -15,7 +15,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 	<?php include_once("$assets/components/admin_components/meta_tags.php") ?>
 </head>
 
-<body style="background:#242b38">
+<body style="background:#2e3748">
 	<?php include_once("$assets/components/noscript.php") ?>
 
 	<main>
@@ -52,7 +52,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 
 							<div class="col s12" style="margin-top:5px">
 								<div class="divider"></div>
-								<a title="Voltar ao 4People" class="btn indigo darken-4 mt-2 z-depth-0" href="../../"><i class="material-icons left">arrow_back</i>Voltar</a>
+								<a title="Voltar ao 4People" class="btn indigo darken-3 mt-2 z-depth-0" href="../../"><i class="material-icons left">arrow_back</i>Voltar</a>
 								<?php
 								include_once("$assets/php/Connection.php");
 								include_once("$assets/php/IP.php");
@@ -100,7 +100,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 									<?php endif ?>
 								<?php endif ?>
 
-								<button title="Logar no 4People" class="btn indigo darken-4 mt-2 z-depth-0 right">
+								<button title="Logar no 4People" class="btn indigo darken-3 mt-2 z-depth-0 right">
 									<i class="material-icons right">arrow_forward</i>Entrar
 									<input style="display:none" type="submit" value="">
 								</button>
@@ -151,7 +151,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 					<?php endif ?>
 				<?php endif ?>
 
-				<div class="left-div indigo darken-4" style="border-radius:0"></div>
+				<div class="left-div indigo darken-3" style="border-radius:0"></div>
 			</div>
 		</div>
 	</main>
