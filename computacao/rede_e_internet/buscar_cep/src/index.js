@@ -26,6 +26,21 @@ const copyResult = () => {
 	}
 }
 
+const saveCEP = () => {
+	if (txtResult.value.trim() !== '') {
+		saveAs(new File([txtResult.value], "CEP.txt", { type: "text/plain;charset=utf-8" }))
+		M.toast({
+			html: 'Resultado salvo com sucesso.',
+			classes: 'green'
+		})
+	} else {
+		M.toast({
+			html: 'Não foi possível salvar o resultado.',
+			classes: 'red accent-4'
+		})
+	}
+}
+
 const clearInput = () => {
 	txtResult.value = ''
 }

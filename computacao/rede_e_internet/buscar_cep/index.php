@@ -5,7 +5,7 @@
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-   <link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>Buscar CEP - 4People</title>
@@ -52,10 +52,13 @@
 				<div class="divider mt-2"></div>
 
 				<textarea id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
-				<button title="Copiar Resultado" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="copyResult()">
+				<button title="Copiar" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="copyResult()">
 					Copiar
 				</button>
-				<button title="Limpar Resultado" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="clearInput()">
+				<button title="Salvar" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="saveCEP()">
+					Salvar
+				</button>
+				<button title="Limpar" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="clearInput()">
 					Limpar
 				</button>
 
@@ -84,6 +87,7 @@
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="src/cep.js"></script>
+	<script src="<?= $assets ?>/src/js/fileSaver.min.js"></script>
 	<script src="src/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 </body>
