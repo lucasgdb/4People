@@ -24,7 +24,7 @@ $image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 				<li>
 					<ul>
 						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/" title="Painel Administrativo"><i class="material-icons left">keyboard_arrow_right</i>Painel Administrativo</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/mensagens/" title="Mensagens dos usuários"><i class="material-icons left">keyboard_arrow_right</i>Mensagens dos usuários</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/mensagens/" title="Mensagens dos usuários"><i class="material-icons left">keyboard_arrow_right</i>Mensagem dos usuários</a></li>
 						<li><a class="waves-effect" href="#" title="Logs de Logins falhos"><i class="material-icons left">keyboard_arrow_right</i>Logs de Logins falhos</a></li>
 						<li><a class="waves-effect" href="#" title="Logs de Administradores"><i class="material-icons left">keyboard_arrow_right</i>Logs de Administradores</a></li>
 						<li><a class="waves-effect" href="#" title="Manutenção do site"><i class="material-icons left">keyboard_arrow_right</i>Manutenção do site</a></li>

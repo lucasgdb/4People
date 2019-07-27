@@ -18,7 +18,7 @@ if (!isset($_SESSION['logged'])) {
 	<?php include_once("$assets/components/admin_components/meta_tags.php") ?>
 </head>
 
-<body style="background:#242b38">
+<body style="background:#2e3748">
 	<?php include_once("$assets/components/noscript.php") ?>
 
 	<main>
@@ -92,15 +92,15 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">link</i>
-							<input value="<?= $tool_link ?>" id="tool_link" title="Preencha este campo com o caminho." placeholder="Link da Ferramenta no GitHub" class="validate" type="text" name="tool_link" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')">
+							<input value="<?= $tool_link ?>" id="tool_link" title="Preencha este campo com o link do repositório." placeholder="Link da Ferramenta no GitHub" class="validate" type="text" name="tool_link" oninvalid="this.setCustomValidity('Preencha este campo com o link do repositório.')" oninput="setCustomValidity('')">
 							<label class="active" for="tool_link">Link</label>
 							<span class="helper-text">Ex: https://github.com/lucasnaja/4People</span>
 						</div>
 
 						<div class="col s12">
 							<div class="divider"></div>
-							<a href="../" class="btn waves-effect waves-light indigo darken-4 mt-2 z-depth-0" title="Cancelar edição"><i class="material-icons left">close</i>Cancelar</a>
-							<button title="Salvar Dados" class="btn waves-effect waves-light indigo darken-4 mt-2 right z-depth-0">
+							<a href="../" class="btn waves-effect waves-light red accent-4 mt-2 z-depth-0" title="Cancelar"><i class="material-icons left">close</i>Cancelar</a>
+							<button title="Salvar" class="btn waves-effect waves-light green darken-3 mt-2 right z-depth-0">
 								<i class="material-icons left">save</i>Salvar
 								<input style="display:none" type="submit" value="">
 							</button>
@@ -108,7 +108,7 @@ if (!isset($_SESSION['logged'])) {
 					</div>
 				</form>
 
-				<div class="left-div indigo darken-4" style="border-radius:0"></div>
+				<div class="left-div indigo darken-3" style="border-radius:0"></div>
 			</div>
 		</div>
 	</main>

@@ -17,14 +17,9 @@ body {
 nav,
 main,
 footer,
-ul#slide-out,
-.fixed-action-btn {
+ul#slide-out {
 	opacity: 0;
 	transition: opacity 150ms !important
-}
-
-.slider {
-	font-family: serif
 }
 
 main {
@@ -66,10 +61,6 @@ main {
 .collapsible-header {
 	border-bottom: 1px solid #e0e0e0 !important
 }
-
-/* body>header+ul>li:nth-child(2) {
-	border-top: 1px solid #e0e0e0 !important
-} */
 
 body>header+ul>li>.collapsible-header {
 	padding-left: 4px !important

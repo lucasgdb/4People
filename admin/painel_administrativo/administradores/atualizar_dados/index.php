@@ -18,7 +18,7 @@ if (!isset($_SESSION['logged'])) {
 	<?php include_once("$assets/components/admin_components/meta_tags.php") ?>
 </head>
 
-<body style="background:#242b38">
+<body style="background:#2e3748">
 	<?php include_once("$assets/components/noscript.php") ?>
 
 	<main>
@@ -73,17 +73,17 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="file-field input-field col s12 l6">
 							<i class="material-icons prefix">image</i>
-							<input type="file" name="admin_image" accept=".png, .jpg, .jpeg, .svg, .gif">
+							<input title="Escolher imagem" type="file" name="admin_image" accept=".png, .jpg, .jpeg, .svg, .gif">
 							<input value="<?= $admin_image ?>" name="admin_image_text" style="width:calc(100% - 4.5rem)" placeholder="Selecionar imagem" type="text" class="file-path">
-							<i class="material-icons prefix red-text" style="cursor:pointer" onclick="admin_image_text.value = ''">close</i>
+							<i class="material-icons prefix red-text" title="Remover imagem" style="cursor:pointer" onclick="admin_image_text.value = ''">close</i>
 							<label class="active">Imagem</label>
 							<span class="helper-text">.png, .jpg, .jpeg, .svg, .gif</span>
 						</div>
 
 						<div class="col s12">
 							<div class="divider"></div>
-							<a href="../" class="btn waves-effect waves-light indigo darken-4 mt-2 z-depth-0" title="Cancelar edição"><i class="material-icons left">close</i>Cancelar</a>
-							<button title="Salvar Dados" class="btn waves-effect waves-light indigo darken-4 mt-2 right z-depth-0">
+							<a href="../" class="btn waves-effect waves-light red accent-4 mt-2 z-depth-0" title="Cancelar"><i class="material-icons left">close</i>Cancelar</a>
+							<button title="Salvar" class="btn waves-effect waves-light green darken-3 mt-2 right z-depth-0">
 								<i class="material-icons left">save</i>Salvar
 								<input style="display:none" type="submit" value="">
 							</button>
@@ -91,7 +91,7 @@ if (!isset($_SESSION['logged'])) {
 					</div>
 				</form>
 
-				<div class="left-div indigo darken-4" style="border-radius:0"></div>
+				<div class="left-div indigo darken-3" style="border-radius:0"></div>
 			</div>
 		</div>
 	</main>

@@ -51,9 +51,7 @@
 							<div class="divider"></div>
 
 							<div class="card-content">
-								<p id="key" class="flow-text center-align">
-									F5
-								</p>
+								<p id="key" class="flow-text center-align">F5</p>
 							</div>
 						</div>
 					</div>
@@ -67,9 +65,7 @@
 							<div class="divider"></div>
 
 							<div class="card-content">
-								<p id="location" class="flow-text center-align">
-									0 (General keys)
-								</p>
+								<p id="location" class="flow-text center-align">0 (General keys)</p>
 							</div>
 						</div>
 					</div>
@@ -83,9 +79,7 @@
 							<div class="divider"></div>
 
 							<div class="card-content">
-								<p id="which" class="flow-text center-align">
-									116
-								</p>
+								<p id="which" class="flow-text center-align">116</p>
 							</div>
 						</div>
 					</div>
@@ -99,9 +93,7 @@
 							<div class="divider"></div>
 
 							<div class="card-content">
-								<p id="code" class="flow-text center-align">
-									F5
-								</p>
+								<p id="code" class="flow-text center-align">F5</p>
 							</div>
 						</div>
 					</div>
