@@ -16,8 +16,8 @@ try {
 			<td><?= $type_path ?></td>
 			<td><i title="<?= $type_icon ?>" class="material-icons" style="top:4px"><?= $type_icon ?></i></td>
 			<td>
-				<a class="material-icons green-text" title="Editar Tipo" href="atualizar_dados/?type_id=<?= $type_id ?>">edit</a>
-				<i onclick="changeLink('src/delete_type.php?type_id=<?= $type_id ?>', '<?= $type_name ?>')" class="material-icons red-text modal-trigger" style="cursor:pointer" title="Remover Tipo" data-target="removeType">clear</i>
+				<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar Tipo" href="atualizar_dados/?type_id=<?= $type_id ?>"><i class="material-icons" style="font-size:22px">edit</i></a>
+				<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" onclick="changeLink('src/delete_type.php?type_id=<?= $type_id ?>', '<?= $type_name ?>')" style="cursor:pointer" title="Remover Tipo" data-target="removeType"><i class="material-icons" style="font-size:24px">delete</i></button>
 			</td>
 		</tr>
 	<?php endforeach ?>

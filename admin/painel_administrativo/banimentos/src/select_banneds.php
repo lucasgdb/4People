@@ -16,7 +16,7 @@ try {
 			<td><?= $banned_begin ?></td>
 			<td><?= $banned_end ?></td>
 			<td>
-				<i onclick="changeLink('src/delete_banned.php?banned_ip=<?= $banned_ip ?>', '<?= $banned_ip ?>')" class="material-icons red-text modal-trigger" style="cursor:pointer" title="Remover Banimento" data-target="removeBanned">clear</i>
+				<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" onclick="changeLink('src/delete_banned.php?banned_ip=<?= $banned_ip ?>', '<?= $banned_ip ?>')" style="cursor:pointer" title="Remover Banimento" data-target="removeBanned"><i class="material-icons" style="font-size:24px">delete</i></button>
 			</td>
 		</tr>
 	<?php endforeach ?>

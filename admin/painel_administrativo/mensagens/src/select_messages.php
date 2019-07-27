@@ -21,8 +21,8 @@ try {
 			<td><?= $message_email ?></td>
 			<td><?= $message_subject ?></td>
 			<td>
-				<i onclick="changeMessage('src/update_message.php?message_id=<?= $message_id ?>', '<?= $message_id ?>', '<?= $message_name ?>', '<?= $message_email ?>', '<?= $message_subject ?>', '<?= preg_replace('/[^[:alnum:]áãâàéẽêèíĩîìóôõòúûũù]/', ' ', $message_content) ?>', <?= $message_read === '1' ?>)" class="material-icons <?= $message_read === '1' ? 'grey-text' : 'green-text' ?> text-darken-1 modal-trigger" style="cursor:pointer" title="Ler Mensagem" data-target="readMessage">remove_red_eye</i>
-				<i onclick="changeLink('src/delete_message.php?message_id=<?= $message_id ?>', '<?= $message_name ?>', '<?= $message_email ?>')" class="material-icons red-text modal-trigger" style="cursor:pointer" title="Remover Mensagem" data-target="removeMessage">clear</i>
+				<button class="btn waves-effect waves-light <?= $message_read === '1' ? 'grey darken-1' : 'green darken-3' ?> modal-trigger z-depth-0" onclick="changeMessage('src/update_message.php?message_id=<?= $message_id ?>', '<?= $message_id ?>', '<?= $message_name ?>', '<?= $message_email ?>', '<?= $message_subject ?>', '<?= preg_replace('/[^[:alnum:]áãâàéẽêèíĩîìóôõòúûũù]/', ' ', $message_content) ?>', <?= $message_read === '1' ?>)" style="cursor:pointer" title="Ler Mensagem" data-target="readMessage"><i class="material-icons" style="font-size:23px">remove_red_eye</i></button>
+				<button class="btn waves-effect waves-light red accent-4 modal-trigger z-depth-0" onclick="changeLink('src/delete_message.php?message_id=<?= $message_id ?>', '<?= $message_name ?>', '<?= $message_email ?>')" style="cursor:pointer" title="Remover Mensagem" data-target="removeMessage"><i class="material-icons" style="font-size:24px">delete</i></button>
 			</td>
 		</tr>
 	<?php endforeach ?>

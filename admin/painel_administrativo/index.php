@@ -85,7 +85,13 @@ $admin_panel = true
 							<div class="card-content left-div-margin-mobile" style="padding-bottom:4px">
 								<div class="row mb-0">
 									<div class="col s12 center-align">
-										<h6 class="mt-0">Banimentos</h6>
+										<?php
+										$sql = $database->prepare('SELECT COUNT(banned_ip) FROM banneds WHERE banned_amount = "4"');
+										$sql->execute();
+
+										$banned_count = $sql->fetchColumn()
+										?>
+										<h6 class="mt-0" style="position:relative">Banimentos<span class="new red badge" style="position:absolute;right:0" data-badge-caption=""><?= $banned_count ?></span></h6>
 										<div class="divider"></div>
 										<a class="tooltiped" data-tooltip="Banimentos" href="banimentos/">
 											<i class="material-icons large" style="color:#212121">close</i>
@@ -101,7 +107,13 @@ $admin_panel = true
 							<div class="card-content left-div-margin-mobile" style="padding-bottom:4px">
 								<div class="row mb-0">
 									<div class="col s12 center-align">
-										<h6 class="mt-0">Ferramentas</h6>
+										<?php
+										$sql = $database->prepare('SELECT COUNT(tool_id) FROM tools');
+										$sql->execute();
+
+										$tools_count = $sql->fetchColumn()
+										?>
+										<h6 class="mt-0" style="position:relative">Ferramentas<span class="new indigo badge" style="position:absolute;right:0" data-badge-caption=""><?= $tools_count ?></span></h6>
 										<div class="divider mb-2"></div>
 										<a class="tooltiped" data-tooltip="<?= $sections_count ? 'Controle de Ferramentas' : ($types_count ? 'Seções de Ferramentas' : 'Tipos de Ferramentas') ?>" href="<?= $sections_count ? 'ferramentas/controle_de_ferramentas/' : ($types_count ? 'ferramentas/secoes_de_ferramentas/' : 'ferramentas/tipos_de_ferramentas/') ?>">
 											<i class="material-icons large" style="color:#212121">build</i>

@@ -29,8 +29,8 @@ try {
 			<td><i title="<?= $section_icon ?>" class="material-icons" style="top:4px"><?= $section_icon ?></i></td>
 			<td><?= $type_name ?></td>
 			<td>
-				<a class="material-icons green-text" title="Editar Seção" href="atualizar_dados/?section_id=<?= $section_id ?>">edit</a>
-				<i onclick="changeLink('src/delete_section.php?section_id=<?= $section_id ?>', '<?= $section_name ?>')" class="material-icons red-text modal-trigger" style="cursor:pointer" title="Remover Seção" data-target="removeSection">clear</i>
+				<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar Seção" href="atualizar_dados/?section_id=<?= $section_id ?>"><i class="material-icons" style="font-size:22px">edit</i></a>
+				<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" onclick="changeLink('src/delete_section.php?section_id=<?= $section_id ?>', '<?= $section_name ?>')" style="cursor:pointer" title="Remover Seção" data-target="removeSection"><i class="material-icons" style="font-size:24px">delete</i></button>
 			</td>
 		</tr>
 	<?php endforeach ?>

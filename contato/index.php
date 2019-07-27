@@ -103,14 +103,14 @@
 		if ($msg === 'error') : ?>
 			<script>
 				M.toast({
-					html: "Não foi possível enviar o e-mail.",
+					html: "Não foi possível enviar a mensagem.",
 					classes: "red accent-4"
 				})
 			</script>
 		<?php elseif ($msg === 'success') : ?>
 			<script>
 				M.toast({
-					html: "E-mail enviado com sucesso! Aguarde retorno.",
+					html: "Mensagem enviada com sucesso! Aguarde retorno.",
 					classes: "green"
 				})
 			</script>

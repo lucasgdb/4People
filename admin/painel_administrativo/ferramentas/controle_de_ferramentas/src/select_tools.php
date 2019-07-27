@@ -43,8 +43,8 @@ try {
 			<td><?= $section_name ?></td>
 			<td><?= $tool_active ? 'Ativado' : 'Desativado' ?></td>
 			<td>
-				<a title="Editar Ferramenta" href="atualizar_dados/?tool_id=<?= $tool_id ?>"><i class="material-icons green-text">edit</i></a>
-				<i onclick="changeLink('src/delete_tool.php?tool_id=<?= $tool_id ?>', '<?= $tool_name ?>')" class="material-icons red-text modal-trigger" style="cursor:pointer" title="Remover Ferramenta" data-target="removeTool">clear</i>
+				<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar Ferramenta" href="atualizar_dados/?tool_id=<?= $tool_id ?>"><i class="material-icons" style="font-size:22px">edit</i></a>
+				<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" onclick="changeLink('src/delete_tool.php?tool_id=<?= $tool_id ?>', '<?= $tool_name ?>')" style="cursor:pointer" title="Remover Ferramenta" data-target="removeTool"><i class="material-icons" style="font-size:24px">delete</i></button>
 			</td>
 		</tr>
 	<?php endforeach ?>
