@@ -77,7 +77,7 @@ if (!isset($_SESSION['logged'])) {
 							<div class="divider"></div>
 							<button title="Inserir Seção no 4People" class="btn waves-effect waves-light indigo darken-4 mt-2 z-depth-0">
 								<i class="material-icons left">folder</i>Inserir
-								<input style="display:none" type="submit" value="">
+								<input class="hide" type="submit" value="">
 							</button>
 						</div>
 					</div>
@@ -116,7 +116,7 @@ if (!isset($_SESSION['logged'])) {
 							<div class="divider"></div>
 							<button title="Filtrar Seções de Ferramentas do 4People" class="btn waves-effect waves-light indigo darken-4 mt-2 z-depth-0">
 								<i class="material-icons left">filter_list</i>Filtrar
-								<input style="display:none" title="Filtrar Ferramentas" type="submit">
+								<input class="hide" title="Filtrar Ferramentas" type="submit">
 							</button>
 
 							<a title="Limpar Filtro" href="." class="btn indigo darken-4 mt-2 waves-effect waves-light right z-depth-0"><i class="material-icons left">format_clear</i>Limpar</a>

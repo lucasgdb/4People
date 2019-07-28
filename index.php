@@ -108,7 +108,7 @@
 						<div class="card teal z-depth-2">
 							<div class="card-content white-text">
 								<span class="card-title"><i class="material-icons left">group</i>Visitas</span>
-								<p style="font-size:16px">Usuários que já visitaram: <span id="totalVisits">10245</span></p>
+								<p style="font-size:16px">Usuários que já visitaram: <span id="totalVisits">1000</span></p>
 							</div>
 
 							<div class="top-div teal darken-4"></div>
@@ -162,34 +162,6 @@
 			</div>
 		</div>
 	</main>
-
-	<div id="agreements" class="modal">
-		<div class="modal-content">
-			<h4>Termos de uso</h4>
-			<div class="divider"></div>
-			<p>
-				O 4People tem como intenção ajudar estudantes, Programadores, analistas, etc. no seu dia a dia.
-				Normalmente necessários parar testar seus softwares em desenvolvimento.
-				A má utilização das Ferramentas é de total responsabilidade do usuário.
-				Os algoritmos são públicos e de código aberto, não contendo acesso a dados de pessoas reais.
-			</p>
-
-			<p class="mb-0">
-				<label>
-					<input type="checkbox">
-					<span>Eu li e aceito os termos de uso</span>
-				</label>
-			</p>
-		</div>
-
-		<div class="divider"></div>
-
-		<div class="modal-footer">
-			<a href="#" class="modal-close waves-effect btn-flat" disabled>Aceito</a>
-		</div>
-
-		<div class="left-div indigo darken-4" style="border-radius:0 !important"></div>
-	</div>
 
 	<?php include_once("$assets/components/footer.php") ?>
 

@@ -102,7 +102,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 
 								<button title="Logar no 4People" class="btn indigo darken-3 mt-2 z-depth-0 right">
 									<i class="material-icons right">arrow_forward</i>Entrar
-									<input style="display:none" type="submit" value="">
+									<input class="hide" type="submit" value="">
 								</button>
 							</div>
 						</div>

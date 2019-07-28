@@ -95,9 +95,9 @@ if (!isset($_SESSION['logged'])) {
 
 			<div class="modal-footer">
 				<button title="Voltar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0 modal-trigger" data-target="readMessage"><i class="material-icons left">arrow_back</i>Voltar</button>
-				<button title="Responder Mensagem" class="btn waves-effect waves-light teal darken-2 z-depth-0">
+				<button title="Responder Mensagem" id="sendMessage" class="btn waves-effect waves-light teal darken-2 z-depth-0">
 					<i class="material-icons right">send</i>Responder
-					<input style="display:none" type="submit" value="">
+					<input class="hide" type="submit" value="">
 				</button>
 			</div>
 		</form>
@@ -147,11 +147,17 @@ if (!isset($_SESSION['logged'])) {
 		const lblMessageID = document.querySelector('#messageID')
 		const lblMessageNameReply = document.querySelector('#messageNameReply')
 		const lblMessageEmailReply = document.querySelector('#messageEmailReply')
+		const btnSendMessage = document.querySelector('#sendMessage')
 
 		lblQuillContent.onkeyup = e => {
 			if (e.target.innerText.replace(/\n/g, '') === '') lblMessageReply.value = ''
 			else lblMessageReply.value = e.target.innerHTML
 		}
+
+		btnSendMessage.addEventListener('click', () => {
+			if (lblQuillContent.innerText.replace(/\n/g, '') === '') lblMessageReply.value = ''
+			else lblMessageReply.value = lblQuillContent.innerHTML
+		})
 
 		const changeLink = (link, name, email) => {
 			linkRemoveMessage.href = link

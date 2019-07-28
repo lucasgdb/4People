@@ -77,7 +77,7 @@ if (!isset($_SESSION['logged'])) {
 							<div class="divider"></div>
 							<button title="Inserir um Administrador no 4People" class="btn waves-effect waves-light indigo darken-4 mt-2 z-depth-0">
 								<i class="material-icons left">person_add</i>Inserir
-								<input style="display:none" type="submit" value="">
+								<input class="hide" type="submit" value="">
 							</button>
 						</div>
 					</div>

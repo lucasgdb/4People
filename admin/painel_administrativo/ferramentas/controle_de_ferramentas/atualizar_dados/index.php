@@ -102,7 +102,7 @@ if (!isset($_SESSION['logged'])) {
 							<a href="../" class="btn waves-effect waves-light red accent-4 mt-2 z-depth-0" title="Cancelar"><i class="material-icons left">close</i>Cancelar</a>
 							<button title="Salvar" class="btn waves-effect waves-light green darken-3 mt-2 right z-depth-0">
 								<i class="material-icons left">save</i>Salvar
-								<input style="display:none" type="submit" value="">
+								<input class="hide" type="submit" value="">
 							</button>
 						</div>
 					</div>
