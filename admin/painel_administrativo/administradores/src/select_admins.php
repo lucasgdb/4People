@@ -17,7 +17,7 @@ try {
 			<td><?= $admin_email ?></td>
 			<td>
 				<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar Administrador" href="atualizar_dados/?admin_id=<?= $admin_id ?>"><i class="material-icons" style="font-size:22px">edit</i></a>
-				<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" onclick="changeLink('src/delete_admin.php?admin_id=<?= $admin_id ?>', '<?= $admin_name ?>')" style="cursor:pointer" title="Remover Administrador" data-target="removeAdmin"><i class="material-icons" style="font-size:24px">delete</i></button>
+				<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" onclick="changeLink('src/delete_admin.php?admin_id=<?= $admin_id ?>', '<?= $admin_name ?>')" style="cursor:pointer" title="Remover Administrador" data-target="removeAdmin"><i class="material-icons" style="font-size:23px">delete</i></button>
 			</td>
 		</tr>
 	<?php endforeach ?>

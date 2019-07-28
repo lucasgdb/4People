@@ -16,7 +16,7 @@
 				<h5>Links</h5>
 				<div class="divider grey"></div>
 				<ul>
-				<li><a class="white-text linkHover" href="https://twitter.com/lucasnaja0" target="_blank" rel="noopener noreferrer nofollow">Twitter »</a></li>
+					<li><a class="white-text linkHover" href="https://twitter.com/lucasnaja0" target="_blank" rel="noopener noreferrer nofollow">Twitter »</a></li>
 					<li><a class="white-text linkHover" href="https://github.com/lucasnaja" target="_blank" rel="noopener noreferrer nofollow">GitHub »</a></li>
 					<li><a class="white-text linkHover" href="https://www.linkedin.com/in/lucas-bittencourt/" target="_blank" rel="noopener noreferrer nofollow">LinkedIn »</a></li>
 					<li><a class="white-text linkHover" href="https://t.me/lucasnaja0" target="_blank" rel="noopener noreferrer nofollow">Telegram »</a></li>

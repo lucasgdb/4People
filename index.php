@@ -113,9 +113,7 @@
 
 							<div class="top-div teal darken-4"></div>
 						</div>
-					</div>
 
-					<div class="col s12 m6">
 						<div class="card red z-depth-2">
 							<div class="card-content white-text">
 								<span class="card-title"><i class="material-icons left">group</i>Pessoas ajudadas</span>
@@ -131,10 +129,8 @@
 							<div class="top-div red darken-4"></div>
 						</div>
 					</div>
-				</div>
 
-				<div class="row mb-0">
-					<div class="col s12 l6">
+					<div class="col s12 m6">
 						<div class="card blue z-depth-2">
 							<div class="card-content white-text">
 								<span class="card-title"><i class="material-icons left">public</i>Usuários Online</span>
@@ -143,9 +139,7 @@
 
 							<div class="top-div blue darken-4"></div>
 						</div>
-					</div>
 
-					<div class="col s12 l6">
 						<div class="card green z-depth-2">
 							<div class="card-content white-text">
 								<span class="card-title"><i class="material-icons left">build</i>Ferramentas</span>

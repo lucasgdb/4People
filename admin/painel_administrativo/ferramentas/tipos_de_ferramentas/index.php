@@ -107,24 +107,33 @@ if (!isset($_SESSION['logged'])) {
 		<div class="divider"></div>
 
 		<div class="modal-footer">
-		<button title="Cancelar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Cancelar</button>
+			<button title="Cancelar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Cancelar</button>
 			<a id="linkRemoveType" title="Remover Tipo" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</a>
 		</div>
 	</div>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
+	<script src="<?= $assets ?>/src/js/clipboard.min.js"></script>
 	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script>
+		M.Modal.init(document.querySelectorAll('.modal'))
+
 		const linkRemoveType = document.querySelector('#linkRemoveType')
 		const lblType = document.querySelector('#type')
+		const btnsCopy = document.querySelectorAll('.copy')
+
+		new ClipboardJS(btnsCopy).on('success', () => {
+			M.toast({
+				html: 'Caminho copiado com sucesso.',
+				classes: 'green'
+			})
+		})
 
 		const changeLink = (link, type) => {
 			linkRemoveType.href = link
 			lblType.innerHTML = type
 		}
-
-		M.Modal.init(document.querySelectorAll('.modal'))
 	</script>
 </body>
 
