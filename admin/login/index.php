@@ -34,7 +34,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 				$admin_amount = $sql->fetchColumn();
 
 				if ($admin_amount > 0) : ?>
-					<form style="margin-top:15px" action="src/login.php" method="post">
+					<form style="margin-top:15px" action="src/login.php" method="POST">
 						<div class="row mb-0">
 							<div class="input-field col s12">
 								<i class="material-icons prefix">account_circle</i>

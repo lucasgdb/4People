@@ -2475,7 +2475,7 @@ class PHPMailer
 	/**
 	 * Returns the whole MIME message.
 	 * Includes complete headers and body.
-	 * Only valid post preSend().
+	 * Only valid POST preSend().
 	 *
 	 * @see PHPMailer::preSend()
 	 *

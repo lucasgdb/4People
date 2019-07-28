@@ -41,7 +41,7 @@ if (!isset($_SESSION['logged'])) {
 				$s_id = $section_id
 				?>
 
-				<form style="margin-top:15px" action="../src/update_tool.php" method="post">
+				<form style="margin-top:15px" action="../src/update_tool.php" method="POST">
 					<div class="row mb-0">
 						<input type="hidden" value="<?= $tool_id ?>" name="tool_id">
 						<div class="input-field col s12 m6">

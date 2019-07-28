@@ -14,7 +14,8 @@ if (!isset($_SESSION['logged'])) {
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
-	<link rel="stylesheet" href="src/index.css">
+	<link rel="stylesheet" href="src/css/index.css">
+	<link rel="stylesheet" href="src/css/quill.snow.css">
 	<title>Mensagens - 4People</title>
 	<?php include_once("$assets/components/admin_components/meta_tags.php") ?>
 </head>
@@ -75,10 +76,11 @@ if (!isset($_SESSION['logged'])) {
 		</div>
 	</div>
 
-	<div id="replyEmail" class="modal">
+	<div id="replyEmail" class="modal modal-fixed-footer">
 		<form action="src/send_email.php" method="POST">
-			<div class="modal-content left-div-margin" style="padding-bottom:10px">
-				<h4>Responder Mensagem</h4>
+			<div class="modal-content" style="padding-bottom:0">
+				<h4 class="mb-0">Responder Mensagem</h4>
+				<div class="divider mt-1" style="margin-bottom:20px"></div>
 
 				<h6 id="messageSubjectTitle"></h6>
 				<input id="messageID" name="message_id" type="hidden">
@@ -86,12 +88,12 @@ if (!isset($_SESSION['logged'])) {
 				<input id="messageEmailReply" name="message_email" type="hidden">
 				<input id="messageSubjectReply" name="message_subject" type="hidden">
 				<input id="messageReplied" name="message_replied" type="hidden">
-				<textarea placeholder="Mensagem" name="message_content" oninvalid="this.setCustomValidity('Preencha este campo com a mensagem.')" oninput="setCustomValidity('')" spellcheck="false" required></textarea>
+				<input id="messageReply" name="message_content" type="hidden" required>
 
-				<div class="left-div indigo darken-4" style="border-radius:0"></div>
+				<div class="standalone-container">
+					<div id="snow-container"></div>
+				</div>
 			</div>
-
-			<div class="divider"></div>
 
 			<div class="modal-footer">
 				<button title="Voltar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0 modal-trigger" data-target="readMessage"><i class="material-icons left">arrow_back</i>Voltar</button>
@@ -114,7 +116,7 @@ if (!isset($_SESSION['logged'])) {
 		<div class="divider"></div>
 
 		<div class="modal-footer">
-		<button title="Cancelar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Cancelar</button>
+			<button title="Cancelar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Cancelar</button>
 			<a id="linkRemoveMessage" title="Remover Mensagem" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</a>
 		</div>
 	</div>
@@ -122,7 +124,15 @@ if (!isset($_SESSION['logged'])) {
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
+	<script src="src/js/quill.min.js"></script>
 	<script>
+		M.Modal.init(document.querySelectorAll('.modal'))
+
+		const emailReply = new Quill('#snow-container', {
+			placeholder: 'Escrever mensagem...',
+			theme: 'snow'
+		})
+
 		const linkMarkAsRead = document.querySelector('#linkMasAsRead')
 		const linkRemoveMessage = document.querySelector('#linkRemoveMessage')
 		const lblMessageSubject = document.querySelector('#messageSubject')
@@ -130,11 +140,18 @@ if (!isset($_SESSION['logged'])) {
 		const lblMessageSubjectReply = document.querySelector('#messageSubjectReply')
 		const lblMessageReplied = document.querySelector('#messageReplied')
 		const lblMessageContent = document.querySelector('#messageContent')
+		const lblMessageReply = document.querySelector('#messageReply')
+		const lblQuillContent = document.querySelector('.ql-editor')
 		const lblMessageName = document.querySelector('#messageName')
 		const lblMessageEmail = document.querySelector('#messageEmail')
 		const lblMessageID = document.querySelector('#messageID')
 		const lblMessageNameReply = document.querySelector('#messageNameReply')
 		const lblMessageEmailReply = document.querySelector('#messageEmailReply')
+
+		lblQuillContent.onkeyup = e => {
+			if (e.target.innerText.replace(/\n/g, '') === '') lblMessageReply.value = ''
+			else lblMessageReply.value = e.target.innerHTML
+		}
 
 		const changeLink = (link, name, email) => {
 			linkRemoveMessage.href = link
@@ -157,8 +174,6 @@ if (!isset($_SESSION['logged'])) {
 			lblMessageReplied.value = content
 			lblMessageContent.innerHTML = content
 		}
-
-		M.Modal.init(document.querySelectorAll('.modal'))
 	</script>
 	<?php
 	if (isset($_SESSION['msg'])) {

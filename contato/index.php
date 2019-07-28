@@ -40,7 +40,7 @@
 
 				<h5>Dados de contato</h5>
 
-				<form class="mt-2" action="src/send_message.php" method="post">
+				<form class="mt-2" action="src/send_message.php" method="POST">
 					<div class="row mb-0">
 						<div class="input-field col s12">
 							<i class="material-icons prefix">account_circle</i>

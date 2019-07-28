@@ -35,7 +35,7 @@ if (!isset($_SESSION['logged'])) {
 
 				<div class="divider"></div>
 
-				<form style="margin-top:15px" action="src/insert_tool.php" method="post">
+				<form style="margin-top:15px" action="src/insert_tool.php" method="POST">
 					<div class="row mb-0">
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">format_size</i>

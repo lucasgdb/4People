@@ -40,7 +40,7 @@ if (!isset($_SESSION['logged'])) {
 				extract($sql->fetch());
 				?>
 
-				<form style="margin-top:15px" action="../src/update_admin.php" method="post" enctype="multipart/form-data">
+				<form style="margin-top:15px" action="../src/update_admin.php" method="POST" enctype="multipart/form-data">
 					<div class="row mb-0">
 						<input type="hidden" value="<?= $admin_id ?>" name="admin_id">
 						<div class="input-field col s12 m6">

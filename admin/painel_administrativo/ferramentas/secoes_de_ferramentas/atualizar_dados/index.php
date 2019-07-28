@@ -41,7 +41,7 @@ if (!isset($_SESSION['logged'])) {
 				$t_id = $type_id
 				?>
 
-				<form style="margin-top:15px" action="../src/update_section.php" method="post">
+				<form style="margin-top:15px" action="../src/update_section.php" method="POST">
 					<div class="row mb-0">
 						<input type="hidden" value="<?= $section_id ?>" name="section_id">
 						<div class="input-field col s12 m6">
