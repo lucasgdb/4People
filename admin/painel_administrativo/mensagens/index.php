@@ -88,11 +88,13 @@ if (!isset($_SESSION['logged'])) {
 				<input id="messageEmailReply" name="message_email" type="hidden">
 				<input id="messageSubjectReply" name="message_subject" type="hidden">
 				<input id="messageReplied" name="message_replied" type="hidden">
-				<input id="messageReply" name="message_content" type="hidden" required>
+				<input id="messageReply" name="message_content" class="hide" type="text" required>
 
 				<div class="standalone-container">
 					<div id="snow-container"></div>
 				</div>
+
+				<div class="top-div indigo darken-3" style="border-radius:0"></div>
 			</div>
 
 			<div class="modal-footer">
