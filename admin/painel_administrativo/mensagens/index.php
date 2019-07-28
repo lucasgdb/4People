@@ -77,7 +77,7 @@ if (!isset($_SESSION['logged'])) {
 
 	<div id="replyEmail" class="modal modal-fixed-footer">
 		<form action="src/send_email.php" method="POST">
-			<div class="modal-content left-div-margin" style="padding-bottom:0">
+			<div class="modal-content" style="padding-bottom:0;padding-left:34px">
 				<h4 class="mb-0"><i class="material-icons left" style="top:8px">send</i>Responder Mensagem</h4>
 				<div class="divider mt-1" style="margin-bottom:20px"></div>
 

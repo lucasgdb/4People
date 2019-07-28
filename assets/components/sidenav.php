@@ -55,10 +55,10 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 										if ($active) {
 											if (!$tool_status && !$admin) : ?>
 												<script>
-													location = '/'
+													location = '<?= $root ?>/'
 												</script>
-												<?php exit() ?>
-											<?php endif ?>
+												<?php exit();
+											endif ?>
 											<?php
 											$description = $tool_description;
 

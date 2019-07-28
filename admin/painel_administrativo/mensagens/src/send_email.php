@@ -29,7 +29,7 @@ try {
 	$mail->isHTML(true);
 	$mail->Subject = '4People - Resposta da mensagem';
 	$mail->Body =
-		"<h1>Equipe 4People</h1>Olá, $message_name. Recebemos uma mensagem!<br>Título: $message_subject. Mensagem: $message_replied<br><p>Resposta: $message_content</p><br>Administrador: <b>" . $_SESSION['logged']['name'] . '</b>';
+		"<h1>Equipe 4People</h1>Olá, $message_name. Recebemos sua mensagem!<br>Título: $message_subject.<br>Mensagem:<p>$message_replied</p>Resposta: $message_content<br>Administrador: <b>" . $_SESSION['logged']['name'] . '</b>';
 	$mail->AltBody = '4People - Resposta da mensagem.';
 
 	if ($mail->send()) {

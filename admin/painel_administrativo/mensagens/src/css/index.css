@@ -52,7 +52,7 @@ table th {
 }
 
 #snow-container {
-	height: 350px
+	height: 226px
 }
 
 .ql-tooltip {
@@ -61,7 +61,7 @@ table th {
 
 @media (max-width: 600px) {
 	.modal {
-		width: 90%
+		width: 98%
 	}
 }
 
