@@ -154,7 +154,7 @@ if (!isset($_SESSION['logged'])) {
 
 	<div id="removeSection" class="modal">
 		<div class="modal-content left-div-margin">
-			<h4>Remover Seção</h4>
+			<h4><i class="material-icons left" style="top:7px">delete</i>Remover Seção</h4>
 			<p class="mb-0">Você tem certeza que deseja remover <span id="section"></span>?</p>
 
 			<div class="left-div indigo darken-4" style="border-radius:0"></div>

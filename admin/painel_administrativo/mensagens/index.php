@@ -57,12 +57,10 @@ if (!isset($_SESSION['logged'])) {
 
 	<div id="readMessage" class="modal">
 		<div class="modal-content left-div-margin">
-			<h4>Ler Mensagem</h4>
+			<h4><i class="material-icons left" style="top:8px">remove_red_eye</i>Ler Mensagem</h4>
 			<h6 id="messageSubject"></h6>
 			<div class="divider"></div>
-			<p id="messageContent" class="mb-0">
-				Mensagem aleatório do 4People
-			</p>
+			<p id="messageContent" class="mb-0" style="text-indent:6px"></p>
 
 			<div class="left-div indigo darken-4" style="border-radius:0"></div>
 		</div>
@@ -78,8 +76,8 @@ if (!isset($_SESSION['logged'])) {
 
 	<div id="replyEmail" class="modal modal-fixed-footer">
 		<form action="src/send_email.php" method="POST">
-			<div class="modal-content" style="padding-bottom:0">
-				<h4 class="mb-0">Responder Mensagem</h4>
+			<div class="modal-content left-div-margin" style="padding-bottom:0">
+				<h4 class="mb-0"><i class="material-icons left" style="top:8px">send</i>Responder Mensagem</h4>
 				<div class="divider mt-1" style="margin-bottom:20px"></div>
 
 				<h6 id="messageSubjectTitle"></h6>
@@ -93,8 +91,6 @@ if (!isset($_SESSION['logged'])) {
 				<div class="standalone-container">
 					<div id="snow-container"></div>
 				</div>
-
-				<div class="top-div indigo darken-3" style="border-radius:0"></div>
 			</div>
 
 			<div class="modal-footer">
@@ -105,11 +101,13 @@ if (!isset($_SESSION['logged'])) {
 				</button>
 			</div>
 		</form>
+
+		<div class="left-div indigo darken-3" style="border-radius:0"></div>
 	</div>
 
 	<div id="removeMessage" class="modal">
 		<div class="modal-content left-div-margin">
-			<h4>Remover Mensagem</h4>
+			<h4><i class="material-icons left" style="top:7px">delete</i>Remover Mensagem</h4>
 			<p class="mb-0">Você tem certeza que deseja remover a mensagem de <span id="messageName"></span> &lt;<span id="messageEmail"></span>&gt;?</p>
 
 			<div class="left-div indigo darken-4" style="border-radius:0"></div>
