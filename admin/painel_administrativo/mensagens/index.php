@@ -16,6 +16,7 @@ if (!isset($_SESSION['logged'])) {
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/css/index.css">
 	<link rel="stylesheet" href="src/css/quill.snow.css">
+	<link rel="stylesheet" href="src/css/katex.min.css">
 	<title>Mensagens - 4People</title>
 	<?php include_once("$assets/components/admin_components/meta_tags.php") ?>
 </head>
@@ -89,6 +90,46 @@ if (!isset($_SESSION['logged'])) {
 				<input id="messageReply" name="message_content" class="hide" type="text" required>
 
 				<div class="standalone-container">
+					<div id="toolbar-container">
+						<span class="ql-formats">
+							<button class="ql-bold"></button>
+							<button class="ql-italic"></button>
+							<button class="ql-underline"></button>
+							<button class="ql-strike"></button>
+						</span>
+
+						<span class="ql-formats">
+							<select class="ql-color"></select>
+							<select class="ql-background"></select>
+						</span>
+
+						<span class="ql-formats">
+							<button class="ql-script" value="sub"></button>
+							<button class="ql-script" value="super"></button>
+						</span>
+
+						<span class="ql-formats">
+							<button class="ql-header" value="1"></button>
+							<button class="ql-header" value="2"></button>
+							<button class="ql-blockquote"></button>
+						</span>
+
+						<span class="ql-formats">
+							<button class="ql-list" value="ordered"></button>
+							<button class="ql-list" value="bullet"></button>
+						</span>
+
+						<span class="ql-formats">
+							<button class="ql-direction" value="rtl"></button>
+							<select class="ql-align"></select>
+							<button class="ql-link"></button>
+						</span>
+
+						<span class="ql-formats">
+							<button class="ql-clean"></button>
+						</span>
+					</div>
+
 					<div id="snow-container"></div>
 				</div>
 			</div>
@@ -124,11 +165,22 @@ if (!isset($_SESSION['logged'])) {
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
+	<script src="src/js/katex.min.js"></script>
+	<script src="src/js/highlight.min.js"></script>
 	<script src="src/js/quill.min.js"></script>
 	<script>
 		M.Modal.init(document.querySelectorAll('.modal'))
 
+		Quill.register(Quill.import('attributors/style/direction'), true)
+		Quill.register(Quill.import('attributors/style/align'), true)
+		Quill.register(Quill.import('attributors/style/size'), true)
+
 		const emailReply = new Quill('#snow-container', {
+			modules: {
+				formula: true,
+				syntax: true,
+				toolbar: '#toolbar-container'
+			},
 			placeholder: 'Escrever mensagem...',
 			theme: 'snow'
 		})
@@ -148,11 +200,6 @@ if (!isset($_SESSION['logged'])) {
 		const lblMessageNameReply = document.querySelector('#messageNameReply')
 		const lblMessageEmailReply = document.querySelector('#messageEmailReply')
 		const btnSendMessage = document.querySelector('#sendMessage')
-
-		lblQuillContent.onkeyup = e => {
-			if (e.target.innerText.replace(/\n/g, '') === '') lblMessageReply.value = ''
-			else lblMessageReply.value = e.target.innerHTML
-		}
 
 		btnSendMessage.addEventListener('click', () => {
 			if (lblQuillContent.innerText.replace(/\n/g, '') === '') lblMessageReply.value = ''

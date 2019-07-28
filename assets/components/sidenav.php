@@ -8,7 +8,7 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 	<li style="position:relative">
 		<div class="user-view mb-0 left-div-margin-mobile" style="border-bottom:1px solid #e0e0e0">
 			<div class="background grey lighten-4"></div>
-			<img class="circle" src="<?= $assets ?>/images/<?= $logged && $image ? "admin_images/$image" : 'logo.png' ?>" alt="<?= $logged ? 'Foto' : 'Logo' ?>">
+			<img title="<?= $logged ? $_SESSION['logged']['name'] : 'Logo' ?>" class="circle" src="<?= $assets ?>/images/<?= $logged && $image ? "admin_images/$image" : 'logo.png' ?>" alt="<?= $logged ? 'Foto' : 'Logo' ?>">
 			<span class="name black-text"><?= $logged ? "Admin: " . $_SESSION['logged']['name'] : '4People - Ferramentas Online' ?></span>
 			<a class="linkHover" href="<?= $logged ? "$root/admin/painel_administrativo/administradores/atualizar_dados/?admin_id=" . $_SESSION['logged']['id'] : 'https://github.com/lucasnaja/4People' ?>" <?= !$logged ? 'target="_blank" rel="noopener noreferrer nofollow"' : '' ?>><span class=" email"><?= $logged ? 'Editar Perfil' : 'Projeto de TCC' ?> »</span></a>
 		</div>

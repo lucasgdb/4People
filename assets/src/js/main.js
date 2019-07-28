@@ -26,7 +26,7 @@ const animateOut = (delay = 250) => {
 	body.style.transition = `padding-left ${delay}ms`
 	body.style.paddingLeft = '0'
 	container.style.transition = `width ${delay}ms`
-	container.style.width = '80%'
+	container.style.width = '73%'
 }
 
 const sideIn = () => {
