@@ -12,7 +12,7 @@ try {
 	if (isset($type_id_get) && $type_id_get !== '-1') $condition = "AND types.type_id = :type_id_get";
 
 	$sql = $database->prepare(
-		"SELECT sections.*, types.type_name FROM sections
+		"SELECT sections.*, types.type_path FROM sections
 		INNER JOIN types ON types.type_id = sections.type_id
 		$condition
 		ORDER BY types.type_id"
@@ -25,9 +25,8 @@ try {
 	foreach ($sql as $key) : extract($key) ?>
 		<tr>
 			<td><?= $section_name ?></td>
-			<td><?= $section_path ?></td>
 			<td><i title="<?= $section_icon ?>" class="material-icons" style="top:4px"><?= $section_icon ?></i></td>
-			<td><?= $type_name ?></td>
+			<td><?= "$type_path/$section_path/" ?></td>
 			<td>
 				<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar Seção" href="atualizar_dados/?section_id=<?= $section_id ?>"><i class="material-icons" style="font-size:22px">edit</i></a>
 				<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" onclick="changeLink('src/delete_section.php?section_id=<?= $section_id ?>', '<?= $section_name ?>')" style="cursor:pointer" title="Remover Seção" data-target="removeSection"><i class="material-icons" style="font-size:24px">delete</i></button>

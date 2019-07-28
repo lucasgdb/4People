@@ -129,13 +129,13 @@ body>header+ul>li>.collapsible-header {
 }
 
 @media (max-width: 992px) {
-	.container {
+	main>.container {
 		width: 90% !important
 	}
 }
 
 @media (max-width: 600px) {
-	.container {
+	main>.container {
 		width: 100% !important
 	}
 
@@ -152,7 +152,7 @@ body>header+ul>li>.collapsible-header {
 }
 
 @media (min-width: 993px) {
-	.container {
+	main>.container {
 		transition: width 300ms;
 		width: 90%
 	}

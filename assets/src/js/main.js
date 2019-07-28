@@ -18,13 +18,15 @@ const spinner = document.querySelector('#spinner')
 const animateIn = (delay = 250) => {
 	body.style.transition = `padding-left ${delay}ms, opacity 150ms`
 	body.style.paddingLeft = '300px'
+	container.style.transition = `width ${delay}ms`
 	container.style.width = '90%'
 }
 
 const animateOut = (delay = 250) => {
 	body.style.transition = `padding-left ${delay}ms`
 	body.style.paddingLeft = '0'
-	container.style.width = '70%'
+	container.style.transition = `width ${delay}ms`
+	container.style.width = '75%'
 }
 
 const sideIn = () => {

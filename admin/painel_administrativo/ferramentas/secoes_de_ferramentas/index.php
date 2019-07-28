@@ -136,9 +136,8 @@ if (!isset($_SESSION['logged'])) {
 					<thead>
 						<tr>
 							<th>Nome</th>
-							<th>Caminho</th>
 							<th>Ícone</th>
-							<th>Tipo</th>
+							<th>Caminho</th>
 							<th>Operações</th>
 						</tr>
 					</thead>
@@ -164,8 +163,8 @@ if (!isset($_SESSION['logged'])) {
 		<div class="divider"></div>
 
 		<div class="modal-footer">
-			<button title="Cancelar" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left red-text" style="font-size:27px">close</i>Não</button>
-			<a id="linkRemoveSection" title="Remover Seção" class="modal-close waves-effect waves-light btn-flat indigo darken-4 white-text"><i class="material-icons left green-text" style="font-size:27px">check</i>Sim</a>
+		<button title="Cancelar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Cancelar</button>
+			<a id="linkRemoveSection" title="Remover Seção" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</a>
 		</div>
 	</div>
 

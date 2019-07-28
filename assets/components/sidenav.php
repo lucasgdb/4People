@@ -37,7 +37,7 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 				<ul class="collapsible padding-headers">
 					<?php foreach ($sql as $data) : extract($data) ?>
 						<?php
-						$sql = $database->prepare('SELECT tool_id, tool_name, tool_path, tool_description, tool_visits FROM tools WHERE tool_active = "1" AND section_id = :section_id ORDER BY tool_visits DESC');
+						$sql = $database->prepare('SELECT tool_id, tool_name, tool_path, tool_description, tool_visits, tool_active FROM tools WHERE section_id = :section_id ORDER BY tool_visits DESC');
 						$sql->bindValue(':section_id', $section_id);
 						$sql->execute();
 
@@ -47,21 +47,34 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 							<div style="position:relative" class="collapsible-header"><i class="material-icons"><?= $section_icon ?></i><?= $section_name ?><i class="material-icons" style="position:absolute;right:0<?= $active ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
 							<div class="collapsible-body">
 								<ul>
-									<?php foreach ($sql as $data) : extract($data) ?>
-										<?php
+									<?php foreach ($sql as $data) {
+										extract($data);
 										$active = strpos($link, "$type_path/$section_path/$tool_path") !== false;
+										$admin = isset($_SESSION['logged']);
 
 										if ($active) {
+											if (!$tool_active && !$admin) : ?>
+												<script>
+													location = '/'
+												</script>
+												<?php exit() ?>
+											<?php endif ?>
+											<?php
 											$description = $tool_description;
-											$sql = $database->prepare('UPDATE tools SET tool_visits = :tool_visits WHERE tool_id = :tool_id');
 
-											$sql->bindValue(':tool_visits', ++$tool_visits);
-											$sql->bindValue(':tool_id', $tool_id);
-											$sql->execute();
+											if (!$admin) {
+												$sql = $database->prepare('UPDATE tools SET tool_visits = :tool_visits WHERE tool_id = :tool_id');
+
+												$sql->bindValue(':tool_visits', ++$tool_visits);
+												$sql->bindValue(':tool_id', $tool_id);
+												$sql->execute();
+											}
 										}
 										?>
-										<li><a class="waves-effect <?= $active ? 'grey lighten-4 black-text' : '' ?>" href="<?= $root ?>/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" title="<?= $tool_name ?>"><i class="material-icons <?= $active ? 'indigo-text text-darken-4' : '' ?> left" style="<?= $active ? 'font-size:20px' : '' ?>"><?= $active ? 'radio_button_checked' : 'keyboard_arrow_right' ?></i><?= $tool_name ?></a></li>
-									<?php endforeach ?>
+										<?php if ($tool_active || $admin) : ?>
+											<li><a class="waves-effect <?= $active ? 'grey lighten-4 black-text' : '' ?>" href="<?= $root ?>/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" title="<?= $tool_name ?>"><i class="material-icons <?= $active ? 'indigo-text text-darken-4' : '' ?> left" style="<?= $active ? 'font-size:20px' : '' ?>"><?= $active ? 'radio_button_checked' : 'keyboard_arrow_right' ?></i><?= $tool_name ?></a></li>
+										<?php endif ?>
+									<?php } ?>
 								</ul>
 							</div>
 						</li>

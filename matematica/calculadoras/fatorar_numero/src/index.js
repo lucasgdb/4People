@@ -30,6 +30,5 @@ document.addEventListener('DOMContentLoaded', () => {
 			html: 'Copiado para a Área de Transferência.',
 			classes: 'green'
 		})
-
 	})
 })
