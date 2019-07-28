@@ -37,7 +37,7 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 				<ul class="collapsible padding-headers">
 					<?php foreach ($sql as $data) : extract($data) ?>
 						<?php
-						$sql = $database->prepare('SELECT tool_id, tool_name, tool_path, tool_description, tool_visits, tool_active FROM tools WHERE section_id = :section_id ORDER BY tool_visits DESC');
+						$sql = $database->prepare('SELECT tool_id, tool_name, tool_path, tool_description, tool_visits, tool_status FROM tools WHERE section_id = :section_id ORDER BY tool_visits DESC');
 						$sql->bindValue(':section_id', $section_id);
 						$sql->execute();
 
@@ -53,7 +53,7 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 										$admin = isset($_SESSION['logged']);
 
 										if ($active) {
-											if (!$tool_active && !$admin) : ?>
+											if (!$tool_status && !$admin) : ?>
 												<script>
 													location = '/'
 												</script>
@@ -71,7 +71,7 @@ $image = $logged ? $_SESSION['logged']['image'] : ''
 											}
 										}
 										?>
-										<?php if ($tool_active || $admin) : ?>
+										<?php if ($tool_status || $admin) : ?>
 											<li><a class="waves-effect <?= $active ? 'grey lighten-4 black-text' : '' ?>" href="<?= $root ?>/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" title="<?= $tool_name ?>"><i class="material-icons <?= $active ? 'indigo-text text-darken-4' : '' ?> left" style="<?= $active ? 'font-size:20px' : '' ?>"><?= $active ? 'radio_button_checked' : 'keyboard_arrow_right' ?></i><?= $tool_name ?></a></li>
 										<?php endif ?>
 									<?php } ?>

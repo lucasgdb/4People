@@ -149,7 +149,7 @@ $admin_panel = true
 		M.Tooltip.init(document.querySelectorAll('.tooltiped'))
 
 		<?php
-		$sql = $database->prepare('SELECT tool_name, tool_visits FROM tools WHERE tool_active = "1" ORDER BY tool_visits DESC LIMIT 10');
+		$sql = $database->prepare('SELECT tool_name, tool_visits FROM tools WHERE tool_status = "1" ORDER BY tool_visits DESC LIMIT 10');
 
 		$sql->execute()
 		?>
@@ -185,7 +185,7 @@ $admin_panel = true
 		})
 
 		<?php
-		$sql = $database->prepare('SELECT tool_name, tool_visits FROM tools WHERE tool_active = "1" ORDER BY tool_visits DESC LIMIT 3');
+		$sql = $database->prepare('SELECT tool_name, tool_visits FROM tools WHERE tool_status = "1" ORDER BY tool_visits DESC LIMIT 3');
 
 		$sql->execute()
 		?>

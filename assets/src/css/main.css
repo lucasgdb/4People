@@ -154,7 +154,7 @@ body>header+ul>li>.collapsible-header {
 @media (min-width: 993px) {
 	main>.container {
 		transition: width 300ms;
-		width: 90%
+		width: 92.5%
 	}
 
 	body {

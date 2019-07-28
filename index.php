@@ -81,7 +81,7 @@
 									'SELECT tools.tool_name, tools.tool_path, sections.section_path, types.type_path FROM tools
 									INNER JOIN sections ON sections.section_id = tools.section_id
 									INNER JOIN types ON types.type_id = sections.type_id
-									WHERE tool_active = "1"
+									WHERE tool_status = "1"
 									ORDER BY tool_visits DESC, tool_id
 									LIMIT 3'
 								);
@@ -118,7 +118,7 @@
 							<div class="card-content white-text">
 								<span class="card-title"><i class="material-icons left">group</i>Pessoas ajudadas</span>
 								<?php
-								$sql = $database->prepare('SELECT SUM(tool_visits) FROM tools WHERE tool_active = "1" LIMIT 1');
+								$sql = $database->prepare('SELECT SUM(tool_visits) FROM tools WHERE tool_status = "1" LIMIT 1');
 								$sql->execute();
 
 								$total_visits = $sql->fetchColumn()

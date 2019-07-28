@@ -33,7 +33,7 @@ if (!isset($_SESSION['logged'])) {
 				include_once("$assets/php/Connection.php");
 				$tool_id = filter_input(INPUT_GET, 'tool_id', FILTER_DEFAULT);
 
-				$sql = $database->prepare('SELECT tool_id, tool_name, tool_path, tool_description, tool_link, tool_active, section_id FROM tools WHERE tool_id = :tool_id LIMIT 1');
+				$sql = $database->prepare('SELECT tool_id, tool_name, tool_path, tool_description, tool_link, tool_status, section_id FROM tools WHERE tool_id = :tool_id LIMIT 1');
 				$sql->bindValue(':tool_id', $tool_id);
 				$sql->execute();
 
@@ -74,10 +74,10 @@ if (!isset($_SESSION['logged'])) {
 						</div>
 
 						<div class="input-field col s12 m6">
-							<i class="material-icons prefix"><?= $tool_active ? 'check' : 'close' ?></i>
-							<select name="tool_active">
+							<i class="material-icons prefix"><?= $tool_status ? 'check' : 'close' ?></i>
+							<select name="tool_status">
 								<option value="0">Desativado</option>
-								<option value="1" <?= $tool_active ? 'selected' : '' ?>>Ativado</option>
+								<option value="1" <?= $tool_status ? 'selected' : '' ?>>Ativado</option>
 							</select>
 							<label>Status *</label>
 							<span class="helper-text">Status da Ferramenta</span>

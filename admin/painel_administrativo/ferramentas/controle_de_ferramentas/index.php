@@ -69,7 +69,7 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">check</i>
-							<select name="tool_active">
+							<select name="tool_status">
 								<option value="0">Desativado</option>
 								<option value="1" selected>Ativado</option>
 							</select>
@@ -149,13 +149,13 @@ if (!isset($_SESSION['logged'])) {
 						</div>
 
 						<div class="input-field col s12">
-							<?php $tool_active_get = filter_input(INPUT_GET, 'tool_active', FILTER_DEFAULT) ?>
-							<i class="material-icons prefix"><?= isset($tool_active_get) && $tool_active_get === '1' ? 'check' : 'close' ?></i>
+							<?php $tool_status_get = filter_input(INPUT_GET, 'tool_status', FILTER_DEFAULT) ?>
+							<i class="material-icons prefix"><?= isset($tool_status_get) && $tool_status_get === '1' ? 'check' : 'close' ?></i>
 
-							<select name="tool_active">
+							<select name="tool_status">
 								<option value="-1">Selecione uma opção</option>
-								<option value="0" <?= isset($tool_active_get) && $tool_active_get === '0' ? 'selected' : '' ?>>Desativado</option>
-								<option value="1" <?= isset($tool_active_get) && $tool_active_get === '1' ? 'selected' : '' ?>>Ativado</option>
+								<option value="0" <?= isset($tool_status_get) && $tool_status_get === '0' ? 'selected' : '' ?>>Desativado</option>
+								<option value="1" <?= isset($tool_status_get) && $tool_status_get === '1' ? 'selected' : '' ?>>Ativado</option>
 							</select>
 							<label>Status</label>
 							<span class="helper-text">Status da Ferramenta</span>

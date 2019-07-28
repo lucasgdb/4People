@@ -16,9 +16,9 @@ try {
 		$condition .= "sections.section_id = :section_id_get";
 	}
 
-	if (isset($tool_active_get) && $tool_active_get !== '-1') {
+	if (isset($tool_status_get) && $tool_status_get !== '-1') {
 		$condition .= $condition === '' ? 'WHERE ' : ' AND ';
-		$condition .= "tools.tool_active = :tool_active_get";
+		$condition .= "tools.tool_status = :tool_status_get";
 	}
 
 	$sql = $database->prepare(
@@ -31,18 +31,18 @@ try {
 
 	if (isset($type_id_get) && $type_id_get !== '-1') $sql->bindValue(':type_id_get', $type_id_get);
 	if (isset($section_id_get) && $section_id_get !== '-1') $sql->bindValue(':section_id_get', $section_id_get);
-	if (isset($tool_active_get) && $tool_active_get !== '-1') $sql->bindValue(':tool_active_get', $tool_active_get);
+	if (isset($tool_status_get) && $tool_status_get !== '-1') $sql->bindValue(':tool_status_get', $tool_status_get);
 
 	$sql->execute();
 
 	foreach ($sql as $key) : extract($key) ?>
 		<tr>
 			<td><?= $tool_name ?></td>
-			<td><?= $tool_active ? 'Ativado' : 'Desativado' ?></td>
+			<td><?= $tool_status ? 'Ativado' : 'Desativado' ?></td>
 			<td><?= $tool_visits ?></td>
 			<td>
 				<button data-clipboard-text="<?= "$type_path/$section_path/$tool_path/" ?>" title="Copiar caminho da Ferramenta" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
-				<a href="<?= "$root/$type_path/$section_path/$tool_path/" ?>" title="Ir até à Ferramenta" class="btn waves-effect waves-light indigo darken-4 z-depth-0" <?= !$tool_active ? 'disabled' : '' ?>><i class="material-icons">insert_link</i></a>
+				<a href="<?= "$root/$type_path/$section_path/$tool_path/" ?>" title="Ir até à Ferramenta" class="btn waves-effect waves-light indigo darken-4 z-depth-0" <?= !$tool_status ? 'disabled' : '' ?>><i class="material-icons">insert_link</i></a>
 			</td>
 			<td>
 				<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar Ferramenta" href="atualizar_dados/?tool_id=<?= $tool_id ?>"><i class="material-icons" style="font-size:22px">edit</i></a>
