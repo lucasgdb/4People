@@ -44,5 +44,5 @@ try {
 
 	header('Location: ../');
 } catch (Exception $e) {
-	echo 'Um erro ocorreu! Erro: ' . $e->getMessage();
+	"Um erro ocorreu! Erro: {$e->getMessage()}";
 }

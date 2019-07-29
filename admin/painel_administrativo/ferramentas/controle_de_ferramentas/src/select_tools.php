@@ -41,7 +41,7 @@ try {
 			<td><?= $tool_status ? 'Ativado' : 'Desativado' ?></td>
 			<td><?= $tool_visits ?></td>
 			<td>
-				<button data-clipboard-text="<?= "$type_path/$section_path/$tool_path/" ?>" title="Copiar caminho da Ferramenta" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
+				<button data-clipboard-text="<?= "{$_SERVER['HTTP_HOST']}/$type_path/$section_path/$tool_path/" ?>" title="Copiar caminho da Ferramenta" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
 				<a href="<?= "$root/$type_path/$section_path/$tool_path/" ?>" title="Ir até à Ferramenta" class="btn waves-effect waves-light indigo darken-4 z-depth-0" <?= !$tool_status ? 'disabled' : '' ?>><i class="material-icons">insert_link</i></a>
 			</td>
 			<td>
@@ -52,5 +52,5 @@ try {
 	<?php endforeach ?>
 <?php
 } catch (PDOException $e) {
-	echo 'Um erro ocorreu! Erro: ' . $e->getMessage();
+	"Um erro ocorreu! Erro: {$e->getMessage()}";
 }

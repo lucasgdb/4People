@@ -22,5 +22,5 @@ try {
 	<?php endforeach ?>
 <?php
 } catch (PDOException $e) {
-	echo 'Um erro ocorreu! Erro: ' . $e->getMessage();
+	"Um erro ocorreu! Erro: {$e->getMessage()}";
 }

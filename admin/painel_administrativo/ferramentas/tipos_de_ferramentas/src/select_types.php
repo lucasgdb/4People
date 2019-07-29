@@ -15,7 +15,7 @@ try {
 			<td><?= $type_name ?></td>
 			<td><i title="<?= $type_icon ?>" class="material-icons" style="top:4px"><?= $type_icon ?></i></td>
 			<td>
-				<button data-clipboard-text="<?= "$type_path/" ?>" title="Copiar caminho do Tipo" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
+				<button data-clipboard-text="<?= "{$_SERVER['HTTP_HOST']}/$type_path/" ?>" title="Copiar caminho do Tipo" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
 				<a href="<?= "$root/$type_path/" ?>" title="Ir até ao Tipo" class="btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons">insert_link</i></a>
 			</td>
 			<td>
@@ -26,5 +26,5 @@ try {
 	<?php endforeach ?>
 <?php
 } catch (PDOException $e) {
-	echo 'Um erro ocorreu! Erro: ' . $e->getMessage();
+	"Um erro ocorreu! Erro: {$e->getMessage()}";
 }

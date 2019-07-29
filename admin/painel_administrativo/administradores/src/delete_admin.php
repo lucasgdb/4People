@@ -26,5 +26,5 @@ try {
 	$sql->bindValue(':admin_id', $admin_id);
 	$sql->execute();
 } catch (PDOException $e) {
-	echo 'Um erro ocorreu! Erro: ' . $e->getMessage();
+	"Um erro ocorreu! Erro: {$e->getMessage()}";
 }

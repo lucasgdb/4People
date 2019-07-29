@@ -64,5 +64,5 @@ try {
 
 	header('Location: ../');
 } catch (PDOException $e) {
-	echo 'Um erro ocorreu! Erro: ' . $e->getMessage();
+	"Um erro ocorreu! Erro: {$e->getMessage()}";
 }
