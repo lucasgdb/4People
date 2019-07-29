@@ -42,7 +42,7 @@
 						<li class="grey lighten-3">
 							<img alt=".">
 							<div class="caption left-align">
-								<h3 class="dark grey-text text-darken-4"><i style="top:9px" class="material-icons left small">favorite</i> FEITO PARA TODOS!</h3>
+								<h3 class="dark grey-text text-darken-4"><i style="top:9px" class="material-icons red-text text-accent-4 left small">favorite</i> FEITO PARA TODOS!</h3>
 								<h5 class="light grey-text text-darken-4">Possuímos ferramentas para Programadores, professores, estudantes e usuários comuns.</h5>
 							</div>
 						</li>
@@ -56,14 +56,14 @@
 
 						<li class="grey lighten-3">
 							<div class="caption right-align">
-								<h3 class="dark grey-text text-darken-4">CÓDIGO ABERTO! <i style="top:10px" class="material-icons right small">code</i></h3>
+								<h3 class="dark grey-text text-darken-4">CÓDIGO ABERTO! <i style="top:10px" class="material-icons indigo-text text-darken-4 right small">code</i></h3>
 								<h5 class="light grey-text text-darken-4">O Projeto 4People é de Código Aberto para qualquer um estudar os algoritmos e até mesmo melhorá-los.</h5>
 							</div>
 						</li>
 
 						<li class="grey lighten-3">
 							<div class="caption right-align">
-								<h3 class="dark grey-text text-darken-4"><i style="top:10px" class="material-icons right small">free_breakfast</i>O MAIS ATUALIZADO!</h3>
+								<h3 class="dark grey-text text-darken-4"><i style="top:10px" class="material-icons brown-text text-darken-2 right small">free_breakfast</i>O MAIS ATUALIZADO!</h3>
 								<h5 class="light grey-text text-darken-4">O 4People possui as melhores ferramentas atualizadas. Tá sentindo falta de alguma? Por favor, nos envie uma <a href="./contato/">mensagem</a>.</h5>
 							</div>
 						</li>
