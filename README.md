@@ -25,11 +25,30 @@
 	- Controle de Administradores
 		- Primeiro login gera um Admin e envia pro e-mail
 		- Upload de imagem
+	- Mensagens dos usuários
+		- Receber mensagens no Painel Administrativo
+		- Responder mensagens direto do Painel Administrativo pro e-mail do usuário
 	- Controle de Ferramentas
 		- Ativar/Desativar Ferramentas
 - Proteção contra Brute-Force
 - Proteção contra SQL Injection
 - Ferramentas escritas em JavaScript
+
+## Como usar o Projeto
+- Clonar este repositório.
+	- git clone https://github.com/lucasnaja/4People.git
+- Importar o banco de dados no MySQL.
+	- /assets/database/database.sql
+- Windows
+	- Colar a pasta 4People no htdocs do xampp.
+- Linux
+	- Ligar o PHP na pasta do 4People.
+		- php -S localhost:3000
+
+## Como colaborar
+- Faça os mesmos passos de Como usar o Projeto acima.
+- Faça as mudanças.
+- Dê um Commit e abra um PR no [GitHub](https://github.com/lucasnaja/4People) do projeto.
 
 ## Ferramentas prontas (36/115)
 - Computação
