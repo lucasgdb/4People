@@ -23,7 +23,7 @@ try {
 
 	foreach ($sql as $key) : extract($key) ?>
 		<tr>
-			<td><img title="<?= $admin_name ?>" class="circle" width="35" src="<?= $admin_image ? "$assets/images/admin_images/$admin_image" : "$assets/images/logo.png" ?>" alt="<?= $admin_name ?>"></td>
+			<td><img title="<?= $admin_name ?>" class="circle" width="40" style="margin-bottom:-5px" src="<?= $admin_image ? "$assets/images/admin_images/$admin_image" : "$assets/images/logo.png" ?>" alt="<?= $admin_name ?>"></td>
 			<td><?= $admin_name ?></td>
 			<td><?= $admin_nickname ?></td>
 			<td><?= $admin_email ?></td>
