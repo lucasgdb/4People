@@ -92,7 +92,7 @@ if (!isset($_SESSION['logged'])) {
 
 				<div class="divider"></div>
 
-				<form action="." method="get">
+				<form action="." method="GET">
 					<div style="margin-top:15px" class="row mb-0">
 						<div class="input-field col s12">
 							<i class="material-icons prefix">folder</i>

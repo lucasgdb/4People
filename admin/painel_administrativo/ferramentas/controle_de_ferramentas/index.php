@@ -110,7 +110,7 @@ if (!isset($_SESSION['logged'])) {
 
 				<div class="divider"></div>
 
-				<form action="." method="get">
+				<form action="." method="GET">
 					<div style="margin-top:15px" class="row mb-0">
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">folder</i>
@@ -184,7 +184,7 @@ if (!isset($_SESSION['logged'])) {
 				<table class="centered highlight responsive-table">
 					<thead>
 						<tr>
-							<th>Nome</th>
+							<th>Nome da Ferramenta</th>
 							<th>Status</th>
 							<th>Visitas</th>
 							<th>Caminho</th>

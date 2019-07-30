@@ -15,8 +15,8 @@ try {
 			<td><?= $type_name ?></td>
 			<td><i title="<?= $type_icon ?>" class="material-icons" style="top:4px"><?= $type_icon ?></i></td>
 			<td>
-				<button data-clipboard-text="<?= "{$_SERVER['HTTP_HOST']}/$type_path/" ?>" title="Copiar caminho do Tipo" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
-				<a href="<?= "$root/$type_path/" ?>" title="Ir até ao Tipo" class="btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons">insert_link</i></a>
+				<button data-clipboard-text="<?= "{$_SERVER['HTTP_HOST']}/$type_path/" ?>" title="Copiar caminho da página" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
+				<a href="<?= "$root/$type_path/" ?>" title="Ir até a página" class="btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons">insert_link</i></a>
 			</td>
 			<td>
 				<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar Tipo" href="atualizar_dados/?type_id=<?= $type_id ?>"><i class="material-icons" style="font-size:22px">edit</i></a>

@@ -34,7 +34,7 @@ if (!isset($_SESSION['logged'])) {
 				<label>Adicionar um novo Administrador ao 4People</label>
 
 				<div class="divider"></div>
-				
+
 				<form style="margin-top:15px" action="src/insert_admin.php" method="POST" enctype="multipart/form-data">
 					<div class="row mb-0">
 						<div class="input-field col s12 m6">
@@ -86,6 +86,35 @@ if (!isset($_SESSION['logged'])) {
 				<div class="top-div indigo darken-4"></div>
 			</div>
 
+			<div class="card-panel z-depth-2 top-div-margin" style="padding-bottom:10px">
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person_add</i>Pesquisar um Administrador</h1>
+				<label>Pesquisar um Administrador do 4People</label>
+				<div class="divider"></div>
+
+				<form action="." method="GET">
+					<div class="row mb-0" style="margin-top:15px">
+						<div class="input-field col s12">
+							<i class="material-icons prefix">textsms</i>
+							<input title="Preencha este campo com o nome." placeholder="Nome do Administrador" type="text" id="admin_name_search" name="admin_name" class="autocomplete" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
+							<label for="admin_name_search">Pesquisar</label>
+							<span class="helper-text" data-error="Nome inválido." data-success="Nome válido.">Digite o Nome do Administrador para começar a filtrar.</span>
+						</div>
+					</div>
+
+					<div class="col s12">
+						<div class="divider"></div>
+						<button title="Pesquisar Administrador" class="btn waves-effect waves-light indigo darken-4 mt-2 z-depth-0">
+							<i class="material-icons left">search</i>Pesquisar
+							<input class="hide" title="Filtrar Ferramentas" type="submit">
+						</button>
+
+						<a title="Limpar Pesquisa" href="." class="btn indigo darken-4 mt-2 waves-effect waves-light right z-depth-0"><i class="material-icons left">format_clear</i>Limpar</a>
+					</div>
+				</form>
+
+				<div class="top-div indigo darken-4"></div>
+			</div>
+
 			<div class="card-panel left-div-margin" style="padding-bottom:10px">
 				<h2 class="flow-text" style="margin: 0 0 5px"><i class="material-icons left">format_list_bulleted</i>Lista de Administradores</h2>
 				<label>Lista de Administradores registrados</label>
@@ -94,9 +123,10 @@ if (!isset($_SESSION['logged'])) {
 				<table class="centered highlight responsive-table">
 					<thead>
 						<tr>
-							<th>Nome do Administrador</th>
-							<th>Login do Administrador</th>
-							<th>E-mail do Administrador</th>
+							<th>Imagem</th>
+							<th>Nome</th>
+							<th>Login</th>
+							<th>E-mail</th>
 							<th>Operações</th>
 						</tr>
 					</thead>
@@ -122,7 +152,7 @@ if (!isset($_SESSION['logged'])) {
 		<div class="divider"></div>
 
 		<div class="modal-footer">
-		<button title="Cancelar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Cancelar</button>
+			<button title="Cancelar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Cancelar</button>
 			<a id="linkRemoveAdmin" title="Remover Administrador" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</a>
 		</div>
 	</div>
@@ -130,7 +160,25 @@ if (!isset($_SESSION['logged'])) {
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
+	<?php
+	$sql = $database->prepare('SELECT admin_name, admin_image FROM admins');
+	$sql->execute()
+	?>
 	<script>
+		M.Modal.init(document.querySelectorAll('.modal'))
+
+		const data = {}
+		let image, path
+		<?php foreach ($sql as $data) : extract($data) ?>
+			image = '<?= $admin_image ?>'
+			path = '<?= $assets ?>/images/admin_images/'
+			data['<?= $admin_name ?>'] = image ? `${path}${image}` : null
+		<?php endforeach ?>
+
+		M.Autocomplete.init(document.querySelectorAll('.autocomplete'), {
+			data
+		})
+
 		const linkRemoveAdmin = document.querySelector('#linkRemoveAdmin')
 		const lblAdmin = document.querySelector('#admin')
 

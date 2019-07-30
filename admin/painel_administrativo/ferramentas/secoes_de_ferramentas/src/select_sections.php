@@ -8,8 +8,7 @@ try {
 	include_once("$assets/php/Connection.php");
 
 	$condition = '';
-
-	if (isset($type_id_get) && $type_id_get !== '-1') $condition = "AND types.type_id = :type_id_get";
+	if (isset($type_id_get)) $condition = "AND types.type_id = :type_id_get";
 
 	$sql = $database->prepare(
 		"SELECT sections.*, types.type_path FROM sections
@@ -18,7 +17,7 @@ try {
 		ORDER BY types.type_id"
 	);
 
-	if (isset($type_id_get) && $type_id_get !== '-1') $sql->bindValue(':type_id_get', $type_id_get);
+	if (isset($type_id_get)) $sql->bindValue(':type_id_get', $type_id_get);
 
 	$sql->execute();
 
@@ -27,8 +26,8 @@ try {
 			<td><?= $section_name ?></td>
 			<td><i title="<?= $section_icon ?>" class="material-icons" style="top:4px"><?= $section_icon ?></i></td>
 			<td>
-				<button data-clipboard-text="<?= "{$_SERVER['HTTP_HOST']}/$type_path/$section_path/" ?>" title="Copiar caminho da Seção" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
-				<a href="<?= "$root/$type_path/$section_path/" ?>" title="Ir até à Seção" class="btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons">insert_link</i></a>
+				<button data-clipboard-text="<?= "{$_SERVER['HTTP_HOST']}/$type_path/$section_path/" ?>" title="Copiar caminho da página" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
+				<a href="<?= "$root/$type_path/$section_path/" ?>" title="Ir até a página" class="btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons">insert_link</i></a>
 			</td>
 			<td>
 				<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar Seção" href="atualizar_dados/?section_id=<?= $section_id ?>"><i class="material-icons" style="font-size:22px">edit</i></a>

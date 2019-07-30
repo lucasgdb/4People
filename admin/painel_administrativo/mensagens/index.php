@@ -69,7 +69,7 @@ if (!isset($_SESSION['logged'])) {
 		<div class="divider"></div>
 
 		<div class="modal-footer">
-			<a id="linkMasAsRead" title="Marcar como lida" class="btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">remove_red_eye</i>Marcar como lida</a>
+			<a id="linkMasAsRead" title="Marcar como lida" class="btn waves-effect waves-light teal darken-2 z-depth-0"><i class="material-icons left">remove_red_eye</i>Marcar como lida</a>
 			<a title="Fechar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Fechar</a>
 			<button title="Responder Mensagem" class="modal-close btn waves-effect waves-light teal darken-2 z-depth-0 modal-trigger" data-target="replyEmail"><i class="material-icons left">reply</i>Responder</button>
 		</div>

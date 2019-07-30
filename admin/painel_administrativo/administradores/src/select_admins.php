@@ -7,11 +7,23 @@ try {
 
 	include_once("$assets/php/Connection.php");
 
-	$sql = $database->prepare('SELECT admin_id, admin_name, admin_nickname, admin_email FROM admins');
+	$admin_name = filter_input(INPUT_GET, 'admin_name', FILTER_DEFAULT);
+
+	$condition = '';
+	if (isset($admin_name)) $condition = "WHERE admin_name = :admin_name";
+
+	$sql = $database->prepare(
+		"SELECT admin_id, admin_name, admin_nickname, admin_email, admin_image
+			FROM admins $condition"
+	);
+
+	if (isset($admin_name)) $sql->bindValue(':admin_name', $admin_name);
+
 	$sql->execute();
 
 	foreach ($sql as $key) : extract($key) ?>
 		<tr>
+			<td><img title="<?= $admin_name ?>" class="circle" width="35" src="<?= $admin_image ? "$assets/images/admin_images/$admin_image" : "$assets/images/logo.png" ?>" alt="<?= $admin_name ?>"></td>
 			<td><?= $admin_name ?></td>
 			<td><?= $admin_nickname ?></td>
 			<td><?= $admin_email ?></td>
