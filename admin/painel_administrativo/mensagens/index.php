@@ -59,9 +59,9 @@ if (!isset($_SESSION['logged'])) {
 	<div id="readMessage" class="modal">
 		<div class="modal-content left-div-margin">
 			<h4><i class="material-icons left" style="top:8px">remove_red_eye</i>Ler Mensagem</h4>
-			<h6 id="messageSubject"></h6>
+			<h6 id="messageSubject" style="color:#676767"></h6>
 			<div class="divider"></div>
-			<p id="messageContent" class="mb-0" style="text-indent:6px"></p>
+			<p id="messageContent" class="mb-0 grey-text text-darken-4" style="text-indent:6px"></p>
 
 			<div class="left-div indigo darken-4" style="border-radius:0"></div>
 		</div>
@@ -70,8 +70,8 @@ if (!isset($_SESSION['logged'])) {
 
 		<div class="modal-footer">
 			<a id="linkMasAsRead" title="Marcar como lida" class="btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">remove_red_eye</i>Marcar como lida</a>
-			<button title="Responder Mensagem" class="modal-close btn waves-effect waves-light teal darken-2 z-depth-0 modal-trigger" data-target="replyEmail"><i class="material-icons left">reply</i>Responder</button>
 			<a title="Fechar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Fechar</a>
+			<button title="Responder Mensagem" class="modal-close btn waves-effect waves-light teal darken-2 z-depth-0 modal-trigger" data-target="replyEmail"><i class="material-icons left">reply</i>Responder</button>
 		</div>
 	</div>
 
@@ -79,9 +79,8 @@ if (!isset($_SESSION['logged'])) {
 		<form action="src/send_email.php" method="POST">
 			<div class="modal-content" style="padding-bottom:0;padding-left:34px">
 				<h4 class="mb-0"><i class="material-icons left" style="top:8px">send</i>Responder Mensagem</h4>
-				<div class="divider mt-1" style="margin-bottom:20px"></div>
 
-				<h6 id="messageSubjectTitle"></h6>
+				<h6 id="messageSubjectTitle" style="color:#676767"></h6>
 				<input id="messageID" name="message_id" type="hidden">
 				<input id="messageNameReply" name="message_name" type="hidden">
 				<input id="messageEmailReply" name="message_email" type="hidden">
@@ -143,7 +142,7 @@ if (!isset($_SESSION['logged'])) {
 			</div>
 		</form>
 
-		<div class="left-div indigo darken-3" style="border-radius:0"></div>
+		<div class="left-div indigo darken-4" style="border-radius:0"></div>
 	</div>
 
 	<div id="removeMessage" class="modal">
