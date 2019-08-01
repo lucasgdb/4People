@@ -38,7 +38,8 @@
 				<label>Alguma dúvida? Algum bug? Deseja alguma ferramenta nova? Por favor, nos contate e deixe-nos sabendo de qualquer coisa.</label>
 				<div class="divider"></div>
 
-				<h5>Dados de contato</h5>
+				<h5 class="mb-2 center-align" style="position:relative"><i class="material-icons" style="position:absolute;left:0">drafts</i>Dados de contato</h5>
+				<div class="divider" style="margin-bottom:15px"></div>
 
 				<form class="mt-2" method="POST">
 					<div class="row mb-0">
@@ -57,9 +58,9 @@
 						</div>
 					</div>
 
-					<div class="divider"></div>
+					<h5 class="mb-2 center-align" style="position:relative"><i class="material-icons" style="position:absolute;left:0">info</i>Informações</h5>
+					<div class="divider" style="margin-bottom:15px"></div>
 
-					<h5>Informações</h5>
 					<div class="row mb-0">
 						<div class="input-field col s12">
 							<select name="message_subject">
@@ -72,13 +73,19 @@
 							<label>Título *</label>
 							<span class="helper-text">Selecionar assunto de mensagem</span>
 						</div>
+
+						<div class="col s12">
+							<textarea name="message_content" placeholder="Mensagem" oninvalid="this.setCustomValidity('Preencha este campo com a mensagem.')" oninput="setCustomValidity('')" spellcheck="false" required></textarea>
+						</div>
+
+						<div class="col s12">
+							<div class="divider"></div>
+							<button title="Inserir um Administrador no 4People" class="btn waves-effect waves-light indigo darken-4 z-depth-0">
+								<i class="material-icons right">send</i>Enviar Mensagem
+								<input class="hide" type="submit" value="">
+							</button>
+						</div>
 					</div>
-
-					<textarea name="message_content" placeholder="Mensagem" oninvalid="this.setCustomValidity('Preencha este campo com a mensagem.')" oninput="setCustomValidity('')" spellcheck="false" required></textarea>
-
-					<button title="Enviar Mensagem" class="btn waves-effect waves-light indigo darken-4 z-depth-0" type="submit">
-						Enviar
-					</button>
 				</form>
 
 				<div class="left-div indigo darken-4"></div>

@@ -60,7 +60,8 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">https</i>
-							<input id="admin_password" minlength="6" title="Preencha este campo com a senha." placeholder="Senha do Administrador" class="validate" type="password" name="admin_password" oninvalid="this.setCustomValidity('Preencha este campo com a senha.')" oninput="setCustomValidity('')" required>
+							<input id="admin_password" style="width:calc(100% - 4.5rem)" minlength="6" title="Preencha este campo com a senha." placeholder="Senha do Administrador" class="validate" type="password" name="admin_password" oninvalid="this.setCustomValidity('Preencha este campo com a senha.')" oninput="setCustomValidity('')" required>
+							<i id="visibility" onclick="switchVisibility()" class="material-icons prefix" style="cursor:pointer">visibility</i>
 							<label class="active" for="admin_password">Senha *</label>
 							<span class="helper-text" data-error="Senha inválida. Tamanho mínimo: 6" data-success="Senha válida.">Aguardando...</span>
 						</div>
@@ -143,7 +144,20 @@ if (!isset($_SESSION['logged'])) {
 		const admins = document.querySelector('#admins')
 		const modals = document.querySelector('#modals')
 		const inputs = form.querySelectorAll('input')
+		const btnSubmit = form.querySelector('button')
 		const admin_name_search = document.querySelector('#admin_name_search')
+		const txtPassword = document.querySelector('input[name=admin_password]')
+		const txtPasswordIcon = document.querySelector('#visibility')
+
+		const switchVisibility = () => {
+			if (txtPassword.type === 'password') {
+				txtPassword.type = 'text'
+				txtPasswordIcon.innerText = 'visibility_off'
+			} else {
+				txtPassword.type = 'password'
+				txtPasswordIcon.innerText = 'visibility_on'
+			}
+		}
 
 		const createAutoComplete = data => {
 			const filteredData = {}
@@ -158,6 +172,7 @@ if (!isset($_SESSION['logged'])) {
 
 		form.onsubmit = async e => {
 			e.preventDefault()
+			btnSubmit.disabled = true
 			const data = new FormData(form)
 
 			const result = await (await fetch('src/insert_admin.php', {
@@ -186,6 +201,8 @@ if (!isset($_SESSION['logged'])) {
 					classes: 'red accent-4'
 				})
 			}
+
+			btnSubmit.disabled = false
 		}
 
 		const selectAdmins = async (name = '') => await (await fetch(`src/select_admins.php?admin_name=${name}`)).json()
