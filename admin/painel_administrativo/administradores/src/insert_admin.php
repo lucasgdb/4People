@@ -1,5 +1,9 @@
 <?php
 try {
+	header('Access-Control-Allow-Origin: localhost');
+	header("Access-Control-Allow-Methods: POST");
+	header('Content-Type: application/json; charset=UTF-8');
+
 	session_start();
 	if (!isset($_SESSION['logged'])) {
 		header('HTTP/1.0 404 Not Found');
@@ -30,9 +34,9 @@ try {
 	$sql->bindValue(':admin_email', $admin_email);
 	$sql->bindValue(':admin_password', cript($admin_password));
 	$sql->bindValue(':admin_image', isset($no_image) ? NULL : $long_name);
-	
-	$sql->execute();
-	header('Location: ../');
+
+	if ($sql->execute()) echo json_encode(['status' => '1']);
+	else echo json_encode(['status' => '0']);
 } catch (PDOException $e) {
 	"Um erro ocorreu! Erro: {$e->getMessage()}";
 }

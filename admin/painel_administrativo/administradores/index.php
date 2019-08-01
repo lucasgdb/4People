@@ -35,7 +35,7 @@ if (!isset($_SESSION['logged'])) {
 
 				<div class="divider"></div>
 
-				<form style="margin-top:15px" action="src/insert_admin.php" method="POST" enctype="multipart/form-data">
+				<form style="margin-top:15px" method="POST" enctype="multipart/form-data">
 					<div class="row mb-0">
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">person</i>
@@ -87,30 +87,18 @@ if (!isset($_SESSION['logged'])) {
 			</div>
 
 			<div class="card-panel z-depth-2 top-div-margin" style="padding-bottom:10px">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person_add</i>Pesquisar um Administrador</h1>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">search</i>Pesquisar um Administrador</h1>
 				<label>Pesquisar um Administrador do 4People</label>
 				<div class="divider"></div>
 
-				<form action="." method="GET">
-					<div class="row mb-0" style="margin-top:15px">
-						<div class="input-field col s12">
-							<i class="material-icons prefix">textsms</i>
-							<input title="Preencha este campo com o nome." placeholder="Nome do Administrador" type="text" id="admin_name_search" name="admin_name" class="autocomplete" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
-							<label for="admin_name_search">Pesquisar</label>
-							<span class="helper-text" data-error="Nome inválido." data-success="Nome válido.">Digite o Nome do Administrador para começar a filtrar.</span>
-						</div>
+				<div class="row mb-0" style="margin-top:15px">
+					<div class="input-field col s12">
+						<i class="material-icons prefix">textsms</i>
+						<input title="Preencha este campo com o nome." placeholder="Nome do Administrador" type="text" id="admin_name_search" class="autocomplete" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
+						<label for="admin_name_search">Pesquisar</label>
+						<span class="helper-text" data-error="Nome inválido." data-success="Nome válido.">Digite o Nome do Administrador para começar a filtrar.</span>
 					</div>
-
-					<div class="col s12">
-						<div class="divider"></div>
-						<button title="Pesquisar Administrador" class="btn waves-effect waves-light indigo darken-4 mt-2 z-depth-0">
-							<i class="material-icons left">search</i>Pesquisar
-							<input class="hide" title="Filtrar Ferramentas" type="submit">
-						</button>
-
-						<a title="Limpar Pesquisa" href="." class="btn indigo darken-4 mt-2 waves-effect waves-light right z-depth-0"><i class="material-icons left">format_clear</i>Limpar</a>
-					</div>
-				</form>
+				</div>
 
 				<div class="top-div indigo darken-4"></div>
 			</div>
@@ -131,8 +119,8 @@ if (!isset($_SESSION['logged'])) {
 						</tr>
 					</thead>
 
-					<tbody>
-						<?php include_once('src/select_admins.php') ?>
+					<tbody id="admins">
+
 					</tbody>
 				</table>
 
@@ -141,21 +129,7 @@ if (!isset($_SESSION['logged'])) {
 		</div>
 	</main>
 
-	<div id="removeAdmin" class="modal">
-		<div class="modal-content left-div-margin">
-			<h4><i class="material-icons left" style="top:7px">delete</i>Remover Administrador</h4>
-			<p class="mb-0">Você tem certeza que deseja remover <span id="admin"></span> da Administração?</p>
-
-			<div class="left-div indigo darken-4" style="border-radius:0"></div>
-		</div>
-
-		<div class="divider"></div>
-
-		<div class="modal-footer">
-			<button title="Cancelar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Cancelar</button>
-			<a id="linkRemoveAdmin" title="Remover Administrador" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</a>
-		</div>
-	</div>
+	<div id="modals"></div>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/index.js"></script>
@@ -165,29 +139,122 @@ if (!isset($_SESSION['logged'])) {
 	$sql->execute()
 	?>
 	<script>
-		M.Modal.init(document.querySelectorAll('.modal'))
+		const form = document.querySelector('form')
+		const admins = document.querySelector('#admins')
+		const modals = document.querySelector('#modals')
+		const inputs = form.querySelectorAll('input')
+		const admin_name_search = document.querySelector('#admin_name_search')
 
-		const data = {}
-		let image, path
-		<?php foreach ($sql as $data) : extract($data) ?>
-			image = '<?= $admin_image ?>'
-			path = '<?= $assets ?>/images/admin_images/'
-			data['<?= $admin_name ?>'] = image ? `${path}${image}` : null
-		<?php endforeach ?>
+		const createAutoComplete = data => {
+			const filteredData = {}
 
-		M.Autocomplete.init(document.querySelectorAll('.autocomplete'), {
-			data
-		})
+			for (const i in data) filteredData[data[i][0]] = `<?= $assets ?>/images/${data[i][3] ? `admin_images/${data[i][3]}` : 'logo.png'}`
 
-		const linkRemoveAdmin = document.querySelector('#linkRemoveAdmin')
-		const lblAdmin = document.querySelector('#admin')
-
-		const changeLink = (link, admin) => {
-			linkRemoveAdmin.href = link
-			lblAdmin.innerHTML = admin
+			M.Autocomplete.init(document.querySelectorAll('.autocomplete'), {
+				data: filteredData,
+				onAutocomplete: async () => showAdmins(await selectAdmins(admin_name_search.value))
+			})
 		}
 
-		M.Modal.init(document.querySelectorAll('.modal'))
+		form.onsubmit = async e => {
+			e.preventDefault()
+
+			const data = new FormData(form)
+
+			const result = await (await fetch('src/insert_admin.php', {
+				method: 'POST',
+				body: data
+			})).json()
+
+			if (result.status === '1') {
+				M.toast({
+					html: `${inputs[0].value.trim()} adicionado(a) na Administração.`,
+					classes: 'green'
+				})
+
+				for (let i = 0; i < inputs.length; i++) {
+					inputs[i].value = ''
+					inputs[i].classList.remove('valid', 'invalid')
+				}
+
+				const data = await selectAdmins()
+
+				createAutoComplete(data)
+				showAdmins(data)
+			} else {
+				M.toast({
+					html: `Erro ao adicionar ${inputs[0].value.trim()} na Administração.`,
+					classes: 'red accent-4'
+				})
+			}
+		}
+
+		const selectAdmins = async (name = '') => await (await fetch(`src/select_admins.php?admin_name=${name}`)).json()
+
+		const showAdmins = data => {
+			let adminsHTML = '',
+				modalsHTML = ''
+
+			for (const i in data) {
+				modalsHTML +=
+					`<div id="removeAdmin${i}" class="modal">
+						<div class="modal-content left-div-margin">
+							<h4><i class="material-icons left" style="top:7px">delete</i>Remover Administrador</h4>
+							<p class="mb-0">Você tem certeza que deseja remover ${data[i][0]} da Administração?</p>
+
+							<div class="left-div indigo darken-4" style="border-radius:0"></div>
+						</div>
+
+						<div class="divider"></div>
+
+						<div class="modal-footer">
+							<button title="Cancelar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Cancelar</button>
+							<button onclick="deleteAdmin(${i})" title="Remover Administrador" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</button>
+						</div>
+					</div>`
+
+				adminsHTML +=
+					`<tr>
+						<td><img title="${data[i][0]}" class="circle" width="40" style="margin-bottom:-5px" src="${data[i][3] ? `<?= $assets ?>/images/admin_images/${data[i][3]}` : '<?= $assets ?>/images/logo.png' }" alt="${data[i][0]}"></td>
+						<td>${data[i][0]}</td>
+						<td>${data[i][1]}</td>
+						<td>${data[i][2]}</td>
+						<td>
+							<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar Administrador" href="atualizar_dados/?admin_id=${i}"><i class="material-icons" style="font-size:22px">edit</i></a>
+							<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" style="cursor:pointer" title="Remover Administrador" data-target="removeAdmin${i}"><i class="material-icons" style="font-size:23px">delete</i></button>
+						</td>
+					</tr>`
+			}
+
+			admins.innerHTML = adminsHTML
+			modals.innerHTML = modalsHTML
+			M.Modal.init(document.querySelectorAll('.modal'))
+		}
+
+		const deleteAdmin = async id => {
+			const result = await (await fetch(`src/delete_admin.php?admin_id=${id}`)).json()
+
+			if (result.status === '1') location = '/'
+			else {
+				M.toast({
+					html: `${result.admin_name} removido(a) da Administração.`,
+					classes: 'green'
+				})
+			}
+
+			const data = await selectAdmins()
+			createAutoComplete(data)
+			showAdmins(data)
+		}
+
+		admin_name_search.oninput = async e => showAdmins(await selectAdmins(e.target.value))
+
+		window.addEventListener('DOMContentLoaded', async () => {
+			const data = await selectAdmins()
+
+			createAutoComplete(data)
+			showAdmins(data)
+		})
 	</script>
 </body>
 
