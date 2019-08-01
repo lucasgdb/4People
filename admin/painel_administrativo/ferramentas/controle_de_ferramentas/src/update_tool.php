@@ -29,5 +29,5 @@ try {
 	$sql->execute();
 	header('Location: ../');
 } catch (PDOException $e) {
-	"Um erro ocorreu! Erro: {$e->getMessage()}";
+   echo "Um erro ocorreu! Erro: {$e->getMessage()}";
 }

@@ -23,12 +23,14 @@ try {
 
 	if ($admin_id === $_SESSION['logged']['id']) {
 		unset($_SESSION['logged']);
-		echo json_encode(['status' => '1']);
-	} else echo json_encode(['status' => '0', 'admin_name' => $admin_name]);
+		$result = '1';
+	} else $result = '0';
 
 	$sql = $database->prepare('DELETE FROM admins WHERE admin_id = :admin_id');
 	$sql->bindValue(':admin_id', $admin_id);
-	$sql->execute();
+
+	if ($sql->execute()) echo json_encode(['result' => $result, 'admin_name' => $admin_name, 'status' => '1']);
+	else echo json_encode(['status' => '0', 'admin_name' => $admin_name]);
 } catch (PDOException $e) {
-	"Um erro ocorreu! Erro: {$e->getMessage()}";
+	echo json_encode(['status' => '0', 'admin_name' => 'Administrador']);
 }

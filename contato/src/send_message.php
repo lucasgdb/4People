@@ -1,5 +1,4 @@
 <?php
-session_start();
 try {
 	include_once('../../assets//php/Connection.php');
 
@@ -16,11 +15,8 @@ try {
 	$sql->bindValue('message_time', date('Y-m-d H:i:s'));
 	$sql->bindValue('message_content', $message_content);
 
-	if ($sql->execute()) $_SESSION['msg']['type'] = 'success';
-	else $_SESSION['msg']['type'] = 'error';
-
-	header('Location: ../');
+	if ($sql->execute()) echo '{"result":"1"}';
+	else echo '{"result":"0"}';
 } catch (Exception $e) {
-	$_SESSION['msg']['type'] = 'error';
-	header('Location: ../');
+	echo '{"result":"0"}';
 }

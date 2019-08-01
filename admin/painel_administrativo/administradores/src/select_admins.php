@@ -29,9 +29,7 @@ try {
 		}
 
 		echo json_encode($data);
-	} else {
-		echo '{}';
-	}
+	} else echo '{}';
 } catch (PDOException $e) {
-	"Um erro ocorreu! Erro: {$e->getMessage()}";
+	echo '{}';
 }

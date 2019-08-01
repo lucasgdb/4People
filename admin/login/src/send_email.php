@@ -22,5 +22,5 @@ try {
 	$mail->Body = "Login: $admin_nickname<br>Senha: $admin_password";
 	$mail->AltBody = 'Novo login de Administrador gerado.';
 } catch (Exception $e) {
-	"Um erro ocorreu! Erro: {$e->getMessage()}";
+   echo "Um erro ocorreu! Erro: {$e->getMessage()}";
 }

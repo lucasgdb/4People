@@ -158,7 +158,6 @@ if (!isset($_SESSION['logged'])) {
 
 		form.onsubmit = async e => {
 			e.preventDefault()
-
 			const data = new FormData(form)
 
 			const result = await (await fetch('src/insert_admin.php', {
@@ -174,7 +173,7 @@ if (!isset($_SESSION['logged'])) {
 
 				for (let i = 0; i < inputs.length; i++) {
 					inputs[i].value = ''
-					inputs[i].classList.remove('valid', 'invalid')
+					inputs[i].classList.remove('valid')
 				}
 
 				const data = await selectAdmins()
@@ -234,17 +233,23 @@ if (!isset($_SESSION['logged'])) {
 		const deleteAdmin = async id => {
 			const result = await (await fetch(`src/delete_admin.php?admin_id=${id}`)).json()
 
-			if (result.status === '1') location = '/'
-			else {
+			if (result.status === '1') {
+				if (result.result === '0') {
+					M.toast({
+						html: `${result.admin_name} removido(a) da Administração.`,
+						classes: 'green'
+					})
+
+					const data = await selectAdmins()
+					createAutoComplete(data)
+					showAdmins(data)
+				} else location = '<?= $root ?>/'
+			} else {
 				M.toast({
-					html: `${result.admin_name} removido(a) da Administração.`,
-					classes: 'green'
+					html: `Falha ao remover ${result.admin_name} da Administração.`,
+					classes: 'red accent-4'
 				})
 			}
-
-			const data = await selectAdmins()
-			createAutoComplete(data)
-			showAdmins(data)
 		}
 
 		admin_name_search.oninput = async e => showAdmins(await selectAdmins(e.target.value))

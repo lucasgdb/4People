@@ -40,7 +40,7 @@
 
 				<h5>Dados de contato</h5>
 
-				<form class="mt-2" action="src/send_message.php" method="POST">
+				<form class="mt-2" method="POST">
 					<div class="row mb-0">
 						<div class="input-field col s12">
 							<i class="material-icons prefix">account_circle</i>
@@ -62,13 +62,12 @@
 					<h5>Informações</h5>
 					<div class="row mb-0">
 						<div class="input-field col s12">
-							<select name="message_subject" required>
-								<option value="" disabled selected>Escolha um título</option>
+							<select name="message_subject">
 								<option value="Bug (mal funcionamento)">Bug (mal funcionamento)</option>
 								<option value="Erro (erro visual)">Erro (erro visual)</option>
 								<option value="Sugestão (visual)">Sugestão (visual)</option>
 								<option value="Sugestão (ferramenta)">Sugestão (ferramenta)</option>
-								<option value="Outro">Outro</option>
+								<option value="Outro" selected>Outro</option>
 							</select>
 							<label>Título *</label>
 							<span class="helper-text">Selecionar assunto de mensagem</span>
@@ -93,29 +92,39 @@
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script>
 		M.FormSelect.init(document.querySelectorAll('select'))
-	</script>
-	<?php
-	if (isset($_SESSION['msg'])) {
-		$msg = $_SESSION['msg']['type'];
+		const form = document.querySelector('form')
+		const inputs = form.querySelectorAll('input')
+		const message = form.querySelector('textarea')
 
-		unset($_SESSION['msg']);
+		form.onsubmit = async e => {
+			e.preventDefault()
+			const data = new FormData(form)
 
-		if ($msg === 'error') : ?>
-			<script>
-				M.toast({
-					html: "Não foi possível enviar a mensagem.",
-					classes: "red accent-4"
-				})
-			</script>
-		<?php elseif ($msg === 'success') : ?>
-			<script>
+			const result = await (await fetch('src/send_message.php', {
+				method: 'POST',
+				body: data
+			})).json()
+
+			if (result.result === '1') {
 				M.toast({
 					html: "Mensagem enviada com sucesso! Aguarde retorno.",
 					classes: "green"
 				})
-			</script>
-		<?php endif ?>
-	<?php } ?>
+
+				for (let i = 0; i < inputs.length - 1; i++) {
+					inputs[i].value = ''
+					inputs[i].classList.remove('valid')
+				}
+
+				message.value = ''
+			} else {
+				M.toast({
+					html: "Não foi possível enviar a mensagem.",
+					classes: "red accent-4"
+				})
+			}
+		}
+	</script>
 </body>
 
 </html>

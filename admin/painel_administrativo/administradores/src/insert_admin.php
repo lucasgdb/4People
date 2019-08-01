@@ -21,7 +21,7 @@ try {
 	$admin_image = $_FILES['admin_image'];
 	$ext = strtolower(pathinfo($_FILES['admin_image']['name'], PATHINFO_EXTENSION));
 
-	$long_name = $admin_nickname . '.' .  $ext;
+	$long_name = "$admin_nickname.$ext";
 
 	if ($ext) {
 		move_uploaded_file($_FILES['admin_image']['tmp_name'], "../../../../assets/images/admin_images/$long_name");
@@ -35,8 +35,8 @@ try {
 	$sql->bindValue(':admin_password', cript($admin_password));
 	$sql->bindValue(':admin_image', isset($no_image) ? NULL : $long_name);
 
-	if ($sql->execute()) echo json_encode(['status' => '1']);
-	else echo json_encode(['status' => '0']);
+	if ($sql->execute()) echo '{"status":"1"}';
+	else echo '{"status":"0"}';
 } catch (PDOException $e) {
-	"Um erro ocorreu! Erro: {$e->getMessage()}";
+	echo '{"status":"0"}';
 }
