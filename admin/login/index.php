@@ -45,7 +45,8 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 
 							<div class="input-field col s12">
 								<i class="material-icons prefix">https</i>
-								<input id="admin_password" minlength="6" title="Preencha este campo com sua senha." placeholder="Senha de Administrador" class="validate" type="password" name="admin_password" oninvalid="this.setCustomValidity('Preencha este campo com sua senha.')" oninput="setCustomValidity('')" required>
+								<input id="admin_password" style="width:calc(100% - 4.5rem)" minlength="6" title="Preencha este campo com sua senha." placeholder="Senha de Administrador" class="validate" type="password" name="admin_password" oninvalid="this.setCustomValidity('Preencha este campo com sua senha.')" oninput="setCustomValidity('')" required>
+								<i id="visibility" onclick="switchVisibility()" class="material-icons prefix" style="cursor:pointer">visibility</i>
 								<label class="active" for="admin_password">Senha</label>
 								<span class="helper-text" data-error="Senha inválida." data-success="Senha válida.">Aguardando...</span>
 							</div>
@@ -157,6 +158,22 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 	</main>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
+	<script>
+		const txtPassword = document.querySelector('input[name=admin_password]')
+		const txtPasswordIcon = document.querySelector('#visibility')
+
+		const switchVisibility = () => {
+			if (txtPassword.type === 'password') {
+				txtPassword.type = 'text'
+				txtPasswordIcon.innerText = 'visibility_off'
+			}
+			else 
+			{
+				txtPassword.type = 'password'
+				txtPasswordIcon.innerText = 'visibility_on'
+			}
+		}
+	</script>
 </body>
 
 </html>
