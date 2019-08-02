@@ -21,7 +21,7 @@
 	<meta name="twitter:url" content="./computacao/tabelas_e_padroes/codigo_de_eventos_das_teclas">
 </head>
 
-<body class="grey lighten-4">
+<body class="grey lighten-3">
 	<?php
 	include_once("$assets/components/noscript.php");
 	include_once("$assets/components/spinner.php");
@@ -43,57 +43,65 @@
 					<h5 id="digit" class="center-align large-text">116</h5>
 
 					<div class="col s12 m6">
-						<div class="card hoverable">
-							<div class="card-action grey lighten-3">
-								<p class="center-align flow-text mt-0 mb-0">event.key</p>
+						<div class="card hoverable indigo darken-1">
+							<div class="card-action indigo darken-4">
+								<p class="center-align flow-text mt-0 mb-0 white-text">event.key</p>
 							</div>
 
-							<div class="divider"></div>
+							<div class="divider indigo lighten-4"></div>
 
 							<div class="card-content">
-								<p id="key" class="flow-text center-align">F5</p>
+								<p id="key" class="flow-text center-align white-text">
+									F5
+								</p>
 							</div>
 						</div>
 					</div>
 
 					<div class="col s12 m6">
-						<div class="card hoverable">
-							<div class="card-action grey lighten-3">
-								<p class="center-align flow-text mt-0 mb-0">event.location</p>
+						<div class="card hoverable indigo darken-1">
+							<div class="card-action indigo darken-4">
+								<p class="center-align flow-text mt-0 mb-0 white-text">event.location</p>
 							</div>
 
-							<div class="divider"></div>
+							<div class="divider indigo lighten-4"></div>
 
 							<div class="card-content">
-								<p id="location" class="flow-text center-align">0 (General keys)</p>
+								<p id="location" class="flow-text center-align white-text">
+									0 (General keys)
+								</p>
 							</div>
 						</div>
 					</div>
 
 					<div class="col s12 m6">
-						<div class="card hoverable">
-							<div class="card-action grey lighten-3">
-								<p class="center-align flow-text mt-0 mb-0">event.which</p>
+						<div class="card hoverable indigo darken-1">
+							<div class="card-action indigo darken-4">
+								<p class="center-align flow-text mt-0 mb-0 white-text">event.which</p>
 							</div>
 
-							<div class="divider"></div>
+							<div class="divider indigo lighten-4"></div>
 
 							<div class="card-content">
-								<p id="which" class="flow-text center-align">116</p>
+								<p id="which" class="flow-text center-align white-text">
+									116
+								</p>
 							</div>
 						</div>
 					</div>
 
 					<div class="col s12 m6">
-						<div class="card hoverable">
-							<div class="card-action grey lighten-3">
-								<p class="center-align flow-text mt-0 mb-0">event.code</p>
+						<div class="card hoverable indigo darken-1">
+							<div class="card-action indigo darken-4">
+								<p class="center-align flow-text mt-0 mb-0 white-text">event.code</p>
 							</div>
 
-							<div class="divider"></div>
+							<div class="divider indigo lighten-4"></div>
 
 							<div class="card-content">
-								<p id="code" class="flow-text center-align">F5</p>
+								<p id="code" class="flow-text center-align white-text">
+									F5
+								</p>
 							</div>
 						</div>
 					</div>
@@ -109,9 +117,9 @@
 				<div class="divider"></div>
 
 				<table class="responsive-table striped" lang="en-US">
-					<tr>
-						<th>Key Code</th>
-						<th>Event Key</th>
+					<tr class="indigo darken-4">
+						<th class="white-text">Key Code</th>
+						<th class="white-text">Event Key</th>
 					</tr>
 
 					<tr>

@@ -6,9 +6,11 @@ const code = document.querySelector('#code')
 
 window.onkeydown = e => {
 	e.preventDefault()
-	digit.textContent = e.which
-	key.textContent = e.key
-	loc.textContent = `${e.location} (${getKeyCode(e.location)})`
-	which.textContent = e.which
-	code.textContent = e.code
+	if (e.which !== 116) {
+		digit.textContent = e.which
+		key.textContent = e.key
+		loc.textContent = `${e.location} (${getKeyCode(e.location)})`
+		which.textContent = e.which
+		code.textContent = e.code
+	}
 }
