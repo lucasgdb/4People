@@ -1,5 +1,9 @@
 <?php
 try {
+	header('Access-Control-Allow-Origin: localhost');
+	header("Access-Control-Allow-Methods: GET");
+	header('Content-Type: application/json; charset=UTF-8');
+
 	session_start();
 	$assets = '../../../assets';
 	include_once("$assets/php/Connection.php");
@@ -18,7 +22,7 @@ try {
 		extract($sql->fetch());
 
 		$_SESSION['logged']['id'] = $admin_id;
-		header('Location: ../../painel_administrativo/');
+		echo '{"status":"1"}';
 	} else {
 		$sql = $database->prepare('SELECT admin_id, admin_name, admin_image FROM admins WHERE admin_nickname = :admin_nickname and admin_password = :admin_password LIMIT 1');
 
@@ -38,14 +42,14 @@ try {
 				$banned_amount = $sql->fetchColumn();
 
 				if ($banned_amount === '4') {
-					$sql = $database->prepare('SELECT banned_begin, banned_end FROM banneds WHERE banned_ip = :banned_ip AND banned_begin <= :current_time AND banned_end >= :current_time LIMIT 1');
+					$sql = $database->prepare('SELECT banned_begin, banned_end FROM banneds WHERE banned_ip = :banned_ip AND banned_begin < :current_time AND banned_end >= :current_time LIMIT 1');
 
 					$sql->bindValue(':banned_ip', $ip);
 					$sql->bindValue(':current_time', date('Y-m-d H:i:s'));
 					$sql->execute();
 
 					if ($sql->rowCount()) {
-						header('Location: ../');
+						echo json_encode(['status' => '0', 'reason' => 'banned']);
 						exit();
 					} else {
 						$sql = $database->prepare('DELETE FROM banneds WHERE banned_ip = :banned_ip LIMIT 1');
@@ -62,7 +66,7 @@ try {
 			}
 
 			$_SESSION['logged']['id'] = $admin_id;
-			header('Location: ../../painel_administrativo/');
+			echo '{"status":"1"}';
 		} else {
 			$sql = $database->prepare('SELECT banned_amount FROM banneds WHERE banned_ip = :banned_ip LIMIT 1');
 
@@ -85,7 +89,9 @@ try {
 					$sql->bindValue(':banned_end', date('Y-m-d H:i:s', strtotime('+30 minutes')));
 					$sql->bindValue(':banned_ip', $ip);
 					$sql->execute();
-				} else {
+
+					echo json_encode(['status' => '0', 'reason' => 'banned']);
+				} else if ($banned_amount < 3) {
 					$sql = $database->prepare(
 						'UPDATE banneds
 						SET banned_amount = :banned_amount
@@ -95,15 +101,17 @@ try {
 					$sql->bindValue(':banned_amount', ++$banned_amount);
 					$sql->bindValue(':banned_ip', $ip);
 					$sql->execute();
-				}
+
+					echo json_encode(['status' => '0', 'reason' => 'wrong']);
+				} else echo json_encode(['status' => '0', 'reason' => 'banned']);
 			} else {
 				$sql = $database->prepare('INSERT INTO banneds (banned_ip) VALUES(:banned_ip)');
 
 				$sql->bindValue(':banned_ip', $ip);
 				$sql->execute();
-			}
 
-			header('Location: ../');
+				echo json_encode(['status' => '0', 'reason' => 'wrong']);
+			}
 		}
 	}
 } catch (PDOException $e) {

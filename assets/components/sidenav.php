@@ -5,7 +5,7 @@ include_once("$assets/php/Connection.php");
 $logged = isset($_SESSION['logged']['id']);
 
 if ($logged) {
-	$sql = $database->prepare('SELECT admin_id, admin_name, admin_image FROM admins WHERE admin_id=:admin_id LIMIT 1');
+	$sql = $database->prepare('SELECT admin_id, admin_name, admin_image FROM admins WHERE admin_id = :admin_id LIMIT 1');
 	$sql->bindValue(':admin_id', $_SESSION['logged']['id']);
 	$sql->execute();
 

@@ -166,8 +166,8 @@ if (!isset($_SESSION['logged'])) {
 				modalsHTML +=
 					`<div id="removeType${i}" class="modal">
 						<div class="modal-content left-div-margin">
-							<h4><i class="material-icons left" style="top:7px">delete</i>Remover Tipo</h4>
-							<p class="mb-0">Você tem certeza que deseja remover ${data[i][0]}?</p>
+							<h4><i class="material-icons left" style="top:7px">delete</i>Remover ${data[i][0]}</h4>
+							<p class="mb-0">Você tem certeza que deseja remover ${data[i][0]} do 4People?</p>
 
 							<div class="left-div indigo darken-4" style="border-radius:0"></div>
 						</div>
@@ -176,21 +176,21 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="modal-footer">
 							<button title="Cancelar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Cancelar</button>
-							<a onclick="deleteType(${i}, '${data[i][0]}')" title="Remover Tipo" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</a>
+							<a onclick="deleteType(${i}, '${data[i][0]}')" title="Remover ${data[i][0]}" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</a>
 						</div>
 					</div>`
 
 				typesHTML +=
 					`<tr>
 						<td>${data[i][0]}</td>
-						<td><i title="data[i][2]" class="material-icons" style="top:4px">${data[i][2]}</i></td>
+						<td><i title="${data[i][2]}" class="material-icons" style="top:4px">${data[i][2]}</i></td>
 						<td>
 							<button data-clipboard-text="<?= $_SERVER['HTTP_HOST'] ?>/${data[i][1]}" title="Copiar caminho da página" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
 							<a href="<?= $root ?>/${data[i][1]}" title="Ir até a página" class="btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons">insert_link</i></a>
 						</td>
 						<td>
-							<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar Tipo" href="atualizar_dados/?type_id=${i}"><i class="material-icons" style="font-size:22px">edit</i></a>
-							<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" style="cursor:pointer" title="Remover Tipo" data-target="removeType${i}"><i class="material-icons" style="font-size:23px">delete</i></button>
+							<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar informações de ${data[i][0]}" href="atualizar_dados/?type_id=${i}"><i class="material-icons" style="font-size:22px">edit</i></a>
+							<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" style="cursor:pointer" title="Remover ${data[i][0]}" data-target="removeType${i}"><i class="material-icons" style="font-size:23px">delete</i></button>
 						</td>
 					</tr>`
 			}

@@ -1,7 +1,10 @@
 <?php
 include_once('../../assets/assets.php');
 
-if (isset($_SESSION['logged'])) header("Location: $root/")
+if (isset($_SESSION['logged'])) {
+	header("Location: $root/");
+	exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -34,7 +37,7 @@ if (isset($_SESSION['logged'])) header("Location: $root/")
 				$admin_amount = $sql->fetchColumn();
 
 				if ($admin_amount > 0) : ?>
-					<form style="margin-top:15px" action="src/login.php" method="POST">
+					<form style="margin-top:15px" method="POST">
 						<div class="row mb-0">
 							<div class="input-field col s12">
 								<i class="material-icons prefix">account_circle</i>
@@ -54,52 +57,8 @@ if (isset($_SESSION['logged'])) header("Location: $root/")
 							<div class="col s12" style="margin-top:5px">
 								<div class="divider"></div>
 								<a title="Voltar ao 4People" class="btn indigo darken-3 mt-2 z-depth-0" href="../../"><i class="material-icons left">arrow_back</i>Voltar</a>
-								<?php
-								include_once("$assets/php/Connection.php");
-								include_once("$assets/php/IP.php");
 
-								$ip = get_ip_address();
-								$sql = $database->prepare('SELECT banned_amount FROM banneds WHERE banned_ip = :banned_ip');
-
-								$sql->bindValue(':banned_ip', $ip);
-								$sql->execute();
-
-								if ($sql->rowCount()) {
-									$banned_amount = $sql->fetchColumn();
-
-									if ($banned_amount > 3) {
-										$sql = $database->prepare('SELECT banned_begin, banned_end FROM banneds WHERE banned_ip = :banned_ip AND banned_begin <= :current_time AND banned_end >= :current_time LIMIT 1');
-
-										$sql->bindValue(':banned_ip', $ip);
-										$sql->bindValue(':current_time', date('Y-m-d H:i:s'));
-
-										$sql->execute();
-
-										if ($sql->rowCount()) {
-											extract($sql->fetch());
-
-											$banned_begin = new DateTime($banned_begin);
-											$banned_end = new DateTime($banned_end);
-											$current_time = new DateTime();
-
-											$time = $current_time->diff($banned_end)->format('%I:%S');
-										} else {
-											$sql = $database->prepare('DELETE FROM banneds WHERE banned_ip = :banned_ip');
-
-											$sql->bindValue(':banned_ip', $ip);
-											$sql->execute();
-											unset($banned_amount);
-										}
-									}
-								}
-								?>
-								<?php if (isset($banned_amount)) : ?>
-									<?php if ($banned_amount > 3) : ?>
-										<span class="btn-flat mt-2 red-text btn-flat-hover">Você foi bloqueado de logar por <?= $time ?></span>
-									<?php else : ?>
-										<span class="btn-flat mt-2 btn-flat-hover">Número de tentativas falhas: <?= $banned_amount ?>/3</span>
-									<?php endif ?>
-								<?php endif ?>
+								<span id="bannedStatus"></span>
 
 								<button title="Logar no 4People" class="btn indigo darken-3 mt-2 z-depth-0 right">
 									<i class="material-icons right">arrow_forward</i>Entrar
@@ -123,9 +82,7 @@ if (isset($_SESSION['logged'])) header("Location: $root/")
 						$allCharacters = $upperCase . $lowerCase . (isset($special) ? $special : '') . $number;
 						$string = '';
 
-						for ($i = 0; $i < $len; $i++) {
-							$string .= $allCharacters[mt_rand(0, strlen($allCharacters) - 1)];
-						}
+						for ($i = 0; $i < $len; $i++) $string .= $allCharacters[mt_rand(0, strlen($allCharacters) - 1)];
 
 						return $string;
 					}
@@ -161,6 +118,47 @@ if (isset($_SESSION['logged'])) header("Location: $root/")
 	<script>
 		const txtPassword = document.querySelector('input[name=admin_password]')
 		const txtPasswordIcon = document.querySelector('#visibility')
+		const form = document.querySelector('form')
+		const btnSubmit = form.querySelector('button')
+		const lblBannedStatus = document.querySelector('#bannedStatus')
+
+		form.onsubmit = async e => {
+			e.preventDefault()
+			btnSubmit.disabled = true
+
+			const result = await (await fetch('src/login.php', {
+				method: 'POST',
+				body: new FormData(form)
+			})).json()
+
+			if (result.status === '1') location = '../painel_administrativo/'
+			else {
+				M.toast({
+					html: result.reason === 'wrong' ? 'Login e/ou senha inexistente.' : 'Você está banido temporariamente.',
+					classes: 'red accent-4'
+				})
+
+				txtPassword.value = ''
+				txtPassword.classList.remove('valid')
+				checkBannedStatus()
+			}
+
+			btnSubmit.disabled = false
+		}
+
+		const checkBannedStatus = async () => {
+			const data = await (await fetch('src/check_banned_status.php')).json()
+
+			if (data.banned_status === '1') {
+				if (parseInt(data.banned_amount) > 3) {
+					lblBannedStatus.className = 'btn-flat mt-2 red-text btn-flat-hover'
+					lblBannedStatus.innerHTML = `Você foi bloqueado de logar por: ${data.banned_time}`
+				} else {
+					lblBannedStatus.className = 'btn-flat mt-2 btn-flat-hover'
+					lblBannedStatus.innerHTML = `Número de tentativas falhas: ${data.banned_amount}/3`
+				}
+			} else lblBannedStatus.className = 'hide'
+		}
 
 		const switchVisibility = () => {
 			if (txtPassword.type === 'password') {
@@ -171,6 +169,8 @@ if (isset($_SESSION['logged'])) header("Location: $root/")
 				txtPasswordIcon.innerText = 'visibility_on'
 			}
 		}
+
+		checkBannedStatus()
 	</script>
 </body>
 
