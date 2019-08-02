@@ -60,10 +60,7 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="col s12">
 							<div class="divider"></div>
-							<button title="Inserir Tipo de Ferramentas no 4People" class="btn waves-effect waves-light indigo darken-4 mt-2 z-depth-0">
-								<i class="material-icons left">folder</i>Inserir
-								<input class="hide" type="submit" value="">
-							</button>
+							<button title="Inserir Tipo de Ferramentas no 4People" class="btn waves-effect waves-light indigo darken-4 mt-2 z-depth-0"><i class="material-icons left">folder</i>Inserir</button>
 						</div>
 					</div>
 				</form>
@@ -121,7 +118,7 @@ if (!isset($_SESSION['logged'])) {
 		const form = document.querySelector('form')
 		const types = document.querySelector('#types')
 		const modals = document.querySelector('#modals')
-		const inputs = form.querySelectorAll('input')
+		const inputs = form.querySelectorAll('input:not(.hide)')
 		const btnSubmit = form.querySelector('button')
 
 		form.onsubmit = async e => {
@@ -145,7 +142,7 @@ if (!isset($_SESSION['logged'])) {
 					inputs[i].classList.remove('valid')
 				}
 
-				selectTypes().then(() => btnSubmit.disabled = false)
+				selectTypes()
 			} else {
 				M.toast({
 					html: `Erro ao adicionar ${inputs[0].value.trim()}.`,
@@ -166,7 +163,7 @@ if (!isset($_SESSION['logged'])) {
 				modalsHTML +=
 					`<div id="removeType${i}" class="modal">
 						<div class="modal-content left-div-margin">
-							<h4><i class="material-icons left" style="top:7px">delete</i>Remover ${data[i][0]}</h4>
+							<h4><i class="material-icons left" style="top:7px">delete</i>Remover Tipo</h4>
 							<p class="mb-0">Você tem certeza que deseja remover ${data[i][0]} do 4People?</p>
 
 							<div class="left-div indigo darken-4" style="border-radius:0"></div>

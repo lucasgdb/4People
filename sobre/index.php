@@ -61,23 +61,22 @@
 
 				<h5 class="center-align mt-2" style="position:relative"><i class="material-icons" style="position:absolute;left:0">group</i>Equipe</h5>
 				<div class="divider"></div>
-				<div class="row mb-0">
-					<div class="col s6 m3 mt-2">
-						<img title="Lucas Bittencourt" class="circle responsive-img" src="<?= $assets ?>/images/lucas_bittencourt.jpg" alt="">
-					</div>
+				<div class="container">
+					<div class="row mb-0">
+						<a href="https://github.com/lucasnaja" target="_blank" class="col s12 m4 mt-2">
+							<img title="Lucas Bittencourt" class="circle responsive-img" src="<?= $assets ?>/images/lucas_bittencourt.jpg" alt="">
+						</a>
 
-					<div class="col s6 m3 mt-2">
-						<img title="Jairo Arcy" class="circle responsive-img" src="<?= $assets ?>/images/jairo_arcy.jpeg" alt="">
-					</div>
+						<div class="col s12 m4 mt-2">
+							<img title="Suzany Silva" class="circle responsive-img" src="<?= $assets ?>/images/suzany_silva.jpg" alt="">
+						</div>
 
-					<div class="col s6 m3 mt-2">
-						<img title="Suzany Silva" class="circle responsive-img" src="<?= $assets ?>/images/suzany_silva.jpg" alt="">
-					</div>
-
-					<div class="col s6 m3 mt-2">
-						<img title="Renan Mattos" class="circle responsive-img" src="<?= $assets ?>/images/renan_mattos.jpg" alt="">
+						<div class="col s12 m4 mt-2">
+							<img title="Renan Mattos" class="circle responsive-img" src="<?= $assets ?>/images/renan_mattos.jpg" alt="">
+						</div>
 					</div>
 				</div>
+
 				<div class="divider"></div>
 
 				<div class="left-div indigo darken-4"></div>

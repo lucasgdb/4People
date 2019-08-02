@@ -60,10 +60,7 @@ if (isset($_SESSION['logged'])) {
 
 								<span id="bannedStatus"></span>
 
-								<button title="Logar no 4People" class="btn indigo darken-3 mt-2 z-depth-0 right">
-									<i class="material-icons right">arrow_forward</i>Entrar
-									<input class="hide" type="submit" value="">
-								</button>
+								<button title="Logar no 4People" class="btn indigo darken-3 mt-2 z-depth-0 right"><i class="material-icons right">arrow_forward</i>Entrar</button>
 							</div>
 						</div>
 					</form>

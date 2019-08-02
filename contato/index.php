@@ -81,10 +81,7 @@
 
 						<div class="col s12">
 							<div class="divider"></div>
-							<button title="Inserir um Administrador no 4People" class="btn waves-effect waves-light indigo darken-4 z-depth-0">
-								<i class="material-icons right">send</i>Enviar Mensagem
-								<input class="hide" type="submit" value="">
-							</button>
+							<button title="Inserir um Administrador no 4People" class="btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons right">send</i>Enviar Mensagem</button>
 						</div>
 					</div>
 				</form>

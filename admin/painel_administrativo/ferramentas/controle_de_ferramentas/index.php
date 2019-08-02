@@ -163,11 +163,8 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="col s12">
 							<div class="divider"></div>
-							<button title="Filtrar Ferramentas do 4People" class="btn waves-effect waves-light indigo darken-4 mt-2 z-depth-0">
-								<i class="material-icons left">filter_list</i>Filtrar
-								<input class="hide" title="Filtrar Ferramentas" type="submit">
-							</button>
 
+							<button title="Filtrar Ferramentas do 4People" class="btn waves-effect waves-light indigo darken-4 mt-2 z-depth-0"><i class="material-icons left">filter_list</i>Filtrar</button>
 							<a title="Limpar Filtro" href="." class="btn indigo darken-4 mt-2 waves-effect waves-light right z-depth-0"><i class="material-icons left">format_clear</i>Limpar</a>
 						</div>
 					</div>
