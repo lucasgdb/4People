@@ -25,7 +25,7 @@ try {
 	if ($sql->rowCount()) {
 		foreach ($sql as $key) {
 			extract($key);
-			$data[$admin_id] = [$admin_name, $admin_nickname, $admin_email, $admin_image];
+			$data[$admin_id] = [$admin_name, $admin_nickname, $admin_email, $admin_image, $admin_id === $_SESSION['logged']['id']];
 		}
 
 		echo json_encode($data);

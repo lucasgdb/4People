@@ -216,7 +216,7 @@ if (!isset($_SESSION['logged'])) {
 					`<div id="removeAdmin${i}" class="modal">
 						<div class="modal-content left-div-margin">
 							<h4><i class="material-icons left" style="top:7px">delete</i>Remover Administrador</h4>
-							<p class="mb-0">Você tem certeza que deseja remover ${data[i][0]} da Administração?</p>
+							<p class="mb-0">Você tem certeza que deseja remover ${data[i][4] ? 'você mesmo' : data[i][0]} da Administração?</p>
 
 							<div class="left-div indigo darken-4" style="border-radius:0"></div>
 						</div>
@@ -232,12 +232,12 @@ if (!isset($_SESSION['logged'])) {
 				adminsHTML +=
 					`<tr>
 						<td><img title="${data[i][0]}" class="circle" width="40" style="margin-bottom:-5px" src="${data[i][3] ? `<?= $assets ?>/images/admin_images/${data[i][3]}` : '<?= $assets ?>/images/logo.png' }" alt="${data[i][0]}"></td>
-						<td>${data[i][0]}</td>
-						<td>${data[i][1]}</td>
-						<td>${data[i][2]}</td>
+						<td style="${data[i][4] ? 'font-weight:bold' : ''}">${data[i][0]}</td>
+						<td style="${data[i][4] ? 'font-weight:bold' : ''}">${data[i][1]}</td>
+						<td style="${data[i][4] ? 'font-weight:bold' : ''}">${data[i][2]}</td>
 						<td>
-							<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar Administrador" href="atualizar_dados/?admin_id=${i}"><i class="material-icons" style="font-size:22px">edit</i></a>
-							<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" style="cursor:pointer" title="Remover Administrador" data-target="removeAdmin${i}"><i class="material-icons" style="font-size:23px">delete</i></button>
+							<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar ${data[i][4] ? 'seus dados' : `dados de ${data[i][0]}`}" href="atualizar_dados/?admin_id=${i}"><i class="material-icons" style="font-size:22px">edit</i></a>
+							<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" style="cursor:pointer" title="Remover ${data[i][4] ? 'você mesmo' : data[i][0]}" data-target="removeAdmin${i}"><i class="material-icons" style="font-size:23px">delete</i></button>
 						</td>
 					</tr>`
 			}

@@ -56,13 +56,8 @@ try {
 	$sql->bindValue(':admin_image', isset($no_image) ? NULL : (isset($ext) && $ext ? $long_name : $current_admin_image));
 	$sql->bindValue(':admin_id', $admin_id);
 
-	if ($sql->execute() && $_SESSION['logged']['id'] === $admin_id) {
-		$_SESSION['logged']['name'] = $admin_name;
-		if (isset($no_image)) unset($_SESSION['logged']['image']);
-		else $_SESSION['logged']['image'] = isset($long_name) ? $long_name : $current_admin_image;
-	}
-
+	$sql->execute();
 	header('Location: ../');
 } catch (PDOException $e) {
-   echo "Um erro ocorreu! Erro: {$e->getMessage()}";
+	echo "Um erro ocorreu! Erro: {$e->getMessage()}";
 }

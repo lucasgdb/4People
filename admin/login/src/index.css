@@ -1,3 +1,7 @@
+html {
+	font-family: 'Courier New', Courier, monospace;
+}
+
 input[type=text]:focus,
 input[type=password]:focus {
 	border-bottom: 1px solid #1a237e !important;

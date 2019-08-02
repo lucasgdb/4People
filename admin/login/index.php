@@ -1,7 +1,7 @@
 <?php
 include_once('../../assets/assets.php');
 
-if (isset($_SESSION['logged'])) header("Location: $root")
+if (isset($_SESSION['logged'])) header("Location: $root/")
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -18,7 +18,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 <body style="background:#2e3748">
 	<?php include_once("$assets/components/noscript.php") ?>
 
-	<main>
+	<main style="background-color:transparent">
 		<div class="container">
 			<div class="card-panel z-depth-3 left-div-margin" style="padding-bottom:10px">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person</i>Painel Administrativo - Login</h1>
@@ -166,9 +166,7 @@ if (isset($_SESSION['logged'])) header("Location: $root")
 			if (txtPassword.type === 'password') {
 				txtPassword.type = 'text'
 				txtPasswordIcon.innerText = 'visibility_off'
-			}
-			else 
-			{
+			} else {
 				txtPassword.type = 'password'
 				txtPasswordIcon.innerText = 'visibility_on'
 			}

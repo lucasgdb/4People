@@ -1,23 +1,30 @@
 <?php
 $link = $_SERVER['REQUEST_URI'];
+include_once("$assets/php/Connection.php");
 
-$logged = isset($_SESSION['logged']);
-$image = $logged ? $_SESSION['logged']['image'] : ''
+$logged = isset($_SESSION['logged']['id']);
+
+if ($logged) {
+	$sql = $database->prepare('SELECT admin_id, admin_name, admin_image FROM admins WHERE admin_id=:admin_id LIMIT 1');
+	$sql->bindValue(':admin_id', $_SESSION['logged']['id']);
+	$sql->execute();
+
+	extract($sql->fetch());
+}
 ?>
 <ul id="slide-out" class="sidenav sidenav-fixed collapsible grey lighten-5">
 	<li style="position:relative">
 		<div class="user-view mb-0 left-div-margin-mobile" style="border-bottom:1px solid #e0e0e0">
 			<div class="background grey lighten-4"></div>
-			<img title="<?= $logged ? $_SESSION['logged']['name'] : 'Logo' ?>" class="circle" src="<?= $assets ?>/images/<?= $logged && $image ? "admin_images/$image" : 'logo.png' ?>" alt="<?= $logged ? 'Foto' : 'Logo' ?>">
-			<span class="name black-text"><?= $logged ? "Admin: {$_SESSION['logged']['name']}" : '4People - Ferramentas Online' ?></span>
-			<a class="linkHover" href="<?= $logged ? "$root/admin/painel_administrativo/administradores/atualizar_dados/?admin_id={$_SESSION['logged']['id']}" : 'https://github.com/lucasnaja/4People' ?>" <?= !$logged ? 'target="_blank" rel="noopener noreferrer nofollow"' : '' ?>><span class="email"><?= $logged ? 'Editar Perfil' : 'Projeto de TCC' ?> »</span></a>
+			<img title="<?= $logged ? $admin_name : 'Logo' ?>" class="circle" src="<?= $assets ?>/images/<?= $logged && $admin_image ? "admin_images/$admin_image" : 'logo.png' ?>" alt="<?= $logged ? 'Foto' : 'Logo' ?>">
+			<span class="name black-text"><?= $logged ? "Admin: $admin_name" : '4People - Ferramentas Online' ?></span>
+			<a class="linkHover" href="<?= $logged ? "$root/admin/painel_administrativo/administradores/atualizar_dados/?admin_id=$admin_id" : 'https://github.com/lucasnaja/4People' ?>" <?= !$logged ? 'target="_blank" rel="noopener noreferrer nofollow"' : '' ?>><span class="email"><?= $logged ? 'Editar Perfil' : 'Projeto de TCC' ?> »</span></a>
 		</div>
 
 		<div class="left-div-mobile indigo darken-4" style="border-radius:0"></div>
 	</li>
 
 	<?php
-	include_once("$assets/php/Connection.php");
 	$sql = $database->prepare('SELECT * FROM types ORDER BY type_name');
 	$sql->execute();
 

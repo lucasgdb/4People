@@ -18,8 +18,6 @@ try {
 		extract($sql->fetch());
 
 		$_SESSION['logged']['id'] = $admin_id;
-		$_SESSION['logged']['name'] = $admin_name;
-		$_SESSION['logged']['image'] = $admin_image;
 		header('Location: ../../painel_administrativo/');
 	} else {
 		$sql = $database->prepare('SELECT admin_id, admin_name, admin_image FROM admins WHERE admin_nickname = :admin_nickname and admin_password = :admin_password LIMIT 1');
@@ -64,8 +62,6 @@ try {
 			}
 
 			$_SESSION['logged']['id'] = $admin_id;
-			$_SESSION['logged']['name'] = $admin_name;
-			$_SESSION['logged']['image'] = $admin_image;
 			header('Location: ../../painel_administrativo/');
 		} else {
 			$sql = $database->prepare('SELECT banned_amount FROM banneds WHERE banned_ip = :banned_ip LIMIT 1');

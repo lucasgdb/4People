@@ -1,15 +1,20 @@
 <?php
 $link = $_SERVER['REQUEST_URI'];
+include_once("$assets/php/Connection.php");
 
-$image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
+$sql = $database->prepare('SELECT admin_id, admin_name, admin_image FROM admins WHERE admin_id=:admin_id LIMIT 1');
+$sql->bindValue(':admin_id', $_SESSION['logged']['id']);
+$sql->execute();
+
+extract($sql->fetch())
 ?>
 <ul id="slide-out" class="sidenav sidenav-fixed collapsible grey lighten-5">
 	<li style="position:relative">
 		<div class="user-view mb-0 left-div-margin-mobile" style="border-bottom:1px solid #e0e0e0">
 			<div class="background grey lighten-4"></div>
-			<img title="<?= $_SESSION['logged']['name'] ?>" class="circle" src="<?= $assets ?>/images/<?= $image ? 'admin_images/' . $image : 'logo.png' ?>" alt="Foto">
-			<span class="name black-text">Admin: <?= $_SESSION['logged']['name'] ?></span>
-			<a class="linkHover" href="<?= $root ?>/admin/painel_administrativo/administradores/atualizar_dados/?admin_id=<?= $_SESSION['logged']['id'] ?>"><span class="email">Editar perfil »</span></a>
+			<img title="<?= $admin_name ?>" class="circle" src="<?= $assets ?>/images/<?= $admin_image ? "admin_images/$admin_image" : 'logo.png' ?>" alt="Foto">
+			<span class="name black-text">Admin: <?= $admin_name ?></span>
+			<a class="linkHover" href="<?= $root ?>/admin/painel_administrativo/administradores/atualizar_dados/?admin_id=<?= $admin_id ?>"><span class="email">Editar perfil »</span></a>
 		</div>
 
 		<div class="left-div-mobile indigo darken-4" style="border-radius:0"></div>
@@ -46,8 +51,6 @@ $image = isset($_SESSION['logged']['image']) ? $_SESSION['logged']['image'] : ''
 						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/banimentos/" title="Controle de usuários banidos"><i class="material-icons left">keyboard_arrow_right</i>Controle de Banimentos</a></li>
 						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/ferramentas/tipos_de_ferramentas/" title="Controle de Tipos de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Tipos</a></li>
 						<?php
-						include_once("$assets/php/Connection.php");
-
 						$sql = $database->prepare('SELECT COUNT(type_id) AS types_count FROM types LIMIT 1');
 						$sql->execute();
 						$types_count = $sql->fetchColumn();
