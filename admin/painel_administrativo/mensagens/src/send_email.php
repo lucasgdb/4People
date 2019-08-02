@@ -7,6 +7,7 @@ $assets = '../../../../assets';
 include_once("$assets/php/Exception.php");
 include_once("$assets/php/PHPMailer.php");
 include_once("$assets/php/SMTP.php");
+include_once("$assets/php/Connection.php");
 
 $mail = new PHPMailer(true);
 
@@ -28,8 +29,15 @@ try {
 	// Content
 	$mail->isHTML(true);
 	$mail->Subject = '4People - Resposta da mensagem';
+
+	$sql = $database->prepare('SELECT admin_name FROM admins WHERE admin_id = :admin_id LIMIT 1');
+	$sql->bindValue(':admin_id', $_SESSION['logged']['id']);
+	$sql->execute();
+
+	$admin_name = $sql->fetchColumn();
+
 	$mail->Body =
-		"<h1>Equipe 4People</h1>Olá, $message_name. Recebemos sua mensagem!<br>Título: $message_subject.<br>Mensagem:<p>$message_replied</p>Resposta: $message_content<br>Administrador: <b>" . $_SESSION['logged']['name'] . '</b>';
+		"<h1>Equipe 4People</h1>Olá, $message_name. Recebemos sua mensagem!<br>Título: $message_subject.<br>Mensagem:<p>$message_replied</p>Resposta: $message_content<br>Administrador: <b>$admin_name</b>";
 	$mail->AltBody = '4People - Resposta da mensagem.';
 
 	if ($mail->send()) {
@@ -44,5 +52,5 @@ try {
 
 	header('Location: ../');
 } catch (Exception $e) {
-   echo "Um erro ocorreu! Erro: {$e->getMessage()}";
+	echo "Um erro ocorreu! Erro: {$e->getMessage()}";
 }
