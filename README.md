@@ -33,17 +33,20 @@
 - Proteção contra Brute-Force
 - Proteção contra SQL Injection
 - Ferramentas escritas em JavaScript
+- Ajax fortemente usado
 
 ## Como usar o Projeto
 - Clonar este repositório.
 	- git clone https://github.com/lucasnaja/4People.git
 - Importar o banco de dados no MySQL.
-	- /assets/database/database.sql
+	- Localização do database.sql: /assets/database/database.sql
 - Windows
 	- Colar a pasta 4People no htdocs do xampp.
+	- Ou como preferir.
 - Linux
 	- Ligar o PHP na pasta do 4People.
 		- php -S localhost:3000
+	- Ou como preferir.
 
 ## Como colaborar
 - Faça os mesmos passos de Como usar o Projeto acima.
