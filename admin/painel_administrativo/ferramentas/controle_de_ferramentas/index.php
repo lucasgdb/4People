@@ -35,7 +35,7 @@ if (!isset($_SESSION['logged'])) {
 
 				<div class="divider"></div>
 
-				<form style="margin-top:15px" action="src/insert_tool.php" method="POST">
+				<form id="formInsert" style="margin-top:15px" method="POST">
 					<div class="row mb-0">
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">format_size</i>
@@ -50,7 +50,6 @@ if (!isset($_SESSION['logged'])) {
 							<label class="active" for="tool_path">Path *</label>
 							<span class="helper-text" data-error="Caminho de Ferramenta inválido." data-success="Caminho de Ferramenta válido.">Ex: gerador_de_cpf</span>
 						</div>
-
 
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">folder</i>
@@ -110,7 +109,7 @@ if (!isset($_SESSION['logged'])) {
 
 				<div class="divider"></div>
 
-				<form action="." method="GET">
+				<form id="formFilter" method="GET">
 					<div style="margin-top:15px" class="row mb-0">
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">folder</i>
@@ -165,7 +164,7 @@ if (!isset($_SESSION['logged'])) {
 							<div class="divider"></div>
 
 							<button title="Filtrar Ferramentas do 4People" class="btn waves-effect waves-light indigo darken-4 mt-2 z-depth-0"><i class="material-icons left">filter_list</i>Filtrar</button>
-							<a title="Limpar Filtro" href="." class="btn indigo darken-4 mt-2 waves-effect waves-light right z-depth-0"><i class="material-icons left">format_clear</i>Limpar</a>
+							<button onclick="selectTools()" type="button" title="Limpar Filtro" class="btn indigo darken-4 mt-2 waves-effect waves-light right z-depth-0"><i class="material-icons left">format_clear</i>Limpar</button>
 						</div>
 					</div>
 				</form>
@@ -189,9 +188,7 @@ if (!isset($_SESSION['logged'])) {
 						</tr>
 					</thead>
 
-					<tbody>
-						<?php include_once('src/select_tools.php') ?>
-					</tbody>
+					<tbody id="tools"></tbody>
 				</table>
 
 				<div class="left-div indigo darken-4"></div>
@@ -199,21 +196,7 @@ if (!isset($_SESSION['logged'])) {
 		</div>
 	</main>
 
-	<div id="removeTool" class="modal">
-		<div class="modal-content left-div-margin">
-			<h4><i class="material-icons left" style="top:7px">delete</i>Remover Ferramenta</h4>
-			<p class="mb-0">Você tem certeza que deseja remover <span id="tool"></span>?</p>
-
-			<div class="left-div indigo darken-4" style="border-radius:0"></div>
-		</div>
-
-		<div class="divider"></div>
-
-		<div class="modal-footer">
-			<button title="Cancelar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Cancelar</button>
-			<a id="linkRemoveTool" title="Remover Ferramenta" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</a>
-		</div>
-	</div>
+	<div id="modals"></div>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/clipboard.min.js"></script>
@@ -221,23 +204,154 @@ if (!isset($_SESSION['logged'])) {
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script>
 		M.FormSelect.init(document.querySelectorAll('select'))
-		M.Modal.init(document.querySelectorAll('.modal'))
+		const form = document.querySelector('#formInsert')
+		const formFilter = document.querySelector('#formFilter')
+		const tools = document.querySelector('#tools')
+		const modals = document.querySelector('#modals')
+		const inputs = form.querySelectorAll('input:not(.select-dropdown)')
+		const btnSubmit = form.querySelector('button')
 
-		const linkRemoveTool = document.querySelector('#linkRemoveTool')
-		const lblTool = document.querySelector('#tool')
-		const btnsCopy = document.querySelectorAll('.copy')
+		form.onsubmit = async e => {
+			e.preventDefault()
+			btnSubmit.disabled = true
 
-		new ClipboardJS(btnsCopy).on('success', () => {
-			M.toast({
-				html: 'Caminho copiado com sucesso.',
-				classes: 'green'
-			})
-		})
+			const data = await (await fetch('src/insert_tool.php', {
+				method: 'POST',
+				body: new FormData(form)
+			})).json()
 
-		const changeLink = (link, tool) => {
-			linkRemoveTool.href = link
-			lblTool.innerHTML = tool
+			if (data.status === '1') {
+				M.toast({
+					html: `${inputs[0].value.trim()} adicionado(a).`,
+					classes: 'green'
+				})
+
+				for (let i = 0; i < inputs.length; i++) {
+					inputs[i].value = ''
+					inputs[i].classList.remove('valid')
+				}
+
+				selectTools()
+			} else {
+				M.toast({
+					html: `Erro ao adicionar ${inputs[0].value.trim()}.`,
+					classes: 'red accent-4'
+				})
+			}
+
+			btnSubmit.disabled = false
 		}
+
+		formFilter.onsubmit = async e => {
+			e.preventDefault()
+			let toolsHTML = ''
+
+			const newForm = new FormData(formFilter)
+			const type_id_get = newForm.get('type_id')
+			const section_id_get = newForm.get('section_id')
+			const tool_status_get = newForm.get('tool_status')
+			const data = await (await fetch(`src/select_tools.php?type_id=${type_id_get}&section_id=${section_id_get}&tool_status=${tool_status_get}`)).json()
+
+			for (const i in data) {
+				toolsHTML +=
+					`<tr>
+						<td>${i}</td>
+						<td>${data[i][3] ? 'Ativado' : 'Desativado'}</td>
+						<td>${data[i][2]}</td>
+						<td>
+							<button data-clipboard-text="<?= $_SERVER['HTTP_HOST'] ?>/${data[i][4]}/${data[i][5]}/${data[i][1]}/" title="Copiar caminho da página" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
+							<a href="<?= $root ?>/${data[i][4]}/${data[i][5]}/${data[i][1]}/" title="Ir até a página" class="btn waves-effect waves-light indigo darken-4 z-depth-0" ${data[i][3] ? '' : 'disabled'}><i class="material-icons">insert_link</i></a>
+						</td>
+						<td>
+							<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar Ferramenta" href="atualizar_dados/?tool_id=${data[i][0]}"><i class="material-icons" style="font-size:22px">edit</i></a>
+							<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" style="cursor:pointer" title="Remover Ferramenta" data-target="removeTool${data[i][0]}"><i class="material-icons" style="font-size:23px">delete</i></button>
+						</td>
+					</tr>`
+			}
+
+			tools.innerHTML = toolsHTML
+
+			const btnsCopy = document.querySelectorAll('.copy')
+			new ClipboardJS(btnsCopy).on('success', () => {
+				M.toast({
+					html: 'Caminho copiado com sucesso.',
+					classes: 'green'
+				})
+			})
+		}
+
+		const selectTools = async () => {
+			let toolsHTML = '',
+				modalsHTML = ''
+
+			const data = await (await fetch('src/select_tools.php')).json()
+
+			for (const i in data) {
+				modalsHTML +=
+					`<div id="removeTool${data[i][0]}" class="modal">
+						<div class="modal-content left-div-margin">
+							<h4><i class="material-icons left" style="top:7px">delete</i>Remover Ferramenta</h4>
+							<p class="mb-0">Você tem certeza que deseja remover ${i} do 4People?</p>
+
+							<div class="left-div indigo darken-4" style="border-radius:0"></div>
+						</div>
+
+						<div class="divider"></div>
+
+						<div class="modal-footer">
+							<button title="Cancelar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Cancelar</button>
+							<a onclick="deleteTool(${data[i][0]}, '${i}')" title="Remover ${i}" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</a>
+						</div>
+					</div>`
+
+				toolsHTML +=
+					`<tr>
+						<td>${i}</td>
+						<td>${data[i][3] ? 'Ativado' : 'Desativado'}</td>
+						<td>${data[i][2]}</td>
+						<td>
+							<button data-clipboard-text="<?= $_SERVER['HTTP_HOST'] ?>/${data[i][4]}/${data[i][5]}/${data[i][1]}/" title="Copiar caminho da página" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
+							<a href="<?= $root ?>/${data[i][4]}/${data[i][5]}/${data[i][1]}/" title="Ir até a página" class="btn waves-effect waves-light indigo darken-4 z-depth-0" ${data[i][3] ? '' : 'disabled'}><i class="material-icons">insert_link</i></a>
+						</td>
+						<td>
+							<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar Ferramenta" href="atualizar_dados/?tool_id=${data[i][0]}"><i class="material-icons" style="font-size:22px">edit</i></a>
+							<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" style="cursor:pointer" title="Remover Ferramenta" data-target="removeTool${data[i][0]}"><i class="material-icons" style="font-size:23px">delete</i></button>
+						</td>
+					</tr>`
+			}
+
+			tools.innerHTML = toolsHTML
+			modals.innerHTML = modalsHTML
+			M.Modal.init(document.querySelectorAll('.modal'))
+
+			const btnsCopy = document.querySelectorAll('.copy')
+			new ClipboardJS(btnsCopy).on('success', () => {
+				M.toast({
+					html: 'Caminho copiado com sucesso.',
+					classes: 'green'
+				})
+			})
+		}
+
+		const deleteTool = async (id, name) => {
+			const result = await (await fetch(`src/delete_tool.php?tool_id=${id}`)).json()
+
+			if (result.status === '1') {
+				M.toast({
+					html: `${name} removido(a).`,
+					classes: 'green'
+				})
+
+				selectTools()
+			} else {
+				M.toast({
+					html: `Não foi possível remover ${name}.`,
+					classes: 'red accent-4'
+				})
+			}
+		}
+
+		selectTools()
 	</script>
 </body>
 

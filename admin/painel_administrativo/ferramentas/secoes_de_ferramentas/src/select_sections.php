@@ -27,13 +27,14 @@ try {
 
 	$sql->execute();
 
-	foreach ($sql as $key) {
-		extract($key);
-		$data[$section_id] = [$section_name, $section_path, $section_icon, $type_path];
-	}
+	if ($sql->rowCount()) {
+		foreach ($sql as $key) {
+			extract($key);
+			$data[$section_id] = [$section_name, $section_path, $section_icon, $type_path];
+		}
 
-	if ($sql->rowCount()) echo json_encode($data);
-	else echo '{}';
+		echo json_encode($data);
+	} else echo '{}';
 } catch (PDOException $e) {
 	echo '{}';
 }

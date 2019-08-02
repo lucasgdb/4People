@@ -156,7 +156,7 @@ if (!isset($_SESSION['logged'])) {
 		const formFilter = document.querySelector('#formFilter')
 		const sections = document.querySelector('#sections')
 		const modals = document.querySelector('#modals')
-		const inputs = form.querySelectorAll('input')
+		const inputs = form.querySelectorAll('input:not(.select-dropdown)')
 		const btnSubmit = form.querySelector('button')
 
 		form.onsubmit = async e => {
@@ -174,7 +174,7 @@ if (!isset($_SESSION['logged'])) {
 					classes: 'green'
 				})
 
-				for (let i = 0; i < inputs.length - 1; i++) {
+				for (let i = 0; i < inputs.length; i++) {
 					inputs[i].value = ''
 					inputs[i].classList.remove('valid')
 				}
@@ -192,7 +192,6 @@ if (!isset($_SESSION['logged'])) {
 
 		formFilter.onsubmit = async e => {
 			e.preventDefault()
-
 			let sectionsHTML = ''
 
 			const type_id = new FormData(formFilter).get('type_id')
@@ -205,7 +204,7 @@ if (!isset($_SESSION['logged'])) {
 						<td><i title="${data[i][2]}" class="material-icons" style="top:4px">${data[i][2]}</i></td>
 						<td>
 							<button data-clipboard-text="<?= $_SERVER['HTTP_HOST'] ?>/${data[i][3]}/${data[i][1]}/" title="Copiar caminho da página" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
-							<a href="<?= $root ?>/${data[i][3]}/${data[i][1]}/"" title="Ir até a página" class="btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons">insert_link</i></a>
+							<a href="<?= $root ?>/${data[i][3]}/${data[i][1]}/" title="Ir até a página" class="btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons">insert_link</i></a>
 						</td>
 						<td>
 							<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar informações de ${data[i][0]}" href="atualizar_dados/?section_id=${i}"><i class="material-icons" style="font-size:22px">edit</i></a>
@@ -236,7 +235,7 @@ if (!isset($_SESSION['logged'])) {
 					`<div id="removeSection${i}" class="modal">
 						<div class="modal-content left-div-margin">
 							<h4><i class="material-icons left" style="top:7px">delete</i>Remover Seção</h4>
-							<p class="mb-0">Você tem certeza que deseja remover ${data[i][0]}?</p>
+							<p class="mb-0">Você tem certeza que deseja remover ${data[i][0]} do 4People?</p>
 
 							<div class="left-div indigo darken-4" style="border-radius:0"></div>
 						</div>
@@ -255,7 +254,7 @@ if (!isset($_SESSION['logged'])) {
 						<td><i title="${data[i][2]}" class="material-icons" style="top:4px">${data[i][2]}</i></td>
 						<td>
 							<button data-clipboard-text="<?= $_SERVER['HTTP_HOST'] ?>/${data[i][3]}/${data[i][1]}/" title="Copiar caminho da página" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
-							<a href="<?= $root ?>/${data[i][3]}/${data[i][1]}/"" title="Ir até a página" class="btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons">insert_link</i></a>
+							<a href="<?= $root ?>/${data[i][3]}/${data[i][1]}/" title="Ir até a página" class="btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons">insert_link</i></a>
 						</td>
 						<td>
 							<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar informações de ${data[i][0]}" href="atualizar_dados/?section_id=${i}"><i class="material-icons" style="font-size:22px">edit</i></a>

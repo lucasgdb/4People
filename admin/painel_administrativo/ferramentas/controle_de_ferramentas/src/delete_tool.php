@@ -1,5 +1,9 @@
 <?php
 try {
+	header('Access-Control-Allow-Origin: localhost');
+	header("Access-Control-Allow-Methods: GET");
+	header('Content-Type: application/json; charset=UTF-8');
+
 	session_start();
 	if (!isset($_SESSION['logged'])) {
 		header('HTTP/1.0 404 Not Found');
@@ -13,8 +17,8 @@ try {
 	$sql = $database->prepare('DELETE FROM tools WHERE tool_id = :tool_id');
 	$sql->bindValue(':tool_id', $tool_id);
 
-	$sql->execute();
-	header('Location: ../');
+	if ($sql->execute()) echo '{"status":"1"}';
+	else echo '{"status":"0"}';
 } catch (PDOException $e) {
-   echo "Um erro ocorreu! Erro: {$e->getMessage()}";
+	echo '{"status":"0"}';
 }

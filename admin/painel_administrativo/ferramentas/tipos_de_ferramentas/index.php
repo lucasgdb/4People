@@ -118,7 +118,7 @@ if (!isset($_SESSION['logged'])) {
 		const form = document.querySelector('form')
 		const types = document.querySelector('#types')
 		const modals = document.querySelector('#modals')
-		const inputs = form.querySelectorAll('input:not(.hide)')
+		const inputs = form.querySelectorAll('input:not(.select-dropdown)')
 		const btnSubmit = form.querySelector('button')
 
 		form.onsubmit = async e => {

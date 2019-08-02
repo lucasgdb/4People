@@ -1,24 +1,32 @@
 <?php
 try {
+	header('Access-Control-Allow-Origin: localhost');
+	header("Access-Control-Allow-Methods: GET");
+	header('Content-Type: application/json; charset=UTF-8');
+
+	session_start();
 	if (!isset($_SESSION['logged'])) {
 		header('HTTP/1.0 404 Not Found');
 		exit();
 	}
 
-	include_once("$assets/php/Connection.php");
+	include_once('../../../../../assets/php/Connection.php');
+
+	$type_id_get = filter_input(INPUT_GET, 'type_id', FILTER_DEFAULT);
+	$section_id_get = filter_input(INPUT_GET, 'section_id', FILTER_DEFAULT);
+	$tool_status_get = filter_input(INPUT_GET, 'tool_status', FILTER_DEFAULT);
 
 	$condition = '';
-
-	if (isset($type_id_get) && $type_id_get !== '-1') $condition = "WHERE types.type_id = :type_id_get";
+	if (isset($type_id_get) && $type_id_get !== '-1') $condition = "WHERE types.type_id = :type_id";
 
 	if (isset($section_id_get) && $section_id_get !== '-1') {
 		$condition .= $condition === '' ? 'WHERE ' : ' AND ';
-		$condition .= "sections.section_id = :section_id_get";
+		$condition .= "sections.section_id = :section_id";
 	}
 
 	if (isset($tool_status_get) && $tool_status_get !== '-1') {
 		$condition .= $condition === '' ? 'WHERE ' : ' AND ';
-		$condition .= "tools.tool_status = :tool_status_get";
+		$condition .= "tools.tool_status = :tool_status";
 	}
 
 	$sql = $database->prepare(
@@ -29,28 +37,20 @@ try {
 		ORDER BY tools.tool_visits DESC"
 	);
 
-	if (isset($type_id_get) && $type_id_get !== '-1') $sql->bindValue(':type_id_get', $type_id_get);
-	if (isset($section_id_get) && $section_id_get !== '-1') $sql->bindValue(':section_id_get', $section_id_get);
-	if (isset($tool_status_get) && $tool_status_get !== '-1') $sql->bindValue(':tool_status_get', $tool_status_get);
+	if (isset($type_id_get) && $type_id_get !== '-1') $sql->bindValue(':type_id', $type_id_get);
+	if (isset($section_id_get) && $section_id_get !== '-1') $sql->bindValue(':section_id', $section_id_get);
+	if (isset($tool_status_get) && $tool_status_get !== '-1') $sql->bindValue(':tool_status', $tool_status_get);
 
 	$sql->execute();
 
-	foreach ($sql as $key) : extract($key) ?>
-		<tr>
-			<td><?= $tool_name ?></td>
-			<td><?= $tool_status ? 'Ativado' : 'Desativado' ?></td>
-			<td><?= $tool_visits ?></td>
-			<td>
-				<button data-clipboard-text="<?= "{$_SERVER['HTTP_HOST']}/$type_path/$section_path/$tool_path/" ?>" title="Copiar caminho da página" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
-				<a href="<?= "$root/$type_path/$section_path/$tool_path/" ?>" title="Ir até a página" class="btn waves-effect waves-light indigo darken-4 z-depth-0" <?= !$tool_status ? 'disabled' : '' ?>><i class="material-icons">insert_link</i></a>
-			</td>
-			<td>
-				<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar Ferramenta" href="atualizar_dados/?tool_id=<?= $tool_id ?>"><i class="material-icons" style="font-size:22px">edit</i></a>
-				<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" onclick="changeLink('src/delete_tool.php?tool_id=<?= $tool_id ?>', '<?= $tool_name ?>')" style="cursor:pointer" title="Remover Ferramenta" data-target="removeTool"><i class="material-icons" style="font-size:23px">delete</i></button>
-			</td>
-		</tr>
-	<?php endforeach ?>
-<?php
+	if ($sql->rowCount()) {
+		foreach ($sql as $key) {
+			extract($key);
+			$data[$tool_name] = [$tool_id, $tool_path, $tool_visits, $tool_status, $type_path, $section_path];
+		}
+
+		echo json_encode($data);
+	} else echo '{}';
 } catch (PDOException $e) {
-   echo "Um erro ocorreu! Erro: {$e->getMessage()}";
+	echo '{}';
 }
