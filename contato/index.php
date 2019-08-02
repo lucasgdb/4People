@@ -38,7 +38,7 @@
 				<label>Alguma dúvida? Algum bug? Deseja alguma ferramenta nova? Por favor, nos contate e deixe-nos sabendo de qualquer coisa.</label>
 				<div class="divider"></div>
 
-				<h5 class="mb-2 center-align" style="position:relative"><i class="material-icons" style="position:absolute;left:0">drafts</i>Dados de contato</h5>
+				<h5 class="mt-2 mb-2 center-align" style="position:relative"><i class="material-icons" style="position:absolute;left:0">drafts</i>Dados de contato</h5>
 				<div class="divider" style="margin-bottom:15px"></div>
 
 				<form class="mt-2" method="POST">
@@ -58,7 +58,8 @@
 						</div>
 					</div>
 
-					<h5 class="mb-2 center-align" style="position:relative"><i class="material-icons" style="position:absolute;left:0">info</i>Informações</h5>
+					<div class="divider"></div>
+					<h5 class="mt-2 mb-2 center-align" style="position:relative"><i class="material-icons" style="position:absolute;left:0">info</i>Informações</h5>
 					<div class="divider" style="margin-bottom:15px"></div>
 
 					<div class="row mb-0">

@@ -35,7 +35,7 @@ if (!isset($_SESSION['logged'])) {
 
 				<div class="divider"></div>
 
-				<form style="margin-top:15px" action="src/insert_type.php" method="POST">
+				<form style="margin-top:15px" method="POST">
 					<div class="row mb-0">
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">format_size</i>
@@ -86,15 +86,15 @@ if (!isset($_SESSION['logged'])) {
 						</tr>
 					</thead>
 
-					<tbody>
-						<?php include_once('src/select_types.php') ?>
-					</tbody>
+					<tbody id="types"></tbody>
 				</table>
 
 				<div class="left-div indigo darken-4"></div>
 			</div>
 		</div>
 	</main>
+
+	<div id="modals"></div>
 
 	<div id="removeType" class="modal">
 		<div class="modal-content left-div-margin">
@@ -118,22 +118,115 @@ if (!isset($_SESSION['logged'])) {
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script>
 		M.Modal.init(document.querySelectorAll('.modal'))
+		const form = document.querySelector('form')
+		const types = document.querySelector('#types')
+		const modals = document.querySelector('#modals')
+		const inputs = form.querySelectorAll('input')
+		const btnSubmit = form.querySelector('button')
 
-		const linkRemoveType = document.querySelector('#linkRemoveType')
-		const lblType = document.querySelector('#type')
-		const btnsCopy = document.querySelectorAll('.copy')
+		form.onsubmit = async e => {
+			e.preventDefault()
+			btnSubmit.disabled = true
+			const data = new FormData(form)
 
-		new ClipboardJS(btnsCopy).on('success', () => {
-			M.toast({
-				html: 'Caminho copiado com sucesso.',
-				classes: 'green'
-			})
-		})
+			const result = await (await fetch('src/insert_type.php', {
+				method: 'POST',
+				body: data
+			})).json()
 
-		const changeLink = (link, type) => {
-			linkRemoveType.href = link
-			lblType.innerHTML = type
+			if (result.status === '1') {
+				M.toast({
+					html: `${inputs[0].value.trim()} adicionado(a).`,
+					classes: 'green'
+				})
+
+				for (let i = 0; i < inputs.length; i++) {
+					inputs[i].value = ''
+					inputs[i].classList.remove('valid')
+				}
+
+				selectTypes().then(() => btnSubmit.disabled = false)
+			} else {
+				M.toast({
+					html: `Erro ao adicionar ${inputs[0].value.trim()}.`,
+					classes: 'red accent-4'
+				})
+			}
+
+			btnSubmit.disabled = false
 		}
+
+		const selectTypes = async () => {
+			let typesHTML = '',
+				modalsHTML = ''
+
+			const data = await (await fetch('src/select_types.php')).json()
+
+			for (const i in data) {
+				modalsHTML +=
+					`<div id="removeType${i}" class="modal">
+						<div class="modal-content left-div-margin">
+							<h4><i class="material-icons left" style="top:7px">delete</i>Remover Tipo</h4>
+							<p class="mb-0">Você tem certeza que deseja remover ${data[i][0]}?</p>
+
+							<div class="left-div indigo darken-4" style="border-radius:0"></div>
+						</div>
+
+						<div class="divider"></div>
+
+						<div class="modal-footer">
+							<button title="Cancelar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Cancelar</button>
+							<a onclick="deleteType(${i}, '${data[i][0]}')" title="Remover Tipo" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</a>
+						</div>
+					</div>`
+
+				typesHTML +=
+					`<tr>
+						<td>${data[i][0]}</td>
+						<td><i title="data[i][2]" class="material-icons" style="top:4px">${data[i][2]}</i></td>
+						<td>
+							<button data-clipboard-text="<?= $_SERVER['HTTP_HOST'] ?>/${data[i][1]}" title="Copiar caminho da página" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
+							<a href="<?= $root ?>/${data[i][1]}" title="Ir até a página" class="btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons">insert_link</i></a>
+						</td>
+						<td>
+							<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar Tipo" href="atualizar_dados/?type_id=${i}"><i class="material-icons" style="font-size:22px">edit</i></a>
+							<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" style="cursor:pointer" title="Remover Tipo" data-target="removeType${i}"><i class="material-icons" style="font-size:23px">delete</i></button>
+						</td>
+					</tr>`
+			}
+
+			types.innerHTML = typesHTML
+			modals.innerHTML = modalsHTML
+			M.Modal.init(document.querySelectorAll('.modal'))
+
+			const btnsCopy = document.querySelectorAll('.copy')
+			new ClipboardJS(btnsCopy).on('success', () => {
+				M.toast({
+					html: 'Caminho copiado com sucesso.',
+					classes: 'green'
+				})
+			})
+		}
+
+		const deleteType = async (id, name) => {
+			const result = await (await fetch(`src/delete_type.php?type_id=${id}`)).json()
+
+			if (result.status === '1') {
+				M.toast({
+					html: `${name} removido(a).`,
+					classes: 'green'
+				})
+
+				selectTypes()
+			} else {
+				M.toast({
+					html: `Não foi possível remover ${name}.`,
+					classes: 'red accent-4'
+				})
+			}
+		}
+
+		selectTypes()
 	</script>
 </body>
 
