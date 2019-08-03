@@ -1,28 +1,27 @@
 const CACHE_VERSION = 1
-let CURRENT_CACHES = {
-	offline: 'offline-v' + CACHE_VERSION
-}
+const CURRENT_CACHES = { offline: `offline-v${CACHE_VERSION}` }
 const OFFLINE_URL = '/offline/index.html'
+let root
 
-function createCacheBustedRequest(url) {
+const createCacheBustedRequest = url => {
 	let request = new Request(url, {
 		cache: 'reload'
 	})
 
-	if ('cache' in request) {
-		return request
-	}
+	if ('cache' in request) return request
 
 	let bustedUrl = new URL(url, self.location.href)
-	bustedUrl.search += (bustedUrl.search ? '&' : '') + 'cachebust=' + Date.now()
+	bustedUrl.search += `${bustedUrl.search ? '&' : ''}cachebust=${Date.now()}`
 	return new Request(bustedUrl)
 }
+
+self.addEventListener('message', data => root = data.data)
 
 self.addEventListener('install', event => {
 	event.waitUntil(
 		fetch(createCacheBustedRequest(OFFLINE_URL)).then(async response => {
 			const cache = await caches.open(CURRENT_CACHES.offline)
-			return cache.put(OFFLINE_URL, response)
+			return cache.put(`${root}/${OFFLINE_URL}`, response)
 		})
 	)
 })
@@ -48,9 +47,7 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
 	if (event.request.mode === 'navigate' || (event.request.method === 'GET' && event.request.headers.get('accept').includes('text/html'))) {
 		event.respondWith(
-			fetch(event.request).catch(() => {
-				return caches.match(OFFLINE_URL)
-			})
+			fetch(event.request).catch(() => caches.match(OFFLINE_URL))
 		)
 	}
 })
