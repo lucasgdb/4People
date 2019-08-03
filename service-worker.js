@@ -4,11 +4,11 @@ const OFFLINE_URL = '/offline/index.html'
 let root
 
 const createCacheBustedRequest = url => {
-	let request = new Request(url, { cache: 'reload' })
+	const request = new Request(url, { cache: 'reload' })
 
 	if ('cache' in request) return request
 
-	let bustedUrl = new URL(url, self.location.href)
+	const bustedUrl = new URL(url, self.location.href)
 	bustedUrl.search += `${bustedUrl.search ? '&' : ''}cachebust=${Date.now()}`
 	return new Request(bustedUrl)
 }
@@ -25,7 +25,7 @@ self.addEventListener('install', event => {
 })
 
 self.addEventListener('activate', event => {
-	let expectedCacheNames = Object.keys(CURRENT_CACHES).map(key => CURRENT_CACHES[key])
+	const expectedCacheNames = Object.keys(CURRENT_CACHES).map(key => CURRENT_CACHES[key])
 
 	event.waitUntil(
 		caches.keys().then(cacheNames => {

@@ -1,8 +1,11 @@
 <?php
-session_start();
+header('Access-Control-Allow-Origin: localhost');
+header('Access-Control-Allow-Methods: POST');
+header('Content-Type: application/json; charset=UTF-8');
 
 use PHPMailer\PHPMailer\PHPMailer;
 
+session_start();
 $assets = '../../../../assets';
 include_once("$assets/php/Exception.php");
 include_once("$assets/php/PHPMailer.php");
@@ -37,7 +40,7 @@ try {
 	$admin_name = $sql->fetchColumn();
 
 	$mail->Body =
-		"<h1>Equipe 4People</h1>Olá, $message_name. Recebemos sua mensagem!<br>Título: $message_subject.<br>Mensagem:<p>$message_replied</p>Resposta: $message_content<br>Administrador: <b>$admin_name</b>";
+		"<h1>Equipe 4People</h1>Olá, $message_name. Recebemos sua mensagem!<br>Título: $message_subject.<br>Mensagem que você enviou:<p>$message_replied</p>Resposta da Administração do 4People: $message_content<br>Administrador: <b>$admin_name</b>";
 	$mail->AltBody = '4People - Resposta da mensagem.';
 
 	if ($mail->send()) {
@@ -47,10 +50,8 @@ try {
 		$sql->bindValue(':message_id', $message_id);
 		$sql->execute();
 
-		$_SESSION['msg']['type'] = 'success';
-	} else $_SESSION['msg']['type'] = 'error';
-
-	header('Location: ../');
+		echo '{"status":"1"}';
+	} else echo '{"status":"0"}';
 } catch (Exception $e) {
-	echo "Um erro ocorreu! Erro: {$e->getMessage()}";
+	echo '{"status":"0"}';
 }

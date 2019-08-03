@@ -46,9 +46,7 @@ if (!isset($_SESSION['logged'])) {
 						</tr>
 					</thead>
 
-					<tbody>
-						<?php include_once('src/select_messages.php') ?>
-					</tbody>
+					<tbody id="messages"></tbody>
 				</table>
 
 				<div class="left-div indigo darken-4"></div>
@@ -69,14 +67,14 @@ if (!isset($_SESSION['logged'])) {
 		<div class="divider"></div>
 
 		<div class="modal-footer">
-			<a id="linkMasAsRead" title="Marcar como lida" class="btn waves-effect waves-light teal darken-2 z-depth-0"><i class="material-icons left">remove_red_eye</i>Marcar como lida</a>
+			<a id="linkMarkAsRead" title="Marcar como lida" class="btn waves-effect waves-light teal darken-2 z-depth-0"><i class="material-icons left">remove_red_eye</i>Marcar como lida</a>
 			<a title="Fechar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Fechar</a>
 			<button title="Responder Mensagem" class="modal-close btn waves-effect waves-light teal darken-2 z-depth-0 modal-trigger" data-target="replyEmail"><i class="material-icons left">reply</i>Responder</button>
 		</div>
 	</div>
 
 	<div id="replyEmail" class="modal modal-fixed-footer">
-		<form action="src/send_email.php" method="POST">
+		<form id="formReply" method="POST">
 			<div class="modal-content" style="padding-bottom:0;padding-left:34px">
 				<h4 class="mb-0"><i class="material-icons left" style="top:8px">send</i>Responder Mensagem</h4>
 
@@ -135,7 +133,7 @@ if (!isset($_SESSION['logged'])) {
 
 			<div class="modal-footer">
 				<button title="Voltar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0 modal-trigger" data-target="readMessage"><i class="material-icons left">arrow_back</i>Voltar</button>
-				<button title="Responder Mensagem" id="sendMessage" class="btn waves-effect waves-light teal darken-2 z-depth-0"><i class="material-icons right">send</i>Responder</button>
+				<button id="sendMessage" title="Responder Mensagem" id="sendMessage" class="btn waves-effect waves-light teal darken-2 z-depth-0"><i class="material-icons right">send</i>Responder</button>
 			</div>
 		</form>
 
@@ -154,12 +152,12 @@ if (!isset($_SESSION['logged'])) {
 
 		<div class="modal-footer">
 			<button title="Cancelar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Cancelar</button>
-			<a id="linkRemoveMessage" title="Remover Mensagem" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</a>
+			<button id="linkRemoveMessage" title="Remover Mensagem" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</button>
 		</div>
 	</div>
 
 	<?php include_once("$assets/components/service_worker.php") ?>
-	
+
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
@@ -167,13 +165,31 @@ if (!isset($_SESSION['logged'])) {
 	<script src="src/js/highlight.min.js"></script>
 	<script src="src/js/quill.min.js"></script>
 	<script>
-		M.Modal.init(document.querySelectorAll('.modal'))
-
 		Quill.register(Quill.import('attributors/style/direction'), true)
 		Quill.register(Quill.import('attributors/style/align'), true)
 		Quill.register(Quill.import('attributors/style/size'), true)
 
-		const emailReply = new Quill('#snow-container', {
+		M.Modal.init(document.querySelectorAll('.modal'))
+		const messages = document.querySelector('#messages')
+		const linkMarkAsRead = document.querySelector('#linkMarkAsRead')
+		const linkRemoveMessage = document.querySelector('#linkRemoveMessage')
+		const lblMessageSubject = document.querySelector('#messageSubject')
+		const lblMessageSubjectTitle = document.querySelector('#messageSubjectTitle')
+		const lblMessageSubjectReply = document.querySelector('#messageSubjectReply')
+		const lblMessageReplied = document.querySelector('#messageReplied')
+		const lblMessageContent = document.querySelector('#messageContent')
+		const lblMessageReply = document.querySelector('#messageReply')
+		const lblMessageName = document.querySelector('#messageName')
+		const lblMessageEmail = document.querySelector('#messageEmail')
+		const lblMessageID = document.querySelector('#messageID')
+		const lblMessageNameReply = document.querySelector('#messageNameReply')
+		const lblMessageEmailReply = document.querySelector('#messageEmailReply')
+		const btnSendMessage = document.querySelector('#sendMessage')
+		const modalReplyEmail = M.Modal.getInstance(document.querySelector('#replyEmail'))
+		const formReply = document.querySelector('#formReply')
+		let lblQuillContent
+
+		new Quill('#snow-container', {
 			modules: {
 				formula: true,
 				syntax: true,
@@ -183,39 +199,17 @@ if (!isset($_SESSION['logged'])) {
 			theme: 'snow'
 		})
 
-		const linkMarkAsRead = document.querySelector('#linkMasAsRead')
-		const linkRemoveMessage = document.querySelector('#linkRemoveMessage')
-		const lblMessageSubject = document.querySelector('#messageSubject')
-		const lblMessageSubjectTitle = document.querySelector('#messageSubjectTitle')
-		const lblMessageSubjectReply = document.querySelector('#messageSubjectReply')
-		const lblMessageReplied = document.querySelector('#messageReplied')
-		const lblMessageContent = document.querySelector('#messageContent')
-		const lblMessageReply = document.querySelector('#messageReply')
-		const lblQuillContent = document.querySelector('.ql-editor')
-		const lblMessageName = document.querySelector('#messageName')
-		const lblMessageEmail = document.querySelector('#messageEmail')
-		const lblMessageID = document.querySelector('#messageID')
-		const lblMessageNameReply = document.querySelector('#messageNameReply')
-		const lblMessageEmailReply = document.querySelector('#messageEmailReply')
-		const btnSendMessage = document.querySelector('#sendMessage')
-
-		btnSendMessage.addEventListener('click', () => {
-			if (lblQuillContent.innerText.replace(/\n/g, '') === '') lblMessageReply.value = ''
-			else lblMessageReply.value = lblQuillContent.innerHTML
-		})
-
-		const changeLink = (link, name, email) => {
-			linkRemoveMessage.href = link
+		const changeLink = (id, name, email) => {
 			lblMessageName.innerHTML = name
 			lblMessageEmail.innerHTML = email
+			linkRemoveMessage.onclick = () => deleteMessage(id, name)
 		}
 
-		const changeMessage = (link, id, name, email, subject, content, isRead) => {
+		const changeMessage = (id, name, email, subject, content, isRead) => {
 			if (!isRead) {
 				linkMarkAsRead.classList.remove('hide')
-				linkMarkAsRead.href = link
+				linkMarkAsRead.onclick = () => readMessage(id, name)
 			} else linkMarkAsRead.classList.add('hide')
-
 			lblMessageSubject.innerHTML = `Título: ${subject} - ${name} &lt;${email}&gt;`
 			lblMessageSubjectTitle.innerHTML = `Título: ${subject} - ${name} &lt;${email}&gt;`
 			lblMessageID.value = id
@@ -225,6 +219,104 @@ if (!isset($_SESSION['logged'])) {
 			lblMessageReplied.value = content
 			lblMessageContent.innerHTML = content
 		}
+
+		const selectMessages = async () => {
+			let messagesHTML = ''
+
+			const data = await (await fetch('src/select_messages.php')).json()
+
+			for (const i in data) {
+				messagesHTML +=
+					`<tr>
+						<td>${data[i][1]}</td>
+						<td>${data[i][2]}</td>
+						<td>${data[i][3]}</td>
+						<td>
+							<button class="btn waves-effect waves-light ${data[i][5] === '1' ? 'grey darken-1' : 'green darken-3'} modal-trigger z-depth-0" onclick="changeMessage('${data[i][0]}', '${data[i][1]}', '${data[i][2]}', '${data[i][3]}', '${data[i][4]}', ${data[i][5] === '1'})" style="cursor:pointer" title="Ler Mensagem" data-target="readMessage"><i class="material-icons" style="font-size:23px">remove_red_eye</i></button>
+							<button class="btn waves-effect waves-light red accent-4 modal-trigger z-depth-0" style="cursor:pointer" title="Remover Mensagem" onclick="changeLink(${data[i][0]}, '${data[i][1]}', '${data[i][2]}')" style="cursor:pointer" title="Remover Mensagem" data-target="removeMessage"><i class="material-icons" style="font-size:23px">delete</i></button>
+						</td>
+					</tr>`
+			}
+
+			messages.innerHTML = messagesHTML
+		}
+
+		selectMessages()
+
+		const deleteMessage = async (id, name) => {
+			const data = await (await fetch(`src/delete_message.php?message_id=${id}`)).json()
+
+			if (data.status === '1') {
+				M.toast({
+					html: `A mensagem de ${name} foi removida.`,
+					classes: 'green'
+				})
+
+				selectMessages()
+			} else {
+				M.toast({
+					html: `Não foi possível remover a mensagem de ${name}.`,
+					classes: 'red accent-4'
+				})
+			}
+		}
+
+		const readMessage = async (id, name) => {
+			const data = await (await fetch(`src/update_message.php?message_id=${id}`)).json()
+
+			if (data.status === '1') {
+				M.toast({
+					html: `A mensagem de ${name} foi marcada como lida.`,
+					classes: 'green'
+				})
+
+				selectMessages()
+			} else {
+				M.toast({
+					html: `Não foi possível marcar a mensagem de ${name} como lida.`,
+					classes: 'red accent-4'
+				})
+			}
+
+			selectMessages()
+		}
+
+		formReply.onsubmit = async e => {
+			e.preventDefault()
+			btnSendMessage.disabled = true
+
+			const data = await (await fetch('src/send_email.php', {
+				method: 'POST',
+				body: new FormData(formReply)
+			})).json()
+
+			if (data.status === '1') {
+				M.toast({
+					html: `A mensagem foi respondida.`,
+					classes: 'green'
+				})
+
+				selectMessages()
+			} else {
+				M.toast({
+					html: `Não foi possível responder a mensagem.`,
+					classes: 'red accent-4'
+				})
+			}
+
+			btnSendMessage.disabled = false
+			modalReplyEmail.close()
+			selectMessages()
+		}
+
+		btnSendMessage.addEventListener('click', () => {
+			if (lblQuillContent.innerText.replace(/\n/g, '') === '') lblMessageReply.value = ''
+			else lblMessageReply.value = lblQuillContent.innerHTML
+		})
+
+		window.addEventListener('DOMContentLoaded', () => {
+			lblQuillContent = document.querySelector('.ql-editor')
+		})
 	</script>
 	<?php
 	if (isset($_SESSION['msg'])) {

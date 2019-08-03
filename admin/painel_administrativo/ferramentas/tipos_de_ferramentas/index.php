@@ -100,7 +100,6 @@ if (!isset($_SESSION['logged'])) {
 	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script>
-		M.Modal.init(document.querySelectorAll('.modal'))
 		const form = document.querySelector('form')
 		const types = document.querySelector('#types')
 		const modals = document.querySelector('#modals')

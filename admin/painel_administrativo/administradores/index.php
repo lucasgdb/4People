@@ -215,7 +215,7 @@ if (!isset($_SESSION['logged'])) {
 					`<div id="removeAdmin${i}" class="modal">
 						<div class="modal-content left-div-margin">
 							<h4><i class="material-icons left" style="top:7px">delete</i>Remover Administrador</h4>
-							<p class="mb-0">Você tem certeza que deseja remover ${data[i][4] ? 'você mesmo' : data[i][0]} da Administração?</p>
+							<p class="mb-0">Você tem certeza que deseja remover ${data[i][4] ? 'você mesmo' : data[i][0]} da Administração?${data[i][4] ? ' Você será deslogado.' : ''}</p>
 
 							<div class="left-div indigo darken-4" style="border-radius:0"></div>
 						</div>

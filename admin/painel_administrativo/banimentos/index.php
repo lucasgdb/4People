@@ -60,7 +60,6 @@ if (!isset($_SESSION['logged'])) {
 	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script>
-		M.Modal.init(document.querySelectorAll('.modal'))
 		const banneds = document.querySelector('#banneds')
 		const modals = document.querySelector('#modals')
 
