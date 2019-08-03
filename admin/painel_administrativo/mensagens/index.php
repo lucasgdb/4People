@@ -135,10 +135,7 @@ if (!isset($_SESSION['logged'])) {
 
 			<div class="modal-footer">
 				<button title="Voltar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0 modal-trigger" data-target="readMessage"><i class="material-icons left">arrow_back</i>Voltar</button>
-				<button title="Responder Mensagem" id="sendMessage" class="btn waves-effect waves-light teal darken-2 z-depth-0">
-					<i class="material-icons right">send</i>Responder
-					<input class="hide" type="submit" value="">
-				</button>
+				<button title="Responder Mensagem" id="sendMessage" class="btn waves-effect waves-light teal darken-2 z-depth-0"><i class="material-icons right">send</i>Responder</button>
 			</div>
 		</form>
 

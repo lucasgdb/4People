@@ -1,7 +1,7 @@
 <?php
 try {
 	header('Access-Control-Allow-Origin: localhost');
-	header("Access-Control-Allow-Methods: GET");
+	header('Access-Control-Allow-Methods: GET');
 	header('Content-Type: application/json; charset=UTF-8');
 
 	session_start();
