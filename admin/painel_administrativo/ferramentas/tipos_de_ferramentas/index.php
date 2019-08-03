@@ -93,21 +93,7 @@ if (!isset($_SESSION['logged'])) {
 
 	<div id="modals"></div>
 
-	<div id="removeType" class="modal">
-		<div class="modal-content left-div-margin">
-			<h4><i class="material-icons left" style="top:7px">delete</i>Remover Tipo</h4>
-			<p class="mb-0">Você tem certeza que deseja remover <span id="type"></span>?</p>
-
-			<div class="left-div indigo darken-4" style="border-radius:0"></div>
-		</div>
-
-		<div class="divider"></div>
-
-		<div class="modal-footer">
-			<button title="Cancelar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Cancelar</button>
-			<a id="linkRemoveType" title="Remover Tipo" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</a>
-		</div>
-	</div>
+	<?php include_once("$assets/components/service_worker.php") ?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/clipboard.min.js"></script>

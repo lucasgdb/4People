@@ -94,6 +94,8 @@ if (!isset($_SESSION['logged'])) {
 		</div>
 	</main>
 
+	<?php include_once("$assets/components/service_worker.php") ?>
+
 	<script>
 		const admin_image_text = document.querySelector('[name="admin_image_text"]')
 	</script>

@@ -129,6 +129,8 @@ if (!isset($_SESSION['logged'])) {
 
 	<div id="modals"></div>
 
+	<?php include_once("$assets/components/service_worker.php") ?>
+
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>

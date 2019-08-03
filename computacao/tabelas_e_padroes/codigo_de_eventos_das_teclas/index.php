@@ -823,7 +823,10 @@
 		</div>
 	</main>
 
-	<?php include_once("$assets/components/footer.php") ?>
+	<?php
+   include_once("$assets/components/footer.php");
+   include_once("$assets/components/service_worker.php")
+   ?>
 
 	<script src="<?= $assets ?>/algorithms/tables_and_patterns/jsEventKeyCodes.js"></script>
 	<script src="src/index.js"></script>

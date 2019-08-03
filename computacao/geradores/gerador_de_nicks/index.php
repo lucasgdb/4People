@@ -70,7 +70,10 @@
 		</div>
 	</main>
 
-	<?php include_once("$assets/components/footer.php") ?>
+	<?php
+   include_once("$assets/components/footer.php");
+   include_once("$assets/components/service_worker.php")
+   ?>
 
 	<script src="<?= $assets ?>/algorithms/generators/nickGenerator.js"></script>
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>

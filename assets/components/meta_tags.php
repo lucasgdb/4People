@@ -5,6 +5,7 @@
 <meta name="author" content="Lucas Bittencourt">
 <meta name="copyright" content="© 2019 - 4People">
 <link rel="icon" href="<?= $assets ?>/images/icon.png">
+<link rel="manifest" href="<?= $root ?>/manifest.json">
 
 <meta name="mobile-web-app-capable" content="no">
 <meta name="apple-mobile-web-app-capable" content="no">
