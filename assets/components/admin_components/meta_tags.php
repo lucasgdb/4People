@@ -7,8 +7,11 @@
 <meta name="mobile-web-app-capable" content="no">
 <meta name="apple-mobile-web-app-capable" content="no">
 <meta name="apple-mobile-web-app-title" content="4People">
-<meta name="theme-color" content="#eeeeee">
-<meta name="msapplication-navbutton-color" content="#eeeeee">
+<meta name="theme-color" content="#e9e9e9">
+<meta name="msapplication-navbutton-color" content="#e9e9e9">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<link rel="apple-touch-icon" type="image/png" href="<?= $assets ?>/images/PWA_images/logo180x180.png">
+<link rel="apple-touch-icon" type="image/png" href="<?= $assets ?>/images/PWA_images/logo192x192.png">
 
 <meta name="robots" content="none">

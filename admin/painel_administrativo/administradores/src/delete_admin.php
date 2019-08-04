@@ -10,7 +10,8 @@ try {
 		exit();
 	}
 
-	include_once('../../../../assets/php/Connection.php');
+	$assets = '../../../../assets';
+	include_once("$assets/php/Connection.php");
 
 	$admin_id = filter_input(INPUT_GET, 'admin_id', FILTER_DEFAULT);
 
@@ -19,7 +20,7 @@ try {
 	$sql->execute();
 
 	extract($sql->fetch());
-	if ($admin_image) unlink("../../../../assets/images/admin_images/$admin_image");
+	if ($admin_image && file_exists("$assets/images/admin_images/$admin_image")) unlink("../../../../assets/images/admin_images/$admin_image");
 
 	if ($admin_id === $_SESSION['logged']['id']) {
 		unset($_SESSION['logged']);

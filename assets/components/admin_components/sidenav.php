@@ -12,7 +12,7 @@ extract($sql->fetch())
 	<li style="position:relative">
 		<div class="user-view mb-0 left-div-margin-mobile" style="border-bottom:1px solid #e0e0e0">
 			<div class="background grey lighten-4"></div>
-			<img title="<?= $admin_name ?>" class="circle" src="<?= $assets ?>/images/<?= $admin_image ? "admin_images/$admin_image" : 'logo.png' ?>" alt="Foto">
+			<img title="<?= $admin_name ?>" class="circle" src="<?= $assets ?>/images/<?= $admin_image && file_exists("$assets/images/admin_images/$admin_image") ? "admin_images/$admin_image" : 'logo.png' ?>" alt="Foto">
 			<span class="name black-text">Admin: <?= $admin_name ?></span>
 			<a class="linkHover" href="<?= $root ?>/admin/painel_administrativo/administradores/atualizar_dados/?admin_id=<?= $admin_id ?>"><span class="email">Editar perfil »</span></a>
 		</div>

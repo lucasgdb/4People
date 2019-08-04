@@ -10,7 +10,8 @@ try {
 		exit();
 	}
 
-	include_once('../../../../assets/php/Connection.php');
+	$assets = '../../../../assets';
+	include_once("$assets/php/Connection.php");
 
 	$admin_name = filter_input(INPUT_GET, 'admin_name', FILTER_DEFAULT);
 
@@ -25,7 +26,7 @@ try {
 	if ($sql->rowCount()) {
 		foreach ($sql as $key) {
 			extract($key);
-			$data[$admin_id] = [$admin_name, $admin_nickname, $admin_email, $admin_image, $admin_id === $_SESSION['logged']['id']];
+			$data[$admin_id] = [$admin_name, $admin_nickname, $admin_email, $admin_image && file_exists("$assets/images/admin_images/$admin_image") ? $admin_image : NULL, $admin_id === $_SESSION['logged']['id']];
 		}
 
 		echo json_encode($data);
