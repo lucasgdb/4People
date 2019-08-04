@@ -109,14 +109,13 @@ if (!isset($_SESSION['logged'])) {
 		form.onsubmit = async e => {
 			e.preventDefault()
 			btnSubmit.disabled = true
-			const data = new FormData(form)
 
-			const result = await (await fetch('src/insert_type.php', {
+			const data = await (await fetch('src/insert_type.php', {
 				method: 'POST',
-				body: data
+				body: new FormData(form)
 			})).json()
 
-			if (result.status === '1') {
+			if (data.status === '1') {
 				M.toast({
 					html: `${inputs[0].value.trim()} adicionado(a).`,
 					classes: 'green'

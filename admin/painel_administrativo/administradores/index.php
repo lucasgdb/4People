@@ -154,7 +154,7 @@ if (!isset($_SESSION['logged'])) {
 				txtPasswordIcon.innerText = 'visibility_off'
 			} else {
 				txtPassword.type = 'password'
-				txtPasswordIcon.innerText = 'visibility_on'
+				txtPasswordIcon.innerText = 'remove_red_eye'
 			}
 		}
 
@@ -172,14 +172,13 @@ if (!isset($_SESSION['logged'])) {
 		form.onsubmit = async e => {
 			e.preventDefault()
 			btnSubmit.disabled = true
-			const data = new FormData(form)
 
-			const result = await (await fetch('src/insert_admin.php', {
+			const data = await (await fetch('src/insert_admin.php', {
 				method: 'POST',
-				body: data
+				body: new FormData(form)
 			})).json()
 
-			if (result.status === '1') {
+			if (data.status === '1') {
 				M.toast({
 					html: `${inputs[0].value.trim()} adicionado(a) na Administração.`,
 					classes: 'green'

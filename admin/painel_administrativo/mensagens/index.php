@@ -67,16 +67,17 @@ if (!isset($_SESSION['logged'])) {
 		<div class="divider"></div>
 
 		<div class="modal-footer">
-			<a id="linkMarkAsRead" title="Marcar como lida" class="btn waves-effect waves-light teal darken-2 z-depth-0"><i class="material-icons left">remove_red_eye</i>Marcar como lida</a>
-			<a title="Fechar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Fechar</a>
-			<button title="Responder Mensagem" class="modal-close btn waves-effect waves-light teal darken-2 z-depth-0 modal-trigger" data-target="replyEmail"><i class="material-icons left">reply</i>Responder</button>
+			<button id="markAsUnread" title="Desmarcar como lida" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">remove_red_eye</i>Desmarcar como lida</button>
+			<button id="markAsRead" title="Marcar como lida" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">visibility_off</i>Marcar como lida</button>
+			<button title="Fechar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Fechar</button>
+			<button title="Responder Mensagem" class="modal-close btn waves-effect waves-light teal darken-2 z-depth-0 modal-trigger" data-target="replyEmail"><i class="material-icons right">arrow_forward</i>Responder</button>
 		</div>
 	</div>
 
 	<div id="replyEmail" class="modal modal-fixed-footer">
 		<form id="formReply" method="POST">
 			<div class="modal-content" style="padding-bottom:0;padding-left:34px">
-				<h4 class="mb-0"><i class="material-icons left" style="top:8px">send</i>Responder Mensagem</h4>
+				<h4 class="mb-0"><i class="material-icons left" style="top:8px">reply</i>Responder Mensagem</h4>
 
 				<h6 id="messageSubjectTitle" style="color:#676767"></h6>
 				<input id="messageID" name="message_id" type="hidden">
@@ -171,7 +172,8 @@ if (!isset($_SESSION['logged'])) {
 
 		M.Modal.init(document.querySelectorAll('.modal'))
 		const messages = document.querySelector('#messages')
-		const linkMarkAsRead = document.querySelector('#linkMarkAsRead')
+		const btnMarkAsRead = document.querySelector('#markAsRead')
+		const btnMarkAsUnread = document.querySelector('#markAsUnread')
 		const linkRemoveMessage = document.querySelector('#linkRemoveMessage')
 		const lblMessageSubject = document.querySelector('#messageSubject')
 		const lblMessageSubjectTitle = document.querySelector('#messageSubjectTitle')
@@ -206,10 +208,16 @@ if (!isset($_SESSION['logged'])) {
 		}
 
 		const changeMessage = (id, name, email, subject, content, isRead) => {
-			if (!isRead) {
-				linkMarkAsRead.classList.remove('hide')
-				linkMarkAsRead.onclick = () => readMessage(id, name)
-			} else linkMarkAsRead.classList.add('hide')
+			if (isRead) {
+				btnMarkAsRead.classList.add('hide')
+				btnMarkAsUnread.classList.remove('hide')
+				btnMarkAsUnread.onclick = () => unreadMessage(id, name)
+			} else {
+				btnMarkAsUnread.classList.add('hide')
+				btnMarkAsRead.classList.remove('hide')
+				btnMarkAsRead.onclick = () => readMessage(id, name)
+			}
+
 			lblMessageSubject.innerHTML = `Título: ${subject} - ${name} &lt;${email}&gt;`
 			lblMessageSubjectTitle.innerHTML = `Título: ${subject} - ${name} &lt;${email}&gt;`
 			lblMessageID.value = id
@@ -262,7 +270,7 @@ if (!isset($_SESSION['logged'])) {
 		}
 
 		const readMessage = async (id, name) => {
-			const data = await (await fetch(`src/update_message.php?message_id=${id}`)).json()
+			const data = await (await fetch(`src/read_message.php?message_id=${id}`)).json()
 
 			if (data.status === '1') {
 				M.toast({
@@ -277,8 +285,24 @@ if (!isset($_SESSION['logged'])) {
 					classes: 'red accent-4'
 				})
 			}
+		}
 
-			selectMessages()
+		const unreadMessage = async (id, name) => {
+			const data = await (await fetch(`src/unread_message.php?message_id=${id}`)).json()
+
+			if (data.status === '1') {
+				M.toast({
+					html: `A mensagem de ${name} foi desmarcada como lida.`,
+					classes: 'green'
+				})
+
+				selectMessages()
+			} else {
+				M.toast({
+					html: `Não foi possível desmarcar a mensagem de ${name} como lida.`,
+					classes: 'red accent-4'
+				})
+			}
 		}
 
 		formReply.onsubmit = async e => {
@@ -306,7 +330,6 @@ if (!isset($_SESSION['logged'])) {
 
 			btnSendMessage.disabled = false
 			modalReplyEmail.close()
-			selectMessages()
 		}
 
 		btnSendMessage.addEventListener('click', () => {
@@ -318,28 +341,6 @@ if (!isset($_SESSION['logged'])) {
 			lblQuillContent = document.querySelector('.ql-editor')
 		})
 	</script>
-	<?php
-	if (isset($_SESSION['msg'])) {
-		$msg = $_SESSION['msg']['type'];
-
-		unset($_SESSION['msg']);
-
-		if ($msg === 'error') : ?>
-			<script>
-				M.toast({
-					html: "Não foi possível enviar o e-mail.",
-					classes: "red accent-4"
-				})
-			</script>
-		<?php elseif ($msg === 'success') : ?>
-			<script>
-				M.toast({
-					html: "E-mail enviado com sucesso.",
-					classes: "green"
-				})
-			</script>
-		<?php endif ?>
-	<?php } ?>
 </body>
 
 </html>

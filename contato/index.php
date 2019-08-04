@@ -106,14 +106,13 @@
 
 		form.onsubmit = async e => {
 			e.preventDefault()
-			const data = new FormData(form)
 
-			const result = await (await fetch('src/send_message.php', {
+			const data = await (await fetch('src/send_message.php', {
 				method: 'POST',
-				body: data
+				body: new FormData(form)
 			})).json()
 
-			if (result.result === '1') {
+			if (data.result === '1') {
 				M.toast({
 					html: "Mensagem enviada com sucesso! Aguarde retorno.",
 					classes: "green"

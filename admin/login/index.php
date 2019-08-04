@@ -165,7 +165,7 @@ if (isset($_SESSION['logged'])) {
 				txtPasswordIcon.innerText = 'visibility_off'
 			} else {
 				txtPassword.type = 'password'
-				txtPasswordIcon.innerText = 'visibility_on'
+				txtPasswordIcon.innerText = 'remove_red_eye'
 			}
 		}
 
