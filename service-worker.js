@@ -1,7 +1,6 @@
 const CACHE_VERSION = 2
 const CURRENT_CACHES = { offline: `offline-v${CACHE_VERSION}` }
 const OFFLINE_URL = '/offline/index.html'
-let root
 
 const createCacheBustedRequest = url => {
 	const request = new Request(url, { cache: 'reload' })
@@ -12,8 +11,6 @@ const createCacheBustedRequest = url => {
 	bustedUrl.search += `${bustedUrl.search ? '&' : ''}cachebust=${Date.now()}`
 	return new Request(bustedUrl)
 }
-
-self.addEventListener('message', data => root = data.data)
 
 self.addEventListener('install', event => {
 	event.waitUntil(

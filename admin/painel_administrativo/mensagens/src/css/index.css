@@ -59,6 +59,10 @@ table th {
 	left: 10px !important
 }
 
+strong {
+	font-weight: bold
+}
+
 @media (max-width: 600px) {
 	.modal {
 		width: 98%

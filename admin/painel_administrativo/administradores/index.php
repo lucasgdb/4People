@@ -225,7 +225,7 @@ if (!isset($_SESSION['logged'])) {
 
 				adminsHTML +=
 					`<tr>
-						<td><img title="${data[i][0]}${data[i][4] ? ' (você)': ''}" class="circle" width="40" style="margin-bottom:-5px" src="${data[i][3] ? `<?= $assets ?>/images/admin_images/${data[i][3]}` : '<?= $assets ?>/images/logo.png' }" alt="${data[i][0]}"></td>
+						<td><img title="${data[i][0]}${data[i][4] ? ' (você)': ''}" class="circle" width="40" style="margin-bottom:-5px" src="${data[i][3] ? `<?= $assets ?>/images/admin_images/${data[i][3]}` : '<?= $assets ?>/images/user.svg' }" alt="${data[i][0]}"></td>
 						<td style="${data[i][4] ? 'font-weight:bold' : ''}">${data[i][0]}</td>
 						<td style="${data[i][4] ? 'font-weight:bold' : ''}">${data[i][1]}</td>
 						<td style="${data[i][4] ? 'font-weight:bold' : ''}">${data[i][2]}</td>
