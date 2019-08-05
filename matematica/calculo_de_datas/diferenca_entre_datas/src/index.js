@@ -94,19 +94,9 @@ const calculate = async () => {
 			newEndDate
 		)
 
-		const result = await fetch(
-			'src/full_difference.php',
-			{
-				method: 'POST',
-				headers: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/x-www-form-urlencoded'
-				},
-				body: `begin=${newBeginDate}&end=${newEndDate}`
-			}
-		).then(response => response.json())
+		const result = await (await fetch(`src/full_difference.php?begin=${newBeginDate}&end=${newEndDate}`)).json()
 
-		lblAll.textContent = result['difference']
+		lblAll.textContent = result.difference
 		lblMilliSec.textContent = difference.milliSeconds
 		lblSec.textContent = difference.seconds
 		lblMin.textContent = difference.minutes

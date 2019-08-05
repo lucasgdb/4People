@@ -170,8 +170,8 @@ if (!isset($_SESSION['logged'])) {
 							<a href="<?= $root ?>/${data[i][1]}" title="Ir até a página" class="btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons">insert_link</i></a>
 						</td>
 						<td>
-							<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar informações de ${data[i][0]}" href="atualizar_dados/?type_id=${i}"><i class="material-icons" style="font-size:22px">edit</i></a>
-							<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" style="cursor:pointer" title="Remover ${data[i][0]}" data-target="removeType${i}"><i class="material-icons" style="font-size:23px">delete</i></button>
+							<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar informações de ${data[i][0]}" href="atualizar_dados/?type_id=${i}"><i class="material-icons">edit</i></a>
+							<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" style="cursor:pointer" title="Remover ${data[i][0]}" data-target="removeType${i}"><i class="material-icons">delete</i></button>
 						</td>
 					</tr>`
 			}

@@ -134,10 +134,6 @@ if (!isset($_SESSION['logged'])) {
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
-	<?php
-	$sql = $database->prepare('SELECT admin_name, admin_image FROM admins');
-	$sql->execute()
-	?>
 	<script>
 		const form = document.querySelector('form')
 		const admins = document.querySelector('#admins')
