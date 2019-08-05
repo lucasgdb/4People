@@ -79,7 +79,7 @@ if ($logged) {
 										}
 										?>
 										<?php if ($tool_status || $admin) : ?>
-											<li><a class="waves-effect <?= $active ? 'grey lighten-4 black-text' : '' ?>" href="<?= $root ?>/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" title="<?= $tool_name ?>"><i class="material-icons <?= $active ? 'indigo-text text-darken-4' : '' ?> left" style="<?= $active ? 'font-size:20px' : '' ?>"><?= $active ? 'radio_button_checked' : 'keyboard_arrow_right' ?></i><?= $tool_name ?></a></li>
+											<li><a class="waves-effect <?= $active ? 'grey lighten-4 black-text' : '' ?>" <?= $active ? 'style="font-weight:bold" onclick="preventDefault(event)"' : '' ?> href="<?= $root ?>/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" title="<?= $tool_name ?>"><i class="material-icons <?= $active ? 'indigo-text text-darken-4' : '' ?> left" style="<?= $active ? 'font-size:20px' : '' ?>"><?= $active ? 'radio_button_checked' : 'keyboard_arrow_right' ?></i><?= $tool_name ?></a></li>
 										<?php endif ?>
 									<?php } ?>
 								</ul>

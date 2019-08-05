@@ -119,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	for (let i = 0; i < navMobileA.length; i++) {
 		if (navMobileA[i].getAttribute('href').split('/').filter(link => link !== '' && link !== '.').join('') === '') {
 			navMobileA[i].parentElement.classList.add('active')
+			navMobileA[i].onclick = e => e.preventDefault()
 			break
 		}
 
@@ -126,6 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		const pathName = location.pathname.split('/').filter(link => link !== '')
 		if (path[path.length - 1] === pathName[pathName.length - 1]) {
 			navMobileA[i].parentElement.classList.add('active')
+			navMobileA[i].onclick = e => e.preventDefault()
 			break
 		}
 	}

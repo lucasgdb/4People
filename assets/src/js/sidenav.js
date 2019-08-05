@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		const pathName = location.pathname.split('/').filter(link => link !== '')
 		if (path[path.length - 1] === pathName[pathName.length - 1]) {
 			paddingHeadersA[i].classList.add('grey', 'lighten-4', 'black-text')
+			paddingHeadersA[i].style.fontWeight = 'bold'
+			paddingHeadersA[i].onclick = e => preventDefault(e)
 			const icon = paddingHeadersA[i].querySelector('i')
 			icon.innerHTML = 'radio_button_checked'
 			icon.classList.add('indigo-text', 'text-darken-4')
@@ -16,3 +18,5 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 })
+
+const preventDefault = e => e.preventDefault()
