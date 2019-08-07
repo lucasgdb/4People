@@ -34,6 +34,7 @@
 - Proteção contra SQL Injection
 - Ferramentas escritas em JavaScript
 - Ajax fortemente usado
+- Quando sem conexão, é redirecionado para uma página "offline" (PWA)
 
 ## Como usar o Projeto
 - Clonar este repositório.

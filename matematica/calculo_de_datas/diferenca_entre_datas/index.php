@@ -40,13 +40,14 @@
 				<div class="row mb-0">
 					<div class="col s12 m6">
 						<div class="row mb-0">
-							<p class="mb-0 col s12">Data inicial:</p>
+							<p class="mb-0 col s12">Data inicial *</p>
 
 							<div class="input-field col s12">
+								<i class="material-icons prefix">access_time</i>
 								<input id="beginDate" type="text" placeholder="Data inicial" class="datepicker">
 							</div>
 
-							<p class="mb-0 col s12">Horário inicial:</p>
+							<p class="mb-0 col s12">Horário inicial</p>
 							<div class="input-field col s12">
 								<input id="beginTime" type="text" placeholder="Horário atual" class="timepicker">
 							</div>
@@ -55,13 +56,14 @@
 
 					<div class="col s12 m6">
 						<div class="row mb-0">
-							<p class="mb-0 col s12">Data final:</p>
+							<p class="mb-0 col s12">Data final *</p>
 
 							<div class="input-field col s12">
+								<i class="material-icons prefix">access_time</i>
 								<input id="endDate" type="text" placeholder="Data final" class="datepicker">
 							</div>
 
-							<p class="mb-0 col s12">Horário final:</p>
+							<p class="mb-0 col s12">Horário final</p>
 							<div class="input-field col s12">
 								<input id="endTime" type="text" placeholder="Horário atual" class="timepicker">
 							</div>
