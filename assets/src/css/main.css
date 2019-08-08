@@ -132,6 +132,10 @@ body>header+ul>li>.collapsible-header {
 	main>.container {
 		width: 90% !important
 	}
+
+	.modal {
+		width: 80%
+	}
 }
 
 @media (max-width: 992px) {

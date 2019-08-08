@@ -196,7 +196,8 @@ if (!isset($_SESSION['logged'])) {
 		</div>
 	</main>
 
-	<div id="modals"></div>
+	<div id="updates"></div>
+	<div id="deletes"></div>
 
 	<?php include_once("$assets/components/service_worker.php") ?>
 
@@ -209,9 +210,11 @@ if (!isset($_SESSION['logged'])) {
 		const form = document.querySelector('#formInsert')
 		const formFilter = document.querySelector('#formFilter')
 		const tools = document.querySelector('#tools')
-		const modals = document.querySelector('#modals')
+		const updates = document.querySelector('#updates')
+		const deletes = document.querySelector('#deletes')
 		const inputs = form.querySelectorAll('input:not(.select-dropdown)')
 		const btnSubmit = form.querySelector('button')
+		let isFiltered
 
 		form.onsubmit = async e => {
 			e.preventDefault()
@@ -233,7 +236,8 @@ if (!isset($_SESSION['logged'])) {
 					inputs[i].classList.remove('valid')
 				}
 
-				selectTools()
+				if (isFiltered) selectToolsByFilter()
+				else selectTools()
 			} else {
 				M.toast({
 					html: `Erro ao adicionar ${inputs[0].value.trim()}.`,
@@ -246,50 +250,92 @@ if (!isset($_SESSION['logged'])) {
 
 		formFilter.onsubmit = async e => {
 			e.preventDefault()
-			let toolsHTML = ''
 
-			const newForm = new FormData(formFilter)
-			const type_id_get = newForm.get('type_id')
-			const section_id_get = newForm.get('section_id')
-			const tool_status_get = newForm.get('tool_status')
-			const data = await (await fetch(`src/select_tools.php?type_id=${type_id_get}&section_id=${section_id_get}&tool_status=${tool_status_get}`)).json()
-
-			for (const i in data) {
-				toolsHTML +=
-					`<tr>
-						<td>${i}</td>
-						<td>${data[i][3] ? 'Ativado' : 'Desativado'}</td>
-						<td>${data[i][2]}</td>
-						<td>
-							<button data-clipboard-text="<?= $_SERVER['HTTP_HOST'] ?>/${data[i][4]}/${data[i][5]}/${data[i][1]}/" title="Copiar caminho da página" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
-							<a href="<?= $root ?>/${data[i][4]}/${data[i][5]}/${data[i][1]}/" title="Ir até a página" class="btn waves-effect waves-light indigo darken-4 z-depth-0" ${data[i][3] ? '' : 'disabled'}><i class="material-icons">insert_link</i></a>
-						</td>
-						<td>
-							<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar Ferramenta" href="atualizar_dados/?tool_id=${data[i][0]}"><i class="material-icons">edit</i></a>
-							<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" style="cursor:pointer" title="Remover Ferramenta" data-target="removeTool${data[i][0]}"><i class="material-icons">delete</i></button>
-						</td>
-					</tr>`
-			}
-
-			tools.innerHTML = toolsHTML
-
-			const btnsCopy = document.querySelectorAll('.copy')
-			new ClipboardJS(btnsCopy).on('success', () => {
-				M.toast({
-					html: 'Caminho copiado com sucesso.',
-					classes: 'green'
-				})
-			})
+			isFiltered = true
+			selectToolsByFilter()
 		}
 
 		const selectTools = async () => {
+			isFiltered = false
+
 			let toolsHTML = '',
-				modalsHTML = ''
+				updatesHTML = '',
+				deletesHTML = ''
 
 			const data = await (await fetch('src/select_tools.php')).json()
+			const sections = await (await fetch('src/select_sections.php')).json()
 
 			for (const i in data) {
-				modalsHTML +=
+				updatesHTML +=
+					`<div id="updateTool${data[i][0]}" class="modal modal-fixed-footer">
+						<form method="POST">
+							<div class="modal-content left-div-margin" style="padding-bottom:5px">
+								<h4 class="mb-1"><i class="material-icons left" style="top:7px">edit</i>Editar dados</h4>
+								<div class="divider"></div>
+
+								<div class="row mt-2 mb-0">
+									<input type="hidden" value="${data[i][0]}" name="tool_id">
+									<div class="input-field col s12 m6">
+										<i class="material-icons prefix">format_size</i>
+										<input value="${i}" id="tool_name" title="Preencha este campo com o nome." placeholder="Nomoe de Ferramenta" class="validate" type="text" name="tool_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
+										<label class="active" for="tool_name">Nome *</label>
+										<span class="helper-text" data-error="Ferramenta inválida." data-success="Ferramenta válida.">Ex: Gerador de CPF</span>
+									</div>
+
+									<div class="input-field col s12 m6">
+										<i class="material-icons prefix">folder</i>
+										<input value="${data[i][1]}" id="tool_path" title="Preencha este campo com o caminho." placeholder="Caminho da Seção" class="validate" type="text" name="tool_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
+										<label class="active" for="tool_path">Path *</label>
+										<span class="helper-text" data-error="Caminho de Ferramenta inválido." data-success="Caminho de Ferramenta válido.">Ex: gerador_de_cpf</span>
+									</div>
+
+									<div class="input-field col s12 m6">
+										<i class="material-icons prefix">folder</i>
+										<select name="section_id">
+											${sections.map(section => `<option value="${section[0]}" ${section[0] === data[i][8] ? 'selected' : ''}>${section[1]}</option>`).join('')}
+										</select>
+										<label>Seção *</label>
+										<span class="helper-text">Seção da Ferramenta</span>
+									</div>
+
+									<div class="input-field col s12 m6">
+										<i class="material-icons prefix">${data[i][5] === '1' ? 'check' : 'close'}</i>
+										<select name="tool_status">
+											<option value="0">Desativado</option>
+											<option value="1" ${data[i][5] === '1' ? 'selected' : ''}>Ativado</option>
+										</select>
+										<label>Status *</label>
+										<span class="helper-text">Status da Ferramenta</span>
+									</div>
+
+									<div class="input-field col s12 m6">
+										<i class="material-icons prefix">description</i>
+										<input value="${data[i][2]}" id="tool_description" title="Preencha este campo com a descrição." placeholder="Descrição da Ferramenta" class="validate" type="text" name="tool_description" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')">
+										<label class="active" for="tool_description">Descrição</label>
+										<span class="helper-text">Ex: Gerador de CPF Online para Programadores testarem seus Softwares em desenvolvimento.</span>
+									</div>
+
+									<div class="input-field col s12 m6">
+										<i class="material-icons prefix">link</i>
+										<input value="${data[i][3]}" id="tool_link" title="Preencha este campo com o link do repositório." placeholder="Link da Ferramenta no GitHub" class="validate" type="text" name="tool_link" oninvalid="this.setCustomValidity('Preencha este campo com o link do repositório.')" oninput="setCustomValidity('')">
+										<label class="active" for="tool_link">Link</label>
+										<span class="helper-text">Ex: https://github.com/lucasnaja/4People</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="modal-footer">
+								<button type="button" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0" title="Cancelar"><i class="material-icons left">close</i>Cancelar</button>
+								<button type="button" onclick="updateTool(document.querySelector('#updateTool${data[i][0]} form'))" class="modal-close btn waves-effect waves-light green darken-3 z-depth-0" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
+							</div>
+						</form>
+
+						<div class="left-div indigo darken-4" style="border-radius:0"></div>
+					</div>`
+
+				deletesHTML +=
 					`<div id="removeTool${data[i][0]}" class="modal">
 						<div class="modal-content left-div-margin">
 							<h4><i class="material-icons left" style="top:7px">delete</i>Remover Ferramenta</h4>
@@ -309,22 +355,24 @@ if (!isset($_SESSION['logged'])) {
 				toolsHTML +=
 					`<tr>
 						<td>${i}</td>
-						<td>${data[i][3] ? 'Ativado' : 'Desativado'}</td>
-						<td>${data[i][2]}</td>
+						<td>${data[i][5] === '1' ? 'Ativado' : 'Desativado'}</td>
+						<td>${data[i][4]}</td>
 						<td>
-							<button data-clipboard-text="<?= $_SERVER['HTTP_HOST'] ?>/${data[i][4]}/${data[i][5]}/${data[i][1]}/" title="Copiar caminho da página" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
-							<a href="<?= $root ?>/${data[i][4]}/${data[i][5]}/${data[i][1]}/" title="Ir até a página" class="btn waves-effect waves-light indigo darken-4 z-depth-0" ${data[i][3] ? '' : 'disabled'}><i class="material-icons">insert_link</i></a>
+							<button data-clipboard-text="<?= $_SERVER['HTTP_HOST'] ?>/${data[i][6]}/${data[i][7]}/${data[i][1]}/" title="Copiar caminho da página" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
+							<a href="<?= $root ?>/${data[i][6]}/${data[i][7]}/${data[i][1]}/" title="Ir até a página" class="btn waves-effect waves-light indigo darken-4 z-depth-0" ${data[i][5] === '1' ? '' : 'disabled'}><i class="material-icons">insert_link</i></a>
 						</td>
 						<td>
-							<a class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar Ferramenta" href="atualizar_dados/?tool_id=${data[i][0]}"><i class="material-icons">edit</i></a>
+							<button class="btn waves-effect waves-light green darken-3 z-depth-0 modal-trigger" title="Editar Ferramenta" data-target="updateTool${data[i][0]}"><i class="material-icons">edit</i></button>
 							<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" style="cursor:pointer" title="Remover Ferramenta" data-target="removeTool${data[i][0]}"><i class="material-icons">delete</i></button>
 						</td>
 					</tr>`
 			}
 
 			tools.innerHTML = toolsHTML
-			modals.innerHTML = modalsHTML
+			updates.innerHTML = updatesHTML
+			deletes.innerHTML = deletesHTML
 			M.Modal.init(document.querySelectorAll('.modal'))
+			M.FormSelect.init(document.querySelectorAll('select'))
 
 			const btnsCopy = document.querySelectorAll('.copy')
 			new ClipboardJS(btnsCopy).on('success', () => {
@@ -333,6 +381,159 @@ if (!isset($_SESSION['logged'])) {
 					classes: 'green'
 				})
 			})
+		}
+
+		const selectToolsByFilter = async () => {
+			let toolsHTML = '',
+				updatesHTML = '',
+				deletesHTML = ''
+
+			const newForm = new FormData(formFilter)
+			const type_id_get = newForm.get('type_id')
+			const section_id_get = newForm.get('section_id')
+			const tool_status_get = newForm.get('tool_status')
+			const data = await (await fetch(`src/select_tools.php?type_id=${type_id_get}&section_id=${section_id_get}&tool_status=${tool_status_get}`)).json()
+			const sections = await (await fetch('src/select_sections.php')).json()
+
+			for (const i in data) {
+				updatesHTML +=
+					`<div id="updateTool${data[i][0]}" class="modal modal-fixed-footer">
+						<form method="POST">
+							<div class="modal-content left-div-margin" style="padding-bottom:5px">
+								<h4 class="mb-1"><i class="material-icons left" style="top:7px">edit</i>Editar dados</h4>
+								<div class="divider"></div>
+
+								<div class="row mt-2 mb-0">
+									<input type="hidden" value="${data[i][0]}" name="tool_id">
+									<div class="input-field col s12 m6">
+										<i class="material-icons prefix">format_size</i>
+										<input value="${i}" id="tool_name" title="Preencha este campo com o nome." placeholder="Nomoe de Ferramenta" class="validate" type="text" name="tool_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
+										<label class="active" for="tool_name">Nome *</label>
+										<span class="helper-text" data-error="Ferramenta inválida." data-success="Ferramenta válida.">Ex: Gerador de CPF</span>
+									</div>
+
+									<div class="input-field col s12 m6">
+										<i class="material-icons prefix">folder</i>
+										<input value="${data[i][1]}" id="tool_path" title="Preencha este campo com o caminho." placeholder="Caminho da Seção" class="validate" type="text" name="tool_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
+										<label class="active" for="tool_path">Path *</label>
+										<span class="helper-text" data-error="Caminho de Ferramenta inválido." data-success="Caminho de Ferramenta válido.">Ex: gerador_de_cpf</span>
+									</div>
+
+									<div class="input-field col s12 m6">
+										<i class="material-icons prefix">folder</i>
+										<select name="section_id">
+											${sections.map(section => `<option value="${section[0]}" ${section[0] === data[i][8] ? 'selected' : ''}>${section[1]}</option>`).join('')}
+										</select>
+										<label>Seção *</label>
+										<span class="helper-text">Seção da Ferramenta</span>
+									</div>
+
+									<div class="input-field col s12 m6">
+										<i class="material-icons prefix">${data[i][5] === '1' ? 'check' : 'close'}</i>
+										<select name="tool_status">
+											<option value="0">Desativado</option>
+											<option value="1" ${data[i][5] === '1' ? 'selected' : ''}>Ativado</option>
+										</select>
+										<label>Status *</label>
+										<span class="helper-text">Status da Ferramenta</span>
+									</div>
+
+									<div class="input-field col s12 m6">
+										<i class="material-icons prefix">description</i>
+										<input value="${data[i][2]}" id="tool_description" title="Preencha este campo com a descrição." placeholder="Descrição da Ferramenta" class="validate" type="text" name="tool_description" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')">
+										<label class="active" for="tool_description">Descrição</label>
+										<span class="helper-text">Ex: Gerador de CPF Online para Programadores testarem seus Softwares em desenvolvimento.</span>
+									</div>
+
+									<div class="input-field col s12 m6">
+										<i class="material-icons prefix">link</i>
+										<input value="${data[i][3]}" id="tool_link" title="Preencha este campo com o link do repositório." placeholder="Link da Ferramenta no GitHub" class="validate" type="text" name="tool_link" oninvalid="this.setCustomValidity('Preencha este campo com o link do repositório.')" oninput="setCustomValidity('')">
+										<label class="active" for="tool_link">Link</label>
+										<span class="helper-text">Ex: https://github.com/lucasnaja/4People</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="divider"></div>
+
+							<div class="modal-footer">
+								<button type="button" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0" title="Cancelar"><i class="material-icons left">close</i>Cancelar</button>
+								<button type="button" onclick="updateTool(document.querySelector('#updateTool${data[i][0]} form'))" class="modal-close btn waves-effect waves-light green darken-3 z-depth-0" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
+							</div>
+						</form>
+
+						<div class="left-div indigo darken-4" style="border-radius:0"></div>
+					</div>`
+
+				deletesHTML +=
+					`<div id="removeTool${data[i][0]}" class="modal">
+						<div class="modal-content left-div-margin">
+							<h4><i class="material-icons left" style="top:7px">delete</i>Remover Ferramenta</h4>
+							<p class="mb-0">Você tem certeza que deseja remover ${i} do 4People?</p>
+
+							<div class="left-div indigo darken-4" style="border-radius:0"></div>
+						</div>
+
+						<div class="divider"></div>
+
+						<div class="modal-footer">
+							<button title="Cancelar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Cancelar</button>
+							<a onclick="deleteTool(${data[i][0]}, '${i}')" title="Remover ${i}" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</a>
+						</div>
+					</div>`
+
+				toolsHTML +=
+					`<tr>
+						<td>${i}</td>
+						<td>${data[i][5] === '1' ? 'Ativado' : 'Desativado'}</td>
+						<td>${data[i][4]}</td>
+						<td>
+							<button data-clipboard-text="<?= $_SERVER['HTTP_HOST'] ?>/${data[i][6]}/${data[i][7]}/${data[i][1]}/" title="Copiar caminho da página" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
+							<a href="<?= $root ?>/${data[i][6]}/${data[i][7]}/${data[i][1]}/" title="Ir até a página" class="btn waves-effect waves-light indigo darken-4 z-depth-0" ${data[i][5] === '1' ? '' : 'disabled'}><i class="material-icons">insert_link</i></a>
+						</td>
+						<td>
+							<button class="btn waves-effect waves-light green darken-3 z-depth-0 modal-trigger" title="Editar Ferramenta" data-target="updateTool${data[i][0]}"><i class="material-icons">edit</i></button>
+							<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" style="cursor:pointer" title="Remover Ferramenta" data-target="removeTool${data[i][0]}"><i class="material-icons">delete</i></button>
+						</td>
+					</tr>`
+			}
+
+			tools.innerHTML = toolsHTML
+			updates.innerHTML = updatesHTML
+			deletes.innerHTML = deletesHTML
+
+			M.Modal.init(document.querySelectorAll('.modal'))
+			M.FormSelect.init(document.querySelectorAll('select'))
+
+			const btnsCopy = document.querySelectorAll('.copy')
+			new ClipboardJS(btnsCopy).on('success', () => {
+				M.toast({
+					html: 'Caminho copiado com sucesso.',
+					classes: 'green'
+				})
+			})
+		}
+
+		const updateTool = async formUpdate => {
+			const data = await (await fetch('src/update_tool.php', {
+				method: 'POST',
+				body: new FormData(formUpdate)
+			})).json()
+
+			if (data.status === '1') {
+				M.toast({
+					html: 'Os dados foram atualizados com sucesso.',
+					classes: 'green'
+				})
+
+				if (isFiltered) selectToolsByFilter()
+				else selectTools()
+			} else {
+				M.toast({
+					html: 'Houve um erro ao atualizar os dados.',
+					classes: 'red accent-4'
+				})
+			}
 		}
 
 		const deleteTool = async (id, name) => {
@@ -344,7 +545,8 @@ if (!isset($_SESSION['logged'])) {
 					classes: 'green'
 				})
 
-				selectTools()
+				if (isFiltered) selectToolsByFilter()
+				else selectTools()
 			} else {
 				M.toast({
 					html: `Não foi possível remover ${name}.`,

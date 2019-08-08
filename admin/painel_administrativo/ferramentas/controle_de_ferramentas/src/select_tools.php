@@ -30,7 +30,7 @@ try {
 	}
 
 	$sql = $database->prepare(
-		"SELECT tools.*, types.type_path, sections.section_path FROM tools
+		"SELECT tools.*, types.type_path, sections.section_id, sections.section_path FROM tools
 		INNER JOIN sections ON sections.section_id = tools.section_id
 		INNER JOIN types ON types.type_id = sections.type_id
 		$condition
@@ -46,7 +46,7 @@ try {
 	if ($sql->rowCount()) {
 		foreach ($sql as $key) {
 			extract($key);
-			$data[$tool_name] = [$tool_id, $tool_path, $tool_visits, $tool_status, $type_path, $section_path];
+			$data[$tool_name] = [$tool_id, $tool_path, $tool_description, $tool_link, $tool_visits, $tool_status, $type_path, $section_path, $section_id];
 		}
 
 		echo json_encode($data);

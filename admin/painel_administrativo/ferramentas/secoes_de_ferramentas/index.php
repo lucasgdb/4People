@@ -204,14 +204,14 @@ if (!isset($_SESSION['logged'])) {
 		}
 
 		const selectSections = async () => {
+			isFiltered = false
+
 			let sectionsHTML = '',
 				updatesHTML = '',
 				deletesHTML = ''
 
 			const data = await (await fetch('src/select_sections.php')).json()
 			const types = await (await fetch('src/select_types.php')).json()
-
-			isFiltered = false
 
 			for (const i in data) {
 				updatesHTML +=
@@ -247,7 +247,7 @@ if (!isset($_SESSION['logged'])) {
 									<div class="input-field col s12 m6">
 										<i class="material-icons prefix">folder</i>
 										<select name="type_id">
-											${types.map(type => `<option value="${type[0]}" ${type[0] === data[i][4] ? 'selected' : ''}>${type[1]}</option>`).join('')}													
+											${types.map(type => `<option value="${type[0]}" ${type[0] === data[i][4] ? 'selected' : ''}>${type[1]}</option>`).join('')}
 										</select>
 										<label>Tipo *</label>
 										<span class="helper-text">Caminho da Seção</span>
