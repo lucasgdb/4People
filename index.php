@@ -98,7 +98,7 @@
 								</ul>
 							</div>
 
-							<div class="top-div indigo darken-4"></div>
+							<div class="top-div-mobile indigo darken-4"></div>
 						</div>
 					</div>
 				</div>
@@ -111,7 +111,7 @@
 								<p style="font-size:16px">Usuários que já visitaram: <span id="totalVisits">1000</span></p>
 							</div>
 
-							<div class="top-div teal darken-4"></div>
+							<div class="top-div-mobile teal darken-4"></div>
 						</div>
 
 						<div class="card red z-depth-2">
@@ -126,7 +126,7 @@
 								<p style="font-size:16px">Nossas Ferramentas foram usadas <span id="toolVisits"><?= $total_visits ?></span> vezes</p>
 							</div>
 
-							<div class="top-div red darken-4"></div>
+							<div class="top-div-mobile red darken-4"></div>
 						</div>
 					</div>
 
@@ -137,7 +137,7 @@
 								<p style="font-size:16px">Usuários Online no 4People: 1</p>
 							</div>
 
-							<div class="top-div blue darken-4"></div>
+							<div class="top-div-mobile blue darken-4"></div>
 						</div>
 
 						<div class="card green z-depth-2">
@@ -153,7 +153,7 @@
 								<p style="font-size:16px">Quantidade de Ferramentas: <?= $count ?></p>
 							</div>
 
-							<div class="top-div green darken-4"></div>
+							<div class="top-div-mobile green darken-4"></div>
 						</div>
 					</div>
 				</div>

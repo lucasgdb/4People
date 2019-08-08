@@ -18,7 +18,7 @@ if ($logged) {
 			<div class="background grey lighten-4"></div>
 			<img title="<?= $logged ? $admin_name : 'Logo' ?>" class="circle" src="<?= $assets ?>/images/<?= isset($admin_image) && $admin_image ? "admin_images/$admin_image" : ($logged ? 'user.svg' : 'logo.png') ?>" alt="<?= $logged ? 'Foto' : 'Logo' ?>">
 			<span class="name black-text"><?= $logged ? "Admin: $admin_name" : '4People - Ferramentas Online' ?></span>
-			<a class="linkHover" href="<?= $logged ? "$root/admin/painel_administrativo/administradores/atualizar_dados/?admin_id=$admin_id" : 'https://github.com/lucasnaja/4People' ?>" <?= !$logged ? 'target="_blank" rel="noopener noreferrer nofollow"' : '' ?>><span class="email"><?= $logged ? 'Editar Perfil' : 'Projeto de TCC' ?> »</span></a>
+			<a class="linkHover" href="<?= $logged ? "$root/admin/painel_administrativo/administradores/atualizar_dados/?admin_id=$admin_id" : "$root/sobre/" ?>"><span class="email"><?= $logged ? 'Editar Perfil' : 'Sobre o 4People' ?> »</span></a>
 		</div>
 
 		<div class="left-div-mobile indigo darken-4" style="border-radius:0"></div>
