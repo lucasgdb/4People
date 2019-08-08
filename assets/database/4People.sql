@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Aug 01, 2019 at 10:14 PM
--- Server version: 8.0.16
+-- Generation Time: Aug 08, 2019 at 08:38 PM
+-- Server version: 8.0.17
 -- PHP Version: 7.2.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -44,8 +44,7 @@ CREATE TABLE `admins` (
 INSERT INTO `admins` (`admin_id`, `admin_name`, `admin_nickname`, `admin_email`, `admin_password`, `admin_image`) VALUES
 (59, 'Lucas Bittencourt', 'lucasnaja', 'lucasnaja0@gmail.com', '66eccf32c43c345b4e4b88bd529dc384', 'lucasnaja.jpg'),
 (96, 'Suzany Silva', 'suzany_silva', 'suzany_silva@hotmail.com', '66eccf32c43c345b4e4b88bd529dc384', 'suzany_silva.jpg'),
-(97, 'Renan Mattos', 'renan_mattos', 'renan_mattos@hotmail.com', '66eccf32c43c345b4e4b88bd529dc384', 'renan_mattos.jpg'),
-(101, 'Jairo Arcy', 'jairo_arcy', 'jairoarcy@hotmail.com', '66eccf32c43c345b4e4b88bd529dc384', 'jairo_arcy.jpeg');
+(97, 'Renan Mattos', 'renan_mattos', 'renan_mattos@hotmail.com', '66eccf32c43c345b4e4b88bd529dc384', 'renan_mattos.jpg');
 
 -- --------------------------------------------------------
 
@@ -81,13 +80,12 @@ CREATE TABLE `messages` (
 --
 
 INSERT INTO `messages` (`message_id`, `message_name`, `message_email`, `message_subject`, `message_content`, `message_time`, `message_read`) VALUES
-(1, 'Lucas Bittencourt', 'lucasnaja0@gmail.com', 'Erro (erro visual)', 'Lucas', '2019-08-01 08:11:02', 0),
-(2, 'Lucas Bittencourt', 'lucasnaja0@gmail.com', 'Sugestão (ferramenta)', 'Amanhã', '2019-08-01 08:11:26', 0),
-(3, 'João Almeida', 'lucasnaja0@gmail.com', 'Erro (erro visual)', 'dfdsfdfafdf', '2019-08-01 08:12:12', 0),
-(4, 'Lucão', 'lucasnaja0@gmail.com', 'Outro', 'Lucasaaasdfdsffdf', '2019-08-01 08:19:08', 0),
-(5, 'Luquinha', 'lucasnaja0@gmail.com', 'Erro (erro visual)', 'slkjfsdjkfsjfksdfjsdfdfd', '2019-08-01 08:19:48', 0),
-(6, 'Lucas', 'lucasnaja0@gmail.com', 'Outro', 'sfdfafdfadfdfdsfsd', '2019-08-01 08:21:16', 0),
-(7, 'Lucas', 'lucasnaja0@gmail.com', 'Outro', 'sfdfafdfadfdfdsfsd', '2019-08-01 08:21:28', 0);
+(6, 'Lucas', 'lucasnaja0@gmail.com', 'Outro', 'sfdfafdfadfdfdsfsd', '2019-08-01 08:21:16', 1),
+(8, 'Dionísio', 'rodrigo.b.dionisio@gmail.com', 'Outro', 'Mensagemmmm', '2019-08-04 14:33:53', 1),
+(9, 'Lucas Bittencourt', 'lucasnaja0@gmail.com', 'Outro', 'mensagem do usuário - -----', '2019-08-05 06:49:49', 1),
+(10, 'Lucas Bittencourt', 'lucasnaja0@gmail.com', 'Bug (mal funcionamento)', 'teste', '2019-08-05 06:56:33', 1),
+(11, 'Lucas Bittencourt', 'lucasnaja0@gmail.com', 'Outro', 'Olá!\r\nTestando quebra de linha.\r\n\r\nHahahaahhah\r\n1\r\n2\r\n3\r\n,4,4,5,5,', '2019-08-05 07:47:35', 1),
+(12, 'vc kkkk', 'lucasnaja0@gmail.com', 'Sugestão (visual)', 'Mensagem da Stephanie esqueci como escreve kkkkk', '2019-08-08 17:04:13', 1);
 
 -- --------------------------------------------------------
 
@@ -141,9 +139,8 @@ CREATE TABLE `tools` (
 
 INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_description`, `tool_link`, `tool_visits`, `tool_status`, `section_id`) VALUES
 (7, 'Gerador de CPF', 'gerador_de_cpf', 'Gerador de CPF Online para Programadores testarem seus Softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/CPFGenerator.js', 20, 1, 2),
-(8, 'Gerador de Senha', 'gerador_de_senha', 'Gerador de Senha Online para gerar senhas personalizadas e fortes.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/passwordGenerator.js', 22, 1, 2),
+(8, 'Gerador de Senha', 'gerador_de_senha', 'Gerador de Senha Online para gerar senhas personalizadas e fortes.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/passwordGenerator.js', 28, 1, 2),
 (9, 'Gerador de Meta Tags', 'gerador_de_meta_tags', 'Gerador de Meta Tags Online, feito para gerar várias das Meta Tags existentes.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/metaTagsGenerator.js', 25, 1, 2),
-(10, 'Gerador de Nicks', 'gerador_de_nicks', 'Gerador de Nicks Online para gerar diversos tipos de nicks aleatórios.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/nickGenerator.js', 10, 1, 2),
 (11, 'Validador de CPF', 'validador_de_cpf', 'Validador de CPF Online para validar CPFs para programadores testarem seus softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/validators/CPFValidator.js', 14, 1, 4),
 (12, 'Contador de Caracteres', 'contador_de_caracteres', 'Contador de letras, caracteres sem espaço, palavras, espaços, vogais, consoantes, números e linhas.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/string_functions/charactersCount.js', 6, 1, 5),
 (13, 'Meu IP', 'meu_ip', 'Veja seu IP e muito mais informações aqui.', 'https://github.com/lucasnaja/4People/blob/master/computacao/rede_e_internet/meu_ip/src/index.js', 9, 1, 6),
@@ -151,18 +148,18 @@ INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_description`, `t
 (15, 'Buscar CEP', 'buscar_cep', 'Busque informações de seu CEP, como Rua, Cidade, Bairro e Estado aqui.', 'https://github.com/lucasnaja/4People/blob/master/computacao/rede_e_internet/buscar_cep/src/index.js', 9, 1, 6),
 (16, 'Binário, Octal e Hexadecimal', 'conversor_binario', 'Tradutor Online de Código Binário. Basta digitar o código binário ou texto abaixo e clicar no botão para converter.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/encoders_decoders/binaryConverter.js', 7, 1, 7),
 (17, 'Código de Evento das Teclas', 'codigo_de_eventos_das_teclas', 'Código de Eventos das Teclas para descobrir cada keyCode da tecla e criar eventos em sua linguagem de preferência.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/tables_and_patterns/jsEventKeyCodes.js', 12, 1, 8),
-(18, 'Fatorar Número', 'fatorar_numero', 'Calculadora Online para Fatorar Números.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/factorization.js', 47, 1, 12),
+(18, 'Fatorar Número', 'fatorar_numero', 'Calculadora Online para Fatorar Números.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/factorization.js', 48, 1, 12),
 (19, 'Máximo Divisor Comum', 'mdc', 'Calculadora Online para encontrar o Máximo Divisor Comum entre vários números.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/GCD.js', 6, 1, 12),
 (20, 'Mínimo Múltiplo Comum', 'mmc', 'Calculadora Online para encontrar o Mínimo Múltiplo Comum entre vários números.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/LCM.js', 3, 1, 12),
 (21, 'Índice de Massa Corporal', 'imc', 'Calculadora de Índice de Massa Corporal Online para calcular o IMC e o seu peso ideal.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/BMI.js', 2, 1, 12),
 (22, 'Porcentagem', 'porcentagem', 'Calculadora de Porcentagem Online com vários métodos para encontrar a porcentagem, como aumentos, descontos, proporções, etc.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/percentage.js', 3, 1, 12),
-(23, 'Equação do 2° Grau', 'equacao_2_grau', 'Cálculo da Equção do 2° Grau (Bhaskara) Online. Δ = B² - 4 * A * C, X = (-B +- √Δ) / 2 * A', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/bhaskara.js', 5, 1, 12),
+(23, 'Equação do 2° Grau', 'equacao_2_grau', 'Cálculo da Equção do 2° Grau (Bhaskara) Online. Δ = B² - 4 * A * C, X = (-B +- √Δ) / 2 * A', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/bhaskara.js', 6, 1, 12),
 (24, 'Números Primos', 'numeros_primos', 'Calculadora de Números Primos Online para verificar se número é primo ou não.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/primeNumbers.js', 3, 1, 12),
 (25, 'Números Amigáveis', 'numeros_amigaveis', 'Números amigáveis são pares de números onde um deles é a soma dos divisores do outro. Por exemplo, os divisores de 220 são 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 e 110, cuja soma é 284. Por outro lado, os divisores de 284 são 1, 2, 4, 71 e 142 e a soma deles é 220.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/friendlyNumbers.js', 2, 1, 12),
 (26, 'Fibonacci', 'fibonacci', 'Calculadora para calcular a Sequência de Fibonacci. Ex: 0, 1, 1, 2, 3, 5, 8, 13, etc...', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/fibonacci.js', 3, 1, 12),
 (27, 'Conversor de Temperatura', 'conversor_de_temperatura', 'Conversor de Temperatura Online para calcular Graus Celsius, Fahrenheit e Kelvin.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/temperatureConversor.js', 3, 1, 12),
 (28, 'Divisão e Resto', 'divisao_e_resto', 'Calculadora de Divisão Online que mostra o resultado da divisão comum e inteira entre dois números e o resto (módulo) entre eles.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/divisionAndRest.js', 3, 1, 12),
-(29, 'Área do Círculo', 'area_do_circulo', 'Calculador de Área do Círculo Online. R = Raio, D = Diâmetro (2 * R), PI = 3.141592653589793... (Math.PI.toFixed(48))', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/circleArea.js', 10, 1, 10),
+(29, 'Área do Círculo', 'area_do_circulo', 'Calculador de Área do Círculo Online. R = Raio, D = Diâmetro (2 * R), PI = 3.141592653589793... (Math.PI.toFixed(48))', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/circleArea.js', 11, 1, 10),
 (30, 'Área do Quadrado', 'area_do_quadrado', 'Calculador de Área do Quadrado Online. Área do Quadrado = Lado * Lado ou L²', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/squareArea.js', 5, 1, 10),
 (31, 'Área do Retângulo', 'area_do_retangulo', 'Calculador de Área do Retângulo Online. Área do Retângulo = Base * Altura', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/rectangleArea.js', 4, 1, 10),
 (32, 'Área do Triângulo', 'area_do_triangulo', 'Calculador de Área do Triângulo Online. Área do Triângulo = Base * Altura / 2', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/triangleArea.js', 3, 1, 10),
@@ -175,7 +172,7 @@ INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_description`, `t
 (39, 'Área da Elipse', 'area_da_elipse', 'Calculador de Área da Elipse Online. π = PI, Área da Elipse = π * Eixo maior * Eixo menor', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/ellipseArea.js', 1, 1, 10),
 (40, 'Área da Coroa Ciricular', 'area_da_coroa_circular', 'Calculador de Área da Coroa Circular Online. π = PI, R = Raio maior, r = Raio menor, Área da Coroa Circular = π * (R² - r²)', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/circularCrownArea.js', 3, 1, 10),
 (41, 'Área do Setor Circular', 'area_do_setor_circular', 'Calculador de Área do Setor Circular Online. π = PI, Área do Setor Circular = π * (Raio² * Ângulo) / 360', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/circularSectorArea.js', 1, 1, 10),
-(42, 'Diferença entre Datas', 'diferenca_entre_datas', 'Calcular Diferença entre Datas. Possui um leque de recursos disponíveis, como calcular idades, tempo, etc.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/dates_calculator/differenceBetweenDates.js', 85, 1, 11);
+(42, 'Diferença entre Datas', 'diferenca_entre_datas', 'Calcular Diferença entre Datas. Possui um leque de recursos disponíveis, como calcular idades, tempo, etc.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/dates_calculator/differenceBetweenDates.js', 88, 1, 11);
 
 -- --------------------------------------------------------
 
@@ -258,31 +255,31 @@ ALTER TABLE `types`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `sections`
 --
 ALTER TABLE `sections`
-  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tools`
 --
 ALTER TABLE `tools`
-  MODIFY `tool_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `tool_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `types`
 --
 ALTER TABLE `types`
-  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
