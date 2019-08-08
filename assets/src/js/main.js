@@ -77,7 +77,7 @@ const matchMin = minWidth => {
 	}
 }
 
-// Pave events
+// Page events
 document.addEventListener('DOMContentLoaded', () => {
 	if (sessionStorage.getItem('sideStatus')) {
 		sidenav.options.outDuration = 0

@@ -91,8 +91,8 @@ if (!isset($_SESSION['logged'])) {
 		</div>
 	</main>
 
-	<div id="deletes"></div>
 	<div id="updates"></div>
+	<div id="deletes"></div>
 
 	<?php include_once("$assets/components/service_worker.php") ?>
 

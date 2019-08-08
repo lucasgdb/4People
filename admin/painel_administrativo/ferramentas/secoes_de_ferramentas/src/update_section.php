@@ -22,8 +22,8 @@ try {
 	$sql->bindValue(':type_id', $type_id);
 	$sql->bindValue(':section_id', $section_id);
 
-	$sql->execute();
-	header('Location: ../');
+	if ($sql->execute()) echo '{"status":"1"}';
+	else echo '{"status":"0"}';
 } catch (PDOException $e) {
-   echo "Um erro ocorreu! Erro: {$e->getMessage()}";
+	echo '{"status":"0"}';
 }

@@ -30,7 +30,7 @@ try {
 	if ($sql->rowCount()) {
 		foreach ($sql as $key) {
 			extract($key);
-			$data[$section_id] = [$section_name, $section_path, $section_icon, $type_path];
+			$data[$section_id] = [$section_name, $section_path, $section_icon, $type_path, $type_id];
 		}
 
 		echo json_encode($data);
