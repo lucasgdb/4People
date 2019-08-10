@@ -84,7 +84,7 @@ if (!isset($_SESSION['logged'])) {
 				<div class="top-div indigo darken-4"></div>
 			</div>
 
-			<div class="card-panel z-depth-2 top-div-margin" style="padding-bottom:10px">
+			<div class="card-panel z-depth-2 top-div-margin" style="padding-bottom:0">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">search</i>Pesquisar um Administrador</h1>
 				<label>Pesquisar um Administrador do 4People</label>
 				<div class="divider"></div>
@@ -132,7 +132,6 @@ if (!isset($_SESSION['logged'])) {
 	<?php include_once("$assets/components/service_worker.php") ?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
-	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script>
 		const form = document.querySelector('form')

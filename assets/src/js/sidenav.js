@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			icon.innerHTML = 'radio_button_checked'
 			icon.classList.add('indigo-text', 'text-darken-4')
 			icon.style.fontSize = '20px'
+			icon.style.marginLeft = '2.5px'
 
 			header = paddingHeadersA[i].parentElement.parentElement.parentElement.parentElement.querySelector('.collapsible-header')
 			if (header) header.click()

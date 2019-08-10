@@ -58,6 +58,9 @@ M.Timepicker.init(document.querySelectorAll('.timepicker'), {
 		cancel: 'Cancelar',
 		clear: 'Limpar',
 		done: 'Selecionar'
+	},
+	onOpenEnd: () => {
+		document.querySelector('div.modal-overlay').onclick = null
 	}
 })
 

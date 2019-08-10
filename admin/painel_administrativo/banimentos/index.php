@@ -57,7 +57,6 @@ if (!isset($_SESSION['logged'])) {
 	<?php include_once("$assets/components/service_worker.php") ?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
-	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script src="src/index.js"></script>
 </body>

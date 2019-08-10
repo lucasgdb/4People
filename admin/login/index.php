@@ -31,12 +31,10 @@ if (isset($_SESSION['logged'])) {
 
 				<?php
 				include_once("$assets/php/Connection.php");
-				$sql = $database->prepare('SELECT COUNT(admin_id) FROM admins LIMIT 1');
+				$sql = $database->prepare('SELECT admin_id FROM admins LIMIT 1');
 				$sql->execute();
 
-				$admin_amount = $sql->fetchColumn();
-
-				if ($admin_amount > 0) : ?>
+				if ($sql->rowCount()) : ?>
 					<form style="margin-top:15px" method="POST">
 						<div class="row mb-0">
 							<div class="input-field col s12">

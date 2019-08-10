@@ -160,7 +160,6 @@ if (!isset($_SESSION['logged'])) {
 	<?php include_once("$assets/components/service_worker.php") ?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
-	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script src="src/js/katex.min.js"></script>
 	<script src="src/js/highlight.min.js"></script>

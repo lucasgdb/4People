@@ -98,7 +98,6 @@ if (!isset($_SESSION['logged'])) {
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/clipboard.min.js"></script>
-	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script>
 		const form = document.querySelector('#formInsert')
@@ -149,7 +148,7 @@ if (!isset($_SESSION['logged'])) {
 			for (const i in data) {
 				updatesHTML +=
 					`<div id="updateType${i}" class="modal">
-						<form method="POST">
+						<form onsubmit="updateType(document.querySelector('#updateType${i} form')); return false" method="POST">
 							<div class="modal-content left-div-margin" style="padding-bottom:5px">
 								<h4 class="mb-1"><i class="material-icons left" style="top:7px">edit</i>Editar dados</h4>
 								<div class="divider"></div>
@@ -185,7 +184,7 @@ if (!isset($_SESSION['logged'])) {
 
 							<div class="modal-footer">
 								<button type="button" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0" title="Cancelar"><i class="material-icons left">close</i>Cancelar</button>
-								<button type="button" onclick="updateType(document.querySelector('#updateType${i} form'))" class="modal-close btn waves-effect waves-light green darken-3 z-depth-0" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
+								<button class="modal-close btn waves-effect waves-light green darken-3 z-depth-0" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
 							</div>
 						</form>
 					</div>`

@@ -173,7 +173,7 @@ if (!isset($_SESSION['logged'])) {
 			</div>
 
 			<div class="card-panel left-div-margin" style="padding-bottom:10px">
-				<h2 class="flow-text" style="margin: 0 0 5px"><i class="material-icons left">format_list_bulleted</i>Lista de Ferramentas</h2>
+				<h2 class="flow-text" style="margin: 0 0 5px"><i class="material-icons left">format_list_bulleted</i>Lista de Ferramentas <span id="amount"></span></h2>
 				<label>Lista de Ferramentas do 4People</label>
 				<div class="divider"></div>
 
@@ -203,7 +203,6 @@ if (!isset($_SESSION['logged'])) {
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/clipboard.min.js"></script>
-	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script>
 		M.FormSelect.init(document.querySelectorAll('select'))
@@ -214,6 +213,7 @@ if (!isset($_SESSION['logged'])) {
 		const deletes = document.querySelector('#deletes')
 		const inputs = form.querySelectorAll('input:not(.select-dropdown)')
 		const btnSubmit = form.querySelector('button')
+		const lblAmount = document.querySelector('#amount')
 		let isFiltered
 
 		form.onsubmit = async e => {
@@ -260,15 +260,18 @@ if (!isset($_SESSION['logged'])) {
 
 			let toolsHTML = '',
 				updatesHTML = '',
-				deletesHTML = ''
+				deletesHTML = '',
+				amount = 0
 
 			const data = await (await fetch('src/select_tools.php')).json()
 			const sections = await (await fetch('src/select_sections.php')).json()
 
 			for (const i in data) {
+				amount += 1
+
 				updatesHTML +=
 					`<div id="updateTool${data[i][0]}" class="modal modal-fixed-footer">
-						<form method="POST">
+						<form onsubmit="updateTool(document.querySelector('#updateTool${data[i][0]} form')); return false" method="POST">
 							<div class="modal-content left-div-margin" style="padding-bottom:5px">
 								<h4 class="mb-1"><i class="material-icons left" style="top:7px">edit</i>Editar dados</h4>
 								<div class="divider"></div>
@@ -328,7 +331,7 @@ if (!isset($_SESSION['logged'])) {
 
 							<div class="modal-footer">
 								<button type="button" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0" title="Cancelar"><i class="material-icons left">close</i>Cancelar</button>
-								<button type="button" onclick="updateTool(document.querySelector('#updateTool${data[i][0]} form'))" class="modal-close btn waves-effect waves-light green darken-3 z-depth-0" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
+								<button class="modal-close btn waves-effect waves-light green darken-3 z-depth-0" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
 							</div>
 						</form>
 
@@ -371,6 +374,7 @@ if (!isset($_SESSION['logged'])) {
 			tools.innerHTML = toolsHTML
 			updates.innerHTML = updatesHTML
 			deletes.innerHTML = deletesHTML
+			lblAmount.innerHTML = `(${amount})`
 			M.Modal.init(document.querySelectorAll('.modal'))
 			M.FormSelect.init(document.querySelectorAll('select'))
 
@@ -386,7 +390,8 @@ if (!isset($_SESSION['logged'])) {
 		const selectToolsByFilter = async () => {
 			let toolsHTML = '',
 				updatesHTML = '',
-				deletesHTML = ''
+				deletesHTML = '',
+				amount = 0
 
 			const newForm = new FormData(formFilter)
 			const type_id_get = newForm.get('type_id')
@@ -396,9 +401,11 @@ if (!isset($_SESSION['logged'])) {
 			const sections = await (await fetch('src/select_sections.php')).json()
 
 			for (const i in data) {
+				amount += 1
+
 				updatesHTML +=
 					`<div id="updateTool${data[i][0]}" class="modal modal-fixed-footer">
-						<form method="POST">
+						<form onsubmit="updateTool(document.querySelector('#updateTool${data[i][0]} form')); return false" method="POST">
 							<div class="modal-content left-div-margin" style="padding-bottom:5px">
 								<h4 class="mb-1"><i class="material-icons left" style="top:7px">edit</i>Editar dados</h4>
 								<div class="divider"></div>
@@ -458,7 +465,7 @@ if (!isset($_SESSION['logged'])) {
 
 							<div class="modal-footer">
 								<button type="button" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0" title="Cancelar"><i class="material-icons left">close</i>Cancelar</button>
-								<button type="button" onclick="updateTool(document.querySelector('#updateTool${data[i][0]} form'))" class="modal-close btn waves-effect waves-light green darken-3 z-depth-0" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
+								<button class="modal-close btn waves-effect waves-light green darken-3 z-depth-0" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
 							</div>
 						</form>
 
@@ -501,7 +508,7 @@ if (!isset($_SESSION['logged'])) {
 			tools.innerHTML = toolsHTML
 			updates.innerHTML = updatesHTML
 			deletes.innerHTML = deletesHTML
-
+			lblAmount.innerHTML = `(${amount})`
 			M.Modal.init(document.querySelectorAll('.modal'))
 			M.FormSelect.init(document.querySelectorAll('select'))
 

@@ -142,7 +142,6 @@ $admin_panel = true
 	</main>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
-	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script src="src/chart.min.js"></script>
 	<script>
