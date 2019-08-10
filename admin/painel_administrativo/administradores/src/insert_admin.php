@@ -14,7 +14,7 @@ try {
 	include_once("$assets/php/Connection.php");
 	include_once("$assets/php/MD5.php");
 
-	$admin_name = ucwords(trim(filter_input(INPUT_POST, 'admin_name', FILTER_DEFAULT)));
+	$admin_name = trim(filter_input(INPUT_POST, 'admin_name', FILTER_DEFAULT));
 	$admin_nickname = strtolower(trim(filter_input(INPUT_POST, 'admin_nickname', FILTER_DEFAULT)));
 	$admin_email = trim(filter_input(INPUT_POST, 'admin_email', FILTER_DEFAULT));
 	$admin_password = trim(filter_input(INPUT_POST, 'admin_password', FILTER_DEFAULT));
@@ -24,7 +24,7 @@ try {
 	$long_name = "$admin_nickname.$ext";
 
 	if ($ext) {
-		move_uploaded_file($_FILES['admin_image']['tmp_name'], "../../../../assets/images/admin_images/$long_name");
+		move_uploaded_file($_FILES['admin_image']['tmp_name'], "$assets/images/admin_images/$long_name");
 	} else $no_image = '';
 
 	$sql = $database->prepare('INSERT INTO admins VALUES (DEFAULT, :admin_name, :admin_nickname, :admin_email, :admin_password, :admin_image)');

@@ -24,18 +24,18 @@ if (isset($_SESSION['logged'])) {
 	<main style="background-color:transparent">
 		<div class="container">
 			<div class="card-panel z-depth-3 left-div-margin" style="padding-bottom:10px">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person</i>Painel Administrativo - Login</h1>
-				<label>Painel de Login Administrativo. Área restrita!</label>
-
-				<div class="divider"></div>
-
 				<?php
 				include_once("$assets/php/Connection.php");
 				$sql = $database->prepare('SELECT admin_id FROM admins LIMIT 1');
 				$sql->execute();
 
 				if ($sql->rowCount()) : ?>
-					<form style="margin-top:15px" method="POST">
+					<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person</i>Painel Administrativo - Login</h1>
+					<label>Painel de Login Administrativo. Área restrita!</label>
+
+					<div class="divider"></div>
+
+					<form style="margin-top:15px" name="formLogin" method="POST">
 						<div class="row mb-0">
 							<div class="input-field col s12">
 								<i class="material-icons prefix">account_circle</i>
@@ -63,45 +63,56 @@ if (isset($_SESSION['logged'])) {
 						</div>
 					</form>
 				<?php else : ?>
-					<?php
-					include_once("$assets/php/MD5.php");
-					$sql = $database->prepare('INSERT INTO admins VALUES (DEFAULT, "Administrador", :admin_nickname, :admin_email, :admin_password, NULL)');
+					<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person_add</i>Adicionar um Administrador</h1>
+					<label>Adicionar um novo Administrador ao 4People</label>
 
-					function generateRandomString($len, $specialChars = false): String
-					{
-						$upperCase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-						$lowerCase = 'abcdefghijklmnopqrstuvwxyz';
-						if ($specialChars) $special = '!@#$%&*()[]{}<>';
-						$number = '0123456789';
+					<div class="divider"></div>
 
-						$allCharacters = $upperCase . $lowerCase . (isset($special) ? $special : '') . $number;
-						$string = '';
+					<form style="margin-top:15px" name="formInsert" method="POST" enctype="multipart/form-data">
+						<div class="row mb-0">
+							<div class="input-field col s12 m6">
+								<i class="material-icons prefix">person</i>
+								<input id="admin_name" minlength="4" title="Preencha este campo com o nome." placeholder="Login de Administrador" class="validate" type="text" name="admin_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
+								<label class="active" for="admin_name">Nome *</label>
+								<span class="helper-text" data-error="Nome de Administrador inválido." data-success="Nome de Administrador válido.">Ex: Lucas Bittencourt</span>
+							</div>
 
-						for ($i = 0; $i < $len; $i++) $string .= $allCharacters[mt_rand(0, strlen($allCharacters) - 1)];
+							<div class="input-field col s12 m6">
+								<i class="material-icons prefix">account_circle</i>
+								<input id="admin_nickname" minlength="8" title="Preencha este campo com o login." placeholder="Login de Administrador" class="validate" type="text" name="admin_nickname" oninvalid="this.setCustomValidity('Preencha este campo com o login.')" oninput="setCustomValidity('')" required>
+								<label class="active" for="admin_nickname">Login *</label>
+								<span class="helper-text" data-error="Login de Administrador inválido. Tamanho mínimo: 8" data-success="Login de Administrador válido.">Ex: lucasnaja</span>
+							</div>
 
-						return $string;
-					}
+							<div class="input-field col s12">
+								<i class="material-icons prefix">mail</i>
+								<input id="admin_email" title="Preencha este campo com o e-mail." placeholder="E-mail do Administrador" class="validate" type="email" name="admin_email" oninvalid="if (this.value === '') this.setCustomValidity('Preencha este campo com o e-mail.'); else this.setCustomValidity('Este e-mail não é válido.')" oninput="setCustomValidity('')" required>
+								<label class="active" for="admin_email">E-mail *</label>
+								<span class="helper-text" data-error="E-mail inválido." data-success="E-mail válido.">Ex: lucasnaja0@gmail.com</span>
+							</div>
 
-					$admin_nickname = generateRandomString(18);
-					$admin_email = "$admin_nickname@gmail.com";
-					$admin_password = generateRandomString(28, true);
+							<div class="input-field col s12 m6">
+								<i class="material-icons prefix">https</i>
+								<input id="admin_password" style="width:calc(100% - 4.5rem)" minlength="6" title="Preencha este campo com a senha." placeholder="Senha do Administrador" class="validate" type="password" name="admin_password" oninvalid="this.setCustomValidity('Preencha este campo com a senha.')" oninput="setCustomValidity('')" required>
+								<i id="visibility" onclick="switchVisibility()" class="material-icons prefix" style="cursor:pointer">visibility</i>
+								<label class="active" for="admin_password">Senha *</label>
+								<span class="helper-text" data-error="Senha inválida. Tamanho mínimo: 6" data-success="Senha válida.">Aguardando...</span>
+							</div>
 
-					$sql->bindValue(':admin_nickname', $admin_nickname);
-					$sql->bindValue(':admin_email', $admin_email);
-					$sql->bindValue(':admin_password', cript($admin_password));
+							<div class="file-field input-field col s12 m6">
+								<i class="material-icons prefix">image</i>
+								<input type="file" name="admin_image" accept=".png, .jpg, .jpeg, .svg, .gif">
+								<input style="width:calc(100% - 3rem)" placeholder="Selecionar imagem" type="text" class="file-path">
+								<label class="active">Imagem</label>
+								<span class="helper-text">.png, .jpg, .jpeg, .svg, .gif</span>
+							</div>
 
-					if ($sql->execute()) : ?>
-						<?php
-						include_once('src/send_email.php');
-
-						if ($mail->send()) : ?>
-							<p class="btn-flat mb-0"><a class="linkHover" href=".">Um login foi criado e enviado para o e-mail do 4People.</a></p>
-						<?php else : ?>
-							<p class="btn-flat mb-0"><a class="linkHover" href=".">Um erro inesperado aconteceu.</a></p>
-						<?php endif ?>
-					<?php else : ?>
-						<p class="btn-flat mb-0"><a class="linkHover" href=".">Um erro inesperado aconteceu.</a></p>
-					<?php endif ?>
+							<div class="col s12">
+								<div class="divider"></div>
+								<button title="Inserir um Administrador no 4People" class="btn waves-effect waves-light indigo darken-4 mt-2 z-depth-0"><i class="material-icons left">person_add</i>Inserir</button>
+							</div>
+						</div>
+					</form>
 				<?php endif ?>
 
 				<div class="left-div indigo darken-3" style="border-radius:0"></div>
