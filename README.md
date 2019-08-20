@@ -54,10 +54,6 @@
 - Faça as mudanças.
 - Dê um Commit e abra um PR no [GitHub](https://github.com/lucasnaja/4People) do projeto.
 
-## Contribuidores
-| [<img src="https://avatars2.githubusercontent.com/u/43898038?v=3&s=115"><br><sub>@Jairo-Arcy</sub>](https://github.com/Jairo-Arcy) |
-| :---: |
-
 ## Autor
 | [<img src="https://avatars3.githubusercontent.com/u/13838273?v=3&s=115"><br><sub>@lucasnaja</sub>](https://github.com/lucasnaja) |
 | :---: |
