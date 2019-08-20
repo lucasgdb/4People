@@ -3,13 +3,14 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Aug 10, 2019 at 03:37 PM
+-- Generation Time: Aug 20, 2019 at 04:00 PM
 -- Server version: 8.0.17
 -- PHP Version: 7.2.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -20,8 +21,6 @@ START TRANSACTION;
 --
 -- Database: `4People`
 --
-CREATE DATABASE IF NOT EXISTS `4People` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `4People`;
 
 -- --------------------------------------------------------
 
@@ -29,24 +28,21 @@ USE `4People`;
 -- Table structure for table `admins`
 --
 
-CREATE TABLE IF NOT EXISTS `admins` (
-  `admin_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `admins` (
+  `admin_id` int(11) NOT NULL,
   `admin_name` varchar(64) NOT NULL,
   `admin_nickname` varchar(28) NOT NULL,
   `admin_email` varchar(255) NOT NULL,
   `admin_password` varchar(32) NOT NULL,
-  `admin_image` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`admin_id`),
-  UNIQUE KEY `admin_nickname` (`admin_nickname`),
-  UNIQUE KEY `admin_email` (`admin_email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+  `admin_image` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `admins`
 --
 
 INSERT INTO `admins` (`admin_id`, `admin_name`, `admin_nickname`, `admin_email`, `admin_password`, `admin_image`) VALUES
-(1, 'Lucas Bittencourt', 'lucasnaja', 'lucasnaja0@gmail.com', '66eccf32c43c345b4e4b88bd529dc384', 'lucanaja.jpg'),
+(1, 'Lucas Bittencourt', 'lucasnaja', 'lucasnaja0@gmail.com', '66eccf32c43c345b4e4b88bd529dc384', 'lucasnaja.jpg'),
 (2, 'Suzany Silva', 'suzany_silva', 'suzanysilva@hotmail.com', '66eccf32c43c345b4e4b88bd529dc384', 'suzany_silva.jpg'),
 (3, 'Renan Mattos', 'renan_mattos', 'renanmattos@hotmail.com', '66eccf32c43c345b4e4b88bd529dc384', 'renan_mattos.jpg');
 
@@ -56,12 +52,11 @@ INSERT INTO `admins` (`admin_id`, `admin_name`, `admin_nickname`, `admin_email`,
 -- Table structure for table `banneds`
 --
 
-CREATE TABLE IF NOT EXISTS `banneds` (
+CREATE TABLE `banneds` (
   `banned_ip` bigint(15) NOT NULL,
   `banned_begin` datetime DEFAULT NULL,
   `banned_end` datetime DEFAULT NULL,
-  `banned_amount` tinyint(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`banned_ip`)
+  `banned_amount` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -70,16 +65,15 @@ CREATE TABLE IF NOT EXISTS `banneds` (
 -- Table structure for table `messages`
 --
 
-CREATE TABLE IF NOT EXISTS `messages` (
-  `message_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `messages` (
+  `message_id` int(11) NOT NULL,
   `message_name` varchar(45) NOT NULL,
   `message_email` varchar(45) NOT NULL,
   `message_subject` varchar(45) NOT NULL,
   `message_content` text NOT NULL,
   `message_time` datetime NOT NULL,
-  `message_read` int(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`message_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
+  `message_read` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `messages`
@@ -89,8 +83,7 @@ INSERT INTO `messages` (`message_id`, `message_name`, `message_email`, `message_
 (1, 'Lucas', 'lucasnaja0@gmail.com', 'Outro', 'sfdfafdfadfdfdsfsd', '2019-08-01 08:21:16', 0),
 (2, 'Lucas Bittencourt', 'lucasnaja0@gmail.com', 'Outro', 'mensagem do usuário - -----', '2019-08-05 06:49:49', 0),
 (3, 'Lucas Bittencourt', 'lucasnaja0@gmail.com', 'Bug (mal funcionamento)', 'teste', '2019-08-05 06:56:33', 1),
-(4, 'Lucas Bittencourt', 'lucasnaja0@gmail.com', 'Outro', 'Olá!\r\nTestando quebra de linha.\r\n\r\nHahahaahhah\r\n1\r\n2\r\n3\r\n,4,4,5,5,', '2019-08-05 07:47:35', 1),
-(5, 'vc kkkk', 'lucasnaja0@gmail.com', 'Sugestão (visual)', 'Mensagem da Stephanie esqueci como escreve kkkkk', '2019-08-08 17:04:13', 1);
+(4, 'Lucas Bittencourt', 'lucasnaja0@gmail.com', 'Outro', 'Olá!\r\nTestando quebra de linha.\r\n\r\nHahahaahhah\r\n1\r\n2\r\n3\r\n,4,4,5,5,', '2019-08-05 07:47:35', 1);
 
 -- --------------------------------------------------------
 
@@ -98,18 +91,13 @@ INSERT INTO `messages` (`message_id`, `message_name`, `message_email`, `message_
 -- Table structure for table `sections`
 --
 
-CREATE TABLE IF NOT EXISTS `sections` (
-  `section_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `sections` (
+  `section_id` int(11) NOT NULL,
   `section_name` varchar(255) NOT NULL,
   `section_path` varchar(255) NOT NULL,
   `section_icon` varchar(255) NOT NULL,
-  `type_id` int(11) NOT NULL,
-  PRIMARY KEY (`section_id`),
-  UNIQUE KEY `section_name` (`section_name`),
-  UNIQUE KEY `section_path` (`section_path`),
-  UNIQUE KEY `section_icon` (`section_icon`),
-  KEY `type_id_fk` (`type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+  `type_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `sections`
@@ -132,29 +120,25 @@ INSERT INTO `sections` (`section_id`, `section_name`, `section_path`, `section_i
 -- Table structure for table `tools`
 --
 
-CREATE TABLE IF NOT EXISTS `tools` (
-  `tool_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tools` (
+  `tool_id` int(11) NOT NULL,
   `tool_name` varchar(255) NOT NULL,
   `tool_path` varchar(255) NOT NULL,
   `tool_description` text,
   `tool_link` text,
   `tool_visits` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
   `tool_status` tinyint(1) NOT NULL DEFAULT '1',
-  `section_id` int(11) NOT NULL,
-  PRIMARY KEY (`tool_id`),
-  UNIQUE KEY `tool_name` (`tool_name`),
-  UNIQUE KEY `tool_path` (`tool_path`),
-  KEY `section_id_fk` (`section_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
+  `section_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tools`
 --
 
 INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_description`, `tool_link`, `tool_visits`, `tool_status`, `section_id`) VALUES
-(7, 'Gerador de CPF', 'gerador_de_cpf', 'Gerador de CPF Online para Programadores testarem seus Softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/CPFGenerator.js', 20, 1, 2),
-(8, 'Gerador de Senha', 'gerador_de_senha', 'Gerador de Senha Online para gerar senhas personalizadas e fortes.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/passwordGenerator.js', 28, 1, 2),
-(9, 'Gerador de Meta Tags', 'gerador_de_meta_tags', 'Gerador de Meta Tags Online, feito para gerar várias das Meta Tags existentes.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/metaTagsGenerator.js', 25, 1, 2),
+(7, 'Gerador de CPF', 'gerador_de_cpf', 'Gerador de CPF Online para Programadores testarem seus Softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/CPFGenerator.js', 21, 1, 2),
+(8, 'Gerador de Senha', 'gerador_de_senha', 'Gerador de Senha Online para gerar senhas personalizadas e fortes.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/passwordGenerator.js', 29, 1, 2),
+(9, 'Gerador de Meta Tags', 'gerador_de_meta_tags', 'Gerador de Meta Tags Online, feito para gerar várias das Meta Tags existentes.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/metaTagsGenerator.js', 26, 1, 2),
 (11, 'Validador de CPF', 'validador_de_cpf', 'Validador de CPF Online para validar CPFs para programadores testarem seus softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/validators/CPFValidator.js', 14, 1, 4),
 (12, 'Contador de Caracteres', 'contador_de_caracteres', 'Contador de letras, caracteres sem espaço, palavras, espaços, vogais, consoantes, números e linhas.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/string_functions/charactersCount.js', 6, 1, 5),
 (13, 'Meu IP', 'meu_ip', 'Veja seu IP e muito mais informações aqui.', 'https://github.com/lucasnaja/4People/blob/master/computacao/rede_e_internet/meu_ip/src/index.js', 9, 1, 6),
@@ -186,7 +170,9 @@ INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_description`, `t
 (39, 'Área da Elipse', 'area_da_elipse', 'Calculador de Área da Elipse Online. π = PI, Área da Elipse = π * Eixo maior * Eixo menor', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/ellipseArea.js', 1, 1, 10),
 (40, 'Área da Coroa Ciricular', 'area_da_coroa_circular', 'Calculador de Área da Coroa Circular Online. π = PI, R = Raio maior, r = Raio menor, Área da Coroa Circular = π * (R² - r²)', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/circularCrownArea.js', 3, 1, 10),
 (41, 'Área do Setor Circular', 'area_do_setor_circular', 'Calculador de Área do Setor Circular Online. π = PI, Área do Setor Circular = π * (Raio² * Ângulo) / 360', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/circularSectorArea.js', 1, 1, 10),
-(42, 'Diferença entre Datas', 'diferenca_entre_datas', 'Calcular Diferença entre Datas. Possui um leque de recursos disponíveis, como calcular idades, tempo, etc.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/dates_calculator/differenceBetweenDates.js', 89, 1, 11);
+(42, 'Diferença entre Datas', 'diferenca_entre_datas', 'Calcular Diferença entre Datas. Possui um leque de recursos disponíveis, como calcular idades, tempo, etc.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/dates_calculator/differenceBetweenDates.js', 90, 1, 11),
+(50, 'Gerador de Nomes', 'gerador_de_nomes', 'Gerador de Nomes online e gratuito para gerar diversos tipos de nomes', '', 0, 1, 2),
+(51, 'Gerador de Nicks', 'gerador_de_nicks', 'Gerador de Nicks online para gerar diversos tipos de nicknames', '', 0, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -194,16 +180,12 @@ INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_description`, `t
 -- Table structure for table `types`
 --
 
-CREATE TABLE IF NOT EXISTS `types` (
-  `type_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `types` (
+  `type_id` int(11) NOT NULL,
   `type_name` varchar(255) NOT NULL,
   `type_path` varchar(255) NOT NULL,
-  `type_icon` varchar(255) NOT NULL,
-  PRIMARY KEY (`type_id`),
-  UNIQUE KEY `type_name` (`type_name`),
-  UNIQUE KEY `type_path` (`type_path`),
-  UNIQUE KEY `type_icon` (`type_icon`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+  `type_icon` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `types`
@@ -212,6 +194,92 @@ CREATE TABLE IF NOT EXISTS `types` (
 INSERT INTO `types` (`type_id`, `type_name`, `type_path`, `type_icon`) VALUES
 (2, 'Computação', 'computacao', 'computer'),
 (3, 'Matemática', 'matematica', 'functions');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`admin_id`),
+  ADD UNIQUE KEY `admin_nickname` (`admin_nickname`),
+  ADD UNIQUE KEY `admin_email` (`admin_email`);
+
+--
+-- Indexes for table `banneds`
+--
+ALTER TABLE `banneds`
+  ADD PRIMARY KEY (`banned_ip`);
+
+--
+-- Indexes for table `messages`
+--
+ALTER TABLE `messages`
+  ADD PRIMARY KEY (`message_id`);
+
+--
+-- Indexes for table `sections`
+--
+ALTER TABLE `sections`
+  ADD PRIMARY KEY (`section_id`),
+  ADD UNIQUE KEY `section_name` (`section_name`),
+  ADD UNIQUE KEY `section_path` (`section_path`),
+  ADD UNIQUE KEY `section_icon` (`section_icon`),
+  ADD KEY `type_id_fk` (`type_id`);
+
+--
+-- Indexes for table `tools`
+--
+ALTER TABLE `tools`
+  ADD PRIMARY KEY (`tool_id`),
+  ADD UNIQUE KEY `tool_name` (`tool_name`),
+  ADD UNIQUE KEY `tool_path` (`tool_path`),
+  ADD KEY `section_id_fk` (`section_id`);
+
+--
+-- Indexes for table `types`
+--
+ALTER TABLE `types`
+  ADD PRIMARY KEY (`type_id`),
+  ADD UNIQUE KEY `type_name` (`type_name`),
+  ADD UNIQUE KEY `type_path` (`type_path`),
+  ADD UNIQUE KEY `type_icon` (`type_icon`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `messages`
+--
+ALTER TABLE `messages`
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+
+--
+-- AUTO_INCREMENT for table `sections`
+--
+ALTER TABLE `sections`
+  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `tools`
+--
+ALTER TABLE `tools`
+  MODIFY `tool_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+
+--
+-- AUTO_INCREMENT for table `types`
+--
+ALTER TABLE `types`
+  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
