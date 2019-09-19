@@ -17,7 +17,7 @@ const calculateFacorization = (number) => {
 		const noRepeatedResults = [...new Set(result)]
 
 		const amount = []
-		for (let i = 0; i < noRepeatedResults.length; i++) {
+		for (let i = 0; i < noRepeatedResults.length; i += 1) {
 			amount.push({
 				number: noRepeatedResults[i],
 				toThe: countItems(result, noRepeatedResults[i])
@@ -41,7 +41,7 @@ const calculateFacorization = (number) => {
 
 const countItems = (array, item) => {
 	let sum = 0
-	for (let i = 0; i < array.length; i++) {
+	for (let i = 0; i < array.length; i += 1) {
 		if (array[i] === item) sum++
 		else if (sum > 0 && array[i] !== item) return sum
 	}

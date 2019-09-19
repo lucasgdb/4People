@@ -122,7 +122,7 @@ if (!isset($_SESSION['logged'])) {
 					classes: 'green'
 				})
 
-				for (let i = 0; i < inputs.length; i++) {
+				for (let i = 0; i < inputs.length; i += 1) {
 					inputs[i].value = ''
 					inputs[i].classList.remove('valid')
 				}
@@ -146,7 +146,7 @@ if (!isset($_SESSION['logged'])) {
 			const data = await (await fetch('src/select_types.php')).json()
 
 			for (const i in data) {
-				updatesHTML +=
+				updatesHTML += (
 					`<div id="updateType${i}" class="modal">
 						<form onsubmit="updateType(document.querySelector('#updateType${i} form')); return false" method="POST">
 							<div class="modal-content left-div-margin" style="padding-bottom:5px">
@@ -188,8 +188,9 @@ if (!isset($_SESSION['logged'])) {
 							</div>
 						</form>
 					</div>`
+				)
 
-				deletesHTML +=
+				deletesHTML += (
 					`<div id="removeType${i}" class="modal">
 						<div class="modal-content left-div-margin">
 							<h4><i class="material-icons left" style="top:7px">delete</i>Remover Tipo</h4>
@@ -205,8 +206,9 @@ if (!isset($_SESSION['logged'])) {
 							<button onclick="deleteType(${i}, '${data[i][0]}')" title="Remover ${data[i][0]}" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</button>
 						</div>
 					</div>`
+				)
 
-				typesHTML +=
+				typesHTML += (
 					`<tr>
 						<td>${data[i][0]}</td>
 						<td><i title="${data[i][2]}" class="material-icons" style="top:4px">${data[i][2]}</i></td>
@@ -219,6 +221,7 @@ if (!isset($_SESSION['logged'])) {
 							<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" style="cursor:pointer" title="Remover ${data[i][0]}" data-target="removeType${i}"><i class="material-icons">delete</i></button>
 						</td>
 					</tr>`
+				)
 			}
 
 			types.innerHTML = typesHTML

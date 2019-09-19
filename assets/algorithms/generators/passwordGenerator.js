@@ -27,7 +27,7 @@ const generatePassword = (
 	else if (firstChar === 'lowerCase') password += lowerCases[Math.floor(Math.random() * lowerCases.length)]
 	else password += specials[Math.floor(Math.random() * specials.length)]
 
-	for (let i = 1; i < length; i++) {
+	for (let i = 1; i < length; i += 1) {
 		let char = characters[Math.floor(Math.random() * characters.length)]
 
 		do {
@@ -83,7 +83,7 @@ const checkStrength = password => {
 	length += Math.min(2, password.length - password.replace(/[0-9]/g, '').length) * 5
 	length += Math.min(2, password.replace(/[a-zA-Z0-9]/g, '').length) * 5
 
-	for (let i = 1; i < password.length; i++) {
+	for (let i = 1; i < password.length; i += 1) {
 		if (password[i - 1] === password[i]) {
 			length -= 30
 			break

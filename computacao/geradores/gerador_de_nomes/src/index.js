@@ -7,7 +7,7 @@ cardContainer = document.querySelector('#card-container')
 const generate = () => {
     let cardNumber = lblBlockAmount.value,
         html = ''
-    for (let i = 0; i < (cardNumber <= 0 ? 20 : cardNumber); i++) {
+    for (let i = 0; i < (cardNumber <= 0 ? 20 : cardNumber); i += 1) {
         const nick = generateNames(txtSelectName.value, txtSelectSex.value)
         html +=
             `<div class="col s12 l6">

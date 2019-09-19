@@ -4,7 +4,7 @@ const formLogin = document.querySelector('[name=formLogin]')
 const formInsert = document.querySelector('[name=formInsert]')
 const lblBannedStatus = document.querySelector('#bannedStatus')
 
-if (formLogin)
+if (formLogin) {
 	formLogin.onsubmit = async e => {
 		e.preventDefault()
 		const btnSubmit = formLogin.querySelector('button')
@@ -29,8 +29,9 @@ if (formLogin)
 
 		btnSubmit.disabled = false
 	}
+}
 
-if (formInsert)
+if (formInsert) {
 	formInsert.onsubmit = async e => {
 		e.preventDefault()
 		const btnSubmit = formInsert.querySelector('button')
@@ -51,6 +52,7 @@ if (formInsert)
 
 		btnSubmit.disabled = false
 	}
+}
 
 const checkBannedStatus = async () => {
 	const data = await (await fetch('src/check_banned_status.php')).json()

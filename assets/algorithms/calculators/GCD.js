@@ -7,7 +7,7 @@ const calculateGCD = numbers => {
 
 	do {
 		let count = 0 // Number of divided numbers
-		for (let i = 0; i < numbers.length; i++) {
+		for (let i = 0; i < numbers.length; i += 1) {
 			// Checks whether by is divisor of numbers[i]
 			if (numbers[i] % by === 0) {
 				numbers[i] /= by

@@ -18,12 +18,12 @@ const validateCPF = (CPF = Array) => {
 	const firstTimes = [10, 9, 8, 7, 6, 5, 4, 3, 2]
 	const secondTimes = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2]
 
-	for (let i = 0; i < firstTimes.length; i++) firstSum += CPF[i] * firstTimes[i]
+	for (let i = 0; i < firstTimes.length; i += 1) firstSum += CPF[i] * firstTimes[i]
 
 	const rest = firstSum % 11
 	firstDigit = rest < 2 ? 0 : 11 - rest
 
-	for (let i = 0; i < secondTimes.length; i++) secondSum += CPF[i] * secondTimes[i]
+	for (let i = 0; i < secondTimes.length; i += 1) secondSum += CPF[i] * secondTimes[i]
 
 	const rest2 = secondSum % 11
 	secondDigit = rest2 < 2 ? 0 : 11 - rest2

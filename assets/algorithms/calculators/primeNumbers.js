@@ -4,7 +4,7 @@ const isPrimeNumber = numbers => {
 	for (let j = 0; j < numbers.length; j++) {
 		let sum = 1
 
-		for (let i = 2; i < numbers[j]; i++) {
+		for (let i = 2; i < numbers[j]; i += 1) {
 			if (numbers[j] % i === 0) sum++
 
 			if (sum > 1) break

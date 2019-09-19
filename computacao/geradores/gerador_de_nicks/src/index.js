@@ -16,7 +16,7 @@ const generate = () => {
 		let cardNumber = lblBlockAmount.value,
 			html = ''
 
-		for (let i = 0; i < (cardNumber < 0 ? 20 : cardNumber); i++) {
+		for (let i = 0; i < (cardNumber < 0 ? 20 : cardNumber); i += 1) {
 			if (cardNumber > 20 && (txtSelect.value === '1' || txtSelect.value === '4' || txtSelect.value === '5')) {
 				cardNumber = 20
 			}

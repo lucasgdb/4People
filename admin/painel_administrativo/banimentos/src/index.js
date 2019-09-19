@@ -8,7 +8,7 @@ const selectBanneds = async () => {
 	const data = await (await fetch('src/select_banneds.php')).json()
 
 	for (const i in data) {
-		modalsHTML +=
+		modalsHTML += (
 			`<div id="removeBanned${i}" class="modal">
 				<div class="modal-content left-div-margin">
 					<h4><i class="material-icons left" style="top:7px">delete</i>Remover Banimento</h4>
@@ -24,8 +24,9 @@ const selectBanneds = async () => {
 					<a onclick="deleteBanned(${i})" title="Remover Banimento" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</a>
 				</div>
 			</div>`
+		)
 
-		bannedsHTML +=
+		bannedsHTML += (
 			`<tr>
 				<td>${i}</td>
 				<td>${data[i][0]}</td>
@@ -34,6 +35,7 @@ const selectBanneds = async () => {
 					<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" style="cursor:pointer" title="Remover Banimento" data-target="removeBanned${i}"><i class="material-icons">delete</i></button>
 				</td>
 			</tr>`
+		)
 	}
 
 	banneds.innerHTML = bannedsHTML

@@ -66,7 +66,7 @@ const selectMessages = async () => {
 	const data = await (await fetch('src/select_messages.php')).json()
 
 	for (const i in data) {
-		messagesHTML +=
+		messagesHTML += (
 			`<tr>
 				<td>${data[i][1]}</td>
 				<td>${data[i][2]}</td>
@@ -76,6 +76,7 @@ const selectMessages = async () => {
 					<button class="btn waves-effect waves-light red accent-4 modal-trigger z-depth-0" style="cursor:pointer" title="Remover Mensagem" onclick="changeLink(${data[i][0]}, '${data[i][1]}', '${data[i][2]}')" style="cursor:pointer" title="Remover Mensagem" data-target="removeMessage"><i class="material-icons">delete</i></button>
 				</td>
 			</tr>`
+		)
 	}
 
 	messages.innerHTML = messagesHTML

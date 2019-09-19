@@ -178,7 +178,7 @@ if (!isset($_SESSION['logged'])) {
 					classes: 'green'
 				})
 
-				for (let i = 0; i < inputs.length; i++) {
+				for (let i = 0; i < inputs.length; i += 1) {
 					inputs[i].value = ''
 					inputs[i].classList.remove('valid')
 				}
@@ -213,7 +213,7 @@ if (!isset($_SESSION['logged'])) {
 			const types = await (await fetch('src/select_types.php')).json()
 
 			for (const i in data) {
-				updatesHTML +=
+				updatesHTML += (
 					`<div id="updateSection${i}" class="modal">
 						<form onsubmit="updateSection(document.querySelector('#updateSection${i} form')); return false" method="POST">
 							<div class="modal-content left-div-margin" style="padding-bottom:5px">
@@ -264,8 +264,9 @@ if (!isset($_SESSION['logged'])) {
 							</div>
 						</form>
 					</div>`
+				)
 
-				deletesHTML +=
+				deletesHTML += (
 					`<div id="removeSection${i}" class="modal">
 						<div class="modal-content left-div-margin">
 							<h4><i class="material-icons left" style="top:7px">delete</i>Remover Seção</h4>
@@ -281,8 +282,9 @@ if (!isset($_SESSION['logged'])) {
 							<a onclick="deleteSection(${i}, '${data[i][0]}')" title="Remover ${data[i][0]}" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</a>
 						</div>
 					</div>`
+				)
 
-				sectionsHTML +=
+				sectionsHTML += (
 					`<tr>
 						<td>${data[i][0]}</td>
 						<td><i title="${data[i][2]}" class="material-icons" style="top:4px">${data[i][2]}</i></td>
@@ -295,6 +297,7 @@ if (!isset($_SESSION['logged'])) {
 							<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" style="cursor:pointer" title="Remover ${data[i][0]}" data-target="removeSection${i}"><i class="material-icons">delete</i></button>
 						</td>
 					</tr>`
+				)
 			}
 
 			sections.innerHTML = sectionsHTML
@@ -322,7 +325,7 @@ if (!isset($_SESSION['logged'])) {
 			const types = await (await fetch('src/select_types.php')).json()
 
 			for (const i in data) {
-				updatesHTML +=
+				updatesHTML += (
 					`<div id="updateSection${i}" class="modal">
 						<form onsubmit="updateSection(document.querySelector('#updateSection${i} form')); return false" method="POST">
 							<div class="modal-content left-div-margin" style="padding-bottom:5px">
@@ -373,8 +376,9 @@ if (!isset($_SESSION['logged'])) {
 							</div>
 						</form>
 					</div>`
+				)
 
-				deletesHTML +=
+				deletesHTML += (
 					`<div id="removeSection${i}" class="modal">
 						<div class="modal-content left-div-margin">
 							<h4><i class="material-icons left" style="top:7px">delete</i>Remover Seção</h4>
@@ -390,8 +394,9 @@ if (!isset($_SESSION['logged'])) {
 							<a onclick="deleteSection(${i}, '${data[i][0]}')" title="Remover ${data[i][0]}" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</a>
 						</div>
 					</div>`
+				)
 
-				sectionsHTML +=
+				sectionsHTML += (
 					`<tr>
 						<td>${data[i][0]}</td>
 						<td><i title="${data[i][2]}" class="material-icons" style="top:4px">${data[i][2]}</i></td>
@@ -404,6 +409,7 @@ if (!isset($_SESSION['logged'])) {
 							<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" style="cursor:pointer" title="Remover ${data[i][0]}" data-target="removeSection${i}"><i class="material-icons">delete</i></button>
 						</td>
 					</tr>`
+				)
 			}
 
 			sections.innerHTML = sectionsHTML

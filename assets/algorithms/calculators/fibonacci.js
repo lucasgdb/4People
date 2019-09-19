@@ -10,7 +10,7 @@ const calculateFibonacci = (amount, lastNumberOnly) => {
 		let c
 
 		if (lastNumberOnly) {
-			for (let i = 2n; i < amount; i++) {
+			for (let i = 2n; i < amount; i += 1) {
 				c = a + b
 				const aux = b
 				b = c
@@ -21,7 +21,7 @@ const calculateFibonacci = (amount, lastNumberOnly) => {
 		} else {
 			let sequence = [a, b]
 
-			for (let i = 2n; i < amount; i++) {
+			for (let i = 2n; i < amount; i += 1) {
 				sequence.push(c = a + b)
 				const aux = b
 				b = c

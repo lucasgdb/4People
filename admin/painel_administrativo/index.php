@@ -67,8 +67,8 @@ $admin_panel = true
 
 										$count = $sql->fetchColumn()
 										?>
-										<h6 class="mt-0" style="position:relative">Mensagens<span class="new badge" style="position:absolute;right:0" data-badge-caption="nova<?= $count === '1' ? '' : 's' ?>"><?= $count ?></span></h6>
-										<div class="divider mb-2"></div>
+										<h6 class="mt-0" style="position:relative">Mensagens<span class="new badge" style="position:absolute;right:0" data-badge-caption="<?= $count ?>"></span> </h6>
+										<div class=" divider mb-2"></div>
 										<a class="tooltiped" data-tooltip="Mensagens" href="mensagens/">
 											<i class="material-icons large" style="color:#212121">question_answer</i>
 										</a>

@@ -17,7 +17,7 @@ form.onsubmit = async e => {
 			classes: "green"
 		})
 
-		for (let i = 0; i < inputs.length - 1; i++) {
+		for (let i = 0; i < inputs.length - 1; i += 1) {
 			inputs[i].value = ''
 			inputs[i].classList.remove('valid')
 		}

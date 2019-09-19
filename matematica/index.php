@@ -58,7 +58,7 @@
 						$length = count($data);
 						$half = (int) ($length / 2);
 
-						for ($i = 0; $i < $half; $i++) : extract($data[$i]) ?>
+						for ($i = 0; $i < $half; $i += 1) : extract($data[$i]) ?>
 							<div class="card sticky-action z-depth-2">
 								<div class="card-content grey lighten-5">
 									<span class="card-title activator no-select left-div-margin-mobile" style="position:relative">
@@ -89,7 +89,7 @@
 					</div>
 
 					<div class="col s12 m6">
-						<?php for ($i = $half; $i < $length; $i++) : extract($data[$i]) ?>
+						<?php for ($i = $half; $i < $length; $i += 1) : extract($data[$i]) ?>
 							<div class="card sticky-action z-depth-2">
 								<div class="card-content grey lighten-5">
 									<span class="card-title activator no-select left-div-margin-mobile" style="position:relative">

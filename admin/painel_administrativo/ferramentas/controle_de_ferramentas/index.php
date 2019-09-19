@@ -231,7 +231,7 @@ if (!isset($_SESSION['logged'])) {
 					classes: 'green'
 				})
 
-				for (let i = 0; i < inputs.length; i++) {
+				for (let i = 0; i < inputs.length; i += 1) {
 					inputs[i].value = ''
 					inputs[i].classList.remove('valid')
 				}
@@ -269,7 +269,7 @@ if (!isset($_SESSION['logged'])) {
 			for (const i in data) {
 				amount += 1
 
-				updatesHTML +=
+				updatesHTML += (
 					`<div id="updateTool${data[i][0]}" class="modal modal-fixed-footer">
 						<form onsubmit="updateTool(document.querySelector('#updateTool${data[i][0]} form')); return false" method="POST">
 							<div class="modal-content left-div-margin" style="padding-bottom:5px">
@@ -337,8 +337,9 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="left-div indigo darken-4" style="border-radius:0"></div>
 					</div>`
+				)
 
-				deletesHTML +=
+				deletesHTML += (
 					`<div id="removeTool${data[i][0]}" class="modal">
 						<div class="modal-content left-div-margin">
 							<h4><i class="material-icons left" style="top:7px">delete</i>Remover Ferramenta</h4>
@@ -354,8 +355,9 @@ if (!isset($_SESSION['logged'])) {
 							<a onclick="deleteTool(${data[i][0]}, '${i}')" title="Remover ${i}" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</a>
 						</div>
 					</div>`
+				)
 
-				toolsHTML +=
+				toolsHTML += (
 					`<tr>
 						<td>${i}</td>
 						<td>${data[i][5] === '1' ? 'Ativado' : 'Desativado'}</td>
@@ -369,6 +371,7 @@ if (!isset($_SESSION['logged'])) {
 							<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" style="cursor:pointer" title="Remover Ferramenta" data-target="removeTool${data[i][0]}"><i class="material-icons">delete</i></button>
 						</td>
 					</tr>`
+				)
 			}
 
 			tools.innerHTML = toolsHTML
@@ -403,7 +406,7 @@ if (!isset($_SESSION['logged'])) {
 			for (const i in data) {
 				amount += 1
 
-				updatesHTML +=
+				updatesHTML += (
 					`<div id="updateTool${data[i][0]}" class="modal modal-fixed-footer">
 						<form onsubmit="updateTool(document.querySelector('#updateTool${data[i][0]} form')); return false" method="POST">
 							<div class="modal-content left-div-margin" style="padding-bottom:5px">
@@ -471,8 +474,9 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="left-div indigo darken-4" style="border-radius:0"></div>
 					</div>`
+				)
 
-				deletesHTML +=
+				deletesHTML += (
 					`<div id="removeTool${data[i][0]}" class="modal">
 						<div class="modal-content left-div-margin">
 							<h4><i class="material-icons left" style="top:7px">delete</i>Remover Ferramenta</h4>
@@ -488,8 +492,9 @@ if (!isset($_SESSION['logged'])) {
 							<a onclick="deleteTool(${data[i][0]}, '${i}')" title="Remover ${i}" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</a>
 						</div>
 					</div>`
+				)
 
-				toolsHTML +=
+				toolsHTML += (
 					`<tr>
 						<td>${i}</td>
 						<td>${data[i][5] === '1' ? 'Ativado' : 'Desativado'}</td>
@@ -503,6 +508,7 @@ if (!isset($_SESSION['logged'])) {
 							<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" style="cursor:pointer" title="Remover Ferramenta" data-target="removeTool${data[i][0]}"><i class="material-icons">delete</i></button>
 						</td>
 					</tr>`
+				)
 			}
 
 			tools.innerHTML = toolsHTML

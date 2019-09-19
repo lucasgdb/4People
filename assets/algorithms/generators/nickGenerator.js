@@ -141,7 +141,7 @@ const generateNicks = (name, option) => {
     if (option == '1') {
         const letters = 'aeios'
         const modifiedLetters = '43106'
-        for (let i = 0; i < letters.length; i++) {
+        for (let i = 0; i < letters.length; i += 1) {
             if (parseInt(Math.random() * 4) === 1) {
                 name = name.replace(new RegExp(letters[i], 'g'), modifiedLetters[i])
             }

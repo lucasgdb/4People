@@ -42,6 +42,16 @@
 		position: absolute
 	}
 
+	.right-div {
+		width: 11px;
+		height: 100%;
+		top: 0;
+		right: 0;
+		border-top-right-radius: 2px;
+		border-bottom-right-radius: 2px;
+		position: absolute
+	}
+
 	.left-div {
 		width: 10px;
 		height: 100%;

@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-	for (let i = 0; i < paddingHeadersA.length; i++) {
+	for (let i = 0; i < paddingHeadersA.length; i += 1) {
 		const path = paddingHeadersA[i].getAttribute('href').split('/').filter(link => link !== '')
 		const pathName = location.pathname.split('/').filter(link => link !== '')
 		if (path[path.length - 1] === pathName[pathName.length - 1]) {

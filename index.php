@@ -178,7 +178,7 @@
 		const formatter = Intl.NumberFormat('pt-BR')
 
 		const formatNumbers = elements => {
-			for (let i = 0; i < elements.length; i++) {
+			for (let i = 0; i < elements.length; i += 1) {
 				const number = elements[i].textContent
 				elements[i].textContent = formatter.format(number)
 			}

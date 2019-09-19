@@ -82,7 +82,7 @@ try {
 						WHERE banned_ip = :banned_ip'
 				);
 
-				$sql->bindValue(':banned_amount', ++$banned_amount);
+				$sql->bindValue(':banned_amount', $banned_amount += 1);
 				$sql->bindValue(':banned_ip', $ip);
 				$sql->execute();
 

@@ -179,7 +179,7 @@ if (!isset($_SESSION['logged'])) {
 					classes: 'green'
 				})
 
-				for (let i = 0; i < inputs.length; i++) {
+				for (let i = 0; i < inputs.length; i += 1) {
 					inputs[i].value = ''
 					inputs[i].classList.remove('valid')
 				}
@@ -205,7 +205,7 @@ if (!isset($_SESSION['logged'])) {
 				modalsHTML = ''
 
 			for (const i in data) {
-				modalsHTML +=
+				modalsHTML += (
 					`<div id="removeAdmin${i}" class="modal">
 						<div class="modal-content left-div-margin">
 							<h4><i class="material-icons left" style="top:7px">delete</i>Remover Administrador</h4>
@@ -221,8 +221,9 @@ if (!isset($_SESSION['logged'])) {
 							<button onclick="deleteAdmin(${i})" title="Remover Administrador" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</button>
 						</div>
 					</div>`
+				)
 
-				adminsHTML +=
+				adminsHTML += (
 					`<tr>
 						<td><img title="${data[i][0]}${data[i][4] ? ' (você)': ''}" class="circle" width="40" style="margin-bottom:-5px" src="${data[i][3] ? `<?= $assets ?>/images/admin_images/${data[i][3]}` : '<?= $assets ?>/images/user.svg' }" alt="${data[i][0]}"></td>
 						<td style="${data[i][4] ? 'font-weight:bold' : ''}">${data[i][0]}</td>
@@ -233,6 +234,7 @@ if (!isset($_SESSION['logged'])) {
 							<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" style="cursor:pointer" title="Remover ${data[i][4] ? 'você mesmo' : data[i][0]}" data-target="removeAdmin${i}"><i class="material-icons" style="font-size:23px">delete</i></button>
 						</td>
 					</tr>`
+				)
 			}
 
 			admins.innerHTML = adminsHTML

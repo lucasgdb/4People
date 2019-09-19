@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		animateOut(0)
 	}
 
-	for (let i = 0; i < secCollButtons.length; i++) {
+	for (let i = 0; i < secCollButtons.length; i += 1) {
 		secCollButtons[i].addEventListener('click', () => {
 			const icon = secCollButtons[i].querySelector(':last-child')
 			icon.style.transform =
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		})
 	}
 
-	for (let i = 0; i < mainCollButtons.length; i++) {
+	for (let i = 0; i < mainCollButtons.length; i += 1) {
 		mainCollButtons[i].addEventListener('click', () => {
 			const icon = mainCollButtons[i].querySelector(':last-child')
 			icon.style.transform =
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		})
 	}
 
-	for (let i = 0; i < navMobileA.length; i++) {
+	for (let i = 0; i < navMobileA.length; i += 1) {
 		if (navMobileA[i].getAttribute('href').split('/').filter(link => link !== '' && link !== '.').join('') === '') {
 			navMobileA[i].parentElement.classList.add('active')
 			navMobileA[i].onclick = e => e.preventDefault()
