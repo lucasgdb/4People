@@ -21,7 +21,7 @@
 	<meta name="twitter:url" content="./">
 </head>
 
-<body class="grey lighten-4">
+<body>
 	<?php
 	include_once("$assets/components/noscript.php");
 	include_once("$assets/components/spinner.php");
@@ -158,7 +158,7 @@
 					</div>
 				</div>
 
-				<div class="top-div indigo darken-4"></div>
+				<div class="top-div dark-grey"></div>
 			</div>
 		</div>
 	</main>

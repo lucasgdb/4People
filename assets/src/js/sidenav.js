@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			paddingHeadersA[i].onclick = e => preventDefault(e)
 			const icon = paddingHeadersA[i].querySelector('i')
 			icon.innerHTML = 'radio_button_checked'
-			icon.classList.add('indigo-text', 'text-darken-4')
+			icon.classList.add('dark-grey-text')
 			icon.style.fontSize = '20px'
 			icon.style.marginLeft = '2.5px'
 

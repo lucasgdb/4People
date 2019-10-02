@@ -18,8 +18,65 @@ if (isset($_SESSION['logged'])) {
 	<?php include_once("$assets/components/admin_components/meta_tags.php") ?>
 </head>
 
-<body style="background:#2e3748">
+<body style="background-color:#ebebeb">
 	<?php include_once("$assets/components/noscript.php") ?>
+
+	<header class="navbar-fixed">
+		<nav class="z-depth-2">
+			<a href="#" data-target="slide-out" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+			<div class="nav-wrapper">
+				<a href="<?= $root ?>" class="brand-logo center hide-on-large-only">4People</a>
+				<ul id="nav-mobile" class="hide-on-med-and-down">
+					<li title="Página Inicial" class="waves-effect"><a href="<?= $root ?>/">Página Inicial</a></li>
+					<?php
+					if (isset($_SESSION['logged'])) : ?>
+						<li title="Painel Administrativo" class="waves-effect"><a href="<?= $root ?>/admin/panel/"><i class="material-icons left">verified_user</i>Painel Administrativo</a></li>
+						<li title="Sair" class="waves-effect"><a href="<?= $assets ?>/php/Logout.php"><i class="material-icons left">exit_to_app</i>Sair</a></li>
+					<?php else : ?>
+						<?php
+							include_once("$assets/php/Connection.php");
+							$sql = $database->prepare('SELECT type_name, type_path, type_icon FROM types');
+							$sql->execute();
+
+							foreach ($sql as $data) : extract($data) ?>
+							<li title="<?= $type_name ?>" class="waves-effect"><a href="<?= $root ?>/<?= $type_path ?>/"><?= $type_name ?></a></li>
+						<?php endforeach ?>
+					<?php endif ?>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	<ul id="slide-out" class="sidenav collapsible grey lighten-5">
+		<li style="position:relative">
+			<div class="user-view mb-0 left-div-margin-mobile" style="background: #FAFAFA !important;border-bottom:1px solid #E0E0E0">
+				<div class="background"></div>
+				<img title="Logo" class="circle" src="<?= $assets ?>/images/logo.png" alt="Logo">
+				<span class="name black-text">4People - Ferramentas Online</span>
+				<a class="linkHover" href="<?= $root ?>/pages/about/"><span class="email">Sobre o 4People »</span></a>
+			</div>
+
+			<div class="left-div-mobile dark-grey" style="border-radius:0"></div>
+		</li>
+
+		<li>
+			<ul class="padding-headers padding-buttons">
+				<li>
+					<ul>
+						<li><a class="waves-effect" href="<?= $root ?>/pages/about/" title="Sobre - 4People"><i class="material-icons left">keyboard_arrow_right</i>Sobre</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/pages/contact/" title="Fale Conosco - 4People"><i class="material-icons left">keyboard_arrow_right</i>Fale Conosco</a></li>
+						<?php
+						$sql = $database->prepare('SELECT type_name, type_path FROM types');
+						$sql->execute();
+
+						foreach ($sql as $data) : extract($data) ?>
+							<li><a class="waves-effect" href="<?= $root ?>/<?= $type_path ?>/" title="<?= $type_name ?>"><i class="material-icons left">keyboard_arrow_right</i><?= $type_name ?></a></li>
+						<?php endforeach ?>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
 
 	<main style="background-color:transparent">
 		<div class="container">
@@ -47,18 +104,18 @@ if (isset($_SESSION['logged'])) {
 							<div class="input-field col s12">
 								<i class="material-icons prefix">https</i>
 								<input id="admin_password" style="width:calc(100% - 4.5rem)" minlength="6" title="Preencha este campo com sua senha." placeholder="Senha de Administrador" class="validate" type="password" name="admin_password" oninvalid="this.setCustomValidity('Preencha este campo com sua senha.')" oninput="setCustomValidity('')" required>
-								<i id="visibility" onclick="switchVisibility()" class="material-icons prefix" style="cursor:pointer">visibility</i>
 								<label class="active" for="admin_password">Senha</label>
+								<i id="visibility" onclick="switchVisibility()" class="material-icons prefix" style="cursor:pointer">visibility</i>
 								<span class="helper-text" data-error="Senha inválida." data-success="Senha válida.">Aguardando...</span>
 							</div>
 
 							<div class="col s12" style="margin-top:5px">
 								<div class="divider"></div>
-								<a title="Voltar ao 4People" class="btn indigo darken-3 mt-2 z-depth-0" href="../../"><i class="material-icons left">arrow_back</i>Voltar</a>
+								<a title="Voltar ao 4People" class="btn btn-green mt-2 z-depth-0" href="../../"><i class="material-icons left">arrow_back</i>Voltar</a>
 
 								<span id="bannedStatus"></span>
 
-								<button title="Logar no 4People" class="btn indigo darken-3 mt-2 z-depth-0 right"><i class="material-icons right">arrow_forward</i>Entrar</button>
+								<button title="Logar no 4People" class="btn btn-green mt-2 z-depth-0 right"><i class="material-icons right">arrow_forward</i>Entrar</button>
 							</div>
 						</div>
 					</form>
@@ -109,13 +166,13 @@ if (isset($_SESSION['logged'])) {
 
 							<div class="col s12">
 								<div class="divider"></div>
-								<button title="Inserir um Administrador no 4People" class="btn waves-effect waves-light indigo darken-4 mt-2 z-depth-0"><i class="material-icons left">person_add</i>Inserir</button>
+								<button title="Inserir um Administrador no 4People" class="btn waves-effect waves-light btn-green mt-2 z-depth-0"><i class="material-icons left">person_add</i>Inserir</button>
 							</div>
 						</div>
 					</form>
 				<?php endif ?>
 
-				<div class="left-div indigo darken-3" style="border-radius:0"></div>
+				<div class="left-div dark-grey" style="border-radius:0"></div>
 			</div>
 		</div>
 	</main>
@@ -124,6 +181,7 @@ if (isset($_SESSION['logged'])) {
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="src/index.js"></script>
+	<script src="<?= $assets ?>/src/js/sidenav.js"></script>
 </body>
 
 </html>

@@ -1,8 +1,11 @@
+M.Sidenav.init(document.querySelectorAll('.sidenav'))
+
 const txtPassword = document.querySelector('input[name=admin_password]')
 const txtPasswordIcon = document.querySelector('#visibility')
 const formLogin = document.querySelector('[name=formLogin]')
 const formInsert = document.querySelector('[name=formInsert]')
 const lblBannedStatus = document.querySelector('#bannedStatus')
+const paddingHeadersA = document.querySelectorAll('.padding-buttons ul li a')
 
 if (formLogin) {
 	formLogin.onsubmit = async e => {
@@ -15,7 +18,7 @@ if (formLogin) {
 			body: new FormData(formLogin)
 		})).json()
 
-		if (result.status === '1') location = '../painel_administrativo/'
+		if (result.status === '1') location = '../panel/'
 		else {
 			M.toast({
 				html: result.reason === 'wrong' ? 'Login e/ou senha inexistente.' : 'Você está banido temporariamente.',

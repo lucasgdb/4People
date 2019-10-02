@@ -1,24 +1,57 @@
 html {
-	font-family: 'Courier New', Courier, monospace;
+	font-family: Arial, sans-serif, Arial;
 }
 
-input[type=text]:focus,
-input[type=password]:focus,
-input[type=email]:focus {
-	border-bottom: 1px solid #1a237e !important;
-	box-shadow: 0 1px 0 0 #1a237e !important
+.dark-grey {
+	background-color: #1B1A25
 }
 
-input[type=text]:not(.browser-default):focus:not([readonly])+label,
-input[type=password]:not(.browser-default):focus:not([readonly])+label,
-input[type=email]:not(.browser-default):focus:not([readonly])+label {
-	color: #1a237e
+.dark-grey-text {
+	color: #1B1A25 !important
 }
 
-input[type=text]:not(.browser-default):focus.invalid~label,
-input[type=password]:not(.browser-default):focus.invalid~label,
-input[type=email]:not(.browser-default):focus.invalid~label {
-	color: #F44336
+.btn-green {
+	background-color: #37ab52
+}
+
+.btn-green:hover {
+	background-color: #1b9236
+}
+
+.btn-green:focus {
+	background-color: #1b9236
+}
+
+nav {
+	background-color: #1b1a25
+}
+
+.nav-wrapper li a {
+	color: #c8c8c8;
+	height: 50px
+}
+
+nav,
+.nav-mobile,
+nav .nav-wrapper i,
+nav a.sidenav-trigger,
+nav a.sidenav-trigger i,
+.navbar-fixed {
+	height: 50px;
+	line-height: 50px
+}
+
+input:focus {
+	border-bottom: 1px solid #1b1a25 !important;
+	box-shadow: 0 1px 0 0 #1b1a25 !important
+}
+
+input:not(.browser-default):focus:not([readonly])+label {
+	color: #1b1a25 !important
+}
+
+input:not(.browser-default):focus.invalid~label {
+	color: #F44336 !important
 }
 
 i.material-icons {
@@ -27,7 +60,7 @@ i.material-icons {
 }
 
 .input-field .prefix.active {
-	color: #1a237e
+	color: #1b1a25
 }
 
 .mt-2 {

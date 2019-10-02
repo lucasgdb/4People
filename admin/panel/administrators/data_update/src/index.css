@@ -1,0 +1,63 @@
+html {
+	font-family: 'Courier New', Courier, monospace;
+}
+
+input:focus {
+	border-bottom: 1px solid #1B1A25 !important;
+	box-shadow: 0 1px 0 0 #1B1A25 !important
+}
+
+input:not(.browser-default):focus:not([readonly])+label {
+	color: #1B1A25 !important
+}
+
+input:not(.browser-default):focus.invalid~label {
+	color: #F44336 !important
+}
+
+.dark-grey {
+	background-color: #1B1A25
+}
+
+.dark-grey-text {
+	color: #1B1A25 !important
+}
+
+.red-color {
+	background-color: #A62023 !important
+}
+
+.btn-green {
+	background-color: #37ab52
+}
+
+.btn-green:hover {
+	background-color: #1b9236
+}
+
+.btn-green:focus {
+	background-color: #1b9236
+}
+
+.input-field .prefix.active {
+	color: #1B1A25 !important
+}
+
+.mt-2 {
+	margin-top: 10px
+}
+
+.mb-0 {
+	margin-bottom: 0
+}
+
+@media (max-width: 600px) {
+	.card-panel {
+		margin-top: 0;
+		border-radius: 0
+	}
+
+	.container {
+		width: 100%
+	}
+}

@@ -14,13 +14,13 @@ extract($sql->fetch())
 			<div class="background grey lighten-4"></div>
 			<img title="<?= $admin_name ?>" class="circle" src="<?= $assets ?>/images/<?= $admin_image && file_exists("$assets/images/admin_images/$admin_image") ? "admin_images/$admin_image" : 'user.svg' ?>" alt="Foto">
 			<span class="name black-text">Admin: <?= $admin_name ?></span>
-			<a class="linkHover" href="<?= $root ?>/admin/painel_administrativo/administradores/atualizar_dados/?admin_id=<?= $admin_id ?>"><span class="email">Editar perfil »</span></a>
+			<a class="linkHover" href="<?= $root ?>/admin/panel/administradores/atualizar_dados/?admin_id=<?= $admin_id ?>"><span class="email">Editar perfil »</span></a>
 		</div>
 
-		<div class="left-div-mobile indigo darken-4" style="border-radius:0"></div>
+		<div class="left-div-mobile dark-grey" style="border-radius:0"></div>
 	</li>
 
-	<?php $people = strpos($link, 'mensagens') !== false || strpos($link, 'manutencao') !== false || isset($admin_panel) && $admin_panel === true ?>
+	<?php $people = strpos($link, 'messages') !== false || strpos($link, 'manutencao') !== false || isset($admin_panel) && $admin_panel === true ?>
 
 	<li class="<?= $people ? 'active' : '' ?>">
 		<div class="collapsible-header"><i class="material-icons left">dashboard</i>4People<i class="material-icons" style="position:absolute;right:0<?= $people ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
@@ -28,8 +28,8 @@ extract($sql->fetch())
 			<ul class="collapsible padding-headers padding-buttons">
 				<li>
 					<ul>
-						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/" title="Painel Administrativo"><i class="material-icons left">keyboard_arrow_right</i>Painel Administrativo</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/mensagens/" title="Mensagens dos usuários"><i class="material-icons left">keyboard_arrow_right</i>Mensagem dos usuários</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/" title="Painel Administrativo"><i class="material-icons left">keyboard_arrow_right</i>Painel Administrativo</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/messages/" title="Mensagens dos usuários"><i class="material-icons left">keyboard_arrow_right</i>Mensagem dos usuários</a></li>
 						<li><a class="waves-effect" href="#" title="Logs de Logins falhos"><i class="material-icons left">keyboard_arrow_right</i>Logs de Logins falhos</a></li>
 						<li><a class="waves-effect" href="#" title="Logs de Administradores"><i class="material-icons left">keyboard_arrow_right</i>Logs de Administradores</a></li>
 						<li><a class="waves-effect" href="#" title="Manutenção do site"><i class="material-icons left">keyboard_arrow_right</i>Manutenção do site</a></li>
@@ -39,7 +39,7 @@ extract($sql->fetch())
 		</div>
 	</li>
 
-	<?php $controls = strpos($link, 'administradores') !== false || strpos($link, 'ferramentas') !== false || strpos($link, 'banimentos') !== false ?>
+	<?php $controls = strpos($link, 'administrators') !== false || strpos($link, 'tools') !== false || strpos($link, 'banneds') !== false ?>
 
 	<li class="<?= $controls ? 'active' : '' ?>">
 		<div class="collapsible-header"><i class="material-icons left">insert_chart</i>Controles<i class="material-icons" style="position:absolute;right:0<?= $controls ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
@@ -47,9 +47,9 @@ extract($sql->fetch())
 			<ul class="collapsible padding-headers padding-buttons">
 				<li>
 					<ul>
-						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/administradores/" title="Controle de Administradores"><i class="material-icons left">keyboard_arrow_right</i>Controle de Administradores</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/banimentos/" title="Controle de usuários banidos"><i class="material-icons left">keyboard_arrow_right</i>Controle de Banimentos</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/ferramentas/tipos_de_ferramentas/" title="Controle de Tipos de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Tipos</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/administrators/" title="Controle de Administradores"><i class="material-icons left">keyboard_arrow_right</i>Controle de Administradores</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/banneds/" title="Controle de usuários banidos"><i class="material-icons left">keyboard_arrow_right</i>Controle de Banimentos</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/tools/tool_types/" title="Controle de Tipos de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Tipos</a></li>
 						<?php
 						$sql = $database->prepare('SELECT COUNT(type_id) AS types_count FROM types LIMIT 1');
 						$sql->execute();
@@ -60,10 +60,10 @@ extract($sql->fetch())
 						$sections_count = $sql->fetchColumn();
 
 						if ($types_count) : ?>
-							<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/ferramentas/secoes_de_ferramentas/" title="Controle de Seções de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Seções</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/admin/panel/tools/tool_sections/" title="Controle de Seções de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Seções</a></li>
 						<?php endif ?>
 						<?php if ($sections_count) : ?>
-							<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/ferramentas/controle_de_ferramentas/" title="Controle de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Ferramentas</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/admin/panel/tools/tool_controls/" title="Controle de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Ferramentas</a></li>
 						<?php endif ?>
 					</ul>
 				</li>

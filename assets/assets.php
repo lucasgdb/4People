@@ -16,7 +16,7 @@ if (strpos($url, '?') === false && $url[strlen($url) - 1] !== '/') {
 $p = pathinfo($_SERVER['SCRIPT_FILENAME'])['dirname'];
 $assets = '';
 $root = '.';
-$OS_path = PHP_OS === 'WINNT' ? '\\' : '/';
+$OS_path = PHP_OS === 'WINNT' || PHP_OS === 'Windows' || PHP_OS === 'WIN32' ? '\\' : '/';
 
 do {
 	if (is_dir($p . '/assets/')) {

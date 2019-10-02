@@ -18,10 +18,10 @@ if ($logged) {
 			<div class="background"></div>
 			<img title="<?= $logged ? $admin_name : 'Logo' ?>" class="circle" src="<?= $assets ?>/images/<?= isset($admin_image) && $admin_image ? "admin_images/$admin_image" : ($logged ? 'user.svg' : 'logo.png') ?>" alt="<?= $logged ? 'Foto' : 'Logo' ?>">
 			<span class="name black-text"><?= $logged ? "Admin: $admin_name" : '4People - Ferramentas Online' ?></span>
-			<a class="linkHover" href="<?= $logged ? "$root/admin/painel_administrativo/administradores/atualizar_dados/?admin_id=$admin_id" : "$root/sobre/" ?>"><span class="email"><?= $logged ? 'Editar Perfil' : 'Sobre o 4People' ?> »</span></a>
+			<a class="linkHover" href="<?= $logged ? "$root/admin/panel/administradores/atualizar_dados/?admin_id=$admin_id" : "$root/sobre/" ?>"><span class="email"><?= $logged ? 'Editar Perfil' : 'Sobre o 4People' ?> »</span></a>
 		</div>
 
-		<div class="left-div-mobile indigo darken-4" style="border-radius:0"></div>
+		<div class="left-div-mobile dark-grey" style="border-radius:0"></div>
 	</li>
 
 	<?php
@@ -34,7 +34,7 @@ if ($logged) {
 			$sql->bindValue(':type_id', $type_id);
 			$sql->execute();
 
-			$active = strpos($link, $type_path) !== false;
+			$active = strpos($link, "pages/$type_path") !== false;
 
 			if ($active) $icon = $type_icon
 			?>
@@ -48,15 +48,16 @@ if ($logged) {
 								$sql->bindValue(':section_id', $section_id);
 								$sql->execute();
 
-								$active = strpos($link, "$type_path/$section_path") !== false
+								$active = strpos($link, "pages/$type_path/$section_path") !== false
 								?>
 						<li class="<?= $active ? 'active' : '' ?>">
 							<div style="position:relative" class="collapsible-header"><i class="material-icons"><?= $section_icon ?></i><?= $section_name ?><i class="material-icons" style="position:absolute;right:0<?= $active ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
 							<div class="collapsible-body">
 								<ul>
-									<?php foreach ($sql as $data) {
+									<?php
+											foreach ($sql as $data) {
 												extract($data);
-												$active = strpos($link, "$type_path/$section_path/$tool_path") !== false;
+												$active = strpos($link, "pages/$type_path/$section_path/$tool_path") !== false;
 												$admin = isset($_SESSION['logged']);
 
 												if ($active) {
@@ -64,8 +65,9 @@ if ($logged) {
 												<script>
 													location = '<?= $root ?>/'
 												</script>
-											<?php exit();
-															endif ?>
+
+												<?php exit() ?>
+											<?php endif ?>
 										<?php
 														$description = $tool_description;
 
@@ -79,7 +81,7 @@ if ($logged) {
 													}
 													?>
 										<?php if ($tool_status || $admin) : ?>
-											<li><a class="waves-effect <?= $active ? 'grey lighten-4 black-text' : '' ?>" <?= $active ? 'style="font-weight:bold" onclick="preventDefault(event)"' : '' ?> href="<?= $root ?>/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" title="<?= $tool_name ?>"><i class="material-icons <?= $active ? 'indigo-text text-darken-4' : '' ?> left" style="<?= $active ? 'font-size:20px;margin-left:2.5px' : '' ?>"><?= $active ? 'radio_button_checked' : 'keyboard_arrow_right' ?></i><?= $tool_name ?></a></li>
+											<li><a class="waves-effect <?= $active ? 'grey lighten-4 black-text' : '' ?>" <?= $active ? 'style="font-weight:bold" onclick="preventDefault(event)"' : '' ?> href="<?= $root ?>/pages/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" title="<?= $tool_name ?>"><i class="material-icons <?= $active ? 'indigo-text text-darken-4' : '' ?> left" style="<?= $active ? 'font-size:20px;margin-left:2.5px' : '' ?>"><?= $active ? 'radio_button_checked' : 'keyboard_arrow_right' ?></i><?= $tool_name ?></a></li>
 										<?php endif ?>
 									<?php } ?>
 								</ul>
@@ -91,7 +93,7 @@ if ($logged) {
 		</li>
 	<?php endforeach ?>
 
-	<?php $other_pages = strpos($link, 'sobre') !== false || strpos($link, 'contato') !== false ?>
+	<?php $other_pages = strpos($link, 'about') !== false || strpos($link, 'contact') !== false ?>
 
 	<li class="<?= $other_pages ? 'active' : '' ?>">
 		<div class="collapsible-header"><i class="material-icons left">insert_link</i>Outras Páginas<i class="material-icons" style="position:absolute;right:0<?= $other_pages ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
@@ -99,14 +101,14 @@ if ($logged) {
 			<ul class="collapsible padding-headers padding-buttons">
 				<li>
 					<ul>
-						<li><a class="waves-effect" href="<?= $root ?>/sobre/" title="Sobre - 4People"><i class="material-icons left">keyboard_arrow_right</i>Sobre</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/contato/" title="Fale Conosco - 4People"><i class="material-icons left">keyboard_arrow_right</i>Fale Conosco</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/pages/about/" title="Sobre - 4People"><i class="material-icons left">keyboard_arrow_right</i>Sobre</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/pages/contact/" title="Fale Conosco - 4People"><i class="material-icons left">keyboard_arrow_right</i>Fale Conosco</a></li>
 						<?php
 						$sql = $database->prepare('SELECT type_name, type_path FROM types');
 						$sql->execute();
 
 						foreach ($sql as $data) : extract($data) ?>
-							<li><a class="waves-effect" href="<?= $root ?>/<?= $type_path ?>/" title="<?= $type_name ?>"><i class="material-icons left">keyboard_arrow_right</i><?= $type_name ?></a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/pages/<?= $type_path ?>/" title="<?= $type_name ?>"><i class="material-icons left">keyboard_arrow_right</i><?= $type_name ?></a></li>
 						<?php endforeach ?>
 					</ul>
 				</li>
@@ -121,7 +123,7 @@ if ($logged) {
 				<ul class="collapsible padding-headers padding-buttons">
 					<li>
 						<ul>
-							<li><a class="waves-effect" href="<?= $root ?>/admin/painel_administrativo/" title="Ir ao Painel Administrativo"><i class="material-icons left">verified_user</i>Painel Administrativo</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/admin/panel/" title="Ir ao Painel Administrativo"><i class="material-icons left">verified_user</i>Painel Administrativo</a></li>
 							<li><a class="waves-effect" href="<?= $assets ?>/php/Logout.php" title="Sair"><i class="material-icons left">exit_to_app</i>Sair</a></li>
 						</ul>
 					</li>

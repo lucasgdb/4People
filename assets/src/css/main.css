@@ -14,16 +14,63 @@ body {
 	outline: 0
 }
 
+nav {
+	background-color: #1b1a25
+}
+
+.nav-wrapper li a {
+	color: #c8c8c8;
+	height: 50px
+}
+
+nav,
+.nav-mobile,
+nav .nav-wrapper i,
+nav a.sidenav-trigger,
+nav a.sidenav-trigger i,
+.navbar-fixed {
+	height: 50px;
+	line-height: 50px
+}
+
 nav,
 main,
 footer,
 ul#slide-out {
 	opacity: 0;
-	transition: opacity 150ms !important
 }
 
 main {
-	flex: 1 0 auto
+	flex: 1 0 auto;
+	background-color: #ebebeb
+}
+
+.dark-grey {
+	background-color: #1B1A25 !important
+}
+
+.dark-grey-text {
+	color: #1B1A25 !important
+}
+
+.red-color {
+	background-color: #A62023 !important
+}
+
+.red-color-text {
+	color: #A62023 !important
+}
+
+.btn-green {
+	background-color: #37ab52 !important
+}
+
+.btn-green:hover {
+	background-color: #1b9236 !important
+}
+
+.btn-green:focus {
+	background-color: #1b9236 !important
 }
 
 .mb-2 {
@@ -117,7 +164,7 @@ body>header+ul>li>.collapsible-header {
 }
 
 .spinner-layer {
-	border-color: #1a237e
+	border-color: #1B1A25
 }
 
 .card-panel {
@@ -181,7 +228,7 @@ body>header+ul>li>.collapsible-header {
 	}
 
 	.sidenav::-webkit-scrollbar-thumb {
-		background-color: #1a237e;
+		background-color: #1B1A25;
 		border-radius: 8px
 	}
 
