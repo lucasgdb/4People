@@ -10,6 +10,66 @@ body {
 	transition: padding-left 300ms
 }
 
+.mont-serrat span {
+	font-family: 'Montserrat';
+	font-size: 24px;
+	font-weight: 1000
+}
+
+.mont-serrat span span {
+	font-weight: 1000 !important
+}
+
+/* cyrillic-ext */
+@font-face {
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: local('Montserrat Regular'), local('Montserrat-Regular'), url(cyrillic-ext.woff2) format('woff2');
+	unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+
+/* cyrillic */
+@font-face {
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: local('Montserrat Regular'), local('Montserrat-Regular'), url(cyrillic.woff2) format('woff2');
+	unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+/* vietnamese */
+@font-face {
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: local('Montserrat Regular'), local('Montserrat-Regular'), url(vietnamese.woff2) format('woff2');
+	unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+
+/* latin-ext */
+@font-face {
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: local('Montserrat Regular'), local('Montserrat-Regular'), url(latin-ext.woff2) format('woff2');
+	unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: local('Montserrat Regular'), local('Montserrat-Regular'), url(latin.woff2) format('woff2');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 #menu {
 	outline: 0
 }
@@ -65,6 +125,10 @@ main {
 	background-color: #37ab52 !important
 }
 
+.btn-green-text {
+	color: #37ab52 !important
+}
+
 .btn-green:hover {
 	background-color: #1b9236 !important
 }
@@ -106,7 +170,7 @@ main {
 }
 
 .collapsible-header {
-	border-bottom: 1px solid #e0e0e0 !important
+	border-bottom: 1px solid #c8c8c8 !important
 }
 
 body>header+ul>li>.collapsible-header {
@@ -130,12 +194,13 @@ body>header+ul>li>.collapsible-header {
 }
 
 .sidenav.collapsible>li.active {
-	background-color: #e6e6e6
+	background-color: #E0E0E0
 }
 
 .collapsible-body a {
-	margin-bottom: 1px;
-	border: 1px solid #e0e0e0
+	margin-bottom: -1px;
+	border-top: 1px solid #c8c8c8;
+	border-bottom: 1px solid #c8c8c8
 }
 
 .collapsible-body a i {
@@ -228,8 +293,7 @@ body>header+ul>li>.collapsible-header {
 	}
 
 	.sidenav::-webkit-scrollbar-thumb {
-		background-color: #1B1A25;
-		border-radius: 8px
+		background-color: #1B1A25
 	}
 
 	.sidenav::-webkit-scrollbar-track {

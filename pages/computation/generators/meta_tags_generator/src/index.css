@@ -1,0 +1,43 @@
+.input-field {
+	margin: 0
+}
+
+.btn-center {
+	left: 50%;
+	transform: translateX(-50%)
+}
+
+textarea {
+	font-size: 20px;
+	resize: vertical;
+	min-height: 279px;
+	border-top: 0;
+	border-left: 0;
+	outline: none;
+	color: #333
+}
+
+input[type=text]::placeholder {
+	color: #999
+}
+
+input[type=number]:focus,
+input[type=text]:focus {
+	border-bottom: 1px solid #1b1a25 !important;
+	box-shadow: 0 1px 0 0 #1b1a25 !important
+}
+
+[type=radio]:checked+span:after,
+[type=radio].with-gap:checked+span:before,
+[type=radio].with-gap:checked+span:after {
+	border: 2px solid #1b1a25
+}
+
+[type=radio]:checked+span:after,
+[type=radio].with-gap:checked+span:after {
+	background-color: #1b1a25
+}
+
+.dropdown-content li>span {
+	color: black
+}

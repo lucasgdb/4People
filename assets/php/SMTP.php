@@ -10,7 +10,7 @@
  * @author    Jim Jagielski (jimjag) <jimjag@gmail.com>
  * @author    Andy Prevost (codeworxtech) <codeworxtech@users.sourceforge.net>
  * @author    Brent R. Matzelle (original founder)
- * @copyright 2012 - 2017 Marcus Bointon
+ * @copyright 2012 - 2019 Marcus Bointon
  * @copyright 2010 - 2012 Jim Jagielski
  * @copyright 2004 - 2009 Andy Prevost
  * @license   http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
@@ -25,8 +25,8 @@ namespace PHPMailer\PHPMailer;
  * PHPMailer RFC821 SMTP email transport class.
  * Implements RFC 821 SMTP commands and provides some utility methods for sending mail to an SMTP server.
  *
- * @author  Chris Ryan
- * @author  Marcus Bointon <phpmailer@synchromedia.co.uk>
+ * @author Chris Ryan
+ * @author Marcus Bointon <phpmailer@synchromedia.co.uk>
  */
 class SMTP
 {
@@ -35,7 +35,7 @@ class SMTP
 	 *
 	 * @var string
 	 */
-	const VERSION = '6.0.7';
+	const VERSION = '6.1.1';
 
 	/**
 	 * SMTP line break constant.
@@ -60,26 +60,36 @@ class SMTP
 
 	/**
 	 * Debug level for no output.
+	 *
+	 * @var int
 	 */
 	const DEBUG_OFF = 0;
 
 	/**
 	 * Debug level to show client -> server messages.
+	 *
+	 * @var int
 	 */
 	const DEBUG_CLIENT = 1;
 
 	/**
 	 * Debug level to show client -> server and server -> client messages.
+	 *
+	 * @var int
 	 */
 	const DEBUG_SERVER = 2;
 
 	/**
 	 * Debug level to show connection status, client -> server and server -> client messages.
+	 *
+	 * @var int
 	 */
 	const DEBUG_CONNECTION = 3;
 
 	/**
 	 * Debug level to show all messages.
+	 *
+	 * @var int
 	 */
 	const DEBUG_LOWLEVEL = 4;
 
@@ -744,7 +754,7 @@ class SMTP
 	 *
 	 * @return bool
 	 *
-	 * @see    hello()
+	 * @see hello()
 	 */
 	protected function sendHello($hello, $host)
 	{
@@ -1310,7 +1320,7 @@ class SMTP
 	 * If no reply has been received yet, it will return null.
 	 * If no pattern was matched, it will return false.
 	 *
-	 * @return bool|null|string
+	 * @return bool|string|null
 	 */
 	protected function recordLastTransactionID()
 	{
@@ -1336,7 +1346,7 @@ class SMTP
 	 * If no reply has been received yet, it will return null.
 	 * If no pattern was matched, it will return false.
 	 *
-	 * @return bool|null|string
+	 * @return bool|string|null
 	 *
 	 * @see recordLastTransactionID()
 	 */

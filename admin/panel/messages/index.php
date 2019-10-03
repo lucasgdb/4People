@@ -147,7 +147,7 @@ if (!isset($_SESSION['logged'])) {
 			<h4><i class="material-icons left" style="top:7px">delete</i>Remover Mensagem</h4>
 			<p class="mb-0">Você tem certeza que deseja remover a mensagem de <span id="messageName"></span> &lt;<span id="messageEmail"></span>&gt;?</p>
 
-			<div class="left-div indigo darken-4" style="border-radius:0"></div>
+			<div class="left-div dark-grey" style="border-radius:0"></div>
 		</div>
 
 		<div class="divider"></div>

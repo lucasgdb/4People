@@ -16,6 +16,12 @@ $admin_panel = true
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
+	<!-- <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet"> -->
+	<!-- <style>
+		h6 {
+			font-family: 'Montserrat'
+		}
+	</style> -->
 	<link rel="stylesheet" href="src/chart.min.css">
 	<title>Painel Administrativo - 4People</title>
 	<?php include_once("$assets/components/admin_components/meta_tags.php") ?>

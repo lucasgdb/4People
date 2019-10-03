@@ -14,7 +14,7 @@ extract($sql->fetch())
 			<div class="background grey lighten-4"></div>
 			<img title="<?= $admin_name ?>" class="circle" src="<?= $assets ?>/images/<?= $admin_image && file_exists("$assets/images/admin_images/$admin_image") ? "admin_images/$admin_image" : 'user.svg' ?>" alt="Foto">
 			<span class="name black-text">Admin: <?= $admin_name ?></span>
-			<a class="linkHover" href="<?= $root ?>/admin/panel/administradores/atualizar_dados/?admin_id=<?= $admin_id ?>"><span class="email">Editar perfil »</span></a>
+			<a class="linkHover" href="<?= $root ?>/admin/panel/administrators/data_update/?admin_id=<?= $admin_id ?>"><span class="email">Editar perfil »</span></a>
 		</div>
 
 		<div class="left-div-mobile dark-grey" style="border-radius:0"></div>

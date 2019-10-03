@@ -64,7 +64,7 @@
 										<?= $tool_name ?>
 										<i class="material-icons right">more_vert</i>
 
-										<div class="left-div-mobile dark-grey" style="border-radius:0"></div>
+										<div class="left-div-mobile red-color" style="border-radius:0"></div>
 									</span>
 									<div class="divider"></div>
 									<p class="mt-2">
@@ -95,7 +95,7 @@
 										<?= $tool_name ?>
 										<i class="material-icons right">more_vert</i>
 
-										<div class="left-div-mobile dark-grey" style="border-radius:0"></div>
+										<div class="left-div-mobile red-color" style="border-radius:0"></div>
 									</span>
 									<div class="divider"></div>
 									<p class="mt-2">

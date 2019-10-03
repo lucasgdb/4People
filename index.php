@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/index.css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 	<title>4People - Ferramentas Online</title>
 	<?php include_once("$assets/components/meta_tags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
@@ -74,8 +75,8 @@
 
 				<div class="row mb-0">
 					<div class="col s12">
-						<div class="card indigo z-depth-2">
-							<div class="card-content white-text">
+						<div class="card grey lighten-5 z-depth-2">
+							<div class="card-content">
 								<?php
 								$sql = $database->prepare(
 									'SELECT tools.tool_name, tools.tool_path, sections.section_path, types.type_path FROM tools
@@ -91,14 +92,14 @@
 								<span class="card-title"><i class="material-icons left">trending_up</i>As 3 Ferramentas mais populares</span>
 								<ul class="collection with-header mb-0">
 									<?php foreach ($sql as $data) : extract($data) ?>
-										<li class="collection-item indigo">
+										<li class="collection-item grey lighten-5">
 											<div style="font-size:16px"><?= $tool_name ?><a title="Usar <?= $tool_name ?>" href="<?= $root ?>/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
 										</li>
 									<?php endforeach ?>
 								</ul>
 							</div>
 
-							<div class="top-div-mobile indigo darken-4"></div>
+							<div class="top-div-mobile dark-grey"></div>
 						</div>
 					</div>
 				</div>
