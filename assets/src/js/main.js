@@ -139,9 +139,12 @@ window.onload = () => {
 	if (footer) footer.style.opacity = '1'
 	sidenav.el.style.opacity = '1'
 	spinner.style.opacity = '0'
+
 	maxWidth.addListener(matchMax)
 	minWidth.addListener(matchMin)
+
 	setTimeout(() => {
-		spinner.remove()
+		try { spinner.remove() }
+		catch (err) { }
 	}, 200)
 }

@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		const path = paddingHeadersA[i].getAttribute('href').split('/').filter(link => link !== '')
 		const pathName = location.pathname.split('/').filter(link => link !== '')
 		if (path[path.length - 1] === pathName[pathName.length - 1]) {
-			paddingHeadersA[i].classList.add('grey', 'lighten-4', 'black-text')
+			paddingHeadersA[i].classList.add('black-text')
 			paddingHeadersA[i].style.fontWeight = 'bold'
 			paddingHeadersA[i].onclick = e => preventDefault(e)
 			const icon = paddingHeadersA[i].querySelector('i')

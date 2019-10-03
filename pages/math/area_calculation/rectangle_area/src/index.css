@@ -1,6 +1,15 @@
+.input-field {
+	margin: 0
+}
+
+.btn-center {
+	left: 50%;
+	transform: translateX(-50%)
+}
+
 textarea {
 	font-size: 20px;
-	resize: none;
+	resize: vertical;
 	white-space: nowrap;
 	border-top: 0;
 	border-right: 0;
@@ -10,11 +19,8 @@ textarea {
 	color: #333
 }
 
-.lesser {
-	width: 100%
-}
-
-input[type=number]:focus {
+input[type=number]:focus,
+input[type=text]:focus {
 	border-bottom: 1px solid #1b1a25 !important;
 	box-shadow: 0 1px 0 0 #1b1a25 !important
 }
@@ -23,14 +29,8 @@ input[type=number]::placeholder {
 	color: rgba(0, 0, 0, .4)
 }
 
-@media (min-width: 650px) {
-	.lesser {
-		width: 70px
-	}
-
-	textarea {
-		width: 200px !important
-	}
+.dropdown-content li>span {
+	color: black
 }
 
 @media (min-width: 993px) {

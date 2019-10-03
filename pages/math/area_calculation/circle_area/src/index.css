@@ -10,7 +10,7 @@
 textarea {
 	font-size: 20px;
 	resize: vertical;
-	min-height: 200px;
+	white-space: nowrap;
 	border-top: 0;
 	border-right: 0;
 	border-bottom: .5px solid rgb(190, 190, 190);
@@ -19,13 +19,18 @@ textarea {
 	color: #333
 }
 
-input[type=number]:focus {
+input[type=number]:focus,
+input[type=text]:focus {
 	border-bottom: 1px solid #1b1a25 !important;
 	box-shadow: 0 1px 0 0 #1b1a25 !important
 }
 
 input[type=number]::placeholder {
 	color: rgba(0, 0, 0, .4)
+}
+
+.dropdown-content li>span {
+	color: black
 }
 
 [type=radio]:checked+span:after,

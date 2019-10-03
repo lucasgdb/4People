@@ -43,12 +43,13 @@
 							<p class="mb-0 col s12">Data inicial *</p>
 
 							<div class="input-field col s12">
-								<i class="material-icons prefix">access_time</i>
+								<i class="material-icons prefix">date_range</i>
 								<input id="beginDate" type="text" placeholder="Data inicial" class="datepicker">
 							</div>
 
 							<p class="mb-0 col s12">Horário inicial</p>
 							<div class="input-field col s12">
+								<i class="material-icons prefix">access_time</i>
 								<input id="beginTime" type="text" placeholder="Horário atual" class="timepicker">
 							</div>
 						</div>
@@ -59,12 +60,13 @@
 							<p class="mb-0 col s12">Data final *</p>
 
 							<div class="input-field col s12">
-								<i class="material-icons prefix">access_time</i>
+								<i class="material-icons prefix">date_range</i>
 								<input id="endDate" type="text" placeholder="Data final" class="datepicker">
 							</div>
 
 							<p class="mb-0 col s12">Horário final</p>
 							<div class="input-field col s12">
+								<i class="material-icons prefix">access_time</i>
 								<input id="endTime" type="text" placeholder="Horário atual" class="timepicker">
 							</div>
 						</div>

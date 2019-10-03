@@ -464,12 +464,12 @@ if (!isset($_SESSION['logged'])) {
 							<div class="divider"></div>
 
 							<div class="modal-footer">
-								<button type="button" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0" title="Cancelar"><i class="material-icons left">close</i>Cancelar</button>
-								<button class="modal-close btn waves-effect waves-light green darken-3 z-depth-0" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
+								<button type="button" class="modal-close btn waves-effect waves-light dark-grey z-depth-0" title="Cancelar"><i class="material-icons left">close</i>Cancelar</button>
+								<button class="modal-close btn waves-effect waves-light btn-green z-depth-0" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
 							</div>
 						</form>
 
-						<div class="left-div indigo darken-4" style="border-radius:0"></div>
+						<div class="left-div dark-grey" style="border-radius:0"></div>
 					</div>`
 				)
 
@@ -479,14 +479,14 @@ if (!isset($_SESSION['logged'])) {
 							<h4><i class="material-icons left" style="top:7px">delete</i>Remover Ferramenta</h4>
 							<p class="mb-0">Você tem certeza que deseja remover ${i} do 4People?</p>
 
-							<div class="left-div indigo darken-4" style="border-radius:0"></div>
+							<div class="left-div dark-grey" style="border-radius:0"></div>
 						</div>
 
 						<div class="divider"></div>
 
 						<div class="modal-footer">
-							<button title="Cancelar" class="modal-close btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons left">close</i>Cancelar</button>
-							<a onclick="deleteTool(${data[i][0]}, '${i}')" title="Remover ${i}" class="modal-close btn waves-effect waves-light red accent-4 z-depth-0"><i class="material-icons left">delete</i>Remover</a>
+							<button title="Cancelar" class="modal-close btn waves-effect waves-light dark-grey z-depth-0"><i class="material-icons left">close</i>Cancelar</button>
+							<a onclick="deleteTool(${data[i][0]}, '${i}')" title="Remover ${i}" class="modal-close btn waves-effect waves-light red-color z-depth-0"><i class="material-icons left">delete</i>Remover</a>
 						</div>
 					</div>`
 				)
@@ -502,7 +502,7 @@ if (!isset($_SESSION['logged'])) {
 						</td>
 						<td>
 							<button class="btn waves-effect waves-light green darken-3 z-depth-0 modal-trigger" title="Editar Ferramenta" data-target="updateTool${data[i][0]}"><i class="material-icons">edit</i></button>
-							<button class="btn waves-effect waves-light red accent-4 z-depth-0 modal-trigger" style="cursor:pointer" title="Remover Ferramenta" data-target="removeTool${data[i][0]}"><i class="material-icons">delete</i></button>
+							<button class="btn waves-effect waves-light red-color z-depth-0 modal-trigger" style="cursor:pointer" title="Remover Ferramenta" data-target="removeTool${data[i][0]}"><i class="material-icons">delete</i></button>
 						</td>
 					</tr>`
 				)

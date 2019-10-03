@@ -1,17 +1,29 @@
-textarea {
+.input-field {
+	margin: 0
+}
+
+.btn-center {
+	left: 50%;
+	transform: translateX(-50%)
+}
+
+[contenteditable=false] {
+	cursor: text;
 	font-size: 20px;
 	resize: none;
-	white-space: nowrap;
 	border-top: 0;
 	border-right: 0;
 	border-bottom: .5px solid rgb(190, 190, 190);
 	border-left: 0;
+	padding-bottom: 5px;
 	outline: none;
 	color: #333
 }
 
-.lesser {
-	width: 100%
+[contenteditable=false]:empty:before {
+	content: attr(placeholder);
+	color: rgb(201, 201, 201);
+	display: block
 }
 
 input[type=number]:focus {
@@ -23,18 +35,8 @@ input[type=number]::placeholder {
 	color: rgba(0, 0, 0, .4)
 }
 
-@media (min-width: 650px) {
-	.lesser {
-		width: 70px
-	}
-
-	textarea {
-		width: 200px !important
-	}
-}
-
 @media (min-width: 993px) {
-	textarea {
+	[contenteditable=false] {
 		font-size: 25px
 	}
 }

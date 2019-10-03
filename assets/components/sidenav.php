@@ -52,7 +52,7 @@ if ($logged) {
 								$active = strpos($link, "pages/$type_path/$section_path") !== false
 								?>
 						<li class="<?= $active ? 'active' : '' ?>">
-							<div style="position:relative" class="collapsible-header"><i class="material-icons"><?= $section_icon ?></i><?= $section_name ?><i class="material-icons" style="position:absolute;right:0<?= $active ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
+							<div style="position:relative" class="collapsible-header"><i class="material-icons"><?= $section_icon ?></i><?= $section_name ?><i class="material-icons" style="position:absolute;right:10px<?= $active ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
 							<div class="collapsible-body">
 								<ul>
 									<?php
@@ -82,7 +82,7 @@ if ($logged) {
 													}
 													?>
 										<?php if ($tool_status || $admin) : ?>
-											<li><a class="waves-effect <?= $active ? 'grey lighten-4 black-text' : '' ?>" <?= $active ? 'style="font-weight:bold" onclick="preventDefault(event)"' : '' ?> href="<?= $root ?>/pages/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" title="<?= $tool_name ?>"><i class="material-icons <?= $active ? 'dark-grey-text' : '' ?> left" style="<?= $active ? 'font-size:20px;margin-left:2.5px' : '' ?>"><?= $active ? 'radio_button_checked' : 'keyboard_arrow_right' ?></i><?= $tool_name ?></a></li>
+											<li><a class="waves-effect <?= $active ? 'black-text' : '' ?>" <?= $active ? 'style="font-weight:bold" onclick="preventDefault(event)"' : '' ?> href="<?= $root ?>/pages/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" title="<?= $tool_name ?>"><i class="material-icons <?= $active ? 'dark-grey-text' : '' ?> left" style="<?= $active ? 'font-size:20px;margin-left:2.5px' : '' ?>"><?= $active ? 'radio_button_checked' : 'keyboard_arrow_right' ?></i><?= $tool_name ?></a></li>
 										<?php endif ?>
 									<?php } ?>
 								</ul>
