@@ -1,4 +1,4 @@
-<?php include_once('../../../assets/assets.php') ?>
+<?php include_once('../../../../assets/assets.php') ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -31,7 +31,7 @@
 
 	<main>
 		<div class="container">
-			<div class="card-panel left-div-margin">
+			<div class="card-panel top-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">exposure</i>Fatorar Número</h1>
 
 				<label><?= $description ?></label>
@@ -46,20 +46,20 @@
 				</div>
 
 				<div class="divider mb-2"></div>
-				<button title="Fatorar Número" class="btn btn-center waves-effect waves-light indigo darken-4 z-depth-2" onclick="factorize()">
+				<button title="Fatorar Número" class="btn btn-center waves-effect waves-light btn-green z-depth-2" onclick="factorize()">
 					Fatorar Número
 				</button>
 				<div class="divider mt-2"></div>
 
 				<div class="mt-2" id="result" placeholder="Resultado" contenteditable="false"></div>
-				<button id="save" title="Copiar Resultado" class="btn waves-effect waves-light indigo darken-4 mt-2 z-depth-0">
+				<button id="save" title="Copiar Resultado" class="btn waves-effect waves-light dark-grey mt-2 z-depth-0">
 					Copiar
 				</button>
-				<button title="Limpar Fatoração" class="btn waves-effect waves-light indigo darken-4 mt-2 z-depth-0" onclick="clearInput()">
+				<button title="Limpar Fatoração" class="btn waves-effect waves-light dark-grey mt-2 z-depth-0" onclick="clearInput()">
 					Limpar
 				</button>
 
-				<div class="left-div indigo darken-4"></div>
+				<div class="top-div dark-grey"></div>
 			</div>
 
 			<div class="card-panel left-div-margin">
@@ -68,22 +68,22 @@
 
 				<ul class="collection with-header mb-0">
 					<li class="collection-item">
-						<div>Máximo Divisor Comum<a href="<?= $root ?>/matematica/calculadoras/mdc/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+						<div>Máximo Divisor Comum<a href="<?= $root ?>/matematica/calculadoras/mdc/" class="secondary-content"><i class="material-icons btn-green-text">send</i></a></div>
 					</li>
 					<li class="collection-item">
-						<div>Mínimo Divisor Comum<a href="<?= $root ?>/matematica/calculadoras/mmc/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+						<div>Mínimo Divisor Comum<a href="<?= $root ?>/matematica/calculadoras/mmc/" class="secondary-content"><i class="material-icons btn-green-text">send</i></a></div>
 					</li>
 				</ul>
 
-				<div class="left-div indigo darken-4"></div>
+				<div class="left-div dark-grey"></div>
 			</div>
 		</div>
 	</main>
 
 	<?php
-   include_once("$assets/components/footer.php");
-   include_once("$assets/components/service_worker.php")
-   ?>
+	include_once("$assets/components/footer.php");
+	include_once("$assets/components/service_worker.php")
+	?>
 
 	<script src="<?= $assets ?>/algorithms/calculators/factorization.js"></script>
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>

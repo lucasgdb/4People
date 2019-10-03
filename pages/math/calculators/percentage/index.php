@@ -1,11 +1,11 @@
-<?php include_once('../../../assets/assets.php') ?>
+<?php include_once('../../../../assets/assets.php') ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-   <link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>Porcentagem - 4People</title>
@@ -31,7 +31,7 @@
 
 	<main>
 		<div class="container">
-			<div class="card-panel left-div-margin">
+			<div class="card-panel top-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">exposure</i>Porcentagem</h1>
 
 				<label><?= $description ?></label>
@@ -54,11 +54,11 @@
 					</div>
 
 					<div class="col s12">
-						<button title="Calcular" class="btn waves-effect waves-light indigo darken-4" onclick="calculateFirst()">
+						<button title="Calcular" class="btn waves-effect waves-light btn-green z-depth-0" onclick="calculateFirst()">
 							Calcular
 						</button>
 
-						<button title="Copiar" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult(txtFirstResult)">
+						<button title="Copiar" class="btn waves-effect waves-light dark-grey z-depth-0" onclick="copyResult(txtFirstResult)">
 							Copiar
 						</button>
 					</div>
@@ -83,11 +83,11 @@
 					</div>
 
 					<div class="col s12">
-						<button title="Calcular" class="btn waves-effect waves-light indigo darken-4" onclick="calculateSecond()">
+						<button title="Calcular" class="btn waves-effect waves-light btn-green z-depth-0" onclick="calculateSecond()">
 							Calcular
 						</button>
 
-						<button title="Copiar" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult(txtSecondResult)">
+						<button title="Copiar" class="btn waves-effect waves-light dark-grey z-depth-0" onclick="copyResult(txtSecondResult)">
 							Copiar
 						</button>
 					</div>
@@ -112,11 +112,11 @@
 					</div>
 
 					<div class="col s12">
-						<button title="Calcular" class="btn waves-effect waves-light indigo darken-4" onclick="calculateThird()">
+						<button title="Calcular" class="btn waves-effect waves-light btn-green z-depth-0" onclick="calculateThird()">
 							Calcular
 						</button>
 
-						<button title="Copiar" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult(txtThirdResult)">
+						<button title="Copiar" class="btn waves-effect waves-light dark-grey z-depth-0" onclick="copyResult(txtThirdResult)">
 							Copiar
 						</button>
 					</div>
@@ -141,11 +141,11 @@
 					</div>
 
 					<div class="col s12">
-						<button title="Calcular" class="btn waves-effect waves-light indigo darken-4" onclick="calculateFourth()">
+						<button title="Calcular" class="btn waves-effect waves-light btn-green z-depth-0" onclick="calculateFourth()">
 							Calcular
 						</button>
 
-						<button title="Copiar" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult(txtFourthResult)">
+						<button title="Copiar" class="btn waves-effect waves-light dark-grey z-depth-0" onclick="copyResult(txtFourthResult)">
 							Copiar
 						</button>
 					</div>
@@ -170,11 +170,11 @@
 					</div>
 
 					<div class="col s12">
-						<button title="Calcular" class="btn waves-effect waves-light indigo darken-4" onclick="calculateFifth()">
+						<button title="Calcular" class="btn waves-effect waves-light btn-green z-depth-0" onclick="calculateFifth()">
 							Calcular
 						</button>
 
-						<button title="Copiar" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult(txtFifthResult)">
+						<button title="Copiar" class="btn waves-effect waves-light dark-grey z-depth-0" onclick="copyResult(txtFifthResult)">
 							Copiar
 						</button>
 					</div>
@@ -199,11 +199,11 @@
 					</div>
 
 					<div class="col s12">
-						<button title="Calcular" class="btn waves-effect waves-light indigo darken-4" onclick="calculateSixth()">
+						<button title="Calcular" class="btn waves-effect waves-light btn-green z-depth-0" onclick="calculateSixth()">
 							Calcular
 						</button>
 
-						<button title="Copiar" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult(txtSixthResult)">
+						<button title="Copiar" class="btn waves-effect waves-light dark-grey z-depth-0" onclick="copyResult(txtSixthResult)">
 							Copiar
 						</button>
 					</div>
@@ -228,11 +228,11 @@
 					</div>
 
 					<div class="col s12">
-						<button title="Calcular" class="btn waves-effect waves-light indigo darken-4" onclick="calculateSeventh()">
+						<button title="Calcular" class="btn waves-effect waves-light btn-green z-depth-0" onclick="calculateSeventh()">
 							Calcular
 						</button>
 
-						<button title="Copiar" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult(txtSeventhResult)">
+						<button title="Copiar" class="btn waves-effect waves-light dark-grey z-depth-0" onclick="copyResult(txtSeventhResult)">
 							Copiar
 						</button>
 					</div>
@@ -257,11 +257,11 @@
 					</div>
 
 					<div class="col s12">
-						<button title="Calcular" class="btn waves-effect waves-light indigo darken-4" onclick="calculateEighth()">
+						<button title="Calcular" class="btn waves-effect waves-light btn-green z-depth-0" onclick="calculateEighth()">
 							Calcular
 						</button>
 
-						<button title="Copiar" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult(txtEighthResult)">
+						<button title="Copiar" class="btn waves-effect waves-light dark-grey z-depth-0" onclick="copyResult(txtEighthResult)">
 							Copiar
 						</button>
 					</div>
@@ -286,17 +286,17 @@
 					</div>
 
 					<div class="col s12">
-						<button title="Calcular" class="btn waves-effect waves-light indigo darken-4" onclick="calculateNinth()">
+						<button title="Calcular" class="btn waves-effect waves-light btn-green z-depth-0" onclick="calculateNinth()">
 							Calcular
 						</button>
 
-						<button title="Copiar" class="btn waves-effect waves-light indigo darken-4" onclick="copyResult(txtNinthResult)">
+						<button title="Copiar" class="btn waves-effect waves-light dark-grey z-depth-0" onclick="copyResult(txtNinthResult)">
 							Copiar
 						</button>
 					</div>
 				</div>
 
-				<div class="left-div indigo darken-4"></div>
+				<div class="top-div dark-grey"></div>
 			</div>
 
 			<div class="card-panel left-div-margin">
@@ -305,22 +305,22 @@
 
 				<ul class="collection with-header mb-0">
 					<li class="collection-item">
-						<div>Gerador de Senhas<a href="<?= $root ?>/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+						<div>Gerador de Senhas<a href="<?= $root ?>/" class="secondary-content"><i class="material-icons btn-green-text">send</i></a></div>
 					</li>
 					<li class="collection-item">
-						<div>Gerador de Cartão de Crédito<a href="<?= $root ?>/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+						<div>Gerador de Cartão de Crédito<a href="<?= $root ?>/" class="secondary-content"><i class="material-icons btn-green-text">send</i></a></div>
 					</li>
 				</ul>
 
-				<div class="left-div indigo darken-4"></div>
+				<div class="left-div dark-grey"></div>
 			</div>
 		</div>
 	</main>
 
 	<?php
-   include_once("$assets/components/footer.php");
-   include_once("$assets/components/service_worker.php")
-   ?>
+	include_once("$assets/components/footer.php");
+	include_once("$assets/components/service_worker.php")
+	?>
 
 	<script src="<?= $assets ?>/algorithms/calculators/percentage.js"></script>
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>

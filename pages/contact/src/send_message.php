@@ -1,6 +1,6 @@
 <?php
 try {
-	include_once('../../assets//php/Connection.php');
+	include_once('../../../assets/php/Connection.php');
 
 	$message_name = trim(filter_input(INPUT_POST, 'message_name', FILTER_DEFAULT));
 	$message_email = trim(filter_input(INPUT_POST, 'message_email', FILTER_DEFAULT));

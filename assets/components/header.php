@@ -24,6 +24,8 @@
 						foreach ($sql as $data) : extract($data) ?>
 						<li title="<?= $type_name ?>" class="waves-effect"><a href="<?= $root ?>/pages/<?= $type_path ?>/"><?= $type_name ?></a></li>
 					<?php endforeach ?>
+					<li title="Sobre" class="waves-effect"><a href="<?= $root ?>/pages/about/">Sobre nós</a></li>
+					<li title="Fale Conosco" class="waves-effect"><a href="<?= $root ?>/pages/contact/">Fale Conosco</a></li>
 				<?php endif ?>
 			</ul>
 		</div>

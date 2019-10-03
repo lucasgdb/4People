@@ -32,12 +32,12 @@
 	<main>
 		<div class="container">
 			<div class="card-panel z-depth-2 top-div-margin">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left"><?= $icon ?></i>Principais Ferramentas</h1>
+				<h1 style="font-size:30px;margin:20px 0 5px 0"><i class="material-icons left"><?= $icon ?></i>Principais Ferramentas</h1>
 
 				<label>Principais Ferramentas de Matemática do 4People</label>
-				<div class="divider mb-2"></div>
+				<div class="divider" style="margin-top:10px"></div>
 
-				<div class="row mb-0">
+				<div class="row mb-0" style="margin-top:35px">
 					<div class="col s12 m6">
 						<?php
 						include_once("$assets/php/Connection.php");
@@ -61,7 +61,7 @@
 						for ($i = 0; $i < $half; $i += 1) : extract($data[$i]) ?>
 							<div class="card sticky-action z-depth-2">
 								<div class="card-content grey lighten-5">
-									<span class="card-title activator no-select left-div-margin-mobile" style="position:relative">
+									<span class="card-title activator no-select left-div-margin-mobile" style="font-size:22px;font-weight:800;position:relative">
 										<?= $tool_name ?>
 										<i class="material-icons right">more_vert</i>
 
@@ -91,7 +91,7 @@
 						<?php for ($i = $half; $i < $length; $i += 1) : extract($data[$i]) ?>
 							<div class="card sticky-action z-depth-2">
 								<div class="card-content grey lighten-5">
-									<span class="card-title activator no-select left-div-margin-mobile" style="position:relative">
+									<span class="card-title activator no-select left-div-margin-mobile" style="font-size:22px;font-weight:800;position:relative">
 										<?= $tool_name ?>
 										<i class="material-icons right">more_vert</i>
 

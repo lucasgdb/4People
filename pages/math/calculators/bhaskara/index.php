@@ -1,11 +1,11 @@
-<?php include_once('../../../assets/assets.php') ?>
+<?php include_once('../../../../assets/assets.php') ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-   <link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>Equação do 2° Grau - 4People</title>
@@ -31,7 +31,7 @@
 
 	<main>
 		<div class="container">
-			<div class="card-panel left-div-margin">
+			<div class="card-panel top-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">exposure</i>Equação do 2° Grau</h1>
 
 				<label><?= $description ?></label>
@@ -70,20 +70,20 @@
 				</div>
 
 				<div class="divider mb-2"></div>
-				<button title="Calcular o Bhaskara" class="btn btn-center waves-effect waves-light indigo darken-4 z-depth-2" onclick="calculate()">
+				<button title="Calcular o Bhaskara" class="btn btn-center waves-effect waves-light btn-green z-depth-2" onclick="calculate()">
 					Calcular Bhaskara
 				</button>
 				<div class="divider mt-2"></div>
 
 				<textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
-				<button title="Copiar Resultado" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="copyResult()">
+				<button title="Copiar Resultado" class="btn waves-effect waves-light dark-grey mt-1 z-depth-0" onclick="copyResult()">
 					Copiar
 				</button>
-				<button title="Limpar Resultado" class="btn waves-effect waves-light indigo darken-4 mt-1 z-depth-0" onclick="clearInput()">
+				<button title="Limpar Resultado" class="btn waves-effect waves-light dark-grey mt-1 z-depth-0" onclick="clearInput()">
 					Limpar
 				</button>
 
-				<div class="left-div indigo darken-4"></div>
+				<div class="top-div dark-grey"></div>
 			</div>
 
 			<div class="card-panel left-div-margin">
@@ -92,22 +92,22 @@
 
 				<ul class="collection with-header mb-0">
 					<li class="collection-item">
-						<div>Gerador de Senhas<a href="<?= $root ?>/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+						<div>Gerador de Senhas<a href="<?= $root ?>/" class="secondary-content"><i class="material-icons btn-green-text">send</i></a></div>
 					</li>
 					<li class="collection-item">
-						<div>Gerador de Cartão de Crédito<a href="<?= $root ?>/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+						<div>Gerador de Cartão de Crédito<a href="<?= $root ?>/" class="secondary-content"><i class="material-icons btn-green-text">send</i></a></div>
 					</li>
 				</ul>
 
-				<div class="left-div indigo darken-4"></div>
+				<div class="left-div dark-grey"></div>
 			</div>
 		</div>
 	</main>
 
 	<?php
-   include_once("$assets/components/footer.php");
-   include_once("$assets/components/service_worker.php")
-   ?>
+	include_once("$assets/components/footer.php");
+	include_once("$assets/components/service_worker.php")
+	?>
 
 	<script src="<?= $assets ?>/algorithms/calculators/bhaskara.js"></script>
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>

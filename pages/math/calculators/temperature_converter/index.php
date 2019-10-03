@@ -1,11 +1,11 @@
-<?php include_once('../../../assets/assets.php') ?>
+<?php include_once('../../../../assets/assets.php') ?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-   <link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>Conversor de Temperatura - 4People</title>
@@ -31,7 +31,7 @@
 
 	<main>
 		<div class="container">
-			<div class="card-panel left-div-margin">
+			<div class="card-panel top-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">exposure</i>Conversor de Temperatura</h1>
 
 				<label><?= $description ?></label>
@@ -93,16 +93,16 @@
 					</div>
 
 					<div class="col s12">
-						<button title="Copiar" class="btn waves-effect left waves-light indigo darken-4 z-depth-0" onclick="copyResult(txtFirst)">
+						<button title="Copiar" class="btn waves-effect left waves-light dark-grey z-depth-0" onclick="copyResult(txtFirst)">
 							Copiar
 						</button>
-						<button title="Copiar" class="btn waves-effect right waves-light indigo darken-4 z-depth-0" onclick="copyResult(txtSecond)">
+						<button title="Copiar" class="btn waves-effect right waves-light dark-grey z-depth-0" onclick="copyResult(txtSecond)">
 							Copiar
 						</button>
 					</div>
 				</div>
 
-				<div class="left-div indigo darken-4"></div>
+				<div class="top-div dark-grey"></div>
 			</div>
 
 			<div class="card-panel left-div-margin">
@@ -111,22 +111,22 @@
 
 				<ul class="collection with-header mb-0">
 					<li class="collection-item">
-						<div>Gerador de Senhas<a href="<?= $root ?>/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+						<div>Gerador de Senhas<a href="<?= $root ?>/" class="secondary-content"><i class="material-icons btn-green-text">send</i></a></div>
 					</li>
 					<li class="collection-item">
-						<div>Gerador de Cartão de Crédito<a href="<?= $root ?>/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+						<div>Gerador de Cartão de Crédito<a href="<?= $root ?>/" class="secondary-content"><i class="material-icons btn-green-text">send</i></a></div>
 					</li>
 				</ul>
 
-				<div class="left-div indigo darken-4"></div>
+				<div class="left-div dark-grey"></div>
 			</div>
 		</div>
 	</main>
 
 	<?php
-   include_once("$assets/components/footer.php");
-   include_once("$assets/components/service_worker.php")
-   ?>
+	include_once("$assets/components/footer.php");
+	include_once("$assets/components/service_worker.php")
+	?>
 
 	<script src="<?= $assets ?>/algorithms/calculators/temperatureConversor.js"></script>
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>

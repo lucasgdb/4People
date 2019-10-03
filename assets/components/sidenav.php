@@ -14,15 +14,15 @@ if ($logged) {
 ?>
 <ul id="slide-out" class="sidenav sidenav-fixed collapsible grey lighten-5">
 	<li style="position:relative">
-		<div class="user-view dark-grey mb-0">
+		<div class="user-view dark-grey mb-0" style="padding-bottom:15px">
 			<div class="background"></div>
-			<div class="mont-serrat" style="height:65px">
+			<div class="mont-serrat" style="height:70px">
 				<span style="color:#c8c8c8">&lt;/<span class="red-color-text">4People</span>&gt;</span>
 			</div>
 			<span class="name" style="color:#c8c8c8"><?= $logged ? "Admin: $admin_name" : '4People - Ferramentas Online' ?></span>
-			<a class="linkHover" href="<?= $logged ? "$root/admin/panel/administrators/data_update/?admin_id=$admin_id" : "$root/sobre/" ?>"><span class="email"><?= $logged ? 'Editar Perfil' : 'Sobre o 4People' ?> »</span></a>
+			<a class="linkHover" href="<?= $logged ? "$root/admin/panel/administrators/data_update/?admin_id=$admin_id" : "$root/sobre/" ?>"><span class="email" style="padding-bottom:0"><?= $logged ? 'Editar Perfil' : 'Sobre o 4People' ?> »</span></a>
+			<?= $logged ? "<a class=\"dark-grey\" href=\"$assets/php/Logout.php\"><span class=\"email\" style=\"color:#c8c8c8;padding-bottom:0\">Sair »</span></a>" : '' ?>
 		</div>
-		<!-- <div class="left-div-mobile dark-grey" style="border-radius:0"></div> -->
 	</li>
 
 	<?php
