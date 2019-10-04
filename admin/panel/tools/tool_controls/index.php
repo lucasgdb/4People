@@ -92,7 +92,7 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="col s12">
 							<div class="divider"></div>
-							<button title="Inserir uma Ferramenta no 4People" class="btn waves-effect waves-light btn-green mt-2 z-depth-0"><i class="material-icons left">build</i>Inserir</button>
+							<button title="Inserir uma Ferramenta no 4People" class="btn waves-effect waves-light red-color mt-2 z-depth-0"><i class="material-icons left">build</i>Inserir</button>
 						</div>
 					</div>
 				</form>
@@ -465,7 +465,7 @@ if (!isset($_SESSION['logged'])) {
 
 							<div class="modal-footer">
 								<button type="button" class="modal-close btn waves-effect waves-light dark-grey z-depth-0" title="Cancelar"><i class="material-icons left">close</i>Cancelar</button>
-								<button class="modal-close btn waves-effect waves-light btn-green z-depth-0" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
+								<button class="modal-close btn waves-effect waves-light red-color z-depth-0" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
 							</div>
 						</form>
 

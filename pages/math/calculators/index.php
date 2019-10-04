@@ -36,7 +36,7 @@
 				<label>Ferramentas de Calculadoras do 4People</label>
 				<div class="divider"></div>
 
-				<div class="left-div indigo darken-4"></div>
+				<div class="left-div dark-grey"></div>
 			</div>
 		</div>
 	</main>

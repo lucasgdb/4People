@@ -116,7 +116,7 @@
 				</div>
 
 				<div class="divider mb-2"></div>
-				<button title="Calcular Área" class="btn btn-center waves-effect waves-light btn-green z-depth-2" onclick="calculate()">
+				<button title="Calcular Área" class="btn btn-center waves-effect waves-light red-color z-depth-2" onclick="calculate()">
 					Calcular área
 				</button>
 				<div class="divider mt-2"></div>
@@ -138,10 +138,10 @@
 
 				<ul class="collection with-header mb-0">
 					<li class="collection-item">
-						<div>Gerador de Senhas<a href="<?= $root ?>/" class="secondary-content"><i class="material-icons btn-green-text">send</i></a></div>
+						<div>Gerador de Senhas<a href="<?= $root ?>/" class="secondary-content"><i class="material-icons red-color-text">send</i></a></div>
 					</li>
 					<li class="collection-item">
-						<div>Gerador de Cartão de Crédito<a href="<?= $root ?>/" class="secondary-content"><i class="material-icons btn-green-text">send</i></a></div>
+						<div>Gerador de Cartão de Crédito<a href="<?= $root ?>/" class="secondary-content"><i class="material-icons red-color-text">send</i></a></div>
 					</li>
 				</ul>
 

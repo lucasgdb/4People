@@ -61,11 +61,11 @@ if (isset($_SESSION['logged'])) {
 
 							<div class="col s12" style="margin-top:5px">
 								<div class="divider"></div>
-								<a title="Voltar ao 4People" class="btn btn-green mt-2 z-depth-0" href="../../"><i class="material-icons left">arrow_back</i>Voltar</a>
+								<a title="Voltar ao 4People" class="btn dark-grey mt-2 z-depth-0" href="../../"><i class="material-icons left">arrow_back</i>Voltar</a>
 
 								<span id="bannedStatus"></span>
 
-								<button title="Logar no 4People" class="btn btn-green mt-2 z-depth-0 right"><i class="material-icons right">arrow_forward</i>Entrar</button>
+								<button title="Logar no 4People" class="btn red-color mt-2 z-depth-0 right"><i class="material-icons right">arrow_forward</i>Entrar</button>
 							</div>
 						</div>
 					</form>
@@ -91,7 +91,7 @@ if (isset($_SESSION['logged'])) {
 								<span class="helper-text" data-error="Login de Administrador inválido. Tamanho mínimo: 8" data-success="Login de Administrador válido.">Ex: lucasnaja</span>
 							</div>
 
-							<div class="input-field col s12">
+							<div class="input-field col s12 m6">
 								<i class="material-icons prefix">mail</i>
 								<input id="admin_email" title="Preencha este campo com o e-mail." placeholder="E-mail do Administrador" class="validate" type="email" name="admin_email" oninvalid="if (this.value === '') this.setCustomValidity('Preencha este campo com o e-mail.'); else this.setCustomValidity('Este e-mail não é válido.')" oninput="setCustomValidity('')" required>
 								<label class="active" for="admin_email">E-mail *</label>
@@ -101,12 +101,12 @@ if (isset($_SESSION['logged'])) {
 							<div class="input-field col s12 m6">
 								<i class="material-icons prefix">https</i>
 								<input id="admin_password" style="width:calc(100% - 4.5rem)" minlength="6" title="Preencha este campo com a senha." placeholder="Senha do Administrador" class="validate" type="password" name="admin_password" oninvalid="this.setCustomValidity('Preencha este campo com a senha.')" oninput="setCustomValidity('')" required>
-								<i id="visibility" onclick="switchVisibility()" class="material-icons prefix" style="cursor:pointer">visibility</i>
 								<label class="active" for="admin_password">Senha *</label>
+								<i id="visibility" onclick="switchVisibility()" class="material-icons prefix" style="cursor:pointer">visibility</i>
 								<span class="helper-text" data-error="Senha inválida. Tamanho mínimo: 6" data-success="Senha válida.">Aguardando...</span>
 							</div>
 
-							<div class="file-field input-field col s12 m6">
+							<div class="file-field input-field col s12">
 								<i class="material-icons prefix">image</i>
 								<input type="file" name="admin_image" accept=".png, .jpg, .jpeg, .svg, .gif">
 								<input style="width:calc(100% - 3rem)" placeholder="Selecionar imagem" type="text" class="file-path">
@@ -116,7 +116,7 @@ if (isset($_SESSION['logged'])) {
 
 							<div class="col s12">
 								<div class="divider"></div>
-								<button title="Inserir um Administrador no 4People" class="btn waves-effect waves-light btn-green mt-2 z-depth-0"><i class="material-icons left">person_add</i>Inserir</button>
+								<button title="Inserir um Administrador no 4People" class="btn waves-effect waves-light red-color mt-2 z-depth-0"><i class="material-icons left">person_add</i>Inserir</button>
 							</div>
 						</div>
 					</form>

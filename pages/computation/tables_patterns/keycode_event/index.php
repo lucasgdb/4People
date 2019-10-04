@@ -811,14 +811,14 @@
 
 				<ul class="collection with-header mb-0">
 					<li class="collection-item">
-						<div>Color Picker<a href="#" class="secondary-content"><i class="material-icons btn-green-text">send</i></a></div>
+						<div>Color Picker<a href="#" class="secondary-content"><i class="material-icons red-color-text">send</i></a></div>
 					</li>
 					<li class="collection-item">
-						<div>Tabela ASCII<a href="#" class="secondary-content"><i class="material-icons btn-green-text">send</i></a></div>
+						<div>Tabela ASCII<a href="#" class="secondary-content"><i class="material-icons red-color-text">send</i></a></div>
 					</li>
 				</ul>
 
-				<div class="left-div indigo darken-4"></div>
+				<div class="left-div dark-grey"></div>
 			</div>
 		</div>
 	</main>

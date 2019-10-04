@@ -98,7 +98,7 @@
 				</div>
 
 				<div class="divider mb-2"></div>
-				<button title="Gerar CPF" class="btn btn-center waves-effect waves-light btn-green z-depth-2" onclick="generate()">
+				<button title="Gerar CPF" class="btn btn-center waves-effect waves-light red-color z-depth-2" onclick="generate()">
 					Gerar CPF
 				</button>
 				<div class="divider mt-2"></div>

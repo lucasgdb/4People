@@ -32,7 +32,7 @@
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">autorenew</i>Gerador de Senha</h1>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left red-color-text">autorenew</i>Gerador de Senha</h1>
 
 				<label><?= $description ?></label>
 				<div class="divider"></div>
@@ -175,7 +175,7 @@
 				</div>
 
 				<div class="divider mb-2"></div>
-				<button title="Gerar Senha" class="btn btn-center waves-effect waves-light btn-green z-depth-2" onclick="generate()">
+				<button title="Gerar Senha" class="btn btn-center waves-effect waves-light red-color z-depth-2" onclick="generate()">
 					Gerar senha
 				</button>
 				<div class="divider mt-2"></div>
@@ -201,10 +201,10 @@
 
 				<ul class="collection with-header mb-0">
 					<li class="collection-item">
-						<div>Gerador de Meta Tags<a href="<?= $root ?>/computacao/geradores/gerador_de_meta_tags/" class="secondary-content"><i class="material-icons btn-green-text">send</i></a></div>
+						<div>Gerador de Meta Tags<a href="<?= $root ?>/computacao/geradores/gerador_de_meta_tags/" class="secondary-content"><i class="material-icons red-color-text">send</i></a></div>
 					</li>
 					<li class="collection-item">
-						<div>Gerador de CPF<a href="<?= $root ?>/computacao/geradores/gerador_de_cpf/" class="secondary-content"><i class="material-icons btn-green-text">send</i></a></div>
+						<div>Gerador de CPF<a href="<?= $root ?>/computacao/geradores/gerador_de_cpf/" class="secondary-content"><i class="material-icons red-color-text">send</i></a></div>
 					</li>
 				</ul>
 

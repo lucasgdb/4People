@@ -88,11 +88,11 @@
 
 								$sql->execute()
 								?>
-								<span class="card-title"><i class="material-icons left">trending_up</i>As 3 Ferramentas mais populares</span>
+								<span class="card-title"><i class="material-icons left red-color-text">trending_up</i>As 3 Ferramentas mais populares</span>
 								<ul class="collection with-header mb-0">
 									<?php foreach ($sql as $data) : extract($data) ?>
 										<li class="collection-item grey lighten-5">
-											<div style="font-size:16px"><?= $tool_name ?><a title="Usar <?= $tool_name ?>" href="<?= $root ?>/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" class="secondary-content"><i class="material-icons btn-green-text">send</i></a></div>
+											<div style="font-size:16px"><?= $tool_name ?><a title="Usar <?= $tool_name ?>" href="<?= $root ?>/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" class="secondary-content"><i class="material-icons red-color-text">send</i></a></div>
 										</li>
 									<?php endforeach ?>
 								</ul>
@@ -105,18 +105,18 @@
 
 				<div class="row mb-0">
 					<div class="col s12 m6">
-						<div class="card teal z-depth-2">
-							<div class="card-content white-text">
-								<span class="card-title"><i class="material-icons left">group</i>Visitas</span>
+						<div class="card grey lighten-5 z-depth-2">
+							<div class="card-content">
+								<span class="card-title"><i class="material-icons left red-color-text">group</i>Visitas</span>
 								<p style="font-size:16px">Usuários que já visitaram: <span id="totalVisits">1000</span></p>
 							</div>
 
-							<div class="top-div-mobile teal darken-4"></div>
+							<div class="top-div-mobile dark-grey"></div>
 						</div>
 
-						<div class="card red z-depth-2">
-							<div class="card-content white-text">
-								<span class="card-title"><i class="material-icons left">group</i>Pessoas ajudadas</span>
+						<div class="card grey lighten-5 z-depth-2">
+							<div class="card-content">
+								<span class="card-title"><i class="material-icons left red-color-text">group</i>Pessoas ajudadas</span>
 								<?php
 								$sql = $database->prepare('SELECT SUM(tool_visits) FROM tools WHERE tool_status = "1" LIMIT 1');
 								$sql->execute();
@@ -126,23 +126,23 @@
 								<p style="font-size:16px">Nossas Ferramentas foram usadas <span id="toolVisits"><?= $total_visits ?></span> vezes</p>
 							</div>
 
-							<div class="top-div-mobile red darken-4"></div>
+							<div class="top-div-mobile dark-grey"></div>
 						</div>
 					</div>
 
 					<div class="col s12 m6">
-						<div class="card blue z-depth-2">
-							<div class="card-content white-text">
-								<span class="card-title"><i class="material-icons left">public</i>Usuários Online</span>
+						<div class="card grey lighten-5 z-depth-2">
+							<div class="card-content">
+								<span class="card-title"><i class="material-icons left red-color-text">public</i>Usuários Online</span>
 								<p style="font-size:16px">Usuários Online no 4People: 1</p>
 							</div>
 
-							<div class="top-div-mobile blue darken-4"></div>
+							<div class="top-div-mobile dark-grey"></div>
 						</div>
 
-						<div class="card green z-depth-2">
-							<div class="card-content white-text">
-								<span class="card-title"><i class="material-icons left">build</i>Ferramentas</span>
+						<div class="card grey lighten-5 z-depth-2">
+							<div class="card-content">
+								<span class="card-title"><i class="material-icons left red-color-text">build</i>Ferramentas</span>
 								<?php
 								include_once("$assets/php/Connection.php");
 								$sql = $database->query('SELECT COUNT(tool_id) FROM tools');
@@ -153,7 +153,7 @@
 								<p style="font-size:16px">Quantidade de Ferramentas: <?= $count ?></p>
 							</div>
 
-							<div class="top-div-mobile green darken-4"></div>
+							<div class="top-div-mobile dark-grey"></div>
 						</div>
 					</div>
 				</div>

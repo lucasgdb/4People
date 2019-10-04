@@ -39,7 +39,7 @@
 
 				<textarea class="mt-2" id="text" placeholder="Digite aqui o texto" spellcheck="false"></textarea>
 
-				<button title="Converter texto para Binário" class="btn waves-effect waves-light btn-green mt-1" onclick="convertToBinary()">
+				<button title="Converter texto para Binário" class="btn waves-effect waves-light red-color mt-1" onclick="convertToBinary()">
 					Converter para Binário
 				</button>
 				<button title="Limpar Validação" class="btn waves-effect waves-light dark-grey ml-2 mt-1 z-depth-0 right" onclick="clearInput(txtText)">
@@ -51,7 +51,7 @@
 
 				<textarea class="mt-2" id="binary" placeholder="Digite aqui o código binário" spellcheck="false"></textarea>
 
-				<button title="Converter Código Binário para texto" class="btn waves-effect waves-light btn-green mt-1" onclick="convertToText()">
+				<button title="Converter Código Binário para texto" class="btn waves-effect waves-light red-color mt-1" onclick="convertToText()">
 					Converter para Texto
 				</button>
 				<button title="Limpar Validação" class="btn waves-effect waves-light dark-grey ml-2 mt-1 z-depth-0 right" onclick="clearInput(txtBinaryCode)">
@@ -70,10 +70,10 @@
 
 				<ul class="collection with-header mb-0">
 					<li class="collection-item">
-						<div>Base 64 - Codificador & Decodificador<a href="#" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+						<div>Base 64 - Codificador & Decodificador<a href="#" class="secondary-content"><i class="material-icons red-color-text">send</i></a></div>
 					</li>
 					<li class="collection-item">
-						<div>MD5 - Codificador<a href="#" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
+						<div>MD5 - Codificador<a href="#" class="secondary-content"><i class="material-icons red-color-text">send</i></a></div>
 					</li>
 				</ul>
 

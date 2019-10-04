@@ -46,7 +46,7 @@
 				</div>
 
 				<div class="divider mb-2"></div>
-				<button title="Buscar CEP" class="btn btn-center waves-effect waves-light btn-green z-depth-2" onclick="search()">
+				<button title="Buscar CEP" class="btn btn-center waves-effect waves-light red-color z-depth-2" onclick="search()">
 					Buscar CEP
 				</button>
 				<div class="divider mt-2"></div>

@@ -54,7 +54,7 @@
 					</div>
 
 					<div class="col s12">
-						<button title="Calcular" class="btn waves-effect waves-light btn-green z-depth-0" onclick="calculateFirst()">
+						<button title="Calcular" class="btn waves-effect waves-light red-color z-depth-0" onclick="calculateFirst()">
 							Calcular
 						</button>
 
@@ -83,7 +83,7 @@
 					</div>
 
 					<div class="col s12">
-						<button title="Calcular" class="btn waves-effect waves-light btn-green z-depth-0" onclick="calculateSecond()">
+						<button title="Calcular" class="btn waves-effect waves-light red-color z-depth-0" onclick="calculateSecond()">
 							Calcular
 						</button>
 
@@ -112,7 +112,7 @@
 					</div>
 
 					<div class="col s12">
-						<button title="Calcular" class="btn waves-effect waves-light btn-green z-depth-0" onclick="calculateThird()">
+						<button title="Calcular" class="btn waves-effect waves-light red-color z-depth-0" onclick="calculateThird()">
 							Calcular
 						</button>
 
@@ -141,7 +141,7 @@
 					</div>
 
 					<div class="col s12">
-						<button title="Calcular" class="btn waves-effect waves-light btn-green z-depth-0" onclick="calculateFourth()">
+						<button title="Calcular" class="btn waves-effect waves-light red-color z-depth-0" onclick="calculateFourth()">
 							Calcular
 						</button>
 
@@ -170,7 +170,7 @@
 					</div>
 
 					<div class="col s12">
-						<button title="Calcular" class="btn waves-effect waves-light btn-green z-depth-0" onclick="calculateFifth()">
+						<button title="Calcular" class="btn waves-effect waves-light red-color z-depth-0" onclick="calculateFifth()">
 							Calcular
 						</button>
 
@@ -199,7 +199,7 @@
 					</div>
 
 					<div class="col s12">
-						<button title="Calcular" class="btn waves-effect waves-light btn-green z-depth-0" onclick="calculateSixth()">
+						<button title="Calcular" class="btn waves-effect waves-light red-color z-depth-0" onclick="calculateSixth()">
 							Calcular
 						</button>
 
@@ -228,7 +228,7 @@
 					</div>
 
 					<div class="col s12">
-						<button title="Calcular" class="btn waves-effect waves-light btn-green z-depth-0" onclick="calculateSeventh()">
+						<button title="Calcular" class="btn waves-effect waves-light red-color z-depth-0" onclick="calculateSeventh()">
 							Calcular
 						</button>
 
@@ -257,7 +257,7 @@
 					</div>
 
 					<div class="col s12">
-						<button title="Calcular" class="btn waves-effect waves-light btn-green z-depth-0" onclick="calculateEighth()">
+						<button title="Calcular" class="btn waves-effect waves-light red-color z-depth-0" onclick="calculateEighth()">
 							Calcular
 						</button>
 
@@ -286,7 +286,7 @@
 					</div>
 
 					<div class="col s12">
-						<button title="Calcular" class="btn waves-effect waves-light btn-green z-depth-0" onclick="calculateNinth()">
+						<button title="Calcular" class="btn waves-effect waves-light red-color z-depth-0" onclick="calculateNinth()">
 							Calcular
 						</button>
 
@@ -305,10 +305,10 @@
 
 				<ul class="collection with-header mb-0">
 					<li class="collection-item">
-						<div>Gerador de Senhas<a href="<?= $root ?>/" class="secondary-content"><i class="material-icons btn-green-text">send</i></a></div>
+						<div>Gerador de Senhas<a href="<?= $root ?>/" class="secondary-content"><i class="material-icons red-color-text">send</i></a></div>
 					</li>
 					<li class="collection-item">
-						<div>Gerador de Cartão de Crédito<a href="<?= $root ?>/" class="secondary-content"><i class="material-icons btn-green-text">send</i></a></div>
+						<div>Gerador de Cartão de Crédito<a href="<?= $root ?>/" class="secondary-content"><i class="material-icons red-color-text">send</i></a></div>
 					</li>
 				</ul>
 

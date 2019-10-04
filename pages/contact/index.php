@@ -73,7 +73,7 @@
 							<span class="helper-text">Mensagem para a equipe do 4People.</span>
 
 							<div class="divider mt-2"></div>
-							<button title="Inserir um Administrador no 4People" class="btn waves-effect btn-green mt-2 z-depth-0"><i class="material-icons right">send</i>Enviar Mensagem</button>
+							<button title="Inserir um Administrador no 4People" class="btn waves-effect red-color mt-2 z-depth-0"><i class="material-icons right">send</i>Enviar Mensagem</button>
 						</div>
 					</div>
 				</form>

@@ -60,7 +60,7 @@
 				</div>
 
 				<div class="divider mb-2"></div>
-				<button title="Gerar Nomes" class="btn btn-center waves-effect waves-dark indigo darken-4 white-text" onclick="generate()">
+				<button title="Gerar Nomes" class="btn btn-center waves-effect waves-dark red-color white-text" onclick="generate()">
 					Gerar Nomes
 				</button>
 				<div class="divider mt-2"></div>
