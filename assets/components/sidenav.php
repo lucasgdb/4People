@@ -13,7 +13,7 @@ if ($logged) {
 }
 ?>
 <ul id="slide-out" class="sidenav sidenav-fixed collapsible grey lighten-5">
-	<li style="position:relative">
+	<li>
 		<div class="user-view dark-grey mb-0" style="padding-bottom:15px">
 			<div class="background"></div>
 			<div class="mont-serrat" style="height:70px">

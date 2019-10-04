@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			lblContinentCode.textContent = data.continent_code
 			lblLatitude.textContent = data.latitude
 			lblLongitude.textContent = data.longitude
-			lblOrganization.textContent = data.organisation
 			lblCallingCode.textContent = data.calling_code
 			lblFlag.innerHTML = `<img style="position:relative;top:4px" src="${data.flag}" alt="${data.country_code}">`
 		}).catch(err => {

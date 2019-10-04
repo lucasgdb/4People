@@ -52,7 +52,6 @@
 						<p class="mb-0">Código do continente: <span id="continentCode"></span></p>
 						<p class="mb-0">Latitude: <span id="latitude"></span></p>
 						<p class="mb-0">Longitude: <span id="longitude"></span></p>
-						<p class="mb-0">Organização: <span id="organization"></span></p>
 						<p class="mb-0">Código de chamada: <span id="callingCode"></span></p>
 					</div>
 				</div>

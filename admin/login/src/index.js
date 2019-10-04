@@ -5,7 +5,6 @@ const txtPasswordIcon = document.querySelector('#visibility')
 const formLogin = document.querySelector('[name=formLogin]')
 const formInsert = document.querySelector('[name=formInsert]')
 const lblBannedStatus = document.querySelector('#bannedStatus')
-const paddingHeadersA = document.querySelectorAll('.padding-buttons ul li a')
 
 if (formLogin) {
 	formLogin.onsubmit = async e => {

@@ -2,45 +2,6 @@ html {
 	font-family: Arial, sans-serif, Arial;
 }
 
-.dark-grey {
-	background-color: #1B1A25
-}
-
-.dark-grey-text {
-	color: #1B1A25 !important
-}
-
-.btn-green {
-	background-color: #37ab52
-}
-
-.btn-green:hover {
-	background-color: #1b9236
-}
-
-.btn-green:focus {
-	background-color: #1b9236
-}
-
-nav {
-	background-color: #1b1a25
-}
-
-.nav-wrapper li a {
-	color: #c8c8c8;
-	height: 50px
-}
-
-nav,
-.nav-mobile,
-nav .nav-wrapper i,
-nav a.sidenav-trigger,
-nav a.sidenav-trigger i,
-.navbar-fixed {
-	height: 50px;
-	line-height: 50px
-}
-
 input:focus {
 	border-bottom: 1px solid #1b1a25 !important;
 	box-shadow: 0 1px 0 0 #1b1a25 !important
