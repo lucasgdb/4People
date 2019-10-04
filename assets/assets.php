@@ -34,3 +34,24 @@ do {
 		$p = implode($OS_path, $p);
 	}
 } while (true);
+
+include_once("php/Connection.php");
+
+$current_time = date('Y-m-d H:i:s');
+
+$sql = $database->prepare(
+	'SELECT * FROM maintenances WHERE
+	(:current_time >= maintenance_begin AND :current_time <= maintenance_end) OR
+	(maintenance_begin IS NULL AND :current_time <= maintenance_end) OR
+	(:current_time >= maintenance_begin AND maintenance_end IS NULL) OR
+	(maintenance_begin IS NULL AND maintenance_end IS NULL)'
+);
+
+$sql->bindValue(':current_time', $current_time);
+$sql->execute();
+
+if ($sql->rowCount() > 0) {
+	if (!isset($login_page) && !isset($_SESSION['logged'])) {
+		header("Location: $root/pages/maintenance/");
+	}
+}

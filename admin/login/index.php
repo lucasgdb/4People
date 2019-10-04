@@ -1,4 +1,5 @@
 <?php
+$login_page = true;
 include_once('../../assets/assets.php');
 
 if (isset($_SESSION['logged'])) {
@@ -126,7 +127,10 @@ if (isset($_SESSION['logged'])) {
 		</div>
 	</main>
 
-	<?php include_once("$assets/components/service_worker.php") ?>
+	<?php
+	include_once("$assets/components/service_worker.php");
+	include_once("$assets/components/footer.php")
+	?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
