@@ -16,22 +16,21 @@ if (strpos($url, '?') === false && $url[strlen($url) - 1] !== '/') {
 $p = pathinfo($_SERVER['SCRIPT_FILENAME'])['dirname'];
 $assets = '';
 $root = '.';
-$OS_path = PHP_OS === 'WINNT' || PHP_OS === 'Windows' || PHP_OS === 'WIN32' ? '\\' : '/';
 
 do {
 	if (is_dir($p . '/assets/')) {
 		$assets .= 'assets';
-		if ($root[strlen($root) - 1] === $OS_path) $root = substr($root, 0, -1);
+		if ($root[strlen($root) - 1] === '/') $root = substr($root, 0, -1);
 
 		break;
 	} else {
-		$assets .= "..$OS_path";
+		$assets .= "../";
 		if ($root === '.') $root = '';
 
-		$root .= "..$OS_path";
-		$p = explode($OS_path, $p);
+		$root .= "../";
+		$p = explode('/', $p);
 		unset($p[count($p) - 1]);
-		$p = implode($OS_path, $p);
+		$p = implode('/', $p);
 	}
 } while (true);
 
