@@ -1,6 +1,6 @@
-const CACHE_VERSION = 2
+const CACHE_VERSION = 3
 const CURRENT_CACHES = { offline: `offline-v${CACHE_VERSION}` }
-const OFFLINE_URL = '/offline/index.html'
+const OFFLINE_URL = '/pages/offline/index.html'
 
 const createCacheBustedRequest = url => {
 	const request = new Request(url, { cache: 'reload' })

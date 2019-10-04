@@ -20,7 +20,7 @@ if ($logged) {
 				<span style="color:#c8c8c8">&lt;/<span class="red-color-text">4People</span>&gt;</span>
 			</div>
 			<span class="name" style="color:#c8c8c8"><?= $logged ? "Admin: $admin_name" : '4People - Ferramentas Online' ?></span>
-			<a class="linkHover" href="<?= $logged ? "$root/admin/panel/administrators/data_update/?admin_id=$admin_id" : "$root/sobre/" ?>"><span class="email" style="padding-bottom:0"><?= $logged ? 'Editar Perfil' : 'Sobre o 4People' ?> »</span></a>
+			<a class="linkHover" href="<?= $logged ? "$root/admin/panel/administrators/data_update/?admin_id=$admin_id" : "$root/pages/about/" ?>"><span class="email" style="padding-bottom:0"><?= $logged ? 'Editar Perfil' : 'Sobre o 4People' ?> »</span></a>
 			<?= $logged ? "<a class=\"dark-grey\" href=\"$assets/php/Logout.php\"><span class=\"email\" style=\"color:#c8c8c8;padding-bottom:0\">Sair »</span></a>" : '' ?>
 		</div>
 	</li>
@@ -43,14 +43,14 @@ if ($logged) {
 			<div class="collapsible-header"><i class="material-icons left"><?= $type_icon ?></i><?= $type_name ?><i class="material-icons" style="position:absolute;right:0<?= $active ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
 			<div class="collapsible-body">
 				<ul class="collapsible padding-headers">
-					<?php foreach ($sql as $data) : extract($data) ?>
-						<?php
-								$sql = $database->prepare('SELECT tool_id, tool_name, tool_path, tool_description, tool_visits, tool_status FROM tools WHERE section_id = :section_id ORDER BY tool_visits DESC');
-								$sql->bindValue(':section_id', $section_id);
-								$sql->execute();
+					<?php foreach ($sql as $data) :
+							extract($data);
 
-								$active = strpos($link, "pages/$type_path/$section_path") !== false
-								?>
+							$sql = $database->prepare('SELECT tool_id, tool_name, tool_path, tool_description, tool_visits, tool_status FROM tools WHERE section_id = :section_id ORDER BY tool_visits DESC');
+							$sql->bindValue(':section_id', $section_id);
+							$sql->execute();
+
+							$active = strpos($link, "pages/$type_path/$section_path") !== false ?>
 						<li class="<?= $active ? 'active' : '' ?>">
 							<div style="position:relative" class="collapsible-header"><i class="material-icons"><?= $section_icon ?></i><?= $section_name ?><i class="material-icons" style="position:absolute;right:10px<?= $active ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
 							<div class="collapsible-body">
@@ -62,25 +62,22 @@ if ($logged) {
 												$admin = isset($_SESSION['logged']);
 
 												if ($active) {
-													if (!$tool_status && !$admin) : ?>
-												<script>
-													location = '<?= $root ?>/'
-												</script>
+													if (!$tool_status && !$admin) {
+														echo "<script>location = '$root/'</script>";
 
-												<?php exit() ?>
-											<?php endif ?>
-										<?php
-														$description = $tool_description;
-
-														if (!$admin) {
-															$sql = $database->prepare('UPDATE tools SET tool_visits = :tool_visits WHERE tool_id = :tool_id');
-
-															$sql->bindValue(':tool_visits', ++$tool_visits);
-															$sql->bindValue(':tool_id', $tool_id);
-															$sql->execute();
-														}
+														exit();
 													}
-													?>
+
+													$description = $tool_description;
+
+													if (!$admin) {
+														$sql = $database->prepare('UPDATE tools SET tool_visits = :tool_visits WHERE tool_id = :tool_id');
+
+														$sql->bindValue(':tool_visits', ++$tool_visits);
+														$sql->bindValue(':tool_id', $tool_id);
+														$sql->execute();
+													}
+												} ?>
 										<?php if ($tool_status || $admin) : ?>
 											<li><a class="waves-effect <?= $active ? 'black-text' : '' ?>" <?= $active ? 'style="font-weight:bold" onclick="preventDefault(event)"' : '' ?> href="<?= $root ?>/pages/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" title="<?= $tool_name ?>"><i class="material-icons <?= $active ? 'dark-grey-text' : '' ?> left" style="<?= $active ? 'font-size:20px;margin-left:2.5px' : '' ?>"><?= $active ? 'radio_button_checked' : 'keyboard_arrow_right' ?></i><?= $tool_name ?></a></li>
 										<?php endif ?>
@@ -102,7 +99,7 @@ if ($logged) {
 			<ul class="collapsible padding-headers padding-buttons">
 				<li>
 					<ul>
-						<li><a class="waves-effect" href="<?= $root ?>/pages/about/" title="Sobre - 4People"><i class="material-icons left">keyboard_arrow_right</i>Sobre</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/pages/about/" title="Sobre - 4People"><i class="material-icons left">keyboard_arrow_right</i>Sobre nós</a></li>
 						<li><a class="waves-effect" href="<?= $root ?>/pages/contact/" title="Fale Conosco - 4People"><i class="material-icons left">keyboard_arrow_right</i>Fale Conosco</a></li>
 						<?php
 						$sql = $database->prepare('SELECT type_name, type_path FROM types');

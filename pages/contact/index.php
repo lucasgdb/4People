@@ -33,37 +33,29 @@
 	<main>
 		<div class="container">
 			<div class="card-panel z-depth-2 top-div-margin">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">email</i>Fale Conosco</h1>
+				<h1 class="mont-serrat" style="font-size:30px;margin:20px 0 5px 0"><i class="material-icons left" style="top:5px">email</i>Fale Conosco</h1>
 
 				<label>Alguma dúvida? Algum bug? Deseja alguma ferramenta nova? Por favor, nos contate e deixe-nos sabendo de qualquer coisa.</label>
-				<div class="divider"></div>
+				<div class="divider" style="margin-top:10px;margin-bottom:25px"></div>
 
-				<h5 class="mt-2 mb-2 center-align" style="position:relative"><i class="material-icons" style="position:absolute;left:0">drafts</i>Dados de contato</h5>
-				<div class="divider" style="margin-bottom:15px"></div>
-
-				<form class="mt-2" method="POST">
+				<form method="POST">
 					<div class="row mb-0">
-						<div class="input-field col s12">
+						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">account_circle</i>
 							<input title="Preencha este campo com seu nome." maxlength="45" placeholder="Nome para contato" name="message_name" id="message_name" type="text" class="validate" oninvalid="this.setCustomValidity('Preencha este campo com seu nome.')" oninput="setCustomValidity('')" required>
 							<label class="active" for="message_name">Nome *</label>
 							<span class="helper-text" data-error="Nome inválido." data-success="Nome válido.">Ex: Lucas Bittencourt</span>
 						</div>
 
-						<div class="input-field col s12">
+						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">mail</i>
 							<input title="Preencha este campo com seu e-mail." maxlength="45" placeholder="E-mail para contato" name="message_email" id="message_email" type="email" class="validate" oninvalid="this.setCustomValidity('Preencha este campo com seu e-mail.')" oninput="setCustomValidity('')" required>
 							<label class="active" for="message_email">E-mail *</label>
 							<span class="helper-text" data-error="E-mail inválido." data-success="E-mail válido.">Ex: lucasnaja0@gmail.com</span>
 						</div>
-					</div>
 
-					<div class="divider"></div>
-					<h5 class="mt-2 mb-2 center-align" style="position:relative"><i class="material-icons" style="position:absolute;left:0">info</i>Informações</h5>
-					<div class="divider" style="margin-bottom:15px"></div>
-
-					<div class="row mb-0">
 						<div class="input-field col s12">
+							<i class="material-icons prefix">info</i>
 							<select name="message_subject">
 								<option value="Bug (mal funcionamento)">Bug (mal funcionamento)</option>
 								<option value="Erro (erro visual)">Erro (erro visual)</option>
@@ -75,13 +67,13 @@
 							<span class="helper-text">Selecionar assunto de mensagem</span>
 						</div>
 
-						<div class="col s12">
+						<div class="input-field col s12">
+							<i class="material-icons prefix">message</i>
 							<textarea name="message_content" placeholder="Mensagem" oninvalid="this.setCustomValidity('Preencha este campo com a mensagem.')" oninput="setCustomValidity('')" spellcheck="false" required></textarea>
-						</div>
+							<span class="helper-text">Mensagem para a equipe do 4People.</span>
 
-						<div class="col s12">
-							<div class="divider"></div>
-							<button title="Inserir um Administrador no 4People" class="btn waves-effect btn-green z-depth-0"><i class="material-icons right">send</i>Enviar Mensagem</button>
+							<div class="divider mt-2"></div>
+							<button title="Inserir um Administrador no 4People" class="btn waves-effect btn-green mt-2 z-depth-0"><i class="material-icons right">send</i>Enviar Mensagem</button>
 						</div>
 					</div>
 				</form>

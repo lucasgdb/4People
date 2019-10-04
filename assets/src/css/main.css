@@ -7,7 +7,12 @@ body {
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
-	transition: padding-left 300ms
+	transition: padding-left 300ms;
+	background-color: #ebebeb
+}
+
+.mont-serrat {
+	font-family: 'Montserrat';
 }
 
 .mont-serrat span {
@@ -101,8 +106,7 @@ ul#slide-out {
 }
 
 main {
-	flex: 1 0 auto;
-	background-color: #ebebeb
+	flex: 1 0 auto
 }
 
 .dark-grey {

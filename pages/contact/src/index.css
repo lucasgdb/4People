@@ -32,13 +32,13 @@ textarea:focus::placeholder {
 
 input[type=text]:focus,
 input[type=email]:focus {
-	border-bottom: 1px solid #1a237e !important;
-	box-shadow: 0 1px 0 0 #1a237e !important
+	border-bottom: 1px solid #1b1a25 !important;
+	box-shadow: 0 1px 0 0 #1b1a25 !important
 }
 
 input[type=text]:not(.browser-default):focus:not([readonly])+label,
 input[type=email]:not(.browser-default):focus:not([readonly])+label {
-	color: #1a237e
+	color: #1b1a25
 }
 
 input[type=text]:not(.browser-default):focus.invalid~label,
@@ -47,7 +47,7 @@ input[type=email]:not(.browser-default):focus.invalid~label {
 }
 
 .input-field .prefix.active {
-	color: #1a237e
+	color: #1b1a25
 }
 
 .dropdown-content li>span {
