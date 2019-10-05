@@ -76,7 +76,7 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="col s12">
 							<div class="divider"></div>
-							<button title="Inserir um Administrador no 4People" class="btn waves-effect waves-light btn-green mt-2 z-depth-0"><i class="material-icons left">person_add</i>Inserir</button>
+							<button title="Inserir um Administrador no 4People" class="btn waves-effect waves-light red-color mt-2 z-depth-0"><i class="material-icons left">person_add</i>Inserir</button>
 						</div>
 					</div>
 				</form>

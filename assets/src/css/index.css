@@ -1,9 +1,20 @@
+.caption h5,
+.caption h3 {
+	background-color: rgba(0, 0, 0, .3);
+	border-radius: 10px;
+	padding: 0 10px
+}
+
+.caption .material-icons {
+	font-weight: 1000
+}
+
 .indicators .active {
 	background-color: #1B1A25 !important
 }
 
-.slides li {
-	border: 1px solid rgb(180, 180, 180)
+li.indicator-item {
+	border: 1px solid #1B1A25
 }
 
 .card-panel {

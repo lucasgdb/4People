@@ -40,31 +40,34 @@
 				<div class="slider">
 					<ul class="slides">
 						<li class="grey lighten-3">
-							<img alt=".">
+							<img src="<?= $assets ?>/images/bg01.jpg" alt="bg01">
 							<div class="caption left-align">
-								<h3 class="dark grey-text text-darken-4"><i style="top:9px" class="material-icons red-text text-accent-4 left small">favorite</i> FEITO PARA TODOS!</h3>
-								<h5 class="light grey-text text-darken-4">Possuímos ferramentas para Programadores, professores, estudantes e usuários comuns.</h5>
+								<h3 class="dark"><i style="top:9px" class="material-icons red-color-text left small">favorite</i> FEITO PARA TODOS!</h3>
+								<h5 class="light">Possuímos ferramentas para Programadores, professores, estudantes e usuários comuns.</h5>
 							</div>
 						</li>
 
 						<li class="grey lighten-3">
+							<img src="<?= $assets ?>/images/bg01.jpg" alt="bg01">
 							<div class="caption left-align">
-								<h3 class="dark grey-text text-darken-4"><i style="top:10px" class="material-icons left small">fast_forward</i> MAIS RÁPIDO!</h3>
-								<h5 class="light grey-text text-darken-4">Nossas Ferramentas foram todas escritas em JavaScript, para maior velocidade e segurança.</h5>
+								<h3 class="dark"><i style="top:10px" class="material-icons red-color-text left small">fast_forward</i> MAIS RÁPIDO!</h3>
+								<h5 class="light">Nossas Ferramentas foram todas escritas em JavaScript, para maior velocidade e segurança.</h5>
 							</div>
 						</li>
 
 						<li class="grey lighten-3">
+							<img src="<?= $assets ?>/images/bg01.jpg" alt="bg01">
 							<div class="caption right-align">
-								<h3 class="dark grey-text text-darken-4">CÓDIGO ABERTO! <i style="top:10px" class="material-icons right small">code</i></h3>
-								<h5 class="light grey-text text-darken-4">O Projeto 4People é de Código Aberto para qualquer um estudar os algoritmos e até mesmo melhorá-los.</h5>
+								<h3 class="dark">CÓDIGO ABERTO! <i style="top:10px" class="material-icons red-color-text right small">code</i></h3>
+								<h5 class="light">O Projeto 4People é de Código Aberto para qualquer um estudar os algoritmos e até mesmo melhorá-los.</h5>
 							</div>
 						</li>
 
 						<li class="grey lighten-3">
+							<img src="<?= $assets ?>/images/bg01.jpg" alt="bg01">
 							<div class="caption right-align">
-								<h3 class="dark grey-text text-darken-4"><i style="top:10px" class="material-icons right small">free_breakfast</i>O MAIS ATUALIZADO!</h3>
-								<h5 class="light grey-text text-darken-4">O 4People possui as melhores ferramentas atualizadas. Tá sentindo falta de alguma? Por favor, nos envie uma <a href="./contato/">mensagem</a>.</h5>
+								<h3 class="dark"><i style="top:10px" class="material-icons red-color-text right small">free_breakfast</i>O MAIS ATUALIZADO!</h3>
+								<h5 class="light">O 4People possui as melhores ferramentas atualizadas. Tá sentindo falta de alguma? Por favor, nos envie uma <a href="./contato/">mensagem</a>.</h5>
 							</div>
 						</li>
 					</ul>
@@ -92,7 +95,7 @@
 								<ul class="collection with-header mb-0">
 									<?php foreach ($sql as $data) : extract($data) ?>
 										<li class="collection-item grey lighten-5">
-											<div style="font-size:16px"><?= $tool_name ?><a title="Usar <?= $tool_name ?>" href="<?= $root ?>/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" class="secondary-content"><i class="material-icons red-color-text">send</i></a></div>
+											<div style="font-size:16px"><?= $tool_name ?><a title="Usar <?= $tool_name ?>" href="<?= $root ?>/pages/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" class="secondary-content"><i class="material-icons red-color-text">send</i></a></div>
 										</li>
 									<?php endforeach ?>
 								</ul>
