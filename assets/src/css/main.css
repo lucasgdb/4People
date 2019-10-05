@@ -109,7 +109,9 @@ main {
 	flex: 1 0 auto
 }
 
-.dark-grey {
+.dark-grey,
+.dark-grey:hover,
+.dark-grey:focus {
 	background-color: #1B1A25 !important
 }
 

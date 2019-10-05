@@ -54,7 +54,7 @@ if (!isset($_SESSION['logged'])) {
 								<div class="input-field col s12">
 									<i class="material-icons prefix">access_time</i>
 									<input name="maintenance_begin_time" id="maintenance_begin_time" type="text" placeholder="Horário atual" class="timepicker">
-									<label class="active" for="maintenance_begin_time">Data final</label>
+									<label class="active" for="maintenance_begin_time">Horário inicial</label>
 								</div>
 							</div>
 						</div>
@@ -64,7 +64,7 @@ if (!isset($_SESSION['logged'])) {
 								<div class="input-field col s12">
 									<i class="material-icons prefix">date_range</i>
 									<input name="maintenance_end_date" id="maintenance_end_date" type="text" placeholder="Data final" class="datepicker">
-									<label class="active" for="maintenance_end_date">Horário inicial</label>
+									<label class="active" for="maintenance_end_date">Data final</label>
 								</div>
 
 								<div class="input-field col s12">

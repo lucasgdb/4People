@@ -16,6 +16,10 @@ input[type=text]::placeholder {
 	color: rgba(0, 0, 0, .4)
 }
 
+.input-field .prefix.active {
+	color: #A62023 !important
+}
+
 .datepicker-date-display {
 	background-color: #1b1a25
 }

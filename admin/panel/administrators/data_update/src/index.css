@@ -15,8 +15,10 @@ input:not(.browser-default):focus.invalid~label {
 	color: #F44336 !important
 }
 
-.dark-grey {
-	background-color: #1B1A25
+.dark-grey,
+.dark-grey:hover,
+.dark-grey:focus {
+	background-color: #1B1A25 !important
 }
 
 .dark-grey-text {

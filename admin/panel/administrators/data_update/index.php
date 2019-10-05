@@ -83,8 +83,8 @@ if (!isset($_SESSION['logged'])) {
 						<div class="col s12">
 							<div class="divider"></div>
 
-							<a href="../" class="btn waves-effect waves-light red-color mt-2 z-depth-0" title="Cancelar"><i class="material-icons left">close</i>Cancelar</a>
-							<button title="Salvar" class="btn waves-effect waves-light btn-green mt-2 right z-depth-0"><i class="material-icons left">save</i>Salvar</button>
+							<a href="../" class="btn waves-effect waves-light dark-grey mt-2 z-depth-0" title="Cancelar"><i class="material-icons left">close</i>Cancelar</a>
+							<button title="Salvar" class="btn waves-effect waves-light red-color mt-2 right z-depth-0"><i class="material-icons left">save</i>Salvar</button>
 						</div>
 					</div>
 				</form>
