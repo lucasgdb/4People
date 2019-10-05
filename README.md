@@ -70,11 +70,14 @@
 - Página Inicial
 ![4people](assets/images/README_images/4people.png "4People - Início")
 
+- Página Inicial 2
+![4people](assets/images/README_images/4people_2.png "4People - Início")
+
 - Computação
 ![4people](assets/images/README_images/computacao.png "4People - Computação")
 
 - Matemática
 ![4people](assets/images/README_images/matematica.png "4People - Matemática")
 
-- Sobre
-![4people](assets/images/README_images/sobre.png "4People - Sobre")
+- Fale Conosco
+![4people](assets/images/README_images/fale_conosco.png "4People - Fale Conosco")
