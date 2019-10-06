@@ -5,7 +5,7 @@
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-   <link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>Contador de Caracteres - 4People</title>
@@ -28,14 +28,14 @@
 	include_once("$assets/components/header.php");
 	include_once("$assets/components/sidenav.php")
 	?>
-	
+
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">format_color_text</i>Contador de Caracteres</h1>
+				<h1 class="mont-serrat" style="font-size:30px;margin:5px 0 5px 0"><i class="material-icons left red-color-text" style="top:5px"><?= $icon_section ?></i><?= $name_tool ?></h1>
 
-				<label><?= $description ?></label>
-				<div class="divider"></div>
+				<label><?= $description_tool ?></label>
+				<div class="divider" style="margin-top:10px"></div>
 
 				<textarea class="mt-2" id="text" placeholder="Digite aqui o texto" oninput="countChars()"></textarea>
 
@@ -72,9 +72,9 @@
 	</main>
 
 	<?php
-   include_once("$assets/components/footer.php");
-   include_once("$assets/components/service_worker.php")
-   ?>
+	include_once("$assets/components/footer.php");
+	include_once("$assets/components/service_worker.php")
+	?>
 
 	<script src="<?= $assets ?>/algorithms/string_functions/charactersCount.js"></script>
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>

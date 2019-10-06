@@ -5,7 +5,7 @@
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-   <link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<title>Meu Navegador - 4People</title>
 	<?php include_once("$assets/components/meta_tags.php") ?>
@@ -31,10 +31,10 @@
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">wifi</i>Meu Navegador</h1>
+				<h1 class="mont-serrat" style="font-size:30px;margin:5px 0 5px 0"><i class="material-icons left red-color-text" style="top:5px"><?= $icon_section ?></i><?= $name_tool ?></h1>
 
-				<label><?= $description ?></label>
-				<div class="divider"></div>
+				<label><?= $description_tool ?></label>
+				<div class="divider" style="margin-top:10px"></div>
 
 				<div class="row mb-0">
 					<div class="col s12">
@@ -66,9 +66,9 @@
 	</main>
 
 	<?php
-   include_once("$assets/components/footer.php");
-   include_once("$assets/components/service_worker.php")
-   ?>
+	include_once("$assets/components/footer.php");
+	include_once("$assets/components/service_worker.php")
+	?>
 
 	<script src="<?= $assets ?>/algorithms/network_and_internet/myWebBrowser.js"></script>
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>

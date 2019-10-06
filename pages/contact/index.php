@@ -33,7 +33,7 @@
 	<main>
 		<div class="container">
 			<div class="card-panel z-depth-2 top-div-margin">
-				<h1 class="mont-serrat" style="font-size:30px;margin:20px 0 5px 0"><i class="material-icons left" style="top:5px">email</i>Fale Conosco</h1>
+				<h1 class="mont-serrat" style="font-size:30px;margin:5px 0 5px 0"><i class="material-icons left red-color-text" style="top:5px">email</i>Fale Conosco</h1>
 
 				<label>Alguma dúvida? Algum bug? Deseja alguma ferramenta nova? Por favor, nos contate e deixe-nos sabendo de qualquer coisa.</label>
 				<div class="divider" style="margin-top:10px;margin-bottom:25px"></div>

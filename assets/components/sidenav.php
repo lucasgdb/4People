@@ -1,6 +1,5 @@
 <?php
 $link = $_SERVER['REQUEST_URI'];
-include_once("$assets/php/Connection.php");
 
 $logged = isset($_SESSION['logged']['id']);
 
@@ -76,7 +75,8 @@ if ($logged) {
 														exit();
 													}
 
-													$description = $tool_description;
+													$description_tool = $tool_description;
+													$name_tool = $tool_name;
 
 													if (!$admin) {
 														$sql = $database->prepare('UPDATE tools SET tool_visits = :tool_visits WHERE tool_id = :tool_id');

@@ -32,10 +32,10 @@
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">autorenew</i>Gerador de Meta Tags</h1>
+				<h1 class="mont-serrat" style="font-size:30px;margin:5px 0 5px 0"><i class="material-icons left red-color-text" style="top:5px"><?= $icon_section ?></i><?= $name_tool ?></h1>
 
-				<label><?= $description ?></label>
-				<div class="divider"></div>
+				<label><?= $description_tool ?></label>
+				<div class="divider" style="margin-top:10px"></div>
 
 				<h5>Informações</h5>
 				<div class="divider"></div>
@@ -236,9 +236,9 @@
 	</main>
 
 	<?php
-   include_once("$assets/components/footer.php");
-   include_once("$assets/components/service_worker.php")
-   ?>
+	include_once("$assets/components/footer.php");
+	include_once("$assets/components/service_worker.php")
+	?>
 
 	<script src="<?= $assets ?>/algorithms/generators/metaTagsGenerator.js"></script>
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
