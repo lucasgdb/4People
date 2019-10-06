@@ -37,7 +37,10 @@ if ($logged) {
 
 			$active = strpos($link, "pages/$type_path") !== false;
 
-			if ($active) $icon = $type_icon
+			if ($active) {
+				$icon = $type_icon;
+				$name = $type_name;
+			}
 			?>
 		<li class="<?= $active ? 'active' : '' ?>">
 			<div class="collapsible-header"><i class="material-icons left"><?= $type_icon ?></i><?= $type_name ?><i class="material-icons" style="position:absolute;right:0<?= $active ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
@@ -50,7 +53,12 @@ if ($logged) {
 							$sql->bindValue(':section_id', $section_id);
 							$sql->execute();
 
-							$active = strpos($link, "pages/$type_path/$section_path") !== false ?>
+							$active = strpos($link, "pages/$type_path/$section_path") !== false;
+
+							if ($active) {
+								$icon_section = $section_icon;
+								$name_section = $section_name;
+							} ?>
 						<li class="<?= $active ? 'active' : '' ?>">
 							<div style="position:relative" class="collapsible-header"><i class="material-icons"><?= $section_icon ?></i><?= $section_name ?><i class="material-icons" style="position:absolute;right:10px<?= $active ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
 							<div class="collapsible-body">
