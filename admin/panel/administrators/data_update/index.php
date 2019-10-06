@@ -24,11 +24,6 @@ if (!isset($_SESSION['logged'])) {
 	<main>
 		<div class="container">
 			<div class="card-panel z-depth-3 left-div-margin" style="padding-bottom:10px">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">edit</i>Controle de Administradores - Atualizar Dados</h1>
-				<label>Atualizar Dados de um Administrador do 4People</label>
-
-				<div class="divider"></div>
-
 				<?php
 				include_once("$assets/php/Connection.php");
 				$admin_id = filter_input(INPUT_GET, 'admin_id', FILTER_DEFAULT);
@@ -39,6 +34,10 @@ if (!isset($_SESSION['logged'])) {
 				$sql->execute();
 				extract($sql->fetch());
 				?>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">edit</i>Atualizar dados de <?= $admin_name ?></h1>
+				<label>Atualizar Dados de um Administrador do 4People</label>
+
+				<div class="divider"></div>
 
 				<form style="margin-top:15px" action="../src/update_admin.php" method="POST" enctype="multipart/form-data">
 					<div class="row mb-0">

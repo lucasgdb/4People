@@ -289,8 +289,8 @@ if (!isset($_SESSION['logged'])) {
 						<td>${data[i][0]}</td>
 						<td><i title="${data[i][2]}" class="material-icons" style="top:4px">${data[i][2]}</i></td>
 						<td>
-							<button data-clipboard-text="<?= $_SERVER['HTTP_HOST'] ?>/pages/${data[i][3]}/${data[i][1]}/" title="Copiar caminho da página" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
-							<a href="<?= $root ?>/pages/${data[i][3]}/${data[i][1]}/" title="Ir até a página" class="btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons">insert_link</i></a>
+							<button data-clipboard-text="<?= $_SERVER['HTTP_HOST'] ?>/pages/${data[i][3]}/${data[i][1]}/" title="Copiar caminho da página" class="btn waves-effect waves-light dark-grey z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
+							<a href="<?= $root ?>/pages/${data[i][3]}/${data[i][1]}/" title="Ir até a página" class="btn waves-effect waves-light dark-grey z-depth-0"><i class="material-icons">insert_link</i></a>
 						</td>
 						<td>
 							<button class="btn waves-effect waves-light green darken-3 z-depth-0 modal-trigger" title="Editar informações de ${data[i][0]}" data-target="updateSection${i}"><i class="material-icons">edit</i></button>
@@ -401,8 +401,8 @@ if (!isset($_SESSION['logged'])) {
 						<td>${data[i][0]}</td>
 						<td><i title="${data[i][2]}" class="material-icons" style="top:4px">${data[i][2]}</i></td>
 						<td>
-							<button data-clipboard-text="<?= $_SERVER['HTTP_HOST'] ?>/pages/${data[i][3]}/${data[i][1]}/" title="Copiar caminho da página" class="btn waves-effect waves-light teal darken-2 z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
-							<a href="<?= $root ?>/pages/${data[i][3]}/${data[i][1]}/" title="Ir até a página" class="btn waves-effect waves-light indigo darken-4 z-depth-0"><i class="material-icons">insert_link</i></a>
+							<button data-clipboard-text="<?= $_SERVER['HTTP_HOST'] ?>/pages/${data[i][3]}/${data[i][1]}/" title="Copiar caminho da página" class="btn waves-effect waves-light dark-grey z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
+							<a href="<?= $root ?>/pages/${data[i][3]}/${data[i][1]}/" title="Ir até a página" class="btn waves-effect waves-light dark-grey z-depth-0"><i class="material-icons">insert_link</i></a>
 						</td>
 						<td>
 							<button class="btn waves-effect waves-light green darken-3 z-depth-0 modal-trigger" title="Editar informações de ${data[i][0]}" data-target="updateSection${i}"><i class="material-icons">edit</i></button>

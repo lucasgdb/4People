@@ -15,7 +15,7 @@ if (!isset($_SESSION['logged'])) {
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
-	<title>Banimentos - 4People</title>
+	<title>Controle de Banimentos - 4People</title>
 	<?php include_once("$assets/components/admin_components/meta_tags.php") ?>
 </head>
 

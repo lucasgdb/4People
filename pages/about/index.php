@@ -32,7 +32,7 @@
 	<main>
 		<div class="container">
 			<div class="card-panel z-depth-2 top-div-margin">
-				<h1 class="mont-serrat" style="font-size:30px;margin:5px 0 5px 0"><img src="<?= $assets ?>/images/icon.png" width="25" style="margin-right:10px" alt="Logo">Sobre</h1>
+				<h1 class="mont-serrat" style="font-size:30px;margin:5px 0 5px 0"><img src="<?= $assets ?>/images/icon.png" width="25" style="margin-right:10px" alt="Logo">Sobre nós</h1>
 
 				<label>4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.</label>
 				<div class="divider"></div>
