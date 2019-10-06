@@ -10,6 +10,17 @@ try {
 	include_once("$assets/php/MD5.php");
 	include_once("$assets/php/IP.php");
 
+	function setLog($database, $ip, $admin_nickname, $admin_password): int
+	{
+		$log = $database->prepare('INSERT INTO login_logs VALUES (NULL, :log_ip, :log_name, :log_password, :log_createdAt)');
+		$log->bindValue(':log_ip', $ip);
+		$log->bindValue(':log_name', $admin_nickname);
+		$log->bindValue(':log_password', $admin_password);
+		$log->bindValue(':log_createdAt', date('Y-m-d H:i:s'));
+
+		return $log->execute();
+	}
+
 	$ip = get_ip_address();
 	$admin_nickname = strtolower(trim(filter_input(INPUT_POST, 'admin_nickname', FILTER_DEFAULT)));
 	$admin_password = trim(filter_input(INPUT_POST, 'admin_password', FILTER_DEFAULT));
@@ -76,6 +87,8 @@ try {
 
 				echo json_encode(['status' => '0', 'reason' => 'banned']);
 			} else if ($banned_amount < 3) {
+				setLog($database, $ip, $admin_nickname, $admin_password);
+
 				$sql = $database->prepare(
 					'UPDATE banneds
 						SET banned_amount = :banned_amount
@@ -89,6 +102,8 @@ try {
 				echo json_encode(['status' => '0', 'reason' => 'wrong']);
 			} else echo json_encode(['status' => '0', 'reason' => 'banned']);
 		} else {
+			setLog($database, $ip, $admin_nickname, $admin_password);
+
 			$sql = $database->prepare('INSERT INTO banneds (banned_ip) VALUES(:banned_ip)');
 			$sql->bindValue(':banned_ip', $ip);
 			$sql->execute();

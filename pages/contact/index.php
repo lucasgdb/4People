@@ -36,9 +36,9 @@
 				<h1 class="mont-serrat" style="font-size:30px;margin:5px 0 5px 0"><i class="material-icons left red-color-text" style="top:5px">email</i>Fale Conosco</h1>
 
 				<label>Alguma dúvida? Algum bug? Deseja alguma ferramenta nova? Por favor, nos contate e deixe-nos sabendo de qualquer coisa.</label>
-				<div class="divider" style="margin-top:10px;margin-bottom:25px"></div>
+				<div class="divider" style="margin-top:10px"></div>
 
-				<form method="POST">
+				<form style="margin-top:15px" method="POST">
 					<div class="row mb-0">
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">account_circle</i>

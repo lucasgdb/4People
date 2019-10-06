@@ -21,7 +21,7 @@ extract($sql->fetch())
 		<div class="left-div-mobile dark-grey" style="border-radius:0"></div>
 	</li>
 
-	<?php $people = strpos($link, 'messages') !== false || strpos($link, 'maintenance') !== false || isset($admin_panel) && $admin_panel === true ?>
+	<?php $people = strpos($link, 'messages') !== false || strpos($link, 'maintenance') !== false || strpos($link, 'login_logs') !== false || isset($admin_panel) && $admin_panel === true ?>
 
 	<li class="<?= $people ? 'active' : '' ?>">
 		<div class="collapsible-header"><i class="material-icons left">dashboard</i>4People<i class="material-icons" style="position:absolute;right:0<?= $people ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
@@ -31,7 +31,7 @@ extract($sql->fetch())
 					<ul>
 						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/" title="Painel Administrativo"><i class="material-icons left">keyboard_arrow_right</i>Painel Administrativo</a></li>
 						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/messages/" title="Mensagens dos usuários"><i class="material-icons left">keyboard_arrow_right</i>Mensagem dos usuários</a></li>
-						<li><a class="waves-effect" href="#" title="Logs de Logins falhos"><i class="material-icons left">keyboard_arrow_right</i>Logs de Logins falhos</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/login_logs/" title="Logs de Logins falhos"><i class="material-icons left">keyboard_arrow_right</i>Logs de Logins falhos</a></li>
 						<li><a class="waves-effect" href="#" title="Logs de Administradores"><i class="material-icons left">keyboard_arrow_right</i>Logs de Administradores</a></li>
 						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/maintenance/" title="Manutenção do site"><i class="material-icons left">keyboard_arrow_right</i>Manutenção do 4People</a></li>
 					</ul>
