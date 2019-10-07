@@ -28,7 +28,7 @@
 
 	<main>
 		<div class="container">
-			<div class="card-panel z-depth-2 top-div-margin">
+			<div class="card-panel top-div-margin">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">home</i>4People - Página Inicial</h1>
 				<label>Ferramentas Online para estudantes e professores.</label>
 
@@ -54,17 +54,17 @@
 
 						<li class="grey lighten-3">
 							<img src="<?= $assets ?>/images/bg01.jpg" alt="bg01">
-							<div class="caption right-align">
-								<h3 class="dark">CÓDIGO ABERTO! <i style="top:10px" class="material-icons red-color-text right small">code</i></h3>
+							<div class="caption left-align">
+								<h3 class="dark">CÓDIGO ABERTO! <i style="top:10px" class="material-icons red-color-text left small">code</i></h3>
 								<h5 class="light">O 4People é de Código Aberto e livre para qualquer um usar/melhorar.</h5>
 							</div>
 						</li>
 
 						<li class="grey lighten-3">
 							<img src="<?= $assets ?>/images/bg01.jpg" alt="bg01">
-							<div class="caption right-align">
-								<h3 class="dark"><i style="top:10px" class="material-icons red-color-text right small">free_breakfast</i>O MAIS ATUALIZADO!</h3>
-								<h5 class="light">Tá sentindo falta de alguma Ferramenta, encontrou algum erro/bug? Por favor, <a href="./pages/contact/">Fale Conosco</a>.</h5>
+							<div class="caption left-align">
+								<h3 class="dark"><i style="top:10px" class="material-icons red-color-text left small">free_breakfast</i>O MAIS ATUALIZADO!</h3>
+								<h5 class="light">Tá sentindo falta de alguma Ferramenta ou encontrou algum erro? Por favor, <a href="./pages/contact/">Fale Conosco</a>.</h5>
 							</div>
 						</li>
 					</ul>
@@ -72,10 +72,10 @@
 
 				<div class="divider mt-2 mb-2"></div>
 
-				<div class="container">
+				<div style="padding:0 20px">
 					<blockquote class="grey-text text-darken-3" style="border-left-color:#A62023">
 						"O 4People é um Sistema Web que possui inúmeras ferramentas para Desenvolvedores e estudantes usarem e tornarem seus dias mais produtivos e rápidos.
-						Foi produzido no curso de Desenvolvimento de Sistemas da Etec de Guaratinguetá."
+						Foi produzido no curso de Desenvolvimento de Sistemas da Etec de Guaratinguetá. O projeto é de código aberto e pode ser visualizado por qualquer um."
 					</blockquote>
 				</div>
 

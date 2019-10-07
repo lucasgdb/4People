@@ -25,6 +25,11 @@ body {
 	font-weight: 1000 !important
 }
 
+.sidenav {
+	border-right: 0;
+	box-shadow: -15px 0 18px
+}
+
 /* cyrillic-ext */
 @font-face {
 	font-family: 'Montserrat';
