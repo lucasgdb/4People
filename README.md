@@ -80,7 +80,7 @@
 ![matemaitca](assets/images/README_images/matematica.png "4People - Matemática")
 
 - Sobre nós
-![sobre](assets/images/README_images/matematica.png "4People - Sobre")
+![sobre](assets/images/README_images/sobre.png "4People - Sobre")
 
 - Fale Conosco
 ![fale_conosco](assets/images/README_images/fale_conosco.png "4People - Fale Conosco")

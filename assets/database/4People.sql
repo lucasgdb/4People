@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Oct 07, 2019 at 03:07 AM
+-- Generation Time: Oct 07, 2019 at 04:12 AM
 -- Server version: 8.0.17
 -- PHP Version: 7.2.19
 
@@ -67,8 +67,8 @@ CREATE TABLE `banneds` (
 
 CREATE TABLE `login_logs` (
   `log_id` int(11) NOT NULL,
-  `log_ip` bigint(15) NOT NULL,
-  `log_name` varchar(64) NOT NULL,
+  `log_ip` varchar(64) NOT NULL,
+  `log_nickname` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `log_password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `log_createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -77,10 +77,10 @@ CREATE TABLE `login_logs` (
 -- Dumping data for table `login_logs`
 --
 
-INSERT INTO `login_logs` (`log_id`, `log_ip`, `log_name`, `log_password`) VALUES
-(3, 127001, 'lucasnaja', 'dfsdfsdf'),
-(4, 127001, 'lucasnaja', '123457'),
-(5, 127001, 'lucasnaja', 'teste123');
+INSERT INTO `login_logs` (`log_id`, `log_ip`, `log_nickname`, `log_password`) VALUES
+(6, '127.0.0.1', 'lucas_naja', '123456'),
+(7, '127.0.0.1', 'lucas_bittencourt', '654321'),
+(8, '127.0.0.1', 'lucasnaja', 'wasd123');
 
 -- --------------------------------------------------------
 
@@ -188,7 +188,7 @@ INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_description`, `t
 (22, 'Porcentagem', 'percentage', 'Calculadora de Porcentagem Online com vários métodos para encontrar a porcentagem, como aumentos, descontos, proporções, etc.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/percentage.js', 4, 1, 12),
 (23, 'Equação do 2° Grau', 'bhaskara', 'Cálculo da Equção do 2° Grau (Bhaskara) Online. Δ = B² - 4 * A * C, X = (-B +- √Δ) / 2 * A', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/bhaskara.js', 7, 1, 12),
 (24, 'Números Primos', 'prime_numbers', 'Calculadora de Números Primos Online para verificar se número é primo ou não.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/primeNumbers.js', 5, 1, 12),
-(25, 'Números Amigáveis', 'friendly_numbers', 'Números amigáveis são pares de números onde um deles é a soma dos divisores do outro. Por exemplo, os divisores de 220 são 1, 2, 4, 5, 10, 11, 20, 22, 44, 55 e 110, cuja soma é 284. Por outro lado, os divisores de 284 são 1, 2, 4, 71 e 142 e a soma deles é 220.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/friendlyNumbers.js', 4, 1, 12),
+(25, 'Números Amigáveis', 'friendly_numbers', 'Números amigáveis são pares de números onde um deles é a soma dos divisores do outro.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/friendlyNumbers.js', 4, 1, 12),
 (26, 'Fibonacci', 'fibonacci', 'Calculadora para calcular a Sequência de Fibonacci. Ex: 0, 1, 1, 2, 3, 5, 8, 13, etc...', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/fibonacci.js', 5, 1, 12),
 (27, 'Conversor de Temperatura', 'temperature_converter', 'Conversor de Temperatura Online para calcular Graus Celsius, Fahrenheit e Kelvin.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/temperatureConversor.js', 5, 1, 12),
 (28, 'Divisão e Resto', 'division_rest', 'Calculadora de Divisão Online que mostra o resultado da divisão comum e inteira entre dois números e o resto (módulo) entre eles.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/divisionAndRest.js', 5, 1, 12),
@@ -309,7 +309,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `login_logs`
 --
 ALTER TABLE `login_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `maintenances`
