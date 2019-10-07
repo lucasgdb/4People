@@ -34,6 +34,50 @@
 				<label>4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.</label>
 				<div class="divider"></div>
 
+				<h4 class="center-align">Equipe</h4>
+
+				<div class="row" style="margin-top:20px">
+					<div class="col s12 m6 l4">
+						<img title="Lucas Bittencourt" class="responsive-img circle" src="<?= $assets ?>/images/lucas_bittencourt.jpg" alt="">
+					</div>
+
+					<div class="col s12 m6 l8">
+						<p class="grey-text text-darken-4 mb-0">Nome: Lucas Bittencourt. Função: Desenvolvedor</p>
+
+						<div class="divider mb-2"></div>
+						<blockquote class="grey-text text-darken-3 mt-0">"Lucas Bittencourt, 19, cursando Análise e Desenvolvimento de Sistemas na Fatec de Guaratinguetá e amando Desenvolvimeto Web. Amo aprender coisas novas, distribuições Linux e programar. Um futuro Desenvolvedor fullstack."</blockquote>
+					</div>
+				</div>
+
+				<div class="divider"></div>
+
+				<div class="row" style="margin-top:20px">
+					<div class="col s12 m6 l4">
+						<img title="Suzany Silva" class="responsive-img circle" src="<?= $assets ?>/images/suzany_silva.jpg" alt="">
+					</div>
+
+					<div class="col s12 m6 l8">
+						<p class="grey-text text-darken-4 mb-0">Nome: Suzany Silva. Função: Analista</p>
+
+						<div class="divider mb-2"></div>
+						<blockquote class="grey-text text-darken-3 mt-0">"Suzany Silva, 17, cursando Desenvolvimento de Sistemas na Etec de Guaratinguetá e atuando como Analista no projeto de TCC do 4People."</blockquote>
+					</div>
+				</div>
+
+				<div class="divider"></div>
+
+				<div class="row mb-0" style="margin-top:20px">
+					<div class="col s12 m6 l4">
+						<img title="Renan Mattos" class="responsive-img circle" src="<?= $assets ?>/images/renan_mattos.jpg" alt="">
+					</div>
+
+					<div class="col s12 m6 l8">
+						<p class="grey-text text-darken-4 mb-0">Nome: Renan Mattos. Função: Analista</p>
+
+						<div class="divider mb-2"></div>
+						<blockquote class="grey-text text-darken-3 mt-0">"Renan Mattos, 22, cursando Desenvolvimento de Sistemas na Etec de Guaratinguetá e atuando como Analista no projeto de TCC do 4People."</btn-block>
+					</div>
+				</div>
 
 				<div class="top-div dark-grey"></div>
 			</div>

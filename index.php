@@ -72,6 +72,15 @@
 
 				<div class="divider mt-2 mb-2"></div>
 
+				<div class="container">
+					<blockquote class="grey-text text-darken-3" style="border-left-color:#A62023">
+						"O 4People é um Sistema Web que possui inúmeras ferramentas para Desenvolvedores e estudantes usarem e tornarem seus dias mais produtivos e rápidos.
+						Foi produzido no curso de Desenvolvimento de Sistemas da Etec de Guaratinguetá."
+					</blockquote>
+				</div>
+
+				<div class="divider mt-2 mb-2"></div>
+
 				<div class="row mb-0">
 					<div class="col s12">
 						<div class="card grey lighten-5 z-depth-2">
