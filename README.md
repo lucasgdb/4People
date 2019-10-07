@@ -5,40 +5,46 @@
   **_4People_** é um projeto de TCC que visa criar ferramentas para _pessoas_ usarem no cotidiano e _Programadores_ testarem seus Softwares.
   O **_4People_** disponibiliza Ferramentas de **Computação** (Geradores, Validadores, Codificadores e Decodificadores, etc.) e **Matemáticas** (Calculadoras, Calculadoras de Área e Calculadoras de Datas)
 
-## Tecnologias usadas
+## Tecnologias e Ferramentas usadas
 
 - HTML5
 - CSS3
 - JavaScript
 - PHP
+- MySQL
 - Materialize
+- Quill.js
+- PHPMailer
 - Docker
+- VSCode
 
 ## Extensões VSCode usadas
 
+- [Beautify](https://marketplace.visualstudio.com/items?itemName=HookyQR.beautify)
 - [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
 - [HTML CSS Support](https://marketplace.visualstudio.com/items?itemName=ecmel.vscode-html-css)
 - [PHP Intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client)
 - [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
 - [Visual Studio IntelliCode](https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode)
-- [vscode-icons](https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons)
+- [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme)
+- [Dracula Official](https://marketplace.visualstudio.com/items?itemName=dracula-theme.theme-dracula)
 
 ## Algumas Features
 
-- Painel Administrativo
-  - Controle de Administradores
-    - Primeiro login gera um Admin e envia pro e-mail
-    - Upload de imagem
-  - Mensagens dos usuários
-    - Receber mensagens no Painel Administrativo
-    - Responder mensagens direto do Painel Administrativo pro e-mail do usuário
-  - Controle de Ferramentas
-    - Ativar/Desativar Ferramentas
-- Proteção contra Brute-Force
-- Proteção contra SQL Injection
-- Ferramentas escritas em JavaScript
-- Ajax fortemente usado
-- Quando sem conexão, é redirecionado para uma página "offline" (PWA)
+- Painel Administrativo:
+  - Controle de Administradores:
+    - Primeiro login gera um Admin e envia pro e-mail.
+    - Upload de imagem.
+  - Mensagens dos usuários:
+    - Receber mensagens no Painel Administrativo.
+    - Responder mensagens direto do Painel Administrativo pro e-mail do usuário.
+  - Controle de Ferramentas:
+    - Ativar/Desativar Ferramentas.
+- Proteção contra Brute-Force.
+- Proteção contra SQL Injection.
+- Ferramentas escritas em JavaScript.
+- Ajax fortemente usado.
+- Quando sem conexão, é redirecionado para uma página "offline" (PWA).
 
 ## Como usar o Projeto
 
