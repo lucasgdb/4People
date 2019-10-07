@@ -32,7 +32,6 @@ if (isset($_SESSION['logged'])) {
 		<div class="container">
 			<div class="card-panel z-depth-3 left-div-margin" style="padding-bottom:10px">
 				<?php
-				include_once("$assets/php/Connection.php");
 				$sql = $database->prepare('SELECT admin_id FROM admins LIMIT 1');
 				$sql->execute();
 

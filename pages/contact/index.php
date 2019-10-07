@@ -12,14 +12,11 @@
 	<title>Fale Conosco - 4People</title>
 	<?php include_once("$assets/components/meta_tags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-	<meta name="title" content="Contato - 4People">
+	<meta name="title" content="Fale Conosco - 4People">
 	<meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
 	<meta name="application-name" content="4People">
-	<meta name="msapplication-starturl" content="./c/">
-	<meta property="og:title" content="Contato - 4People">
-	<meta name="twitter:title" content="Contato - 4People">
-	<meta property="og:url" content="./contato/">
-	<meta name="twitter:url" content="./contato/">
+	<meta property="og:title" content="Fale Conosco - 4People">
+	<meta name="twitter:title" content="Fale Conosco - 4People">
 </head>
 
 <body>
@@ -71,8 +68,10 @@
 							<i class="material-icons prefix">message</i>
 							<textarea name="message_content" placeholder="Mensagem" oninvalid="this.setCustomValidity('Preencha este campo com a mensagem.')" oninput="setCustomValidity('')" spellcheck="false" required></textarea>
 							<span class="helper-text">Mensagem para a equipe do 4People.</span>
+						</div>
 
-							<div class="divider mt-2"></div>
+						<div class="col s12">
+							<div class="divider"></div>
 							<button title="Inserir um Administrador no 4People" class="btn waves-effect red-color mt-2 z-depth-0"><i class="material-icons right">send</i>Enviar Mensagem</button>
 						</div>
 					</div>

@@ -14,11 +14,8 @@
 	<meta name="title" content="Sobre - 4People">
 	<meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
 	<meta name="application-name" content="4People">
-	<meta name="msapplication-starturl" content="./sobre/">
-	<meta property="og:title" content="Sobre - 4People">
-	<meta name="twitter:title" content="Sobre - 4People">
-	<meta property="og:url" content="./sobre/">
-	<meta name="twitter:url" content="./sobre/">
+	<meta property="og:title" content="Sobre nós - 4People">
+	<meta name="twitter:title" content="Sobre nós - 4People">
 </head>
 
 <body>

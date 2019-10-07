@@ -17,7 +17,6 @@
 					<li title="Sair" class="waves-effect"><a href="<?= $assets ?>/php/Logout.php"><i class="material-icons left">exit_to_app</i>Sair</a></li>
 				<?php else : ?>
 					<?php
-						include_once("$assets/php/Connection.php");
 						$sql = $database->prepare('SELECT type_name, type_path, type_icon FROM types');
 						$sql->execute();
 

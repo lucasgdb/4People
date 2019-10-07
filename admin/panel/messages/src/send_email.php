@@ -33,14 +33,14 @@ try {
 	$mail->isHTML(true);
 	$mail->Subject = '4People - Resposta da mensagem';
 
-	$sql = $database->prepare('SELECT admin_name FROM admins WHERE admin_id = :admin_id LIMIT 1');
+	$sql = $database->prepare('SELECT admin_name, admin_email FROM admins WHERE admin_id = :admin_id LIMIT 1');
 	$sql->bindValue(':admin_id', $_SESSION['logged']['id']);
 	$sql->execute();
 
-	$admin_name = $sql->fetchColumn();
+	extract($sql->fetch());
 
 	$mail->Body =
-		"<h1>Equipe 4People</h1>Olá, $message_name. Recebemos sua mensagem!<br>Título: $message_subject.<br>Mensagem que você enviou:<p>$message_replied</p>Resposta da Administração do 4People: $message_content<br>Administrador: <b>$admin_name</b>";
+		"<h1>Equipe 4People</h1>Olá, $message_name. Recebemos sua mensagem!<br>Título: $message_subject.<br>Mensagem que você enviou:<p>$message_replied</p>Resposta da Administração do 4People: $message_content<br>Administrador: <b>$admin_name</b> ($admin_email)";
 	$mail->AltBody = '4People - Resposta da mensagem.';
 
 	if ($mail->send()) {

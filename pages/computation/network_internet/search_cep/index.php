@@ -14,11 +14,8 @@
 	<meta name="title" content="Buscar CEP - 4People">
 	<meta name="description" content="Buscar CEP Online para ver informações do seu CEP. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
 	<meta name="application-name" content="4People">
-	<meta name="msapplication-starturl" content="./computacao/rede_e_internet/buscar_cep/">
 	<meta property="og:title" content="Buscar CEP - 4People">
 	<meta name="twitter:title" content="Buscar CEP - 4People">
-	<meta property="og:url" content="./computacao/rede_e_internet/buscar_cep/">
-	<meta name="twitter:url" content="./computacao/rede_e_internet/buscar_cep/">
 </head>
 
 <body>
@@ -65,21 +62,35 @@
 				<div class="top-div dark-grey"></div>
 			</div>
 
-			<div class="card-panel left-div-margin">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">trending_up</i>Veja também:</h1>
-				<div class="divider"></div>
+			<?php
+			$sql = $database->prepare(
+				'SELECT tools.tool_name, tools.tool_path FROM tools
+					INNER JOIN sections ON sections.section_id = tools.section_id
+					WHERE tools.tool_status = "1" AND tools.tool_name != :tool_name AND sections.section_name = :section_name 
+					ORDER BY RAND()
+					LIMIT 2'
+			);
 
-				<ul class="collection with-header mb-0">
-					<li class="collection-item">
-						<div>Meu IP<a href="<?= $root ?>/computacao/rede_e_internet/meu_ip/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
-					</li>
-					<li class="collection-item">
-						<div>Meu Navegador<a href="<?= $root ?>/computacao/rede_e_internet/meu_navegador/" class="secondary-content"><i class="material-icons indigo-text text-darken-4">send</i></a></div>
-					</li>
-				</ul>
+			$sql->bindValue(':section_name', $name_section);
+			$sql->bindValue(':tool_name', $name_tool);
+			$sql->execute();
 
-				<div class="left-div dark-grey"></div>
-			</div>
+			if ($sql->rowCount() > 0) : ?>
+				<div class="card-panel left-div-margin">
+					<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">trending_up</i>Veja também:</h1>
+					<div class="divider"></div>
+
+					<ul class="collection with-header mb-0">
+						<?php foreach ($sql as $data) : extract($data) ?>
+							<li class="collection-item">
+								<div><?= $tool_name ?><a href="../<?= $tool_path ?>/" class="secondary-content"><i class="material-icons red-color-text">send</i></a></div>
+							</li>
+						<?php endforeach ?>
+					</ul>
+
+					<div class="left-div dark-grey"></div>
+				</div>
+			<?php endif ?>
 		</div>
 	</main>
 

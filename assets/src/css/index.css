@@ -5,7 +5,7 @@
 	padding: 0 10px
 }
 
-.caption .material-icons {
+.caption .material-icons.right {
 	font-weight: 1000
 }
 
@@ -33,13 +33,5 @@ li.indicator-item {
 	.card-panel {
 		padding-left: 5px;
 		padding-right: 5px
-	}
-}
-
-@media (min-width: 600px) {
-	.card * {
-		user-select: none !important;
-		-moz-user-select: none !important;
-		-webkit-user-select: none !important
 	}
 }

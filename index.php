@@ -14,11 +14,8 @@
 	<meta name="title" content="4People - Ferramentas Online">
 	<meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
 	<meta name="application-name" content="4People">
-	<meta name="msapplication-starturl" content="./">
 	<meta property="og:title" content="4People - Ferramentas Online">
 	<meta name="twitter:title" content="4People - Ferramentas Online">
-	<meta property="og:url" content="./">
-	<meta name="twitter:url" content="./">
 </head>
 
 <body>
@@ -43,7 +40,7 @@
 							<img src="<?= $assets ?>/images/bg01.jpg" alt="bg01">
 							<div class="caption left-align">
 								<h3 class="dark"><i style="top:9px" class="material-icons red-color-text left small">favorite</i> FEITO PARA TODOS!</h3>
-								<h5 class="light">Possuímos ferramentas para Programadores, professores, estudantes e usuários comuns.</h5>
+								<h5 class="light">As Ferramentas são para Programadores, professores, estudantes e usuários comuns.</h5>
 							</div>
 						</li>
 
@@ -51,7 +48,7 @@
 							<img src="<?= $assets ?>/images/bg01.jpg" alt="bg01">
 							<div class="caption left-align">
 								<h3 class="dark"><i style="top:10px" class="material-icons red-color-text left small">fast_forward</i> MAIS RÁPIDO!</h3>
-								<h5 class="light">Nossas Ferramentas foram todas escritas em JavaScript, para maior velocidade e segurança.</h5>
+								<h5 class="light">As Ferramentas foram todas escritas em JavaScript, para maior velocidade e segurança.</h5>
 							</div>
 						</li>
 
@@ -59,7 +56,7 @@
 							<img src="<?= $assets ?>/images/bg01.jpg" alt="bg01">
 							<div class="caption right-align">
 								<h3 class="dark">CÓDIGO ABERTO! <i style="top:10px" class="material-icons red-color-text right small">code</i></h3>
-								<h5 class="light">O Projeto 4People é de Código Aberto para qualquer um estudar os algoritmos e até mesmo melhorá-los.</h5>
+								<h5 class="light">O 4People é de Código Aberto e livre para qualquer um usar/melhorar.</h5>
 							</div>
 						</li>
 
@@ -67,7 +64,7 @@
 							<img src="<?= $assets ?>/images/bg01.jpg" alt="bg01">
 							<div class="caption right-align">
 								<h3 class="dark"><i style="top:10px" class="material-icons red-color-text right small">free_breakfast</i>O MAIS ATUALIZADO!</h3>
-								<h5 class="light">O 4People possui as melhores ferramentas atualizadas. Tá sentindo falta de alguma? Por favor, nos envie uma <a href="./contato/">mensagem</a>.</h5>
+								<h5 class="light">Tá sentindo falta de alguma Ferramenta, encontrou algum erro/bug? Por favor, <a href="./pages/contact/">Fale Conosco</a>.</h5>
 							</div>
 						</li>
 					</ul>
@@ -104,10 +101,8 @@
 							<div class="top-div-mobile dark-grey"></div>
 						</div>
 					</div>
-				</div>
 
-				<div class="row mb-0">
-					<div class="col s12 m6">
+					<div class="col s12 l6">
 						<div class="card grey lighten-5 z-depth-2">
 							<div class="card-content">
 								<span class="card-title"><i class="material-icons left red-color-text">group</i>Visitas</span>
@@ -116,7 +111,9 @@
 
 							<div class="top-div-mobile dark-grey"></div>
 						</div>
+					</div>
 
+					<div class="col s12 l6">
 						<div class="card grey lighten-5 z-depth-2">
 							<div class="card-content">
 								<span class="card-title"><i class="material-icons left red-color-text">group</i>Pessoas ajudadas</span>
@@ -133,7 +130,7 @@
 						</div>
 					</div>
 
-					<div class="col s12 m6">
+					<div class="col s12 l6">
 						<div class="card grey lighten-5 z-depth-2">
 							<div class="card-content">
 								<span class="card-title"><i class="material-icons left red-color-text">public</i>Usuários Online</span>
@@ -142,18 +139,17 @@
 
 							<div class="top-div-mobile dark-grey"></div>
 						</div>
+					</div>
 
+					<div class="col s12 l6">
 						<div class="card grey lighten-5 z-depth-2">
 							<div class="card-content">
 								<span class="card-title"><i class="material-icons left red-color-text">build</i>Ferramentas</span>
 								<?php
-								include_once("$assets/php/Connection.php");
 								$sql = $database->query('SELECT COUNT(tool_id) FROM tools');
 								$sql->execute();
-
-								$count = $sql->fetchColumn()
 								?>
-								<p style="font-size:16px">Quantidade de Ferramentas: <?= $count ?></p>
+								<p style="font-size:16px">Quantidade de Ferramentas: <?= $sql->fetchColumn() ?></p>
 							</div>
 
 							<div class="top-div-mobile dark-grey"></div>

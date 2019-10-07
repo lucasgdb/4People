@@ -25,7 +25,6 @@ if (!isset($_SESSION['logged'])) {
 		<div class="container">
 			<div class="card-panel z-depth-3 left-div-margin" style="padding-bottom:10px">
 				<?php
-				include_once("$assets/php/Connection.php");
 				$admin_id = filter_input(INPUT_GET, 'admin_id', FILTER_DEFAULT);
 
 				$sql = $database->prepare('SELECT admin_id, admin_name, admin_nickname, admin_email, admin_image FROM admins WHERE admin_id = :admin_id LIMIT 1');

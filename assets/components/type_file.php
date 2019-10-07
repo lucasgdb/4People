@@ -32,7 +32,6 @@
 
 				<div class="row mb-0" style="margin-top:10px">
 					<?php
-					include_once("$assets/php/Connection.php");
 					$sql = $database->prepare(
 						'SELECT sections.section_path, sections.section_icon, tools.tool_name, tools.tool_path, tools.tool_description, tools.tool_link
 							FROM tools

@@ -75,11 +75,8 @@ if ($sql->rowCount() === 0) {
 	<meta name="title" content="4People - Ferramentas Online">
 	<meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
 	<meta name="application-name" content="4People">
-	<meta name="msapplication-starturl" content="./">
 	<meta property="og:title" content="4People - Ferramentas Online">
 	<meta name="twitter:title" content="4People - Ferramentas Online">
-	<meta property="og:url" content="./">
-	<meta name="twitter:url" content="./">
 </head>
 
 <body style="background-color: #ebebeb">

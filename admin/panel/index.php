@@ -65,14 +65,10 @@ $admin_panel = true
 								<div class="row mb-0">
 									<div class="col s12 center-align">
 										<?php
-										include_once("$assets/php/Connection.php");
-
 										$sql = $database->prepare('SELECT COUNT(message_id) FROM messages WHERE message_read = "0"');
 										$sql->execute();
-
-										$count = $sql->fetchColumn()
 										?>
-										<h6 class="mt-0" style="position:relative">Mensagens<span class="new badge btn-green" style="position:absolute;right:0" data-badge-caption="<?= $count ?>"></span> </h6>
+										<h6 class="mt-0" style="position:relative">Mensagens<span class="new badge btn-green" style="position:absolute;right:0" data-badge-caption="<?= $sql->fetchColumn() ?>"></span> </h6>
 										<div class="divider mb-2"></div>
 										<a class="tooltiped" data-tooltip="Mensagens" href="messages/">
 											<i class="material-icons large" style="color:#212121">question_answer</i>
