@@ -357,7 +357,7 @@ if (!isset($_SESSION['logged'])) {
 				toolsHTML += (
 					`<tr>
 						<td>${i}</td>
-						<td>${data[i][5] === '1' ? '<i class="material-icons btn-green-text">done</i>' : '<i class="material-icons red-color-text">clear</i>'}</td>
+						<td>${data[i][5] === '1' ? '<i title="Ativado" class="material-icons btn-green-text">done</i>' : '<i title="Desativado" class="material-icons red-color-text">clear</i>'}</td>
 						<td>${data[i][4]}</td>
 						<td>
 							<button data-clipboard-text="<?= $_SERVER['HTTP_HOST'] ?>/pages/${data[i][6]}/${data[i][7]}/${data[i][1]}/" title="Copiar caminho da página" class="btn waves-effect waves-light dark-grey z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
@@ -494,7 +494,7 @@ if (!isset($_SESSION['logged'])) {
 				toolsHTML += (
 					`<tr>
 						<td>${i}</td>
-						<td>${data[i][5] === '1' ? '<i class="material-icons btn-green-text">done</i>' : '<i class="material-icons red-color-text">clear</i>'}</td>
+						<td>${data[i][5] === '1' ? '<i title="Ativado" class="material-icons btn-green-text">done</i>' : '<i title="Desativado" class="material-icons red-color-text">clear</i>'}</td>
 						<td>${data[i][4]}</td>
 						<td>
 							<button data-clipboard-text="<?= $_SERVER['HTTP_HOST'] ?>/${data[i][6]}/${data[i][7]}/${data[i][1]}/" title="Copiar caminho da página" class="btn waves-effect waves-light dark-grey z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>

@@ -12,9 +12,9 @@ try {
 
 	function setLog($database, $ip, $admin_nickname, $admin_password): int
 	{
-		$log = $database->prepare('INSERT INTO login_logs VALUES (NULL, :log_ip, :log_name, :log_password, :log_createdAt)');
+		$log = $database->prepare('INSERT INTO login_logs VALUES (NULL, :log_ip, :log_nickname, :log_password, :log_createdAt)');
 		$log->bindValue(':log_ip', $ip);
-		$log->bindValue(':log_name', $admin_nickname);
+		$log->bindValue(':log_nickname', $admin_nickname);
 		$log->bindValue(':log_password', $admin_password);
 		$log->bindValue(':log_createdAt', date('Y-m-d H:i:s'));
 
@@ -34,7 +34,7 @@ try {
 		extract($sql->fetch());
 
 		$sql = $database->prepare('SELECT banned_amount FROM banneds WHERE banned_ip = :banned_ip LIMIT 1');
-		$sql->bindValue(':banned_ip', $ip);
+		$sql->bindValue(':banned_ip', str_replace('.', '', $ip));
 		$sql->execute();
 
 		if ($sql->rowCount()) {
@@ -42,7 +42,7 @@ try {
 
 			if ($banned_amount === '4') {
 				$sql = $database->prepare('SELECT banned_begin, banned_end FROM banneds WHERE banned_ip = :banned_ip AND banned_begin < :current_time AND banned_end >= :current_time LIMIT 1');
-				$sql->bindValue(':banned_ip', $ip);
+				$sql->bindValue(':banned_ip', str_replace('.', '', $ip));
 				$sql->bindValue(':current_time', date('Y-m-d H:i:s'));
 				$sql->execute();
 
@@ -51,12 +51,12 @@ try {
 					exit();
 				} else {
 					$sql = $database->prepare('DELETE FROM banneds WHERE banned_ip = :banned_ip LIMIT 1');
-					$sql->bindValue(':banned_ip', $ip);
+					$sql->bindValue(':banned_ip', str_replace('.', '', $ip));
 					$sql->execute();
 				}
 			} else {
 				$sql = $database->prepare('DELETE FROM banneds WHERE banned_ip = :banned_ip LIMIT 1');
-				$sql->bindValue(':banned_ip', $ip);
+				$sql->bindValue(':banned_ip', str_replace('.', '', $ip));
 				$sql->execute();
 			}
 		}
@@ -65,7 +65,7 @@ try {
 		echo '{"status":"1"}';
 	} else {
 		$sql = $database->prepare('SELECT banned_amount FROM banneds WHERE banned_ip = :banned_ip LIMIT 1');
-		$sql->bindValue(':banned_ip', $ip);
+		$sql->bindValue(':banned_ip', str_replace('.', '', $ip));
 		$sql->execute();
 
 		if ($sql->rowCount()) {
@@ -96,7 +96,7 @@ try {
 				);
 
 				$sql->bindValue(':banned_amount', $banned_amount += 1);
-				$sql->bindValue(':banned_ip', $ip);
+				$sql->bindValue(':banned_ip', str_replace('.', '', $ip));
 				$sql->execute();
 
 				echo json_encode(['status' => '0', 'reason' => 'wrong']);
@@ -105,7 +105,7 @@ try {
 			setLog($database, $ip, $admin_nickname, $admin_password);
 
 			$sql = $database->prepare('INSERT INTO banneds (banned_ip) VALUES(:banned_ip)');
-			$sql->bindValue(':banned_ip', $ip);
+			$sql->bindValue(':banned_ip', str_replace('.', '', $ip));
 			$sql->execute();
 
 			echo json_encode(['status' => '0', 'reason' => 'wrong']);

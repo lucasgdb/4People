@@ -7,7 +7,7 @@ $assets = '../../../assets';
 include_once("$assets/php/Connection.php");
 include_once("$assets/php/IP.php");
 
-$ip = get_ip_address();
+$ip = str_replace('.', '', get_ip_address());
 $sql = $database->prepare('SELECT banned_amount FROM banneds WHERE banned_ip = :banned_ip');
 
 $sql->bindValue(':banned_ip', $ip);

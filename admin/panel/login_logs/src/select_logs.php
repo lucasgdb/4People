@@ -18,7 +18,7 @@ try {
 	if ($sql->rowCount()) {
 		foreach ($sql as $key) {
 			extract($key);
-			$data[$log_id] = [$log_ip, $log_name, $log_password, $log_createdAt];
+			$data[$log_id] = [$log_ip, $log_nickname, $log_password, $log_createdAt];
 		}
 
 		echo json_encode($data);

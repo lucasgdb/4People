@@ -105,17 +105,6 @@
 					<div class="col s12 l6">
 						<div class="card grey lighten-5 z-depth-2">
 							<div class="card-content">
-								<span class="card-title"><i class="material-icons left red-color-text">group</i>Visitas</span>
-								<p style="font-size:16px">Usuários que já visitaram: <span id="totalVisits">1000</span></p>
-							</div>
-
-							<div class="top-div-mobile dark-grey"></div>
-						</div>
-					</div>
-
-					<div class="col s12 l6">
-						<div class="card grey lighten-5 z-depth-2">
-							<div class="card-content">
 								<span class="card-title"><i class="material-icons left red-color-text">group</i>Pessoas ajudadas</span>
 								<?php
 								$sql = $database->prepare('SELECT SUM(tool_visits) FROM tools WHERE tool_status = "1" LIMIT 1');
@@ -124,17 +113,6 @@
 								$total_visits = $sql->fetchColumn()
 								?>
 								<p style="font-size:16px">Nossas Ferramentas foram usadas <span id="toolVisits"><?= $total_visits ?></span> vezes</p>
-							</div>
-
-							<div class="top-div-mobile dark-grey"></div>
-						</div>
-					</div>
-
-					<div class="col s12 l6">
-						<div class="card grey lighten-5 z-depth-2">
-							<div class="card-content">
-								<span class="card-title"><i class="material-icons left red-color-text">public</i>Usuários Online</span>
-								<p style="font-size:16px">Usuários Online no 4People: 1</p>
 							</div>
 
 							<div class="top-div-mobile dark-grey"></div>
@@ -171,7 +149,6 @@
 	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script>
-		const lblTotalVisits = document.querySelector('#totalVisits')
 		const lblToolVisits = document.querySelector('#toolVisits')
 
 		const formatter = Intl.NumberFormat('pt-BR')
@@ -183,7 +160,7 @@
 			}
 		}
 
-		formatNumbers([lblTotalVisits, lblToolVisits])
+		formatNumbers([lblToolVisits])
 	</script>
 </body>
 
