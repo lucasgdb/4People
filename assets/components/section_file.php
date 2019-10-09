@@ -45,35 +45,39 @@
 					$sql->bindValue(':section_name', $name_section);
 					$sql->execute();
 
-					foreach ($sql as $data) : extract($data) ?>
-						<div class="col s12 l6">
-							<div class="card sticky-action z-depth-2">
-								<div class="card-content grey lighten-5">
-									<span class="card-title activator mont-serrat no-select left-div-margin-mobile" style="font-size:22px;position:relative">
-										<?= $tool_name ?>
-										<i class="material-icons right">more_vert</i>
+					if ($sql->rowCount()) :
+						foreach ($sql as $data) : extract($data) ?>
+							<div class="col s12 l6">
+								<div class="card sticky-action z-depth-2">
+									<div class="card-content grey lighten-5">
+										<span class="card-title activator mont-serrat no-select left-div-margin-mobile" style="font-size:22px;position:relative">
+											<?= $tool_name ?>
+											<i class="material-icons right">more_vert</i>
 
-										<div class="left-div-mobile red-color" style="border-radius:0"></div>
-									</span>
-									<div class="divider"></div>
-									<p class="mt-2">
+											<div class="left-div-mobile red-color" style="border-radius:0"></div>
+										</span>
+										<div class="divider"></div>
+										<p class="mt-2">
 
-										<?= $tool_description ?>
-									</p>
-								</div>
+											<?= $tool_description ?>
+										</p>
+									</div>
 
-								<div class="card-action dark-grey">
-									<a class="white-text no-break" href="./<?= $tool_path ?>/">Ferramenta &raquo;</a>
-								</div>
+									<div class="card-action dark-grey">
+										<a class="white-text no-break" href="./<?= $tool_path ?>/">Ferramenta &raquo;</a>
+									</div>
 
-								<div class="card-reveal">
-									<span class="card-title no-select"><i style="top:5px" class="material-icons left">code</i>Código Fonte<i class="material-icons right">close</i></span>
-									<div class="divider"></div>
-									<p><a class="linkHover bold" href="<?= $tool_link ?>" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+									<div class="card-reveal">
+										<span class="card-title no-select"><i style="top:5px" class="material-icons left">code</i>Código Fonte<i class="material-icons right">close</i></span>
+										<div class="divider"></div>
+										<p><a class="linkHover bold" href="<?= $tool_link ?>" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+									</div>
 								</div>
 							</div>
-						</div>
-					<?php endforeach ?>
+						<?php endforeach ?>
+					<?php else : ?>
+						<p class="mb-2">Não há ferramentas nessa seção! :(</p>
+					<?php endif ?>
 				</div>
 
 				<div class="top-div dark-grey"></div>
