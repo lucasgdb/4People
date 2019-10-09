@@ -3,19 +3,33 @@ const txtPasswordIcon = document.querySelector('#visibility')
 const formLogin = document.querySelector('[name=formLogin]')
 const formInsert = document.querySelector('[name=formInsert]')
 const lblBannedStatus = document.querySelector('#bannedStatus')
+const adminNickname = document.querySelector('#admin_nickname')
+const adminPassword = document.querySelector('#admin_password')
 
 if (formLogin) {
+	const chkRemember = document.querySelector('#remember')
+	const nickName = localStorage.getItem('nickname')
+
+	if (nickName !== undefined) adminNickname.value = nickName
+
 	formLogin.onsubmit = async e => {
 		e.preventDefault()
+
 		const btnSubmit = formLogin.querySelector('button')
 		btnSubmit.disabled = true
 
+		const body = new FormData(formLogin)
+
 		const result = await (await fetch('src/login.php', {
 			method: 'POST',
-			body: new FormData(formLogin)
+			body
 		})).json()
 
-		if (result.status === '1') location = '../panel/'
+		if (result.status === '1') {
+			if (chkRemember.checked) localStorage.setItem('nickname', body.get('admin_nickname'))
+
+			location = '../panel/'
+		}
 		else {
 			M.toast({
 				html: result.reason === 'wrong' ? 'Login e/ou senha inexistente.' : 'Você está banido temporariamente.',
@@ -80,4 +94,9 @@ const switchVisibility = () => {
 	}
 }
 
-checkBannedStatus()
+window.addEventListener('load', () => {
+	checkBannedStatus()
+
+	if (adminNickname.value !== '') adminPassword.focus()
+	else adminNickname.focus()
+})

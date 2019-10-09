@@ -61,65 +61,72 @@ if (isset($_SESSION['logged'])) {
 								<span id="bannedStatus"></span>
 
 								<button title="Logar no 4People" class="btn red-color mt-2 z-depth-0 right"><i class="material-icons right">arrow_forward</i>Entrar</button>
+
+								<p class="right mr-2 mb-0">
+									<label>
+										<input type="checkbox" id="remember"/>
+										<span>Lembrar usuário</span>
+									</label>
+								</p>
 							</div>
 						</div>
 					</form>
 				<?php else : ?>
-					<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person_add</i>Adicionar um Administrador</h1>
-					<label>Adicionar um novo Administrador ao 4People</label>
+					<h1 class=" flow-text" style="margin:0 0 5px"><i class="material-icons left">person_add</i>Adicionar um Administrador</h1>
+										<label>Adicionar um novo Administrador ao 4People</label>
 
-					<div class="divider"></div>
+										<div class="divider"></div>
 
-					<form style="margin-top:15px" name="formInsert" method="POST" enctype="multipart/form-data">
-						<div class="row mb-0">
-							<div class="input-field col s12 m6">
-								<i class="material-icons prefix">person</i>
-								<input id="admin_name" minlength="4" title="Preencha este campo com o nome." placeholder="Login de Administrador" class="validate" type="text" name="admin_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
-								<label class="active" for="admin_name">Nome *</label>
-								<span class="helper-text" data-error="Nome de Administrador inválido." data-success="Nome de Administrador válido.">Ex: Lucas Bittencourt</span>
-							</div>
+										<form style="margin-top:15px" name="formInsert" method="POST" enctype="multipart/form-data">
+											<div class="row mb-0">
+												<div class="input-field col s12 m6">
+													<i class="material-icons prefix">person</i>
+													<input id="admin_name" minlength="4" title="Preencha este campo com o nome." placeholder="Login de Administrador" class="validate" type="text" name="admin_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
+													<label class="active" for="admin_name">Nome *</label>
+													<span class="helper-text" data-error="Nome de Administrador inválido." data-success="Nome de Administrador válido.">Ex: Lucas Bittencourt</span>
+												</div>
 
-							<div class="input-field col s12 m6">
-								<i class="material-icons prefix">account_circle</i>
-								<input id="admin_nickname" minlength="8" title="Preencha este campo com o login." placeholder="Login de Administrador" class="validate" type="text" name="admin_nickname" oninvalid="this.setCustomValidity('Preencha este campo com o login.')" oninput="setCustomValidity('')" required>
-								<label class="active" for="admin_nickname">Login *</label>
-								<span class="helper-text" data-error="Login de Administrador inválido. Tamanho mínimo: 8" data-success="Login de Administrador válido.">Ex: lucasnaja</span>
-							</div>
+												<div class="input-field col s12 m6">
+													<i class="material-icons prefix">account_circle</i>
+													<input id="admin_nickname" minlength="8" title="Preencha este campo com o login." placeholder="Login de Administrador" class="validate" type="text" name="admin_nickname" oninvalid="this.setCustomValidity('Preencha este campo com o login.')" oninput="setCustomValidity('')" required>
+													<label class="active" for="admin_nickname">Login *</label>
+													<span class="helper-text" data-error="Login de Administrador inválido. Tamanho mínimo: 8" data-success="Login de Administrador válido.">Ex: lucasnaja</span>
+												</div>
 
-							<div class="input-field col s12 m6">
-								<i class="material-icons prefix">mail</i>
-								<input id="admin_email" title="Preencha este campo com o e-mail." placeholder="E-mail do Administrador" class="validate" type="email" name="admin_email" oninvalid="if (this.value === '') this.setCustomValidity('Preencha este campo com o e-mail.'); else this.setCustomValidity('Este e-mail não é válido.')" oninput="setCustomValidity('')" required>
-								<label class="active" for="admin_email">E-mail *</label>
-								<span class="helper-text" data-error="E-mail inválido." data-success="E-mail válido.">Ex: lucasnaja0@gmail.com</span>
-							</div>
+												<div class="input-field col s12 m6">
+													<i class="material-icons prefix">mail</i>
+													<input id="admin_email" title="Preencha este campo com o e-mail." placeholder="E-mail do Administrador" class="validate" type="email" name="admin_email" oninvalid="if (this.value === '') this.setCustomValidity('Preencha este campo com o e-mail.'); else this.setCustomValidity('Este e-mail não é válido.')" oninput="setCustomValidity('')" required>
+													<label class="active" for="admin_email">E-mail *</label>
+													<span class="helper-text" data-error="E-mail inválido." data-success="E-mail válido.">Ex: lucasnaja0@gmail.com</span>
+												</div>
 
-							<div class="input-field col s12 m6">
-								<i class="material-icons prefix">https</i>
-								<input id="admin_password" style="width:calc(100% - 4.5rem)" minlength="6" title="Preencha este campo com a senha." placeholder="Senha do Administrador" class="validate" type="password" name="admin_password" oninvalid="this.setCustomValidity('Preencha este campo com a senha.')" oninput="setCustomValidity('')" required>
-								<label class="active" for="admin_password">Senha *</label>
-								<i id="visibility" onclick="switchVisibility()" class="material-icons prefix" style="cursor:pointer">visibility</i>
-								<span class="helper-text" data-error="Senha inválida. Tamanho mínimo: 6" data-success="Senha válida.">Aguardando...</span>
-							</div>
+												<div class="input-field col s12 m6">
+													<i class="material-icons prefix">https</i>
+													<input id="admin_password" style="width:calc(100% - 4.5rem)" minlength="6" title="Preencha este campo com a senha." placeholder="Senha do Administrador" class="validate" type="password" name="admin_password" oninvalid="this.setCustomValidity('Preencha este campo com a senha.')" oninput="setCustomValidity('')" required>
+													<label class="active" for="admin_password">Senha *</label>
+													<i id="visibility" onclick="switchVisibility()" class="material-icons prefix" style="cursor:pointer">visibility</i>
+													<span class="helper-text" data-error="Senha inválida. Tamanho mínimo: 6" data-success="Senha válida.">Aguardando...</span>
+												</div>
 
-							<div class="file-field input-field col s12">
-								<i class="material-icons prefix">image</i>
-								<input type="file" name="admin_image" accept=".png, .jpg, .jpeg, .svg, .gif">
-								<input style="width:calc(100% - 3rem)" placeholder="Selecionar imagem" type="text" class="file-path">
-								<label class="active">Imagem</label>
-								<span class="helper-text">.png, .jpg, .jpeg, .svg, .gif</span>
-							</div>
+												<div class="file-field input-field col s12">
+													<i class="material-icons prefix">image</i>
+													<input type="file" name="admin_image" accept=".png, .jpg, .jpeg, .svg, .gif">
+													<input style="width:calc(100% - 3rem)" placeholder="Selecionar imagem" type="text" class="file-path">
+													<label class="active">Imagem</label>
+													<span class="helper-text">.png, .jpg, .jpeg, .svg, .gif</span>
+												</div>
 
-							<div class="col s12">
-								<div class="divider"></div>
-								<button title="Inserir um Administrador no 4People" class="btn waves-effect waves-light red-color mt-2 z-depth-0"><i class="material-icons left">person_add</i>Inserir</button>
+												<div class="col s12">
+													<div class="divider"></div>
+													<button title="Inserir um Administrador no 4People" class="btn waves-effect waves-light red-color mt-2 z-depth-0"><i class="material-icons left">person_add</i>Inserir</button>
+												</div>
+											</div>
+										</form>
+									<?php endif ?>
+
+									<div class="left-div dark-grey" style="border-radius:0"></div>
 							</div>
 						</div>
-					</form>
-				<?php endif ?>
-
-				<div class="left-div dark-grey" style="border-radius:0"></div>
-			</div>
-		</div>
 	</main>
 
 	<?php include_once("$assets/components/service_worker.php") ?>

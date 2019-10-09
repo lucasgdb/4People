@@ -55,6 +55,20 @@ i.material-icons {
 	color: #A62023 !important
 }
 
+[type=checkbox]:checked+span:not(.lever):before {
+	border-right: 2px solid #1b1a25;
+	border-bottom: 2px solid #1b1a25
+}
+
+[type=checkbox].filled-in:checked+span:not(.lever):after {
+	border: 2px solid #1b1a25;
+	background-color: #1b1a25
+}
+
+.mr-2 {
+	margin-right: 10px
+}
+
 @media (max-width: 600px) {
 	.card-panel {
 		margin-top: 0;
