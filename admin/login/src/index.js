@@ -5,11 +5,12 @@ const formInsert = document.querySelector('[name=formInsert]')
 const lblBannedStatus = document.querySelector('#bannedStatus')
 const adminNickname = document.querySelector('#admin_nickname')
 const adminPassword = document.querySelector('#admin_password')
+const chkRemember = document.querySelector('#remember')
+const nickName = localStorage.getItem('nickname')
+
+if (nickName) chkRemember.checked = true
 
 if (formLogin) {
-	const chkRemember = document.querySelector('#remember')
-	const nickName = localStorage.getItem('nickname')
-
 	if (nickName !== undefined) adminNickname.value = nickName
 
 	formLogin.onsubmit = async e => {
@@ -27,6 +28,7 @@ if (formLogin) {
 
 		if (result.status === '1') {
 			if (chkRemember.checked) localStorage.setItem('nickname', body.get('admin_nickname'))
+			else localStorage.removeItem('nickname')
 
 			location = '../panel/'
 		}
@@ -97,6 +99,6 @@ const switchVisibility = () => {
 window.addEventListener('load', () => {
 	checkBannedStatus()
 
-	if (adminNickname.value !== '') adminPassword.focus()
-	else adminNickname.focus()
+	if (adminNickname.value === '') adminNickname.focus()
+	else adminPassword.focus()
 })

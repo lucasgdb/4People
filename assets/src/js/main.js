@@ -15,14 +15,14 @@ const footer = document.querySelector('footer')
 const spinner = document.querySelector('#spinner')
 
 // Methods
-const animateIn = (delay = 250) => {
+const animateIn = (delay = 290) => {
 	body.style.transition = `padding-left ${delay}ms, opacity 150ms`
 	body.style.paddingLeft = '300px'
 	container.style.transition = `width ${delay}ms`
 	container.style.width = '92.5%'
 }
 
-const animateOut = (delay = 250) => {
+const animateOut = (delay = 100) => {
 	body.style.transition = `padding-left ${delay}ms`
 	body.style.paddingLeft = '0'
 	container.style.transition = `width ${delay}ms`
