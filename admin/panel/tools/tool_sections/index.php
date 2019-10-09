@@ -29,7 +29,7 @@ if (!isset($_SESSION['logged'])) {
 
 	<main>
 		<div class="container">
-			<div class="card-panel z-depth-2 top-div-margin" style="padding-bottom:10px">
+			<div class="card-panel top-div-margin" style="padding-bottom:10px">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">folder</i>Adicionar uma Seção de Ferramentas</h1>
 				<label>Adicionar uma novo Seção de Ferramentas no 4People</label>
 
@@ -83,7 +83,7 @@ if (!isset($_SESSION['logged'])) {
 				<div class="top-div dark-grey"></div>
 			</div>
 
-			<div class="card-panel z-depth-2 top-div-margin" style="padding-bottom:10px">
+			<div class="card-panel top-div-margin" style="padding-bottom:10px">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">filter_list</i>Filtrar Tipos</h1>
 				<label>Filtro de Tipos de Ferramentas do 4People</label>
 
@@ -147,6 +147,7 @@ if (!isset($_SESSION['logged'])) {
 	<div id="updates"></div>
 	<div id="deletes"></div>
 
+	<?php include_once("$assets/components/footer.php") ?>
 	<?php include_once("$assets/components/service_worker.php") ?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>

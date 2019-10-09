@@ -27,7 +27,7 @@ body {
 
 .sidenav {
 	border-right: 0;
-	box-shadow: -15px 0 18px
+	box-shadow: -15px 0 18px #1b1a25
 }
 
 /* cyrillic-ext */
@@ -140,10 +140,7 @@ main {
 	color: #37ab52 !important
 }
 
-.btn-green:hover {
-	background-color: #1b9236 !important
-}
-
+.btn-green:hover,
 .btn-green:focus {
 	background-color: #1b9236 !important
 }
@@ -298,16 +295,16 @@ body>header+ul>li>.collapsible-header {
 		padding-left: 300px
 	}
 
-	.sidenav::-webkit-scrollbar {
+	::-webkit-scrollbar {
 		width: 5px;
 		height: 5px
 	}
 
-	.sidenav::-webkit-scrollbar-thumb {
-		background-color: #1B1A25
+	::-webkit-scrollbar-thumb {
+		background-color: #1b1a25
 	}
 
-	.sidenav::-webkit-scrollbar-track {
+	::-webkit-scrollbar-track {
 		background-color: #e0e0e0
 	}
 }

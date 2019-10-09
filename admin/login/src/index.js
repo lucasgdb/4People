@@ -1,5 +1,3 @@
-M.Sidenav.init(document.querySelectorAll('.sidenav'))
-
 const txtPassword = document.querySelector('input[name=admin_password]')
 const txtPasswordIcon = document.querySelector('#visibility')
 const formLogin = document.querySelector('[name=formLogin]')

@@ -19,7 +19,7 @@ if ($logged) {
 				<span style="color:#c8c8c8">&lt;/<span class="red-color-text">4People</span>&gt;</span>
 			</div>
 			<span class="name" style="color:#c8c8c8"><?= $logged ? "Admin: $admin_name" : '4People - Ferramentas Online' ?></span>
-			<a class="linkHover" href="<?= $logged ? "$root/admin/panel/administrators/data_update/?admin_id=$admin_id" : "$root/pages/about/" ?>"><span class="email" style="padding-bottom:0"><?= $logged ? 'Editar Perfil' : 'Sobre o 4People' ?> »</span></a>
+			<a class="linkHover" href="<?= $logged ? "$root/admin/panel/administrators/data_update/?admin_id=$admin_id" : "$root/pages/contact/" ?>"><span class="email" style="padding-bottom:0"><?= $logged ? 'Editar Perfil' : 'Fale Conosco' ?> »</span></a>
 			<?= $logged ? "<a class=\"dark-grey\" href=\"$assets/php/Logout.php\"><span class=\"email\" style=\"color:#c8c8c8;padding-bottom:0\">Sair »</span></a>" : '' ?>
 		</div>
 	</li>
@@ -107,7 +107,6 @@ if ($logged) {
 			<ul class="collapsible padding-headers padding-buttons">
 				<li>
 					<ul>
-						<li><a class="waves-effect" href="<?= $root ?>/pages/about/" title="Sobre - 4People"><i class="material-icons left">keyboard_arrow_right</i>Sobre nós</a></li>
 						<li><a class="waves-effect" href="<?= $root ?>/pages/contact/" title="Fale Conosco - 4People"><i class="material-icons left">keyboard_arrow_right</i>Fale Conosco</a></li>
 						<?php
 						$sql = $database->prepare('SELECT type_name, type_path FROM types');

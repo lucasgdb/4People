@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
 window.onload = () => {
 	nav.style.opacity = '1'
 	main.style.opacity = '1'
-	if (footer) footer.style.opacity = '1'
+	footer.style.opacity = '1'
 	sidenav.el.style.opacity = '1'
 	spinner.style.opacity = '0'
 

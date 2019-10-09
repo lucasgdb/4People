@@ -29,7 +29,7 @@ if (!isset($_SESSION['logged'])) {
 
 	<main>
 		<div class="container">
-			<div class="card-panel z-depth-2 top-div-margin" style="padding-bottom:10px">
+			<div class="card-panel top-div-margin" style="padding-bottom:10px">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">folder</i>Agendar manutenção</h1>
 				<label>Agendar uma manutenção no 4People</label>
 
@@ -111,6 +111,7 @@ if (!isset($_SESSION['logged'])) {
 	<div id="updates"></div>
 	<div id="deletes"></div>
 
+	<?php include_once("$assets/components/footer.php") ?>
 	<?php include_once("$assets/components/service_worker.php") ?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>

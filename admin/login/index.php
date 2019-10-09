@@ -14,7 +14,6 @@ if (isset($_SESSION['logged'])) {
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
-	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>Painel de Login</title>
 	<?php include_once("$assets/components/admin_components/meta_tags.php") ?>
@@ -23,9 +22,6 @@ if (isset($_SESSION['logged'])) {
 <body style="background-color:#ebebeb">
 	<?php
 	include_once("$assets/components/noscript.php");
-	include_once("$assets/components/spinner.php");
-	include_once("$assets/components/header.php");
-	include_once("$assets/components/sidenav.php")
 	?>
 
 	<main>
@@ -126,13 +122,9 @@ if (isset($_SESSION['logged'])) {
 		</div>
 	</main>
 
-	<?php
-	include_once("$assets/components/service_worker.php");
-	include_once("$assets/components/footer.php")
-	?>
+	<?php include_once("$assets/components/service_worker.php") ?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
-	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script src="src/index.js"></script>
 </body>
 

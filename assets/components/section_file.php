@@ -24,8 +24,8 @@
 
 	<main>
 		<div class="container">
-			<div class="card-panel z-depth-2 top-div-margin">
-				<h1 class="mont-serrat" style="font-size:30px;margin:5px 0 5px 0"><i class="material-icons left" style="top:5px"><?= $icon_section ?></i><?= $name_section ?></h1>
+			<div class="card-panel top-div-margin">
+				<h1 class="flow-text" style="font-size:30px;margin:5px 0 5px 0"><i class="material-icons left" style="top:5px"><?= $icon_section ?></i><?= $name_section ?></h1>
 
 				<label>Principais Ferramentas de <?= $name_section ?> do 4People</label>
 				<div class="divider" style="margin-top:10px"></div>

@@ -29,7 +29,7 @@ if (!isset($_SESSION['logged'])) {
 
 	<main>
 		<div class="container">
-			<div class="card-panel z-depth-2 top-div-margin" style="padding-bottom:10px">
+			<div class="card-panel top-div-margin" style="padding-bottom:10px">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person_add</i>Adicionar um Administrador</h1>
 				<label>Adicionar um novo Administrador ao 4People</label>
 
@@ -84,7 +84,7 @@ if (!isset($_SESSION['logged'])) {
 				<div class="top-div dark-grey"></div>
 			</div>
 
-			<div class="card-panel z-depth-2 top-div-margin" style="padding-bottom:0">
+			<div class="card-panel top-div-margin" style="padding-bottom:0">
 				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">search</i>Pesquisar um Administrador</h1>
 				<label>Pesquisar um Administrador do 4People</label>
 				<div class="divider"></div>
@@ -127,6 +127,7 @@ if (!isset($_SESSION['logged'])) {
 
 	<div id="modals"></div>
 
+	<?php include_once("$assets/components/footer.php") ?>
 	<?php include_once("$assets/components/service_worker.php") ?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>

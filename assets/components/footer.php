@@ -1,4 +1,4 @@
-<footer class="page-footer dark-grey" style="padding-top:0;margin-top:25px">
+<footer class="page-footer dark-grey" style="padding-top:0">
 	<div class="footer-copyright" style="background-color:#101016">
 		<div class="container" style="line-height:24px">
 			© 4People - <?= date('Y') ?>

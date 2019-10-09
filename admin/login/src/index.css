@@ -37,6 +37,24 @@ i.material-icons {
 	background-color: unset
 }
 
+.dark-grey,
+.dark-grey:hover,
+.dark-grey:focus {
+	background-color: #1B1A25 !important
+}
+
+.dark-grey-text {
+	color: #1B1A25 !important
+}
+
+.red-color {
+	background-color: #A62023 !important
+}
+
+.red-color-text {
+	color: #A62023 !important
+}
+
 @media (max-width: 600px) {
 	.card-panel {
 		margin-top: 0;
