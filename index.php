@@ -158,8 +158,7 @@
 						<blockquote class="grey-text text-darken-3 mt-0">
 							"Lucas Bittencourt, 19, cursando Desenvolvimento de Sistemas na Etec de Guaratinguetá e atuando como Desenvolvedor do 4People.
 							Também cursando o curso de Análise e Desenvolvimento de Sistemas na Fatec de Guaratinguetá.
-							Amo café <img src="<?= $assets ?>/images/coffee.png" alt="Café" />, distribuições Linux <img height="20" src="<?= $assets ?>/images/linux.png" alt="Linux" />, JavaScript <img src="<?= $assets ?>/images/js.png" alt="JS" /> e desenvolver &lt;/&gt;.
-							Um futuro Desenvolvedor fullstack."
+							Amo café <img src="<?= $assets ?>/images/coffee.png" alt="Café" />, distribuições Linux <img height="20" src="<?= $assets ?>/images/linux.png" alt="Linux" />, JavaScript <img src="<?= $assets ?>/images/js.png" alt="JS" /> e desenvolver &lt;/&gt;."
 						</blockquote>
 					</div>
 				</div>

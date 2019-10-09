@@ -25,6 +25,11 @@ body {
 	font-weight: 1000 !important
 }
 
+.name,
+.mont-serrat span {
+	color: #c8c8c8
+}
+
 .sidenav {
 	border-right: 0;
 	box-shadow: -15px 0 18px #1b1a25

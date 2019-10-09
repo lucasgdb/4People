@@ -1,5 +1,9 @@
 <?php
 try {
+	header('Access-Control-Allow-Origin: localhost');
+	header('Access-Control-Allow-Methods: POST');
+	header('Content-Type: application/json; charset=UTF-8');
+
 	session_start();
 	if (!isset($_SESSION['logged'])) {
 		header('HTTP/1.0 404 Not Found');
