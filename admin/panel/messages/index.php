@@ -60,7 +60,7 @@ if (!isset($_SESSION['logged'])) {
 			<h4><i class="material-icons left" style="top:8px">remove_red_eye</i>Ler Mensagem</h4>
 			<h6 id="messageSubject" style="color:#676767"></h6>
 			<div class="divider"></div>
-			<blockquote id="messageContent" class="mb-0 grey-text text-darken-4"></blockquote>
+			<blockquote id="messageContent" class="mb-0 grey-text text-darken-4" style="border-left-color:#A62023"></blockquote>
 
 			<div class="left-div dark-grey" style="border-radius:0"></div>
 		</div>

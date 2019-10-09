@@ -19,11 +19,6 @@ $admin_panel = true
 	<link rel="stylesheet" href="src/chart.min.css">
 	<title>Painel Administrativo - 4People</title>
 	<?php include_once("$assets/components/admin_components/meta_tags.php") ?>
-	<style>
-		h6 {
-			font-family: 'Montserrat'
-		}
-	</style>
 </head>
 
 <body>
@@ -48,7 +43,7 @@ $admin_panel = true
 							<div class="card-content left-div-margin-mobile" style="padding-bottom:4px">
 								<div class="row mb-0">
 									<div class="col s12 center-align">
-										<h6 class="mt-0">Administradores</h6>
+										<h6 class="mont-serrat mt-0">Administradores</h6>
 										<div class="divider"></div>
 										<a class="tooltiped" data-tooltip="Administradores" href="administrators/">
 											<i class="material-icons large" style="color:#212121">supervisor_account</i>
@@ -66,9 +61,9 @@ $admin_panel = true
 									<div class="col s12 center-align">
 										<?php
 										$sql = $database->prepare('SELECT COUNT(message_id) FROM messages WHERE message_read = "0"');
-										$sql->execute();
+										$sql->execute()
 										?>
-										<h6 class="mt-0" style="position:relative">Mensagens<span class="new badge btn-green" style="position:absolute;right:0" data-badge-caption="<?= $sql->fetchColumn() ?>"></span> </h6>
+										<h6 class="mont-serrat mt-0" style="position:relative">Mensagens<span class="new badge btn-green" style="position:absolute;right:0" data-badge-caption="<?= $sql->fetchColumn() ?>"></span> </h6>
 										<div class="divider mb-2"></div>
 										<a class="tooltiped" data-tooltip="Mensagens" href="messages/">
 											<i class="material-icons large" style="color:#212121">question_answer</i>
@@ -92,7 +87,7 @@ $admin_panel = true
 
 										$banned_count = $sql->fetchColumn()
 										?>
-										<h6 class="mt-0" style="position:relative">Banimentos<span class="new red badge" style="position:absolute;right:0" data-badge-caption=""><?= $banned_count ?></span></h6>
+										<h6 class="mont-serrat mt-0" style="position:relative">Banimentos<span class="new red badge" style="position:absolute;right:0" data-badge-caption=""><?= $banned_count ?></span></h6>
 										<div class="divider"></div>
 										<a class="tooltiped" data-tooltip="Banimentos" href="banneds/">
 											<i class="material-icons large" style="color:#212121">close</i>
@@ -114,7 +109,7 @@ $admin_panel = true
 
 										$tools_count = $sql->fetchColumn()
 										?>
-										<h6 class="mt-0" style="position:relative">Ferramentas<span class="new indigo badge" style="position:absolute;right:0" data-badge-caption=""><?= $tools_count ?></span></h6>
+										<h6 class="mont-serrat mt-0" style="position:relative">Ferramentas<span class="new indigo badge" style="position:absolute;right:0" data-badge-caption=""><?= $tools_count ?></span></h6>
 										<div class="divider mb-2"></div>
 										<a class="tooltiped" data-tooltip="<?= $sections_count ? 'Controle de Ferramentas' : ($types_count ? 'Seções de Ferramentas' : 'Tipos de Ferramentas') ?>" href="<?= $sections_count ? 'tools/tool_controls/' : ($types_count ? 'tools/sections/' : 'tools/tool_types/') ?>">
 											<i class="material-icons large" style="color:#212121">build</i>
@@ -150,72 +145,55 @@ $admin_panel = true
 	<script>
 		M.Tooltip.init(document.querySelectorAll('.tooltiped'))
 
-		<?php
-		$sql = $database->prepare('SELECT tool_name, tool_visits FROM tools WHERE tool_status = "1" ORDER BY tool_visits DESC LIMIT 10');
+		document.addEventListener('DOMContentLoaded', async () => {
+			const data = []
+			const labels = []
+			const getData = await (await fetch('src/select_data.php')).json()
 
-		$sql->execute()
-		?>
-
-		const data = []
-		const labels = []
-
-		<?php foreach ($sql as $data) : extract($data) ?>
-			data.push('<?= $tool_visits ?>')
-			labels.push('<?= $tool_name ?>')
-		<?php endforeach ?>
-
-		new Chart(document.querySelector('#status').getContext('2d'), {
-			type: 'pie',
-			data: {
-				datasets: [{
-					label: '# visitas',
-					data,
-					backgroundColor: [
-						'#009688',
-						'#f44336',
-						'#2196f3',
-						'#cddc39',
-						'#00bcd4',
-						'#ff9800',
-						'#795548',
-						'#3f51b5',
-						'#e91e63',
-						'#9c27b0'
-					]
-				}],
-				labels
+			for (const i in getData) {
+				data.push(getData[i][0])
+				labels.push(getData[i][1])
 			}
-		})
 
-		<?php
-		$sql = $database->prepare('SELECT tool_name, tool_visits FROM tools WHERE tool_status = "1" ORDER BY tool_visits DESC LIMIT 3');
-		$sql->execute()
-		?>
+			new Chart(document.querySelector('#status').getContext('2d'), {
+				type: 'pie',
+				data: {
+					datasets: [{
+						label: '# visitas',
+						data,
+						backgroundColor: [
+							'#009688',
+							'#f44336',
+							'#2196f3',
+							'#cddc39',
+							'#00bcd4',
+							'#ff9800',
+							'#795548',
+							'#3f51b5',
+							'#e91e63',
+							'#9c27b0'
+						]
+					}],
+					labels
+				}
+			})
 
-		const data2 = []
-		const labels2 = []
-
-		<?php foreach ($sql as $data) : extract($data) ?>
-			data2.push('<?= $tool_visits ?>')
-			labels2.push('<?= $tool_name ?>')
-		<?php endforeach ?>
-
-		new Chart(document.querySelector('#tools').getContext('2d'), {
-			type: 'pie',
-			data: {
-				datasets: [{
-					data: data2,
-					backgroundColor: [
-						'#009688',
-						'#f44336',
-						'#2196f3'
-					]
-				}],
-				labels: labels2
-			}
+			new Chart(document.querySelector('#tools').getContext('2d'), {
+				type: 'pie',
+				data: {
+					datasets: [{
+						data: data.slice(0, 3),
+						backgroundColor: [
+							'#009688',
+							'#f44336',
+							'#2196f3'
+						]
+					}],
+					labels: labels.slice(0, 3)
+				}
+			})
 		})
 	</script>
-
 </body>
 
 </html>
