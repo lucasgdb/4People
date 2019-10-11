@@ -22,10 +22,10 @@ if ($logged) {
 			<?php if ($logged) : ?>
 				<span class="name">Admin: <?= $admin_name ?></span>
 				<a class="linkHover" href="<?= $root ?>/admin/panel/administrators/data_update/?admin_id=<?= $admin_id ?>"><span class="email" style="padding-bottom:0">Editar Perfil »</span></a>
-				<a class="linkHover dark-grey" href="<?= $assets ?>/php/Logout.php"> <span class="email" style="color:#c8c8c8;padding-bottom:0">Sair »</span></a>
+				<a class="dark-grey" href="<?= $assets ?>/php/Logout.php"> <span class="email" style="color:#c8c8c8;padding-bottom:0">Sair »</span></a>
 			<?php else : ?>
 				<span class="name">4People - Ferramentas Online</span>
-				<a class="linkHover" href="<?= $root ?>/pages/contact/"><span class="email" style="padding-bottom:0">Fale Conosco »</span></a>
+				<a class="linkHover" href="<?= $root ?>/pages/contact/"><span class="email" style="padding-bottom:0">Contato »</span></a>
 			<?php endif ?>
 		</div>
 	</li>
@@ -116,7 +116,7 @@ if ($logged) {
 			<ul class="collapsible padding-headers padding-buttons">
 				<li>
 					<ul>
-						<li><a class="waves-effect" href="<?= $root ?>/pages/contact/" title="Fale Conosco - 4People"><i class="material-icons left">keyboard_arrow_right</i>Fale Conosco</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/pages/contact/" title="Contato - 4People"><i class="material-icons left">keyboard_arrow_right</i>Contato</a></li>
 						<?php
 						$sql = $database->prepare('SELECT type_name, type_path FROM types');
 						$sql->execute();

@@ -9,14 +9,14 @@
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
-	<title>Fale Conosco - 4People</title>
+	<title>Contato - 4People</title>
 	<?php include_once("$assets/components/meta_tags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-	<meta name="title" content="Fale Conosco - 4People">
+	<meta name="title" content="Contato - 4People">
 	<meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
 	<meta name="application-name" content="4People">
-	<meta property="og:title" content="Fale Conosco - 4People">
-	<meta name="twitter:title" content="Fale Conosco - 4People">
+	<meta property="og:title" content="Contato - 4People">
+	<meta name="twitter:title" content="Contato - 4People">
 </head>
 
 <body>
@@ -30,7 +30,7 @@
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin">
-				<h1 class="flow-text" style="font-size:30px;margin:5px 0 5px"><i class="material-icons left" style="top:5px">email</i>Fale Conosco</h1>
+				<h1 class="flow-text" style="font-size:30px;margin:5px 0 5px"><i class="material-icons left" style="top:5px">email</i>Contato</h1>
 
 				<label>Alguma dúvida? Algum bug? Deseja alguma ferramenta nova? Por favor, nos contate e deixe-nos sabendo de qualquer coisa.</label>
 				<div class="divider" style="margin-top:10px"></div>

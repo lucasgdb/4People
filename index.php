@@ -32,9 +32,9 @@
 				<h1 class="flow-text" style="margin:5px 0 5px"><i class="material-icons left">home</i>4People - Página Inicial</h1>
 				<label>Ferramentas Online para estudantes e professores.</label>
 
-				<div class="divider" style="margin-bottom:5px"></div>
+				<div class="divider" style="margin:10px 0"></div>
 
-				<div class="slider mt-2">
+				<div class="slider">
 					<ul class="slides z-depth-2">
 						<li class="grey lighten-3">
 							<img src="<?= $assets ?>/images/bg01.jpg" alt="bg01">
@@ -64,7 +64,7 @@
 							<img src="<?= $assets ?>/images/bg01.jpg" alt="bg01">
 							<div class="caption left-align">
 								<h3 class="dark"><i style="top:10px" class="material-icons red-color-text left small">free_breakfast</i>O MAIS ATUALIZADO!</h3>
-								<h5 class="light">Tá sentindo falta de alguma Ferramenta ou encontrou algum erro? Por favor, <a href="./pages/contact/">Fale Conosco</a>.</h5>
+								<h5 class="light">Tá sentindo falta de alguma Ferramenta ou encontrou algum erro? Por favor, <a href="./pages/contact/">fale conosco</a>.</h5>
 							</div>
 						</li>
 					</ul>

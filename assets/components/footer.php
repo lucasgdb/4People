@@ -5,7 +5,7 @@
 			<?php if (isset($_SESSION['logged']['id'])) : ?>
 				<a class="right linkHover" href="<?= $root ?>/admin/panel/"><i class="material-icons left" style="top:-1px">verified_user</i>Painel Administrativo »</a>
 			<?php else : ?>
-				<a class="right linkHover" href="<?= $root ?>/pages/contact/"><i class="material-icons left" style="top:-1px">email</i>Fale Conosco »</a>
+				<a class="right linkHover" href="<?= $root ?>/pages/contact/"><i class="material-icons left" style="top:-1px">email</i>Contato »</a>
 			<?php endif ?>
 		</div>
 	</div>

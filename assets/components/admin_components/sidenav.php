@@ -15,7 +15,7 @@ extract($sql->fetch())
 			<img title="<?= $admin_name ?>" class="circle" src="<?= $assets ?>/images/<?= $admin_image && file_exists("$assets/images/admin_images/$admin_image") ? "admin_images/$admin_image" : 'user.svg' ?>" alt="Foto">
 			<span class="name black-text">Admin: <?= $admin_name ?></span>
 			<a class="linkHover" href="<?= $root ?>/admin/panel/administrators/data_update/?admin_id=<?= $admin_id ?>"><span class="email" style="padding-bottom:0">Editar perfil »</span></a>
-			<a class="linkHover" href="<?= $assets ?>/php/Logout.php"> <span class="email dark-grey-text" style="padding-bottom:0;margin-bottom:15px">Sair »</span></a>
+			<a href="<?= $assets ?>/php/Logout.php"> <span class="email dark-grey-text" style="padding-bottom:0;margin-bottom:15px">Sair »</span></a>
 		</div>
 
 		<div class="left-div-mobile dark-grey" style="border-radius:0"></div>
