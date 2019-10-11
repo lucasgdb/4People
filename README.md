@@ -52,6 +52,7 @@
   - git clone [https://github.com/lucasnaja/4People.git](https://github.com/lucasnaja/4People.git)
 - Importar o banco de dados no MySQL.
   - Localização do database.sql: /assets/database/database.sql
+- Mudar as configurações de seu MySQL em /assets/php/Connection.php
 - Windows
   - Colar a pasta 4People no htdocs do xampp.
   - Ou como preferir.

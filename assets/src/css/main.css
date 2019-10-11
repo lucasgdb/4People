@@ -190,10 +190,6 @@ body>header+ul>li>.collapsible-header {
 	padding-left: 4px !important
 }
 
-.active>.collapsible-header {
-	border-bottom: 0 !important
-}
-
 .padding-headers .collapsible-header {
 	padding: 0 19px !important
 }
@@ -212,7 +208,6 @@ body>header+ul>li>.collapsible-header {
 
 .collapsible-body a {
 	margin-bottom: -1px;
-	border-top: 1px solid #c8c8c8;
 	border-bottom: 1px solid #c8c8c8
 }
 
