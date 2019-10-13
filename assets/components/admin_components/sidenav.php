@@ -29,11 +29,11 @@ extract($sql->fetch())
 			<ul class="collapsible padding-headers padding-buttons">
 				<li>
 					<ul>
-						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/" title="Painel Administrativo"><i class="material-icons left">keyboard_arrow_right</i>Painel Administrativo</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/messages/" title="Mensagens dos usuários"><i class="material-icons left">keyboard_arrow_right</i>Mensagem dos usuários</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/login_logs/" title="Logs de Logins falhos"><i class="material-icons left">keyboard_arrow_right</i>Logs de Logins falhos</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/admin_logs/" title="Logs de Administradores"><i class="material-icons left">keyboard_arrow_right</i>Logs de Administradores</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/maintenance/" title="Manutenção do site"><i class="material-icons left">keyboard_arrow_right</i>Manutenção do 4People</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/" title="Painel Administrativo"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Painel Administrativo</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/messages/" title="Mensagens dos usuários"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Mensagem dos usuários</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/login_logs/" title="Logs de Logins falhos"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Logs de Logins falhos</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/admin_logs/" title="Logs de Administradores"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Logs de Administradores</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/maintenance/" title="Manutenção do site"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Manutenção do 4People</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -48,9 +48,9 @@ extract($sql->fetch())
 			<ul class="collapsible padding-headers padding-buttons">
 				<li>
 					<ul>
-						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/administrators/" title="Controle de Administradores"><i class="material-icons left">keyboard_arrow_right</i>Controle de Administradores</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/banneds/" title="Controle de usuários banidos"><i class="material-icons left">keyboard_arrow_right</i>Controle de Banimentos</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/tools/tool_types/" title="Controle de Tipos de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Tipos</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/administrators/" title="Controle de Administradores"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Controle de Administradores</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/banneds/" title="Controle de usuários banidos"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Controle de Banimentos</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/tools/tool_types/" title="Controle de Tipos de Ferramentas"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Controle de Tipos</a></li>
 						<?php
 						$sql = $database->prepare('SELECT COUNT(type_id) AS types_count FROM types LIMIT 1');
 						$sql->execute();
@@ -61,10 +61,10 @@ extract($sql->fetch())
 						$sections_count = $sql->fetchColumn();
 
 						if ($types_count) : ?>
-							<li><a class="waves-effect" href="<?= $root ?>/admin/panel/tools/tool_sections/" title="Controle de Seções de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Seções</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/admin/panel/tools/tool_sections/" title="Controle de Seções de Ferramentas"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Controle de Seções</a></li>
 						<?php endif ?>
 						<?php if ($sections_count) : ?>
-							<li><a class="waves-effect" href="<?= $root ?>/admin/panel/tools/tool_controls/" title="Controle de Ferramentas"><i class="material-icons left">keyboard_arrow_right</i>Controle de Ferramentas</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/admin/panel/tools/tool_controls/" title="Controle de Ferramentas"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Controle de Ferramentas</a></li>
 						<?php endif ?>
 					</ul>
 				</li>
@@ -78,8 +78,8 @@ extract($sql->fetch())
 			<ul class="collapsible padding-headers padding-buttons">
 				<li>
 					<ul>
-						<li><a class="waves-effect" href="<?= $root ?>/" title="Voltar ao Início"><i class="material-icons left">home</i>Voltar ao Início</a></li>
-						<li><a class="waves-effect" href="<?= $assets ?>/php/Logout.php" title="Sair"><i class="material-icons left">exit_to_app</i>Sair</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/" title="Voltar ao Início"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Voltar ao Início</a></li>
+						<li><a class="waves-effect" href="<?= $assets ?>/php/Logout.php" title="Sair"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Sair</a></li>
 					</ul>
 				</li>
 			</ul>

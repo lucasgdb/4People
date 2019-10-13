@@ -55,7 +55,7 @@
 					Limpar
 				</button>
 
-				<div class="left-div dark-grey"></div>
+				<div class="top-div dark-grey"></div>
 			</div>
 
 			<?php include_once("$assets/components/more_tools.php") ?>

@@ -32,7 +32,7 @@ body {
 
 .sidenav {
 	border-right: 0;
-	box-shadow: -15px 0 18px #1b1a25
+	box-shadow: -17px 0 18px #1b1a25
 }
 
 /* cyrillic-ext */
@@ -203,12 +203,30 @@ body>header+ul>li>.collapsible-header {
 }
 
 .sidenav.collapsible>li.active {
-	background-color: #E0E0E0
+	background-color: #D8D8D8
+}
+
+.collapsible-body li.active {
+	background-color: #E9E9E9
+}
+
+.sidenav.collapsible>li,
+.collapsible-body li {
+	transition: all 300ms
+}
+
+.collapsible-header:hover,
+.collapsible-header:focus {
+	background-color: unset !important
 }
 
 .collapsible-body a {
 	margin-bottom: -1px;
 	border-bottom: 1px solid #c8c8c8
+}
+
+.collapsible-body a:focus {
+	background-color: unset
 }
 
 .collapsible-body a i {
@@ -287,7 +305,6 @@ body>header+ul>li>.collapsible-header {
 
 @media (min-width: 993px) {
 	main>.container {
-		transition: width 300ms !important;
 		width: 92.5%
 	}
 

@@ -135,7 +135,7 @@
 					</div>
 				</div>
 
-				<div class="divider mt-2 mb-2"></div>
+				<div class="divider mb-2"></div>
 
 				<div style="padding:0 20px">
 					<blockquote class="grey-text text-darken-3" style="border-left-color:#A62023">
@@ -148,7 +148,7 @@
 
 				<div class="row mb-0">
 					<div class="col s12 m6 l4">
-						<img title="Lucas Bittencourt" class="responsive-img img-thumbnail" src="<?= $assets ?>/images/lucas_bittencourt.jpg" alt="">
+						<a href="https://github.com/lucasnaja" target="_blank"><img title="Lucas Bittencourt" class="responsive-img img-thumbnail" src="<?= $assets ?>/images/lucas_bittencourt.jpg" alt="Lucas Bittencourt"></a>
 					</div>
 
 					<div class="col s12 m6 l8">
@@ -165,7 +165,7 @@
 
 				<div class="row mb-0" style="margin-top:12px">
 					<div class="col s12 m6 l4">
-						<img title="Suzany Silva" class="responsive-img img-thumbnail" src="<?= $assets ?>/images/suzany_silva.jpg" alt="">
+						<img title="Suzany Silva" class="responsive-img img-thumbnail" src="<?= $assets ?>/images/suzany_silva.jpg" alt="Suzany Silva">
 					</div>
 
 					<div class="col s12 m6 l8">
@@ -178,7 +178,7 @@
 
 				<div class="row mb-0" style="margin-top:12px">
 					<div class="col s12 m6 l4">
-						<img title="Renan Mattos" class="responsive-img img-thumbnail" src="<?= $assets ?>/images/renan_mattos.jpg" alt="">
+						<img title="Renan Mattos" class="responsive-img img-thumbnail" src="<?= $assets ?>/images/renan_mattos.jpg" alt="Renan Mattos">
 					</div>
 
 					<div class="col s12 m6 l8">

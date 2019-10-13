@@ -15,7 +15,7 @@
 	<meta name="description" content="Calcular a equação do 2° grau (Bhaskara). 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
 	<meta name="application-name" content="4People">
 	<meta property="og:title" content="Equação do 2° Grau - 4People">
-	<meta name="twitter:title" content="Equação do 2° Grau - 4People">>
+	<meta name="twitter:title" content="Equação do 2° Grau - 4People">
 </head>
 
 <body>

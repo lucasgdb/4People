@@ -3,9 +3,9 @@
 		<div class="container" style="line-height:24px">
 			© 4People - <?= date('Y') ?>
 			<?php if (isset($_SESSION['logged']['id'])) : ?>
-				<a class="right linkHover" href="<?= $root ?>/admin/panel/"><i class="material-icons left" style="top:-1px">verified_user</i>Painel Administrativo »</a>
+				<a class="right linkHover red-color-text" href="<?= $root ?>/admin/panel/"><i class="material-icons left" style="top:-1px">verified_user</i>Painel Administrativo »</a>
 			<?php else : ?>
-				<a class="right linkHover" href="<?= $root ?>/pages/contact/"><i class="material-icons left" style="top:-1px">email</i>Contato »</a>
+				<a class="right linkHover red-color-text" href="<?= $root ?>/pages/contact/"><i class="material-icons left" style="top:-1px">email</i>Contato »</a>
 			<?php endif ?>
 		</div>
 	</div>

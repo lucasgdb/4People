@@ -93,9 +93,9 @@ if ($logged) {
 												} ?>
 										<?php if ($tool_status || $admin) : ?>
 											<?php if ($active) : ?>
-												<li><a class="waves-effect black-text" style="font-weight:bold" onclick="preventDefault(event)" href="<?= $root ?>/pages/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" title="<?= $tool_name ?>"><i class="material-icons dark-grey-text left" style="font-size:20px;margin-left:2.5px">radio_button_checked</i><?= $tool_name ?></a></li>
+												<li><a class="waves-effect waves- black-text" style="font-weight:bold" onclick="preventDefault(event)" href="<?= $root ?>/pages/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" title="<?= $tool_name ?>"><i class="material-icons dark-grey-text left" style="font-size:20px;margin-left:2.5px">radio_button_checked</i><?= $tool_name ?></a></li>
 											<?php else : ?>
-												<li><a class="waves-effect" href="<?= $root ?>/pages/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" title="<?= $tool_name ?>"><i class="material-icons left">keyboard_arrow_right</i><?= $tool_name ?></a></li>
+												<li><a class="waves-effect waves-" href="<?= $root ?>/pages/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" title="<?= $tool_name ?>"><i class="material-icons left red-color-text">keyboard_arrow_right</i><?= $tool_name ?></a></li>
 											<?php endif ?>
 										<?php endif ?>
 									<?php endforeach ?>
@@ -116,13 +116,13 @@ if ($logged) {
 			<ul class="collapsible padding-headers padding-buttons">
 				<li>
 					<ul>
-						<li><a class="waves-effect" href="<?= $root ?>/pages/contact/" title="Contato - 4People"><i class="material-icons left">keyboard_arrow_right</i>Contato</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/pages/contact/" title="Contato - 4People"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Contato</a></li>
 						<?php
 						$sql = $database->prepare('SELECT type_name, type_path FROM types');
 						$sql->execute();
 
 						foreach ($sql as $data) : extract($data) ?>
-							<li><a class="waves-effect" href="<?= $root ?>/pages/<?= $type_path ?>/" title="<?= $type_name ?>"><i class="material-icons left">keyboard_arrow_right</i><?= $type_name ?></a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/pages/<?= $type_path ?>/" title="<?= $type_name ?>"><i class="material-icons left red-color-text">keyboard_arrow_right</i><?= $type_name ?></a></li>
 						<?php endforeach ?>
 					</ul>
 				</li>
@@ -137,8 +137,8 @@ if ($logged) {
 				<ul class="collapsible padding-headers padding-buttons">
 					<li>
 						<ul>
-							<li><a class="waves-effect" href="<?= $root ?>/admin/panel/" title="Ir ao Painel Administrativo"><i class="material-icons left">verified_user</i>Painel Administrativo</a></li>
-							<li><a class="waves-effect" href="<?= $assets ?>/php/Logout.php" title="Sair"><i class="material-icons left">exit_to_app</i>Sair</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/" title="Painel Administrativo"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Painel Administrativo</a></li>
+						<li><a class="waves-effect" href="<?= $assets ?>/php/Logout.php" title="Sair"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Sair</a></li>
 						</ul>
 					</li>
 				</ul>

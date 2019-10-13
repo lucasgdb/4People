@@ -68,9 +68,9 @@
 									</div>
 
 									<div class="card-reveal">
-										<span class="card-title no-select"><i style="top:5px" class="material-icons left">code</i>Código Fonte<i class="material-icons right">close</i></span>
+										<span class="card-title no-select"><i style="top:5px" class="material-icons left">code</i>Código Fonte<i class="material-icons right red-color-text">close</i></span>
 										<div class="divider"></div>
-										<p><a class="linkHover bold" href="<?= $tool_link ?>" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
+										<p><a class="linkHover bold red-color-text" href="<?= $tool_link ?>" target="_blank">Clique aqui</a> para ir direto ao Código Fonte no GitHub.</p>
 									</div>
 								</div>
 							</div>
