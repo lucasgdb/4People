@@ -16,15 +16,15 @@ if (!isset($_SESSION['logged'])) {
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>Tipos de Ferramentas - 4People</title>
-	<?php include_once("$assets/components/admin_components/meta_tags.php") ?>
+	<?php include_once("$assets/components/admin_components/MetaTags.php") ?>
 </head>
 
 <body>
 	<?php
-	include_once("$assets/components/noscript.php");
-	include_once("$assets/components/spinner.php");
-	include_once("$assets/components/header.php");
-	include_once("$assets/components/admin_components/sidenav.php")
+	include_once("$assets/components/NoScript.php");
+	include_once("$assets/components/Spinner.php");
+	include_once("$assets/components/Header.php");
+	include_once("$assets/components/admin_components/Sidenav.php")
 	?>
 
 	<main>
@@ -94,8 +94,8 @@ if (!isset($_SESSION['logged'])) {
 	<div id="updates"></div>
 	<div id="deletes"></div>
 
-	<?php include_once("$assets/components/footer.php") ?>
-	<?php include_once("$assets/components/service_worker.php") ?>
+	<?php include_once("$assets/components/Footer.php") ?>
+	<?php include_once("$assets/components/ServiceWorker.php") ?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/clipboard.min.js"></script>

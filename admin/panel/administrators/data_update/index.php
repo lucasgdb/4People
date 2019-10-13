@@ -15,11 +15,11 @@ if (!isset($_SESSION['logged'])) {
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>Controle de Administradores - Atualizar Dados</title>
-	<?php include_once("$assets/components/admin_components/meta_tags.php") ?>
+	<?php include_once("$assets/components/admin_components/MetaTags.php") ?>
 </head>
 
 <body style="background-color:#ebebeb">
-	<?php include_once("$assets/components/noscript.php") ?>
+	<?php include_once("$assets/components/NoScript.php") ?>
 
 	<main>
 		<div class="container">
@@ -92,7 +92,7 @@ if (!isset($_SESSION['logged'])) {
 		</div>
 	</main>
 
-	<?php include_once("$assets/components/service_worker.php") ?>
+	<?php include_once("$assets/components/ServiceWorker.php") ?>
 
 	<script>
 		const admin_image_text = document.querySelector('[name="admin_image_text"]')

@@ -16,12 +16,12 @@ if (isset($_SESSION['logged'])) {
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>Painel de Login</title>
-	<?php include_once("$assets/components/admin_components/meta_tags.php") ?>
+	<?php include_once("$assets/components/admin_components/MetaTags.php") ?>
 </head>
 
 <body style="background-color:#ebebeb">
 	<?php
-	include_once("$assets/components/noscript.php");
+	include_once("$assets/components/NoScript.php");
 	?>
 
 	<main>
@@ -129,7 +129,7 @@ if (isset($_SESSION['logged'])) {
 		</div>
 	</main>
 
-	<?php include_once("$assets/components/service_worker.php") ?>
+	<?php include_once("$assets/components/ServiceWorker.php") ?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="src/index.js"></script>

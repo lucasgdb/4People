@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/cards.css">
-	<?php include_once("$assets/components/meta_tags.php") ?>
+	<?php include_once("$assets/components/MetaTags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="4People - Ferramentas Online">
 	<meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
@@ -16,32 +16,33 @@
 
 <body>
 	<?php
-	include_once("$assets/components/noscript.php");
-	include_once("$assets/components/spinner.php");
-	include_once("$assets/components/header.php");
-	include_once("$assets/components/sidenav.php")
+	include_once("$assets/components/NoScript.php");
+	include_once("$assets/components/Spinner.php");
+	include_once("$assets/components/Header.php");
+	include_once("$assets/components/Sidenav.php")
 	?>
 
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin">
-				<h1 class="flow-text" style="font-size:30px;margin:5px 0 5px 0"><i class="material-icons left" style="top:5px"><?= $icon ?></i>Principais Ferramentas</h1>
+				<h1 class="flow-text" style="font-size:30px;margin:5px 0 5px 0"><i class="material-icons left" style="top:5px"><?= $icon_section ?></i><?= $name_section ?></h1>
 
-				<label>Principais Ferramentas de <?= $name ?> do 4People</label>
-				<div class="divider" style="margin-top:10px"></div>
+				<label>Principais Ferramentas de <?= $name_section ?> do 4People</label>
+				<div class="divider"></div>
 
-				<div class="row mb-0" style="margin-top:10px">
+				<div class="row mt-2 mb-0">
 					<?php
 					$sql = $database->prepare(
 						'SELECT sections.section_path, sections.section_icon, tools.tool_name, tools.tool_path, tools.tool_description, tools.tool_link
 							FROM tools
 							INNER JOIN sections ON sections.section_id = tools.section_id
 							INNER JOIN types ON types.type_id = sections.type_id
-							WHERE tools.tool_status = "1" AND types.type_name = :type_name
+							WHERE tools.tool_status = "1" AND types.type_name = :type_name AND sections.section_name = :section_name
 							ORDER BY tools.tool_visits DESC'
 					);
 
 					$sql->bindValue(':type_name', $name);
+					$sql->bindValue(':section_name', $name_section);
 					$sql->execute();
 
 					if ($sql->rowCount()) :
@@ -63,8 +64,7 @@
 									</div>
 
 									<div class="card-action dark-grey">
-										<a class="white-text no-break" href="./<?= $section_path ?>/<?= $tool_path ?>/">Ferramenta &raquo;</a>
-										<a class="white-text no-break" href="./<?= $section_path ?>/">Mais Ferramentas &raquo;</a>
+										<a class="white-text no-break" href="./<?= $tool_path ?>/">Ferramenta &raquo;</a>
 									</div>
 
 									<div class="card-reveal">
@@ -86,14 +86,14 @@
 	</main>
 
 	<?php
-	include_once("$assets/components/footer.php");
-	include_once("$assets/components/service_worker.php")
+	include_once("$assets/components/Footer.php");
+	include_once("$assets/components/ServiceWorker.php")
 	?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script>
-		document.title = '<?= $name ?> - 4People'
+		document.title = '<?= $name_section ?> - 4People'
 	</script>
 </body>
 

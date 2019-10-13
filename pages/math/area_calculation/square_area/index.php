@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>Área do Quadrado - 4People</title>
-	<?php include_once("$assets/components/meta_tags.php") ?>
+	<?php include_once("$assets/components/MetaTags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="Área do Quadrado - 4People">
 	<meta name="description" content="Calcular área do Quadrado. 4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
@@ -20,10 +20,10 @@
 
 <body>
 	<?php
-	include_once("$assets/components/noscript.php");
-	include_once("$assets/components/spinner.php");
-	include_once("$assets/components/header.php");
-	include_once("$assets/components/sidenav.php")
+	include_once("$assets/components/NoScript.php");
+	include_once("$assets/components/Spinner.php");
+	include_once("$assets/components/Header.php");
+	include_once("$assets/components/Sidenav.php")
 	?>
 
 	<main>
@@ -32,7 +32,7 @@
 				<h1 class="mont-serrat" style="font-size:30px;margin:5px 0 5px 0"><i class="material-icons left" style="top:5px"><?= $icon_section ?></i><?= $name_tool ?></h1>
 
 				<label><?= $description_tool ?></label>
-				<div class="divider" style="margin-top:10px"></div>
+				<div class="divider"></div>
 
 				<div class="row mb-0">
 					<div class="col s12 m4">
@@ -105,13 +105,13 @@
 				<div class="top-div dark-grey"></div>
 			</div>
 
-			<?php include_once("$assets/components/more_tools.php") ?>
+			<?php include_once("$assets/components/MoreTools.php") ?>
 		</div>
 	</main>
 
 	<?php
-	include_once("$assets/components/footer.php");
-	include_once("$assets/components/service_worker.php")
+	include_once("$assets/components/Footer.php");
+	include_once("$assets/components/ServiceWorker.php")
 	?>
 
 	<script src="<?= $assets ?>/algorithms/areas_calculator/squareArea.js"></script>

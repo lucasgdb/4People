@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/index.css">
 	<title>4People - Ferramentas Online</title>
-	<?php include_once("$assets/components/meta_tags.php") ?>
+	<?php include_once("$assets/components/MetaTags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
 	<meta name="title" content="4People - Ferramentas Online">
 	<meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
@@ -20,10 +20,10 @@
 
 <body>
 	<?php
-	include_once("$assets/components/noscript.php");
-	include_once("$assets/components/spinner.php");
-	include_once("$assets/components/header.php");
-	include_once("$assets/components/sidenav.php")
+	include_once("$assets/components/NoScript.php");
+	include_once("$assets/components/Spinner.php");
+	include_once("$assets/components/Header.php");
+	include_once("$assets/components/Sidenav.php")
 	?>
 
 	<main>
@@ -32,9 +32,9 @@
 				<h1 class="flow-text" style="margin:5px 0 5px"><i class="material-icons left">home</i>4People - Página Inicial</h1>
 				<label>Ferramentas Online para estudantes e professores.</label>
 
-				<div class="divider" style="margin:10px 0"></div>
+				<div class="divider"></div>
 
-				<div class="slider">
+				<div class="slider mt-2">
 					<ul class="slides z-depth-2">
 						<li class="grey lighten-3">
 							<img src="<?= $assets ?>/images/bg01.jpg" alt="bg01">
@@ -195,8 +195,8 @@
 	</main>
 
 	<?php
-	include_once("$assets/components/footer.php");
-	include_once("$assets/components/service_worker.php")
+	include_once("$assets/components/Footer.php");
+	include_once("$assets/components/ServiceWorker.php")
 	?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
