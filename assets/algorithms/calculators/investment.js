@@ -23,7 +23,7 @@ const calculateInvestment = ({ value = 0, CDI = 0, perMonth = 0, months = 0, IR 
 		tax: formatter.format(tax),
 		profit: formatter.format(profit),
 		perMonth: formatter.format(profit / months),
-		perYear: formatter.format(profit / Math.floor(months / 12)),
+		perYear: formatter.format(profit / (Math.floor(months / 12) === 0 ? 1 : Math.floor(months / 12))),
 		total: formatter.format(value),
 	}
 }

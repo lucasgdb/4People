@@ -207,14 +207,14 @@
 
 		const formatter = Intl.NumberFormat('pt-BR')
 
-		const formatNumbers = elements => {
+		const formatNumbers = (...elements) => {
 			for (let i = 0; i < elements.length; i += 1) {
 				const number = elements[i].textContent
 				elements[i].textContent = formatter.format(number)
 			}
 		}
 
-		formatNumbers([lblToolVisits])
+		formatNumbers(lblToolVisits)
 	</script>
 </body>
 

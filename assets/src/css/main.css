@@ -187,11 +187,11 @@ main {
 }
 
 body>header+ul>li>.collapsible-header {
-	padding-left: 4px !important
+	padding-left: 6px !important
 }
 
 .padding-headers .collapsible-header {
-	padding: 0 19px !important
+	padding: 0 24px !important
 }
 
 .padding-headers .collapsible-body a {
@@ -199,7 +199,11 @@ body>header+ul>li>.collapsible-header {
 }
 
 .padding-buttons a {
-	padding: 0 19px !important
+	padding: 0 26px !important
+}
+
+.padding-headers>li>ul>li>a {
+	padding: 0 16px !important
 }
 
 .sidenav.collapsible>li.active {
