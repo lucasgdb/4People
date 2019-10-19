@@ -1,12 +1,12 @@
-const calculateInvestment = ({ value = 0, CDI = 0, perMonth = 0, months = 0, IR = false }) => {
-	CDI /= 12
-	CDI /= 100
+const calculateInvestment = ({ value = 0, percentage = 0, perMonth = 0, months = 0, IR = false }) => {
+	percentage /= 12
+	percentage /= 100
 
 	const formatter = Intl.NumberFormat([], { style: 'currency', currency: 'BRL' })
 	const oldValue = value
 
 	for (let i = 0; i < months; i++) {
-		value += value * CDI
+		value += value * percentage
 
 		if (i > 0) value += perMonth
 	}
@@ -27,3 +27,5 @@ const calculateInvestment = ({ value = 0, CDI = 0, perMonth = 0, months = 0, IR 
 		total: formatter.format(value),
 	}
 }
+
+console.log(calculateInvestment({ value: 23000, percentage: 84, months: 24, IR: true }))

@@ -25,10 +25,10 @@ try {
 
 			break;
 		} else {
-			$assets .= "../";
+			$assets .= '../';
 			if ($root === '.') $root = '';
 
-			$root .= "../";
+			$root .= '../';
 			$p = explode('/', $p);
 			unset($p[count($p) - 1]);
 			$p = implode('/', $p);
@@ -41,10 +41,10 @@ try {
 
 	$sql = $database->prepare(
 		'SELECT * FROM maintenances WHERE
-	(:current_time >= maintenance_begin AND :current_time <= maintenance_end) OR
-	(maintenance_begin IS NULL AND :current_time <= maintenance_end) OR
-	(:current_time >= maintenance_begin AND maintenance_end IS NULL) OR
-	(maintenance_begin IS NULL AND maintenance_end IS NULL)'
+		(:current_time >= maintenance_begin AND :current_time <= maintenance_end) OR
+		(maintenance_begin IS NULL AND :current_time <= maintenance_end) OR
+		(:current_time >= maintenance_begin AND maintenance_end IS NULL) OR
+		(maintenance_begin IS NULL AND maintenance_end IS NULL)'
 	);
 
 	$sql->bindValue(':current_time', $current_time);

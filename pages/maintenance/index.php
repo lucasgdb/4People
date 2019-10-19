@@ -80,7 +80,7 @@ if ($sql->rowCount() === 0) {
 </head>
 
 <body style="background-color: #ebebeb">
-	<?php include_once('../../assets/components/noscript.php') ?>
+	<?php include_once('../../assets/components/NoScript.php') ?>
 
 	<div style="text-align:center;margin-top:10px">
 		<img src="../../assets/images/maintenance.png" alt="">
