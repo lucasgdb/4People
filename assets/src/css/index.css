@@ -18,9 +18,8 @@ blockquote img {
 
 .caption h5,
 .caption h3 {
-	background-color: rgba(0, 0, 0, 0.3);
 	border-radius: 10px;
-	padding: 0 10px;
+	padding: 10px;
 }
 
 .indicators .active {
@@ -42,6 +41,6 @@ li.indicator-item {
 	}
 
 	.dark {
-		font-size: 25px;
+		display: none;
 	}
 }

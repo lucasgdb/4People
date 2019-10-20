@@ -2,8 +2,8 @@
 try {
 	session_start();
 	$url = $_SERVER['REQUEST_URI'];
-
 	$pos = strpos($url, '?');
+	$assets = "$root/assets";
 
 	if (strpos($url, '?') === false && $url[strlen($url) - 1] !== '/') {
 		header("Location: $url/");
@@ -13,8 +13,6 @@ try {
 		header("Location: $url");
 		exit();
 	}
-
-	$assets = "$root/assets";
 
 	include_once("$assets/php/Connection.php");
 

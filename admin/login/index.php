@@ -1,6 +1,7 @@
 <?php
 $login_page = true;
-include_once('../../assets/assets.php');
+$root = '../..';
+include_once("$root/assets/assets.php");
 
 if (isset($_SESSION['logged'])) {
 	header("Location: $root/");

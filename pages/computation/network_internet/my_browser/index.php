@@ -1,4 +1,7 @@
-<?php include_once('../../../../assets/assets.php') ?>
+<?php
+$root = '../../../..';
+include_once("$root/assets/assets.php")
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
