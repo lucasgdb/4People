@@ -1,11 +1,11 @@
-.top-div-mobile {
+.top-div {
 	width: 100%;
 	height: 11px;
 	top: 0;
 	border-top-left-radius: 2px;
 	border-top-right-radius: 2px;
 	left: 0;
-	position: absolute
+	position: absolute;
 }
 
 .left-div-mobile {
@@ -15,33 +15,23 @@
 	border-top-left-radius: 2px;
 	border-bottom-left-radius: 2px;
 	left: 0;
-	position: absolute
+	position: absolute;
 }
 
 .card-panel {
 	position: relative !important;
-	padding-bottom: 10px
+	padding-bottom: 10px;
 }
 
 .left-div-margin-mobile {
-	padding-left: 34px !important
+	padding-left: 34px !important;
 }
 
-.top-div-margin-mobile {
-	padding-top: 29px !important
+.top-div-margin {
+	padding-top: 29px !important;
 }
 
 @media (min-width: 601px) {
-	.top-div {
-		width: 100%;
-		height: 11px;
-		top: 0;
-		border-top-left-radius: 2px;
-		border-top-right-radius: 2px;
-		left: 0;
-		position: absolute
-	}
-
 	.right-div {
 		width: 11px;
 		height: 100%;
@@ -49,7 +39,7 @@
 		right: 0;
 		border-top-right-radius: 2px;
 		border-bottom-right-radius: 2px;
-		position: absolute
+		position: absolute;
 	}
 
 	.left-div {
@@ -57,23 +47,19 @@
 		height: 100%;
 		top: 0;
 		border-top-left-radius: 2px;
-		border-bottom-left-radius: 2px
+		border-bottom-left-radius: 2px;
 	}
 
 	.left-div {
 		left: 0;
-		position: absolute
+		position: absolute;
 	}
 
 	.left-div-margin {
-		padding-left: 34px !important
-	}
-
-	.top-div-margin {
-		padding-top: 29px !important
+		padding-left: 34px !important;
 	}
 
 	.linkHover:hover {
-		text-decoration: underline
+		text-decoration: underline;
 	}
 }

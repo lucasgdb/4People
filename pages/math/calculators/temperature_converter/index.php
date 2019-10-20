@@ -5,8 +5,6 @@
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
-	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>Conversor de Temperatura - 4People</title>
 	<?php include_once("$assets/components/MetaTags.php") ?>

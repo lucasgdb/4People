@@ -5,8 +5,6 @@
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
-	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<title>Meu IP - 4People</title>
 	<?php include_once("$assets/components/MetaTags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">

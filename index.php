@@ -1,12 +1,13 @@
-<?php include_once('assets/assets.php') ?>
+<?php
+$root = '.';
+include_once('assets/assets.php')
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
-	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/index.css">
 	<title>4People - Ferramentas Online</title>
 	<?php include_once("$assets/components/MetaTags.php") ?>
@@ -98,7 +99,7 @@
 								</ul>
 							</div>
 
-							<div class="top-div-mobile dark-grey"></div>
+							<div class="top-div dark-grey"></div>
 						</div>
 					</div>
 
@@ -115,7 +116,7 @@
 								<p style="font-size:16px">Nossas Ferramentas foram usadas <span id="toolVisits"><?= $total_visits ?></span> vezes</p>
 							</div>
 
-							<div class="top-div-mobile dark-grey"></div>
+							<div class="top-div dark-grey"></div>
 						</div>
 					</div>
 
@@ -130,7 +131,7 @@
 								<p style="font-size:16px">Quantidade de Ferramentas: <?= $sql->fetchColumn() ?></p>
 							</div>
 
-							<div class="top-div-mobile dark-grey"></div>
+							<div class="top-div dark-grey"></div>
 						</div>
 					</div>
 				</div>
@@ -204,7 +205,6 @@
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script>
 		const lblToolVisits = document.querySelector('#toolVisits')
-
 		const formatter = Intl.NumberFormat('pt-BR')
 
 		const formatNumbers = (...elements) => {

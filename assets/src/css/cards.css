@@ -2,19 +2,19 @@
 	user-select: none;
 	-ms-user-select: none;
 	-webkit-user-select: none;
-	-moz-user-select: none
+	-moz-user-select: none;
 }
 
 .bold {
-	font-weight: bold
+	font-weight: bold;
 }
 
 .no-break {
-	white-space: nowrap
+	white-space: nowrap;
 }
 
 @media (min-width: 993px) {
 	.card-content {
-		min-height: 180px
+		min-height: 180px;
 	}
 }

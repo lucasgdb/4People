@@ -11,9 +11,7 @@ if (!isset($_SESSION['logged'])) {
 
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
-	<link rel="stylesheet" href="<?= $assets ?>/src/css/material-icons.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-	<link rel="stylesheet" href="<?= $assets ?>/src/css/bars.css">
 	<link rel="stylesheet" href="src/css/index.css">
 	<link rel="stylesheet" href="src/css/quill.snow.css">
 	<link rel="stylesheet" href="src/css/katex.min.css">
