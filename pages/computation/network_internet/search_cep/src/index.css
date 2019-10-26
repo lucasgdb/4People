@@ -8,6 +8,7 @@
 }
 
 textarea {
+	padding-top: 5px;
 	font-size: 20px;
 	resize: none;
 	min-height: 150px;

@@ -77,6 +77,14 @@ if ($sql->rowCount() === 0) {
 	<meta name="application-name" content="4People">
 	<meta property="og:title" content="4People - Ferramentas Online">
 	<meta name="twitter:title" content="4People - Ferramentas Online">
+
+	<style>
+		@media (max-width: 600px) {
+			img {
+				width: 100%
+			}
+		}
+	</style>
 </head>
 
 <body style="background-color: #ebebeb">

@@ -1,21 +1,22 @@
 textarea {
+	padding-top: 5px;
 	font-size: 25px;
 	resize: vertical;
 	min-height: 200px;
 	overflow-y: scroll;
-	border: .5px solid rgb(190, 190, 190);
+	border: 0.5px solid rgb(190, 190, 190);
 	outline: 0;
 	color: #333;
-	transition: border-top .2s, border-bottom .2s, border-left .2s, background-color .2s
+	transition: border-top 0.2s, border-bottom 0.2s, border-left 0.2s, background-color 0.2s
 }
 
 textarea:focus {
-	border: .5px solid rgb(73, 73, 73);
+	border: 0.5px solid rgb(73, 73, 73);
 	background-color: rgb(230, 230, 230)
 }
 
 textarea::placeholder {
-	transition: color .2s
+	transition: color 0.2s
 }
 
 textarea:focus::placeholder {

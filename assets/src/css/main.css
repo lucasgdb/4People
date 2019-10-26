@@ -250,7 +250,7 @@ main {
 	border-bottom: 1px solid #c8c8c8 !important;
 }
 
-body > header + ul > li > .collapsible-header {
+body>header+ul>li>.collapsible-header {
 	padding-left: 6px !important;
 }
 
@@ -266,11 +266,11 @@ body > header + ul > li > .collapsible-header {
 	padding: 0 26px !important;
 }
 
-.padding-headers > li > ul > li > a {
+.padding-headers>li>ul>li>a {
 	padding: 0 16px !important;
 }
 
-.sidenav.collapsible > li.active {
+.sidenav.collapsible>li.active {
 	background-color: #d8d8d8;
 }
 
@@ -278,7 +278,7 @@ body > header + ul > li > .collapsible-header {
 	background-color: #e9e9e9;
 }
 
-.sidenav.collapsible > li,
+.sidenav.collapsible>li,
 .collapsible-body li {
 	transition: all 300ms;
 }
@@ -330,7 +330,7 @@ body > header + ul > li > .collapsible-header {
 }
 
 @media (max-width: 1125px) {
-	main > .container {
+	main>.container {
 		width: 90% !important;
 	}
 
@@ -340,7 +340,7 @@ body > header + ul > li > .collapsible-header {
 }
 
 @media (max-width: 992px) {
-	main > .container {
+	main>.container {
 		width: 90% !important;
 	}
 
@@ -350,7 +350,7 @@ body > header + ul > li > .collapsible-header {
 }
 
 @media (max-width: 600px) {
-	main > .container {
+	main>.container {
 		width: 98% !important;
 	}
 
@@ -405,7 +405,7 @@ body > header + ul > li > .collapsible-header {
 }
 
 @media (min-width: 993px) {
-	main > .container {
+	main>.container {
 		width: 92.5%;
 	}
 
