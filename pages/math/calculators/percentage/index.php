@@ -271,11 +271,11 @@ include_once("$root/assets/assets.php")
 					<div class="col s12">
 						O valor X diminuiu em
 						<div class="input-field mb-0 inline lesser">
-							<input id="seventeenthNumber" type="number" placeholder="Ex: 50" step="any">
+							<input id="seventeenthNumber" type="number" placeholder="Ex: 50" step="any" min="1">
 						</div>
 						% para
 						<div class="input-field mb-0 inline lesser">
-							<input id="eighteenthNumber" type="number" placeholder="Ex: 100" step="any">
+							<input id="eighteenthNumber" type="number" placeholder="Ex: 100" step="any" min="1">
 						</div>
 						. Qual o valor X?
 						<div class="input-field mb-0 inline">

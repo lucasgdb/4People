@@ -1,3 +1,5 @@
+M.FormSelect.init(document.querySelectorAll('select'))
+
 const logs = document.querySelector('#logs')
 
 const selectLogs = async () => {

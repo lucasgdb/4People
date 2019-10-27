@@ -17,8 +17,14 @@ try {
 	$sql = $database->prepare('DELETE FROM tools WHERE tool_id = :tool_id');
 	$sql->bindValue(':tool_id', $tool_id);
 
-	if ($sql->execute()) echo '{"status":"1"}';
-	else echo '{"status":"0"}';
+	if ($sql->execute()) {
+		echo '{"status":"1"}';
+
+		$sql = $database->prepare('INSERT INTO admin_logs VALUES (NULL, :log_action, CURRENT_TIMESTAMP, :admin_id)');
+		$sql->bindValue(':log_action', 'delete.tool');
+		$sql->bindValue(':admin_id', $_SESSION['logged']['id']);
+		$sql->execute();
+	} else echo '{"status":"0"}';
 } catch (PDOException $e) {
 	echo '{"status":"0"}';
 }

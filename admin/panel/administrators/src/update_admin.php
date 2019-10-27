@@ -60,7 +60,12 @@ try {
 	$sql->bindValue(':admin_image', isset($no_image) ? NULL : (isset($ext) && $ext ? $long_name : $current_admin_image));
 	$sql->bindValue(':admin_id', $admin_id);
 
-	$sql->execute();
+	if ($sql->execute()) {
+		$sql = $database->prepare('INSERT INTO admin_logs VALUES (NULL, :log_action, CURRENT_TIMESTAMP, :admin_id)');
+		$sql->bindValue(':log_action', 'update.administrator');
+		$sql->bindValue(':admin_id', $_SESSION['logged']['id']);
+		$sql->execute();
+	}
 	header('Location: ../');
 } catch (PDOException $e) {
 	echo "Um erro ocorreu! Erro: {$e->getMessage()}";

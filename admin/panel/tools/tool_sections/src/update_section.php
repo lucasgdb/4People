@@ -22,8 +22,14 @@ try {
 	$sql->bindValue(':type_id', $type_id);
 	$sql->bindValue(':section_id', $section_id);
 
-	if ($sql->execute()) echo '{"status":"1"}';
-	else echo '{"status":"0"}';
+	if ($sql->execute()) {
+		echo '{"status":"1"}';
+
+		$sql = $database->prepare('INSERT INTO admin_logs VALUES (NULL, :log_action, CURRENT_TIMESTAMP, :admin_id)');
+		$sql->bindValue(':log_action', 'update.section');
+		$sql->bindValue(':admin_id', $_SESSION['logged']['id']);
+		$sql->execute();
+	} else echo '{"status":"0"}';
 } catch (PDOException $e) {
 	echo '{"status":"0"}';
 }

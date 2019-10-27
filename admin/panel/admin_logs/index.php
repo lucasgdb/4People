@@ -29,7 +29,7 @@ if (!isset($_SESSION['logged'])) {
 	<main>
 		<div class="container">
 			<div class="card-panel left-div-margin" style="padding-bottom:10px">
-				<h2 class="flow-text" style="margin: 0 0 5px"><i class="material-icons left">format_list_bulleted</i>Logs de Administradores (em breve)</h2>
+				<h2 class="flow-text" style="margin: 0 0 5px"><i class="material-icons left">format_list_bulleted</i>Logs de Administradores</h2>
 				<label>Lista de logs de Administradores do 4People</label>
 				<div class="divider"></div>
 

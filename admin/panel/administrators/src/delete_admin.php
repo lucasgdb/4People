@@ -30,8 +30,14 @@ try {
 	$sql = $database->prepare('DELETE FROM admins WHERE admin_id = :admin_id');
 	$sql->bindValue(':admin_id', $admin_id);
 
-	if ($sql->execute()) echo json_encode(['result' => $result, 'admin_name' => $admin_name, 'status' => '1']);
-	else echo json_encode(['status' => '0', 'admin_name' => $admin_name]);
+	if ($sql->execute()) {
+		echo json_encode(['result' => $result, 'admin_name' => $admin_name, 'status' => '1']);
+
+		$sql = $database->prepare('INSERT INTO admin_logs VALUES (NULL, :log_action, CURRENT_TIMESTAMP, :admin_id)');
+		$sql->bindValue(':log_action', 'delete.administrator');
+		$sql->bindValue(':admin_id', $_SESSION['logged']['id']);
+		$sql->execute();
+	} else echo json_encode(['status' => '0', 'admin_name' => $admin_name]);
 } catch (PDOException $e) {
 	echo json_encode(['status' => '0', 'admin_name' => 'Administrador']);
 }
