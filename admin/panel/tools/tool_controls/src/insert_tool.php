@@ -37,5 +37,5 @@ try {
 		$sql->execute();
 	} else echo '{"status":"0"}';
 } catch (PDOException $e) {
-	echo "Um erro ocorreu! Erro: {$e->getMessage()}";
+	echo '{"status":"0"}';
 }

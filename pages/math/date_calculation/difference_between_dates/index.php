@@ -30,7 +30,7 @@ include_once("$root/assets/assets.php")
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin">
-				<h1 class="mont-serrat" style="font-size:30px;margin:5px 0 5px 0"><i class="material-icons left" style="top:5px"><?= $icon_section ?></i><?= $name_tool ?></h1>
+				<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5px"><?= $icon_section ?></i><?= $name_tool ?></h1>
 
 				<label><?= $description_tool ?></label>
 				<div class="divider"></div>
@@ -78,7 +78,7 @@ include_once("$root/assets/assets.php")
 				<div class="divider mt-2"></div>
 
 				<ul class="collection mb-0">
-					<li class="collection-item">Diferença: <span id="all">0 ano(s), 0 mês(es), 1 dia(s), 0 hora(s) e 0 minuto(s)</span></li>
+					<li class="collection-item">Diferença: <span id="all">0 ano(s), 0 mês(es) e 1 dia(s)</span></li>
 					<li class="collection-item">Milissegundos: <span id="milliSecs">86.400.000</span></li>
 					<li class="collection-item">Segundos: <span id="secs">86.400</span></li>
 					<li class="collection-item">Minutos: <span id="mins">1.440</span></li>

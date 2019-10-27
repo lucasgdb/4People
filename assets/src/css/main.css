@@ -262,12 +262,12 @@ body>header+ul>li>.collapsible-header {
 	text-transform: unset !important;
 }
 
-.padding-buttons a {
-	padding: 0 26px !important;
+li .collapsible-body a {
+	padding: 0 38px !important;
 }
 
 .padding-headers>li>ul>li>a {
-	padding: 0 16px !important;
+	padding: 0 24px !important;
 }
 
 .sidenav.collapsible>li.active {

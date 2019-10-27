@@ -137,8 +137,8 @@ if ($logged) {
 				<ul class="collapsible padding-headers padding-buttons">
 					<li>
 						<ul>
-						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/" title="Painel Administrativo"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Painel Administrativo</a></li>
-						<li><a class="waves-effect" href="<?= $assets ?>/php/Logout.php" title="Sair"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Sair</a></li>
+							<li><a class="waves-effect" href="<?= $root ?>/admin/panel/" title="Painel Administrativo"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Painel Administrativo</a></li>
+							<li><a class="waves-effect" href="<?= $assets ?>/php/Logout.php" title="Sair"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Sair</a></li>
 						</ul>
 					</li>
 				</ul>

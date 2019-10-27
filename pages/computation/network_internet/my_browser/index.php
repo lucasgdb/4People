@@ -28,15 +28,15 @@ include_once("$root/assets/assets.php")
 
 	<main>
 		<div class="container">
-			<div class="card-panel top-div-margin">
-				<h1 class="mont-serrat" style="font-size:30px;margin:5px 0 5px 0"><i class="material-icons left" style="top:5px"><?= $icon_section ?></i><?= $name_tool ?></h1>
+			<div class="card-panel top-div-margin" style="padding-bottom:20px">
+				<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5px"><?= $icon_section ?></i><?= $name_tool ?></h1>
 
 				<label><?= $description_tool ?></label>
 				<div class="divider"></div>
 
 				<div class="row mb-0">
 					<div class="col s12">
-						<p class="mb-0" style="font-size:20px">Navegador: <span id="browser"></span></p>
+						<p style="font-size:20px">Navegador: <span id="browser"></span></p>
 						<div class="divider mt-0"></div>
 						<p class="mb-0">Linguagem: <span id="language"></span></p>
 					</div>

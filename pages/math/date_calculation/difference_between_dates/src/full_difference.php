@@ -9,6 +9,6 @@ $end = filter_input(INPUT_GET, 'end', FILTER_DEFAULT);
 $now = new DateTime($begin);
 $tomorrow = new DateTime($end);
 
-$difference = $now->diff($tomorrow)->format('%y ano(s), %m mês(es), %d dia(s), %h hora(s) e %i minuto(s)');
+$difference = $now->diff($tomorrow)->format('%y ano(s), %m mês(es) e %d dia(s)');
 
 echo "{\"difference\":\"$difference\"}";

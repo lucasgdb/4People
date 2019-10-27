@@ -30,7 +30,7 @@ include_once('assets/assets.php')
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin">
-				<h1 class="flow-text" style="margin:5px 0 5px"><i class="material-icons left">home</i>4People - Página Inicial</h1>
+				<h1 class="flow-text" style="margin:5px 0 5px;font-size:30px"><i class="material-icons left" style="top:5.5px">home</i>4People - Página Inicial</h1>
 				<label>Ferramentas Online para estudantes e professores.</label>
 
 				<div class="divider"></div>
@@ -163,6 +163,8 @@ include_once('assets/assets.php')
 						</blockquote>
 					</div>
 				</div>
+				
+				<div class="divider mt-2 mb-2"></div>
 
 				<div class="row mb-0" style="margin-top:12px">
 					<div class="col s12 m6 l4">
@@ -176,6 +178,8 @@ include_once('assets/assets.php')
 						<blockquote class="grey-text text-darken-3 mt-0">"Suzany Silva, 17, cursando Desenvolvimento de Sistemas na Etec de Guaratinguetá e atuando como Analista do 4People."</blockquote>
 					</div>
 				</div>
+
+				<div class="divider mt-2 mb-2"></div>
 
 				<div class="row mb-0" style="margin-top:12px">
 					<div class="col s12 m6 l4">
