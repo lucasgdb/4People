@@ -87,7 +87,7 @@ if ($sql->rowCount() === 0) {
 	</style>
 </head>
 
-<body style="background-color: #ebebeb">
+<body style="background-color: #eeeeee">
 	<?php include_once('../../assets/components/NoScript.php') ?>
 
 	<div style="text-align:center;margin-top:10px">

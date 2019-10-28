@@ -30,7 +30,7 @@ include_once('assets/assets.php')
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin">
-				<h1 class="flow-text" style="margin:5px 0 5px;font-size:30px"><i class="material-icons left" style="top:5.5px">home</i>4People - Página Inicial</h1>
+				<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5.5px">home</i>4People - Página Inicial</h1>
 				<label>Ferramentas Online para estudantes e professores.</label>
 
 				<div class="divider"></div>

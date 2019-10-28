@@ -19,7 +19,7 @@ if (!isset($_SESSION['logged'])) {
 	<?php include_once("$assets/components/admin_components/MetaTags.php") ?>
 </head>
 
-<body style="background-color:#ebebeb">
+<body style="background-color:#eeeeee">
 	<?php include_once("$assets/components/NoScript.php") ?>
 
 	<main>
