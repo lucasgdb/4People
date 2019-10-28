@@ -176,9 +176,9 @@ include_once("$root/assets/assets.php")
 				<button title="Gerar Senha" class="btn btn-center waves-effect waves-light red-color z-depth-2" onclick="generate()">
 					Gerar senha
 				</button>
-				<div class="divider mt-2"></div>
+				<div class="divider mt-2 mb-2"></div>
 
-				<p class="mb-2">Força de senha: <span id="passwordLength"></span></p>
+				<p>Força de senha: <span id="passwordLength"></span></p>
 				<textarea id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
 				<button title="Copiar Senha" class="btn waves-effect waves-light dark-grey mt-1 z-depth-0" onclick="copyResult()">
 					Copiar

@@ -1,10 +1,10 @@
 blockquote {
-	border-left-color: #a62023;
+	border-left-color: #a62023
 }
 
 blockquote img {
 	position: relative;
-	top: 3px;
+	top: 3px
 }
 
 .img-thumbnail {
@@ -13,34 +13,34 @@ blockquote img {
 	border: 1px solid #dee2e6;
 	border-radius: 0.25rem;
 	max-width: 100%;
-	height: auto;
+	height: auto
 }
 
 .caption h5,
 .caption h3 {
 	border-radius: 10px;
-	padding: 10px;
+	padding: 10px
 }
 
 .indicators .active {
-	background-color: #1b1a25 !important;
+	background-color: #1b1a25 !important
 }
 
 li.indicator-item {
-	border: 1px solid #1b1a25;
+	border: 1px solid #1b1a25
 }
 
 .slider {
-	font-family: serif;
+	font-family: serif
 }
 
 @media (max-width: 600px) {
 	.card-panel {
 		padding-left: 5px;
-		padding-right: 5px;
+		padding-right: 5px
 	}
 
 	.dark {
-		display: none;
+		display: none
 	}
 }

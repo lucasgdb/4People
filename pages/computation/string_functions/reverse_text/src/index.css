@@ -1,0 +1,56 @@
+.input-field {
+	margin: 0
+}
+
+.ml-0 {
+	margin-left: 0
+}
+
+.btn-center {
+	left: 50%;
+	transform: translateX(-50%)
+}
+
+input[type=text]:focus {
+	border-bottom: 1px solid #1b1a25 !important;
+	box-shadow: 0 1px 0 0 #1b1a25 !important
+}
+
+input[type=text]::placeholder {
+	color: rgba(0, 0, 0, .4)
+}
+
+textarea {
+	padding-top: 5px;
+	font-size: 25px;
+	resize: vertical;
+	min-height: 200px;
+	overflow-y: scroll;
+	border: 0.5px solid rgb(190, 190, 190);
+	outline: 0;
+	color: #333;
+	transition: border-top 0.2s, border-bottom 0.2s, border-left 0.2s, background-color 0.2s
+}
+
+textarea:focus {
+	border: 0.5px solid rgb(73, 73, 73);
+	background-color: rgb(230, 230, 230)
+}
+
+textarea::placeholder {
+	transition: color 0.2s
+}
+
+textarea:focus::placeholder {
+	color: grey
+}
+
+@media (min-width: 600px) {
+	textarea {
+		border-right: 0
+	}
+
+	textarea:focus {
+		border-right: 0
+	}
+}

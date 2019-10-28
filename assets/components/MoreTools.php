@@ -13,7 +13,7 @@ $sql->execute();
 
 if ($sql->rowCount() > 0) : ?>
 	<div class="card-panel left-div-margin">
-		<h1 class="flow-text" style="margin:-5px 0 15px"><i class="material-icons left" style="top:3px">trending_up</i>Veja também:</h1>
+		<h2 class="flow-text" style="margin:-5px 0 15px"><i class="material-icons left" style="top:3px">trending_up</i>Veja também:</h2>
 		<div class="divider"></div>
 
 		<ul class="collection with-header mb-0">

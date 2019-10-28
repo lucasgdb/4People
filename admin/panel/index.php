@@ -31,7 +31,7 @@ $admin_panel = true
 	<main>
 		<div class="container">
 			<div class="card-panel left-div-margin">
-				<h1 class="flow-text" style="margin:5px 0 5px"><i class="material-icons left">verified_user</i>Painel Administrativo</h1>
+				<h1 class="mont-serrat" style="font-size:30px;margin:-5px 0 5px"><i class="material-icons left" style="top:5px">verified_user</i>Painel Administrativo</h1>
 				<label>Painel Administrativo do 4People</label>
 
 				<div class="divider"></div>

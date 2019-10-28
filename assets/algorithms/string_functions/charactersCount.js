@@ -1,4 +1,4 @@
-const countCharacters = (text) => {
+const countCharacters = text => {
 	return {
 		totalCharacters: text.length, // returns the string length
 		charWithoutSpaces: text.replace(/[ \n]/g, '').length, // returns the string length without spaces

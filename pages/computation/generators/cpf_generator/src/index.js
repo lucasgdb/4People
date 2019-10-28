@@ -1,7 +1,12 @@
 M.FormSelect.init(document.querySelectorAll('select'))
+M.Modal.init(document.querySelectorAll('.modal'), {
+	dismissible: false
+})
+
 const txtResult = document.querySelector('#result')
 const rbPonctuation = document.querySelector('[name=punctuation]')
 const ddState = document.querySelector('select')
+const agreeModal = M.Modal.getInstance(document.querySelector('#agreeModal'));
 
 const generate = () => {
 	const CPF = generateCPF(rbPonctuation.checked, ddState.value)
@@ -28,3 +33,7 @@ const copyResult = () => {
 const clearInput = () => {
 	txtResult.value = ''
 }
+
+window.addEventListener('load', () => {
+	agreeModal.open()
+})

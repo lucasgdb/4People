@@ -36,7 +36,9 @@ const generate = () => {
 
 const savePassword = () => {
 	if (txtResult.value.trim() !== '') {
-		saveAs(new File([`Senha: ${txtResult.value}`], "Senha.txt", { type: "text/plain;charset=utf-8" }))
+		saveAs(new File([`Senha: ${txtResult.value}`], "Senha.txt", {
+			type: "text/plain;charset=utf-8"
+		}))
 		M.toast({
 			html: 'Senha salva com sucesso.',
 			classes: 'green'
@@ -72,6 +74,6 @@ const clearInput = () => {
 }
 
 cbStrength.onchange = () => {
-	if (this.checked) lblPasswordLength.parentElement.hidden = false
+	if (cbStrength.checked) lblPasswordLength.parentElement.hidden = false
 	else lblPasswordLength.parentElement.hidden = true
 }

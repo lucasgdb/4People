@@ -29,7 +29,7 @@ if (!isset($_SESSION['logged'])) {
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin" style="padding-bottom:10px">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">folder</i>Adicionar uma Seção de Ferramentas</h1>
+				<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5px">folder</i>Adicionar uma Seção de Ferramentas</h1>
 				<label>Adicionar uma novo Seção de Ferramentas no 4People</label>
 
 				<div class="divider"></div>
@@ -83,8 +83,7 @@ if (!isset($_SESSION['logged'])) {
 			</div>
 
 			<div class="card-panel top-div-margin" style="padding-bottom:10px">
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">filter_list</i>Filtrar Tipos</h1>
-				<label>Filtro de Tipos de Ferramentas do 4People</label>
+				<h2 class="flow-text" style="margin:0 0 15px"><i class="material-icons left" style="top:3px">filter_list</i>Filtrar Tipos</h2>
 
 				<div class="divider"></div>
 
@@ -121,8 +120,7 @@ if (!isset($_SESSION['logged'])) {
 			</div>
 
 			<div class="card-panel left-div-margin" style="padding-bottom:10px">
-				<h2 class="flow-text" style="margin: 0 0 5px"><i class="material-icons left">format_list_bulleted</i>Lista de Seções do 4People</h2>
-				<label>Lista de Seções do 4People</label>
+				<h2 class="flow-text" style="margin:-5px 0 15px"><i class="material-icons left" style="top:3px">format_list_bulleted</i>Lista de Seções do 4People</h2>
 				<div class="divider"></div>
 
 				<table class="centered highlight responsive-table">

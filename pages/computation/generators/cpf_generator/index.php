@@ -116,6 +116,27 @@ include_once("$root/assets/assets.php")
 		</div>
 	</main>
 
+	<div id="agreeModal" class="modal">
+		<div class="modal-content left-div-margin">
+			<h4><i class="material-icons left red-color-text" style="top:7px">warning</i>IMPORTANTE</h4>
+
+			<blockquote style="border-left-color:#a62023">
+				Nosso gerador online de CPF tem como intenção ajudar estudantes, programadores, analistas e testadores a gerar CPF válidos. Normalmente necessários parar testar seus softwares em desenvolvimento.
+				A má utilização dos dados aqui gerados é de total responsabilidade do usuário.
+				Os números são gerados de forma aleatória, respeitando as regras de criação de cada documento.
+			</blockquote>
+
+			<div class="left-div dark-grey"></div>
+		</div>
+
+		<div class="modal-footer">
+			<div class="divider"></div>
+
+			<a class="btn waves-effect waves-light red-color" title="Não concordar" href="../">Não concordo</a>
+			<button class="btn waves-effect modal-close waves-light green darken-3" title="Concordar">Concordo</button>
+		</div>
+	</div>
+
 	<?php
 	include_once("$assets/components/Footer.php");
 	include_once("$assets/components/ServiceWorker.php")
