@@ -9,7 +9,7 @@
 
 textarea {
 	font-size: 20px;
-	resize: vertical;
+	resize: none;
 	white-space: nowrap;
 	border-top: 0;
 	border-right: 0;
@@ -19,17 +19,9 @@ textarea {
 	color: #333
 }
 
-input:focus {
+input[type=text]:focus {
 	border-bottom: 1px solid #1b1a25 !important;
 	box-shadow: 0 1px 0 0 #1b1a25 !important
-}
-
-input::placeholder {
-	color: rgba(0, 0, 0, .4)
-}
-
-.dropdown-content li>span {
-	color: black
 }
 
 [type=radio]:checked+span:after,
@@ -41,6 +33,10 @@ input::placeholder {
 [type=radio]:checked+span:after,
 [type=radio].with-gap:checked+span:after {
 	background-color: #1b1a25
+}
+
+.dropdown-content li>span {
+	color: black
 }
 
 @media (min-width: 993px) {

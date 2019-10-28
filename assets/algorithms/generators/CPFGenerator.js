@@ -1,7 +1,7 @@
 const generateCPF = (ponctuation = true, state = '-1') => {
-	let CPF = []
 	let firstSum = 0
 	let secondSum = 0
+	const CPF = []
 	const firstTimes = [10, 9, 8, 7, 6, 5, 4, 3, 2]
 	const secondTimes = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2]
 

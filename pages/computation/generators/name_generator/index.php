@@ -19,7 +19,7 @@ include_once("$root/assets/assets.php")
 	<meta name="twitter:title" content="Gerador de Nomes - 4People">
 </head>
 
-<body class="grey lighten-3">
+<body>
 	<?php
 	include_once("$assets/components/NoScript.php");
 	include_once("$assets/components/Spinner.php");
@@ -35,25 +35,28 @@ include_once("$root/assets/assets.php")
 				<label><?= $description_tool ?></label>
 				<div class="divider"></div>
 
-				<div class="row mb-0">
-					<div class="input-field col s12">
+				<div class="row mt-2 mb-0">
+					<div class="input-field col s12 m6">
 						<select class="center" id="selectNames">
 							<option value="1" selected>Nome + Sobrenome</option>
 							<option value="2">Apenas o nome</option>
 							<option value="3">Nome + Sobrenome + Sobrenome</option>
 						</select>
+						<label>Tipo de nome</label>
 					</div>
-					<div class="input-field col s12">
+
+					<div class="input-field col s12 m6">
 						<select class="center" id="selectSex">
 							<option value="1" selected>Masculino</option>
 							<option value="2">Feminino</option>
 							<option value="3">Masculino e Feminino</option>
 						</select>
+						<label>Sexo</label>
 					</div>
-					<div class="col s12">
-						<div class="input-field">
-							<input id="blocksAmount" type="number" class="" placeholder="Digite o número de Nomes" step="1">
-						</div>
+
+					<div class="input-field col s12">
+						<input id="blocksAmount" type="number" value="20" min="1" placeholder="Digite o número de nomes para serem gerados." step="1">
+						<label for="blocksAmount">Quantidade de nomes</label>
 					</div>
 				</div>
 
@@ -63,7 +66,7 @@ include_once("$root/assets/assets.php")
 				</button>
 				<div class="divider mt-2"></div>
 
-				<div class="row mb-0" id="card-container"></div>
+				<div class="row" id="card-container"></div>
 
 				<div class="top-div dark-grey"></div>
 			</div>

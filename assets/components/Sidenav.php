@@ -20,7 +20,7 @@ if ($logged) {
 			</div>
 
 			<?php if ($logged) : ?>
-				<span class="name">Admin: <?= $admin_name ?></span>
+				<span class="name">Administrador: <?= $admin_name ?></span>
 				<a class="linkHover" href="<?= $root ?>/admin/panel/administrators/data_update/?admin_id=<?= $admin_id ?>"><span class="email" style="padding-bottom:0">Editar Perfil »</span></a>
 				<a class="dark-grey" href="<?= $assets ?>/php/Logout.php"> <span class="email" style="color:#c8c8c8;padding-bottom:0">Sair »</span></a>
 			<?php else : ?>
