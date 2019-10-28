@@ -1,5 +1,5 @@
 const validateCPF = (CPF = Array) => {
-	if (CPF.filter(number => number === CPF[0]).length >= 11) {
+	if (CPF.filter(number => number === CPF[0]).length === 11) {
 		return {
 			isCPF: false,
 			from: null,
