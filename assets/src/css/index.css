@@ -34,10 +34,20 @@ li.indicator-item {
 	font-family: serif
 }
 
+@media (max-width: 767px) {
+	.light {
+		display: none
+	}
+}
+
 @media (max-width: 600px) {
 	.card-panel {
 		padding-left: 5px;
 		padding-right: 5px
+	}
+
+	.light {
+		display: block
 	}
 
 	.dark {

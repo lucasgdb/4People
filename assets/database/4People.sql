@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Oct 28, 2019 at 04:19 AM
+-- Generation Time: Oct 28, 2019 at 10:58 PM
 -- Server version: 8.0.18
 -- PHP Version: 7.2.22
 
@@ -81,7 +81,24 @@ INSERT INTO `admin_logs` (`log_id`, `log_action`, `log_createdAt`, `admin_id`) V
 (18, 'insert.tool', '2019-10-28 03:26:35', 4),
 (19, 'insert.tool', '2019-10-28 03:34:03', 4),
 (20, 'update.tool', '2019-10-28 03:45:42', 4),
-(21, 'update.tool', '2019-10-28 04:18:14', 4);
+(21, 'update.tool', '2019-10-28 04:18:14', 4),
+(22, 'insert.tool', '2019-10-28 17:41:17', 4),
+(23, 'insert.tool', '2019-10-28 18:00:11', 4),
+(24, 'delete.tool', '2019-10-28 18:01:53', 4),
+(25, 'insert.tool', '2019-10-28 18:49:42', 4),
+(26, 'insert.tool', '2019-10-28 18:50:07', 4),
+(27, 'update.tool', '2019-10-28 18:50:39', 4),
+(28, 'update.tool', '2019-10-28 18:50:44', 4),
+(29, 'update.tool', '2019-10-28 18:51:00', 4),
+(30, 'update.tool', '2019-10-28 20:19:12', 4),
+(31, 'insert.tool', '2019-10-28 22:32:16', 4),
+(32, 'update.tool', '2019-10-28 22:51:26', 4),
+(33, 'update.tool', '2019-10-28 22:51:37', 4),
+(34, 'update.tool', '2019-10-28 22:52:15', 4),
+(35, 'insert.tool', '2019-10-28 22:52:24', 4),
+(36, 'update.tool', '2019-10-28 22:52:47', 4),
+(37, 'update.tool', '2019-10-28 22:56:06', 4),
+(38, 'update.tool', '2019-10-28 22:56:18', 4);
 
 -- --------------------------------------------------------
 
@@ -211,17 +228,17 @@ CREATE TABLE `tools` (
 --
 
 INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_description`, `tool_link`, `tool_visits`, `tool_status`, `section_id`) VALUES
-(7, 'Gerador de CPF', 'cpf_generator', 'Gerador de CPF Online para Programadores testarem seus Softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/CPFGenerator.js', 49, 1, 2),
-(8, 'Gerador de Senha', 'password_generator', 'Gerador de Senha Online para gerar senhas personalizadas e fortes.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/passwordGenerator.js', 189, 1, 2),
-(9, 'Gerador de Meta Tags', 'meta_tags_generator', 'Gerador de Meta Tags Online, feito para gerar várias das Meta Tags existentes.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/metaTagsGenerator.js', 54, 1, 2),
-(11, 'Validador de CPF', 'cpf_validator', 'Validador de CPF Online para validar CPFs para programadores testarem seus softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/validators/CPFValidator.js', 28, 1, 4),
-(12, 'Contador de Caracteres', 'characters_count', 'Contador de letras, caracteres sem espaço, palavras, espaços, vogais, consoantes, números e linhas.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/string_functions/charactersCount.js', 17, 1, 5),
+(7, 'Gerador de CPF', 'cpf_generator', 'Gerador de CPF Online para Programadores testarem seus Softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/CPFGenerator.js', 52, 1, 2),
+(8, 'Gerador de Senha', 'password_generator', 'Gerador de Senha Online para gerar senhas personalizadas e fortes.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/passwordGenerator.js', 194, 1, 2),
+(9, 'Gerador de Meta Tags', 'meta_tags_generator', 'Gerador de Meta Tags Online, feito para gerar várias das Meta Tags existentes.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/metaTagsGenerator.js', 55, 1, 2),
+(11, 'Validador de CPF', 'cpf_validator', 'Validador de CPF Online para validar CPFs para programadores testarem seus softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/validators/CPFValidator.js', 32, 1, 4),
+(12, 'Contador de Caracteres', 'characters_count', 'Contador de letras, caracteres sem espaço, palavras, espaços, vogais, consoantes, números e linhas.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/string_functions/charactersCount.js', 21, 1, 5),
 (13, 'Meu IP', 'my_ip', 'Veja seu IP e muito mais informações aqui.', 'https://github.com/lucasnaja/4People/blob/master/pages/computation/network_internet/my_ip/src/index.js', 25, 1, 6),
 (14, 'Meu Navegador', 'my_browser', 'Veja seu Navegador aqui.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/network_and_internet/myWebBrowser.js', 15, 1, 6),
-(15, 'Buscar CEP', 'search_cep', 'Busque informações de seu CEP, como Rua, Cidade, Bairro e Estado aqui.', 'https://github.com/lucasnaja/4People/blob/master/pages/computation/network_internet/search_cep/src/index.js', 40, 1, 6),
-(16, 'Binário, Octal e Hexadecimal', 'binary_converter', 'Tradutor Online de Código Binário. Basta digitar o código binário ou texto abaixo e clicar no botão para converter.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/encoders_decoders/binaryConverter.js', 19, 1, 7),
-(17, 'Código de Evento das Teclas', 'keycode_event', 'Código de Eventos das Teclas para descobrir cada keyCode da tecla e criar eventos em sua linguagem de preferência.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/tables_and_patterns/jsEventKeyCodes.js', 28, 1, 8),
-(18, 'Fatorar Número', 'factorize_number', 'Calculadora Online para Fatorar Números.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/factorization.js', 74, 1, 12),
+(15, 'Buscar CEP', 'search_cep', 'Busque informações de seu CEP, como Rua, Cidade, Bairro e Estado aqui.', 'https://github.com/lucasnaja/4People/blob/master/pages/computation/network_internet/search_cep/src/index.js', 41, 1, 6),
+(16, 'Binário, Octal e Hexadecimal', 'binary_converter', 'Tradutor Online de Código Binário. Basta digitar o código binário ou texto abaixo e clicar no botão para converter.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/encoders_decoders/binaryConverter.js', 22, 1, 7),
+(17, 'Código de Evento das Teclas', 'keycode_event', 'Código de Eventos das Teclas para descobrir cada keyCode da tecla e criar eventos em sua linguagem de preferência.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/tables_and_patterns/jsEventKeyCodes.js', 29, 1, 8),
+(18, 'Fatorar Número', 'factorize_number', 'Calculadora Online para Fatorar Números.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/factorization.js', 75, 1, 12),
 (19, 'Máximo Divisor Comum', 'gcd', 'Calculadora Online para encontrar o Máximo Divisor Comum entre vários números.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/GCD.js', 10, 1, 12),
 (20, 'Mínimo Múltiplo Comum', 'lcm', 'Calculadora Online para encontrar o Mínimo Múltiplo Comum entre vários números.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/LCM.js', 4, 1, 12),
 (21, 'Índice de Massa Corporal', 'bmi', 'Calculadora de Índice de Massa Corporal Online para calcular o IMC e o seu peso ideal.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/BMI.js', 4, 1, 12),
@@ -232,7 +249,7 @@ INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_description`, `t
 (26, 'Fibonacci', 'fibonacci', 'Calculadora para calcular a Sequência de Fibonacci. Ex: 0, 1, 1, 2, 3, 5, 8, 13, entre outros...', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/fibonacci.js', 6, 1, 12),
 (27, 'Conversor de Temperatura', 'temperature_converter', 'Conversor de Temperatura Online para calcular Graus Celsius, Fahrenheit e Kelvin.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/temperatureConversor.js', 5, 1, 12),
 (28, 'Divisão e Resto', 'division_rest', 'Calculadora de Divisão Online que mostra o resultado da divisão comum e inteira entre dois números e o resto (módulo) entre eles.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/divisionAndRest.js', 7, 1, 12),
-(29, 'Área do Círculo', 'circle_area', 'Calculador de Área do Círculo Online. R = Raio, D = Diâmetro (2 * R), PI = 3.141592653589793... (Math.PI.toFixed(48))', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/circleArea.js', 36, 1, 10),
+(29, 'Área do Círculo', 'circle_area', 'Calculador de Área do Círculo Online. R = Raio, D = Diâmetro (2 * R), PI = 3.141592653589793... (Math.PI.toFixed(48))', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/circleArea.js', 37, 1, 10),
 (30, 'Área do Quadrado', 'square_area', 'Calculador de Área do Quadrado Online. Área do Quadrado = Lado * Lado ou L²', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/squareArea.js', 16, 1, 10),
 (31, 'Área do Retângulo', 'rectangle_area', 'Calculador de Área do Retângulo Online. Área do Retângulo = Base * Altura', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/rectangleArea.js', 8, 1, 10),
 (32, 'Área do Triângulo', 'triangle_area', 'Calculador de Área do Triângulo Online. Área do Triângulo = Base * Altura / 2', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/triangleArea.js', 8, 1, 10),
@@ -245,11 +262,16 @@ INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_description`, `t
 (39, 'Área da Elipse', 'ellipse_area', 'Calculador de Área da Elipse Online. π = PI, Área da Elipse = π * Eixo maior * Eixo menor', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/ellipseArea.js', 4, 1, 10),
 (40, 'Área da Coroa Ciricular', 'circular_crown_area', 'Calculador de Área da Coroa Circular Online. π = PI, R = Raio maior, r = Raio menor, Área da Coroa Circular = π * (R² - r²)', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/circularCrownArea.js', 5, 1, 10),
 (41, 'Área do Setor Circular', 'circular_sector_area', 'Calculador de Área do Setor Circular Online. π = PI, Área do Setor Circular = π * (Raio² * Ângulo) / 360', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/circularSectorArea.js', 2, 1, 10),
-(42, 'Diferença entre Datas', 'difference_between_dates', 'Calcular Diferença entre Datas. Possui um leque de recursos disponíveis, como calcular idades, tempo, etc.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/dates_calculator/differenceBetweenDates.js', 151, 1, 11),
-(50, 'Gerador de Nomes', 'name_generator', 'Gerador de Nomes online e gratuito para gerar diversos tipos de nomes', '', 3, 0, 2),
-(51, 'Gerador de Nicks', 'nick_generator', 'Gerador de Nicks online para gerar diversos tipos de nicknames', '', 2, 0, 2),
-(52, 'Tabela ASCII', 'ascii_table', 'Lista de códigos padrões da tabela ASC II.', 'https://github.com/lucasnaja/4People/tree/master/pages/computation/tables_patterns/ascii_table', 8, 1, 8),
-(53, 'Inverter Texto', 'reverse_text', 'Inversor de Texto online do 4People', 'https://github.com/lucasnaja/4People/tree/master/assets/algorithms/string_functions/reverseText.js', 0, 1, 5);
+(42, 'Diferença entre Datas', 'difference_between_dates', 'Calcular Diferença entre Datas. Possui um leque de recursos disponíveis, como calcular idades, tempo, etc.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/dates_calculator/differenceBetweenDates.js', 153, 1, 11),
+(50, 'Gerador de Nomes', 'name_generator', 'Gerador de Nomes online e gratuito para gerar diversos tipos de nomes', '', 5, 1, 2),
+(52, 'Tabela ASCII', 'ascii_table', 'Lista de códigos padrões da tabela ASC II.', 'https://github.com/lucasnaja/4People/tree/master/pages/computation/tables_patterns/ascii_table', 9, 1, 8),
+(53, 'Inverter Texto', 'reverse_text', 'Inversor de Texto online do 4People', 'https://github.com/lucasnaja/4People/tree/master/assets/algorithms/string_functions/reverseText.js', 1, 1, 5),
+(54, 'Gerador de RG', 'rg_generator', 'Gerador de RG Online para Programadores testarem seus Softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/RGGenerator.js', 5, 1, 2),
+(55, 'Gerador de CNPJ', 'cnpj_generator', 'Gerador de CNPJ Online para Programadores testarem seus Softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/CNPJGenerator.js', 1, 1, 2),
+(56, 'Validador de RG', 'rg_validator', 'Validador de RG Online para validar RGs para programadores testarem seus softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/validators/RGValidator.js', 6, 1, 4),
+(57, 'Validador de CNPJ', 'cnpj_validator', 'Validador de CNPJ Online para validar CNPJs para programadores testarem seus softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/validators/CNPJValidator.js', 3, 1, 4),
+(58, 'Somar em Data', 'add_in_date', 'Some dias, semanas, meses ou anos em uma Data.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/dates_calculator/addInDate.js', 0, 1, 11),
+(59, 'Subtrair em Data', 'subtract_in_date', 'Subtraia dias, semanas, meses ou anos de uma Data.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/dates_calculator/subtractInDate.js', 0, 1, 11);
 
 -- --------------------------------------------------------
 
@@ -358,7 +380,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `admin_logs`
 --
 ALTER TABLE `admin_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `login_logs`
@@ -388,7 +410,7 @@ ALTER TABLE `sections`
 -- AUTO_INCREMENT for table `tools`
 --
 ALTER TABLE `tools`
-  MODIFY `tool_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `tool_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `types`

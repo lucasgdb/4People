@@ -9,17 +9,11 @@ const generateCNPJ = (ponctuation = true) => {
 
 	CNPJ.push(0, 0, 0, 1)
 
-	let DV1 = multipliers1.map((multiplier, index) => multiplier * CNPJ[index]).reduce((n1, n2) => n1 + n2) % 11;
+	const DV1 = multipliers1.map((multiplier, index) => multiplier * CNPJ[index]).reduce((n1, n2) => n1 + n2) % 11;
+	CNPJ.push(DV1 < 2 ? 0 : 11 - DV1)
 
-	DV1 = DV1 < 2 ? 0 : 11 - DV1
-
-	CNPJ.push(DV1)
-
-	let DV2 = multipliers2.map((multiplier, index) => multiplier * CNPJ[index]).reduce((n1, n2) => n1 + n2) % 11;
-
-	DV2 = DV2 < 2 ? 0 : 11 - DV2
-
-	CNPJ.push(DV2)
+	const DV2 = multipliers2.map((multiplier, index) => multiplier * CNPJ[index]).reduce((n1, n2) => n1 + n2) % 11;
+	CNPJ.push(DV2 < 2 ? 0 : 11 - DV2)
 
 	if (ponctuation) {
 		CNPJ.splice(2, 0, '.')

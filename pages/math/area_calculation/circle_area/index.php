@@ -59,10 +59,8 @@ include_once("$root/assets/assets.php")
 					<div class="col s12 m6 l4">
 						<div class="row mb-0">
 							<p class="mb-0 col s12" id="formulasName">Raio:</p>
-							<div class="col s12">
-								<div class="input-field">
-									<input id="number" type="number" placeholder="Digite aqui o Raio." min="0" value="1" step="any">
-								</div>
+							<div class="input-field col s12">
+								<input id="number" type="number" placeholder="Digite aqui o Raio." min="0" value="1" step="any">
 							</div>
 						</div>
 					</div>
@@ -70,18 +68,16 @@ include_once("$root/assets/assets.php")
 					<div class="col s12 m6 l4">
 						<div class="row mb-0">
 							<p class="mb-0 col s12">Medida:</p>
-							<div class="col s12">
-								<div class="input-field">
-									<select id="measure">
-										<option value="km">Kilômetros</option>
-										<option value="hm">Hectômetros</option>
-										<option value="dam">Decâmetros</option>
-										<option value="m" selected>Metros</option>
-										<option value="dm">Decímetros</option>
-										<option value="cm">Centímetros</option>
-										<option value="mm">Milímetros</option>
-									</select>
-								</div>
+							<div class="input-field col s12">
+								<select id="measure">
+									<option value="km">Kilômetros</option>
+									<option value="hm">Hectômetros</option>
+									<option value="dam">Decâmetros</option>
+									<option value="m" selected>Metros</option>
+									<option value="dm">Decímetros</option>
+									<option value="cm">Centímetros</option>
+									<option value="mm">Milímetros</option>
+								</select>
 							</div>
 						</div>
 					</div>
