@@ -36,7 +36,7 @@ include_once("$root/assets/assets.php")
 
 				<div class="row mb-0">
 					<div class="col s12">
-						<p style="font-size:20px">Navegador: <span id="browser"></span></p>
+						<p style="font-size:20px">Navegador: <span class="red-color-text" id="browser"></span></p>
 						<div class="divider mt-0"></div>
 						<p class="mb-0">Linguagem: <span id="language"></span></p>
 					</div>

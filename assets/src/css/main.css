@@ -246,6 +246,14 @@ body>header+ul>li>.collapsible-header {
 	padding-left: 6px !important
 }
 
+.collapsible-body,
+.collaple-header,
+li .collapsible-body a,
+.padding-headers>li>ul>li>a {
+	text-overflow: ellipsis !important;
+	white-space: nowrap
+}
+
 .padding-headers .collapsible-header {
 	padding: 0 24px !important
 }

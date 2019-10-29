@@ -36,10 +36,10 @@ include_once("$root/assets/assets.php")
 
 				<div class="row mb-0">
 					<div class="col s12">
-						<p class="mb-0" style="font-size:20px">Meu IP: <span id="ip"></span></p>
+						<p class="mont-serrat" style="font-size:20px">Seu IP: <span class="red-color-text" id="ip"></span></p>
 						<div class="divider"></div>
 						<!-- <p class="mt-0">Cidade: <span id="city"></span></p> -->
-						<p class="mb-0">Região: <span id="region"></span></p>
+						<!-- <p class="mb-0">Região: <span id="region"></span></p>
 						<p class="mb-0">Código da região: <span id="regionCode"></span></p>
 						<p class="mb-0">País: <span id="country"></span></p>
 						<p class="mb-0">Código do país: <span id="countryCode"></span></p>
@@ -50,7 +50,7 @@ include_once("$root/assets/assets.php")
 						<p class="mb-0">Código do continente: <span id="continentCode"></span></p>
 						<p class="mb-0">Latitude: <span id="latitude"></span></p>
 						<p class="mb-0">Longitude: <span id="longitude"></span></p>
-						<p class="mb-0">Código de chamada: <span id="callingCode"></span></p>
+						<p>Código de chamada: <span id="callingCode"></span></p> -->
 					</div>
 				</div>
 

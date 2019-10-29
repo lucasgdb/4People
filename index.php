@@ -149,7 +149,7 @@ include_once('assets/assets.php')
 
 				<div class="row mb-0">
 					<div class="col s12 m6 l4">
-						<a href="https://github.com/lucasnaja" target="_blank"><img title="Lucas Bittencourt" class="responsive-img img-thumbnail" src="<?= $assets ?>/images/lucas_bittencourt.jpg" alt="Lucas Bittencourt"></a>
+						<a href="https://github.com/lucasnaja" target="_blank"><img title="Lucas Bittencourt" class="responsive-img img-thumbnail" src="<?= $assets ?>/images/lucas_bittencourt.jpeg" alt="Lucas Bittencourt"></a>
 					</div>
 
 					<div class="col s12 m6 l8">

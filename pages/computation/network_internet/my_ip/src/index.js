@@ -15,24 +15,23 @@ const lblCallingCode = document.querySelector('#callingCode')
 const lblFlag = document.querySelector('#flag')
 
 document.addEventListener('DOMContentLoaded', () => {
-	fetch('https://api.ipdata.co/?api-key=2cdd235eefa704006ffc48a6212ebae13f9f4afd8c9f1846d7a2ae12')
-		.then(result => result.text())
-		.then(json => JSON.parse(json))
+	fetch('https://api.ipify.org?format=json')
+		.then(result => result.json())
 		.then(data => {
 			lblIp.textContent = data.ip
 			// lblCity.textContent = data.city
-			lblRegion.textContent = data.region
-			lblRegionCode.textContent = data.region_code
-			lblCountry.textContent = data.country_name
-			lblCountryCode.textContent = data.country_code
-			lblSymbol.textContent = data.currency.symbol
-			lblLanguage.textContent = data.languages[0].native
-			lblContinent.textContent = data.continent_name
-			lblContinentCode.textContent = data.continent_code
-			lblLatitude.textContent = data.latitude
-			lblLongitude.textContent = data.longitude
-			lblCallingCode.textContent = data.calling_code
-			lblFlag.innerHTML = `<img style="position:relative;top:4px" src="${data.flag}" alt="${data.country_code}">`
+			// lblRegion.textContent = data.region
+			// lblRegionCode.textContent = data.region_code
+			// lblCountry.textContent = data.country_name
+			// lblCountryCode.textContent = data.country_code
+			// lblSymbol.textContent = data.currency.symbol
+			// lblLanguage.textContent = data.languages[0].native
+			// lblContinent.textContent = data.continent_name
+			// lblContinentCode.textContent = data.continent_code
+			// lblLatitude.textContent = data.latitude
+			// lblLongitude.textContent = data.longitude
+			// lblCallingCode.textContent = data.calling_code
+			// lblFlag.innerHTML = `<img style="position:relative;top:4px" src="${data.flag}" alt="${data.country_code}">`
 		}).catch(err => {
 			M.toast({
 				html: 'Houve um erro. Verifique sua conexão.',
