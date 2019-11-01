@@ -10,12 +10,11 @@
 - HTML5
 - CSS3
 - JavaScript
-- PHP
-- MySQL
 - Materialize
-- Quill.js
-- PHPMailer
+- PHP
 - Docker
+- MySQL
+- PHPMyAdmin
 - VSCode
 
 ## Extensões VSCode usadas
@@ -29,30 +28,13 @@
 - [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme)
 - [Dracula Official](https://marketplace.visualstudio.com/items?itemName=dracula-theme.theme-dracula)
 
-## Algumas Features
-
-- Painel Administrativo:
-  - Controle de Administradores:
-    - Primeiro login gera um Admin e envia pro e-mail.
-    - Upload de imagem.
-  - Mensagens dos usuários:
-    - Receber mensagens no Painel Administrativo.
-    - Responder mensagens direto do Painel Administrativo pro e-mail do usuário.
-  - Controle de Ferramentas:
-    - Ativar/Desativar Ferramentas.
-- Proteção contra Brute-Force.
-- Proteção contra SQL Injection.
-- Ferramentas escritas em JavaScript.
-- Ajax fortemente usado.
-- Quando sem conexão, é redirecionado para uma página "offline" (PWA).
-
 ## Como usar o Projeto
 
 - Clonar este repositório.
   - git clone [https://github.com/lucasnaja/4People.git](https://github.com/lucasnaja/4People.git)
-- Importar o banco de dados no MySQL.
+- Importar o banco de dados no MySQL/PHPMyAdmin.
   - Localização do database.sql: /assets/database/database.sql
-- Mudar as configurações de seu MySQL em /assets/php/Connection.php
+- Mudar as configurações de seu SQL em /assets/php/Connection.php
 - Windows
   - Colar a pasta 4People no htdocs do xampp.
   - Ou como preferir.
