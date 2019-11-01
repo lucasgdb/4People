@@ -39,7 +39,7 @@ include_once("$root/assets/assets.php")
 					<p class="mb-0 col s12">Digite o Texto:</p>
 
 					<div class="input-field col s12">
-						<input id="text" placeholder="Digite aqui o texto que será invertido." type="text" maxlength="14">
+						<input id="text" placeholder="Digite aqui o texto que será invertido." type="text">
 					</div>
 				</div>
 

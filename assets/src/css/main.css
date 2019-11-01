@@ -31,6 +31,7 @@ body {
 }
 
 .sidenav {
+	overflow-x: hidden;
 	border-right: 0;
 	box-shadow: -17px 0 18px #1b1a25
 }
@@ -246,16 +247,14 @@ body>header+ul>li>.collapsible-header {
 	padding-left: 6px !important
 }
 
-.collapsible-body,
-.collaple-header,
 li .collapsible-body a,
-.padding-headers>li>ul>li>a {
+.padding-headers .collapsible-header {
 	text-overflow: ellipsis !important;
-	white-space: nowrap
+	white-space: nowrap !important
 }
 
 .padding-headers .collapsible-header {
-	padding: 0 24px !important
+	padding: 0 48px 0 24px !important
 }
 
 .padding-headers .collapsible-body a {
@@ -418,22 +417,29 @@ li .collapsible-body a {
 		overflow-y: auto !important
 	}
 
-	.sidenav::-webkit-scrollbar,
-	html::-webkit-scrollbar {
+	.modal-content::-webkit-scrollbar,
+	.sidenav::-webkit-scrollbar {
 		width: 5px;
 		height: 5px
 	}
 
+	html::-webkit-scrollbar {
+		width: 8px
+	}
+
+	.modal-content::-webkit-scrollbar-thumb,
 	.sidenav::-webkit-scrollbar-thumb,
 	html::-webkit-scrollbar-thumb {
 		background-color: #1b1a25
 	}
 
+	.modal-content::-webkit-scrollbar-thumb:hover,
 	.sidenav::-webkit-scrollbar-thumb:hover,
 	html::-webkit-scrollbar-thumb:hover {
 		background-color: #16151e
 	}
 
+	.modal-content::-webkit-scrollbar-track,
 	.sidenav::-webkit-scrollbar-track,
 	html::-webkit-scrollbar-track {
 		background-color: #e0e0e0

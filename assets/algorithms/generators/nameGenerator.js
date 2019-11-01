@@ -134,8 +134,10 @@ const generateNames = (option, optionSex) => {
 	if (optionSex === '1' && option === '1') return `${namesMen} ${nameSub}`
 	else if (optionSex === '1' && option === '2') return `${namesMen}`
 	else if (optionSex === '1' && option === '3') return `${namesMen} ${nameSub} ${namesThird}`
-
 	else if (optionSex === '2' && option === '1') return `${namesWomen} ${nameSub}`
 	else if (optionSex === '2' && option === '2') return `${namesWomen}`
-	else if (optionSex === '2' && option === '3') return `${namesWomen} ${namesThird}`
+	else if (optionSex === '2' && option === '3') return `${namesWomen} ${nameSub} ${namesThird}`
+	else if (optionSex === '3' && option === '1') return `${Math.floor(Math.random() * 2) === 0 ? namesMen : namesWomen} ${nameSub}`
+	else if (optionSex === '3' && option === '2') return `${Math.floor(Math.random() * 2) === 0 ? namesMen : namesWomen}`
+	else if (optionSex === '3' && option === '3') return `${Math.floor(Math.random() * 2) === 0 ? namesMen : namesWomen} ${nameSub} ${namesThird}`
 }

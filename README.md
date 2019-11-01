@@ -45,7 +45,7 @@
 
 ## Como colaborar
 
-- Faça os mesmos passos de Como usar o Projeto acima.
+- Faça os mesmos passos de como usar o Projeto acima.
 - Faça as mudanças.
 - Dê um Commit e abra um PR no [GitHub](https://github.com/lucasnaja/4People) do projeto.
 

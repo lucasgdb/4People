@@ -268,8 +268,7 @@ if (!isset($_SESSION['logged'])) {
 					`<div id="updateTool${data[i][0]}" class="modal modal-fixed-footer">
 						<form onsubmit="updateTool(document.querySelector('#updateTool${data[i][0]} form')); return false" method="POST">
 							<div class="modal-content left-div-margin" style="padding-bottom:5px">
-								<h4 class="mb-1"><i class="material-icons left" style="top:7px">edit</i>Editar dados</h4>
-								<div class="divider"></div>
+								<h4 class="flow-text" style="font-size:30px;margin:-2px 0 7px"><i class="material-icons left" style="top:7px">edit</i>Editar dados</h4>
 
 								<div class="row mt-2 mb-0">
 									<input type="hidden" value="${data[i][0]}" name="tool_id">
@@ -405,8 +404,7 @@ if (!isset($_SESSION['logged'])) {
 					`<div id="updateTool${data[i][0]}" class="modal modal-fixed-footer">
 						<form onsubmit="updateTool(document.querySelector('#updateTool${data[i][0]} form')); return false" method="POST">
 							<div class="modal-content left-div-margin" style="padding-bottom:5px">
-								<h4 class="mb-1"><i class="material-icons left" style="top:7px">edit</i>Editar dados</h4>
-								<div class="divider"></div>
+								<h4 class="flow-text" style="font-size:30px;margin:-2px 0 7px"><i class="material-icons left" style="top:7px">edit</i>Editar dados</h4>
 
 								<div class="row mt-2 mb-0">
 									<input type="hidden" value="${data[i][0]}" name="tool_id">
