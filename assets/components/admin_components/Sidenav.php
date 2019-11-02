@@ -40,7 +40,7 @@ extract($sql->fetch())
 		</div>
 	</li>
 
-	<?php $controls = strpos($link, 'administrators') !== false || strpos($link, 'tools') !== false || strpos($link, 'banneds') !== false ?>
+	<?php $controls = strpos($link, 'administrators') !== false || strpos($link, 'tools') !== false || strpos($link, 'banneds') !== false || strpos($link, 'blog') !== false ?>
 
 	<li class="<?= $controls ? 'active' : '' ?>">
 		<div class="collapsible-header"><i class="material-icons left">insert_chart</i>Controles<i class="material-icons" style="position:absolute;right:0<?= $controls ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
@@ -49,6 +49,7 @@ extract($sql->fetch())
 				<li>
 					<ul>
 						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/administrators/" title="Controle de Administradores"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Controle de Administradores</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/blog/" title="Controle de Blog do 4People"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Controle de Blog</a></li>
 						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/banneds/" title="Controle de usuários banidos"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Controle de Banimentos</a></li>
 						<li><a class="waves-effect" href="<?= $root ?>/admin/panel/tools/tool_types/" title="Controle de Tipos de Ferramentas"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Controle de Tipos</a></li>
 						<?php

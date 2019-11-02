@@ -108,7 +108,7 @@ if ($logged) {
 		</li>
 	<?php endforeach ?>
 
-	<?php $other_pages = strpos($link, 'about') !== false || strpos($link, 'contact') !== false ?>
+	<?php $other_pages = strpos($link, 'contact') !== false || strpos($link, 'blog') !== false ?>
 
 	<li class="<?= $other_pages ? 'active' : '' ?>">
 		<div class="collapsible-header"><i class="material-icons left">insert_link</i>Outras Páginas<i class="material-icons" style="position:absolute;right:0<?= $other_pages ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
@@ -116,6 +116,7 @@ if ($logged) {
 			<ul class="collapsible padding-headers padding-buttons">
 				<li>
 					<ul>
+						<li><a class="waves-effect" href="<?= $root ?>/pages/blog/" title="4People - Blog"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Blog</a></li>
 						<li><a class="waves-effect" href="<?= $root ?>/pages/contact/" title="Contato - 4People"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Contato</a></li>
 						<?php
 						$sql = $database->prepare('SELECT type_name, type_path FROM types');

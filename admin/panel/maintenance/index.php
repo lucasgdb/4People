@@ -357,6 +357,7 @@ if (!isset($_SESSION['logged'])) {
 				'Sáb'
 			]
 		})
+		
 		M.Timepicker.init(document.querySelectorAll('.timepicker'), {
 			i18n: {
 				cancel: 'Cancelar',

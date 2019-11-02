@@ -57,7 +57,7 @@ include_once('assets/assets.php')
 							<img src="<?= $assets ?>/images/bg01.jpg" alt="bg01">
 							<div class="caption left-align">
 								<h3 class="dark">CÓDIGO ABERTO! <i style="top:10px" class="material-icons red-color-text left small">code</i></h3>
-								<h5 class="light">O 4People é de Código Aberto e livre para qualquer um usar/melhorar.</h5>
+								<h5 class="light">O 4People é de Código Aberto e livre para qualquer um estudar/melhorar.</h5>
 							</div>
 						</li>
 
