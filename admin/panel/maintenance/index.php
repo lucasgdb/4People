@@ -176,7 +176,7 @@ if (!isset($_SESSION['logged'])) {
 									<input type="hidden" value="${i}" name="maintenance_id">
 									<div class="input-field col s12">
 										<i class="material-icons prefix">format_size</i>
-										<input value="${data[i][0]}" id="maintenance_name" title="Preencha este campo com o nome." placeholder="Nome da manutenção" class="validate" type="text" name="maintenance_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
+										<input value="${data[i][0]}" id="maintenance_name" title="Preencha este campo com o nome." placeholder="Nome da manutenção" class="validate valid" type="text" name="maintenance_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
 										<label class="active" for="maintenance_name">Nome *</label>
 									</div>
 

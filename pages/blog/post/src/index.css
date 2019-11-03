@@ -1,0 +1,29 @@
+h1 {
+	font-size: 35px;
+	margin: 15px 0
+}
+
+h2 {
+	font-size: 27px;
+	margin: 10px 0
+}
+
+br {
+	margin: 5px 0
+}
+
+p>br {
+	display: none
+}
+
+.mb-1 {
+	margin-bottom: 5px
+}
+
+strong {
+	font-weight: bold
+}
+
+blockquote {
+	border-left-color: #a62023
+}

@@ -32,7 +32,7 @@ try {
 	$ext = strtolower(pathinfo($_FILES['admin_image']['name'], PATHINFO_EXTENSION));
 
 	if ($ext) {
-		$long_name = $admin_nickname . '.' . $ext;
+		$long_name = "$admin_nickname.$ext";
 
 		if ($current_admin_image) unlink("../../../../assets/images/admin_images/$current_admin_image");
 		move_uploaded_file($_FILES['admin_image']['tmp_name'], "../../../../assets/images/admin_images/$long_name");

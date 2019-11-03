@@ -13,6 +13,8 @@ if (!isset($_SESSION['logged'])) {
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/katex.min.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/quill.snow.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>Controle de Blog - 4People</title>
 	<?php include_once("$assets/components/admin_components/MetaTags.php") ?>
@@ -28,10 +30,78 @@ if (!isset($_SESSION['logged'])) {
 
 	<main>
 		<div class="container">
-			<div class="card-panel" style="padding-bottom:10px">
-				<button title="Inserir uma Ferramenta no 4People" class="btn waves-effect waves-light red-color z-depth-0"><i class="material-icons left">comment</i>Inserir</button>
-				<button title="Filtrar Ferramentas do 4People" class="btn waves-effect waves-light btn-green z-depth-0"><i class="material-icons left">filter_list</i>Filtrar</button>
-				<button onclick="selectTools()" title="Limpar Filtro" class="btn dark-grey waves-effect waves-light z-depth-0"><i class="material-icons left">format_clear</i>Limpar filtro</button>
+			<div class="card-panel top-div-margin">
+				<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5px">person_add</i>Publicar um post</h1>
+				<label>Publicar um post no Blog do 4People.</label>
+				<div class="divider"></div>
+
+				<form id="formInsertPost" method="POST" enctype="multipart/form-data">
+					<div class="row mt-2 mb-0">
+						<div class="input-field col s12 m6">
+							<i class="material-icons prefix">person</i>
+							<input id="post_title" minlength="4" title="Preencha este campo com o título." placeholder="Título do post" class="validate" type="text" name="post_title" oninvalid="this.setCustomValidity('Preencha este campo com o título.')" oninput="setCustomValidity('')" required>
+							<label class="active" for="post_title">Título *</label>
+							<span class="helper-text" data-error="Título de post inválido." data-success="Título de post válido.">Ex: Lançamento</span>
+						</div>
+
+						<div class="input-field col s12 m6">
+							<i class="material-icons prefix">person</i>
+							<input id="post_description" minlength="8" title="Preencha este campo com a descrição." placeholder="Descrição do post" class="validate" type="text" name="post_description" oninvalid="this.setCustomValidity('Preencha este campo com a descrição.')" oninput="setCustomValidity('')" required>
+							<label class="active" for="post_description">Descrição *</label>
+							<span class="helper-text" data-error="Descrição de post inválido." data-success="Descrição de post válido.">Ex: Lançamento do 4People</span>
+						</div>
+
+						<div class="file-field input-field col s12">
+							<i class="material-icons prefix">image</i>
+							<input type="file" name="post_image" accept=".png, .jpg, .jpeg, .svg, .gif" required>
+							<input style="width:calc(100% - 3rem)" placeholder="Selecionar imagem" type="text" class="file-path" required>
+							<label class="active">Imagem</label>
+							<span class="helper-text">.png, .jpg, .jpeg, .svg, .gif</span>
+						</div>
+					</div>
+
+					<input id="postContent" name="post_content" class="hide" type="text" required>
+
+					<div class="standalone-container">
+						<div id="toolbar-container">
+							<span class="ql-formats">
+								<button class="ql-bold"></button>
+								<button class="ql-italic"></button>
+								<button class="ql-underline"></button>
+								<button class="ql-strike"></button>
+							</span>
+
+							<span class="ql-formats">
+								<button class="ql-script" value="sub"></button>
+								<button class="ql-script" value="super"></button>
+							</span>
+
+							<span class="ql-formats">
+								<button class="ql-header" value="1"></button>
+								<button class="ql-header" value="2"></button>
+								<button class="ql-blockquote"></button>
+							</span>
+
+							<span class="ql-formats">
+								<button class="ql-list" value="ordered"></button>
+								<button class="ql-list" value="bullet"></button>
+							</span>
+
+							<span class="ql-formats">
+								<button class="ql-direction" value="rtl"></button>
+								<button class="ql-link"></button>
+							</span>
+
+							<span class="ql-formats">
+								<button class="ql-clean"></button>
+							</span>
+						</div>
+
+						<div class="snow-container" id="snow-container"></div>
+					</div>
+
+					<button id="btnInsertPost" title="Inserir post no Blog 4People" class="btn waves-effect waves-light red-color z-depth-0"><i class="material-icons left">comment</i>Inserir</button>
+				</form>
 
 				<div class="top-div dark-grey"></div>
 			</div>
@@ -46,11 +116,12 @@ if (!isset($_SESSION['logged'])) {
 							<th>Título</th>
 							<th>Status</th>
 							<th>Visitas</th>
+							<th>Autor</th>
 							<th>Operações</th>
 						</tr>
 					</thead>
 
-					<tbody id="tools"></tbody>
+					<tbody id="posts"></tbody>
 				</table>
 
 				<div class="left-div dark-grey"></div>
@@ -65,27 +136,29 @@ if (!isset($_SESSION['logged'])) {
 	<?php include_once("$assets/components/ServiceWorker.php") ?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
-	<script src="<?= $assets ?>/src/js/clipboard.min.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
+	<script src="<?= $assets ?>/src/js/katex.min.js"></script>
+	<script src="<?= $assets ?>/src/js/highlight.min.js"></script>
+	<script src="<?= $assets ?>/src/js/quill.min.js"></script>
+	<script src="<?= $assets ?>/src/js/auto-render.min.js" onload="renderMathInElement(document.body)"></script>
+	<script src="src/index.js"></script>
 	<script>
-		M.FormSelect.init(document.querySelectorAll('select'))
-		const form = document.querySelector('#formInsert')
+		M.Modal.init(document.querySelectorAll('.modal'))
+		const formInsertPost = document.querySelector('#formInsertPost')
 		const formFilter = document.querySelector('#formFilter')
-		const tools = document.querySelector('#tools')
-		const updates = document.querySelector('#updates')
+		const posts = document.querySelector('#posts')
 		const deletes = document.querySelector('#deletes')
-		const inputs = form.querySelectorAll('input:not(.select-dropdown)')
-		const btnSubmit = form.querySelector('button')
+		const inputs = formInsertPost.querySelectorAll('input:not(.select-dropdown)')
+		const btnSubmit = formInsertPost.querySelector('button')
 		const lblAmount = document.querySelector('#amount')
-		let isFiltered
 
-		form.onsubmit = async e => {
+		formInsertPost.onsubmit = async e => {
 			e.preventDefault()
 			btnSubmit.disabled = true
 
-			const data = await (await fetch('src/insert_tool.php', {
+			const data = await (await fetch('src/insert_post.php', {
 				method: 'POST',
-				body: new FormData(form)
+				body: new FormData(formInsertPost)
 			})).json()
 
 			if (data.status === '1') {
@@ -99,8 +172,10 @@ if (!isset($_SESSION['logged'])) {
 					inputs[i].classList.remove('valid')
 				}
 
-				if (isFiltered) selectToolsByFilter()
-				else selectTools()
+				lblQuillContent.innerHTML = ''
+				postContent.value = ''
+
+				selectPosts()
 			} else {
 				M.toast({
 					html: `Erro ao adicionar ${inputs[0].value.trim()}.`,
@@ -111,81 +186,88 @@ if (!isset($_SESSION['logged'])) {
 			btnSubmit.disabled = false
 		}
 
-		formFilter.onsubmit = async e => {
-			e.preventDefault()
-
-			isFiltered = true
-			selectToolsByFilter()
-		}
-
-		const selectTools = async () => {
-			isFiltered = false
-
-			let toolsHTML = '',
+		const selectPosts = async () => {
+			let postsHTML = '',
 				updatesHTML = '',
 				deletesHTML = '',
 				amount = 0
 
-			const data = await (await fetch('src/select_tools.php')).json()
-			const sections = await (await fetch('src/select_sections.php')).json()
+			const data = await (await fetch('src/select_posts.php')).json()
 
 			for (const i in data) {
 				amount += 1
 
 				updatesHTML += (
-					`<div id="updateTool${data[i][0]}" class="modal modal-fixed-footer">
-						<form onsubmit="updateTool(document.querySelector('#updateTool${data[i][0]} form')); return false" method="POST">
+					`<div id="updatePost${i}" class="modal modal-fixed-footer">
+						<form onsubmit="updatePost(document.querySelector('#updatePost${i} form')); return false" method="POST" enctype="multipart/form-data">
 							<div class="modal-content left-div-margin" style="padding-bottom:5px">
-								<h4 class="flow-text" style="font-size:30px;margin:-2px 0 7px"><i class="material-icons left" style="top:7px">edit</i>Editar dados</h4>
+								<h4 class="flow-text" style="font-size:30px;margin:-5px 0 15px"><i class="material-icons left" style="top:7px">comment</i>Alterar dados do post</h4>
+								<div class="divider"></div>
 
 								<div class="row mt-2 mb-0">
-									<input type="hidden" value="${data[i][0]}" name="tool_id">
+									<input value="${i}" class="hide" type="hidden" name="post_id">
+
 									<div class="input-field col s12 m6">
-										<i class="material-icons prefix">format_size</i>
-										<input value="${i}" id="tool_name" title="Preencha este campo com o nome." placeholder="Nomoe de Ferramenta" class="validate" type="text" name="tool_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
-										<label class="active" for="tool_name">Nome *</label>
-										<span class="helper-text" data-error="Ferramenta inválida." data-success="Ferramenta válida.">Ex: Gerador de CPF</span>
+										<i class="material-icons prefix">person</i>
+										<input value="${data[i][0]}" id="post_title" minlength="4" title="Preencha este campo com o título." placeholder="Título do post" class="validate valid" type="text" name="post_title" oninvalid="this.setCustomValidity('Preencha este campo com o título.')" oninput="setCustomValidity('')" required>
+										<label class="active" for="post_title">Título *</label>
+										<span class="helper-text" data-error="Título de post inválido." data-success="Título de post válido.">Ex: Lançamento</span>
 									</div>
 
 									<div class="input-field col s12 m6">
-										<i class="material-icons prefix">folder</i>
-										<input value="${data[i][1]}" id="tool_path" title="Preencha este campo com o caminho." placeholder="Caminho da Seção" class="validate" type="text" name="tool_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
-										<label class="active" for="tool_path">Path *</label>
-										<span class="helper-text" data-error="Caminho de Ferramenta inválido." data-success="Caminho de Ferramenta válido.">Ex: gerador_de_cpf</span>
+										<i class="material-icons prefix">person</i>
+										<input value="${data[i][4]}" id="post_description" minlength="8" title="Preencha este campo com a descrição." placeholder="Descrição do post" class="validate valid" type="text" name="post_description" oninvalid="this.setCustomValidity('Preencha este campo com a descrição.')" oninput="setCustomValidity('')" required>
+										<label class="active" for="post_description">Descrição *</label>
+										<span class="helper-text" data-error="Descrição de post inválido." data-success="Descrição de post válido.">Ex: Lançamento do 4People</span>
 									</div>
 
-									<div class="input-field col s12 m6">
-										<i class="material-icons prefix">folder</i>
-										<select name="section_id">
-											${sections.map(section => `<option value="${section[0]}" ${section[0] === data[i][8] ? 'selected' : ''}>${section[1]}</option>`).join('')}
-										</select>
-										<label>Seção *</label>
-										<span class="helper-text">Seção da Ferramenta</span>
+									<div class="file-field input-field col s12">
+										<i class="material-icons prefix">image</i>
+										<input value="${data[i][5]}" type="file" name="post_image" accept=".png, .jpg, .jpeg, .svg, .gif">
+										<input value="${data[i][5]}" name="post_image_text" style="width:calc(100% - 3rem)" placeholder="Selecionar imagem" type="text" class="file-path" required>
+										<label class="active">Imagem</label>
+										<span class="helper-text">.png, .jpg, .jpeg, .svg, .gif</span>
+									</div>
+								</div>
+
+								<input id="postContent${i}" name="post_content" class="hide" type="text" required>
+
+								<div class="standalone-container">
+									<div id="toolbar-container${i}">
+										<span class="ql-formats">
+											<button class="ql-bold"></button>
+											<button class="ql-italic"></button>
+											<button class="ql-underline"></button>
+											<button class="ql-strike"></button>
+										</span>
+
+										<span class="ql-formats">
+											<button class="ql-script" value="sub"></button>
+											<button class="ql-script" value="super"></button>
+										</span>
+
+										<span class="ql-formats">
+											<button class="ql-header" value="1"></button>
+											<button class="ql-header" value="2"></button>
+											<button class="ql-blockquote"></button>
+										</span>
+
+										<span class="ql-formats">
+											<button class="ql-list" value="ordered"></button>
+											<button class="ql-list" value="bullet"></button>
+										</span>
+
+										<span class="ql-formats">
+											<button class="ql-direction" value="rtl"></button>
+											<button class="ql-link"></button>
+										</span>
+
+										<span class="ql-formats">
+											<button class="ql-clean"></button>
+										</span>
 									</div>
 
-									<div class="input-field col s12 m6">
-										<i class="material-icons prefix">${data[i][5] === '1' ? 'check' : 'close'}</i>
-										<select name="tool_status">
-											<option value="0">Desativado</option>
-											<option value="1" ${data[i][5] === '1' ? 'selected' : ''}>Ativado</option>
-										</select>
-										<label>Status *</label>
-										<span class="helper-text">Status da Ferramenta</span>
-									</div>
-
-									<div class="input-field col s12 m6">
-										<i class="material-icons prefix">description</i>
-										<input value="${data[i][2]}" id="tool_description" title="Preencha este campo com a descrição." placeholder="Descrição da Ferramenta" class="validate" type="text" name="tool_description" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')">
-										<label class="active" for="tool_description">Descrição</label>
-										<span class="helper-text">Ex: Gerador de CPF Online para Programadores testarem seus Softwares em desenvolvimento.</span>
-									</div>
-
-									<div class="input-field col s12 m6">
-										<i class="material-icons prefix">link</i>
-										<input value="${data[i][3]}" id="tool_link" title="Preencha este campo com o link do repositório." placeholder="Link da Ferramenta no GitHub" class="validate" type="text" name="tool_link" oninvalid="this.setCustomValidity('Preencha este campo com o link do repositório.')" oninput="setCustomValidity('')">
-										<label class="active" for="tool_link">Link</label>
-										<span class="helper-text">Ex: https://github.com/lucasnaja/4People</span>
-									</div>
+									<div class="snow-container" id="snow-container${i}">${data[i][6]}</div>
 								</div>
 							</div>
 
@@ -193,7 +275,7 @@ if (!isset($_SESSION['logged'])) {
 
 							<div class="modal-footer">
 								<button type="button" class="modal-close btn waves-effect waves-light dark-grey z-depth-0" title="Cancelar"><i class="material-icons left">close</i>Cancelar</button>
-								<button class="modal-close btn waves-effect waves-light green darken-3 z-depth-0" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
+								<button id="btnUpdatePost${i}" class="btn waves-effect waves-light green darken-3 z-depth-0" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
 							</div>
 						</form>
 
@@ -202,10 +284,10 @@ if (!isset($_SESSION['logged'])) {
 				)
 
 				deletesHTML += (
-					`<div id="removeTool${data[i][0]}" class="modal">
+					`<div id="removePost${i}" class="modal">
 						<div class="modal-content left-div-margin">
-							<h4><i class="material-icons left" style="top:7px">delete</i>Remover Ferramenta</h4>
-							<p class="mb-0">Você tem certeza que deseja remover ${i} do 4People?</p>
+							<h4><i class="material-icons left" style="top:7px">delete</i>Remover post</h4>
+							<p class="mb-0">Você tem certeza que deseja remover ${data[i][0]} do 4People?</p>
 
 							<div class="left-div dark-grey" style="border-radius:0"></div>
 						</div>
@@ -214,182 +296,58 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="modal-footer">
 							<button title="Cancelar" class="modal-close btn waves-effect waves-light dark-grey z-depth-0"><i class="material-icons left">close</i>Cancelar</button>
-							<a onclick="deleteTool(${data[i][0]}, '${i}')" title="Remover ${i}" class="modal-close btn waves-effect waves-light red-color z-depth-0"><i class="material-icons left">delete</i>Remover</a>
+							<a onclick="deleteTool(${i}, '${data[i][0]}')" title="Remover ${data[i][0]}" class="modal-close btn waves-effect waves-light red-color z-depth-0"><i class="material-icons left">delete</i>Remover</a>
 						</div>
 					</div>`
 				)
 
-				toolsHTML += (
+				postsHTML += (
 					`<tr>
-						<td>${i}</td>
-						<td>${data[i][5] === '1' ? '<i title="Ativado" class="material-icons btn-green-text">done</i>' : '<i title="Desativado" class="material-icons red-color-text">clear</i>'}</td>
-						<td>${data[i][4]}</td>
+						<td>${data[i][0]}</td>
+						<td>${data[i][1] === '1' ? '<i title="Ativado" class="material-icons btn-green-text">done</i>' : '<i title="Desativado" class="material-icons red-color-text">clear</i>'}</td>
+						<td>${data[i][2]}</td>
+						<td>${data[i][3]}</td>
 						<td>
-							<button data-clipboard-text="<?= $_SERVER['HTTP_HOST'] ?>/pages/${data[i][6]}/${data[i][7]}/${data[i][1]}/" title="Copiar caminho da página" class="btn waves-effect waves-light dark-grey z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
-							<a href="<?= $root ?>/pages/${data[i][6]}/${data[i][7]}/${data[i][1]}/" title="Ir até a página" class="btn waves-effect waves-light dark-grey z-depth-0" ${data[i][5] === '1' ? '' : 'disabled'}><i class="material-icons">insert_link</i></a>
-						</td>
-						<td>
-							<button class="btn waves-effect waves-light green darken-3 z-depth-0 modal-trigger" title="Editar Ferramenta" data-target="updateTool${data[i][0]}"><i class="material-icons">edit</i></button>
-							<button class="btn waves-effect waves-light red-color z-depth-0 modal-trigger" style="cursor:pointer" title="Remover Ferramenta" data-target="removeTool${data[i][0]}"><i class="material-icons">delete</i></button>
+							<button class="btn waves-effect waves-light green darken-3 z-depth-0 modal-trigger" title="Editar post" data-target="updatePost${i}"><i class="material-icons">edit</i></button>
+							<button class="btn waves-effect waves-light red-color z-depth-0 modal-trigger" style="cursor:pointer" title="Remover post" data-target="removePost${i}"><i class="material-icons">delete</i></button>
 						</td>
 					</tr>`
 				)
 			}
 
-			tools.innerHTML = toolsHTML
+			posts.innerHTML = postsHTML
 			updates.innerHTML = updatesHTML
 			deletes.innerHTML = deletesHTML
-			lblAmount.innerHTML = `(${amount})`
+			lblAmount.innerHTML = `[${amount}]`
 			M.Modal.init(document.querySelectorAll('.modal'))
 			M.FormSelect.init(document.querySelectorAll('select'))
 
-			const btnsCopy = document.querySelectorAll('.copy')
-			new ClipboardJS(btnsCopy).on('success', () => {
-				M.toast({
-					html: 'Caminho copiado com sucesso.',
-					classes: 'green'
-				})
-			})
-		}
-
-		const selectToolsByFilter = async () => {
-			let toolsHTML = '',
-				updatesHTML = '',
-				deletesHTML = '',
-				amount = 0
-
-			const newForm = new FormData(formFilter)
-			const type_id_get = newForm.get('type_id')
-			const section_id_get = newForm.get('section_id')
-			const tool_status_get = newForm.get('tool_status')
-			const data = await (await fetch(`src/select_tools.php?type_id=${type_id_get}&section_id=${section_id_get}&tool_status=${tool_status_get}`)).json()
-			const sections = await (await fetch('src/select_sections.php')).json()
+			const snowContainers = document.querySelectorAll('.snow-container')
 
 			for (const i in data) {
-				amount += 1
-
-				updatesHTML += (
-					`<div id="updateTool${data[i][0]}" class="modal modal-fixed-footer">
-						<form onsubmit="updateTool(document.querySelector('#updateTool${data[i][0]} form')); return false" method="POST">
-							<div class="modal-content left-div-margin" style="padding-bottom:5px">
-								<h4 class="flow-text" style="font-size:30px;margin:-2px 0 7px"><i class="material-icons left" style="top:7px">edit</i>Editar dados</h4>
-
-								<div class="row mt-2 mb-0">
-									<input type="hidden" value="${data[i][0]}" name="tool_id">
-									<div class="input-field col s12 m6">
-										<i class="material-icons prefix">format_size</i>
-										<input value="${i}" id="tool_name" title="Preencha este campo com o nome." placeholder="Nomoe de Ferramenta" class="validate" type="text" name="tool_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
-										<label class="active" for="tool_name">Nome *</label>
-										<span class="helper-text" data-error="Ferramenta inválida." data-success="Ferramenta válida.">Ex: Gerador de CPF</span>
-									</div>
-
-									<div class="input-field col s12 m6">
-										<i class="material-icons prefix">folder</i>
-										<input value="${data[i][1]}" id="tool_path" title="Preencha este campo com o caminho." placeholder="Caminho da Seção" class="validate" type="text" name="tool_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
-										<label class="active" for="tool_path">Path *</label>
-										<span class="helper-text" data-error="Caminho de Ferramenta inválido." data-success="Caminho de Ferramenta válido.">Ex: gerador_de_cpf</span>
-									</div>
-
-									<div class="input-field col s12 m6">
-										<i class="material-icons prefix">folder</i>
-										<select name="section_id">
-											${sections.map(section => `<option value="${section[0]}" ${section[0] === data[i][8] ? 'selected' : ''}>${section[1]}</option>`).join('')}
-										</select>
-										<label>Seção *</label>
-										<span class="helper-text">Seção da Ferramenta</span>
-									</div>
-
-									<div class="input-field col s12 m6">
-										<i class="material-icons prefix">${data[i][5] === '1' ? 'check' : 'close'}</i>
-										<select name="tool_status">
-											<option value="0">Desativado</option>
-											<option value="1" ${data[i][5] === '1' ? 'selected' : ''}>Ativado</option>
-										</select>
-										<label>Status *</label>
-										<span class="helper-text">Status da Ferramenta</span>
-									</div>
-
-									<div class="input-field col s12 m6">
-										<i class="material-icons prefix">description</i>
-										<input value="${data[i][2]}" id="tool_description" title="Preencha este campo com a descrição." placeholder="Descrição da Ferramenta" class="validate" type="text" name="tool_description" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')">
-										<label class="active" for="tool_description">Descrição</label>
-										<span class="helper-text">Ex: Gerador de CPF Online para Programadores testarem seus Softwares em desenvolvimento.</span>
-									</div>
-
-									<div class="input-field col s12 m6">
-										<i class="material-icons prefix">link</i>
-										<input value="${data[i][3]}" id="tool_link" title="Preencha este campo com o link do repositório." placeholder="Link da Ferramenta no GitHub" class="validate" type="text" name="tool_link" oninvalid="this.setCustomValidity('Preencha este campo com o link do repositório.')" oninput="setCustomValidity('')">
-										<label class="active" for="tool_link">Link</label>
-										<span class="helper-text">Ex: https://github.com/lucasnaja/4People</span>
-									</div>
-								</div>
-							</div>
-
-							<div class="divider"></div>
-
-							<div class="modal-footer">
-								<button type="button" class="modal-close btn waves-effect waves-light dark-grey z-depth-0" title="Cancelar"><i class="material-icons left">close</i>Cancelar</button>
-								<button class="modal-close btn waves-effect waves-light red-color z-depth-0" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
-							</div>
-						</form>
-
-						<div class="left-div dark-grey" style="border-radius:0"></div>
-					</div>`
-				)
-
-				deletesHTML += (
-					`<div id="removeTool${data[i][0]}" class="modal">
-						<div class="modal-content left-div-margin">
-							<h4><i class="material-icons left" style="top:7px">delete</i>Remover Ferramenta</h4>
-							<p class="mb-0">Você tem certeza que deseja remover ${i} do 4People?</p>
-
-							<div class="left-div dark-grey" style="border-radius:0"></div>
-						</div>
-
-						<div class="divider"></div>
-
-						<div class="modal-footer">
-							<button title="Cancelar" class="modal-close btn waves-effect waves-light dark-grey z-depth-0"><i class="material-icons left">close</i>Cancelar</button>
-							<a onclick="deleteTool(${data[i][0]}, '${i}')" title="Remover ${i}" class="modal-close btn waves-effect waves-light red-color z-depth-0"><i class="material-icons left">delete</i>Remover</a>
-						</div>
-					</div>`
-				)
-
-				toolsHTML += (
-					`<tr>
-						<td>${i}</td>
-						<td>${data[i][5] === '1' ? '<i title="Ativado" class="material-icons btn-green-text">done</i>' : '<i title="Desativado" class="material-icons red-color-text">clear</i>'}</td>
-						<td>${data[i][4]}</td>
-						<td>
-							<button data-clipboard-text="<?= $_SERVER['HTTP_HOST'] ?>/${data[i][6]}/${data[i][7]}/${data[i][1]}/" title="Copiar caminho da página" class="btn waves-effect waves-light dark-grey z-depth-0 copy"><i class="material-icons" style="cursor:pointer">content_copy</i></button>
-							<a href="<?= $root ?>/${data[i][6]}/${data[i][7]}/${data[i][1]}/" title="Ir até a página" class="btn waves-effect waves-light dark-grey z-depth-0" ${data[i][5] === '1' ? '' : 'disabled'}><i class="material-icons">insert_link</i></a>
-						</td>
-						<td>
-							<button class="btn waves-effect waves-light green darken-3 z-depth-0 modal-trigger" title="Editar Ferramenta" data-target="updateTool${data[i][0]}"><i class="material-icons">edit</i></button>
-							<button class="btn waves-effect waves-light red-color z-depth-0 modal-trigger" style="cursor:pointer" title="Remover Ferramenta" data-target="removeTool${data[i][0]}"><i class="material-icons">delete</i></button>
-						</td>
-					</tr>`
-				)
-			}
-
-			tools.innerHTML = toolsHTML
-			updates.innerHTML = updatesHTML
-			deletes.innerHTML = deletesHTML
-			lblAmount.innerHTML = `(${amount})`
-			M.Modal.init(document.querySelectorAll('.modal'))
-			M.FormSelect.init(document.querySelectorAll('select'))
-
-			const btnsCopy = document.querySelectorAll('.copy')
-			new ClipboardJS(btnsCopy).on('success', () => {
-				M.toast({
-					html: 'Caminho copiado com sucesso.',
-					classes: 'green'
+				new Quill(`#snow-container${i}`, {
+					modules: {
+						formula: true,
+						syntax: true,
+						toolbar: `#toolbar-container${i}`
+					},
+					placeholder: 'Escrever conteúdo...',
+					theme: 'snow'
 				})
-			})
+
+				let newLblQuillContent = document.querySelector(`#snow-container${i} .ql-editor`)
+				const btnUpdatePost = document.querySelector(`#btnUpdatePost${i}`)
+				const newPostContent = document.querySelector(`#postContent${i}`)
+
+				btnUpdatePost.addEventListener('click', () => {
+					if (newLblQuillContent.innerText.replace(/\n/g, '') === '') newPostContent.value = ''
+					else newPostContent.value = newLblQuillContent.innerHTML
+				})
+			}
 		}
 
-		const updateTool = async formUpdate => {
-			const data = await (await fetch('src/update_tool.php', {
+		const updatePost = async formUpdate => {
+			const data = await (await fetch('src/update_post.php', {
 				method: 'POST',
 				body: new FormData(formUpdate)
 			})).json()
@@ -400,8 +358,7 @@ if (!isset($_SESSION['logged'])) {
 					classes: 'green'
 				})
 
-				if (isFiltered) selectToolsByFilter()
-				else selectTools()
+				selectPosts()
 			} else {
 				M.toast({
 					html: 'Houve um erro ao atualizar os dados.',
@@ -410,26 +367,25 @@ if (!isset($_SESSION['logged'])) {
 			}
 		}
 
-		const deleteTool = async (id, name) => {
-			const result = await (await fetch(`src/delete_tool.php?tool_id=${id}`)).json()
+		const deleteTool = async (id, title) => {
+			const result = await (await fetch(`src/delete_post.php?post_id=${id}`)).json()
 
 			if (result.status === '1') {
 				M.toast({
-					html: `${name} removido(a).`,
+					html: `${title} removido(a).`,
 					classes: 'green'
 				})
 
-				if (isFiltered) selectToolsByFilter()
-				else selectTools()
+				selectPosts()
 			} else {
 				M.toast({
-					html: `Não foi possível remover ${name}.`,
+					html: `Não foi possível remover ${title}.`,
 					classes: 'red accent-4'
 				})
 			}
 		}
 
-		selectTools()
+		selectPosts()
 	</script>
 </body>
 

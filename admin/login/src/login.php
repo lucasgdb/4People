@@ -12,11 +12,10 @@ try {
 
 	function setLog($database, $ip, $admin_nickname, $admin_password): int
 	{
-		$log = $database->prepare('INSERT INTO login_logs VALUES (NULL, :log_ip, :log_nickname, :log_password, :log_createdAt)');
+		$log = $database->prepare('INSERT INTO login_logs VALUES (NULL, :log_ip, :log_nickname, :log_password, CURRENT_TIMESTAMP)');
 		$log->bindValue(':log_ip', $ip);
 		$log->bindValue(':log_nickname', $admin_nickname);
 		$log->bindValue(':log_password', $admin_password);
-		$log->bindValue(':log_createdAt', date('Y-m-d H:i:s'));
 
 		return $log->execute();
 	}

@@ -378,16 +378,16 @@ li .collapsible-body a {
 	}
 
 	.left-div {
-		top: 0;
+		left: 0;
 		border-top-left-radius: 2px;
 		border-bottom-left-radius: 2px
 	}
 
 	.right-div,
 	.left-div {
+		top: 0;
 		width: 11px;
 		height: 100%;
-		left: 0;
 		position: absolute
 	}
 

@@ -6,7 +6,7 @@ try {
 
 	include_once('../../../assets/php/Connection.php');
 
-	$offset = isset($_GET['offset']) ? ($_GET['offset'] - 1) * 6 : 1;
+	$offset = isset($_GET['offset']) ? (filter_input(INPUT_GET, 'offset', FILTER_DEFAULT) - 1) * 6 : 1;
 
 	$sql = $database->prepare("SELECT * FROM posts WHERE post_status = \"1\" ORDER BY post_createdAt DESC LIMIT 6 OFFSET $offset");
 	$sql->execute();
@@ -14,7 +14,7 @@ try {
 	if ($sql->rowCount()) {
 		foreach ($sql as $key) {
 			extract($key);
-			$data["@$post_id"] = [$post_title, $post_image, $post_createdAt];
+			$data["@$post_id"] = [$post_id, $post_title, $post_image, $post_createdAt];
 		}
 
 		echo json_encode($data);

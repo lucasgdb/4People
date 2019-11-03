@@ -13,10 +13,9 @@ if (!isset($_SESSION['logged'])) {
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-	<link rel="stylesheet" href="src/css/index.css">
-	<link rel="stylesheet" href="src/css/quill.snow.css">
-	<link rel="stylesheet" href="src/css/katex.min.css">
-	<link rel="stylesheet" href="src/css/monokai-sublime.min.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/katex.min.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/quill.snow.css">
+	<link rel="stylesheet" href="src/index.css">
 	<title>Mensagens - 4People</title>
 	<?php include_once("$assets/components/admin_components/MetaTags.php") ?>
 </head>
@@ -75,7 +74,7 @@ if (!isset($_SESSION['logged'])) {
 
 	<div id="replyEmail" class="modal modal-fixed-footer">
 		<form id="formReply" method="POST">
-			<div class="modal-content" style="padding-bottom:0;padding-left:34px">
+			<div class="modal-content left-div-margin" style="padding-bottom:0">
 				<h4 class="mb-0"><i class="material-icons left" style="top:8px">reply</i>Responder Mensagem</h4>
 
 				<h6 id="messageSubjectTitle" style="color:#676767"></h6>
@@ -161,11 +160,11 @@ if (!isset($_SESSION['logged'])) {
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
-	<script src="src/js/katex.min.js"></script>
-	<script src="src/js/highlight.min.js"></script>
-	<script src="src/js/quill.min.js"></script>
-	<script src="src/js/auto-render.min.js" onload="renderMathInElement(document.body)"></script>
-	<script src="src/js/index.js"></script>
+	<script src="<?= $assets ?>/src/js/katex.min.js"></script>
+	<script src="<?= $assets ?>/src/js/highlight.min.js"></script>
+	<script src="<?= $assets ?>/src/js/quill.min.js"></script>
+	<script src="<?= $assets ?>/src/js/auto-render.min.js" onload="renderMathInElement(document.body)"></script>
+	<script src="src/index.js"></script>
 </body>
 
 </html>

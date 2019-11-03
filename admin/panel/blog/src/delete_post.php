@@ -10,18 +10,27 @@ try {
 		exit();
 	}
 
-	include_once('../../../../../assets/php/Connection.php');
+	$assets = '../../../../assets';
+	include_once("$assets/php/Connection.php");
 
-	$tool_id = filter_input(INPUT_GET, 'tool_id', FILTER_DEFAULT);
+	$post_id = filter_input(INPUT_GET, 'post_id', FILTER_DEFAULT);
 
-	$sql = $database->prepare('DELETE FROM tools WHERE tool_id = :tool_id');
-	$sql->bindValue(':tool_id', $tool_id);
+	$sql = $database->prepare('SELECT post_image FROM posts WHERE post_id = :post_id LIMIT 1');
+	$sql->bindValue(':post_id', $post_id);
+	$sql->execute();
+
+	$post_image = $sql->fetchColumn();
+
+	$sql = $database->prepare('DELETE FROM posts WHERE post_id = :post_id');
+	$sql->bindValue(':post_id', $post_id);
 
 	if ($sql->execute()) {
 		echo '{"status":"1"}';
 
+		unlink("$assets/images/blog_images/$post_image");
+
 		$sql = $database->prepare('INSERT INTO admin_logs VALUES (NULL, :log_action, CURRENT_TIMESTAMP, :admin_id)');
-		$sql->bindValue(':log_action', 'delete.tool');
+		$sql->bindValue(':log_action', 'delete.post');
 		$sql->bindValue(':admin_id', $_SESSION['logged']['id']);
 		$sql->execute();
 	} else echo '{"status":"0"}';

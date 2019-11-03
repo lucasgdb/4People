@@ -274,14 +274,14 @@ if (!isset($_SESSION['logged'])) {
 									<input type="hidden" value="${data[i][0]}" name="tool_id">
 									<div class="input-field col s12 m6">
 										<i class="material-icons prefix">format_size</i>
-										<input value="${i}" id="tool_name" title="Preencha este campo com o nome." placeholder="Nomoe de Ferramenta" class="validate" type="text" name="tool_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
+										<input value="${i}" id="tool_name" title="Preencha este campo com o nome." placeholder="Nomoe de Ferramenta" class="validate valid" type="text" name="tool_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
 										<label class="active" for="tool_name">Nome *</label>
 										<span class="helper-text" data-error="Ferramenta inválida." data-success="Ferramenta válida.">Ex: Gerador de CPF</span>
 									</div>
 
 									<div class="input-field col s12 m6">
 										<i class="material-icons prefix">folder</i>
-										<input value="${data[i][1]}" id="tool_path" title="Preencha este campo com o caminho." placeholder="Caminho da Seção" class="validate" type="text" name="tool_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
+										<input value="${data[i][1]}" id="tool_path" title="Preencha este campo com o caminho." placeholder="Caminho da Seção" class="validate valid" type="text" name="tool_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
 										<label class="active" for="tool_path">Path *</label>
 										<span class="helper-text" data-error="Caminho de Ferramenta inválido." data-success="Caminho de Ferramenta válido.">Ex: gerador_de_cpf</span>
 									</div>
@@ -307,14 +307,14 @@ if (!isset($_SESSION['logged'])) {
 
 									<div class="input-field col s12 m6">
 										<i class="material-icons prefix">description</i>
-										<input value="${data[i][2]}" id="tool_description" title="Preencha este campo com a descrição." placeholder="Descrição da Ferramenta" class="validate" type="text" name="tool_description" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')">
+										<input value="${data[i][2]}" id="tool_description" title="Preencha este campo com a descrição." placeholder="Descrição da Ferramenta" class="validate valid" type="text" name="tool_description" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')">
 										<label class="active" for="tool_description">Descrição</label>
 										<span class="helper-text">Ex: Gerador de CPF Online para Programadores testarem seus Softwares em desenvolvimento.</span>
 									</div>
 
 									<div class="input-field col s12 m6">
 										<i class="material-icons prefix">link</i>
-										<input value="${data[i][3]}" id="tool_link" title="Preencha este campo com o link do repositório." placeholder="Link da Ferramenta no GitHub" class="validate" type="text" name="tool_link" oninvalid="this.setCustomValidity('Preencha este campo com o link do repositório.')" oninput="setCustomValidity('')">
+										<input value="${data[i][3]}" id="tool_link" title="Preencha este campo com o link do repositório." placeholder="Link da Ferramenta no GitHub" class="validate valid" type="text" name="tool_link" oninvalid="this.setCustomValidity('Preencha este campo com o link do repositório.')" oninput="setCustomValidity('')">
 										<label class="active" for="tool_link">Link</label>
 										<span class="helper-text">Ex: https://github.com/lucasnaja/4People</span>
 									</div>
@@ -371,7 +371,7 @@ if (!isset($_SESSION['logged'])) {
 			tools.innerHTML = toolsHTML
 			updates.innerHTML = updatesHTML
 			deletes.innerHTML = deletesHTML
-			lblAmount.innerHTML = `(${amount})`
+			lblAmount.innerHTML = `[${amount}]`
 			M.Modal.init(document.querySelectorAll('.modal'))
 			M.FormSelect.init(document.querySelectorAll('select'))
 
@@ -410,14 +410,14 @@ if (!isset($_SESSION['logged'])) {
 									<input type="hidden" value="${data[i][0]}" name="tool_id">
 									<div class="input-field col s12 m6">
 										<i class="material-icons prefix">format_size</i>
-										<input value="${i}" id="tool_name" title="Preencha este campo com o nome." placeholder="Nomoe de Ferramenta" class="validate" type="text" name="tool_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
+										<input value="${i}" id="tool_name" title="Preencha este campo com o nome." placeholder="Nomoe de Ferramenta" class="validate valid" type="text" name="tool_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
 										<label class="active" for="tool_name">Nome *</label>
 										<span class="helper-text" data-error="Ferramenta inválida." data-success="Ferramenta válida.">Ex: Gerador de CPF</span>
 									</div>
 
 									<div class="input-field col s12 m6">
 										<i class="material-icons prefix">folder</i>
-										<input value="${data[i][1]}" id="tool_path" title="Preencha este campo com o caminho." placeholder="Caminho da Seção" class="validate" type="text" name="tool_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
+										<input value="${data[i][1]}" id="tool_path" title="Preencha este campo com o caminho." placeholder="Caminho da Seção" class="validate valid" type="text" name="tool_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
 										<label class="active" for="tool_path">Path *</label>
 										<span class="helper-text" data-error="Caminho de Ferramenta inválido." data-success="Caminho de Ferramenta válido.">Ex: gerador_de_cpf</span>
 									</div>
@@ -443,14 +443,14 @@ if (!isset($_SESSION['logged'])) {
 
 									<div class="input-field col s12 m6">
 										<i class="material-icons prefix">description</i>
-										<input value="${data[i][2]}" id="tool_description" title="Preencha este campo com a descrição." placeholder="Descrição da Ferramenta" class="validate" type="text" name="tool_description" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')">
+										<input value="${data[i][2]}" id="tool_description" title="Preencha este campo com a descrição." placeholder="Descrição da Ferramenta" class="validate valid" type="text" name="tool_description" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')">
 										<label class="active" for="tool_description">Descrição</label>
 										<span class="helper-text">Ex: Gerador de CPF Online para Programadores testarem seus Softwares em desenvolvimento.</span>
 									</div>
 
 									<div class="input-field col s12 m6">
 										<i class="material-icons prefix">link</i>
-										<input value="${data[i][3]}" id="tool_link" title="Preencha este campo com o link do repositório." placeholder="Link da Ferramenta no GitHub" class="validate" type="text" name="tool_link" oninvalid="this.setCustomValidity('Preencha este campo com o link do repositório.')" oninput="setCustomValidity('')">
+										<input value="${data[i][3]}" id="tool_link" title="Preencha este campo com o link do repositório." placeholder="Link da Ferramenta no GitHub" class="validate valid" type="text" name="tool_link" oninvalid="this.setCustomValidity('Preencha este campo com o link do repositório.')" oninput="setCustomValidity('')">
 										<label class="active" for="tool_link">Link</label>
 										<span class="helper-text">Ex: https://github.com/lucasnaja/4People</span>
 									</div>
@@ -507,7 +507,7 @@ if (!isset($_SESSION['logged'])) {
 			tools.innerHTML = toolsHTML
 			updates.innerHTML = updatesHTML
 			deletes.innerHTML = deletesHTML
-			lblAmount.innerHTML = `(${amount})`
+			lblAmount.innerHTML = `[${amount}]`
 			M.Modal.init(document.querySelectorAll('.modal'))
 			M.FormSelect.init(document.querySelectorAll('select'))
 

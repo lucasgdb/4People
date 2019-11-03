@@ -222,21 +222,21 @@ if (!isset($_SESSION['logged'])) {
 									<input type="hidden" value="${i}" name="section_id">
 									<div class="input-field col s12 m6">
 										<i class="material-icons prefix">format_size</i>
-										<input value="${data[i][0]}" id="section_name" title="Preencha este campo com o nome." placeholder="Tipo de Seção" class="validate" type="text" name="section_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
+										<input value="${data[i][0]}" id="section_name" title="Preencha este campo com o nome." placeholder="Tipo de Seção" class="validate valid" type="text" name="section_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
 										<label class="active" for="section_name">Nome *</label>
 										<span class="helper-text" data-error="Seção de Ferramenta inválida." data-success="Seção de Ferramenta válida.">Ex: Geradores</span>
 									</div>
 
 									<div class="input-field col s12 m6">
 										<i class="material-icons prefix">folder</i>
-										<input value="${data[i][1]}" id="section_path" title="Preencha este campo com o caminho." placeholder="Caminho da Seção" class="validate" type="text" name="section_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
+										<input value="${data[i][1]}" id="section_path" title="Preencha este campo com o caminho." placeholder="Caminho da Seção" class="validate valid" type="text" name="section_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
 										<label class="active" for="section_path">Path *</label>
 										<span class="helper-text" data-error="Caminho de Seção inválido." data-success="Caminho de Seção válido.">Ex: geradores</span>
 									</div>
 
 									<div class="input-field col s12 m6">
 										<i class="material-icons prefix">${data[i][2]}</i>
-										<input value="${data[i][2]}" id="section_icon" title="Preencha este campo com o ícone." placeholder="Ícone de Seção" class="validate" type="text" name="section_icon" oninvalid="this.setCustomValidity('Preencha este campo com o ícone.')" oninput="setCustomValidity('')" required>
+										<input value="${data[i][2]}" id="section_icon" title="Preencha este campo com o ícone." placeholder="Ícone de Seção" class="validate valid" type="text" name="section_icon" oninvalid="this.setCustomValidity('Preencha este campo com o ícone.')" oninput="setCustomValidity('')" required>
 										<label class="active" for="section_icon">Ícone *</label>
 										<span class="helper-text" data-error="Ícone de Seção inválido." data-success="Ícone de Seção válido.">Ex: autorenew</span>
 									</div>
@@ -334,21 +334,21 @@ if (!isset($_SESSION['logged'])) {
 									<input type="hidden" value="${i}" name="section_id">
 									<div class="input-field col s12 m6">
 										<i class="material-icons prefix">format_size</i>
-										<input value="${data[i][0]}" id="section_name" title="Preencha este campo com o nome." placeholder="Tipo de Seção" class="validate" type="text" name="section_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
+										<input value="${data[i][0]}" id="section_name" title="Preencha este campo com o nome." placeholder="Tipo de Seção" class="validate valid" type="text" name="section_name" oninvalid="this.setCustomValidity('Preencha este campo com o nome.')" oninput="setCustomValidity('')" required>
 										<label class="active" for="section_name">Nome *</label>
 										<span class="helper-text" data-error="Seção de Ferramenta inválida." data-success="Seção de Ferramenta válida.">Ex: Geradores</span>
 									</div>
 
 									<div class="input-field col s12 m6">
 										<i class="material-icons prefix">folder</i>
-										<input value="${data[i][1]}" id="section_path" title="Preencha este campo com o caminho." placeholder="Caminho da Seção" class="validate" type="text" name="section_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
+										<input value="${data[i][1]}" id="section_path" title="Preencha este campo com o caminho." placeholder="Caminho da Seção" class="validate valid" type="text" name="section_path" oninvalid="this.setCustomValidity('Preencha este campo com o caminho.')" oninput="setCustomValidity('')" required>
 										<label class="active" for="section_path">Path *</label>
 										<span class="helper-text" data-error="Caminho de Seção inválido." data-success="Caminho de Seção válido.">Ex: geradores</span>
 									</div>
 
 									<div class="input-field col s12 m6">
 										<i class="material-icons prefix">${data[i][2]}</i>
-										<input value="${data[i][2]}" id="section_icon" title="Preencha este campo com o ícone." placeholder="Ícone de Seção" class="validate" type="text" name="section_icon" oninvalid="this.setCustomValidity('Preencha este campo com o ícone.')" oninput="setCustomValidity('')" required>
+										<input value="${data[i][2]}" id="section_icon" title="Preencha este campo com o ícone." placeholder="Ícone de Seção" class="validate valid" type="text" name="section_icon" oninvalid="this.setCustomValidity('Preencha este campo com o ícone.')" oninput="setCustomValidity('')" required>
 										<label class="active" for="section_icon">Ícone *</label>
 										<span class="helper-text" data-error="Ícone de Seção inválido." data-success="Ícone de Seção válido.">Ex: autorenew</span>
 									</div>

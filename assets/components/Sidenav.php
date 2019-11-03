@@ -108,7 +108,7 @@ if ($logged) {
 		</li>
 	<?php endforeach ?>
 
-	<?php $other_pages = strpos($link, 'contact') !== false || strpos($link, 'blog') !== false ?>
+	<?php $other_pages = strpos($link, 'contact') !== false || strpos($link, 'blog') !== false && strpos($link, 'post') === false ?>
 
 	<li class="<?= $other_pages ? 'active' : '' ?>">
 		<div class="collapsible-header"><i class="material-icons left">insert_link</i>Outras Páginas<i class="material-icons" style="position:absolute;right:0<?= $other_pages ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>

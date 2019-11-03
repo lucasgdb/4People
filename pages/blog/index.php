@@ -62,27 +62,32 @@ include_once("$root/assets/assets.php")
 			page = page === undefined ? '1' : page;
 
 			const total = Number((await (await fetch('src/total_posts.php')).json()).total)
-			const offset = Math.ceil(total / 6)
-			const data = await (await fetch(`src/select_posts.php?offset=${page > offset ? offset : page < offset ? 1 : offset}`)).json()
 
-			for (const i in data) {
-				postsHTML += (
-					`<div class="col s12 m6">
+			if (total > 0) {
+				const offset = Math.ceil(total / 6)
+				const data = await (await fetch(`src/select_posts.php?offset=${page > offset ? offset : page < offset ? 1 : offset}`)).json()
+
+				for (const i in data) {
+					postsHTML += (
+						`<div class="col s12 m6">
 						<div class="card">
-							<div style="height:250px;background-size:cover;background-image: url('<?= $assets ?>/images/blog_images/${data[i][1]}')" class="card-image waves-effect waves-block waves-light"></div>
+							<a href="./post/?post_id=${data[i][0]}" style="height:250px;background-size:cover;background-image: url('<?= $assets ?>/images/blog_images/${data[i][2]}')" class="card-image waves-effect waves-block waves-light"></a>
 
 							<div class="card-content">
-								<span class="card-title grey-text text-darken-4"><a href="#">${data[i][0]}</a></span>
-								<p><a href="#">Clique aqui</a> para ver mais informações.</p>
-								<p class="mt-2 mb-0">${data[i][2]}</p>
+								<span class="card-title grey-text text-darken-4"><a href="./post/?post_id=${data[i][0]}">${data[i][1]}</a></span>
+								<p><a href="./post/?post_id=${data[i][0]}">Clique aqui</a> para ver mais informações.</p>
+								<p class="mt-2 mb-0">${data[i][3]}</p>
 							</div>
 						</div>
 					</div>`
-				)
-			}
+					)
+				}
 
-			createPagination(offset, Number(page))
-			posts.innerHTML = postsHTML
+				createPagination(offset, Number(page))
+				posts.innerHTML = postsHTML
+			} else {
+				posts.innerHTML = '<p class="mont-serrat mb-0 red-color-text">Não há posts publicados!</p>'
+			}
 		}
 
 		function createPagination(amount = 10, selected = 1) {
