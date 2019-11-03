@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Nov 03, 2019 at 01:28 AM
+-- Generation Time: Nov 03, 2019 at 02:56 AM
 -- Server version: 8.0.18
 -- PHP Version: 7.2.22
 
@@ -194,7 +194,33 @@ INSERT INTO `admin_logs` (`log_id`, `log_action`, `log_createdAt`, `admin_id`) V
 (131, 'delete.post', '2019-11-03 01:16:59', 4),
 (132, 'insert.post', '2019-11-03 01:22:03', 4),
 (133, 'delete.post', '2019-11-03 01:24:39', 4),
-(134, 'update.post', '2019-11-03 01:27:20', 4);
+(134, 'update.post', '2019-11-03 01:27:20', 4),
+(135, 'insert.post', '2019-11-03 01:34:16', 4),
+(136, 'insert.post', '2019-11-03 01:34:24', 4),
+(137, 'insert.post', '2019-11-03 01:34:30', 4),
+(138, 'insert.post', '2019-11-03 01:34:36', 4),
+(139, 'insert.post', '2019-11-03 01:34:43', 4),
+(140, 'insert.post', '2019-11-03 01:34:51', 4),
+(141, 'update.post', '2019-11-03 01:37:04', 4),
+(142, 'delete.post', '2019-11-03 01:39:33', 4),
+(143, 'delete.post', '2019-11-03 01:39:35', 4),
+(144, 'delete.post', '2019-11-03 01:39:37', 4),
+(145, 'delete.post', '2019-11-03 01:39:38', 4),
+(146, 'delete.post', '2019-11-03 01:39:41', 4),
+(147, 'update.post', '2019-11-03 02:13:10', 4),
+(148, 'update.post', '2019-11-03 02:13:18', 4),
+(149, 'update.post', '2019-11-03 02:16:24', 4),
+(150, 'update.post', '2019-11-03 02:16:39', 4),
+(151, 'update.post', '2019-11-03 02:17:42', 4),
+(152, 'insert.post', '2019-11-03 02:19:34', 4),
+(153, 'delete.post', '2019-11-03 02:19:57', 4),
+(154, 'update.post', '2019-11-03 02:40:24', 4),
+(155, 'update.post', '2019-11-03 02:41:12', 4),
+(156, 'update.post', '2019-11-03 02:44:08', 4),
+(157, 'update.post', '2019-11-03 02:48:14', 4),
+(158, 'insert.post', '2019-11-03 02:48:57', 4),
+(159, 'update.post', '2019-11-03 02:49:13', 4),
+(160, 'delete.post', '2019-11-03 02:49:21', 4);
 
 -- --------------------------------------------------------
 
@@ -298,7 +324,8 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`post_id`, `post_title`, `post_image`, `post_description`, `post_content`, `post_visits`, `post_status`, `post_createdAt`, `admin_id`) VALUES
-(25, 'Lançamento', 'Lançamento.jpg', 'Lançamento do 4People', '<h1>4People lançado!</h1><p><br></p><blockquote>Hoje, dia 02 de Novembro, depois de muito suor, foi lançado a primeira versão do 4People ao público. O planejamento do 4People começou em maio/2019!</blockquote><p><br></p><h2>Como a ideia surgiu?</h2><p><br></p><p>O <strong>4People</strong> foi pensado mais ou menos em <u>2014</u>, que foi o ano em que eu, <em>Lucas Bittencourt</em>, Administrador do <strong>4People</strong>, conheceu o <em>4Devs</em> (concorrente direto do <em>4People</em>), desde então ficou em sua memória o quanto queria produzir algo do tipo, mas não tinha o conhecimento necessário. <em>Lucas</em> no começo de sua jornada no Desenvolvimento de Software, sempre fez projetos pessoais baseados em sites que já existiam (para ter uma base). O 4Devs foi um deles. Mas, como não tinha o conhecimento necessário para produzir algo do tipo, deixou de lado.</p><p><br></p><p>Na <u>Etec</u> de Guaratinguetá, ele teve essa ideia novamente (mais ou menos em Novembro de 2018), de produzir algo parecido com 4Devs.</p><p><br></p><h2>Por que <strong>4People</strong>?</h2><p><br></p><p>Como o nome 4Devs tem o significado \"para Devs\", a equipe do 4People pensou em algo não só para Devs, e sim para <u>pessoas</u>. Foi aí que surgiu o <strong><u>4People</u></strong>.</p><p><br></p><h2>Como foi o processo?</h2><p><br></p><p>O 4People passou por várias mudanças ao decorrer do tempo, tanto visuais, como também de linguagem, frameworks, bibliotecas, entre outros.</p>', 0, 1, '2019-11-03 00:27:58', 4);
+(25, 'Lançamento', 'Lançamento.jpg', 'Lançamento do 4People', '<h1 style=\"text-align: center;\"><strong>4People lançado!</strong></h1><p><br></p><blockquote><span style=\"color: rgb(68, 68, 68);\">Hoje, dia 02 de Dezembro, depois de muito suor, foi lançado a primeira versão do 4People ao público. O planejamento do 4People começou em maio/2019!</span></blockquote><p><br></p><h2><strong>Como a ideia surgiu?</strong></h2><p><br></p><p style=\"text-align: justify;\"><span style=\"color: rgb(68, 68, 68);\">O </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\"> foi pensado mais ou menos em </span><u style=\"color: rgb(68, 68, 68);\">2014</u><span style=\"color: rgb(68, 68, 68);\">, que foi o ano em que eu, </span><em style=\"color: rgb(68, 68, 68);\">Lucas Bittencourt</em><span style=\"color: rgb(68, 68, 68);\">, Administrador do </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\">, conheceu o </span><em style=\"color: rgb(68, 68, 68);\">4Devs</em><span style=\"color: rgb(68, 68, 68);\"> (concorrente direto do </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\">), desde então ficou em sua memória o quanto queria produzir algo do tipo, mas não tinha o conhecimento necessário. </span><em style=\"color: rgb(68, 68, 68);\">Lucas</em><span style=\"color: rgb(68, 68, 68);\"> no começo de sua jornada no Desenvolvimento de Software, sempre fez projetos pessoais baseados em sites que já existiam (para ter uma base). O </span><em style=\"color: rgb(68, 68, 68);\">4Devs</em><span style=\"color: rgb(68, 68, 68);\"> foi um deles. Mas, como não tinha o conhecimento necessário para produzir algo do tipo, deixou de lado.</span></p><p><br></p><p style=\"text-align: justify;\"><span style=\"color: rgb(68, 68, 68);\">Na Etec de Guaratinguetá, ele teve essa ideia novamente (mais ou menos em Novembro de 2018), de produzir algo parecido com </span><em style=\"color: rgb(68, 68, 68);\">4Devs</em>. <span style=\"color: rgb(68, 68, 68);\">Como o nome 4Devs tem o significado \"para Devs\", a equipe do 4People pensou em algo não só para </span><u style=\"color: rgb(68, 68, 68);\">Desenvolvedores</u><span style=\"color: rgb(68, 68, 68);\">, e sim para </span><u style=\"color: rgb(68, 68, 68);\">pessoas</u><span style=\"color: rgb(68, 68, 68);\">. Foi aí que surgiu o </span><strong style=\"color: rgb(68, 68, 68);\">4People</strong><span style=\"color: rgb(68, 68, 68);\">.</span></p><p style=\"text-align: justify;\"><br></p><h2 style=\"text-align: justify;\"><strong>Por que usar o 4People?</strong></h2><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\"><span style=\"color: rgb(68, 68, 68);\">O </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\"> é um </span><u style=\"color: rgb(68, 68, 68);\">Sistema Web</u><span style=\"color: rgb(68, 68, 68);\">, que traz vários tipos de ferramentas computacionais para Desenvolvedores de Softwares e estudantes de informática, e ferramentas matemáticas para alunos e professores. Mas ele vai muito além disso, 4People é de código aberto, ou seja, qualquer um pode visualizar seu código fonte, e usá-lo para estudos e até mesmo melhorá-lo.</span></p><p><br></p><h2><strong>Como foi o processo?</strong></h2><p><br></p><p style=\"text-align: justify;\"><span style=\"color: rgb(68, 68, 68);\">O 4People passou por várias mudanças ao decorrer do tempo, tanto visuais, como também de linguagem, frameworks, bibliotecas, entre outros. O Sistema é composto por 3 integrantes (1 Desenvolvedor e 2 analistas). O processo de produção do 4People foi árduo e demorado, mas com todo o código gerado, foi possível reutilizar parte dele, em vários pedaços do Sistema, facilitando seu Desenvolvimento.</span></p>', 2, 1, '2019-11-03 00:27:58', 4),
+(34, 'Manutenção', 'Manutenção.png', 'Possíveis manutenções serão agendadas aqui', '<blockquote><span style=\"color: rgb(68, 68, 68);\">Não há manutenções agendadas.</span></blockquote>', 0, 1, '2019-11-03 01:34:43', 4);
 
 -- --------------------------------------------------------
 
@@ -372,7 +399,7 @@ INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_description`, `t
 (26, 'Fibonacci', 'fibonacci', 'Calculadora para calcular a Sequência de Fibonacci. Ex: 0, 1, 1, 2, 3, 5, 8, 13, entre outros...', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/fibonacci.js', 6, 1, 12),
 (27, 'Conversor de Temperatura', 'temperature_converter', 'Conversor de Temperatura Online para calcular Graus Celsius, Fahrenheit e Kelvin.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/temperatureConversor.js', 5, 1, 12),
 (28, 'Divisão e Resto', 'division_rest', 'Calculadora de Divisão Online que mostra o resultado da divisão comum e inteira entre dois números e o resto (módulo) entre eles.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/divisionAndRest.js', 7, 1, 12),
-(29, 'Área do Círculo', 'circle_area', 'Calculador de Área do Círculo Online. R = Raio, D = Diâmetro (2 * R), PI = 3.141592653589793... (Math.PI.toFixed(48))', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/circleArea.js', 48, 1, 10),
+(29, 'Área do Círculo', 'circle_area', 'Calculador de Área do Círculo Online. R = Raio, D = Diâmetro (2 * R), PI = 3.141592653589793... (Math.PI.toFixed(48))', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/circleArea.js', 49, 1, 10),
 (30, 'Área do Quadrado', 'square_area', 'Calculador de Área do Quadrado Online. Área do Quadrado = Lado * Lado ou L²', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/squareArea.js', 20, 1, 10),
 (31, 'Área do Retângulo', 'rectangle_area', 'Calculador de Área do Retângulo Online. Área do Retângulo = Base * Altura', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/rectangleArea.js', 8, 1, 10),
 (32, 'Área do Triângulo', 'triangle_area', 'Calculador de Área do Triângulo Online. Área do Triângulo = Base * Altura / 2', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/triangleArea.js', 8, 1, 10),
@@ -511,7 +538,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `admin_logs`
 --
 ALTER TABLE `admin_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
 
 --
 -- AUTO_INCREMENT for table `login_logs`
@@ -535,7 +562,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `sections`

@@ -31,7 +31,7 @@ if (!isset($_SESSION['logged'])) {
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin">
-				<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5px">person_add</i>Publicar um post</h1>
+				<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5px">comment</i>Publicar um post</h1>
 				<label>Publicar um post no Blog do 4People.</label>
 				<div class="divider"></div>
 
@@ -72,6 +72,11 @@ if (!isset($_SESSION['logged'])) {
 							</span>
 
 							<span class="ql-formats">
+								<select class="ql-color browser-default"></select>
+								<select class="ql-background browser-default"></select>
+							</span>
+
+							<span class="ql-formats">
 								<button class="ql-script" value="sub"></button>
 								<button class="ql-script" value="super"></button>
 							</span>
@@ -89,6 +94,7 @@ if (!isset($_SESSION['logged'])) {
 
 							<span class="ql-formats">
 								<button class="ql-direction" value="rtl"></button>
+								<select class="ql-align browser-default"></select>
 								<button class="ql-link"></button>
 							</span>
 
@@ -117,6 +123,7 @@ if (!isset($_SESSION['logged'])) {
 							<th>Status</th>
 							<th>Visitas</th>
 							<th>Autor</th>
+							<th>Ver post</th>
 							<th>Operações</th>
 						</tr>
 					</thead>
@@ -242,6 +249,11 @@ if (!isset($_SESSION['logged'])) {
 										</span>
 
 										<span class="ql-formats">
+											<select class="ql-color browser-default"></select>
+											<select class="ql-background browser-default"></select>
+										</span>
+
+										<span class="ql-formats">
 											<button class="ql-script" value="sub"></button>
 											<button class="ql-script" value="super"></button>
 										</span>
@@ -259,6 +271,7 @@ if (!isset($_SESSION['logged'])) {
 
 										<span class="ql-formats">
 											<button class="ql-direction" value="rtl"></button>
+											<select class="ql-align browser-default"></select>
 											<button class="ql-link"></button>
 										</span>
 
@@ -307,6 +320,7 @@ if (!isset($_SESSION['logged'])) {
 						<td>${data[i][1] === '1' ? '<i title="Ativado" class="material-icons btn-green-text">done</i>' : '<i title="Desativado" class="material-icons red-color-text">clear</i>'}</td>
 						<td>${data[i][2]}</td>
 						<td>${data[i][3]}</td>
+						<td><a href="<?= $root ?>/pages/blog/post/?post_id=${i}" title="Ir até ao post" class="btn waves-effect waves-light dark-grey z-depth-0"><i class="material-icons">send</i></a></td>
 						<td>
 							<button class="btn waves-effect waves-light green darken-3 z-depth-0 modal-trigger" title="Editar post" data-target="updatePost${i}"><i class="material-icons">edit</i></button>
 							<button class="btn waves-effect waves-light red-color z-depth-0 modal-trigger" style="cursor:pointer" title="Remover post" data-target="removePost${i}"><i class="material-icons">delete</i></button>

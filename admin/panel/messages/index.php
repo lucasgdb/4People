@@ -95,8 +95,8 @@ if (!isset($_SESSION['logged'])) {
 						</span>
 
 						<span class="ql-formats">
-							<select class="ql-color"></select>
-							<select class="ql-background"></select>
+							<select class="ql-color browser-default"></select>
+							<select class="ql-background browser-default"></select>
 						</span>
 
 						<span class="ql-formats">
@@ -117,7 +117,7 @@ if (!isset($_SESSION['logged'])) {
 
 						<span class="ql-formats">
 							<button class="ql-direction" value="rtl"></button>
-							<select class="ql-align"></select>
+							<select class="ql-align browser-default"></select>
 							<button class="ql-link"></button>
 						</span>
 

@@ -35,14 +35,19 @@ include_once("$root/assets/assets.php")
 
 				<div class="divider"></div>
 
-				<img class="responsive-img mt-2" style="height:300px" id="postImage">
+				<div class="center-align">
+					<img class="responsive-img mt-2" style="height:300px" id="postImage">
+				</div>
 
 				<div class="row mb-0">
 					<p class="mt-0 mb-0 col s12" id="postContent"></p>
 				</div>
 
 				<div class="divider mb-2"></div>
-				<a href=".." class="btn waves-effect waves-light red-color">« Voltar</a>
+				<a title="Voltar ao Blog" href=".." class="btn waves-effect waves-light red-color">« Voltar</a>
+				<?php if (isset($_SESSION['logged'])) : ?>
+					<a title="Ir para página de Controle de posts do Blog" href="<?= $root ?>/admin/panel/blog/" class="btn waves-effect waves-light btn-green">Editar »</a>
+				<?php endif ?>
 
 				<div class="top-div dark-grey"></div>
 			</div>
