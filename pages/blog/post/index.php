@@ -8,6 +8,7 @@ include_once("$root/assets/assets.php")
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
+	<link rel="stylesheet" href="src/xcode.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>4People - Ferramentas Online</title>
 	<?php include_once("$assets/components/MetaTags.php") ?>
@@ -36,7 +37,9 @@ include_once("$root/assets/assets.php")
 				<div class="divider"></div>
 
 				<div class="center-align">
-					<img class="responsive-img mt-2" style="height:300px" id="postImage">
+					<div class="waves-effect waves-light">
+						<img class="responsive-img mt-2" style="height:300px" id="postImage" />
+					</div>
 				</div>
 
 				<div class="row mb-0">
@@ -78,6 +81,8 @@ include_once("$root/assets/assets.php")
 			if (Object.keys(data).length > 0) {
 				postTitle.innerHTML = `<i class="material-icons left" style="top:5.5px">comment</i>${data[0]}`
 				postImage.src = `<?= $assets ?>/images/blog_images/${data[1]}`
+				postImage.alt = data[0]
+				postImage.parentElement.title = data[0]
 				postDescription.innerHTML = `${data[2]}. Autor: ${data[6]}. Postado: ${data[5]}. Visitas: ${data[4]}`
 				postContent.innerHTML = data[3]
 
@@ -89,7 +94,8 @@ include_once("$root/assets/assets.php")
 				postTitle.innerHTML = 'Post'
 				postDescription.innerHTML = 'Descrição'
 				postContent.innerHTML = 'Não há post nessa área!'
-				postContent.classList.add('mont-serrat', 'red-color-text', 'mb-1')
+				postContent.classList.add('mont-serrat', 'red-color-text', 'mt-2', 'mb-2')
+				postContent.classList.remove('mb-0')
 				postImage.hidden = true
 			}
 		}

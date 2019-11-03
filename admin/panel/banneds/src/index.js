@@ -11,7 +11,8 @@ const selectBanneds = async () => {
 		modalsHTML += (
 			`<div id="removeBanned${i}" class="modal">
 				<div class="modal-content left-div-margin">
-					<h4><i class="material-icons left" style="top:7px">delete</i>Remover Banimento</h4>
+					<h4 class="flow-text" style="font-size:30px;margin:-5px 0 15px"><i class="material-icons left" style="top:7px">comment</i>Remover Banimento</h4>
+					<div class="divider"></div>
 					<p class="mb-0">Você tem certeza que deseja desbanir ${i}?</p>
 
 					<div class="left-div dark-grey" style="border-radius:0"></div>

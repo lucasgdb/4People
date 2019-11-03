@@ -16,6 +16,7 @@ try {
 	$post_title = trim(filter_input(INPUT_POST, 'post_title', FILTER_DEFAULT));
 	$post_description = trim(filter_input(INPUT_POST, 'post_description', FILTER_DEFAULT));
 	$post_content = trim(filter_input(INPUT_POST, 'post_content', FILTER_DEFAULT));
+	$post_status = filter_input(INPUT_POST, 'post_status', FILTER_DEFAULT);
 	$post_image = $_FILES['post_image'];
 	$ext = strtolower(pathinfo($post_image['name'], PATHINFO_EXTENSION));
 
@@ -25,12 +26,13 @@ try {
 		move_uploaded_file($post_image['tmp_name'], "$assets/images/blog_images/$long_name");
 	} else $no_image = '';
 
-	$sql = $database->prepare('INSERT INTO posts VALUES (NULL, :post_title, :post_image, :post_description, :post_content, DEFAULT, DEFAULT, CURRENT_TIMESTAMP, :admin_id)');
+	$sql = $database->prepare('INSERT INTO posts VALUES (NULL, :post_title, :post_image, :post_description, :post_content, DEFAULT, :post_status, CURRENT_TIMESTAMP, :admin_id)');
 
 	$sql->bindValue(':post_title', $post_title);
 	$sql->bindValue(':post_description', $post_description);
 	$sql->bindValue(':post_content', $post_content);
 	$sql->bindValue(':post_image', $long_name);
+	$sql->bindValue(':post_status', $post_status);
 	$sql->bindValue(':admin_id', $_SESSION['logged']['id']);
 
 	if ($sql->execute()) {

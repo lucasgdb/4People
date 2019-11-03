@@ -169,7 +169,7 @@ if (!isset($_SESSION['logged'])) {
 					`<div id="updateSchedule${i}" class="modal">
 						<form onsubmit="updateSchedule(document.querySelector('#updateSchedule${i} form')); return false" method="POST">
 							<div class="modal-content left-div-margin" style="padding-bottom:5px">
-								<h4 class="mb-1"><i class="material-icons left" style="top:7px">edit</i>Editar dados</h4>
+								<h4 class="flow-text" style="font-size:30px;margin:-5px 0 15px"><i class="material-icons left" style="top:7px">edit</i>Editar dados</h4>
 								<div class="divider"></div>
 
 								<div class="row mt-2 mb-0">
@@ -229,8 +229,9 @@ if (!isset($_SESSION['logged'])) {
 				deletesHTML += (
 					`<div id="removeSchedule${i}" class="modal">
 						<div class="modal-content left-div-margin">
-							<h4><i class="material-icons left" style="top:7px">delete</i>Remover manutenção</h4>
-							<p class="mb-0">Você tem certeza que deseja remover ${data[i][0]} do 4People?</p>
+							<h4 class="flow-text" style="font-size:30px;margin:-5px 0 15px"><i class="material-icons left" style="top:7px">delete</i>Remover Agendamento</h4>
+							<div class="divider"></div>
+							<p class="mb-0">Você tem certeza que deseja remover "${data[i][0]}" do 4People?</p>
 
 							<div class="left-div dark-grey" style="border-radius:0"></div>
 						</div>

@@ -1,3 +1,5 @@
+M.FormSelect.init(document.querySelectorAll('select'))
+
 Quill.register(Quill.import('attributors/style/direction'), true)
 Quill.register(Quill.import('attributors/style/align'), true)
 Quill.register(Quill.import('attributors/style/size'), true)

@@ -15,6 +15,7 @@ if (!isset($_SESSION['logged'])) {
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/katex.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/quill.snow.css">
+	<link rel="stylesheet" href="src/monokai-sublime.min.css">
 	<link rel="stylesheet" href="src/index.css">
 	<title>Controle de Blog - 4People</title>
 	<?php include_once("$assets/components/admin_components/MetaTags.php") ?>
@@ -51,12 +52,24 @@ if (!isset($_SESSION['logged'])) {
 							<span class="helper-text" data-error="Descrição de post inválido." data-success="Descrição de post válido.">Ex: Lançamento do 4People</span>
 						</div>
 
-						<div class="file-field input-field col s12">
+						<div class="file-field input-field col s12 m6">
 							<i class="material-icons prefix">image</i>
 							<input type="file" name="post_image" accept=".png, .jpg, .jpeg, .svg, .gif" required>
 							<input style="width:calc(100% - 3rem)" placeholder="Selecionar imagem" type="text" class="file-path" required>
 							<label class="active">Imagem</label>
 							<span class="helper-text">.png, .jpg, .jpeg, .svg, .gif</span>
+						</div>
+
+						<div class="file-field input-field col s12 m6">
+							<i class="material-icons prefix">visibility</i>
+
+							<select id="post_status" name="post_status">
+								<option value="0">Desativado</option>
+								<option value="1" selected>Ativado</option>
+							</select>
+
+							<label>Status</label>
+							<span class="helper-text">Status do post</span>
 						</div>
 					</div>
 
@@ -64,6 +77,10 @@ if (!isset($_SESSION['logged'])) {
 
 					<div class="standalone-container">
 						<div id="toolbar-container">
+							<span class="ql-formats">
+								<select class="ql-font browser-default"></select>
+							</span>
+
 							<span class="ql-formats">
 								<button class="ql-bold"></button>
 								<button class="ql-italic"></button>
@@ -74,9 +91,6 @@ if (!isset($_SESSION['logged'])) {
 							<span class="ql-formats">
 								<select class="ql-color browser-default"></select>
 								<select class="ql-background browser-default"></select>
-							</span>
-
-							<span class="ql-formats">
 								<button class="ql-script" value="sub"></button>
 								<button class="ql-script" value="super"></button>
 							</span>
@@ -85,17 +99,21 @@ if (!isset($_SESSION['logged'])) {
 								<button class="ql-header" value="1"></button>
 								<button class="ql-header" value="2"></button>
 								<button class="ql-blockquote"></button>
+								<button class="ql-code-block"></button>
 							</span>
 
 							<span class="ql-formats">
 								<button class="ql-list" value="ordered"></button>
 								<button class="ql-list" value="bullet"></button>
+								<button class="ql-indent" value="-1"></button>
+								<button class="ql-indent" value="+1"></button>
 							</span>
 
 							<span class="ql-formats">
 								<button class="ql-direction" value="rtl"></button>
 								<select class="ql-align browser-default"></select>
 								<button class="ql-link"></button>
+								<button class="ql-formula"></button>
 							</span>
 
 							<span class="ql-formats">
@@ -205,10 +223,10 @@ if (!isset($_SESSION['logged'])) {
 				amount += 1
 
 				updatesHTML += (
-					`<div id="updatePost${i}" class="modal modal-fixed-footer">
+					`<div id="updatePost${i}" class="modal modal-fixed-footer customized-modal">
 						<form onsubmit="updatePost(document.querySelector('#updatePost${i} form')); return false" method="POST" enctype="multipart/form-data">
 							<div class="modal-content left-div-margin" style="padding-bottom:5px">
-								<h4 class="flow-text" style="font-size:30px;margin:-5px 0 15px"><i class="material-icons left" style="top:7px">comment</i>Alterar dados do post</h4>
+								<h4 class="flow-text" style="font-size:30px;margin:-5px 0 15px"><i class="material-icons left" style="top:7px">edit</i>Editar dados</h4>
 								<div class="divider"></div>
 
 								<div class="row mt-2 mb-0">
@@ -228,12 +246,24 @@ if (!isset($_SESSION['logged'])) {
 										<span class="helper-text" data-error="Descrição de post inválido." data-success="Descrição de post válido.">Ex: Lançamento do 4People</span>
 									</div>
 
-									<div class="file-field input-field col s12">
+									<div class="file-field input-field col s12 m6">
 										<i class="material-icons prefix">image</i>
 										<input value="${data[i][5]}" type="file" name="post_image" accept=".png, .jpg, .jpeg, .svg, .gif">
 										<input value="${data[i][5]}" name="post_image_text" style="width:calc(100% - 3rem)" placeholder="Selecionar imagem" type="text" class="file-path" required>
 										<label class="active">Imagem</label>
 										<span class="helper-text">.png, .jpg, .jpeg, .svg, .gif</span>
+									</div>
+
+									<div class="file-field input-field col s12 m6">
+										<i class="material-icons prefix">visibility</i>
+
+										<select id="post_status" name="post_status">
+											<option value="0" ${data[i][1] === '0' ? 'selected' : ''}>Desativado</option>
+											<option value="1" ${data[i][1] === '1' ? 'selected' : ''}>Ativado</option>
+										</select>
+
+										<label>Status</label>
+										<span class="helper-text">Status do post</span>
 									</div>
 								</div>
 
@@ -241,6 +271,10 @@ if (!isset($_SESSION['logged'])) {
 
 								<div class="standalone-container">
 									<div id="toolbar-container${i}">
+										<span class="ql-formats">
+											<select class="ql-font browser-default"></select>
+										</span>
+
 										<span class="ql-formats">
 											<button class="ql-bold"></button>
 											<button class="ql-italic"></button>
@@ -251,9 +285,6 @@ if (!isset($_SESSION['logged'])) {
 										<span class="ql-formats">
 											<select class="ql-color browser-default"></select>
 											<select class="ql-background browser-default"></select>
-										</span>
-
-										<span class="ql-formats">
 											<button class="ql-script" value="sub"></button>
 											<button class="ql-script" value="super"></button>
 										</span>
@@ -262,17 +293,21 @@ if (!isset($_SESSION['logged'])) {
 											<button class="ql-header" value="1"></button>
 											<button class="ql-header" value="2"></button>
 											<button class="ql-blockquote"></button>
+											<button class="ql-code-block"></button>
 										</span>
 
 										<span class="ql-formats">
 											<button class="ql-list" value="ordered"></button>
 											<button class="ql-list" value="bullet"></button>
+											<button class="ql-indent" value="-1"></button>
+											<button class="ql-indent" value="+1"></button>
 										</span>
 
 										<span class="ql-formats">
 											<button class="ql-direction" value="rtl"></button>
 											<select class="ql-align browser-default"></select>
 											<button class="ql-link"></button>
+											<button class="ql-formula"></button>
 										</span>
 
 										<span class="ql-formats">
@@ -288,7 +323,7 @@ if (!isset($_SESSION['logged'])) {
 
 							<div class="modal-footer">
 								<button type="button" class="modal-close btn waves-effect waves-light dark-grey z-depth-0" title="Cancelar"><i class="material-icons left">close</i>Cancelar</button>
-								<button id="btnUpdatePost${i}" class="btn waves-effect waves-light green darken-3 z-depth-0" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
+								<button id="btnUpdatePost${i}" class="modal-close btn waves-effect waves-light green darken-3 z-depth-0" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
 							</div>
 						</form>
 
@@ -299,8 +334,9 @@ if (!isset($_SESSION['logged'])) {
 				deletesHTML += (
 					`<div id="removePost${i}" class="modal">
 						<div class="modal-content left-div-margin">
-							<h4><i class="material-icons left" style="top:7px">delete</i>Remover post</h4>
-							<p class="mb-0">Você tem certeza que deseja remover ${data[i][0]} do 4People?</p>
+								<h4 class="flow-text" style="font-size:30px;margin:-5px 0 15px"><i class="material-icons left" style="top:7px">delete</i>Remover post</h4>
+								<div class="divider"></div>
+							<p class="mb-0">Você tem certeza que deseja remover "${data[i][0]}" do 4People?</p>
 
 							<div class="left-div dark-grey" style="border-radius:0"></div>
 						</div>
@@ -396,6 +432,12 @@ if (!isset($_SESSION['logged'])) {
 					html: `Não foi possível remover ${title}.`,
 					classes: 'red accent-4'
 				})
+			}
+		}
+
+		function changeIcon(e) {
+			if (e.target.value === '0') {
+				e.target.innerHTML = 'fk'
 			}
 		}
 

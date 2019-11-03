@@ -59,7 +59,7 @@ include_once("$root/assets/assets.php")
 		async function getPosts() {
 			let postsHTML = ''
 			let page = location.search.split('=')[1]
-			page = page === undefined ? '1' : page;
+			page = page === undefined || !Number.isInteger(page) ? '1' : page;
 
 			const total = Number((await (await fetch('src/total_posts.php')).json()).total)
 

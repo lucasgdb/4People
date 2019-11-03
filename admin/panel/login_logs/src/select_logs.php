@@ -12,13 +12,13 @@ try {
 
 	include_once('../../../../assets/php/Connection.php');
 
-	$sql = $database->prepare('SELECT * FROM login_logs');
+	$sql = $database->prepare('SELECT * FROM login_logs ORDER BY log_createdAt DESC');
 	$sql->execute();
 
 	if ($sql->rowCount()) {
 		foreach ($sql as $key) {
 			extract($key);
-			$data[$log_id] = [$log_ip, $log_nickname, $log_password, $log_createdAt];
+			$data["@$log_id"] = [$log_ip, $log_nickname, $log_password, $log_createdAt];
 		}
 
 		echo json_encode($data);

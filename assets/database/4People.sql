@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Nov 03, 2019 at 02:56 AM
+-- Generation Time: Nov 03, 2019 at 02:48 PM
 -- Server version: 8.0.18
 -- PHP Version: 7.2.22
 
@@ -220,7 +220,39 @@ INSERT INTO `admin_logs` (`log_id`, `log_action`, `log_createdAt`, `admin_id`) V
 (157, 'update.post', '2019-11-03 02:48:14', 4),
 (158, 'insert.post', '2019-11-03 02:48:57', 4),
 (159, 'update.post', '2019-11-03 02:49:13', 4),
-(160, 'delete.post', '2019-11-03 02:49:21', 4);
+(160, 'delete.post', '2019-11-03 02:49:21', 4),
+(161, 'update.post', '2019-11-03 05:21:05', 4),
+(162, 'update.post', '2019-11-03 05:21:19', 4),
+(163, 'update.post', '2019-11-03 05:43:18', 4),
+(164, 'update.post', '2019-11-03 05:58:10', 4),
+(165, 'update.post', '2019-11-03 05:58:22', 4),
+(166, 'update.post', '2019-11-03 06:04:53', 4),
+(167, 'update.post', '2019-11-03 06:05:41', 4),
+(168, 'update.post', '2019-11-03 06:19:29', 4),
+(169, 'update.post', '2019-11-03 06:21:05', 4),
+(170, 'update.post', '2019-11-03 06:23:41', 4),
+(171, 'update.post', '2019-11-03 13:59:59', 4),
+(172, 'update.post', '2019-11-03 14:00:19', 4),
+(173, 'insert.post', '2019-11-03 14:01:28', 4),
+(174, 'update.post', '2019-11-03 14:02:36', 4),
+(175, 'update.post', '2019-11-03 14:02:50', 4),
+(176, 'update.post', '2019-11-03 14:03:26', 4),
+(177, 'update.post', '2019-11-03 14:03:55', 4),
+(178, 'delete.post', '2019-11-03 14:04:07', 4),
+(179, 'update.post', '2019-11-03 14:13:43', 4),
+(180, 'update.post', '2019-11-03 14:14:02', 4),
+(181, 'update.post', '2019-11-03 14:14:45', 4),
+(182, 'update.type', '2019-11-03 14:14:51', 4),
+(183, 'update.type', '2019-11-03 14:14:53', 4),
+(184, 'update.post', '2019-11-03 14:15:03', 4),
+(185, 'update.post', '2019-11-03 14:15:35', 4),
+(186, 'update.post', '2019-11-03 14:15:37', 4),
+(187, 'update.post', '2019-11-03 14:15:48', 4),
+(188, 'update.post', '2019-11-03 14:17:50', 4),
+(189, 'update.post', '2019-11-03 14:21:23', 4),
+(190, 'insert.schedule', '2019-11-03 14:39:01', 4),
+(191, 'delete.schedule', '2019-11-03 14:39:29', 4),
+(192, 'insert.schedule', '2019-11-03 14:43:03', 4);
 
 -- --------------------------------------------------------
 
@@ -260,7 +292,10 @@ INSERT INTO `login_logs` (`log_id`, `log_ip`, `log_nickname`, `log_password`, `l
 (9, '127.0.0.1', 'lucasnaj', 'dkajsdjdf', '2019-10-19 19:28:41'),
 (10, '127.0.0.1', 'lucasnaja', 'djkdjdf', '2019-10-19 19:28:41'),
 (11, '127.0.0.1', 'lucasnaja', '1kdfsjdf', '2019-10-19 19:28:41'),
-(12, '127.0.0.1', 'lucasnaja', '123466', '2019-11-01 20:14:11');
+(12, '127.0.0.1', 'lucasnaja', '123466', '2019-11-01 20:14:11'),
+(13, '127.0.0.1', 'lucasnaja', 'dfddfdf', '2019-11-03 04:08:16'),
+(14, '127.0.0.1', 'lucasnaja', 'sffddf', '2019-11-03 04:08:17'),
+(15, '127.0.0.1', 'lucasnaja', 'dffsdf', '2019-11-03 04:08:43');
 
 -- --------------------------------------------------------
 
@@ -274,6 +309,13 @@ CREATE TABLE `maintenances` (
   `maintenance_begin` datetime DEFAULT NULL,
   `maintenance_end` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `maintenances`
+--
+
+INSERT INTO `maintenances` (`maintenance_id`, `maintenance_name`, `maintenance_begin`, `maintenance_end`) VALUES
+(13, 'fd', '2019-11-03 11:43:03', '2019-11-04 11:43:03');
 
 -- --------------------------------------------------------
 
@@ -324,8 +366,8 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`post_id`, `post_title`, `post_image`, `post_description`, `post_content`, `post_visits`, `post_status`, `post_createdAt`, `admin_id`) VALUES
-(25, 'Lançamento', 'Lançamento.jpg', 'Lançamento do 4People', '<h1 style=\"text-align: center;\"><strong>4People lançado!</strong></h1><p><br></p><blockquote><span style=\"color: rgb(68, 68, 68);\">Hoje, dia 02 de Dezembro, depois de muito suor, foi lançado a primeira versão do 4People ao público. O planejamento do 4People começou em maio/2019!</span></blockquote><p><br></p><h2><strong>Como a ideia surgiu?</strong></h2><p><br></p><p style=\"text-align: justify;\"><span style=\"color: rgb(68, 68, 68);\">O </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\"> foi pensado mais ou menos em </span><u style=\"color: rgb(68, 68, 68);\">2014</u><span style=\"color: rgb(68, 68, 68);\">, que foi o ano em que eu, </span><em style=\"color: rgb(68, 68, 68);\">Lucas Bittencourt</em><span style=\"color: rgb(68, 68, 68);\">, Administrador do </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\">, conheceu o </span><em style=\"color: rgb(68, 68, 68);\">4Devs</em><span style=\"color: rgb(68, 68, 68);\"> (concorrente direto do </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\">), desde então ficou em sua memória o quanto queria produzir algo do tipo, mas não tinha o conhecimento necessário. </span><em style=\"color: rgb(68, 68, 68);\">Lucas</em><span style=\"color: rgb(68, 68, 68);\"> no começo de sua jornada no Desenvolvimento de Software, sempre fez projetos pessoais baseados em sites que já existiam (para ter uma base). O </span><em style=\"color: rgb(68, 68, 68);\">4Devs</em><span style=\"color: rgb(68, 68, 68);\"> foi um deles. Mas, como não tinha o conhecimento necessário para produzir algo do tipo, deixou de lado.</span></p><p><br></p><p style=\"text-align: justify;\"><span style=\"color: rgb(68, 68, 68);\">Na Etec de Guaratinguetá, ele teve essa ideia novamente (mais ou menos em Novembro de 2018), de produzir algo parecido com </span><em style=\"color: rgb(68, 68, 68);\">4Devs</em>. <span style=\"color: rgb(68, 68, 68);\">Como o nome 4Devs tem o significado \"para Devs\", a equipe do 4People pensou em algo não só para </span><u style=\"color: rgb(68, 68, 68);\">Desenvolvedores</u><span style=\"color: rgb(68, 68, 68);\">, e sim para </span><u style=\"color: rgb(68, 68, 68);\">pessoas</u><span style=\"color: rgb(68, 68, 68);\">. Foi aí que surgiu o </span><strong style=\"color: rgb(68, 68, 68);\">4People</strong><span style=\"color: rgb(68, 68, 68);\">.</span></p><p style=\"text-align: justify;\"><br></p><h2 style=\"text-align: justify;\"><strong>Por que usar o 4People?</strong></h2><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\"><span style=\"color: rgb(68, 68, 68);\">O </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\"> é um </span><u style=\"color: rgb(68, 68, 68);\">Sistema Web</u><span style=\"color: rgb(68, 68, 68);\">, que traz vários tipos de ferramentas computacionais para Desenvolvedores de Softwares e estudantes de informática, e ferramentas matemáticas para alunos e professores. Mas ele vai muito além disso, 4People é de código aberto, ou seja, qualquer um pode visualizar seu código fonte, e usá-lo para estudos e até mesmo melhorá-lo.</span></p><p><br></p><h2><strong>Como foi o processo?</strong></h2><p><br></p><p style=\"text-align: justify;\"><span style=\"color: rgb(68, 68, 68);\">O 4People passou por várias mudanças ao decorrer do tempo, tanto visuais, como também de linguagem, frameworks, bibliotecas, entre outros. O Sistema é composto por 3 integrantes (1 Desenvolvedor e 2 analistas). O processo de produção do 4People foi árduo e demorado, mas com todo o código gerado, foi possível reutilizar parte dele, em vários pedaços do Sistema, facilitando seu Desenvolvimento.</span></p>', 2, 1, '2019-11-03 00:27:58', 4),
-(34, 'Manutenção', 'Manutenção.png', 'Possíveis manutenções serão agendadas aqui', '<blockquote><span style=\"color: rgb(68, 68, 68);\">Não há manutenções agendadas.</span></blockquote>', 0, 1, '2019-11-03 01:34:43', 4);
+(25, 'Lançamento', 'Lançamento.jpg', 'Lançamento do 4People', '<h1 style=\"text-align: center;\"><strong>4People lançado!</strong></h1><p><br></p><blockquote><span style=\"color: rgb(68, 68, 68);\">Hoje, dia 02 de Dezembro, depois de muito suor, foi lançado a primeira versão do 4People ao público. O planejamento do 4People começou em maio/2019! O Sistema é composto por 3 integrantes (1 Desenvolvedor e 2 analistas).</span></blockquote><p><br></p><h2><strong>Como a ideia surgiu?</strong></h2><p><br></p><p style=\"text-align: justify;\"><span style=\"color: rgb(68, 68, 68);\">O </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\"> foi pensado mais ou menos em 2014, que foi o ano em que o </span><a href=\"https://github.com/lucasnaja\" target=\"_blank\" style=\"color: rgb(68, 68, 68);\"><em><u>Lucas Bittencourt</u></em>,</a><span style=\"color: rgb(68, 68, 68);\"> Administrador do </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\">, conheceu o </span><em style=\"color: rgb(68, 68, 68);\">4Devs</em><span style=\"color: rgb(68, 68, 68);\"> (concorrente direto do </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\">), desde então ficou em sua memória o quanto queria produzir algo do tipo, mas não tinha o conhecimento necessário. </span><em style=\"color: rgb(68, 68, 68);\">Lucas</em><span style=\"color: rgb(68, 68, 68);\"> no começo de sua jornada no Desenvolvimento de Software, sempre fez projetos pessoais baseados em sites que já existiam (para ter uma base). O </span><em style=\"color: rgb(68, 68, 68);\">4Devs</em><span style=\"color: rgb(68, 68, 68);\"> foi um deles. Mas, como não tinha o conhecimento necessário para produzir algo do tipo, deixou de lado.</span></p><p><br></p><p style=\"text-align: justify;\"><span style=\"color: rgb(68, 68, 68);\">Na Etec de Guaratinguetá, ele teve essa ideia novamente (mais ou menos em Novembro de 2018), de produzir algo parecido com </span><em style=\"color: rgb(68, 68, 68);\">4Devs</em>. <span style=\"color: rgb(68, 68, 68);\">Como o nome 4Devs tem o significado \"para Devs\", a equipe do 4People pensou em algo não só para </span><u style=\"color: rgb(68, 68, 68);\">Desenvolvedores</u><span style=\"color: rgb(68, 68, 68);\">, e sim para </span><u style=\"color: rgb(68, 68, 68);\">pessoas</u><span style=\"color: rgb(68, 68, 68);\">. Foi aí que surgiu o </span><strong style=\"color: rgb(68, 68, 68);\">4People</strong><span style=\"color: rgb(68, 68, 68);\">.</span></p><p style=\"text-align: justify;\"><br></p><h2 style=\"text-align: justify;\"><strong>Por que usar o 4People?</strong></h2><p style=\"text-align: justify;\"><br></p><p style=\"text-align: justify;\"><span style=\"color: rgb(68, 68, 68);\">O </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\"> é um </span><u style=\"color: rgb(68, 68, 68);\">Sistema Web</u><span style=\"color: rgb(68, 68, 68);\">, que traz vários tipos de ferramentas computacionais para Desenvolvedores de Softwares e estudantes de informática, e ferramentas matemáticas para alunos e professores. Mas ele vai muito além disso, 4People é de código aberto, ou seja, qualquer um pode visualizar seu código fonte, e usá-lo para estudos e até mesmo melhorá-lo.</span></p><p><br></p><h2><strong>Como foi o processo?</strong></h2><p><br></p><p style=\"text-align: justify;\"><span style=\"color: rgb(68, 68, 68);\">O 4People passou por várias mudanças ao decorrer do tempo, tanto visuais, como também de linguagem, frameworks, bibliotecas, entre outros. O processo de produção do 4People foi árduo e demorado, mas com todo o código gerado, foi possível reutilizar parte dele, em vários pedaços do Sistema, facilitando seu Desenvolvimento.</span></p>', 4, 1, '2019-11-03 00:27:58', 4),
+(34, 'Manutenção', 'Manutenção.png', 'Possíveis manutenções serão agendadas aqui', '<blockquote><span style=\"color: rgb(68, 68, 68);\">Não há manutenções agendadas.</span></blockquote>', 1, 1, '2019-11-03 01:34:43', 4);
 
 -- --------------------------------------------------------
 
@@ -383,9 +425,9 @@ INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_description`, `t
 (9, 'Gerador de Meta Tags', 'meta_tags_generator', 'Gerador de Meta Tags Online, feito para gerar várias das Meta Tags existentes.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/metaTagsGenerator.js', 59, 1, 2),
 (11, 'Validador de CPF', 'cpf_validator', 'Validador de CPF Online para validar CPFs para programadores testarem seus softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/validators/CPFValidator.js', 40, 1, 4),
 (12, 'Contador de Caracteres', 'characters_count', 'Contador de letras, caracteres sem espaço, palavras, espaços, vogais, consoantes, números e linhas.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/string_functions/charactersCount.js', 25, 1, 5),
-(13, 'Meu IP', 'my_ip', 'Veja seu IP e muito mais informações aqui.', 'https://github.com/lucasnaja/4People/blob/master/pages/computation/network_internet/my_ip/src/index.js', 40, 1, 6),
+(13, 'Meu IP', 'my_ip', 'Veja seu IP e muito mais informações aqui.', 'https://github.com/lucasnaja/4People/blob/master/pages/computation/network_internet/my_ip/src/index.js', 41, 1, 6),
 (14, 'Meu Navegador', 'my_browser', 'Veja seu Navegador aqui.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/network_and_internet/myWebBrowser.js', 18, 1, 6),
-(15, 'Buscar CEP', 'search_cep', 'Busque informações de seu CEP, como Rua, Cidade, Bairro e Estado aqui.', 'https://github.com/lucasnaja/4People/blob/master/pages/computation/network_internet/search_cep/src/index.js', 47, 1, 6),
+(15, 'Buscar CEP', 'search_cep', 'Busque informações de seu CEP, como Rua, Cidade, Bairro e Estado aqui.', 'https://github.com/lucasnaja/4People/blob/master/pages/computation/network_internet/search_cep/src/index.js', 48, 1, 6),
 (16, 'Binário, Octal e Hexadecimal', 'binary_converter', 'Tradutor Online de Código Binário. Basta digitar o código binário ou texto abaixo e clicar no botão para converter.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/encoders_decoders/binaryConverter.js', 23, 1, 7),
 (17, 'Código de Evento das Teclas', 'keycode_event', 'Código de Eventos das Teclas para descobrir cada keyCode da tecla e criar eventos em sua linguagem de preferência.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/tables_and_patterns/jsEventKeyCodes.js', 37, 1, 8),
 (18, 'Fatorar Número', 'factorize_number', 'Calculadora Online para Fatorar Números.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/factorization.js', 78, 1, 12),
@@ -538,19 +580,19 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `admin_logs`
 --
 ALTER TABLE `admin_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
 
 --
 -- AUTO_INCREMENT for table `login_logs`
 --
 ALTER TABLE `login_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `maintenances`
 --
 ALTER TABLE `maintenances`
-  MODIFY `maintenance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `maintenance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `messages`
@@ -562,7 +604,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `sections`

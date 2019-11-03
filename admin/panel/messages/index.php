@@ -75,7 +75,7 @@ if (!isset($_SESSION['logged'])) {
 	<div id="replyEmail" class="modal modal-fixed-footer">
 		<form id="formReply" method="POST">
 			<div class="modal-content left-div-margin" style="padding-bottom:0">
-				<h4 class="mb-0"><i class="material-icons left" style="top:8px">reply</i>Responder Mensagem</h4>
+				<h4 class="mb-0"><i class="material-icons left" style="top:7px">reply</i>Responder Mensagem</h4>
 
 				<h6 id="messageSubjectTitle" style="color:#676767"></h6>
 				<input id="messageID" name="message_id" type="hidden">
@@ -141,7 +141,8 @@ if (!isset($_SESSION['logged'])) {
 
 	<div id="removeMessage" class="modal">
 		<div class="modal-content left-div-margin">
-			<h4><i class="material-icons left" style="top:7px">delete</i>Remover Mensagem</h4>
+			<h4 class="flow-text" style="font-size:30px;margin:-5px 0 15px"><i class="material-icons left" style="top:7px">delete</i>Remover Mensagem</h4>
+			<div class="divider"></div>
 			<p class="mb-0">Você tem certeza que deseja remover a mensagem de <span id="messageName"></span> &lt;<span id="messageEmail"></span>&gt;?</p>
 
 			<div class="left-div dark-grey" style="border-radius:0"></div>

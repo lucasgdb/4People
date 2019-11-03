@@ -13,6 +13,7 @@ try {
 	$post_title = trim(filter_input(INPUT_POST, 'post_title', FILTER_DEFAULT));
 	$post_description = trim(filter_input(INPUT_POST, 'post_description', FILTER_DEFAULT));
 	$post_content = trim(filter_input(INPUT_POST, 'post_content', FILTER_DEFAULT));
+	$post_status = filter_input(INPUT_POST, 'post_status', FILTER_DEFAULT);
 	$post_image = $_FILES['post_image'];
 	$post_image_text = filter_input(INPUT_POST, 'post_image_text', FILTER_DEFAULT);
 	$ext = strtolower(pathinfo($post_image['name'], PATHINFO_EXTENSION));
@@ -34,13 +35,14 @@ try {
 		$long_name = $current_post_image;
 	}
 
-	$sql = $database->prepare('UPDATE posts SET post_title = :post_title, post_description = :post_description, post_content = :post_content, post_image = :post_image WHERE post_id = :post_id');
+	$sql = $database->prepare('UPDATE posts SET post_title = :post_title, post_description = :post_description, post_content = :post_content, post_status = :post_status, post_image = :post_image WHERE post_id = :post_id');
 
 	$sql->bindValue(':post_id', $post_id);
 	$sql->bindValue(':post_title', $post_title);
 	$sql->bindValue(':post_description', $post_description);
 	$sql->bindValue(':post_content', $post_content);
 	$sql->bindValue(':post_image', $long_name);
+	$sql->bindValue(':post_status', $post_status);
 
 	if ($sql->execute()) {
 		echo '{"status":"1"}';
