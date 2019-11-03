@@ -4,7 +4,7 @@ Quill.register(Quill.import('attributors/style/direction'), true)
 Quill.register(Quill.import('attributors/style/align'), true)
 Quill.register(Quill.import('attributors/style/size'), true)
 
-new Quill('#snow-container', {
+const quill = new Quill('#snow-container', {
 	modules: {
 		formula: true,
 		syntax: true,
@@ -13,6 +13,8 @@ new Quill('#snow-container', {
 	placeholder: 'Escrever conteúdo...',
 	theme: 'snow'
 })
+
+quill.root.setAttribute('spellcheck', false)
 
 let lblQuillContent
 const btnInsertPost = document.querySelector('#btnInsertPost')

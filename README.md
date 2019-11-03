@@ -68,5 +68,8 @@
 - Matemática
 ![matemaitca](assets/images/README_images/matematica.png "4People - Matemática")
 
+- Blog
+![blog](assets/images/README_images/blog.png "Blog do 4People")
+
 - Contato
 ![contato](assets/images/README_images/contato.png "4People - Contato")

@@ -23,6 +23,7 @@
 						foreach ($sql as $data) : extract($data) ?>
 						<li title="<?= $type_name ?>" class="waves-effect"><a href="<?= $root ?>/pages/<?= $type_path ?>/"><i class="material-icons left"><?= $type_icon ?></i><?= $type_name ?></a></li>
 					<?php endforeach ?>
+					<li title="Blog do 4People" class="waves-effect"><a href="<?= $root ?>/pages/blog/"><i class="material-icons left">comment</i>Blog</a></li>
 					<li title="Contato" class="waves-effect"><a href="<?= $root ?>/pages/contact/"><i class="material-icons left">email</i>Contato</a></li>
 				<?php endif ?>
 			</ul>

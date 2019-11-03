@@ -31,25 +31,68 @@ include_once("$root/assets/assets.php")
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin">
-				<h1 class="mont-serrat" id="postTitle" style="font-size:30px;margin:0 0 5px"></h1>
-				<label id="postDescription"></label>
+				<?php
+				include_once("$assets/php/Connection.php");
 
-				<div class="divider"></div>
+				$post_id = filter_input(INPUT_GET, 'post_id', FILTER_DEFAULT);
 
-				<div class="center-align">
-					<div class="waves-effect waves-light">
-						<img class="responsive-img mt-2" style="height:300px" id="postImage" />
+				$sql = $database->prepare('SELECT COUNT(post_id) FROM posts WHERE post_status = "1" LIMIT 1');
+				$sql->execute();
+
+				$total = $sql->fetchColumn();
+
+				$sql = $database->prepare(
+					'SELECT posts.post_title, posts.post_image, posts.post_description, posts.post_content, posts.post_visits, posts.post_createdAt, admins.admin_name FROM posts
+						INNER JOIN admins ON admins.admin_id = posts.admin_id
+						WHERE post_status = "1" AND post_id = :post_id
+						LIMIT 1'
+				);
+
+				$sql->bindValue(':post_id', $post_id);
+
+				if ($sql->execute() && $sql->rowCount()) : extract($sql->fetch()) ?>
+					<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px"><?= $post_title ?></h1>
+					<label><?= $post_description ?></label>
+
+					<div class="divider"></div>
+
+					<div class="center-align">
+						<div class="waves-effect waves-light">
+							<img class="responsive-img mt-2" style="height:300px" src="<?= $assets ?>/images/blog_images/<?= $post_image ?>" />
+						</div>
 					</div>
-				</div>
 
-				<div class="row mb-0">
-					<p class="mt-0 mb-0 col s12" id="postContent"></p>
-				</div>
+					<div class="row mb-0">
+						<p class="mt-0 mb-0 col s12"><?= $post_content ?></p>
+					</div>
+
+					<?php if (!isset($_SESSION['logged'])) {
+							$sql = $database->prepare('SELECT post_visits FROM posts WHERE post_status = "1" AND post_id = :post_id LIMIT 1');
+							$sql->bindValue(':post_id', $post_id);
+							$sql->execute();
+
+							$visits = $sql->fetchColumn();
+
+							$sql = $database->prepare('UPDATE posts SET post_visits = :post_visits WHERE post_id = :post_id');
+							$sql->bindValue(':post_visits', ++$visits);
+							$sql->bindValue(':post_id', $post_id);
+							$sql->execute();
+						} ?>
+				<?php else : ?>
+					<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px">Postagem</h1>
+					<label>Erro ao encontrar o post.</label>
+
+					<div class="divider"></div>
+
+					<div class="row mb-0">
+						<p class="mont-serrat mt-2 mb-2 red-color-text col s12">Não foi encontrado nenhum post de ID "<?= $post_id ?>"</p>
+					</div>
+				<?php endif ?>
 
 				<div class="divider mb-2"></div>
-				<a title="Voltar ao Blog" href=".." class="btn waves-effect waves-light red-color">« Voltar</a>
+				<a title="Voltar ao Blog" href=".." class="btn waves-effect waves-light red-color z-depth-0">« Voltar</a>
 				<?php if (isset($_SESSION['logged'])) : ?>
-					<a title="Ir para página de Controle de posts do Blog" href="<?= $root ?>/admin/panel/blog/" class="btn waves-effect waves-light btn-green">Editar »</a>
+					<a title="Ir para página de Controle de posts do Blog" href="<?= $root ?>/admin/panel/blog/" class="btn waves-effect waves-light btn-green z-depth-0">Editar »</a>
 				<?php endif ?>
 
 				<div class="top-div dark-grey"></div>
@@ -65,43 +108,6 @@ include_once("$root/assets/assets.php")
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
-	<script>
-		const postTitle = document.querySelector('#postTitle')
-		const postImage = document.querySelector('#postImage')
-		const postDescription = document.querySelector('#postDescription')
-		const postContent = document.querySelector('#postContent')
-
-		async function getPost() {
-			let postHTML = ''
-			let post_id = location.search.split('=')[1]
-			post_id = post_id === undefined ? '1' : post_id;
-
-			const data = await (await fetch(`src/select_post.php?post_id=${post_id}`)).json()
-
-			if (Object.keys(data).length > 0) {
-				postTitle.innerHTML = `<i class="material-icons left" style="top:5.5px">comment</i>${data[0]}`
-				postImage.src = `<?= $assets ?>/images/blog_images/${data[1]}`
-				postImage.alt = data[0]
-				postImage.parentElement.title = data[0]
-				postDescription.innerHTML = `${data[2]}. Autor: ${data[6]}. Postado: ${data[5]}. Visitas: ${data[4]}`
-				postContent.innerHTML = data[3]
-
-				const getULElements = document.querySelectorAll('#postContent ul')
-				for (let i = 0; i < getULElements.length; i += 1) {
-					getULElements[i].classList.add('browser-default')
-				}
-			} else {
-				postTitle.innerHTML = 'Post'
-				postDescription.innerHTML = 'Descrição'
-				postContent.innerHTML = 'Não há post nessa área!'
-				postContent.classList.add('mont-serrat', 'red-color-text', 'mt-2', 'mb-2')
-				postContent.classList.remove('mb-0')
-				postImage.hidden = true
-			}
-		}
-
-		getPost()
-	</script>
 </body>
 
 </html>

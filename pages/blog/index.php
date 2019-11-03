@@ -59,7 +59,7 @@ include_once("$root/assets/assets.php")
 		async function getPosts() {
 			let postsHTML = ''
 			let page = location.search.split('=')[1]
-			page = page === undefined || !Number.isInteger(page) ? '1' : page;
+			page = page === undefined || !Number.isInteger(parseInt(page)) ? '1' : page;
 
 			const total = Number((await (await fetch('src/total_posts.php')).json()).total)
 
@@ -70,16 +70,16 @@ include_once("$root/assets/assets.php")
 				for (const i in data) {
 					postsHTML += (
 						`<div class="col s12 m6">
-						<div class="card">
-							<a href="./post/?post_id=${data[i][0]}" style="height:250px;background-size:cover;background-image: url('<?= $assets ?>/images/blog_images/${data[i][2]}')" class="card-image waves-effect waves-block waves-light"></a>
+							<div class="card">
+								<a title="${data[i][1]}" href="./post/?post_id=${data[i][0]}" style="height:250px;background-size:cover;background-image: url('<?= $assets ?>/images/blog_images/${data[i][2]}')" class="card-image waves-effect waves-block waves-light"></a>
 
-							<div class="card-content">
-								<span class="card-title grey-text text-darken-4"><a href="./post/?post_id=${data[i][0]}">${data[i][1]}</a></span>
-								<p><a href="./post/?post_id=${data[i][0]}">Clique aqui</a> para ver mais informações.</p>
-								<p class="mt-2 mb-0">${data[i][3]}</p>
+								<div class="card-content">
+									<span class="card-title grey-text text-darken-4"><a href="./post/?post_id=${data[i][0]}">${data[i][1]}</a></span>
+									<p><a href="./post/?post_id=${data[i][0]}">Clique aqui</a> para ver mais informações.</p>
+									<p class="mt-2 mb-0">Postado: ${new Date(data[i][3]).toDateString()}</p>
+								</div>
 							</div>
-						</div>
-					</div>`
+						</div>`
 					)
 				}
 

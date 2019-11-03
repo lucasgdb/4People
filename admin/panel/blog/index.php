@@ -375,7 +375,7 @@ if (!isset($_SESSION['logged'])) {
 			const snowContainers = document.querySelectorAll('.snow-container')
 
 			for (const i in data) {
-				new Quill(`#snow-container${i}`, {
+				const newQuill = new Quill(`#snow-container${i}`, {
 					modules: {
 						formula: true,
 						syntax: true,
@@ -384,6 +384,8 @@ if (!isset($_SESSION['logged'])) {
 					placeholder: 'Escrever conteúdo...',
 					theme: 'snow'
 				})
+
+				newQuill.root.setAttribute('spellcheck', false)
 
 				let newLblQuillContent = document.querySelector(`#snow-container${i} .ql-editor`)
 				const btnUpdatePost = document.querySelector(`#btnUpdatePost${i}`)
@@ -401,6 +403,8 @@ if (!isset($_SESSION['logged'])) {
 				method: 'POST',
 				body: new FormData(formUpdate)
 			})).json()
+
+			console.log(data)
 
 			if (data.status === '1') {
 				M.toast({

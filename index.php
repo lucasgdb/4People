@@ -163,7 +163,7 @@ include_once('assets/assets.php')
 						</blockquote>
 					</div>
 				</div>
-				
+
 				<div class="divider mt-2 mb-2"></div>
 
 				<div class="row mb-0" style="margin-top:12px">
