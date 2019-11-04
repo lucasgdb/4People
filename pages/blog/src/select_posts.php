@@ -8,7 +8,8 @@ try {
 
 	$offset = isset($_GET['offset']) ? (filter_input(INPUT_GET, 'offset', FILTER_DEFAULT) - 1) * 6 : 1;
 
-	$sql = $database->prepare("SELECT * FROM posts WHERE post_status = \"1\" ORDER BY post_createdAt DESC LIMIT 6 OFFSET $offset");
+	$sql = $database->prepare('SELECT * FROM posts WHERE post_status = "1" ORDER BY post_createdAt DESC LIMIT 6 OFFSET :page');
+	$sql->bindValue(':page', (int) $offset, PDO::PARAM_INT);
 	$sql->execute();
 
 	if ($sql->rowCount()) {

@@ -1,11 +1,18 @@
-M.FormSelect.init(document.querySelectorAll('select'))
-
 const logs = document.querySelector('#logs')
+let currentPage = 0
+let currentTotal = 10
 
-const selectLogs = async () => {
+const selectLogs = async type => {
 	let logsHTML = ''
 
-	const data = await (await fetch('src/select_logs.php')).json()
+	if (currentTotal < 10 && type === 0) currentPage--
+	else if (type === 0 && currentPage > 1) currentPage--
+	else if (currentTotal === 10 && type === 1) currentPage++
+	else return
+
+	const data = await (await fetch(`src/select_logs.php?page=${currentPage}`)).json()
+
+	currentTotal = Object.keys(data).length
 
 	for (const i in data) {
 		logsHTML += (
@@ -21,4 +28,4 @@ const selectLogs = async () => {
 	logs.innerHTML = logsHTML
 }
 
-selectLogs()
+selectLogs(1)

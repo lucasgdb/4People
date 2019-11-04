@@ -47,6 +47,16 @@ if (!isset($_SESSION['logged'])) {
 
 				<div class="left-div dark-grey"></div>
 			</div>
+
+			<div class="card-panel" style="padding-top:10px">
+				<div class="center-align">
+					<button title="Anterior" class="btn waves-effect waves-light red-color z-depth-0" onclick="selectBanneds(0)">Anterior</button>
+					<button title="Próxima" class="btn waves-effect waves-light red-color z-depth-0" onclick="selectBanneds(1)">Próxima</button>
+				</div>
+
+				<div class="left-div dark-grey"></div>
+				<div class="right-div dark-grey"></div>
+			</div>
 		</div>
 	</main>
 

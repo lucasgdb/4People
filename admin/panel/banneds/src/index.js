@@ -1,11 +1,20 @@
 const banneds = document.querySelector('#banneds')
 const modals = document.querySelector('#modals')
+let currentPage = 0
+let currentTotal = 10
 
-const selectBanneds = async () => {
+const selectBanneds = async type => {
 	let bannedsHTML = '',
 		modalsHTML = ''
 
-	const data = await (await fetch('src/select_banneds.php')).json()
+	if (currentTotal < 10 && type === 0) currentPage--
+	else if (type === 0 && currentPage > 1) currentPage--
+	else if (currentTotal === 10 && type === 1) currentPage++
+	else return
+
+	const data = await (await fetch(`src/select_banneds.php?page=${currentPage}`)).json()
+
+	currentTotal = Object.keys(data).length
 
 	for (const i in data) {
 		modalsHTML += (
@@ -62,4 +71,4 @@ const deleteBanned = async ip => {
 	}
 }
 
-selectBanneds()
+selectBanneds(1)

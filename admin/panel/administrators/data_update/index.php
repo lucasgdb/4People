@@ -39,8 +39,8 @@ if (!isset($_SESSION['logged'])) {
 
 				<div class="divider"></div>
 
-				<form style="margin-top:15px" action="../src/update_admin.php" method="POST" enctype="multipart/form-data">
-					<div class="row mb-0">
+				<form onsubmit="updateAdmin(event)" method="POST" enctype="multipart/form-data">
+					<div class="row mt-2 mb-0">
 						<input type="hidden" value="<?= $admin_id ?>" name="admin_id">
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">person</i>
@@ -82,7 +82,7 @@ if (!isset($_SESSION['logged'])) {
 						<div class="col s12">
 							<div class="divider"></div>
 
-							<a href="../" class="btn waves-effect waves-light dark-grey mt-2 z-depth-0" title="Cancelar"><i class="material-icons left">close</i>Cancelar</a>
+							<a href="../" class="btn waves-effect waves-light dark-grey z-depth-0 mt-2" title="Cancelar"><i class="material-icons left">keyboard_return</i>Voltar</a>
 							<button title="Salvar" class="btn waves-effect waves-light red-color mt-2 right z-depth-0"><i class="material-icons left">save</i>Salvar</button>
 						</div>
 					</div>
@@ -95,10 +95,33 @@ if (!isset($_SESSION['logged'])) {
 
 	<?php include_once("$assets/components/ServiceWorker.php") ?>
 
+
+	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script>
 		const admin_image_text = document.querySelector('[name="admin_image_text"]')
+		const formUpdate = document.querySelector('form')
+
+		const updateAdmin = async e => {
+			e.preventDefault()
+
+			const data = await (await fetch('../src/update_admin.php', {
+				method: 'POST',
+				body: new FormData(formUpdate)
+			})).json()
+
+			if (data.status === '1') {
+				M.toast({
+					html: 'Os dados foram atualizados com sucesso.',
+					classes: 'green'
+				})
+			} else {
+				M.toast({
+					html: 'Houve um erro ao atualizar os dados.',
+					classes: 'red accent-4'
+				})
+			}
+		}
 	</script>
-	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 </body>
 
 </html>

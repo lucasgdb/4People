@@ -39,14 +39,14 @@ if (!isset($_SESSION['logged'])) {
 				<form id="formInsertPost" method="POST" enctype="multipart/form-data">
 					<div class="row mt-2 mb-0">
 						<div class="input-field col s12 m6">
-							<i class="material-icons prefix">person</i>
+							<i class="material-icons prefix">title</i>
 							<input id="post_title" minlength="4" title="Preencha este campo com o título." placeholder="Título do post" class="validate" type="text" name="post_title" oninvalid="this.setCustomValidity('Preencha este campo com o título.')" oninput="setCustomValidity('')" required>
 							<label class="active" for="post_title">Título *</label>
 							<span class="helper-text" data-error="Título de post inválido." data-success="Título de post válido.">Ex: Lançamento</span>
 						</div>
 
 						<div class="input-field col s12 m6">
-							<i class="material-icons prefix">person</i>
+							<i class="material-icons prefix">description</i>
 							<input id="post_description" minlength="8" title="Preencha este campo com a descrição." placeholder="Descrição do post" class="validate" type="text" name="post_description" oninvalid="this.setCustomValidity('Preencha este campo com a descrição.')" oninput="setCustomValidity('')" required>
 							<label class="active" for="post_description">Descrição *</label>
 							<span class="helper-text" data-error="Descrição de post inválido." data-success="Descrição de post válido.">Ex: Lançamento do 4People</span>
@@ -73,7 +73,7 @@ if (!isset($_SESSION['logged'])) {
 						</div>
 					</div>
 
-					<input id="postContent" name="post_content" class="hide" type="text" required>
+					<textarea id="postContent" name="post_content" class="hide" spellcheck="false"></textarea>
 
 					<div class="standalone-container">
 						<div id="toolbar-container">
@@ -121,10 +121,10 @@ if (!isset($_SESSION['logged'])) {
 							</span>
 						</div>
 
-						<div class="snow-container" id="snow-container"></div>
+						<div name="post_content" class="snow-container" id="snow-container"></div>
 					</div>
 
-					<button id="btnInsertPost" title="Inserir post no Blog 4People" class="btn waves-effect waves-light red-color z-depth-0"><i class="material-icons left">comment</i>Inserir</button>
+					<button id="btnInsertPost" title="Inserir post no Blog 4People" class="btn mt-2 waves-effect waves-light red-color z-depth-0"><i class="material-icons left">comment</i>Inserir</button>
 				</form>
 
 				<div class="top-div dark-grey"></div>
@@ -154,7 +154,6 @@ if (!isset($_SESSION['logged'])) {
 		</div>
 	</main>
 
-	<div id="updates"></div>
 	<div id="deletes"></div>
 
 	<?php include_once("$assets/components/Footer.php") ?>
@@ -213,7 +212,6 @@ if (!isset($_SESSION['logged'])) {
 
 		const selectPosts = async () => {
 			let postsHTML = '',
-				updatesHTML = '',
 				deletesHTML = '',
 				amount = 0
 
@@ -221,115 +219,6 @@ if (!isset($_SESSION['logged'])) {
 
 			for (const i in data) {
 				amount += 1
-
-				updatesHTML += (
-					`<div id="updatePost${i}" class="modal modal-fixed-footer customized-modal">
-						<form onsubmit="updatePost(document.querySelector('#updatePost${i} form')); return false" method="POST" enctype="multipart/form-data">
-							<div class="modal-content left-div-margin" style="padding-bottom:5px">
-								<h4 class="flow-text" style="font-size:30px;margin:-5px 0 15px"><i class="material-icons left" style="top:7px">edit</i>Editar dados</h4>
-								<div class="divider"></div>
-
-								<div class="row mt-2 mb-0">
-									<input value="${i}" class="hide" type="hidden" name="post_id">
-
-									<div class="input-field col s12 m6">
-										<i class="material-icons prefix">person</i>
-										<input value="${data[i][0]}" id="post_title" minlength="4" title="Preencha este campo com o título." placeholder="Título do post" class="validate valid" type="text" name="post_title" oninvalid="this.setCustomValidity('Preencha este campo com o título.')" oninput="setCustomValidity('')" required>
-										<label class="active" for="post_title">Título *</label>
-										<span class="helper-text" data-error="Título de post inválido." data-success="Título de post válido.">Ex: Lançamento</span>
-									</div>
-
-									<div class="input-field col s12 m6">
-										<i class="material-icons prefix">person</i>
-										<input value="${data[i][4]}" id="post_description" minlength="8" title="Preencha este campo com a descrição." placeholder="Descrição do post" class="validate valid" type="text" name="post_description" oninvalid="this.setCustomValidity('Preencha este campo com a descrição.')" oninput="setCustomValidity('')" required>
-										<label class="active" for="post_description">Descrição *</label>
-										<span class="helper-text" data-error="Descrição de post inválido." data-success="Descrição de post válido.">Ex: Lançamento do 4People</span>
-									</div>
-
-									<div class="file-field input-field col s12 m6">
-										<i class="material-icons prefix">image</i>
-										<input value="${data[i][5]}" type="file" name="post_image" accept=".png, .jpg, .jpeg, .svg, .gif">
-										<input value="${data[i][5]}" name="post_image_text" style="width:calc(100% - 3rem)" placeholder="Selecionar imagem" type="text" class="file-path" required>
-										<label class="active">Imagem</label>
-										<span class="helper-text">.png, .jpg, .jpeg, .svg, .gif</span>
-									</div>
-
-									<div class="file-field input-field col s12 m6">
-										<i class="material-icons prefix">visibility</i>
-
-										<select id="post_status" name="post_status">
-											<option value="0" ${data[i][1] === '0' ? 'selected' : ''}>Desativado</option>
-											<option value="1" ${data[i][1] === '1' ? 'selected' : ''}>Ativado</option>
-										</select>
-
-										<label>Status</label>
-										<span class="helper-text">Status do post</span>
-									</div>
-								</div>
-
-								<input id="postContent${i}" name="post_content" class="hide" type="text" required>
-
-								<div class="standalone-container">
-									<div id="toolbar-container${i}">
-										<span class="ql-formats">
-											<select class="ql-font browser-default"></select>
-										</span>
-
-										<span class="ql-formats">
-											<button class="ql-bold"></button>
-											<button class="ql-italic"></button>
-											<button class="ql-underline"></button>
-											<button class="ql-strike"></button>
-										</span>
-
-										<span class="ql-formats">
-											<select class="ql-color browser-default"></select>
-											<select class="ql-background browser-default"></select>
-											<button class="ql-script" value="sub"></button>
-											<button class="ql-script" value="super"></button>
-										</span>
-
-										<span class="ql-formats">
-											<button class="ql-header" value="1"></button>
-											<button class="ql-header" value="2"></button>
-											<button class="ql-blockquote"></button>
-											<button class="ql-code-block"></button>
-										</span>
-
-										<span class="ql-formats">
-											<button class="ql-list" value="ordered"></button>
-											<button class="ql-list" value="bullet"></button>
-											<button class="ql-indent" value="-1"></button>
-											<button class="ql-indent" value="+1"></button>
-										</span>
-
-										<span class="ql-formats">
-											<button class="ql-direction" value="rtl"></button>
-											<select class="ql-align browser-default"></select>
-											<button class="ql-link"></button>
-											<button class="ql-formula"></button>
-										</span>
-
-										<span class="ql-formats">
-											<button class="ql-clean"></button>
-										</span>
-									</div>
-
-									<div class="snow-container" id="snow-container${i}">${data[i][6]}</div>
-								</div>
-							</div>
-
-							<div class="divider"></div>
-
-							<div class="modal-footer">
-								<button type="button" class="modal-close btn waves-effect waves-light dark-grey z-depth-0" title="Cancelar"><i class="material-icons left">close</i>Cancelar</button>
-								<button id="btnUpdatePost${i}" class="modal-close btn waves-effect waves-light green darken-3 z-depth-0" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
-							</div>
-						</form>
-
-						<div class="left-div dark-grey" style="border-radius:0"></div>
-					</div>`
-				)
 
 				deletesHTML += (
 					`<div id="removePost${i}" class="modal">
@@ -358,7 +247,7 @@ if (!isset($_SESSION['logged'])) {
 						<td>${data[i][3]}</td>
 						<td><a href="<?= $root ?>/pages/blog/post/?post_id=${i}" title="Ir até ao post" class="btn waves-effect waves-light dark-grey z-depth-0"><i class="material-icons">send</i></a></td>
 						<td>
-							<button class="btn waves-effect waves-light green darken-3 z-depth-0 modal-trigger" title="Editar post" data-target="updatePost${i}"><i class="material-icons">edit</i></button>
+							<a href="./data_update/?post_id=${i}" class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar post"><i class="material-icons">edit</i></a>
 							<button class="btn waves-effect waves-light red-color z-depth-0 modal-trigger" style="cursor:pointer" title="Remover post" data-target="removePost${i}"><i class="material-icons">delete</i></button>
 						</td>
 					</tr>`
@@ -366,59 +255,10 @@ if (!isset($_SESSION['logged'])) {
 			}
 
 			posts.innerHTML = postsHTML
-			updates.innerHTML = updatesHTML
 			deletes.innerHTML = deletesHTML
 			lblAmount.innerHTML = `[${amount}]`
 			M.Modal.init(document.querySelectorAll('.modal'))
 			M.FormSelect.init(document.querySelectorAll('select'))
-
-			const snowContainers = document.querySelectorAll('.snow-container')
-
-			for (const i in data) {
-				const newQuill = new Quill(`#snow-container${i}`, {
-					modules: {
-						formula: true,
-						syntax: true,
-						toolbar: `#toolbar-container${i}`
-					},
-					placeholder: 'Escrever conteúdo...',
-					theme: 'snow'
-				})
-
-				newQuill.root.setAttribute('spellcheck', false)
-
-				let newLblQuillContent = document.querySelector(`#snow-container${i} .ql-editor`)
-				const btnUpdatePost = document.querySelector(`#btnUpdatePost${i}`)
-				const newPostContent = document.querySelector(`#postContent${i}`)
-
-				btnUpdatePost.addEventListener('click', () => {
-					if (newLblQuillContent.innerText.replace(/\n/g, '') === '') newPostContent.value = ''
-					else newPostContent.value = newLblQuillContent.innerHTML
-				})
-			}
-		}
-
-		const updatePost = async formUpdate => {
-			const data = await (await fetch('src/update_post.php', {
-				method: 'POST',
-				body: new FormData(formUpdate)
-			})).json()
-
-			console.log(data)
-
-			if (data.status === '1') {
-				M.toast({
-					html: 'Os dados foram atualizados com sucesso.',
-					classes: 'green'
-				})
-
-				selectPosts()
-			} else {
-				M.toast({
-					html: 'Houve um erro ao atualizar os dados.',
-					classes: 'red accent-4'
-				})
-			}
 		}
 
 		const deleteTool = async (id, title) => {
@@ -436,12 +276,6 @@ if (!isset($_SESSION['logged'])) {
 					html: `Não foi possível remover ${title}.`,
 					classes: 'red accent-4'
 				})
-			}
-		}
-
-		function changeIcon(e) {
-			if (e.target.value === '0') {
-				e.target.innerHTML = 'fk'
 			}
 		}
 

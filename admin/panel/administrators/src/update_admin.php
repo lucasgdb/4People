@@ -61,12 +61,13 @@ try {
 	$sql->bindValue(':admin_id', $admin_id);
 
 	if ($sql->execute()) {
+		echo '{"status":"1"}';
+
 		$sql = $database->prepare('INSERT INTO admin_logs VALUES (NULL, :log_action, CURRENT_TIMESTAMP, :admin_id)');
 		$sql->bindValue(':log_action', 'update.administrator');
 		$sql->bindValue(':admin_id', $_SESSION['logged']['id']);
 		$sql->execute();
-	}
-	header('Location: ../');
+	} else echo '{"status":"0"}';
 } catch (PDOException $e) {
-	echo "Um erro ocorreu! Erro: {$e->getMessage()}";
+	echo '{"status":"0"}';
 }

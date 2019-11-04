@@ -21,8 +21,8 @@ const btnInsertPost = document.querySelector('#btnInsertPost')
 const postContent = document.querySelector('#postContent')
 
 btnInsertPost.addEventListener('click', () => {
-	if (lblQuillContent.innerText.replace(/\n/g, '') === '') postContent.value = ''
-	else postContent.value = lblQuillContent.innerHTML
+	if (lblQuillContent.innerText.replace(/\n/g, '') === '') postContent.innerHTML = ''
+	else postContent.innerHTML = lblQuillContent.innerHTML
 })
 
 window.addEventListener('DOMContentLoaded', () => {

@@ -36,30 +36,12 @@ strong {
 	margin-bottom: 5px
 }
 
-.standalone-container {
-	margin: 10px auto;
-	width: 100%
-}
-
-.snow-container {
-	height: 300px
-}
-
-.modal .snow-container {
-	height: 350px
-}
-
 .ql-tooltip {
 	left: 10px !important
 }
 
 .ql-editor blockquote {
 	border-left-color: #a62023 !important
-}
-
-.customized-modal {
-	width: 80%;
-	height: 80% !important
 }
 
 @media (max-width: 600px) {
