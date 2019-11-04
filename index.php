@@ -48,6 +48,14 @@ include_once('assets/assets.php')
 						<li class="grey lighten-3">
 							<img src="<?= $assets ?>/images/bg01.jpg" alt="bg01">
 							<div class="caption left-align">
+								<h3 class="dark"><i style="top:10px" class="material-icons red-color-text left small">comment</i> BLOG ATUALIZADO!</h3>
+								<h5 class="light">Possuímos um blog totalmente atualizado com notícias, tutoriais e atualizações do mundo da Tecnologia.</h5>
+							</div>
+						</li>
+
+						<li class="grey lighten-3">
+							<img src="<?= $assets ?>/images/bg01.jpg" alt="bg01">
+							<div class="caption left-align">
 								<h3 class="dark"><i style="top:10px" class="material-icons red-color-text left small">fast_forward</i> MAIS RÁPIDO!</h3>
 								<h5 class="light">As Ferramentas foram todas escritas em JavaScript, para maior velocidade e segurança.</h5>
 							</div>

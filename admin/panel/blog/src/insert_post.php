@@ -20,8 +20,6 @@ try {
 	$post_image = $_FILES['post_image'];
 	$ext = strtolower(pathinfo($post_image['name'], PATHINFO_EXTENSION));
 
-	echo $post_content;
-
 	$long_name = "$post_title.$ext";
 
 	if ($ext) {

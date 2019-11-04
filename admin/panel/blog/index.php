@@ -245,7 +245,7 @@ if (!isset($_SESSION['logged'])) {
 						<td>${data[i][1] === '1' ? '<i title="Ativado" class="material-icons btn-green-text">done</i>' : '<i title="Desativado" class="material-icons red-color-text">clear</i>'}</td>
 						<td>${data[i][2]}</td>
 						<td>${data[i][3]}</td>
-						<td><a href="<?= $root ?>/pages/blog/post/?post_id=${i}" title="Ir até ao post" class="btn waves-effect waves-light dark-grey z-depth-0"><i class="material-icons">send</i></a></td>
+						<td><a href="<?= $root ?>/pages/blog/post/?post_id=${i}" title="Ir até ao post" class="btn waves-effect waves-light dark-grey z-depth-0"><i class="material-icons">link</i></a></td>
 						<td>
 							<a href="./data_update/?post_id=${i}" class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar post"><i class="material-icons">edit</i></a>
 							<button class="btn waves-effect waves-light red-color z-depth-0 modal-trigger" style="cursor:pointer" title="Remover post" data-target="removePost${i}"><i class="material-icons">delete</i></button>

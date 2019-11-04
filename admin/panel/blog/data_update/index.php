@@ -47,14 +47,14 @@ if (!isset($_SESSION['logged'])) {
 						<input value="<?= $post_id ?>" class="hide" type="hidden" name="post_id">
 
 						<div class="input-field col s12 m6">
-							<i class="material-icons prefix">person</i>
+							<i class="material-icons prefix">title</i>
 							<input value="<?= $post_title ?>" id="post_title" minlength="4" title="Preencha este campo com o título." placeholder="Título do post" class="validate valid" type="text" name="post_title" oninvalid="this.setCustomValidity('Preencha este campo com o título.')" oninput="setCustomValidity('')" required>
 							<label class="active" for="post_title">Título *</label>
 							<span class="helper-text" data-error="Título de post inválido." data-success="Título de post válido.">Ex: Lançamento</span>
 						</div>
 
 						<div class="input-field col s12 m6">
-							<i class="material-icons prefix">person</i>
+							<i class="material-icons prefix">description</i>
 							<input value="<?= $post_description ?>" id="post_description" minlength="8" title="Preencha este campo com a descrição." placeholder="Descrição do post" class="validate valid" type="text" name="post_description" oninvalid="this.setCustomValidity('Preencha este campo com a descrição.')" oninput="setCustomValidity('')" required>
 							<label class="active" for="post_description">Descrição *</label>
 							<span class="helper-text" data-error="Descrição de post inválido." data-success="Descrição de post válido.">Ex: Lançamento do 4People</span>
@@ -132,8 +132,9 @@ if (!isset($_SESSION['logged'])) {
 						<div class="snow-container" id="snow-container"><?= $post_content ?></div>
 					</div>
 
-					<a href="../" class="btn waves-effect waves-light dark-grey z-depth-0 mt-2" title="Cancelar"><i class="material-icons left">keyboard_return</i>Voltar</a>
-					<button id="btnUpdatePost" class="btn waves-effect waves-light red-color right z-depth-0 mt-2" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
+					<a href="../" class="btn waves-effect waves-light dark-grey z-depth-0 mt-2" title="Voltar"><i class="material-icons left">keyboard_return</i>Voltar</a>
+					<button id="btnUpdatePost" class="btn waves-effect waves-light red-color right z-depth-0 mt-2 ml-1" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
+					<a href="<?= $root ?>/pages/blog/post/?post_id=<?= $post_id ?>" class="btn waves-effect waves-light dark-grey z-depth-0 right mt-2" title="Ir até o post"><i class="material-icons left">link</i>Ver post</a>
 				</form>
 
 				<div class="left-div dark-grey"></div>

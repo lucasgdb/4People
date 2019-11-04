@@ -63,3 +63,21 @@ input:not(.browser-default):focus.invalid~label {
 		width: 100%
 	}
 }
+
+@media (min-width: 993px) {
+	html::-webkit-scrollbar {
+		width: 8px
+	}
+
+	html::-webkit-scrollbar-thumb {
+		background-color: #1b1a25
+	}
+
+	html::-webkit-scrollbar-thumb:hover {
+		background-color: #16151e
+	}
+
+	html::-webkit-scrollbar-track {
+		background-color: #e0e0e0
+	}
+}

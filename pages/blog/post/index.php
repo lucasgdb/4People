@@ -51,16 +51,18 @@ if ($post->rowCount()) extract($post->fetch());
 		<div class="container">
 			<div class="card-panel top-div-margin">
 				<?php if ($post->rowCount()) : ?>
-					<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px"><?= $post_title ?></h1>
+					<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:6px">comment</i><?= $post_title ?></h1>
 					<label><?= $post_description ?>. Autor: <?= $admin_name ?>. Data: <?= $post_createdAt ?></label>
 
 					<div class="divider"></div>
 
-					<div class="center-align">
+					<div class="center-align mt-2">
 						<div title="<?= $post_title ?>" class="waves-effect waves-light">
-							<img  class="responsive-img mt-2" style="height:300px" src="<?= $assets ?>/images/blog_images/<?= $post_image ?>" />
+							<img class="responsive-img" style="height:300px;margin-bottom:-5px" src="<?= $assets ?>/images/blog_images/<?= $post_image ?>" />
 						</div>
 					</div>
+
+					<div class="divider mt-2"></div>
 
 					<div class="row mb-0">
 						<p class="mt-0 mb-0 col s12"><?= $post_content ?></p>
@@ -79,7 +81,7 @@ if ($post->rowCount()) extract($post->fetch());
 							$sql->execute();
 						} ?>
 				<?php else : ?>
-					<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px">Erro 404</h1>
+					<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:6px">error</i>Erro 404</h1>
 					<label>Erro ao encontrar o post.</label>
 
 					<div class="divider"></div>
@@ -92,7 +94,7 @@ if ($post->rowCount()) extract($post->fetch());
 				<div class="divider mb-2"></div>
 				<a title="Voltar ao Blog" href=".." class="btn waves-effect waves-light red-color z-depth-0">« Voltar</a>
 				<?php if (isset($_SESSION['logged']) && $post->rowCount()) : ?>
-					<a title="Ir para página de Controle de posts do Blog" href="<?= $root ?>/admin/panel/blog/" class="btn waves-effect waves-light btn-green z-depth-0">Editar »</a>
+					<a title="Ir para página de Controle de posts do Blog" href="<?= $root ?>/admin/panel/blog/data_update/?post_id=<?= $post_id ?>" class="btn waves-effect waves-light btn-green z-depth-0">Editar »</a>
 				<?php endif ?>
 
 				<div class="top-div dark-grey"></div>
