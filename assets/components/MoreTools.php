@@ -11,7 +11,7 @@ $sql->bindValue(':section_name', $name_section);
 $sql->bindValue(':tool_name', $name_tool);
 $sql->execute();
 
-if ($sql->rowCount() > 0) : ?>
+if ($sql->rowCount()) : ?>
 	<div class="card-panel left-div-margin">
 		<h2 class="flow-text" style="margin:-5px 0 15px"><i class="material-icons left" style="top:3px">trending_up</i>Veja também:</h2>
 		<div class="divider"></div>

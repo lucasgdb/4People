@@ -29,7 +29,7 @@ try {
 	$sql->bindValue(':current_time', $current_time);
 	$sql->execute();
 
-	if ($sql->rowCount() > 0) {
+	if ($sql->rowCount()) {
 		if (!isset($login_page) && !isset($_SESSION['logged'])) {
 			header("Location: $root/pages/maintenance/");
 		}

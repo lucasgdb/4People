@@ -64,7 +64,7 @@ if ($post->rowCount()) extract($post->fetch());
 
 					<div class="divider mt-2"></div>
 
-					<div class="row mb-0">
+					<div id="content" class="row mb-0">
 						<p class="mt-0 mb-0 col s12"><?= $post_content ?></p>
 					</div>
 
@@ -99,6 +99,28 @@ if ($post->rowCount()) extract($post->fetch());
 
 				<div class="top-div dark-grey"></div>
 			</div>
+
+			<?php
+			$sql = $database->prepare('SELECT * FROM posts WHERE post_id != :post_id AND post_status = "1" ORDER BY RAND() LIMIT 2');
+			$sql->bindValue(':post_id', $post_id);
+			$sql->execute();
+
+			if ($sql->rowCount()) : ?>
+				<div class="card-panel left-div-margin">
+					<h2 class="flow-text" style="margin:-5px 0 15px"><i class="material-icons left" style="top:3px">trending_up</i>Veja também:</h2>
+					<div class="divider"></div>
+
+					<ul class="collection with-header mb-0">
+						<?php foreach ($sql as $data) : extract($data) ?>
+							<li class="collection-item">
+								<div><?= $post_title ?><a title="Ver <?= $post_title ?>" href="./?post_id=<?= $post_id ?>" class="secondary-content"><i class="material-icons red-color-text">send</i></a></div>
+							</li>
+						<?php endforeach ?>
+					</ul>
+
+					<div class="left-div dark-grey"></div>
+				</div>
+			<?php endif ?>
 		</div>
 	</main>
 
@@ -111,7 +133,7 @@ if ($post->rowCount()) extract($post->fetch());
 	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script>
-		const ULs = document.querySelectorAll('main ul')
+		const ULs = document.querySelectorAll('#content ul')
 
 		for (let i = 0; i < ULs.length; i++) ULs[i].classList.add('browser-default')
 	</script>
