@@ -37,7 +37,7 @@ if (!isset($_SESSION['logged'])) {
 				$sql->execute();
 				extract($sql->fetch());
 				?>
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left" style="top:5px">edit</i>Editar dados de "<?= $post_title ?>"</h1>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left" style="top:2px">edit</i>Editar dados de "<?= $post_title ?>"</h1>
 				<label>Atualizar dados de um post do blog do 4People</label>
 
 				<div class="divider"></div>
@@ -55,7 +55,7 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="input-field col s12 m6">
 							<i class="material-icons prefix">description</i>
-							<input value="<?= $post_description ?>" id="post_description" minlength="8" title="Preencha este campo com a descrição." placeholder="Descrição do post" class="validate valid" type="text" name="post_description" oninvalid="this.setCustomValidity('Preencha este campo com a descrição.')" oninput="setCustomValidity('')" required>
+							<input oninvalid="this.setCustomValidity('Por favor, selecione uma imagem.')" oninput="setCustomValidity('')" value="<?= $post_description ?>" id="post_description" minlength="8" title="Preencha este campo com a descrição." placeholder="Descrição do post" class="validate valid" type="text" name="post_description" oninvalid="this.setCustomValidity('Preencha este campo com a descrição.')" oninput="setCustomValidity('')" required>
 							<label class="active" for="post_description">Descrição *</label>
 							<span class="helper-text" data-error="Descrição de post inválido." data-success="Descrição de post válido.">Ex: Lançamento do 4People</span>
 						</div>
@@ -113,8 +113,6 @@ if (!isset($_SESSION['logged'])) {
 							<span class="ql-formats">
 								<button class="ql-list" value="ordered"></button>
 								<button class="ql-list" value="bullet"></button>
-								<button class="ql-indent" value="-1"></button>
-								<button class="ql-indent" value="+1"></button>
 							</span>
 
 							<span class="ql-formats">
@@ -151,10 +149,6 @@ if (!isset($_SESSION['logged'])) {
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script>
 		M.FormSelect.init(document.querySelectorAll('select'))
-
-		Quill.register(Quill.import('attributors/style/direction'), true)
-		Quill.register(Quill.import('attributors/style/align'), true)
-		Quill.register(Quill.import('attributors/style/size'), true)
 
 		const formUpdate = document.querySelector('form')
 

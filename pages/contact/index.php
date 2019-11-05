@@ -59,6 +59,7 @@ include_once("$root/assets/assets.php")
 								<option value="Erro (erro visual)">Erro (erro visual)</option>
 								<option value="Sugestão (visual)">Sugestão (visual)</option>
 								<option value="Sugestão (ferramenta)">Sugestão (ferramenta)</option>
+								<option value="Sugestão (blog)">Sugestão (blog, post)</option>
 								<option value="Outro" selected>Outro</option>
 							</select>
 							<label>Título *</label>

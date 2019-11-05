@@ -37,7 +37,9 @@ include_once("$root/assets/assets.php")
 
 				<div id="posts" class="row mt-1 mb-0"></div>
 
-				<ul id="pagination" class="pagination center mt-2 mb-1"></ul>
+				<div class="divider"></div>
+
+				<ul id="pagination" class="pagination center mb-1"></ul>
 
 				<div class="top-div dark-grey"></div>
 			</div>

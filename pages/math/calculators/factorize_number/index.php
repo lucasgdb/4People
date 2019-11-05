@@ -51,10 +51,10 @@ include_once("$root/assets/assets.php")
 
 				<div class="mt-2" id="result" placeholder="Resultado" contenteditable="false"></div>
 				<button id="save" title="Copiar Resultado" class="btn waves-effect waves-light dark-grey mt-2 z-depth-0">
-					Copiar
+					<i class="material-icons left">content_copy</i>Copiar
 				</button>
 				<button title="Limpar Fatoração" class="btn waves-effect waves-light dark-grey mt-2 z-depth-0" onclick="clearInput()">
-					Limpar
+					<i class="material-icons left">clear</i>Limpar
 				</button>
 
 				<div class="top-div dark-grey"></div>

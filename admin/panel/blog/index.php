@@ -54,7 +54,7 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="file-field input-field col s12 m6">
 							<i class="material-icons prefix">image</i>
-							<input type="file" name="post_image" accept=".png, .jpg, .jpeg, .svg, .gif" required>
+							<input oninvalid="this.setCustomValidity('Por favor, selecione uma imagem.')" oninput="setCustomValidity('')" type="file" name="post_image" accept=".png, .jpg, .jpeg, .svg, .gif" required>
 							<input style="width:calc(100% - 3rem)" placeholder="Selecionar imagem" type="text" class="file-path" required>
 							<label class="active">Imagem</label>
 							<span class="helper-text">.png, .jpg, .jpeg, .svg, .gif</span>
@@ -105,8 +105,6 @@ if (!isset($_SESSION['logged'])) {
 							<span class="ql-formats">
 								<button class="ql-list" value="ordered"></button>
 								<button class="ql-list" value="bullet"></button>
-								<button class="ql-indent" value="-1"></button>
-								<button class="ql-indent" value="+1"></button>
 							</span>
 
 							<span class="ql-formats">
@@ -221,11 +219,11 @@ if (!isset($_SESSION['logged'])) {
 				amount += 1
 
 				deletesHTML += (
-					`<div id="removePost${i}" class="modal">
+					`<div id="removePost${data[i][0]}" class="modal">
 						<div class="modal-content left-div-margin">
 								<h4 class="flow-text" style="font-size:30px;margin:-5px 0 15px"><i class="material-icons left" style="top:7px">delete</i>Remover post</h4>
 								<div class="divider"></div>
-							<p class="mb-0">Você tem certeza que deseja remover "${data[i][0]}" do 4People?</p>
+							<p class="mb-0">Você tem certeza que deseja remover "${data[i][1]}" do 4People?</p>
 
 							<div class="left-div dark-grey" style="border-radius:0"></div>
 						</div>
@@ -234,21 +232,21 @@ if (!isset($_SESSION['logged'])) {
 
 						<div class="modal-footer">
 							<button title="Cancelar" class="modal-close btn waves-effect waves-light dark-grey z-depth-0"><i class="material-icons left">close</i>Cancelar</button>
-							<a onclick="deleteTool(${i}, '${data[i][0]}')" title="Remover ${data[i][0]}" class="modal-close btn waves-effect waves-light red-color z-depth-0"><i class="material-icons left">delete</i>Remover</a>
+							<a onclick="deleteTool(${data[i][0]}, '${data[i][1]}')" title="Remover ${data[i][1]}" class="modal-close btn waves-effect waves-light red-color z-depth-0"><i class="material-icons left">delete</i>Remover</a>
 						</div>
 					</div>`
 				)
 
 				postsHTML += (
 					`<tr>
-						<td>${data[i][0]}</td>
-						<td>${data[i][1] === '1' ? '<i title="Ativado" class="material-icons btn-green-text">done</i>' : '<i title="Desativado" class="material-icons red-color-text">clear</i>'}</td>
-						<td>${data[i][2]}</td>
+						<td>${data[i][1]}</td>
+						<td>${data[i][2] === '1' ? '<i title="Ativado" class="material-icons btn-green-text">done</i>' : '<i title="Desativado" class="material-icons red-color-text">clear</i>'}</td>
 						<td>${data[i][3]}</td>
-						<td><a href="<?= $root ?>/pages/blog/post/?post_id=${i}" title="Ir até ao post" class="btn waves-effect waves-light dark-grey z-depth-0"><i class="material-icons">link</i></a></td>
+						<td>${data[i][4]}</td>
+						<td><a href="<?= $root ?>/pages/blog/post/?post_id=${data[i][0]}" title="Ir até ao post" class="btn waves-effect waves-light dark-grey z-depth-0"><i class="material-icons">link</i></a></td>
 						<td>
-							<a href="./data_update/?post_id=${i}" class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar post"><i class="material-icons">edit</i></a>
-							<button class="btn waves-effect waves-light red-color z-depth-0 modal-trigger" style="cursor:pointer" title="Remover post" data-target="removePost${i}"><i class="material-icons">delete</i></button>
+							<a href="./data_update/?post_id=${data[i][0]}" class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar post"><i class="material-icons">edit</i></a>
+							<button class="btn waves-effect waves-light red-color z-depth-0 modal-trigger" style="cursor:pointer" title="Remover post" data-target="removePost${data[i][0]}"><i class="material-icons">delete</i></button>
 						</td>
 					</tr>`
 				)

@@ -204,8 +204,8 @@ if (!isset($_SESSION['logged'])) {
 				modalsHTML += (
 					`<div id="removeAdmin${i}" class="modal">
 						<div class="modal-content left-div-margin">
-								<h4 class="flow-text" style="font-size:30px;margin:-5px 0 15px"><i class="material-icons left" style="top:7px">delete</i>Remover Administrador</h4>
-								<div class="divider"></div>
+							<h4 class="flow-text" style="font-size:30px;margin:-5px 0 15px"><i class="material-icons left" style="top:7px">delete</i>Remover Administrador</h4>
+							<div class="divider"></div>
 							<p class="mb-0">Você tem certeza que deseja remover ${data[i][4] ? 'você mesmo' : data[i][0]} da Administração?${data[i][4] ? ' <b>Você será deslogado</b>.' : ''}</p>
 
 							<div class="left-div dark-grey" style="border-radius:0"></div>

@@ -181,13 +181,13 @@ include_once("$root/assets/assets.php")
 				<p>Força de senha: <span id="passwordLength"></span></p>
 				<textarea id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
 				<button title="Copiar Senha" class="btn waves-effect waves-light dark-grey mt-1 z-depth-0" onclick="copyResult()">
-					Copiar
+					<i class="material-icons left">content_copy</i>Copiar
 				</button>
 				<button title="Salvar Senha" class="btn waves-effect waves-light dark-grey mt-1 z-depth-0" onclick="savePassword()">
-					Salvar
+					<i class="material-icons left">save</i>Salvar
 				</button>
 				<button title="Limpar Senha" class="btn waves-effect waves-light dark-grey mt-1 z-depth-0" onclick="clearInput()">
-					Limpar
+					<i class="material-icons left">clear</i>Limpar
 				</button>
 
 				<div class="top-div dark-grey"></div>

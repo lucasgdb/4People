@@ -108,6 +108,31 @@ if ($logged) {
 		</li>
 	<?php endforeach ?>
 
+	<?php
+	$sql = $database->prepare('SELECT post_id AS selected_post_id, post_title FROM posts WHERE post_status = "1" ORDER BY post_visits DESC LIMIT 20');
+	$sql->execute();
+
+	$blog = strpos($link, 'blog/post') !== false;
+
+	if ($sql->rowCount()) :
+		$current_post_id = filter_input(INPUT_GET, 'post_id', FILTER_DEFAULT) ?>
+		<li class="<?= $blog ? 'active' : '' ?>">
+			<div class="collapsible-header"><i class="material-icons left">comment</i>Postagens<i class="material-icons" style="position:absolute;right:0<?= $blog ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
+			<div class="collapsible-body">
+				<ul class="collapsible padding-headers padding-buttons">
+					<li>
+						<ul>
+							<?php
+								foreach ($sql as $data) : extract($data) ?>
+								<li><a class="waves-effect <?= $current_post_id === $selected_post_id ? 'black-text' : '' ?>" <?= $current_post_id === $selected_post_id ? 'onclick="e => preventDefault(e)" style="font-weight:bold"' : '' ?> href="<?= $root ?>/pages/blog/post/?post_id=<?= $selected_post_id ?>" title="<?= $post_title ?>"><i class="material-icons left <?= $current_post_id === $selected_post_id ? 'dark-grey-text' : 'red-color-text' ?>" <?= $current_post_id === $selected_post_id ? 'style="font-size:20px;margin-left:2.5px"' : '' ?>><?= $current_post_id === $selected_post_id ? 'radio_button_checked' : 'keyboard_arrow_right' ?></i><?= $post_title ?></a></li>
+							<?php endforeach ?>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</li>
+	<?php endif ?>
+
 	<?php $other_pages = strpos($link, 'contact') !== false || strpos($link, 'blog') !== false && strpos($link, 'post') === false ?>
 
 	<li class="<?= $other_pages ? 'active' : '' ?>">

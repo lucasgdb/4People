@@ -41,10 +41,10 @@ include_once("$root/assets/assets.php")
 					Converter para Binário
 				</button>
 				<button title="Limpar Validação" class="btn waves-effect waves-light dark-grey ml-2 mt-1 z-depth-0 right" onclick="clearInput(txtText)">
-					Limpar
+					<i class="material-icons left">clear</i>Limpar
 				</button>
 				<button title="Copiar Texto" class="btn waves-effect waves-light dark-grey mt-1 z-depth-0 right" onclick="copyResult(txtText)">
-					Copiar
+					<i class="material-icons left">content_copy</i>Copiar
 				</button>
 
 				<textarea class="mt-2" id="binary" placeholder="Digite aqui o código binário" spellcheck="false"></textarea>
@@ -53,10 +53,10 @@ include_once("$root/assets/assets.php")
 					Converter para Texto
 				</button>
 				<button title="Limpar Validação" class="btn waves-effect waves-light dark-grey ml-2 mt-1 z-depth-0 right" onclick="clearInput(txtBinaryCode)">
-					Limpar
+					<i class="material-icons left">clear</i>Limpar
 				</button>
 				<button title="Copiar Código Binário" class="btn waves-effect waves-light dark-grey mt-1 z-depth-0 right" onclick="copyResult(txtBinaryCode)">
-					Copiar
+					<i class="material-icons left">content_copy</i>Copiar
 				</button>
 
 				<div class="top-div dark-grey"></div>

@@ -34,8 +34,8 @@ if (!isset($_SESSION['logged'])) {
 				$sql->execute();
 				extract($sql->fetch());
 				?>
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left" style="top:5px">edit</i>Editar dados de <?= $admin_name ?></h1>
-				<label>Atualizar Dados de um Administrador do 4People</label>
+				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left" style="top:2px">edit</i>Editar dados de <?= $admin_name ?></h1>
+				<label>Atualizar dados de um Administrador do 4People</label>
 
 				<div class="divider"></div>
 

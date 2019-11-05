@@ -65,10 +65,10 @@ include_once("$root/assets/assets.php")
 
 				<textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
 				<button title="Copiar CNPJ" class="btn waves-effect waves-light dark-grey mt-1 z-depth-0" onclick="copyResult()">
-					Copiar
+					<i class="material-icons left">content_copy</i>Copiar
 				</button>
 				<button title="Limpar CNPJ" class="btn waves-effect waves-light dark-grey mt-1 z-depth-0" onclick="clearInput()">
-					Limpar
+					<i class="material-icons left">clear</i>Limpar
 				</button>
 
 				<div class="top-div dark-grey"></div>
@@ -94,8 +94,8 @@ include_once("$root/assets/assets.php")
 		<div class="modal-footer">
 			<div class="divider"></div>
 
-			<a class="btn waves-effect waves-light red-color" title="Não concordar" href="../">Não concordo</a>
-			<button class="btn waves-effect modal-close waves-light green darken-3" title="Concordar">Concordo</button>
+			<a class="btn waves-effect waves-light red-color" title="Não concordar" href="../"><i class="material-icons left">thumb_down</i>Não concordo</a>
+			<button class="btn waves-effect modal-close waves-light green darken-3" title="Concordar"><i class="material-icons left">thumb_up</i>Concordo</button>
 		</div>
 	</div>
 

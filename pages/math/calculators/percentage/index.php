@@ -57,7 +57,7 @@ include_once("$root/assets/assets.php")
 						</button>
 
 						<button title="Copiar" class="btn waves-effect waves-light dark-grey z-depth-0" onclick="copyResult(txtFirstResult)">
-							Copiar
+							<i class="material-icons left">content_copy</i>Copiar
 						</button>
 					</div>
 				</div>
@@ -86,7 +86,7 @@ include_once("$root/assets/assets.php")
 						</button>
 
 						<button title="Copiar" class="btn waves-effect waves-light dark-grey z-depth-0" onclick="copyResult(txtSecondResult)">
-							Copiar
+							<i class="material-icons left">content_copy</i>Copiar
 						</button>
 					</div>
 				</div>
@@ -115,7 +115,7 @@ include_once("$root/assets/assets.php")
 						</button>
 
 						<button title="Copiar" class="btn waves-effect waves-light dark-grey z-depth-0" onclick="copyResult(txtThirdResult)">
-							Copiar
+							<i class="material-icons left">content_copy</i>Copiar
 						</button>
 					</div>
 				</div>
@@ -144,7 +144,7 @@ include_once("$root/assets/assets.php")
 						</button>
 
 						<button title="Copiar" class="btn waves-effect waves-light dark-grey z-depth-0" onclick="copyResult(txtFourthResult)">
-							Copiar
+							<i class="material-icons left">content_copy</i> Copiar
 						</button>
 					</div>
 				</div>
@@ -173,7 +173,7 @@ include_once("$root/assets/assets.php")
 						</button>
 
 						<button title="Copiar" class="btn waves-effect waves-light dark-grey z-depth-0" onclick="copyResult(txtFifthResult)">
-							Copiar
+							<i class="material-icons left">content_copy</i>Copiar
 						</button>
 					</div>
 				</div>
@@ -202,7 +202,7 @@ include_once("$root/assets/assets.php")
 						</button>
 
 						<button title="Copiar" class="btn waves-effect waves-light dark-grey z-depth-0" onclick="copyResult(txtSixthResult)">
-							Copiar
+							<i class="material-icons left">content_copy</i>Copiar
 						</button>
 					</div>
 				</div>
@@ -231,7 +231,7 @@ include_once("$root/assets/assets.php")
 						</button>
 
 						<button title="Copiar" class="btn waves-effect waves-light dark-grey z-depth-0" onclick="copyResult(txtSeventhResult)">
-							Copiar
+							<i class="material-icons left">content_copy</i>Copiar
 						</button>
 					</div>
 				</div>
@@ -260,7 +260,7 @@ include_once("$root/assets/assets.php")
 						</button>
 
 						<button title="Copiar" class="btn waves-effect waves-light dark-grey z-depth-0" onclick="copyResult(txtEighthResult)">
-							Copiar
+							<i class="material-icons left">content_copy</i>Copiar
 						</button>
 					</div>
 				</div>
@@ -289,7 +289,7 @@ include_once("$root/assets/assets.php")
 						</button>
 
 						<button title="Copiar" class="btn waves-effect waves-light dark-grey z-depth-0" onclick="copyResult(txtNinthResult)">
-							Copiar
+							<i class="material-icons left">content_copy</i>Copiar
 						</button>
 					</div>
 				</div>

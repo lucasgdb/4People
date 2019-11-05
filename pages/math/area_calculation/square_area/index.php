@@ -97,10 +97,10 @@ include_once("$root/assets/assets.php")
 
 				<textarea class="mt-2" id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
 				<button title="Copiar Área" class="btn waves-effect waves-light dark-grey mt-1 z-depth-0" onclick="copyResult()">
-					Copiar
+					<i class="material-icons left">content_copy</i>Copiar
 				</button>
 				<button title="Limpar" class="btn waves-effect waves-light dark-grey mt-1 z-depth-0" onclick="clearInput()">
-					Limpar
+					<i class="material-icons left">clear</i>Limpar
 				</button>
 
 				<div class="top-div dark-grey"></div>

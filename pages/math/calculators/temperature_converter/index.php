@@ -92,10 +92,10 @@ include_once("$root/assets/assets.php")
 
 					<div class="col s12">
 						<button title="Copiar" class="btn waves-effect left waves-light dark-grey z-depth-0" onclick="copyResult(txtFirst)">
-							Copiar
+							<i class="material-icons left">content_copy</i>Copiar
 						</button>
 						<button title="Copiar" class="btn waves-effect right waves-light dark-grey z-depth-0" onclick="copyResult(txtSecond)">
-							Copiar
+							<i class="material-icons left">content_copy</i>Copiar
 						</button>
 					</div>
 				</div>

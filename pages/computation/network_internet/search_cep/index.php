@@ -51,13 +51,13 @@ include_once("$root/assets/assets.php")
 
 				<textarea id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
 				<button title="Copiar" class="btn waves-effect waves-light dark-grey mt-1 z-depth-0" onclick="copyResult()">
-					Copiar
+					<i class="material-icons left">content_copy</i>Copiar
 				</button>
 				<button title="Salvar" class="btn waves-effect waves-light dark-grey mt-1 z-depth-0" onclick="saveCEP()">
-					Salvar
+					<i class="material-icons left">save</i>Salvar
 				</button>
 				<button title="Limpar" class="btn waves-effect waves-light dark-grey mt-1 z-depth-0" onclick="clearInput()">
-					Limpar
+					<i class="material-icons left">clear</i>Limpar
 				</button>
 
 				<div class="top-div dark-grey"></div>

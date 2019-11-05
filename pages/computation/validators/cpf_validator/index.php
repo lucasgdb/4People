@@ -52,10 +52,10 @@ include_once("$root/assets/assets.php")
 				<p class="mb-2">Origem do CPF: <span id="from">Aguardando...</span></p>
 				<textarea id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
 				<button title="Copiar Validação" class="btn waves-effect waves-light dark-grey mt-1 z-depth-0" onclick="copyResult()">
-					Copiar
+					<i class="material-icons left">content_copy</i>Copiar
 				</button>
 				<button title="Limpar Validação" class="btn waves-effect waves-light dark-grey mt-1 z-depth-0" onclick="clearInput()">
-					Limpar
+					<i class="material-icons left">clear</i>Limpar
 				</button>
 
 				<div class="top-div dark-grey"></div>
