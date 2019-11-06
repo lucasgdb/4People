@@ -23,9 +23,9 @@
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin">
-				<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5px"><?= $icon ?></i>Principais Ferramentas</h1>
+				<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5px"><?= $icon ?></i>Principais Ferramentas</h1>
 
-				<label>Principais Ferramentas de <?= $name ?> do 4People.</label>
+				<label class="dark-grey-text">Principais Ferramentas de <?= $name ?> do 4People.</label>
 				<div class="divider"></div>
 
 				<div class="row mt-2 mb-0">
@@ -84,6 +84,7 @@
 	</main>
 
 	<?php
+	include_once("$assets/components/FixedActionButton.php");
 	include_once("$assets/components/Footer.php");
 	include_once("$assets/components/ServiceWorker.php")
 	?>

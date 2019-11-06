@@ -2,6 +2,16 @@ html {
 	font-family: Arial, sans-serif, Arial;
 }
 
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto
+}
+
 input:focus {
 	border-bottom: 1px solid #1b1a25 !important;
 	box-shadow: 0 1px 0 0 #1b1a25 !important

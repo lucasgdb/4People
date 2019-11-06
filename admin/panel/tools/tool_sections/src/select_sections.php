@@ -10,7 +10,7 @@ try {
 		exit();
 	}
 
-	include_once("../../../../../assets/php/Connection.php");
+	include_once("../../../../../assets/src/php/Connection.php");
 
 	$type_id_get = filter_input(INPUT_GET, 'type_id', FILTER_DEFAULT);
 	$condition = '';

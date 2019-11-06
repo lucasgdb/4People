@@ -10,7 +10,7 @@ try {
 		exit();
 	}
 
-	include_once('../../../../../assets/php/Connection.php');
+	include_once('../../../../../assets/src/php/Connection.php');
 
 	$section_name = trim(filter_input(INPUT_POST, 'section_name', FILTER_DEFAULT));
 	$section_path = strtolower(trim(filter_input(INPUT_POST, 'section_path', FILTER_DEFAULT)));

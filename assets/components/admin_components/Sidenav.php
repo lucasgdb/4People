@@ -1,6 +1,6 @@
 <?php
 $link = $_SERVER['REQUEST_URI'];
-include_once("$assets/php/Connection.php");
+include_once("$assets/src/php/Connection.php");
 
 $sql = $database->prepare('SELECT admin_id, admin_name, admin_image FROM admins WHERE admin_id = :admin_id LIMIT 1');
 $sql->bindValue(':admin_id', $_SESSION['logged']['id']);
@@ -15,7 +15,7 @@ extract($sql->fetch())
 			<img title="<?= $admin_name ?>" class="circle" src="<?= $assets ?>/images/<?= $admin_image && file_exists("$assets/images/admin_images/$admin_image") ? "admin_images/$admin_image" : 'user.svg' ?>" alt="Foto">
 			<span class="name black-text">Administrador: <?= $admin_name ?></span>
 			<a class="linkHover" href="<?= $root ?>/admin/panel/administrators/data_update/?admin_id=<?= $admin_id ?>"><span class="email" style="padding-bottom:0">Editar perfil »</span></a>
-			<a href="<?= $assets ?>/php/Logout.php"> <span class="email dark-grey-text" style="padding-bottom:0;margin-bottom:15px">Sair »</span></a>
+			<a href="<?= $assets ?>/src/php/Logout.php"> <span class="email dark-grey-text" style="padding-bottom:0;margin-bottom:15px">Sair »</span></a>
 		</div>
 
 		<div class="left-div-mobile dark-grey" style="border-radius:0"></div>
@@ -80,7 +80,7 @@ extract($sql->fetch())
 				<li>
 					<ul>
 						<li><a class="waves-effect" href="<?= $root ?>/" title="Voltar ao Início"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Voltar ao Início</a></li>
-						<li><a class="waves-effect" href="<?= $assets ?>/php/Logout.php" title="Sair"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Sair</a></li>
+						<li><a class="waves-effect" href="<?= $assets ?>/src/php/Logout.php" title="Sair"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Sair</a></li>
 					</ul>
 				</li>
 			</ul>

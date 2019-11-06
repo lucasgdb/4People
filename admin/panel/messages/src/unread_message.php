@@ -10,7 +10,7 @@ try {
 		exit();
 	}
 
-	include_once('../../../../assets/php/Connection.php');
+	include_once('../../../../assets/src/php/Connection.php');
 
 	$message_id = filter_input(INPUT_GET, 'message_id', FILTER_DEFAULT);
 

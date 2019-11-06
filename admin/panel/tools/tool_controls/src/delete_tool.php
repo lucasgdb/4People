@@ -10,7 +10,7 @@ try {
 		exit();
 	}
 
-	include_once('../../../../../assets/php/Connection.php');
+	include_once('../../../../../assets/src/php/Connection.php');
 
 	$tool_id = filter_input(INPUT_GET, 'tool_id', FILTER_DEFAULT);
 

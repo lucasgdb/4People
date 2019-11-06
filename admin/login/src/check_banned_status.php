@@ -4,8 +4,8 @@ header('Access-Control-Allow-Methods: GET');
 header('Content-Type: application/json; charset=UTF-8');
 
 $assets = '../../../assets';
-include_once("$assets/php/Connection.php");
-include_once("$assets/php/IP.php");
+include_once("$assets/src/php/Connection.php");
+include_once("$assets/src/php/IP.php");
 
 $ip = str_replace('.', '', get_ip_address());
 $sql = $database->prepare('SELECT banned_amount FROM banneds WHERE banned_ip = :banned_ip');

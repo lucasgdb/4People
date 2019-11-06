@@ -10,7 +10,7 @@ try {
 		exit();
 	}
 
-	include_once('../../../../../assets/php/Connection.php');
+	include_once('../../../../../assets/src/php/Connection.php');
 
 	$sql = $database->prepare('SELECT * FROM types');
 	$sql->execute();

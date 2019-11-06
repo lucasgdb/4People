@@ -10,7 +10,7 @@ try {
 		exit();
 	}
 
-	include_once('../../../../assets/php/Connection.php');
+	include_once('../../../../assets/src/php/Connection.php');
 
 	$banned_ip = filter_input(INPUT_GET, 'banned_ip', FILTER_DEFAULT);
 

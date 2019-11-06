@@ -10,7 +10,7 @@ try {
 		exit();
 	}
 
-	include_once('../../../../../assets/php/Connection.php');
+	include_once('../../../../../assets/src/php/Connection.php');
 
 	$tool_name = trim(filter_input(INPUT_POST, 'tool_name', FILTER_DEFAULT));
 	$tool_path = strtolower(trim(filter_input(INPUT_POST, 'tool_path', FILTER_DEFAULT)));

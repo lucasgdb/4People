@@ -33,8 +33,8 @@ if (isset($_SESSION['logged'])) {
 				$sql->execute();
 
 				if ($sql->rowCount()) : ?>
-					<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left">person</i>Painel Administrativo - Login</h1>
-					<label>Painel de Login Administrativo. Área restrita!</label>
+					<h1 class="flow-text dark-grey-text" style="margin:0 0 5px"><i class="material-icons left">person</i>Painel Administrativo - Login</h1>
+					<label class="dark-grey-text">Painel de Login Administrativo. Área restrita!</label>
 
 					<div class="divider"></div>
 
@@ -73,8 +73,8 @@ if (isset($_SESSION['logged'])) {
 						</div>
 					</form>
 				<?php else : ?>
-					<h1 class=" flow-text" style="margin:0 0 5px"><i class="material-icons left">person_add</i>Adicionar um Administrador</h1>
-					<label>Adicionar um novo Administrador ao 4People</label>
+					<h1 class="flow-text dark-grey-text" style="margin:0 0 5px"><i class="material-icons left">person_add</i>Adicionar um Administrador</h1>
+					<label class="dark-grey-text">Adicionar um novo Administrador ao 4People</label>
 
 					<div class="divider"></div>
 
@@ -130,7 +130,10 @@ if (isset($_SESSION['logged'])) {
 		</div>
 	</main>
 
-	<?php include_once("$assets/components/ServiceWorker.php") ?>
+	<?php
+	include_once("$assets/components/Footer.php");
+	include_once("$assets/components/ServiceWorker.php")
+	?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="src/index.js"></script>

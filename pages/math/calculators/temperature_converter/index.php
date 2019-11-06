@@ -30,9 +30,9 @@ include_once("$root/assets/assets.php")
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin">
-				<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5px"><?= $icon_section ?></i><?= $name_tool ?></h1>
+				<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5px"><?= $icon_section ?></i><?= $name_tool ?></h1>
 
-				<label><?= $description_tool ?></label>
+				<label class="dark-grey-text"><?= $description_tool ?></label>
 				<div class="divider"></div>
 
 				<div class="row mb-0">
@@ -108,6 +108,7 @@ include_once("$root/assets/assets.php")
 	</main>
 
 	<?php
+	include_once("$assets/components/FixedActionButton.php");
 	include_once("$assets/components/Footer.php");
 	include_once("$assets/components/ServiceWorker.php")
 	?>

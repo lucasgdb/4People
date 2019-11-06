@@ -32,7 +32,7 @@ include_once("$root/assets/assets.php")
 			<div class="card-panel left-div-margin">
 				<h1 class="mont-serrat" style="font-size:30px;margin:-5px 0 5px"><i class="material-icons left" style="top:5px"><?= $icon_section ?></i><?= $name_tool ?></h1>
 
-				<label><?= $description_tool ?></label>
+				<label class="dark-grey-text"><?= $description_tool ?></label>
 				<div class="divider"></div>
 
 				<table class="responsive-table striped" lang="en-US">
@@ -738,6 +738,7 @@ include_once("$root/assets/assets.php")
 	</main>
 
 	<?php
+	include_once("$assets/components/FixedActionButton.php");
 	include_once("$assets/components/Footer.php");
 	include_once("$assets/components/ServiceWorker.php")
 	?>

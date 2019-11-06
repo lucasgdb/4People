@@ -30,8 +30,8 @@ include_once('assets/assets.php')
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin">
-				<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5.5px">home</i>4People - Página Inicial</h1>
-				<label>Ferramentas Online para estudantes e professores.</label>
+				<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5.5px">home</i>4People - Página Inicial</h1>
+				<label class="dark-grey-text">Ferramentas Online para estudantes e professores.</label>
 
 				<div class="divider"></div>
 
@@ -208,6 +208,7 @@ include_once('assets/assets.php')
 	</main>
 
 	<?php
+	include_once("$assets/components/FixedActionButton.php");
 	include_once("$assets/components/Footer.php");
 	include_once("$assets/components/ServiceWorker.php")
 	?>

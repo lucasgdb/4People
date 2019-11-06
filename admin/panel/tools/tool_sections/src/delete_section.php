@@ -10,7 +10,7 @@ try {
 		exit();
 	}
 
-	include_once('../../../../../assets/php/Connection.php');
+	include_once('../../../../../assets/src/php/Connection.php');
 
 	$section_id = filter_input(INPUT_GET, 'section_id', FILTER_DEFAULT);
 

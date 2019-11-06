@@ -7,10 +7,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 session_start();
 $assets = '../../../../assets';
-include_once("$assets/php/Exception.php");
-include_once("$assets/php/PHPMailer.php");
-include_once("$assets/php/SMTP.php");
-include_once("$assets/php/Connection.php");
+include_once("$assets/src/php/Exception.php");
+include_once("$assets/src/php/PHPMailer.php");
+include_once("$assets/src/php/SMTP.php");
+include_once("$assets/src/php/Connection.php");
 
 $mail = new PHPMailer(true);
 
@@ -53,7 +53,7 @@ try {
 	$mail->AltBody = '4People - Resposta da mensagem.';
 
 	if ($mail->send()) {
-		include_once("$assets/php/Connection.php");
+		include_once("$assets/src/php/Connection.php");
 
 		$sql = $database->prepare('UPDATE messages SET message_read = "1" WHERE message_id = :message_id');
 		$sql->bindValue(':message_id', $message_id);

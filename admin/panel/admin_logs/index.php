@@ -29,7 +29,7 @@ if (!isset($_SESSION['logged'])) {
 	<main>
 		<div class="container">
 			<div class="card-panel left-div-margin" style="padding-bottom:10px">
-				<h1 class="flow-text" style="margin:-5px 0 15px"><i class="material-icons left" style="top:3px">format_list_bulleted</i>Logs de Administradores</h1>
+				<h1 class="flow-text dark-grey-text" style="margin:-5px 0 15px"><i class="material-icons left" style="top:3px">format_list_bulleted</i>Logs de Administradores</h1>
 				<div class="divider"></div>
 
 				<table class="centered highlight responsive-table">
@@ -60,7 +60,8 @@ if (!isset($_SESSION['logged'])) {
 		</div>
 	</main>
 
-	<?php include_once("$assets/components/Footer.php") ?>
+	<?php include_once("$assets/components/FixedActionButton.php");
+	include_once("$assets/components/Footer.php") ?>
 	<?php include_once("$assets/components/ServiceWorker.php") ?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>

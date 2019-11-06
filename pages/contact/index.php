@@ -31,9 +31,9 @@ include_once("$root/assets/assets.php")
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin">
-				<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5px">email</i>Contato</h1>
+				<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5px">email</i>Contato</h1>
 
-				<label>Alguma dúvida? Algum bug? Deseja alguma ferramenta nova? Por favor, nos contate e deixe-nos sabendo de qualquer coisa.</label>
+				<label class="dark-grey-text">Alguma dúvida? Algum bug? Deseja alguma ferramenta nova? Por favor, nos contate e deixe-nos sabendo de qualquer coisa.</label>
 				<div class="divider"></div>
 
 				<form style="margin-top:15px" method="POST">
@@ -55,11 +55,11 @@ include_once("$root/assets/assets.php")
 						<div class="input-field col s12">
 							<i class="material-icons prefix">info</i>
 							<select name="message_subject">
-								<option value="Bug (mal funcionamento)">Bug (mal funcionamento)</option>
-								<option value="Erro (erro visual)">Erro (erro visual)</option>
-								<option value="Sugestão (visual)">Sugestão (visual)</option>
-								<option value="Sugestão (ferramenta)">Sugestão (ferramenta)</option>
-								<option value="Sugestão (blog)">Sugestão (blog, post)</option>
+								<option value="Bug - Mal funcionamento">Bug - Mal funcionamento</option>
+								<option value="Erro - Erro visual">Erro - Erro visual</option>
+								<option value="Sugestão - Visual">Sugestão - Visual</option>
+								<option value="Sugestão - Ferramenta">Sugestão - Ferramenta</option>
+								<option value="Sugestão - Blog">Sugestão - Blog</option>
 								<option value="Outro" selected>Outro</option>
 							</select>
 							<label>Título *</label>
@@ -85,6 +85,7 @@ include_once("$root/assets/assets.php")
 	</main>
 
 	<?php
+	include_once("$assets/components/FixedActionButton.php");
 	include_once("$assets/components/Footer.php");
 	include_once("$assets/components/ServiceWorker.php")
 	?>

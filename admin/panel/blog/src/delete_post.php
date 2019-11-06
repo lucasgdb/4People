@@ -11,7 +11,7 @@ try {
 	}
 
 	$assets = '../../../../assets';
-	include_once("$assets/php/Connection.php");
+	include_once("$assets/src/php/Connection.php");
 
 	$post_id = filter_input(INPUT_GET, 'post_id', FILTER_DEFAULT);
 

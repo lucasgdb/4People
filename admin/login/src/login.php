@@ -6,9 +6,9 @@ try {
 
 	session_start();
 	$assets = '../../../assets';
-	include_once("$assets/php/Connection.php");
-	include_once("$assets/php/MD5.php");
-	include_once("$assets/php/IP.php");
+	include_once("$assets/src/php/Connection.php");
+	include_once("$assets/src/php/MD5.php");
+	include_once("$assets/src/php/IP.php");
 
 	function setLog($database, $ip, $admin_nickname, $admin_password): int
 	{

@@ -32,8 +32,8 @@ if (!isset($_SESSION['logged'])) {
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin">
-				<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5px">comment</i>Publicar um post</h1>
-				<label>Publicar um post no Blog do 4People.</label>
+				<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5px">comment</i>Publicar um post</h1>
+				<label class="dark-grey-text">Publicar um post no Blog do 4People.</label>
 				<div class="divider"></div>
 
 				<form id="formInsertPost" method="POST" enctype="multipart/form-data">
@@ -129,7 +129,7 @@ if (!isset($_SESSION['logged'])) {
 			</div>
 
 			<div class="card-panel left-div-margin" style="padding-bottom:10px">
-				<h2 class="flow-text" style="margin:-5px 0 15px"><i class="material-icons left" style="top:3px">format_list_bulleted</i>Lista de posts <span id="amount"></span></h2>
+				<h2 class="flow-text dark-grey-text" style="margin:-5px 0 15px"><i class="material-icons left" style="top:3px">format_list_bulleted</i>Lista de posts <span id="amount"></span></h2>
 				<div class="divider"></div>
 
 				<table class="centered highlight responsive-table">
@@ -154,7 +154,8 @@ if (!isset($_SESSION['logged'])) {
 
 	<div id="deletes"></div>
 
-	<?php include_once("$assets/components/Footer.php") ?>
+	<?php include_once("$assets/components/FixedActionButton.php");
+	include_once("$assets/components/Footer.php") ?>
 	<?php include_once("$assets/components/ServiceWorker.php") ?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
@@ -243,7 +244,7 @@ if (!isset($_SESSION['logged'])) {
 						<td>${data[i][2] === '1' ? '<i title="Ativado" class="material-icons btn-green-text">done</i>' : '<i title="Desativado" class="material-icons red-color-text">clear</i>'}</td>
 						<td>${data[i][3]}</td>
 						<td>${data[i][4]}</td>
-						<td><a href="<?= $root ?>/pages/blog/post/?post_id=${data[i][0]}" title="Ir até ao post" class="btn waves-effect waves-light dark-grey z-depth-0"><i class="material-icons">link</i></a></td>
+						<td><a href="<?= $root ?>/pages/blog/post/?post_id=${data[i][0]}" title="Ir até ao post" class="btn waves-effect waves-light dark-grey z-depth-0" ${data[i][2] === '1' ? '' : 'disabled'}><i class="material-icons">link</i></a></td>
 						<td>
 							<a href="./data_update/?post_id=${data[i][0]}" class="btn waves-effect waves-light green darken-3 z-depth-0" title="Editar post"><i class="material-icons">edit</i></a>
 							<button class="btn waves-effect waves-light red-color z-depth-0 modal-trigger" style="cursor:pointer" title="Remover post" data-target="removePost${data[i][0]}"><i class="material-icons">delete</i></button>

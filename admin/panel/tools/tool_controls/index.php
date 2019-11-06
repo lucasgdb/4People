@@ -29,8 +29,8 @@ if (!isset($_SESSION['logged'])) {
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin" style="padding-bottom:10px">
-				<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5px">build</i>Adicionar uma Ferramenta</h1>
-				<label>Adicionar uma nova Ferramenta no 4People</label>
+				<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5px">build</i>Adicionar uma Ferramenta</h1>
+				<label class="dark-grey-text">Adicionar uma nova Ferramenta no 4People</label>
 
 				<div class="divider"></div>
 
@@ -100,7 +100,7 @@ if (!isset($_SESSION['logged'])) {
 			</div>
 
 			<div class="card-panel top-div-margin" style="padding-bottom:10px">
-				<h2 class="flow-text" style="margin:0 0 15px"><i class="material-icons left" style="top:3px">filter_list</i>Filtrar Ferramentas</h2>
+				<h2 class="flow-text dark-grey-text" style="margin:0 0 15px"><i class="material-icons left" style="top:3px">filter_list</i>Filtrar Ferramentas</h2>
 
 				<div class="divider"></div>
 
@@ -168,7 +168,7 @@ if (!isset($_SESSION['logged'])) {
 			</div>
 
 			<div class="card-panel left-div-margin" style="padding-bottom:10px">
-				<h2 class="flow-text" style="margin:-5px 0 15px"><i class="material-icons left" style="top:3px">format_list_bulleted</i>Lista de Ferramentas <span id="amount"></span></h2>
+				<h2 class="flow-text dark-grey-text" style="margin:-5px 0 15px"><i class="material-icons left" style="top:3px">format_list_bulleted</i>Lista de Ferramentas <span id="amount"></span></h2>
 				<div class="divider"></div>
 
 				<table class="centered highlight responsive-table">
@@ -193,7 +193,8 @@ if (!isset($_SESSION['logged'])) {
 	<div id="updates"></div>
 	<div id="deletes"></div>
 
-	<?php include_once("$assets/components/Footer.php") ?>
+	<?php include_once("$assets/components/FixedActionButton.php");
+	include_once("$assets/components/Footer.php") ?>
 	<?php include_once("$assets/components/ServiceWorker.php") ?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>

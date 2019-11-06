@@ -10,7 +10,7 @@ try {
 		exit();
 	}
 
-	include_once('../../../../assets/php/Connection.php');
+	include_once('../../../../assets/src/php/Connection.php');
 
 	$sql = $database->prepare(
 		'SELECT
@@ -23,7 +23,7 @@ try {
 	if ($sql->rowCount()) {
 		foreach ($sql as $key) {
 			extract($key);
-			$data["msg_$message_id"] = [$message_id, $message_name, $message_email, $message_subject, preg_replace('/[^[:alnum:]\-áãâàéẽêèíĩîìóôõòúûũù]/', ' ', $message_content), $message_read];
+			$data["msg_$message_id"] = [$message_id, $message_name, $message_email, $message_subject, $message_content, $message_read];
 		}
 
 		echo json_encode($data);

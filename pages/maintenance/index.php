@@ -1,5 +1,5 @@
 <?php
-include_once('../../assets/php/Connection.php');
+include_once('../../assets/src/php/Connection.php');
 
 $current_time = date('Y-m-d H:i:s');
 

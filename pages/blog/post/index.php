@@ -51,8 +51,8 @@ if ($post->rowCount()) extract($post->fetch());
 		<div class="container">
 			<div class="card-panel top-div-margin">
 				<?php if ($post->rowCount()) : ?>
-					<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:6px">comment</i><?= $post_title ?></h1>
-					<label><?= $post_description ?>. Autor: <?= $admin_name ?>. Data: <?= $post_createdAt ?></label>
+					<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:6px">comment</i><?= $post_title ?></h1>
+					<label class="dark-grey-text"><?= $post_description ?>. Autor: <?= $admin_name ?>. Visitas: <?= $post_visits ?>. Data: <?= $post_createdAt ?></label>
 
 					<div class="divider"></div>
 
@@ -125,6 +125,7 @@ if ($post->rowCount()) extract($post->fetch());
 	</main>
 
 	<?php
+	include_once("$assets/components/FixedActionButton.php");
 	include_once("$assets/components/Footer.php");
 	include_once("$assets/components/ServiceWorker.php")
 	?>

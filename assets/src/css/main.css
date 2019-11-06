@@ -349,6 +349,10 @@ li .collapsible-body a {
 }
 
 @media (max-width: 600px) {
+	.fixed-action-btn {
+		display: none
+	}
+
 	main>.container {
 		width: 98% !important
 	}

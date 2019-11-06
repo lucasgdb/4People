@@ -1,6 +1,9 @@
 // Materialize initalizations
 M.Sidenav.init(document.querySelectorAll('.sidenav'))
 M.Collapsible.init(document.querySelectorAll('.collapsible'))
+M.FloatingActionButton.init(document.querySelectorAll('.fixed-action-btn'), {
+	hoverEnabled: false
+})
 
 // Constants
 const sidenav = M.Sidenav.getInstance(document.querySelector('#slide-out'))
@@ -144,7 +147,8 @@ window.onload = () => {
 	minWidth.addListener(matchMin)
 
 	setTimeout(() => {
-		try { spinner.remove() }
-		catch (err) { }
+		try {
+			spinner.remove()
+		} catch (err) {}
 	}, 200)
 }

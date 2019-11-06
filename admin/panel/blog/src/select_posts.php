@@ -10,7 +10,7 @@ try {
 		exit();
 	}
 
-	include_once('../../../../assets/php/Connection.php');
+	include_once('../../../../assets/src/php/Connection.php');
 
 	$sql = $database->prepare('SELECT posts.post_id, posts.post_title, posts.post_description, posts.post_image, posts.post_content, posts.post_status, posts.post_visits, admins.admin_name FROM posts INNER JOIN admins ON admins.admin_id = posts.admin_id ORDER BY post_visits DESC');
 	$sql->execute();

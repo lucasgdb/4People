@@ -10,7 +10,7 @@ try {
 		exit();
 	}
 
-	include_once('../../../../assets/php/Connection.php');
+	include_once('../../../../assets/src/php/Connection.php');
 
 	$page = filter_input(INPUT_GET, 'page', FILTER_DEFAULT);
 	$page = isset($page) && $page > 0 ? ($page - 1) * 10 : 0;

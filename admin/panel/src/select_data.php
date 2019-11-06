@@ -10,7 +10,7 @@ try {
 		exit();
 	}
 
-	include_once('../../../assets/php/Connection.php');
+	include_once('../../../assets/src/php/Connection.php');
 
 	$sql = $database->prepare('SELECT tool_name, tool_visits FROM tools WHERE tool_status = "1" ORDER BY tool_visits DESC LIMIT 10');
 	$sql->execute();

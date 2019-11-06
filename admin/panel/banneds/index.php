@@ -62,7 +62,8 @@ if (!isset($_SESSION['logged'])) {
 
 	<div id="modals"></div>
 
-	<?php include_once("$assets/components/Footer.php") ?>
+	<?php include_once("$assets/components/FixedActionButton.php");
+	include_once("$assets/components/Footer.php") ?>
 	<?php include_once("$assets/components/ServiceWorker.php") ?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>

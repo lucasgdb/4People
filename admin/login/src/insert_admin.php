@@ -5,13 +5,13 @@ try {
 	header('Content-Type: application/json; charset=UTF-8');
 
 	$assets = '../../../assets';
-	include_once("$assets/php/Connection.php");
+	include_once("$assets/src/php/Connection.php");
 
 	$sql = $database->prepare('SELECT admin_id FROM admins LIMIT 1');
 	$sql->execute();
 
 	if (!$sql->rowCount()) {
-		include_once("$assets/php/MD5.php");
+		include_once("$assets/src/php/MD5.php");
 
 		$admin_name = trim(filter_input(INPUT_POST, 'admin_name', FILTER_DEFAULT));
 		$admin_nickname = strtolower(trim(filter_input(INPUT_POST, 'admin_nickname', FILTER_DEFAULT)));

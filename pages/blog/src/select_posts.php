@@ -4,7 +4,7 @@ try {
 	header('Access-Control-Allow-Methods: GET');
 	header('Content-Type: application/json; charset=UTF-8');
 
-	include_once('../../../assets/php/Connection.php');
+	include_once('../../../assets/src/php/Connection.php');
 
 	$offset = isset($_GET['offset']) ? (filter_input(INPUT_GET, 'offset', FILTER_DEFAULT) - 1) * 6 : 1;
 

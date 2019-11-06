@@ -31,8 +31,8 @@ $admin_panel = true
 	<main>
 		<div class="container">
 			<div class="card-panel left-div-margin">
-				<h1 class="mont-serrat" style="font-size:30px;margin:-5px 0 5px"><i class="material-icons left" style="top:5px">verified_user</i>Painel Administrativo</h1>
-				<label>Painel Administrativo do 4People</label>
+				<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:-5px 0 5px"><i class="material-icons left" style="top:5px">verified_user</i>Painel Administrativo</h1>
+				<label class="dark-grey-text">Painel Administrativo do 4People</label>
 
 				<div class="divider"></div>
 
@@ -136,7 +136,8 @@ $admin_panel = true
 		</div>
 	</main>
 
-	<?php include_once("$assets/components/Footer.php") ?>
+	<?php include_once("$assets/components/FixedActionButton.php");
+	include_once("$assets/components/Footer.php") ?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>

@@ -29,8 +29,8 @@ if (!isset($_SESSION['logged'])) {
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin" style="padding-bottom:10px">
-				<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5px">person_add</i>Adicionar um Administrador</h1>
-				<label>Adicionar um novo Administrador ao 4People</label>
+				<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5px">person_add</i>Adicionar um Administrador</h1>
+				<label class="dark-grey-text">Adicionar um novo Administrador ao 4People</label>
 
 				<div class="divider"></div>
 
@@ -84,7 +84,7 @@ if (!isset($_SESSION['logged'])) {
 			</div>
 
 			<div class="card-panel top-div-margin" style="padding-bottom:0">
-				<h2 class="flow-text" style="margin:0 0 15px"><i class="material-icons left" style="top:3px">search</i>Pesquisar um Administrador</h2>
+				<h2 class="flow-text dark-grey-text" style="margin:0 0 15px"><i class="material-icons left" style="top:3px">search</i>Pesquisar um Administrador</h2>
 				<div class="divider"></div>
 
 				<div class="row mb-0" style="margin-top:15px">
@@ -100,7 +100,7 @@ if (!isset($_SESSION['logged'])) {
 			</div>
 
 			<div class="card-panel left-div-margin" style="padding-bottom:10px">
-				<h2 class="flow-text" style="margin:-5px 0 15px"><i class="material-icons left" style="top:3px">format_list_bulleted</i>Lista de Administradores</h2>
+				<h2 class="flow-text dark-grey-text" style="margin:-5px 0 15px"><i class="material-icons left" style="top:3px">format_list_bulleted</i>Lista de Administradores</h2>
 				<div class="divider"></div>
 
 				<table class="centered highlight responsive-table">
@@ -124,7 +124,8 @@ if (!isset($_SESSION['logged'])) {
 
 	<div id="modals"></div>
 
-	<?php include_once("$assets/components/Footer.php") ?>
+	<?php include_once("$assets/components/FixedActionButton.php");
+	include_once("$assets/components/Footer.php") ?>
 	<?php include_once("$assets/components/ServiceWorker.php") ?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>

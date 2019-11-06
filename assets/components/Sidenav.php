@@ -22,7 +22,7 @@ if ($logged) {
 			<?php if ($logged) : ?>
 				<span class="name">Administrador: <?= $admin_name ?></span>
 				<a class="linkHover" href="<?= $root ?>/admin/panel/administrators/data_update/?admin_id=<?= $admin_id ?>"><span class="email" style="padding-bottom:0">Editar Perfil »</span></a>
-				<a class="dark-grey" href="<?= $assets ?>/php/Logout.php"> <span class="email" style="color:#c8c8c8;padding-bottom:0">Sair »</span></a>
+				<a class="dark-grey" href="<?= $assets ?>/src/php/Logout.php"> <span class="email" style="color:#c8c8c8;padding-bottom:0">Sair »</span></a>
 			<?php else : ?>
 				<span class="name">4People - Ferramentas Online</span>
 				<a class="linkHover" href="<?= $root ?>/pages/contact/"><span class="email" style="padding-bottom:0">Contato »</span></a>
@@ -117,7 +117,7 @@ if ($logged) {
 	if ($sql->rowCount()) :
 		$current_post_id = filter_input(INPUT_GET, 'post_id', FILTER_DEFAULT) ?>
 		<li class="<?= $blog ? 'active' : '' ?>">
-			<div class="collapsible-header"><i class="material-icons left">comment</i>Postagens<i class="material-icons" style="position:absolute;right:0<?= $blog ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
+			<div class="collapsible-header"><i class="material-icons left">comment</i>Blog<i class="material-icons" style="position:absolute;right:0<?= $blog ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
 			<div class="collapsible-body">
 				<ul class="collapsible padding-headers padding-buttons">
 					<li>
@@ -143,6 +143,9 @@ if ($logged) {
 					<ul>
 						<li><a class="waves-effect" href="<?= $root ?>/pages/blog/" title="4People - Blog"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Blog</a></li>
 						<li><a class="waves-effect" href="<?= $root ?>/pages/contact/" title="Contato - 4People"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Contato</a></li>
+						<?php if ($logged) : ?>
+							<li><a class="waves-effect" href="<?= $root ?>/admin/panel/" title="Painel Administrativo"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Painel Administrativo</a></li>
+						<?php endif ?>
 						<?php
 						$sql = $database->prepare('SELECT type_name, type_path FROM types');
 						$sql->execute();
@@ -155,22 +158,6 @@ if ($logged) {
 			</ul>
 		</div>
 	</li>
-
-	<?php if ($logged) : ?>
-		<li>
-			<div class="collapsible-header"><i class="material-icons left">settings</i>Opções<i class="material-icons" style="position:absolute;right:0">arrow_drop_down</i></div>
-			<div class="collapsible-body">
-				<ul class="collapsible padding-headers padding-buttons">
-					<li>
-						<ul>
-							<li><a class="waves-effect" href="<?= $root ?>/admin/panel/" title="Painel Administrativo"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Painel Administrativo</a></li>
-							<li><a class="waves-effect" href="<?= $assets ?>/php/Logout.php" title="Sair"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Sair</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</li>
-	<?php endif ?>
 </ul>
 
 <script>

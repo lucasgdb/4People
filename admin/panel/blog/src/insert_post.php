@@ -11,7 +11,7 @@ try {
 	}
 
 	$assets = '../../../../assets';
-	include_once("$assets/php/Connection.php");
+	include_once("$assets/src/php/Connection.php");
 
 	$post_title = trim(filter_input(INPUT_POST, 'post_title', FILTER_DEFAULT));
 	$post_description = trim(filter_input(INPUT_POST, 'post_description', FILTER_DEFAULT));

@@ -37,8 +37,8 @@ if (!isset($_SESSION['logged'])) {
 				$sql->execute();
 				extract($sql->fetch());
 				?>
-				<h1 class="flow-text" style="margin:0 0 5px"><i class="material-icons left" style="top:2px">edit</i>Editar dados de "<?= $post_title ?>"</h1>
-				<label>Atualizar dados de um post do blog do 4People</label>
+				<h1 class="flow-text dark-grey-text" style="margin:0 0 5px"><i class="material-icons left" style="top:2px">edit</i>Editar dados de "<?= $post_title ?>"</h1>
+				<label class="dark-grey-text">Atualizar dados de um post do blog do 4People</label>
 
 				<div class="divider"></div>
 

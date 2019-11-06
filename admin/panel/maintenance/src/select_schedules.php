@@ -10,7 +10,7 @@ try {
 		exit();
 	}
 
-	include_once('../../../../assets/php/Connection.php');
+	include_once('../../../../assets/src/php/Connection.php');
 
 	$current_date = date('Y-m-d H:i:s');
 	$sql = $database->prepare('DELETE FROM maintenances WHERE :current_date > maintenance_end');

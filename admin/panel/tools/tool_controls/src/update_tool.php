@@ -6,7 +6,7 @@ try {
 		exit();
 	}
 
-	include_once('../../../../../assets/php/Connection.php');
+	include_once('../../../../../assets/src/php/Connection.php');
 
 	$tool_id = filter_input(INPUT_POST, 'tool_id', FILTER_DEFAULT);
 	$tool_name = trim(filter_input(INPUT_POST, 'tool_name', FILTER_DEFAULT));

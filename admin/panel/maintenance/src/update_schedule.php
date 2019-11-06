@@ -10,7 +10,7 @@ try {
 		exit();
 	}
 
-	include_once('../../../../assets/php/Connection.php');
+	include_once('../../../../assets/src/php/Connection.php');
 
 	$maintenance_id = filter_input(INPUT_POST, 'maintenance_id', FILTER_DEFAULT);
 	$maintenance_name = filter_input(INPUT_POST, 'maintenance_name', FILTER_DEFAULT);
