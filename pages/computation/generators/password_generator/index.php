@@ -39,7 +39,7 @@ include_once("$root/assets/assets.php")
 					<p class="mb-0 col s12">Primeiro caractere</p>
 					<div class="col s6 m3">
 						<p>
-							<label>
+							<label class="dark-grey-text">
 								<input class="with-gap" name="firstCharacter" type="radio" checked>
 								<span>Número</span>
 							</label>
@@ -48,7 +48,7 @@ include_once("$root/assets/assets.php")
 
 					<div class="col s6 m3">
 						<p>
-							<label>
+							<label class="dark-grey-text">
 								<input class="with-gap" name="firstCharacter" type="radio">
 								<span>Maiúsculo</span>
 							</label>
@@ -57,7 +57,7 @@ include_once("$root/assets/assets.php")
 
 					<div class="col s6 m3">
 						<p>
-							<label>
+							<label class="dark-grey-text">
 								<input class="with-gap" name="firstCharacter" type="radio">
 								<span>Minúsculo</span>
 							</label>
@@ -66,7 +66,7 @@ include_once("$root/assets/assets.php")
 
 					<div class="col s6 m3">
 						<p>
-							<label>
+							<label class="dark-grey-text">
 								<input class="with-gap" name="firstCharacter" type="radio">
 								<span>Especial</span>
 							</label>
@@ -80,7 +80,7 @@ include_once("$root/assets/assets.php")
 					<p class="mb-0 col s12">Outros caracteres</p>
 					<div class="col s6 m3">
 						<p>
-							<label>
+							<label class="dark-grey-text">
 								<input type="checkbox" checked>
 								<span>Números</span>
 							</label>
@@ -89,7 +89,7 @@ include_once("$root/assets/assets.php")
 
 					<div class="col s6 m3">
 						<p>
-							<label>
+							<label class="dark-grey-text">
 								<input type="checkbox" checked>
 								<span>Maiúsculos</span>
 							</label>
@@ -98,7 +98,7 @@ include_once("$root/assets/assets.php")
 
 					<div class="col s6 m3">
 						<p>
-							<label>
+							<label class="dark-grey-text">
 								<input type="checkbox" checked>
 								<span>Minúsculos</span>
 							</label>
@@ -107,7 +107,7 @@ include_once("$root/assets/assets.php")
 
 					<div class="col s6 m3">
 						<p>
-							<label>
+							<label class="dark-grey-text">
 								<input type="checkbox">
 								<span>Especiais</span>
 							</label>
@@ -146,7 +146,7 @@ include_once("$root/assets/assets.php")
 				<div class="row mb-0">
 					<div class="col s12 m6">
 						<p>
-							<label>
+							<label class="dark-grey-text">
 								<input id="equalChars" type="checkbox" class="filled-in" checked>
 								<span>Excluir Caracteres iguais (AA, ll, 22)</span>
 							</label>
@@ -155,16 +155,16 @@ include_once("$root/assets/assets.php")
 
 					<div class="col s12 m6">
 						<p>
-							<label>
+							<label class="dark-grey-text">
 								<input id="similarChars" type="checkbox" class="filled-in" checked>
 								<span>Excluir Caracteres similares (lL, lj, O0)</span>
 							</label>
 						</p>
 					</div>
 
-					<div class="col s12 m6 l12">
+					<div class="col s12 m6">
 						<p>
-							<label>
+							<label class="dark-grey-text">
 								<input id="strength" type="checkbox" class="filled-in" checked>
 								<span>Mostrar Força de Senha</span>
 							</label>

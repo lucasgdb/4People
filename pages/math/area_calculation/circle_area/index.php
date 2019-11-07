@@ -40,12 +40,12 @@ include_once("$root/assets/assets.php")
 
 					<div class="col s12">
 						<p>
-							<label>
+							<label class="dark-grey-text">
 								<input class="with-gap" name="formula" type="radio" checked />
 								<span>Fórmula do Raio (PI * R²)</span>
 							</label>
 
-							<label class="ml-4">
+							<label class="ml-4 dark-grey-text">
 								<input class="with-gap" name="formula" type="radio" />
 								<span>Fórmula do Diâmetro (PI * D² / 4)</span>
 							</label>

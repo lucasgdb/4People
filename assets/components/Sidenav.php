@@ -124,7 +124,7 @@ if ($logged) {
 						<ul>
 							<?php
 								foreach ($sql as $data) : extract($data) ?>
-								<li><a class="waves-effect <?= $current_post_id === $selected_post_id ? 'black-text' : '' ?>" <?= $current_post_id === $selected_post_id ? 'onclick="e => preventDefault(e)" style="font-weight:bold"' : '' ?> href="<?= $root ?>/pages/blog/post/?post_id=<?= $selected_post_id ?>" title="<?= $post_title ?>"><i class="material-icons left <?= $current_post_id === $selected_post_id ? 'dark-grey-text' : 'red-color-text' ?>" <?= $current_post_id === $selected_post_id ? 'style="font-size:20px;margin-left:2.5px"' : '' ?>><?= $current_post_id === $selected_post_id ? 'radio_button_checked' : 'keyboard_arrow_right' ?></i><?= $post_title ?></a></li>
+								<li><a class="waves-effect <?= $current_post_id === $selected_post_id ? 'black-text' : '' ?>" <?= $current_post_id === $selected_post_id ? 'onclick="preventDefault(event)" style="font-weight:bold"' : '' ?> href="<?= $root ?>/pages/blog/post/?post_id=<?= $selected_post_id ?>" title="<?= $post_title ?>"><i class="material-icons left <?= $current_post_id === $selected_post_id ? 'dark-grey-text' : 'red-color-text' ?>" <?= $current_post_id === $selected_post_id ? 'style="font-size:20px;margin-left:2.5px"' : '' ?>><?= $current_post_id === $selected_post_id ? 'radio_button_checked' : 'keyboard_arrow_right' ?></i><?= $post_title ?></a></li>
 							<?php endforeach ?>
 						</ul>
 					</li>

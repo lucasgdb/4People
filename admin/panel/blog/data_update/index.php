@@ -140,7 +140,10 @@ if (!isset($_SESSION['logged'])) {
 		</div>
 	</main>
 
-	<?php include_once("$assets/components/ServiceWorker.php") ?>
+	<?php
+	include_once("$assets/components/Footer.php");
+	include_once("$assets/components/ServiceWorker.php")
+	?>
 
 	<script src="<?= $assets ?>/src/js/katex.min.js"></script>
 	<script src="<?= $assets ?>/src/js/highlight.min.js"></script>
