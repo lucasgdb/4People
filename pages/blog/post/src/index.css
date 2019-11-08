@@ -12,10 +12,6 @@ br {
 	margin: 5px 0
 }
 
-p>br {
-	display: none
-}
-
 .mb-1 {
 	margin-bottom: 5px
 }
@@ -25,7 +21,8 @@ strong {
 }
 
 blockquote {
-	border-left-color: #a62023
+	border-left-color: #a62023;
+	padding-left: 13px !important
 }
 
 pre {
@@ -43,12 +40,9 @@ pre {
 	padding: 1em 1.5em;
 	display: block;
 	word-wrap: break-word;
+	padding: 10px 20px !important
 }
 
-.ql-font-serif {
-	font-family: serif;
-}
-
-.ql-font-monospace {
-	font-family: monospace;
+.ql-editor *:not(a) {
+	cursor: default !important
 }

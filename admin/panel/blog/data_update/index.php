@@ -84,9 +84,10 @@ if (!isset($_SESSION['logged'])) {
 					<textarea id="postContent" name="post_content" class="hide" spellcheck="false"></textarea>
 
 					<div class="standalone-container">
-						<div id="toolbar-container">
+						<div id="toolbar-container" class="center-align">
 							<span class="ql-formats">
 								<select class="ql-font browser-default"></select>
+								<select class="ql-size browser-default"></select>
 							</span>
 
 							<span class="ql-formats">
@@ -113,6 +114,9 @@ if (!isset($_SESSION['logged'])) {
 							<span class="ql-formats">
 								<button class="ql-list" value="ordered"></button>
 								<button class="ql-list" value="bullet"></button>
+								<button class="ql-indent" value="-1"></button>
+								<button class="ql-indent" value="+1"></button>
+
 							</span>
 
 							<span class="ql-formats">
@@ -131,7 +135,7 @@ if (!isset($_SESSION['logged'])) {
 					</div>
 
 					<a href="../" class="btn waves-effect waves-light dark-grey z-depth-0 mt-2" title="Voltar"><i class="material-icons left">keyboard_return</i>Voltar</a>
-					<button id="btnUpdatePost" class="btn waves-effect waves-light red-color right z-depth-0 mt-2 ml-1" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
+					<button id="btnUpdatePost" class="btn waves-effect waves-light btn-green right z-depth-0 mt-2 ml-1" title="Salvar"><i class="material-icons left">save</i>Salvar</button>
 					<a href="<?= $root ?>/pages/blog/post/?post_id=<?= $post_id ?>" class="btn waves-effect waves-light dark-grey z-depth-0 right mt-2" title="Ir até o post"><i class="material-icons left">link</i>Ver post</a>
 				</form>
 

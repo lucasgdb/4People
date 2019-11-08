@@ -76,9 +76,10 @@ if (!isset($_SESSION['logged'])) {
 					<textarea id="postContent" name="post_content" class="hide" spellcheck="false"></textarea>
 
 					<div class="standalone-container">
-						<div id="toolbar-container">
+						<div id="toolbar-container" class="center-align">
 							<span class="ql-formats">
 								<select class="ql-font browser-default"></select>
+								<select class="ql-size browser-default"></select>
 							</span>
 
 							<span class="ql-formats">
@@ -105,6 +106,8 @@ if (!isset($_SESSION['logged'])) {
 							<span class="ql-formats">
 								<button class="ql-list" value="ordered"></button>
 								<button class="ql-list" value="bullet"></button>
+								<button class="ql-indent" value="-1"></button>
+								<button class="ql-indent" value="+1"></button>
 							</span>
 
 							<span class="ql-formats">

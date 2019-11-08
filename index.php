@@ -114,14 +114,12 @@ include_once('assets/assets.php')
 					<div class="col s12 l6">
 						<div class="card grey lighten-5">
 							<div class="card-content">
-								<span class="card-title"><i class="material-icons left red-color-text">group</i>Pessoas ajudadas</span>
+								<span class="card-title"><i class="material-icons left red-color-text">build</i>Ferramentas</span>
 								<?php
-								$sql = $database->prepare('SELECT SUM(tool_visits) FROM tools WHERE tool_status = "1" LIMIT 1');
+								$sql = $database->query('SELECT COUNT(tool_id) FROM tools');
 								$sql->execute();
-
-								$total_visits = $sql->fetchColumn()
 								?>
-								<p style="font-size:16px">Nossas Ferramentas foram usadas <span id="toolVisits"><?= $total_visits ?></span> vezes</p>
+								<p style="font-size:16px">Quantidade de Ferramentas: <span class="number"><?= $sql->fetchColumn() ?></span></p>
 							</div>
 
 							<div class="top-div dark-grey"></div>
@@ -131,12 +129,42 @@ include_once('assets/assets.php')
 					<div class="col s12 l6">
 						<div class="card grey lighten-5">
 							<div class="card-content">
-								<span class="card-title"><i class="material-icons left red-color-text">build</i>Ferramentas</span>
+								<span class="card-title"><i class="material-icons left red-color-text">group</i>Pessoas ajudadas</span>
 								<?php
-								$sql = $database->query('SELECT COUNT(tool_id) FROM tools');
+								$sql = $database->prepare('SELECT SUM(tool_visits) FROM tools WHERE tool_status = "1" LIMIT 1');
 								$sql->execute();
 								?>
-								<p style="font-size:16px">Quantidade de Ferramentas: <?= $sql->fetchColumn() ?></p>
+								<p style="font-size:16px">Nossas Ferramentas foram usadas <span class="number"><?= $sql->fetchColumn() ?></span> vezes</p>
+							</div>
+
+							<div class="top-div dark-grey"></div>
+						</div>
+					</div>
+
+					<div class="col s12 l6">
+						<div class="card grey lighten-5">
+							<div class="card-content">
+								<span class="card-title"><i class="material-icons left red-color-text">comment</i>Postagens</span>
+								<?php
+								$sql = $database->query('SELECT COUNT(post_id) FROM posts LIMIT 1');
+								$sql->execute();
+								?>
+								<p style="font-size:16px">Quantidade de Postagens: <span class="number"><?= $sql->fetchColumn() ?></span></p>
+							</div>
+
+							<div class="top-div dark-grey"></div>
+						</div>
+					</div>
+
+					<div class="col s12 l6">
+						<div class="card grey lighten-5">
+							<div class="card-content">
+								<span class="card-title"><i class="material-icons left red-color-text">group</i>Visitas</span>
+								<?php
+								$sql = $database->prepare('SELECT SUM(post_visits) FROM posts WHERE post_status = "1" LIMIT 1');
+								$sql->execute();
+								?>
+								<p style="font-size:16px">Nossas Postagens foram vistas <span class="number"><?= $sql->fetchColumn() ?></span> vezes</p>
 							</div>
 
 							<div class="top-div dark-grey"></div>
@@ -147,18 +175,18 @@ include_once('assets/assets.php')
 				<div class="divider mb-2"></div>
 
 				<div style="padding:0 20px">
-					<blockquote class="grey-text text-darken-3" style="border-left-color:#A62023">
-						"O 4People é um Sistema Web que possui inúmeras ferramentas para Desenvolvedores e estudantes usarem e tornarem seus dias mais produtivos e rápidos.
-						Foi produzido no curso de Desenvolvimento de Sistemas da Etec de Guaratinguetá. O projeto é de código aberto e pode ser usado, desenvolvido e implementado por qualquer um."
+					<h2 class="mont-serrat mt-2 mb-0 center-align" style="font-size:35px">4People</h2>
+					<blockquote class="grey-text text-darken-3 mt-2" style="border-left-color:#A62023">
+						"O 4People é um Sistema Web que traz vários tipos de ferramentas Computacionais para Desenvolvedores de Softwares e estudantes de informática, assim como ferramentas Matemáticas para alunos e professores. 4People também possui um sistema de Blog totalmente otimizado. Além disso, ele é de código aberto, ou seja, qualquer um pode visualizar seu código fonte, e usá-lo para estudos e até mesmo melhorá-lo."
 					</blockquote>
 				</div>
 
 				<div class="divider mt-2 mb-2"></div>
 
-				<div class="row mb-0">
-					<div class="col s12 m6 l4">
-						<a href="https://github.com/lucasnaja" target="_blank"><img title="Lucas Bittencourt" class="responsive-img img-thumbnail" src="<?= $assets ?>/images/lucas_bittencourt.jpeg" alt="Lucas Bittencourt"></a>
-					</div>
+				<div title="Lucas Bittencourt" class="row mb-0">
+					<a href="https://github.com/lucasnaja" target="_blank" class="waves-effect col s12 m6 l4">
+						<img class="responsive-img img-thumbnail" src="<?= $assets ?>/images/lucas_bittencourt.jpeg" alt="Lucas Bittencourt">
+					</a>
 
 					<div class="col s12 m6 l8">
 						<p class="grey-text text-darken-4 mb-0">Nome: Lucas Bittencourt. Função: Desenvolvedor</p>
@@ -175,8 +203,8 @@ include_once('assets/assets.php')
 				<div class="divider mt-2 mb-2"></div>
 
 				<div class="row mb-0" style="margin-top:12px">
-					<div class="col s12 m6 l4">
-						<img title="Suzany Silva" class="responsive-img img-thumbnail" src="<?= $assets ?>/images/suzany_silva.jpg" alt="Suzany Silva">
+					<div title="Suzany Silva" class="waves-effect col s12 m6 l4">
+						<img class="responsive-img img-thumbnail" src="<?= $assets ?>/images/suzany_silva.jpg" alt="Suzany Silva">
 					</div>
 
 					<div class="col s12 m6 l8">
@@ -190,8 +218,8 @@ include_once('assets/assets.php')
 				<div class="divider mt-2 mb-2"></div>
 
 				<div class="row mb-0" style="margin-top:12px">
-					<div class="col s12 m6 l4">
-						<img title="Renan Mattos" class="responsive-img img-thumbnail" src="<?= $assets ?>/images/renan_mattos.jpg" alt="Renan Mattos">
+					<div title="Renan Mattos" class="waves-effect col s12 m6 l4">
+						<img class="responsive-img img-thumbnail" src="<?= $assets ?>/images/renan_mattos.jpg" alt="Renan Mattos">
 					</div>
 
 					<div class="col s12 m6 l8">
@@ -217,17 +245,17 @@ include_once('assets/assets.php')
 	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script>
-		const lblToolVisits = document.querySelector('#toolVisits')
+		const lblNumbers = document.querySelectorAll('.number')
 		const formatter = Intl.NumberFormat('pt-BR')
 
-		const formatNumbers = (...elements) => {
+		const formatNumbers = elements => {
 			for (let i = 0; i < elements.length; i += 1) {
 				const number = elements[i].textContent
 				elements[i].textContent = formatter.format(number)
 			}
 		}
 
-		formatNumbers(lblToolVisits)
+		formatNumbers(lblNumbers)
 	</script>
 </body>
 

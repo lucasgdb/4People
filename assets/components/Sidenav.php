@@ -141,8 +141,8 @@ if ($logged) {
 			<ul class="collapsible padding-headers padding-buttons">
 				<li>
 					<ul>
-						<li><a class="waves-effect" href="<?= $root ?>/pages/blog/" title="4People - Blog"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Blog</a></li>
-						<li><a class="waves-effect" href="<?= $root ?>/pages/contact/" title="Contato - 4People"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Contato</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/pages/blog/" title="Blog do 4People"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Blog</a></li>
+						<li><a class="waves-effect" href="<?= $root ?>/pages/contact/" title="Fale Conosco"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Contato</a></li>
 						<?php if ($logged) : ?>
 							<li><a class="waves-effect" href="<?= $root ?>/admin/panel/" title="Painel Administrativo"><i class="material-icons left red-color-text">keyboard_arrow_right</i>Painel Administrativo</a></li>
 						<?php endif ?>

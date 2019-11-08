@@ -18,6 +18,11 @@ $admin_panel = true
 	<link rel="stylesheet" href="src/chart.min.css">
 	<title>Painel Administrativo - 4People</title>
 	<?php include_once("$assets/components/admin_components/MetaTags.php") ?>
+	<style>
+		.mb-3 {
+			margin-bottom: 14px
+		}
+	</style>
 </head>
 
 <body>
@@ -38,36 +43,32 @@ $admin_panel = true
 
 				<div class="row mb-0">
 					<div class="col s12 m6">
-						<div class="card z-depth-2">
-							<div class="card-content left-div-margin-mobile" style="padding-bottom:4px">
-								<div class="row mb-0">
-									<div class="col s12 center-align">
-										<h6 class="mont-serrat mt-0">Administradores</h6>
-										<div class="divider"></div>
-										<a class="tooltiped" data-tooltip="Administradores" href="administrators/">
-											<i class="material-icons large" style="color:#212121">supervisor_account</i>
-										</a>
-									</div>
+						<div class="card z-depth-1">
+							<div class="card-content left-div-margin-mobile" style="padding-top:4px;padding-bottom:4px">
+								<div class="center-align">
+									<h6 class="mont-serrat mb-3">Administradores</h6>
+									<div class="divider"></div>
+									<a class="tooltiped" data-tooltip="Administradores" href="administrators/">
+										<i class="material-icons large" style="color:#212121">supervisor_account</i>
+									</a>
 								</div>
 
 								<div class="left-div-mobile dark-grey"></div>
 							</div>
 						</div>
 
-						<div class="card z-depth-2">
-							<div class="card-content left-div-margin-mobile" style="padding-bottom:4px">
-								<div class="row mb-0">
-									<div class="col s12 center-align">
-										<?php
-										$sql = $database->prepare('SELECT COUNT(message_id) FROM messages WHERE message_read = "0"');
-										$sql->execute()
-										?>
-										<h6 class="mont-serrat mt-0" style="position:relative">Mensagens<span class="new badge btn-green" style="position:absolute;right:0" data-badge-caption="<?= $sql->fetchColumn() ?>"></span> </h6>
-										<div class="divider mb-2"></div>
-										<a class="tooltiped" data-tooltip="Mensagens" href="messages/">
-											<i class="material-icons large" style="color:#212121">question_answer</i>
-										</a>
-									</div>
+						<div class="card z-depth-1">
+							<div class="card-content left-div-margin-mobile" style="padding-top:4px;padding-bottom:4px">
+								<div class="center-align">
+									<?php
+									$sql = $database->prepare('SELECT COUNT(message_id) FROM messages WHERE message_read = "0"');
+									$sql->execute()
+									?>
+									<h6 class="mont-serrat mb-3" style="position:relative">Mensagens<span class="new badge btn-green" style="position:absolute;right:0" data-badge-caption="<?= $sql->fetchColumn() ?>"></span> </h6>
+									<div class="divider mb-2"></div>
+									<a class="tooltiped" data-tooltip="Mensagens" href="messages/">
+										<i class="material-icons large" style="color:#212121">question_answer</i>
+									</a>
 								</div>
 
 								<div class="left-div-mobile dark-grey"></div>
@@ -77,7 +78,7 @@ $admin_panel = true
 
 					<div class="col s12 m6">
 						<div class="card z-depth-2">
-							<div class="card-content left-div-margin-mobile" style="padding-bottom:4px">
+							<div class="card-content left-div-margin-mobile" style="padding-top:4px;padding-bottom:4px">
 								<div class="row mb-0">
 									<div class="col s12 center-align">
 										<?php
@@ -86,7 +87,7 @@ $admin_panel = true
 
 										$banned_count = $sql->fetchColumn()
 										?>
-										<h6 class="mont-serrat mt-0" style="position:relative">Banimentos<span class="new red badge" style="position:absolute;right:0" data-badge-caption=""><?= $banned_count ?></span></h6>
+										<h6 class="mont-serrat mb-3" style="position:relative">Banimentos<span class="new red badge" style="position:absolute;right:0" data-badge-caption=""><?= $banned_count ?></span></h6>
 										<div class="divider"></div>
 										<a class="tooltiped" data-tooltip="Banimentos" href="banneds/">
 											<i class="material-icons large" style="color:#212121">close</i>
@@ -99,7 +100,7 @@ $admin_panel = true
 						</div>
 
 						<div class="card z-depth-2">
-							<div class="card-content left-div-margin-mobile" style="padding-bottom:4px">
+							<div class="card-content left-div-margin-mobile" style="padding-top:4px;padding-bottom:4px">
 								<div class="row mb-0">
 									<div class="col s12 center-align">
 										<?php
@@ -108,7 +109,7 @@ $admin_panel = true
 
 										$tools_count = $sql->fetchColumn()
 										?>
-										<h6 class="mont-serrat mt-0" style="position:relative">Ferramentas<span class="new indigo badge" style="position:absolute;right:0" data-badge-caption=""><?= $tools_count ?></span></h6>
+										<h6 class="mont-serrat mb-3" style="position:relative">Ferramentas<span class="new indigo badge" style="position:absolute;right:0" data-badge-caption=""><?= $tools_count ?></span></h6>
 										<div class="divider mb-2"></div>
 										<a class="tooltiped" data-tooltip="<?= $sections_count ? 'Controle de Ferramentas' : ($types_count ? 'Seções de Ferramentas' : 'Tipos de Ferramentas') ?>" href="<?= $sections_count ? 'tools/tool_controls/' : ($types_count ? 'tools/sections/' : 'tools/tool_types/') ?>">
 											<i class="material-icons large" style="color:#212121">build</i>

@@ -55,11 +55,9 @@ include_once("$root/assets/assets.php")
 						<div class="input-field col s12">
 							<i class="material-icons prefix">info</i>
 							<select name="message_subject">
-								<option value="Bug - Mal funcionamento">Bug - Mal funcionamento</option>
-								<option value="Erro - Erro visual">Erro - Erro visual</option>
-								<option value="Sugestão - Visual">Sugestão - Visual</option>
-								<option value="Sugestão - Ferramenta">Sugestão - Ferramenta</option>
-								<option value="Sugestão - Blog">Sugestão - Blog</option>
+								<option value="Bug">Bug</option>
+								<option value="Erro">Erro</option>
+								<option value="Sugestão">Sugestão</option>
 								<option value="Outro" selected>Outro</option>
 							</select>
 							<label>Título *</label>

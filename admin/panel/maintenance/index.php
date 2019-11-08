@@ -121,7 +121,7 @@ if (!isset($_SESSION['logged'])) {
 		const schedules = document.querySelector('#schedules')
 		const updates = document.querySelector('#updates')
 		const deletes = document.querySelector('#deletes')
-		const inputs = form.querySelectorAll('input:not(.select-dropdown)')
+		const maintenanceName = form.querySelector('#maintenance_name')
 		const btnSubmit = form.querySelector('button')
 
 		form.onsubmit = async e => {
@@ -135,19 +135,17 @@ if (!isset($_SESSION['logged'])) {
 
 			if (data.status === '1') {
 				M.toast({
-					html: `${inputs[0].value.trim()} adicionado(a).`,
+					html: `${maintenanceName.value.trim()} adicionado(a).`,
 					classes: 'green'
 				})
 
-				for (let i = 0; i < inputs.length; i += 1) {
-					inputs[i].value = ''
-					inputs[i].classList.remove('valid')
-				}
+				maintenanceName.value = ''
+				maintenanceName.classList.remove('valid')
 
 				selectSchedules()
 			} else {
 				M.toast({
-					html: `Erro ao adicionar ${inputs[0].value.trim()}.`,
+					html: `Erro ao adicionar ${maintenanceName.value.trim()}.`,
 					classes: 'red accent-4'
 				})
 			}
@@ -359,7 +357,7 @@ if (!isset($_SESSION['logged'])) {
 				'Sáb'
 			]
 		})
-		
+
 		M.Timepicker.init(document.querySelectorAll('.timepicker'), {
 			i18n: {
 				cancel: 'Cancelar',

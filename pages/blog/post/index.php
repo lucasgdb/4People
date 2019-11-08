@@ -10,7 +10,7 @@ $sql->execute();
 $total = $sql->fetchColumn();
 
 $post = $database->prepare(
-	'SELECT posts.post_title, posts.post_image, posts.post_description, posts.post_content, posts.post_visits, posts.post_createdAt, admins.admin_name FROM posts
+	'SELECT posts.post_title AS current_post_title, posts.post_image, posts.post_description, posts.post_content, posts.post_visits, posts.post_createdAt, admins.admin_name FROM posts
 		INNER JOIN admins ON admins.admin_id = posts.admin_id
 		WHERE post_status = "1" AND post_id = :post_id
 		LIMIT 1'
@@ -27,16 +27,18 @@ if ($post->rowCount()) extract($post->fetch());
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/katex.min.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/quill.snow.css">
 	<link rel="stylesheet" href="src/xcode.css">
 	<link rel="stylesheet" href="src/index.css">
-	<title><?= $post->rowCount() ? $post_title : 'Erro 404' ?> - Blog do 4People</title>
+	<title><?= $post->rowCount() ? $current_post_title : 'Erro 404' ?> - Blog do 4People</title>
 	<?php include_once("$assets/components/MetaTags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
-	<meta name="title" content="<?= $post->rowCount() ? $post_title : 'Erro 404' ?> - Blog do 4People">
+	<meta name="title" content="<?= $post->rowCount() ? $current_post_title : 'Erro 404' ?> - Blog do 4People">
 	<meta name="description" content="4People é um site feito para ajudar estudantes, professores, programadores e pessoas em suas atividades diárias.">
 	<meta name="application-name" content="4People">
-	<meta property="og:title" content="<?= $post->rowCount() ? $post_title : 'Erro 404' ?> - Blog do 4People">
-	<meta name="twitter:title" content="<?= $post->rowCount() ? $post_title : 'Erro 404' ?> - Blog do 4People">
+	<meta property="og:title" content="<?= $post->rowCount() ? $current_post_title : 'Erro 404' ?> - Blog do 4People">
+	<meta name="twitter:title" content="<?= $post->rowCount() ? $current_post_title : 'Erro 404' ?> - Blog do 4People">
 </head>
 
 <body>
@@ -51,22 +53,20 @@ if ($post->rowCount()) extract($post->fetch());
 		<div class="container">
 			<div class="card-panel top-div-margin">
 				<?php if ($post->rowCount()) : ?>
-					<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:6px">comment</i><?= $post_title ?></h1>
+					<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:6px">comment</i><?= $current_post_title ?></h1>
 					<label class="dark-grey-text"><?= $post_description ?>. Autor: <?= $admin_name ?>. Visitas: <?= $post_visits ?>. Data: <?= $post_createdAt ?></label>
 
 					<div class="divider"></div>
 
 					<div class="center-align mt-2">
-						<div title="<?= $post_title ?>" class="waves-effect waves-light">
+						<div title="<?= $current_post_title ?>" class="waves-effect waves-light">
 							<img class="responsive-img" style="height:300px;margin-bottom:-5px" src="<?= $assets ?>/images/blog_images/<?= $post_image ?>" />
 						</div>
 					</div>
 
 					<div class="divider mt-2"></div>
 
-					<div id="content" class="row mb-0">
-						<p class="mt-0 mb-0 col s12"><?= $post_content ?></p>
-					</div>
+					<div id="content" class="mt-0 mb-0 ql-editor"><?= $post_content ?></div>
 
 					<?php if (!isset($_SESSION['logged'])) {
 							$sql = $database->prepare('SELECT post_visits FROM posts WHERE post_status = "1" AND post_id = :post_id LIMIT 1');
@@ -113,7 +113,7 @@ if ($post->rowCount()) extract($post->fetch());
 					<ul class="collection with-header mb-0">
 						<?php foreach ($sql as $data) : extract($data) ?>
 							<li class="collection-item">
-								<div><?= $post_title ?><a title="Ver <?= $post_title ?>" href="./?post_id=<?= $post_id ?>" class="secondary-content"><i class="material-icons red-color-text">send</i></a></div>
+								<div><?= $post_title ?><a title="Ver <?= $current_post_title ?>" href="./?post_id=<?= $post_id ?>" class="secondary-content"><i class="material-icons red-color-text">send</i></a></div>
 							</li>
 						<?php endforeach ?>
 					</ul>
