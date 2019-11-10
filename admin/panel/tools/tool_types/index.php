@@ -12,8 +12,8 @@ if (!isset($_SESSION['logged'])) {
 
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
-	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="src/index.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<title>Tipos de Ferramentas - 4People</title>
 	<?php include_once("$assets/components/admin_components/MetaTags.php") ?>
 </head>

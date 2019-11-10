@@ -4,9 +4,15 @@ M.Collapsible.init(document.querySelectorAll('.collapsible'))
 M.FloatingActionButton.init(document.querySelectorAll('.fixed-action-btn'), {
 	hoverEnabled: false
 })
+if (typeof data !== 'undefined') {
+	M.Autocomplete.init(document.querySelectorAll('.autocomplete'), {
+		data
+	})
+}
 
 // Constants
 const sidenav = M.Sidenav.getInstance(document.querySelector('#slide-out'))
+const searchInput = document.querySelector('.search-wrapper input')
 const navMobileA = document.querySelectorAll('#nav-mobile a')
 const mainCollButtons = document.querySelectorAll('#slide-out > li:not(:first-child) > .collapsible-header')
 const secCollButtons = document.querySelectorAll('.padding-headers:not(.padding-buttons) > li > .collapsible-header')
@@ -42,6 +48,12 @@ const sideOut = () => {
 	sidenav._animateSidenavOut()
 	tr = true
 	sidenav.isClose = true
+}
+
+const searchTool = () => {
+	if (tool_paths[searchInput.value])
+		location = `${link}/pages/${tool_paths[searchInput.value]}`
+	else searchInput.focus()
 }
 
 // Left and right effects from sidebar

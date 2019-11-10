@@ -7,8 +7,8 @@ include_once("$root/assets/assets.php")
 
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
-	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<link rel="stylesheet" href="src/index.css">
+	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
 	<title>Inverter Texto - 4People</title>
 	<?php include_once("$assets/components/MetaTags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
@@ -49,7 +49,7 @@ include_once("$root/assets/assets.php")
 				</button>
 				<div class="divider mt-2 mb-2"></div>
 
-				<textarea id="result" placeholder="Resultado" spellcheck="false" readonly></textarea>
+				<textarea id="result" placeholder="Resultado" spellcheck="false"></textarea>
 				<button title="Copiar Validação" class="btn waves-effect waves-light dark-grey mt-1 z-depth-0" onclick="copyResult()">
 					Copiar
 				</button>

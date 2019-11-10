@@ -30,9 +30,19 @@ if ($logged) {
 		</div>
 	</li>
 
+	<li class="search">
+		<div class="input-field search-wrapper" style="margin:0">
+			<input class="autocomplete" type="text" id="autocomplete-input" placeholder="Procurar Ferramenta">
+			<i onclick="searchTool()" title="Pesquisar" class="material-icons">search</i>
+			<div class="search-results"></div>
+		</div>
+	</li>
+
 	<?php
 	$sql = $database->prepare('SELECT * FROM types ORDER BY type_name');
 	$sql->execute();
+
+	$first = 0;
 
 	foreach ($sql as $data) :
 		extract($data);
@@ -47,7 +57,7 @@ if ($logged) {
 			$name = $type_name;
 		} ?>
 		<li class="<?= $active ? 'active' : '' ?>">
-			<div class="collapsible-header"><i class="material-icons left"><?= $type_icon ?></i><?= $type_name ?><i class="material-icons" style="position:absolute;right:0<?= $active ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
+			<div class="collapsible-header" <?= $first++ === 0 ? 'style="border-top: 1px solid #c8c8c8 !important"' : '' ?>><i class="material-icons left"><?= $type_icon ?></i><?= $type_name ?><i class="material-icons" style="position:absolute;right:0<?= $active ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
 			<div class="collapsible-body">
 				<ul class="collapsible padding-headers">
 					<?php
@@ -72,6 +82,9 @@ if ($logged) {
 												extract($data);
 												$active = strpos($link, "pages/$type_path/$section_path/$tool_path") !== false;
 												$admin = isset($_SESSION['logged']);
+
+												$tool_names[$tool_name] = null;
+												$tool_paths[$tool_name] = "$type_path/$section_path/$tool_path";
 
 												if ($active) {
 													if (!$tool_status && !$admin) {
@@ -162,5 +175,9 @@ if ($logged) {
 
 <script>
 	const paddingHeadersA = document.querySelectorAll('.padding-buttons ul li a')
+
+	const data = <?= json_encode($tool_names) ?>;
+	const tool_paths = <?= json_encode($tool_paths) ?>;
+	const link = '<?= $root ?>';
 </script>
 <script src="<?= $assets ?>/src/js/sidenav.js"></script>

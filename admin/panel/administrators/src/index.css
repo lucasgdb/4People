@@ -29,7 +29,7 @@ table th {
 }
 
 .autocomplete-content li .highlight {
-	color: blue !important
+	color: #a62023 !important
 }
 
 @media (max-width: 600px) {

@@ -31,7 +31,7 @@ include_once('assets/assets.php')
 		<div class="container">
 			<div class="card-panel top-div-margin">
 				<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5.5px">home</i>4People - Página Inicial</h1>
-				<label class="dark-grey-text">Ferramentas Online para estudantes e professores.</label>
+				<label class="dark-grey-text">Ferramentas Online para estudantes, professores e Desenvolvedores.</label>
 
 				<div class="divider"></div>
 
