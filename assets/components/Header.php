@@ -14,7 +14,8 @@
 				<?php
 				if (isset($_SESSION['logged'])) : ?>
 					<li title="Painel Administrativo" class="waves-effect"><a href="<?= $root ?>/admin/panel/"><i class="material-icons left">verified_user</i>Painel Administrativo</a></li>
-					<li title="Sair" class="waves-effect"><a href="<?= $assets ?>/src/php/Logout.php"><i class="material-icons left">exit_to_app</i>Sair</a></li>
+					<!-- <li title="Notificações" class="waves-effect"><a href="<?= $assets ?>/"><i class="material-icons">notifications</i></a></li> -->
+					<li title="Sair" class="waves-effect"><a href="<?= $assets ?>/src/php/Logout.php"><i class="material-icons">exit_to_app</i></a></li>
 				<?php else : ?>
 					<?php
 						$sql = $database->prepare('SELECT type_name, type_path, type_icon FROM types');

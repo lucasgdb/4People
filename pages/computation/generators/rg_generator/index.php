@@ -30,7 +30,7 @@ include_once("$root/assets/assets.php")
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin">
-				<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5px"><?= $icon_section ?></i><?= $name_tool ?></h1>
+				<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:-5px 0 10px"><i class="material-icons left" style="top:5px"><?= $icon_section ?></i><?= $name_tool ?></h1>
 
 				<label class="dark-grey-text"><?= $description_tool ?></label>
 				<div class="divider"></div>
@@ -42,12 +42,12 @@ include_once("$root/assets/assets.php")
 
 							<div class="col s12">
 								<p>
-									<label>
+									<label class="dark-grey-text">
 										<input class="with-gap" name="punctuation" type="radio" checked>
 										<span>Sim</span>
 									</label>
 
-									<label class="ml-4">
+									<label class="ml-4 dark-grey-text">
 										<input class="with-gap" name="punctuation" type="radio">
 										<span>Não</span>
 									</label>
@@ -58,7 +58,7 @@ include_once("$root/assets/assets.php")
 				</div>
 
 				<div class="divider mb-2"></div>
-				<button title="Gerar RG" class="btn btn-center waves-effect waves-light red-color z-depth-2" onclick="generate()">
+				<button title="Gerar RG" class="btn btn-center waves-effect waves-light red-color z-depth-0" onclick="generate()">
 					Gerar RG
 				</button>
 				<div class="divider mt-2"></div>

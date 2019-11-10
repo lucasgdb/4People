@@ -13,6 +13,8 @@ if (typeof data !== 'undefined') {
 // Constants
 const sidenav = M.Sidenav.getInstance(document.querySelector('#slide-out'))
 const searchInput = document.querySelector('.search-wrapper input')
+const toggleInput = document.querySelector('#toggleInput')
+const search = document.querySelector('.search')
 const navMobileA = document.querySelectorAll('#nav-mobile a')
 const mainCollButtons = document.querySelectorAll('#slide-out > li:not(:first-child) > .collapsible-header')
 const secCollButtons = document.querySelectorAll('.padding-headers:not(.padding-buttons) > li > .collapsible-header')
@@ -51,9 +53,25 @@ const sideOut = () => {
 }
 
 const searchTool = () => {
-	if (tool_paths[searchInput.value])
+	if (tool_paths[searchInput.value]) {
 		location = `${link}/pages/${tool_paths[searchInput.value]}`
-	else searchInput.focus()
+	} else searchInput.focus()
+}
+
+const searchByInput = e => {
+	if (e.which === 13) searchTool()
+}
+
+const toggleSearchInput = () => {
+	search.classList.toggle('hide')
+
+	if (toggleInput.innerHTML === 'search') {
+		toggleInput.innerHTML = 'close'
+		toggleInput.title = 'Fechar'
+	} else {
+		toggleInput.innerHTML = 'search'
+		toggleInput.title = 'Buscar Ferramenta'
+	}
 }
 
 // Left and right effects from sidebar

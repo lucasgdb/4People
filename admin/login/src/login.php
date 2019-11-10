@@ -10,7 +10,7 @@ try {
 	include_once("$assets/src/php/MD5.php");
 	include_once("$assets/src/php/IP.php");
 
-	function setLog($database, $ip, $admin_nickname, $admin_password): int
+	function setLog($database, $ip, $admin_nickname, $admin_password)
 	{
 		$log = $database->prepare('INSERT INTO login_logs VALUES (NULL, :log_ip, :log_nickname, :log_password, CURRENT_TIMESTAMP)');
 		$log->bindValue(':log_ip', $ip);

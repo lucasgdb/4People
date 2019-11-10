@@ -30,14 +30,14 @@ include_once("$root/assets/assets.php")
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin">
-				<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5px"><?= $icon_section ?></i><?= $name_tool ?></h1>
+				<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:-5px 0 10px"><i class="material-icons left" style="top:5px"><?= $icon_section ?></i><?= $name_tool ?></h1>
 
 				<label class="dark-grey-text"><?= $description_tool ?></label>
 				<div class="divider"></div>
 
 				<textarea class="mt-2" id="text" placeholder="Digite aqui o texto" spellcheck="false"></textarea>
 
-				<button title="Converter texto para Binário" class="btn waves-effect waves-light red-color mt-1" onclick="convertToBinary()">
+				<button title="Converter texto para Binário" class="btn waves-effect waves-light red-color mt-1 z-depth-0" onclick="convertToBinary()">
 					Converter para Binário
 				</button>
 				<button title="Limpar Validação" class="btn waves-effect waves-light dark-grey ml-2 mt-1 z-depth-0 right" onclick="clearInput(txtText)">
@@ -49,7 +49,7 @@ include_once("$root/assets/assets.php")
 
 				<textarea class="mt-2" id="binary" placeholder="Digite aqui o código binário" spellcheck="false"></textarea>
 
-				<button title="Converter Código Binário para texto" class="btn waves-effect waves-light red-color mt-1" onclick="convertToText()">
+				<button title="Converter Código Binário para texto" class="btn waves-effect waves-light red-color mt-1 z-depth-0" onclick="convertToText()">
 					Converter para Texto
 				</button>
 				<button title="Limpar Validação" class="btn waves-effect waves-light dark-grey ml-2 mt-1 z-depth-0 right" onclick="clearInput(txtBinaryCode)">

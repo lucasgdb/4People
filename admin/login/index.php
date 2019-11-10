@@ -33,7 +33,7 @@ if (isset($_SESSION['logged'])) {
 				$sql->execute();
 
 				if ($sql->rowCount()) : ?>
-					<h1 class="flow-text dark-grey-text" style="margin:0 0 5px"><i class="material-icons left">person</i>Painel Administrativo - Login</h1>
+					<h1 class="flow-text dark-grey-text" style="margin:-2px 0 10px"><i class="material-icons left">verified_user</i>Painel Administrativo - Login</h1>
 					<label class="dark-grey-text">Painel de Login Administrativo. Área restrita!</label>
 
 					<div class="divider"></div>

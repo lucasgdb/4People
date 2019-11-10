@@ -21,43 +21,67 @@ body {
 }
 
 .search-wrapper input {
+	font-family: Arial;
 	text-indent: 20px;
-	width: calc(100% - 20px) !important;
-	padding: 15px 0 !important;
+	padding: 13px 0 !important;
 	font-size: 18px !important;
 	border-bottom: none !important;
 	height: 100% !important;
 	margin-bottom: 0 !important;
-	color: #878787 !important;
-	transition: color .4s !important
+	color: #1b1a25 !important;
+	transition: color .4s !important;
+	font-weight: 0 !important
+}
+
+.search-wrapper input::placeholder {
+	color: #d1d1d1 !important
+}
+
+.search-wrapper #square {
+	width: 60px;
+	height: 100%;
+	position: absolute;
+	right: 0;
+	top: 0;
+	background: linear-gradient(to right, transparent, #fafafa 25%);
+	cursor: text
 }
 
 .search-wrapper input:focus {
 	border-bottom: none !important;
-	box-shadow: none !important;
-	color: #1b1a25 !important
+	box-shadow: none !important
 }
 
 .search-wrapper .autocomplete-content li .highlight {
 	color: #a62023 !important
 }
 
-.search-wrapper i {
+.search-wrapper #square i {
 	cursor: pointer;
 	color: #a6a6a6;
-	background-color: #fafafa;
-	z-index: 10;
-	font-size: 35px;
+	font-size: 30px;
+	transition: color .4s;
 	position: absolute;
-	right: 18px;
 	top: 50%;
-	width: 30px;
-	transform: translateY(-50%);
-	transition: color .4s
+	left: 50%;
+	transform: translate(-40%, -50%)
 }
 
-.search-wrapper input:focus~i {
+#toggleInput {
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	color: #eeeeee;
+	cursor: pointer;
+	font-size: 25px
+}
+
+.search-wrapper input:focus~#square i {
 	color: #1b1a25
+}
+
+.search-wrapper input:not(:placeholder-shown)~#square i {
+	color: #1b1a25 !important
 }
 
 .mont-serrat {

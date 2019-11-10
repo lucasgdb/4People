@@ -53,7 +53,7 @@ if ($post->rowCount()) extract($post->fetch());
 		<div class="container">
 			<div class="card-panel top-div-margin">
 				<?php if ($post->rowCount()) : ?>
-					<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:6px">comment</i><?= $current_post_title ?></h1>
+					<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:-5px 0 10px"><i class="material-icons left" style="top:6px">comment</i><?= $current_post_title ?></h1>
 					<label class="dark-grey-text"><?= $post_description ?>. Autor: <?= $admin_name ?>. Visitas: <?= $post_visits ?>. Data: <?= $post_createdAt ?></label>
 
 					<div class="divider"></div>

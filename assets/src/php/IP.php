@@ -1,5 +1,5 @@
 <?php
-function get_ip_address(): String
+function get_ip_address()
 {
 	if (isset($_SERVER['HTTP_CLIENT_IP']))
 		return $_SERVER['HTTP_CLIENT_IP'];

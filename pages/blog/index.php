@@ -30,7 +30,7 @@ include_once("$root/assets/assets.php")
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin">
-				<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5.5px">comment</i>4People - Blog</h1>
+				<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:-5px 0 10px"><i class="material-icons left" style="top:5.5px">comment</i>4People - Blog</h1>
 				<label class="dark-grey-text">Blog de conteúdos e notícias do 4People.</label>
 
 				<div class="divider"></div>

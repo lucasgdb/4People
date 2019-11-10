@@ -27,13 +27,17 @@ if ($logged) {
 				<span class="name">4People - Ferramentas Online</span>
 				<a class="linkHover" href="<?= $root ?>/pages/contact/"><span class="email" style="padding-bottom:0">Contato »</span></a>
 			<?php endif ?>
+
+			<i id="toggleInput" onclick="toggleSearchInput()" title="Buscar Ferramenta" class="material-icons">search</i>
 		</div>
 	</li>
 
-	<li class="search">
-		<div class="input-field search-wrapper" style="margin:0">
-			<input class="autocomplete" type="text" id="autocomplete-input" placeholder="Procurar Ferramenta">
-			<i onclick="searchTool()" title="Pesquisar" class="material-icons">search</i>
+	<li class="search hide">
+		<div class="input-field search-wrapper mt-0 mb-0">
+			<input onkeyup="searchByInput(event)" class="autocomplete" type="text" id="autocomplete-input" placeholder="Procurar Ferramenta">
+			<div onclick="searchTool()" id="square">
+				<i onclick="searchTool()" title="Buscar Ferramenta" class="material-icons">search</i>
+			</div>
 			<div class="search-results"></div>
 		</div>
 	</li>

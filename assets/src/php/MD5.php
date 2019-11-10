@@ -1,5 +1,5 @@
 <?php
-function cript($str): String
+function cript($str)
 {
 	for ($i = 0; $i < 1000; $i += 1) $str = MD5($str);
 

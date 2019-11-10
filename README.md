@@ -1,9 +1,12 @@
 # 4People
 
+<p align="center">
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-%2304D361" />
+</p>
+
 ## Descrição
 
-  **_4People_** é um projeto de TCC que visa criar ferramentas para _pessoas_ usarem no cotidiano e _Programadores_ testarem seus Softwares.
-  O **_4People_** disponibiliza Ferramentas de **Computação** (Geradores, Validadores, Codificadores e Decodificadores, etc.) e **Matemáticas** (Calculadoras, Calculadoras de Área e Calculadoras de Datas)
+O 4People é um Sistema Web que traz vários tipos de ferramentas Computacionais para Desenvolvedores de Softwares e estudantes de informática, assim como ferramentas Matemáticas para alunos e professores. 4People também possui um sistema de Blog totalmente otimizado. Além disso, ele é de código aberto, ou seja, qualquer um pode visualizar seu código fonte, e usá-lo para estudos e até mesmo melhorá-lo.
 
 ## Tecnologias e Ferramentas usadas
 

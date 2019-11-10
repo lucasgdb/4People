@@ -29,7 +29,7 @@ if (!isset($_SESSION['logged'])) {
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin" style="padding-bottom:10px">
-				<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:5px">person_add</i>Adicionar um Administrador</h1>
+				<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:-5px 0 10px"><i class="material-icons left" style="top:5px">person_add</i>Adicionar um Administrador</h1>
 				<label class="dark-grey-text">Adicionar um novo Administrador ao 4People</label>
 
 				<div class="divider"></div>
