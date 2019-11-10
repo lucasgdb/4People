@@ -1,8 +1,6 @@
 # 4People
 
-<p align="center">
-  <img alt="License" src="https://img.shields.io/badge/license-MIT-%2304D361" />
-</p>
+![CRAN/METACRAN](https://img.shields.io/cran/l/devtools)
 
 ## Descrição
 
