@@ -52,12 +52,12 @@ include_once("$root/assets/assets.php")
 
 							<div class="col s12">
 								<p>
-									<label>
+									<label class="dark-grey-text">
 										<input class="with-gap" name="type" type="radio" checked />
 										<span>Todos</span>
 									</label>
 
-									<label class="ml-4">
+									<label class="ml-4 dark-grey-text">
 										<input class="with-gap" name="type" type="radio" />
 										<span>Último</span>
 									</label>

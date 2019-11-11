@@ -44,10 +44,6 @@ strong {
 	border-left-color: #a62023 !important
 }
 
-.ql-editor {
-	min-height: 300px
-}
-
 @media (max-width: 600px) {
 	.modal {
 		width: 98%

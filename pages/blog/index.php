@@ -35,11 +35,56 @@ include_once("$root/assets/assets.php")
 
 				<div class="divider"></div>
 
-				<div id="posts" class="row mt-1 mb-0"></div>
+				<?php
+				$page = isset($_GET['page']) ? (filter_input(INPUT_GET, 'page', FILTER_DEFAULT) - 1) * 6 : 0;
+
+				$sql = $database->prepare('SELECT post_id, post_title, post_image, post_createdAt FROM posts WHERE post_status = "1" ORDER BY post_createdAt DESC LIMIT 6 OFFSET :page');
+				$sql->bindValue(':page', (int) $page, PDO::PARAM_INT);
+				$sql->execute();
+
+				if ($sql->rowCount()) : ?>
+					<div class="row mt-1 mb-0">
+						<?php foreach ($sql as $post) : extract($post) ?>
+							<div class="col s12 m6">
+								<div class="card">
+									<a title="<?= $post_title ?>" href="./post/?post_id=<?= $post_id ?>" style="height:250px;background-size:cover;background-image: url('<?= $assets ?>/images/blog_images/<?= $post_image ?>')" class="card-image waves-effect waves-block waves-light"></a>
+
+									<div class="card-content">
+										<span class="card-title grey-text text-darken-4"><a href="./post/?post_id=<?= $post_id ?>"><?= $post_title ?></a></span>
+										<p><a href="./post/?post_id=<?= $post_id ?>">Clique aqui</a> para ver mais informações.</p>
+										<p class="mt-2 mb-0">Postado: <span class="date-format"><?= $post_createdAt ?></span></p>
+									</div>
+								</div>
+							</div>
+						<?php endforeach ?>
+					</div>
+
+					<div class="divider"></div>
+
+					<ul class="pagination center mt-2 mb-2">
+						<?php
+							$total = $database->prepare('SELECT COUNT(post_id) FROM posts WHERE post_status = "1" LIMIT 1');
+							$total->execute();
+
+							$amount = (int) ceil($total->fetchColumn() / 6);
+							$selected = (int) $page;
+
+							if ($selected > $amount) $selected = $amount;
+							else if ($selected < 1) $selected = 1;
+							?>
+						<?php for ($i = 0; $i < $amount + 2; $i++) : ?>
+							<li class="<?= ($i === 0 && $selected === 1) || ($i === $amount + 1 && $selected === $amount) ? 'disabled' : ($i === $selected ? 'active red-color waves-effect waves-light' : 'waves-effect') ?>">
+								<a href="<?= $i === 0 ? ($selected === 1 ? '#' : '?page=' . ($selected - 1)) : ($i < $amount + 1 ? "?page=$i" : ($selected === $amount ? '#' : '?page=' . ($selected + 1))) ?>">
+									<?= ($i === 0 || $i === $amount + 1) ? ('<i class="material-icons">' . ($i === 0 ? 'chevron_left' : 'chevron_right') . '</i>') : $i ?>
+								</a>
+							</li>
+						<?php endfor ?>
+					</ul>
+				<?php else : ?>
+					<p class="mont-serrat red-color-text">Não há posts publicados aqui!</p>
+				<?php endif ?>
 
 				<div class="divider"></div>
-
-				<ul id="pagination" class="pagination center mb-1"></ul>
 
 				<div class="top-div dark-grey"></div>
 			</div>
@@ -53,66 +98,38 @@ include_once("$root/assets/assets.php")
 	?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
-	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script>
-		const posts = document.querySelector('#posts')
-		const pagination = document.querySelector('#pagination')
+		const dates = document.querySelectorAll('.date-format')
+		const dateFormatter = new Intl.RelativeTimeFormat('pt-BR', {
+			style: 'narrow'
+		});
 
-		async function getPosts() {
-			let postsHTML = ''
-			let page = location.search.split('=')[1]
-			page = page === undefined || !Number.isInteger(parseInt(page)) ? '1' : page;
+		for (let i = 0; i < dates.length; i++) {
+			let format
 
-			const total = Number((await (await fetch('src/total_posts.php')).json()).total)
+			const current = new Date().getTime()
+			const server = new Date(dates[i].innerHTML).getTime()
 
-			if (total > 0) {
-				const offset = Math.ceil(total / 6)
-				const data = await (await fetch(`src/select_posts.php?offset=${page > offset ? offset : page < offset ? 1 : offset}`)).json()
+			const difference = Math.abs(current - server)
 
-				for (const i in data) {
-					postsHTML += (
-						`<div class="col s12 m6">
-							<div class="card">
-								<a title="${data[i][1]}" href="./post/?post_id=${data[i][0]}" style="height:250px;background-size:cover;background-image: url('<?= $assets ?>/images/blog_images/${data[i][2]}')" class="card-image waves-effect waves-block waves-light"></a>
-
-								<div class="card-content">
-									<span class="card-title grey-text text-darken-4"><a href="./post/?post_id=${data[i][0]}">${data[i][1]}</a></span>
-									<p><a href="./post/?post_id=${data[i][0]}">Clique aqui</a> para ver mais informações.</p>
-									<p class="mt-2 mb-0">Postado: ${new Date(data[i][3]).toDateString()}</p>
-								</div>
-							</div>
-						</div>`
-					)
-				}
-
-				createPagination(offset, Number(page))
-				posts.innerHTML = postsHTML
-			} else {
-				posts.innerHTML = '<p class="mont-serrat mb-0 red-color-text">Não há posts publicados!</p>'
-			}
-		}
-
-		function createPagination(amount = 10, selected = 1) {
-			let html = ''
-
-			if (selected > amount) selected = amount
-			else if (selected < 1) selected = 1
-
-			for (let i = 0; i < amount + 2; i++) {
-				html += (
-					`<li class="${(i === 0 && selected === 1) || (i === amount + 1 && selected === amount) ? 'disabled' : i === selected ? 'active red-color waves-effect waves-light' : 'waves-effect'}">
-						<a href="${i === 0 ? selected === 1 ? '#' : `?page=${selected - 1}` : i < amount + 1 ? `?page=${i}` : selected === amount ? '#' : `?page=${selected + 1}`}">
-							${i === 0 || i === amount + 1 ? `<i class="material-icons">${i === 0 ? 'chevron_left' : 'chevron_right'}</i>` : i}
-						</a>
-					</li>`
-				)
+			const times = {
+				second: Math.trunc(difference / 1000),
+				minute: Math.trunc(difference / 60000),
+				hour: Math.trunc(difference / 3600000),
+				day: Math.trunc(difference / 86400000),
+				month: Math.trunc(difference / 2629800000),
+				year: Math.trunc(difference / 31557600000)
 			}
 
-			pagination.innerHTML = html
-		}
+			if (times.year > 0) format = 'year'
+			else if (times.month > 0) format = 'month'
+			else if (times.day > 0) format = 'day'
+			else if (times.minute > 0) format = 'minute'
+			else format = 'second'
 
-		getPosts()
+			dates[i].innerHTML = dateFormatter.format(-times[format], format)
+		}
 	</script>
 </body>
 

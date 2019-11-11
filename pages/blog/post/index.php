@@ -92,9 +92,9 @@ if ($post->rowCount()) extract($post->fetch());
 				<?php endif ?>
 
 				<div class="divider mb-2"></div>
-				<a title="Voltar ao Blog" href=".." class="btn waves-effect waves-light red-color z-depth-0">« Voltar</a>
+				<a title="Voltar ao Blog" href=".." class="btn waves-effect waves-light red-color z-depth-0"><i class="material-icons left">arrow_back</i>Voltar</a>
 				<?php if (isset($_SESSION['logged']) && $post->rowCount()) : ?>
-					<a title="Ir para página de Controle de posts do Blog" href="<?= $root ?>/admin/panel/blog/data_update/?post_id=<?= $post_id ?>" class="btn waves-effect waves-light btn-green z-depth-0">Editar »</a>
+					<a title="Ir para página de Controle de posts do Blog" href="<?= $root ?>/admin/panel/blog/data_update/?post_id=<?= $post_id ?>" class="btn waves-effect waves-light btn-green z-depth-0">Editar<i class="material-icons right">arrow_forward</i></a>
 				<?php endif ?>
 
 				<div class="top-div dark-grey"></div>
@@ -131,7 +131,6 @@ if ($post->rowCount()) extract($post->fetch());
 	?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
-	<script src="<?= $assets ?>/src/js/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script>
 		const ULs = document.querySelectorAll('#content ul')

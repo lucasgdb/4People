@@ -8,7 +8,7 @@ include_once('assets/assets.php')
 <head>
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/materialize.min.css">
 	<link rel="stylesheet" href="<?= $assets ?>/src/css/main.css">
-	<link rel="stylesheet" href="<?= $assets ?>/src/css/index.css">
+	<link rel="stylesheet" href="src/index.css">
 	<title>4People - Ferramentas Online</title>
 	<?php include_once("$assets/components/MetaTags.php") ?>
 	<meta name="keywords" content="4people,4devs,pessoas,online,ferramentas,desenvolvedores,computacao,matematica,geradores,validadores,faker">
@@ -242,7 +242,7 @@ include_once('assets/assets.php')
 	?>
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
-	<script src="<?= $assets ?>/src/js/index.js"></script>
+	<script src="src/index.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script>
 		const lblNumbers = document.querySelectorAll('.number')

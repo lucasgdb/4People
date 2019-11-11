@@ -36,5 +36,5 @@ const clearInput = () => {
 }
 
 txtCPF.onkeyup = e => {
-	if (e.which === 13) validate()
+	if (e.which === 13) reverse()
 }

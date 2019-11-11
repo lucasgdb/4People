@@ -1,3 +1,7 @@
-.mb-1 {
-	margin-bottom: 5px
+.pagination li:first-child a {
+	padding: 0
+}
+
+.pagination li:last-child a {
+	padding: 0 !important
 }

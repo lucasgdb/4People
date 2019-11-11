@@ -1,7 +1,7 @@
 const txtResult = document.querySelector('#result')
 const txtCEP = document.querySelector('#cep')
 
-const search = async () => {
+const searchCEP = async () => {
 	txtResult.value = await cep(txtCEP.value)
 		.then(data =>
 			`CEP: ${data.cep}\nEstado: ${data.state}\nCidade: ${data.city}${data.street ? `\nRua: ${data.street}` : ''}${data.neighborhood ? `\nBairro: ${data.neighborhood}` : ''}`
@@ -46,5 +46,5 @@ const clearInput = () => {
 }
 
 txtCEP.onkeyup = e => {
-	if (e.which === 13) search()
+	if (e.which === 13) searchCEP()
 }

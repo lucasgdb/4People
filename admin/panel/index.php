@@ -143,19 +143,34 @@ $admin_panel = true
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script src="src/chart.min.js"></script>
+
+	<?php
+	$data = $database->prepare('SELECT tool_visits FROM tools WHERE tool_status = "1" ORDER BY tool_visits DESC LIMIT 10');
+	$data->execute();
+
+	foreach ($data as $tool_visits) {
+		extract($tool_visits);
+
+		$visits[] = (int) $tool_visits;
+	}
+
+	$labels = $database->prepare('SELECT tool_name FROM tools WHERE tool_status = "1" ORDER BY tool_visits DESC LIMIT 10');
+	$labels->execute();
+
+	foreach ($labels as $tool_names) {
+		extract($tool_names);
+
+		$names[] = $tool_name;
+	}
+	?>
+
 	<script>
 		M.Tooltip.init(document.querySelectorAll('.tooltiped'))
 
-		document.addEventListener('DOMContentLoaded', async () => {
-			const data = []
-			const labels = []
-			const getData = await (await fetch('src/select_data.php')).json()
+		const data = <?= json_encode($visits) ?>;
+		const labels = <?= json_encode($names) ?>;
 
-			for (const i in getData) {
-				data.push(getData[i][0])
-				labels.push(getData[i][1])
-			}
-
+		document.addEventListener('DOMContentLoaded', () => {
 			new Chart(document.querySelector('#status').getContext('2d'), {
 				type: 'pie',
 				data: {
