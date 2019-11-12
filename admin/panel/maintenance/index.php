@@ -306,7 +306,7 @@ if (!isset($_SESSION['logged'])) {
 			format: 'yyyy/mm/dd',
 			yearRange: 25,
 			i18n: {
-				cancel: '',
+				cancel: 'Cancelar',
 				clear: 'Limpar',
 				done: 'Selecionar'
 			},
@@ -363,9 +363,6 @@ if (!isset($_SESSION['logged'])) {
 				cancel: 'Cancelar',
 				clear: 'Limpar',
 				done: 'Selecionar'
-			},
-			onOpenEnd: () => {
-				document.querySelector('div.modal-overlay').onclick = null
 			}
 		})
 
@@ -375,9 +372,6 @@ if (!isset($_SESSION['logged'])) {
 		const endTime = M.Timepicker.getInstance(document.querySelector('#maintenance_end_time'))
 
 		document.addEventListener('DOMContentLoaded', () => {
-			beginDate.cancelBtn.disabled = true
-			endDate.cancelBtn.disabled = true
-
 			const date = new Date()
 			beginDate.setDate(date)
 			beginDate.doneBtn.click()
