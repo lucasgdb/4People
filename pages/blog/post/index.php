@@ -54,7 +54,7 @@ if ($post->rowCount()) extract($post->fetch());
 			<div class="card-panel top-div-margin">
 				<?php if ($post->rowCount()) : ?>
 					<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:-5px 0 10px"><i class="material-icons left" style="top:6px">comment</i><?= $current_post_title ?></h1>
-					<label class="dark-grey-text"><?= $post_description ?>. Autor: <?= $admin_name ?>. Visitas: <?= $post_visits ?>. Data: <?= $post_createdAt ?></label>
+					<label class="dark-grey-text"><?= $post_description ?>. Autor: <?= $admin_name ?>. Visitas: <span class="number"><?= $post_visits ?></span>. Data: <span id="dateFormat"><?= $post_createdAt ?></span></label>
 
 					<div class="divider"></div>
 
@@ -92,9 +92,9 @@ if ($post->rowCount()) extract($post->fetch());
 				<?php endif ?>
 
 				<div class="divider mb-2"></div>
-				<a title="Voltar ao Blog" href=".." class="btn waves-effect waves-light red-color z-depth-0"><i class="material-icons left">arrow_back</i>Voltar</a>
+				<a title="Voltar ao Blog" href=".." class="btn waves-effect waves-light red-color z-depth-0"><i class="material-icons left">keyboard_return</i>Voltar</a>
 				<?php if (isset($_SESSION['logged']) && $post->rowCount()) : ?>
-					<a title="Ir para página de Controle de posts do Blog" href="<?= $root ?>/admin/panel/blog/data_update/?post_id=<?= $post_id ?>" class="btn waves-effect waves-light btn-green z-depth-0">Editar<i class="material-icons right">arrow_forward</i></a>
+					<a title="Editar informações da postagem" href="<?= $root ?>/admin/panel/blog/data_update/?post_id=<?= $post_id ?>" class="btn waves-effect waves-light btn-green z-depth-0"><i class="material-icons left">edit</i>Editar</a>
 				<?php endif ?>
 
 				<div class="top-div dark-grey"></div>
@@ -132,8 +132,21 @@ if ($post->rowCount()) extract($post->fetch());
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
+	<script src="../src/moment.min.js"></script>
 	<script>
 		const ULs = document.querySelectorAll('#content ul')
+		const dateFormat = document.querySelector('#dateFormat')
+		const lblNumbers = document.querySelectorAll('.number')
+		const formatter = Intl.NumberFormat('pt-BR')
+
+		for (let i = 0; i < lblNumbers.length; i += 1) {
+			const number = lblNumbers[i].textContent
+			lblNumbers[i].textContent = formatter.format(number)
+		}
+
+		moment.locale('pt-BR')
+
+		dateFormat.innerHTML = moment(new Date(dateFormat.innerHTML)).format("dddd DD, MMMM YYYY");
 
 		for (let i = 0; i < ULs.length; i++) ULs[i].classList.add('browser-default')
 	</script>

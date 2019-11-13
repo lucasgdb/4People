@@ -35,11 +35,10 @@
 							FROM tools
 							INNER JOIN sections ON sections.section_id = tools.section_id
 							INNER JOIN types ON types.type_id = sections.type_id
-							WHERE tools.tool_status = "1" AND types.type_name = :type_name AND sections.section_name = :section_name
+							WHERE tools.tool_status = "1" AND sections.section_name = :section_name
 							ORDER BY tools.tool_visits DESC'
 					);
 
-					$sql->bindValue(':type_name', $name);
 					$sql->bindValue(':section_name', $name_section);
 					$sql->execute();
 
@@ -56,7 +55,6 @@
 										</span>
 										<div class="divider"></div>
 										<p class="mt-2">
-
 											<?= $tool_description ?>
 										</p>
 									</div>

@@ -36,7 +36,7 @@ include_once("$root/assets/assets.php")
 				<div class="divider"></div>
 
 				<div class="row mb-0">
-					<p class="mb-0 col s12">Primeiro caractere</p>
+					<p class="mb-0 col s12">Primeiro caractere:</p>
 					<div class="col s6 m3">
 						<p>
 							<label class="dark-grey-text">
@@ -77,7 +77,7 @@ include_once("$root/assets/assets.php")
 				<div class="divider"></div>
 
 				<div class="row mb-0">
-					<p class="mb-0 col s12">Outros caracteres</p>
+					<p class="mb-0 col s12">Outros caracteres:</p>
 					<div class="col s6 m3">
 						<p>
 							<label class="dark-grey-text">

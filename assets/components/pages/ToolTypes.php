@@ -55,7 +55,6 @@
 										</span>
 										<div class="divider"></div>
 										<p class="mt-2">
-
 											<?= $tool_description ?>
 										</p>
 									</div>

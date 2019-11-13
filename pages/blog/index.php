@@ -38,7 +38,7 @@ include_once("$root/assets/assets.php")
 				<?php
 				$page = isset($_GET['page']) ? (filter_input(INPUT_GET, 'page', FILTER_DEFAULT) - 1) * 6 : 0;
 
-				$sql = $database->prepare('SELECT post_id, post_title, post_image, post_createdAt FROM posts WHERE post_status = "1" ORDER BY post_createdAt DESC LIMIT 6 OFFSET :page');
+				$sql = $database->prepare('SELECT post_id, post_title, post_description, post_image, post_visits, post_createdAt, admins.admin_name FROM posts INNER JOIN admins ON admins.admin_id = posts.admin_id WHERE post_status = "1" ORDER BY post_createdAt DESC LIMIT 6 OFFSET :page');
 				$sql->bindValue(':page', (int) $page, PDO::PARAM_INT);
 				$sql->execute();
 
@@ -46,13 +46,43 @@ include_once("$root/assets/assets.php")
 					<div class="row mt-1 mb-0">
 						<?php foreach ($sql as $post) : extract($post) ?>
 							<div class="col s12 m6">
-								<div class="card">
-									<a title="<?= $post_title ?>" href="./post/?post_id=<?= $post_id ?>" style="height:250px;background-size:cover;background-image: url('<?= $assets ?>/images/blog_images/<?= $post_image ?>')" class="card-image waves-effect waves-block waves-light"></a>
+								<div class="card sticky-action">
+									<div title="<?= $post_title ?>" style="height:250px;background-size:cover;background-image: url('<?= $assets ?>/images/blog_images/<?= $post_image ?>')" class="card-image waves-effect waves-block waves-light activator"></div>
 
 									<div class="card-content">
-										<span class="card-title grey-text text-darken-4"><a href="./post/?post_id=<?= $post_id ?>"><?= $post_title ?></a></span>
+										<span class="card-title grey-text text-darken-4"><a href="./post/?post_id=<?= $post_id ?>"><?= $post_title ?></a><i title="Mais informações" class="material-icons activator right" style="cursor:pointer">more_vert</i></span>
 										<p><a href="./post/?post_id=<?= $post_id ?>">Clique aqui</a> para ver mais informações.</p>
-										<p class="mt-2 mb-0">Postado: <span class="date-format"><?= $post_createdAt ?></span></p>
+										<p class="mt-2 mb-0 date-format"><?= $post_createdAt ?></p>
+									</div>
+
+									<div class="card-reveal">
+										<span class="card-title grey-text text-darken-4 left-div-margin-mobile" style="position:relative">
+											Informações<i title="Fechar" class="material-icons right red-color-text">close</i>
+
+											<div class="left-div-mobile red-color" style="border-radius:0"></div>
+										</span>
+
+										<div class="divider mt-2"></div>
+
+										<p>
+											Descrição: <?= $post_description ?>. <br>
+											Visitas: <span class="number"><?= $post_visits ?></span>
+										</p>
+
+										<div class="divider"></div>
+
+										<p>Data: <span class="date-format"><?= $post_createdAt ?></span></p>
+
+										<div class="divider"></div>
+
+										<a title="Visitar postagem" href="./post/?post_id=<?= $post_id ?>" class="btn waves-effect waves-light red-color mt-2 z-depth-0" style="margin-bottom:5px"><i class="material-icons right">keyboard_arrow_right</i>Visitar</a>
+										<?php if (isset($_SESSION['logged'])) : ?>
+											<a title="Editar informações da postagem" href="<?= $root ?>/admin/panel/blog/data_update/?post_id=<?= $post_id ?>" class="btn waves-effect waves-light btn-green mt-2 z-depth-0" style="margin-bottom:5px"><i class="material-icons left">edit</i>Editar</a>
+										<?php endif ?>
+
+										<br>
+
+										<span class="dark-grey-text">Autor: <?= $admin_name ?></span>
 									</div>
 								</div>
 							</div>
@@ -99,6 +129,7 @@ include_once("$root/assets/assets.php")
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
+	<script src="src/moment.min.js"></script>
 	<script src="src/index.js"></script>
 </body>
 

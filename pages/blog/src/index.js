@@ -1,15 +1,24 @@
 const dates = document.querySelectorAll('.date-format')
+const lblNumbers = document.querySelectorAll('.number')
+const formatter = Intl.NumberFormat('pt-BR')
 const dateFormatter = new Intl.RelativeTimeFormat('pt-BR', {
 	style: 'narrow'
 });
 
+for (let i = 0; i < lblNumbers.length; i += 1) {
+	const number = lblNumbers[i].textContent
+	lblNumbers[i].textContent = formatter.format(number)
+}
+
+moment.locale('pt-BR')
+
 for (let i = 0; i < dates.length; i++) {
 	let format
 
-	const current = new Date().getTime()
-	const server = new Date(dates[i].innerHTML).getTime()
+	const current = new Date()
+	const server = new Date(dates[i].innerHTML)
 
-	const difference = Math.abs(current - server)
+	const difference = Math.abs(current.getTime() - server.getTime())
 
 	const times = {
 		second: Math.trunc(difference / 1000),
@@ -27,5 +36,5 @@ for (let i = 0; i < dates.length; i++) {
 	else if (times.minute > 0) format = 'minute'
 	else format = 'second'
 
-	dates[i].innerHTML = dateFormatter.format(-times[format], format)
+	dates[i].innerHTML = `${moment(server).format("dddd DD, MMMM YYYY")}, ${dateFormatter.format(-times[format], format)}`
 }

@@ -248,14 +248,10 @@ include_once('assets/assets.php')
 		const lblNumbers = document.querySelectorAll('.number')
 		const formatter = Intl.NumberFormat('pt-BR')
 
-		const formatNumbers = elements => {
-			for (let i = 0; i < elements.length; i += 1) {
-				const number = elements[i].textContent
-				elements[i].textContent = formatter.format(number)
-			}
+		for (let i = 0; i < lblNumbers.length; i += 1) {
+			const number = lblNumbers[i].textContent
+			lblNumbers[i].textContent = formatter.format(number)
 		}
-
-		formatNumbers(lblNumbers)
 	</script>
 </body>
 

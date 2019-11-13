@@ -54,13 +54,13 @@ if ($logged) {
 		$sql->bindValue(':type_id', $type_id);
 		$sql->execute();
 
-		$active = strpos($link, "pages/$type_path") !== false;
+		$type_active = strpos($link, "pages/$type_path") !== false;
 
-		if ($active) {
+		if ($type_active) {
 			$icon = $type_icon;
 			$name = $type_name;
 		} ?>
-		<li class="<?= $active ? 'active' : '' ?>">
+		<li class="<?= $type_active ? 'active' : '' ?>">
 			<div class="collapsible-header" <?= $first++ === 0 ? 'style="border-top: 1px solid #c8c8c8 !important"' : '' ?>><i class="material-icons left"><?= $type_icon ?></i><?= $type_name ?><i class="material-icons" style="position:absolute;right:0<?= $active ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
 			<div class="collapsible-body">
 				<ul class="collapsible padding-headers">
@@ -71,26 +71,27 @@ if ($logged) {
 							$sql->bindValue(':section_id', $section_id);
 							$sql->execute();
 
-							$active = strpos($link, "pages/$type_path/$section_path") !== false;
+							$section_active = strpos($link, "pages/$type_path/$section_path") !== false;
 
-							if ($active) {
+							if ($section_active) {
 								$icon_section = $section_icon;
 								$name_section = $section_name;
 							} ?>
-						<li class="<?= $active ? 'active' : '' ?>">
+						<li class="<?= $section_active ? 'active' : '' ?>">
 							<div style="position:relative" class="collapsible-header"><i class="material-icons"><?= $section_icon ?></i><?= $section_name ?><i class="material-icons" style="position:absolute;right:10px<?= $active ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
 							<div class="collapsible-body">
 								<ul>
 									<?php
 											foreach ($sql as $data) :
 												extract($data);
-												$active = strpos($link, "pages/$type_path/$section_path/$tool_path") !== false;
+
+												$tool_active = strpos($link, "pages/$type_path/$section_path/$tool_path") !== false;
 												$admin = isset($_SESSION['logged']);
 
 												$tool_names[$tool_name] = null;
 												$tool_paths[$tool_name] = "$type_path/$section_path/$tool_path";
 
-												if ($active) {
+												if ($tool_active) {
 													if (!$tool_status && !$admin) {
 														echo "<script>location = '$root/'</script>";
 
@@ -109,7 +110,7 @@ if ($logged) {
 													}
 												} ?>
 										<?php if ($tool_status || $admin) : ?>
-											<?php if ($active) : ?>
+											<?php if ($tool_active) : ?>
 												<li><a class="waves-effect waves- black-text" style="font-weight:bold" onclick="preventDefault(event)" href="<?= $root ?>/pages/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" title="<?= $tool_name ?>"><i class="material-icons dark-grey-text left" style="font-size:20px;margin-left:2.5px">radio_button_checked</i><?= $tool_name ?></a></li>
 											<?php else : ?>
 												<li><a class="waves-effect waves-" href="<?= $root ?>/pages/<?= $type_path ?>/<?= $section_path ?>/<?= $tool_path ?>/" title="<?= $tool_name ?>"><i class="material-icons left red-color-text">keyboard_arrow_right</i><?= $tool_name ?></a></li>
