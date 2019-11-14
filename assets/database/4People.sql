@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql
--- Generation Time: Nov 13, 2019 at 04:01 AM
+-- Generation Time: Nov 14, 2019 at 05:33 AM
 -- Server version: 8.0.18
 -- PHP Version: 7.2.22
 
@@ -443,7 +443,58 @@ INSERT INTO `admin_logs` (`log_id`, `log_action`, `log_createdAt`, `admin_id`) V
 (380, 'delete.post', '2019-11-12 13:55:57', 4),
 (381, 'insert.post', '2019-11-13 02:02:21', 4),
 (382, 'update.post', '2019-11-13 02:04:52', 4),
-(383, 'delete.post', '2019-11-13 02:26:21', 4);
+(383, 'delete.post', '2019-11-13 02:26:21', 4),
+(384, 'insert.post', '2019-11-13 20:15:40', 4),
+(385, 'insert.post', '2019-11-13 20:15:49', 4),
+(386, 'insert.post', '2019-11-13 20:15:57', 4),
+(387, 'update.post', '2019-11-13 20:17:17', 4),
+(388, 'delete.post', '2019-11-13 20:17:26', 4),
+(389, 'delete.post', '2019-11-13 20:17:27', 4),
+(390, 'delete.post', '2019-11-13 20:17:29', 4),
+(391, 'insert.post', '2019-11-13 20:17:36', 4),
+(392, 'delete.post', '2019-11-13 20:17:46', 4),
+(393, 'insert.post', '2019-11-13 20:17:53', 4),
+(394, 'insert.post', '2019-11-13 20:18:02', 4),
+(395, 'delete.post', '2019-11-13 20:18:18', 4),
+(396, 'delete.post', '2019-11-13 20:18:20', 4),
+(397, 'insert.post', '2019-11-13 20:18:27', 4),
+(398, 'insert.post', '2019-11-13 20:18:37', 4),
+(399, 'insert.post', '2019-11-13 20:19:07', 4),
+(400, 'insert.post', '2019-11-13 20:19:11', 4),
+(401, 'delete.post', '2019-11-13 20:19:22', 4),
+(402, 'delete.post', '2019-11-13 20:19:23', 4),
+(403, 'insert.post', '2019-11-13 20:19:38', 4),
+(404, 'insert.post', '2019-11-13 20:19:46', 4),
+(405, 'insert.post', '2019-11-13 20:20:12', 4),
+(406, 'insert.post', '2019-11-13 20:20:16', 4),
+(407, 'delete.post', '2019-11-13 20:20:27', 4),
+(408, 'delete.post', '2019-11-13 20:20:29', 4),
+(409, 'delete.post', '2019-11-13 20:20:30', 4),
+(410, 'delete.post', '2019-11-13 20:20:32', 4),
+(411, 'delete.post', '2019-11-13 20:20:34', 4),
+(412, 'delete.post', '2019-11-13 20:20:35', 4),
+(413, 'update.message.sent_email', '2019-11-13 20:56:59', 4),
+(414, 'update.message.unread', '2019-11-13 21:01:26', 4),
+(415, 'update.message.sent_email', '2019-11-13 21:12:39', 4),
+(416, 'update.message.unread', '2019-11-13 21:13:17', 4),
+(417, 'insert.post', '2019-11-13 22:11:14', 4),
+(418, 'delete.post', '2019-11-13 22:13:47', 4),
+(419, 'insert.post', '2019-11-14 04:23:02', 4),
+(420, 'delete.post', '2019-11-14 04:33:55', 4),
+(421, 'insert.post', '2019-11-14 04:36:17', 4),
+(422, 'delete.post', '2019-11-14 04:38:31', 4),
+(423, 'insert.post', '2019-11-14 04:38:37', 4),
+(424, 'delete.post', '2019-11-14 04:38:48', 4),
+(425, 'insert.post', '2019-11-14 04:39:28', 4),
+(426, 'delete.post', '2019-11-14 04:39:44', 4),
+(427, 'insert.schedule', '2019-11-14 04:47:19', 4),
+(428, 'delete.schedule', '2019-11-14 04:47:21', 4),
+(429, 'insert.post', '2019-11-14 04:52:24', 4),
+(430, 'delete.post', '2019-11-14 04:54:10', 4),
+(431, 'insert.post', '2019-11-14 04:57:30', 4),
+(432, 'insert.post', '2019-11-14 04:57:37', 4),
+(433, 'delete.post', '2019-11-14 05:14:08', 4),
+(434, 'delete.post', '2019-11-14 05:14:09', 4);
 
 -- --------------------------------------------------------
 
@@ -530,6 +581,19 @@ INSERT INTO `messages` (`message_id`, `message_name`, `message_email`, `message_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `notification_id` int(11) NOT NULL,
+  `notification_text` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `notification_createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `posts`
 --
 
@@ -553,7 +617,7 @@ INSERT INTO `posts` (`post_id`, `post_title`, `post_image`, `post_description`, 
 (25, 'Lançamento', 'Lançamento.jpg', 'Primeira postagem do 4People', '<h1 class=\"ql-align-center\"><strong>4People publicado!</strong></h1><p><br></p><blockquote><span style=\"color: rgb(68, 68, 68);\">Hoje, dia 02 de Dezembro, depois de muito suor, foi lançado a primeira versão do 4People ao público. O planejamento do 4People começou em Fevereiro de 2019! O TCC é composto por 3 integrantes (1 Desenvolvedor e 2 analistas).</span></blockquote><p><br></p><h2><strong>Como a ideia surgiu?</strong></h2><p><br></p><p class=\"ql-align-justify\"><span style=\"color: rgb(68, 68, 68);\">O </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\"> foi pensado mais ou menos em 2014, que foi o ano em que o </span><a href=\"https://github.com/lucasnaja\" target=\"_blank\" style=\"color: rgb(0, 102, 204);\">Lucas Bittencourt</a><a href=\"https://github.com/lucasnaja\" target=\"_blank\" style=\"color: rgb(68, 68, 68);\">,</a><span style=\"color: rgb(68, 68, 68);\"> Administrador do </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\">, conheceu o </span><em style=\"color: rgb(68, 68, 68);\">4Devs</em><span style=\"color: rgb(68, 68, 68);\"> (concorrente direto do </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\">), desde então ficou em sua memória o quanto queria produzir algo do tipo, mas não tinha o conhecimento necessário. </span><em style=\"color: rgb(68, 68, 68);\">Lucas</em><span style=\"color: rgb(68, 68, 68);\"> no começo de sua jornada no Desenvolvimento de Software, sempre fez projetos pessoais baseados em sites que já existiam (para ter uma base). O </span><em style=\"color: rgb(68, 68, 68);\">4Devs</em><span style=\"color: rgb(68, 68, 68);\"> foi um deles. Mas, como não tinha o conhecimento necessário para produzir algo do tipo, deixou de lado.</span></p><p><br></p><p class=\"ql-align-justify\"><span style=\"color: rgb(68, 68, 68);\">Na Etec de Guaratinguetá, ele teve essa ideia novamente (mais ou menos em Novembro de 2018), de produzir algo parecido com </span><em style=\"color: rgb(68, 68, 68);\">4Devs</em>. <span style=\"color: rgb(68, 68, 68);\">Como o nome 4Devs tem o significado \"para Devs\", a equipe do 4People pensou em algo não só para </span><em style=\"color: rgb(68, 68, 68);\">Desenvolvedores</em><span style=\"color: rgb(68, 68, 68);\">, e sim para p</span><em style=\"color: rgb(68, 68, 68);\">essoas</em><span style=\"color: rgb(68, 68, 68);\">. Foi aí que surgiu o </span><strong style=\"color: rgb(68, 68, 68);\">4People</strong><span style=\"color: rgb(68, 68, 68);\">.</span></p><p class=\"ql-align-justify\"><br></p><h2 class=\"ql-align-justify\"><strong>Por que usar o 4People?</strong></h2><p class=\"ql-align-justify\"><br></p><p class=\"ql-align-justify\"><span style=\"color: rgb(68, 68, 68);\">O 4People é um </span><strong style=\"color: rgb(68, 68, 68);\">Sistema Web</strong><span style=\"color: rgb(68, 68, 68);\"> que traz vários tipos de ferramentas Computacionais para Desenvolvedores de Softwares e estudantes de informática, assim como ferramentas Matemáticas para alunos e professores. 4People também possui um sistema de Blog totalmente otimizado. Além disso, ele é de código aberto, ou seja, qualquer um pode visualizar seu código fonte, e usá-lo para estudos e até mesmo melhorá-lo.</span></p><p><br></p><h2><strong>Como foi o processo?</strong></h2><p><br></p><p class=\"ql-align-justify\"><span style=\"color: rgb(68, 68, 68);\">O 4People passou por várias mudanças ao decorrer do tempo, tanto visuais, como também de linguagem, frameworks, bibliotecas, entre outros. O processo de produção do 4People foi árduo e demorado, mas com todo o código gerado, foi possível reutilizar parte dele, em vários pedaços do Sistema, asO </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\"> é um </span><u style=\"color: rgb(68, 68, 68);\">Sistema Web</u><span style=\"color: rgb(68, 68, 68);\"> que traz vários tipos de ferramentas computacionais para Desenvolvedores de Softwares e estudantes de informática, e ferramentas matemáticas para alunos e professores. Mas ele vai muito além disso, 4People possui um sistema de Blog totalmente otimizado. Além disso, ele é de código aberto, ou seja, qualquer um pode visualizar seu código fonte, e usá-lo para estudos e até mesmo melhorá-lo.sim facilitando seu Desenvolvimento. As linguagens utilizadas no Desenvolvimento foram HTML5, CSS3, JavaScript, PHP e MySQL.</span></p><p class=\"ql-align-justify\"><br></p><h2 class=\"ql-align-justify\"><strong>Agradecimentos</strong></h2><p class=\"ql-align-justify\"><br></p><p class=\"ql-align-justify\"><span style=\"color: rgb(68, 68, 68);\">Foi um prazer fazer parte da primeira turma de Desenvolvimento de Sistemas da Etec de Guaratinguetá. Queremos desejar parabéns a todas as equipes que estão aqui hoje apresentando seus projetos e aos professores pelo carinho e ensino dado. Foram 1 ano e meio de muito aprendizado e amizade.</span></p>', 40, 1, '2019-11-03 00:27:58', 4),
 (34, 'Manutenção', 'Manutenção.png', 'Possíveis manutenções serão agendadas aqui', '<blockquote><span style=\"color: rgb(68, 68, 68);\" class=\"ql-size-large\">Não há manutenções agendadas.</span></blockquote>', 12, 1, '2019-11-03 01:34:43', 4),
 (39, 'Arduino com JS', 'Arduino com JS.png', 'Aprendendo a controlar o Arduino com NodeJS e a biblioteca Johnny-Five', '<h1 class=\"ql-align-center\"><strong>Arduino com JS</strong></h1><p><br></p><h2><strong>Programas necessários</strong></h2><p><br></p><ul><li><a href=\"https://code.visualstudio.com/\" target=\"_blank\">VSCode</a> (ou qualquer outra IDE/Editor de Texto)</li><li><a href=\"https://docs.npmjs.com/cli/install\" target=\"_blank\">NPM</a></li><li><a href=\"https://nodejs.org/en/\" target=\"_blank\">Node</a></li></ul><p><br></p><h2><strong>Componentes necessários</strong></h2><p><br></p><ul><li><span style=\"color: rgb(68, 68, 68);\"> O Arduino UNO (e o cabo de conexão USB)</span></li><li><span style=\"color: rgb(68, 68, 68);\"> Um LED</span></li><li><span style=\"color: rgb(68, 68, 68);\"> Um resistor de 220 OHM</span></li></ul><p><br></p><h2><strong>Preparando o Arduino</strong></h2><p><br></p><ol><li><span style=\"color: rgb(68, 68, 68);\">Baixe o </span><a href=\"https://www.arduino.cc/en/Main/Software\" target=\"_blank\" style=\"color: rgb(0, 102, 204);\">Arduino IDE</a><span style=\"color: rgb(68, 68, 68);\">.</span><a href=\"https://www.arduino.cc/en/Main/Software\" target=\"_blank\" style=\"color: rgb(68, 68, 68);\">﻿</a></li><li><span style=\"color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);\">Plugue o Arduino na USB do computador.</span></li><li><span style=\"color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);\">Abra a IDE, depois abra o arquivo no caminho \'</span><span style=\"color: rgb(68, 68, 68);\">File > Examples > Firmata > StandardFirmata\'</span></li><li><span style=\"color: rgb(68, 68, 68);\">C</span><span style=\"color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);\">lique em upload.</span></li></ol><p><br></p><h2><strong>Preparando o Projeto</strong></h2><p><br></p><ol><li><span style=\"color: rgb(68, 68, 68);\">Digite</span> <strong style=\"color: rgb(68, 68, 68); background-color: rgb(255, 255, 204);\">npm init -y</strong><strong> </strong><span style=\"color: rgb(68, 68, 68);\">para iniciar um novo projeto em Node.</span></li><li><span style=\"color: rgb(68, 68, 68);\">Digite</span> <strong style=\"color: rgb(68, 68, 68); background-color: rgb(255, 255, 204);\">npm install -s johnny-five</strong> <span style=\"color: rgb(68, 68, 68);\">para instalar o johnny-five</span>.</li><li><span style=\"color: rgb(68, 68, 68);\">Crie um arquivo chamado index.js e cole o código abaixo:</span></li></ol><p><br></p><pre class=\"ql-syntax\" spellcheck=\"false\">const five = <span class=\"hljs-built_in\">require</span>(<span class=\"hljs-string\">\'johnny-five\'</span>)\r\n\r\nconst board = <span class=\"hljs-keyword\">new</span> five.Board();\r\n\r\n﻿let isReady = <span class=\"hljs-literal\">false</span>;\r\nlet isOn = <span class=\"hljs-literal\">false</span>;\r\nlet led;\r\n\r\nboard.<span class=\"hljs-literal\">on</span>(<span class=\"hljs-string\">\'ready\'</span>, <span class=\"hljs-function\"><span class=\"hljs-params\">()</span> =></span> {\r\n    led = <span class=\"hljs-keyword\">new</span> five.Led(<span class=\"hljs-number\">13</span>);\r\n\r\n    led.<span class=\"hljs-literal\">off</span>();\r\n\r\n    isReady = <span class=\"hljs-literal\">true</span>;\r\n});\r\n  \r\nhttp.createServer(<span class=\"hljs-function\"><span class=\"hljs-params\">(req, res)</span> =></span> {\r\n    toggleLed()\r\n\r\n    <span class=\"hljs-keyword\">if</span> (req.url == <span class=\"hljs-string\">\'/\'</span>) res.end(isOn + <span class=\"hljs-string\">\'\'</span>);\r\n    <span class=\"hljs-keyword\">else</span> res.end();\r\n}).listen(<span class=\"hljs-number\">3000</span>);\r\n  \r\n<span class=\"hljs-built_in\">console</span>.log(<span class=\"hljs-string\">\'listening at 3000\'</span>);\r\n\r\nfunction toggleLed () {\r\n    <span class=\"hljs-keyword\">if</span> (!isReady) { <span class=\"hljs-keyword\">return</span>; }\r\n  \r\n    <span class=\"hljs-keyword\">if</span> (isOn) {\r\n        led.<span class=\"hljs-literal\">off</span>();\r\n\r\n        isOn = <span class=\"hljs-literal\">false</span>;\r\n    } <span class=\"hljs-keyword\">else</span> {\r\n        led.<span class=\"hljs-literal\">on</span>();\r\n\r\n        isOn = <span class=\"hljs-literal\">true</span>;\r\n    }\r\n}\r\n</pre><p><br></p><h2><strong>Iniciando servidor</strong></h2><p><br></p><pre class=\"ql-syntax\" spellcheck=\"false\">node index.js\r\n</pre><p><br></p><p><span style=\"color: rgb(68, 68, 68);\">É isso! Agora basta modificar o código e deixá-lo à sua maneira.</span></p><p><br></p><blockquote><a href=\"https://github.com/lucasnaja/arduino-js\" target=\"_blank\" style=\"color: rgb(0, 102, 204);\">Clique aqui</a> <span style=\"color: rgb(68, 68, 68);\">para ir no meu GitHub e ver o projeto funcionando com socket.io e express.js com um código mais completo e detalhado. :)</span></blockquote>', 89, 1, '2019-11-03 17:41:57', 4),
-(44, 'Hacktoberfest', 'Hacktoberfest.png', 'Hacktoberfest - Um evento do GitHub patrocinado pela DigitalOcean e Dev Community', '<h1 class=\"ql-align-center\"><strong>Hacktoberfest</strong></h1><p><br></p><blockquote><strong style=\"background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);\">Hacktoberfest</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);\"> é uma celebração mundial da comunidade Open Source que ocorre durante o mês de outubro para incentivar a contribuição em projetos de código aberto.</span></blockquote><p><br></p><h2><strong>Por que?</strong></h2><p><br></p><p class=\"ql-align-justify\"><span style=\"background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);\">Para quem é Desenvolvedor, estudante aprendendo a programar, empresa de qualquer tamanho, ou um curioso do mundo da Tecnologia, você é incentivado a participar do evento, não importa seu nível de conhecimento (estamos todos aqui para aprender cada vez mais). Você pode aproveitar para sair da zona de conforto, e começar a participar do mundo open-source, ganhando cada vez mais conhecimento, e recebendo algo em troca por isso.</span></p><p class=\"ql-align-justify\"><br></p><h2 class=\"ql-align-justify\"><strong style=\"background-color: rgb(255, 255, 255);\">O que ganha?</strong></h2><p class=\"ql-align-justify\"><br></p><p class=\"ql-align-justify\"><span style=\"background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);\">O prêmio para quem concluir o desafio é uma camiseta de edição limitada e stickers. Todo ano as camisetas mudam de design, no caso do evento que ocorreu em 2019, você pode ver a camiseta na thumbnail desse post. Mas não se esqueça, há um limite de camisetas, que são 50.000 unidades que serão entregues no mundo todo. Passando disso, você receberá somente os stickers.</span></p><p class=\"ql-align-justify\"><br></p><h2 class=\"ql-align-justify\"><strong style=\"background-color: rgb(255, 255, 255);\">Como funciona?</strong></h2><p class=\"ql-align-justify\"><br></p><p><span style=\"color: rgb(68, 68, 68);\">Você precisa abrir somente 4 Pull Requests em qualquer repositório (4 PRs em 1 repo ou 1 PR em 4 repos). Só isso. Para quem nunca mexeu no GitHub, recomendo fortemente pesquisar como funciona (eu fiquei pesquisando que nem louco no google como funcionava os PRs do GitHub, quando o meu professor da Etec de Guaratinguetá, Augusto da Silva Costa, me falou sobre o evento).</span></p><p><br></p><h2><strong>Por onde eu começo?</strong></h2><p><br></p><p>Você pode começar por um repositório fácil de ser mantido, e que foi bastante utilizado pelas pessoas no Hacktoberfest de 2019. O repositório é simples e intuitivo, um repositório que mostra as ferramentas mais úteis utilizadas por Desenvolvedores. Link do repositório no GitHub: <a href=\"https://github.com/lucasnaja/useful-dev-tools\" target=\"_blank\">Clique aqui</a></p>', 59, 1, '2019-11-04 00:12:09', 4);
+(44, 'Hacktoberfest', 'Hacktoberfest.png', 'Hacktoberfest - Um evento do GitHub patrocinado pela DigitalOcean e Dev Community', '<h1 class=\"ql-align-center\"><strong>Hacktoberfest</strong></h1><p><br></p><blockquote><strong style=\"background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);\">Hacktoberfest</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);\"> é uma celebração mundial da comunidade Open Source que ocorre durante o mês de outubro para incentivar a contribuição em projetos de código aberto.</span></blockquote><p><br></p><h2><strong>Por que?</strong></h2><p><br></p><p class=\"ql-align-justify\"><span style=\"background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);\">Para quem é Desenvolvedor, estudante aprendendo a programar, empresa de qualquer tamanho, ou um curioso do mundo da Tecnologia, você é incentivado a participar do evento, não importa seu nível de conhecimento (estamos todos aqui para aprender cada vez mais). Você pode aproveitar para sair da zona de conforto, e começar a participar do mundo open-source, ganhando cada vez mais conhecimento, e recebendo algo em troca por isso.</span></p><p class=\"ql-align-justify\"><br></p><h2 class=\"ql-align-justify\"><strong style=\"background-color: rgb(255, 255, 255);\">O que ganha?</strong></h2><p class=\"ql-align-justify\"><br></p><p class=\"ql-align-justify\"><span style=\"background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);\">O prêmio para quem concluir o desafio é uma camiseta de edição limitada e stickers. Todo ano as camisetas mudam de design, no caso do evento que ocorreu em 2019, você pode ver a camiseta na thumbnail desse post. Mas não se esqueça, há um limite de camisetas, que são 50.000 unidades que serão entregues no mundo todo. Passando disso, você receberá somente os stickers.</span></p><p class=\"ql-align-justify\"><br></p><h2 class=\"ql-align-justify\"><strong style=\"background-color: rgb(255, 255, 255);\">Como funciona?</strong></h2><p class=\"ql-align-justify\"><br></p><p><span style=\"color: rgb(68, 68, 68);\">Você precisa abrir somente 4 Pull Requests em qualquer repositório (4 PRs em 1 repo ou 1 PR em 4 repos). Só isso. Para quem nunca mexeu no GitHub, recomendo fortemente pesquisar como funciona (eu fiquei pesquisando que nem louco no google como funcionava os PRs do GitHub, quando o meu professor da Etec de Guaratinguetá, Augusto da Silva Costa, me falou sobre o evento).</span></p><p><br></p><h2><strong>Por onde eu começo?</strong></h2><p><br></p><p>Você pode começar por um repositório fácil de ser mantido, e que foi bastante utilizado pelas pessoas no Hacktoberfest de 2019. O repositório é simples e intuitivo, um repositório que mostra as ferramentas mais úteis utilizadas por Desenvolvedores. Link do repositório no GitHub: <a href=\"https://github.com/lucasnaja/useful-dev-tools\" target=\"_blank\">Clique aqui</a></p>', 60, 1, '2019-11-04 00:12:09', 4);
 
 -- --------------------------------------------------------
 
@@ -614,7 +678,7 @@ INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_description`, `t
 (13, 'Meu IP', 'my_ip', 'Veja seu IP e muito mais informações aqui.', 'https://github.com/lucasnaja/4People/blob/master/pages/computation/network_internet/my_ip/src/index.js', 54, 1, 6),
 (14, 'Meu Navegador', 'my_browser', 'Veja seu Navegador aqui.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/network_and_internet/myWebBrowser.js', 21, 1, 6),
 (15, 'Buscar CEP', 'search_cep', 'Busque informações de seu CEP, como Rua, Cidade, Bairro e Estado aqui.', 'https://github.com/lucasnaja/4People/blob/master/pages/computation/network_internet/search_cep/src/index.js', 57, 1, 6),
-(16, 'Código Binário', 'binary_converter', 'Tradutor Online de Código Binário. Basta digitar o código binário ou texto abaixo e clicar no botão para converter.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/encoders_decoders/binaryConverter.js', 34, 1, 7),
+(16, 'Código Binário', 'binary_converter', 'Tradutor Online de Código Binário. Basta digitar o código binário ou texto abaixo e clicar no botão para converter.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/encoders_decoders/binaryConverter.js', 35, 1, 7),
 (17, 'Código de Evento das Teclas', 'keycode_event', 'Código de Eventos das Teclas para descobrir cada keyCode da tecla e criar eventos em sua linguagem de preferência.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/tables_and_patterns/jsEventKeyCodes.js', 42, 1, 8),
 (18, 'Fatorar Número', 'factorize_number', 'Calculadora Online para Fatorar Números.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/factorization.js', 92, 1, 12),
 (19, 'Máximo Divisor Comum', 'gcd', 'Calculadora Online para encontrar o Máximo Divisor Comum entre vários números.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/GCD.js', 15, 1, 12),
@@ -643,7 +707,7 @@ INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_description`, `t
 (42, 'Diferença entre Datas', 'difference_between_dates', 'Calcular Diferença entre Datas. Possui um leque de recursos disponíveis, como calcular idades, tempo, etc.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/dates_calculator/differenceBetweenDates.js', 178, 1, 11),
 (50, 'Gerador de Nomes', 'name_generator', 'Gerador de Nomes online e gratuito para gerar diversos tipos de nomes.', '', 15, 1, 2),
 (52, 'Tabela ASCII', 'ascii_table', 'Lista de códigos padrões da tabela ASC II.', 'https://github.com/lucasnaja/4People/tree/master/pages/computation/tables_patterns/ascii_table', 14, 1, 8),
-(53, 'Inverter Texto', 'reverse_text', 'Inversor de Texto online do 4People', 'https://github.com/lucasnaja/4People/tree/master/assets/algorithms/string_functions/reverseText.js', 14, 1, 5),
+(53, 'Inverter Texto', 'reverse_text', 'Inversor de Texto online do 4People', 'https://github.com/lucasnaja/4People/tree/master/assets/algorithms/string_functions/reverseText.js', 15, 1, 5),
 (54, 'Gerador de RG', 'rg_generator', 'Gerador de RG Online para Programadores testarem seus Softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/RGGenerator.js', 25, 1, 2),
 (55, 'Gerador de CNPJ', 'cnpj_generator', 'Gerador de CNPJ Online para Programadores testarem seus Softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/CNPJGenerator.js', 13, 1, 2),
 (56, 'Validador de RG', 'rg_validator', 'Validador de RG Online para validar RGs para programadores testarem seus softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/validators/RGValidator.js', 15, 1, 4),
@@ -717,6 +781,13 @@ ALTER TABLE `messages`
   ADD PRIMARY KEY (`message_id`);
 
 --
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`notification_id`),
+  ADD KEY `post_id` (`post_id`);
+
+--
 -- Indexes for table `posts`
 --
 ALTER TABLE `posts`
@@ -766,7 +837,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `admin_logs`
 --
 ALTER TABLE `admin_logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=384;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=435;
 
 --
 -- AUTO_INCREMENT for table `login_logs`
@@ -778,7 +849,7 @@ ALTER TABLE `login_logs`
 -- AUTO_INCREMENT for table `maintenances`
 --
 ALTER TABLE `maintenances`
-  MODIFY `maintenance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `maintenance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `messages`
@@ -787,10 +858,16 @@ ALTER TABLE `messages`
   MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- AUTO_INCREMENT for table `sections`
@@ -819,6 +896,12 @@ ALTER TABLE `types`
 --
 ALTER TABLE `admin_logs`
   ADD CONSTRAINT `admin_logs_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`admin_id`);
+
+--
+-- Constraints for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `posts`
