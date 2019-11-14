@@ -1,6 +1,6 @@
 <?php
 $root = '../../../..';
-include_once("$root/assets/assets.php")
+include_once("$root/assets/src/php/Main.php")
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

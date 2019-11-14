@@ -43,8 +43,7 @@ try {
 	if ($sql->execute()) {
 		echo '{"status":"1"}';
 
-		$sql = $database->prepare('INSERT INTO admin_logs VALUES (NULL, :log_action, CURRENT_TIMESTAMP, :admin_id)');
-		$sql->bindValue(':log_action', 'update.schedule');
+		$sql = $database->prepare('INSERT INTO admin_logs VALUES (NULL, "update.schedule", CURRENT_TIMESTAMP, :admin_id)');
 		$sql->bindValue(':admin_id', $_SESSION['logged']['id']);
 		$sql->execute();
 	} else echo '{"status":"0"}';

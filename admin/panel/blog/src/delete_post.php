@@ -29,8 +29,7 @@ try {
 
 		unlink("$assets/images/blog_images/$post_image");
 
-		$sql = $database->prepare('INSERT INTO admin_logs VALUES (NULL, :log_action, CURRENT_TIMESTAMP, :admin_id)');
-		$sql->bindValue(':log_action', 'delete.post');
+		$sql = $database->prepare('INSERT INTO admin_logs VALUES (NULL, "delete.post", CURRENT_TIMESTAMP, :admin_id)');
 		$sql->bindValue(':admin_id', $_SESSION['logged']['id']);
 		$sql->execute();
 	} else echo '{"status":"0"}';

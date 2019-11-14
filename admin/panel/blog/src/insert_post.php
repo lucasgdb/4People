@@ -38,8 +38,11 @@ try {
 	if ($sql->execute()) {
 		echo '{"status":"1"}';
 
-		$sql = $database->prepare('INSERT INTO admin_logs VALUES (NULL, :log_action, CURRENT_TIMESTAMP, :admin_id)');
-		$sql->bindValue(':log_action', 'insert.post');
+		$sql = $database->prepare('INSERT INTO notifications VALUES (NULL, "Nova postagem", :post_id, CURRENT_TIMESTAMP)');
+		$sql->bindValue(':post_id', $database->lastInsertId());
+		$sql->execute();
+
+		$sql = $database->prepare('INSERT INTO admin_logs VALUES (NULL, "insert.post", CURRENT_TIMESTAMP, :admin_id)');
 		$sql->bindValue(':admin_id', $_SESSION['logged']['id']);
 		$sql->execute();
 	} else echo '{"status":"0"}';

@@ -1,6 +1,6 @@
 <?php
 $root = '../..';
-include_once("$root/assets/assets.php")
+include_once("$root/assets/src/php/Main.php")
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -57,7 +57,7 @@ include_once("$root/assets/assets.php")
 
 									<div class="card-reveal">
 										<span class="card-title grey-text text-darken-4 left-div-margin-mobile" style="position:relative">
-											Informações<i title="Fechar" class="material-icons right red-color-text">close</i>
+											<?= $post_title ?><i title="Fechar" class="material-icons right red-color-text">close</i>
 
 											<div class="left-div-mobile red-color" style="border-radius:0"></div>
 										</span>
@@ -129,7 +129,7 @@ include_once("$root/assets/assets.php")
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
-	<script src="src/moment.min.js"></script>
+	<script src="<?= $assets ?>/src/js/moment.min.js"></script>
 	<script src="src/index.js"></script>
 </body>
 

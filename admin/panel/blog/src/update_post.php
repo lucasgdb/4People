@@ -54,8 +54,7 @@ try {
 			move_uploaded_file($post_image['tmp_name'], "$assets/images/blog_images/$long_name");
 		}
 
-		$sql = $database->prepare('INSERT INTO admin_logs VALUES (NULL, :log_action, CURRENT_TIMESTAMP, :admin_id)');
-		$sql->bindValue(':log_action', 'update.post');
+		$sql = $database->prepare('INSERT INTO admin_logs VALUES (NULL, "update.post", CURRENT_TIMESTAMP, :admin_id)');
 		$sql->bindValue(':admin_id', $_SESSION['logged']['id']);
 		$sql->execute();
 	} else echo '{"status":"0"}';

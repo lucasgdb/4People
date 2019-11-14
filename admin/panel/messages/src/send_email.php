@@ -49,7 +49,7 @@ try {
 	extract($sql->fetch());
 
 	$mail->Body =
-		"<h1>Equipe 4People</h1>Olá, $message_name. Recebemos sua mensagem!<br>Título: $message_subject.<br>Mensagem que você enviou:<p>$message_replied</p>Resposta da Administração do 4People: $message_content<br>Administrador: <b>$admin_name</b> ($admin_email)";
+		"<h1>Equipe 4People</h1>Olá, $message_name. Recebemos sua mensagem!<br>Título: $message_subject.<br><br>Mensagem que você enviou:<br>$message_replied<br><br>Resposta da Administração do 4People: $message_content<br>Administrador: <b>$admin_name</b> ($admin_email)";
 	$mail->AltBody = '4People - Resposta da mensagem.';
 
 	if ($mail->send()) {
@@ -61,8 +61,7 @@ try {
 
 		echo '{"status":"1"}';
 
-		$sql = $database->prepare('INSERT INTO admin_logs VALUES (NULL, :log_action, CURRENT_TIMESTAMP, :admin_id)');
-		$sql->bindValue(':log_action', 'update.message.sent_email');
+		$sql = $database->prepare('INSERT INTO admin_logs VALUES (NULL, "update.message.sent_email", CURRENT_TIMESTAMP, :admin_id)');
 		$sql->bindValue(':admin_id', $_SESSION['logged']['id']);
 		$sql->execute();
 	} else echo '{"status":"0"}';

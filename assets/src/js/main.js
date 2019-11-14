@@ -1,6 +1,7 @@
 // Materialize initalizations
 M.Sidenav.init(document.querySelectorAll('.sidenav'))
 M.Collapsible.init(document.querySelectorAll('.collapsible'))
+M.Dropdown.init(document.querySelectorAll('.dropdown-trigger'))
 M.FloatingActionButton.init(document.querySelectorAll('.fixed-action-btn'), {
 	hoverEnabled: false
 })

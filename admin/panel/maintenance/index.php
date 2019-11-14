@@ -1,6 +1,6 @@
 <?php
 $root = '../../..';
-include_once("$root/assets/assets.php");
+include_once("$root/assets/src/php/Main.php");
 
 if (!isset($_SESSION['logged'])) {
 	header('HTTP/1.0 404 Not Found');

@@ -1,6 +1,6 @@
 <?php
 $root = '../../..';
-include_once("$root/assets/assets.php");
+include_once("$root/assets/src/php/Main.php");
 
 $post_id = filter_input(INPUT_GET, 'post_id', FILTER_DEFAULT);
 
@@ -132,7 +132,7 @@ if ($post->rowCount()) extract($post->fetch());
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
-	<script src="../src/moment.min.js"></script>
+	<script src="<?= $assets ?>/src/js/moment.min.js"></script>
 	<script>
 		const ULs = document.querySelectorAll('#content ul')
 		const dateFormat = document.querySelector('#dateFormat')
@@ -146,7 +146,9 @@ if ($post->rowCount()) extract($post->fetch());
 
 		moment.locale('pt-BR')
 
-		dateFormat.innerHTML = moment(new Date(dateFormat.innerHTML)).format("dddd DD, MMMM YYYY");
+		if (dateFormat) {
+			dateFormat.innerHTML = moment(new Date(dateFormat.innerHTML)).format("dddd DD, MMMM YYYY");
+		}
 
 		for (let i = 0; i < ULs.length; i++) ULs[i].classList.add('browser-default')
 	</script>
