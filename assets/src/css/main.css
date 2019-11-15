@@ -11,7 +11,7 @@ body {
 	background-color: #eeeeee
 }
 
-.dropdown-content {
+#notifications {
 	top: 52px !important;
 	width: 300px !important;
 	left: 119px;

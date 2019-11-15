@@ -40,7 +40,7 @@
 <div id="notifications" class="dropdown-content">
 	<?php if ($notifications->rowCount()) : ?>
 		<?php foreach ($notifications as $notification) : extract($notification) ?>
-			<a title="<?= $post_title ?>" href="<?= $root ?>/pages/blog/post/?post_id=<?= $post_id ?>" class="dark-grey-text truncate" style="padding:8px 0 8px 22px;position:relative;height:unset;line-height:28px">
+			<a title="<?= $notification_text ?> - <?= $post_title ?>" href="<?= $root ?>/pages/blog/post/?post_id=<?= $post_id ?>" class="dark-grey-text truncate" style="padding:8px 0 8px 22px;position:relative;height:unset;line-height:28px">
 				Data: <span class="date-format-notification"><?= date("d/m/Y H:s:m", strtotime($notification_createdAt)) ?></span>
 
 				<br>
@@ -51,11 +51,10 @@
 
 				<div class="left-div dark-grey" style="border-radius:0"></div>
 			</a>
-
-			<div class="divider"></div>
+			<div class="divider dark-grey"></div>
 		<?php endforeach ?>
 	<?php else : ?>
-		<div class="dark-grey-text truncate" style="padding:6px 0 6px 22px;position:relative;line-height:25px">
+		<div title="Sem notificações" class="dark-grey-text truncate" style="padding:6px 0 6px 22px;position:relative;line-height:25px">
 			<p class="black-text">Nenhuma notificação.</p>
 
 			<div class="left-div dark-grey"></div>
