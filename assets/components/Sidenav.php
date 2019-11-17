@@ -61,7 +61,7 @@ if ($logged) {
 			$name = $type_name;
 		} ?>
 		<li class="<?= $type_active ? 'active' : '' ?>">
-			<div class="collapsible-header" <?= $first++ === 0 ? 'style="border-top: 1px solid #c8c8c8 !important"' : '' ?>><i class="material-icons left"><?= $type_icon ?></i><?= $type_name ?><i class="material-icons" style="position:absolute;right:0<?= $active ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
+			<div class="collapsible-header" <?= $first++ === 0 ? 'style="border-top: 1px solid #c8c8c8 !important"' : '' ?>><i class="material-icons left"><?= $type_icon ?></i><?= $type_name ?><i class="material-icons" style="position:absolute;right:0<?= $type_active ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
 			<div class="collapsible-body">
 				<ul class="collapsible padding-headers">
 					<?php
@@ -78,10 +78,13 @@ if ($logged) {
 								$name_section = $section_name;
 							} ?>
 						<li class="<?= $section_active ? 'active' : '' ?>">
-							<div style="position:relative" class="collapsible-header"><i class="material-icons"><?= $section_icon ?></i><?= $section_name ?><i class="material-icons" style="position:absolute;right:10px<?= $active ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
+							<div style="position:relative" class="collapsible-header"><i class="material-icons"><?= $section_icon ?></i><?= $section_name ?><i class="material-icons" style="position:absolute;right:10px<?= $type_active ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
 							<div class="collapsible-body">
 								<ul>
 									<?php
+											setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+											date_default_timezone_set('America/Sao_Paulo');
+
 											foreach ($sql as $data) :
 												extract($data);
 
@@ -106,7 +109,43 @@ if ($logged) {
 
 														$sql->bindValue(':tool_visits', ++$tool_visits);
 														$sql->bindValue(':tool_id', $tool_id);
-														$sql->execute();
+
+														if ($sql->execute()) {
+															$month = $database->prepare('SELECT month_id FROM months WHERE month_name = :month_name LIMIT 1');
+															$month->bindValue(':month_name', strftime('%B', strtotime('today')));
+															$month->execute();
+
+															$month_id = $month->fetchColumn();
+
+															$year = $database->prepare('SELECT year_id FROM years WHERE year_number = :year_number LIMIT 1');
+															$year->bindValue(':year_number', date('Y'));
+															$year->execute();
+
+															$year_id = $year->fetchColumn();
+
+															$month_year = $database->prepare('SELECT month_year_id FROM months_years WHERE month_id = :month_id AND year_id = :year_id LIMIT 1');
+															$month_year->bindValue(':month_id', $month_id);
+															$month_year->bindValue(':year_id', $year_id);
+															$month_year->execute();
+
+															$month_year_id = $month_year->fetchColumn();
+
+															$tool_visit = $database->prepare('SELECT tool_visit_id, tool_visit_visits FROM tool_visits WHERE month_year_id = :month_year_id LIMIT 1');
+															$tool_visit->bindValue(':month_year_id', $month_year_id);
+
+															if ($tool_visit->execute() && $tool_visit->rowCount()) {
+																$tool_visit_data = $tool_visit->fetch();
+
+																$sql = $database->prepare('UPDATE tool_visits SET tool_visit_visits = :tool_visit_visits WHERE tool_visit_id = :tool_visit_id');
+																$sql->bindValue(':tool_visit_visits', ++$tool_visit_data['tool_visit_visits']);
+																$sql->bindValue(':tool_visit_id', $tool_visit_data['tool_visit_id']);
+																$sql->execute();
+															} else {
+																$sql = $database->prepare('INSERT INTO tool_visits VALUES (DEFAULT, DEFAULT, :month_year_id)');
+																$sql->bindValue(':month_year_id', $month_year_id);
+																$sql->execute();
+															}
+														}
 													}
 												} ?>
 										<?php if ($tool_status || $admin) : ?>

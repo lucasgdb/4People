@@ -18,8 +18,8 @@
 
 				if (isset($_SESSION['logged'])) : ?>
 					<li title="Painel Administrativo" class="waves-effect"><a href="<?= $root ?>/admin/panel/"><i class="material-icons left">verified_user</i>Painel Administrativo</a></li>
-					<!-- <li title="Notificações"><a class="dropdown-trigger" href="#" data-target="notifications"><i class="material-icons"><?= $notifications->rowCount() ? 'notifications_active' : 'notifications' ?></i></a></li> -->
 					<li title="Sair" class="waves-effect"><a href="<?= $assets ?>/src/php/Logout.php"><i class="material-icons left">exit_to_app</i>Sair</a></li>
+					<li title="Notificações"><a class="dropdown-trigger" href="#" data-target="notifications"><i class="material-icons"><?= $notifications->rowCount() ? 'notifications_active' : 'notifications' ?></i></a></li>
 				<?php else : ?>
 					<?php
 						$sql = $database->prepare('SELECT type_name, type_path, type_icon FROM types');
@@ -49,7 +49,7 @@
 
 				<i class="material-icons red-color-text" style="position:absolute;right:10px;top:50%;transform:translateY(-50%)">chevron_right</i>
 
-				<div class="left-div dark-grey" style="border-radius:0"></div>
+				<div class="left-div dark-grey" style="border-radius:0 !important"></div>
 			</a>
 			<div class="divider dark-grey"></div>
 		<?php endforeach ?>

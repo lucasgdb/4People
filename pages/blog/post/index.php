@@ -52,9 +52,12 @@ if ($post->rowCount()) extract($post->fetch());
 	<main>
 		<div class="container">
 			<div class="card-panel top-div-margin">
-				<?php if ($post->rowCount()) : ?>
+				<?php
+				setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+				date_default_timezone_set('America/Sao_Paulo');
+				if ($post->rowCount()) : ?>
 					<h1 class="mont-serrat dark-grey-text" style="font-size:30px;margin:-5px 0 10px"><i class="material-icons left" style="top:6px">comment</i><?= $current_post_title ?></h1>
-					<label class="dark-grey-text"><?= $post_description ?>. Autor: <?= $admin_name ?>. Visitas: <span class="number"><?= $post_visits ?></span>. Data: <span id="dateFormat"><?= $post_createdAt ?></span></label>
+					<label class="dark-grey-text"><?= $post_description ?>. Autor: <?= $admin_name ?>. Visitas: <span class="number"><?= $post_visits ?></span>. Data: <?= strftime('%A, %d de %B de %Y', strtotime(date($post_createdAt))) ?></label>
 
 					<div class="divider"></div>
 
@@ -68,7 +71,8 @@ if ($post->rowCount()) extract($post->fetch());
 
 					<div id="content" class="mt-0 mb-0 ql-editor"><?= $post_content ?></div>
 
-					<?php if (!isset($_SESSION['logged'])) {
+					<?php
+						if (!isset($_SESSION['logged'])) {
 							$sql = $database->prepare('SELECT post_visits FROM posts WHERE post_status = "1" AND post_id = :post_id LIMIT 1');
 							$sql->bindValue(':post_id', $post_id);
 							$sql->execute();
@@ -78,7 +82,43 @@ if ($post->rowCount()) extract($post->fetch());
 							$sql = $database->prepare('UPDATE posts SET post_visits = :post_visits WHERE post_id = :post_id');
 							$sql->bindValue(':post_visits', ++$visits);
 							$sql->bindValue(':post_id', $post_id);
-							$sql->execute();
+
+							if ($sql->execute()) {
+								$month = $database->prepare('SELECT month_id FROM months WHERE month_name = :month_name LIMIT 1');
+								$month->bindValue(':month_name', strftime('%B', strtotime('today')));
+								$month->execute();
+
+								$month_id = $month->fetchColumn();
+
+								$year = $database->prepare('SELECT year_id FROM years WHERE year_number = :year_number LIMIT 1');
+								$year->bindValue(':year_number', date('Y'));
+								$year->execute();
+
+								$year_id = $year->fetchColumn();
+
+								$month_year = $database->prepare('SELECT month_year_id FROM months_years WHERE month_id = :month_id AND year_id = :year_id LIMIT 1');
+								$month_year->bindValue(':month_id', $month_id);
+								$month_year->bindValue(':year_id', $year_id);
+								$month_year->execute();
+
+								$month_year_id = $month_year->fetchColumn();
+
+								$post_visit = $database->prepare('SELECT post_visit_id, post_visit_visits FROM post_visits WHERE month_year_id = :month_year_id LIMIT 1');
+								$post_visit->bindValue(':month_year_id', $month_year_id);
+
+								if ($post_visit->execute() && $post_visit->rowCount()) {
+									$post_visit_data = $post_visit->fetch();
+
+									$sql = $database->prepare('UPDATE post_visits SET post_visit_visits = :post_visit_visits WHERE post_visit_id = :post_visit_id');
+									$sql->bindValue(':post_visit_visits', ++$post_visit_data['post_visit_visits']);
+									$sql->bindValue(':post_visit_id', $post_visit_data['post_visit_id']);
+									$sql->execute();
+								} else {
+									$sql = $database->prepare('INSERT INTO post_visits VALUES (DEFAULT, DEFAULT, :month_year_id)');
+									$sql->bindValue(':month_year_id', $month_year_id);
+									$sql->execute();
+								}
+							}
 						} ?>
 				<?php else : ?>
 					<h1 class="mont-serrat" style="font-size:30px;margin:0 0 5px"><i class="material-icons left" style="top:6px">error</i>Erro 404</h1>
@@ -132,22 +172,14 @@ if ($post->rowCount()) extract($post->fetch());
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
-	<script src="<?= $assets ?>/src/js/moment.min.js"></script>
 	<script>
 		const ULs = document.querySelectorAll('#content ul')
-		const dateFormat = document.querySelector('#dateFormat')
 		const lblNumbers = document.querySelectorAll('.number')
 		const formatter = Intl.NumberFormat('pt-BR')
 
 		for (let i = 0; i < lblNumbers.length; i += 1) {
 			const number = lblNumbers[i].textContent
 			lblNumbers[i].textContent = formatter.format(number)
-		}
-
-		moment.locale('pt-BR')
-
-		if (dateFormat) {
-			dateFormat.innerHTML = moment(new Date(dateFormat.innerHTML)).format("dddd DD, MMMM YYYY");
 		}
 
 		for (let i = 0; i < ULs.length; i++) ULs[i].classList.add('browser-default')

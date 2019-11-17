@@ -159,7 +159,7 @@ include_once("$root/assets/src/php/Main.php")
 					<div class="col s12 l6">
 						<div class="card grey lighten-5">
 							<div class="card-content">
-								<span class="card-title"><i class="material-icons left red-color-text">group</i>Visitas</span>
+								<span class="card-title"><i class="material-icons left red-color-text">group</i>Pessoas entretidas</span>
 								<?php
 								$sql = $database->prepare('SELECT SUM(post_visits) FROM posts WHERE post_status = "1" LIMIT 1');
 								$sql->execute();

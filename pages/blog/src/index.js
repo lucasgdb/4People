@@ -10,8 +10,6 @@ for (let i = 0; i < lblNumbers.length; i += 1) {
 	lblNumbers[i].textContent = formatter.format(number)
 }
 
-moment.locale('pt-BR')
-
 for (let i = 0; i < dates.length; i++) {
 	let format
 
@@ -36,5 +34,5 @@ for (let i = 0; i < dates.length; i++) {
 	else if (times.minute > 0) format = 'minute'
 	else format = 'second'
 
-	dates[i].innerHTML = `${moment(server).format("dddd DD, MMMM YYYY")}, ${dateFormatter.format(-times[format], format)}`
+	dates[i].innerHTML = dateFormatter.format(-times[format], format)
 }

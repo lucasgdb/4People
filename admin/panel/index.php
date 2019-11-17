@@ -77,7 +77,7 @@ $admin_panel = true
 					</div>
 
 					<div class="col s12 m6">
-						<div class="card z-depth-2">
+						<div class="card z-depth-1">
 							<div class="card-content left-div-margin-mobile" style="padding-top:4px;padding-bottom:4px">
 								<div class="row mb-0">
 									<div class="col s12 center-align">
@@ -99,7 +99,7 @@ $admin_panel = true
 							</div>
 						</div>
 
-						<div class="card z-depth-2">
+						<div class="card z-depth-1">
 							<div class="card-content left-div-margin-mobile" style="padding-top:4px;padding-bottom:4px">
 								<div class="row mb-0">
 									<div class="col s12 center-align">
@@ -121,16 +121,55 @@ $admin_panel = true
 							</div>
 						</div>
 					</div>
+
+					<div class="col s12 m6">
+						<div class="card z-depth-1">
+							<div class="card-content left-div-margin-mobile" style="padding-top:4px;padding-bottom:4px">
+								<div class="row mb-0">
+									<div class="col s12 center-align">
+										<h6 class="mont-serrat mb-3" style="position:relative">Manutenção</h6>
+										<div class="divider"></div>
+										<a class="tooltiped" data-tooltip="Manutenção" href="maintenance/">
+											<i class="material-icons large mt-2" style="color:#212121">access_time</i>
+										</a>
+									</div>
+								</div>
+
+								<div class="left-div-mobile dark-grey"></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col s12 m6">
+						<div class="card z-depth-1">
+							<div class="card-content left-div-margin-mobile" style="padding-top:4px;padding-bottom:4px">
+								<div class="row mb-0">
+									<div class="col s12 center-align">
+										<h6 class="mont-serrat mb-3" style="position:relative">Postagens</h6>
+										<div class="divider"></div>
+										<a class="tooltiped" data-tooltip="Postagens" href="blog/">
+											<i class="material-icons large mt-2" style="color:#212121">comment</i>
+										</a>
+									</div>
+								</div>
+
+								<div class="left-div-mobile dark-grey"></div>
+							</div>
+						</div>
+					</div>
 				</div>
 
-				<div class="divider"></div>
+				<div class="divider mt-1"></div>
 
-				<div class="card z-depth-2" style="padding:8px 0">
-					<canvas class="mt-2 mb-2" id="tools" width="3" height="1">Esse browser não suporta Canvas.</canvas>
-				</div>
-				<div class="card mb-2 z-depth-2" style="padding:8px 0">
-					<canvas id="status" width="3" height="1">Esse browser não suporta Canvas.</canvas>
-				</div>
+				<canvas id="tools" class="mt-1" width="3" height="1">Esse browser não suporta Canvas.</canvas>
+
+				<div class="divider mt-1 mb-1"></div>
+
+				<canvas id="posts" width="3" height="1">Esse browser não suporta Canvas.</canvas>
+
+				<div class="divider mt-1 mb-1"></div>
+
+				<canvas id="tool_names" width="3" height="1">Esse browser não suporta Canvas.</canvas>
 
 				<div class="left-div dark-grey"></div>
 			</div>
@@ -145,67 +184,147 @@ $admin_panel = true
 	<script src="src/chart.min.js"></script>
 
 	<?php
-	$data = $database->prepare('SELECT tool_visits FROM tools WHERE tool_status = "1" ORDER BY tool_visits DESC LIMIT 10');
-	$data->execute();
+	$sql = $database->prepare('SELECT months.month_id, tool_visits.tool_visit_visits FROM months INNER JOIN months_years ON months_years.month_id = months.month_id INNER JOIN years ON years.year_id = months_years.year_id INNER JOIN tool_visits ON tool_visits.month_year_id = months_years.month_year_id WHERE year_number = :year_number LIMIT 12');
+	$sql->bindValue(':year_number', date('Y'));
+	$sql->execute();
 
-	foreach ($data as $tool_visits) {
-		extract($tool_visits);
+	if ($sql->rowCount()) {
+		foreach ($sql as $visits) {
+			extract($visits);
 
-		$visits[] = (int) $tool_visits;
-	}
+			$data_tool[$month_id] = $tool_visit_visits;
+		}
+	} else $data_tool[] = null;
 
-	$labels = $database->prepare('SELECT tool_name FROM tools WHERE tool_status = "1" ORDER BY tool_visits DESC LIMIT 10');
-	$labels->execute();
+	$sql = $database->prepare('SELECT months.month_id, post_visits.post_visit_visits FROM months INNER JOIN months_years ON months_years.month_id = months.month_id INNER JOIN years ON years.year_id = months_years.year_id INNER JOIN post_visits ON post_visits.month_year_id = months_years.month_year_id WHERE year_number = :year_number LIMIT 12');
+	$sql->bindValue(':year_number', date('Y'));
+	$sql->execute();
 
-	foreach ($labels as $tool_names) {
-		extract($tool_names);
+	if ($sql->rowCount()) {
+		foreach ($sql as $visits) {
+			extract($visits);
 
-		$names[] = $tool_name;
-	}
+			$data_post[$month_id] = $post_visit_visits;
+		}
+	} else $data_post[] = null;
+
+	$sql = $database->prepare('SELECT tool_name, tool_visits FROM tools ORDER BY tool_visits DESC LIMIT 10');
+	$sql->execute();
+
+	if ($sql->rowCount()) {
+		foreach ($sql as $tools) {
+			extract($tools);
+
+			$data_tool_names[] = [$tool_visits, $tool_name];
+		}
+	} else $data_tool_names[] = null
 	?>
 
 	<script>
 		M.Tooltip.init(document.querySelectorAll('.tooltiped'))
 
-		const data = <?= json_encode($visits) ?>;
-		const labels = <?= json_encode($names) ?>;
-
 		document.addEventListener('DOMContentLoaded', () => {
-			new Chart(document.querySelector('#status').getContext('2d'), {
-				type: 'pie',
+			const encoded_tools = <?= json_encode($data_tool) ?>;
+			let data = []
+
+			for (let i = 1; i <= 12; i++) {
+				if (encoded_tools[i] === undefined) data.push(0)
+				else data.push(encoded_tools[i])
+			}
+
+			new Chart(document.querySelector('#tools'), {
+				type: 'bar',
 				data: {
 					datasets: [{
-						label: '# visitas',
+						minBarLength: 2,
 						data,
-						backgroundColor: [
-							'#009688',
-							'#f44336',
-							'#2196f3',
-							'#cddc39',
-							'#00bcd4',
-							'#ff9800',
-							'#795548',
-							'#3f51b5',
-							'#e91e63',
-							'#9c27b0'
-						]
+						backgroundColor: ['#a62023', '#1b1a25', '#a62023', '#1b1a25', '#a62023', '#1b1a25', '#a62023', '#1b1a25', '#a62023', '#1b1a25', '#a62023', '#1b1a25'],
 					}],
-					labels
+					labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+				},
+				options: {
+					legend: {
+						display: false
+					},
+					tooltips: {
+						callbacks: {
+							label: ttItem => ` ${ttItem.yLabel}`,
+						}
+					},
+					title: {
+						display: true,
+						text: 'Visitas nas Ferramentas do 4People em <?= date('Y') ?>'
+					}
 				}
 			})
 
-			new Chart(document.querySelector('#tools').getContext('2d'), {
-				type: 'pie',
+			const encoded_posts = <?= json_encode($data_post) ?>;
+			data = []
+
+			for (let i = 1; i <= 12; i++) {
+				if (encoded_posts[i] === undefined) data.push(0)
+				else data.push(encoded_posts[i])
+			}
+
+			new Chart(document.querySelector('#posts'), {
+				type: 'bar',
 				data: {
 					datasets: [{
-						data: data.slice(0, 3),
-						backgroundColor: [
-							'#009688',
-							'#f44336',
-							'#2196f3'
-						]
+						minBarLength: 2,
+						data,
+						backgroundColor: ['#a62023', '#1b1a25', '#a62023', '#1b1a25', '#a62023', '#1b1a25', '#a62023', '#1b1a25', '#a62023', '#1b1a25', '#a62023', '#1b1a25'],
 					}],
-					labels: labels.slice(0, 3)
+					labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+				},
+				options: {
+					legend: {
+						display: false
+					},
+					tooltips: {
+						callbacks: {
+							label: ttItem => ` ${ttItem.yLabel}`,
+						}
+					},
+					title: {
+						display: true,
+						text: 'Visitas no Blog do 4People em <?= date('Y') ?>'
+					}
+				}
+			})
+
+			const encoded_tool_names = <?= json_encode($data_tool_names) ?>;
+			data = []
+			const labels = []
+
+			for (let i = encoded_tool_names.length - 1; i >= 0; i--) {
+				data.push(encoded_tool_names[i][0])
+				labels.push(`${encoded_tool_names[i][1].split(' ')[0]}...`)
+			}
+
+			new Chart(document.querySelector('#tool_names'), {
+				type: 'bar',
+				data: {
+					datasets: [{
+						minBarLength: 2,
+						data,
+						backgroundColor: ['#a62023', '#1b1a25', '#a62023', '#1b1a25', '#a62023', '#1b1a25', '#a62023', '#1b1a25', '#a62023', '#1b1a25', '#a62023', '#1b1a25'],
+					}],
+					labels,
+				},
+				options: {
+					legend: {
+						display: false
+					},
+					tooltips: {
+						callbacks: {
+							label: ttItem => ` ${ttItem.yLabel}`,
+							title: label => encoded_tool_names[encoded_tool_names.length - 1 - label[0].index][1]
+						}
+					},
+					title: {
+						display: true,
+						text: `As ${encoded_tool_names.length} Ferramentas mais populares do 4People.`
+					}
 				}
 			})
 		})

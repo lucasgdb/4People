@@ -42,6 +42,9 @@ include_once("$root/assets/src/php/Main.php")
 				$sql->bindValue(':page', (int) $page, PDO::PARAM_INT);
 				$sql->execute();
 
+				setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
+				date_default_timezone_set('America/Sao_Paulo');
+
 				if ($sql->rowCount()) : ?>
 					<div class="row mt-1 mb-0">
 						<?php foreach ($sql as $post) : extract($post) ?>
@@ -52,7 +55,7 @@ include_once("$root/assets/src/php/Main.php")
 									<div class="card-content">
 										<span class="card-title grey-text text-darken-4"><a href="./post/?post_id=<?= $post_id ?>"><?= $post_title ?></a><i title="Mais informações" class="material-icons activator right" style="cursor:pointer">more_vert</i></span>
 										<p><a href="./post/?post_id=<?= $post_id ?>">Clique aqui</a> para ver mais informações.</p>
-										<p class="mt-2 mb-0 date-format"><?= $post_createdAt ?></p>
+										<p class="mt-2 mb-0"><?= strftime('%A, %d de %B de %Y', strtotime(date($post_createdAt))) ?>, <span class="date-format"><?= $post_createdAt ?></span></p>
 									</div>
 
 									<div class="card-reveal">
@@ -71,7 +74,7 @@ include_once("$root/assets/src/php/Main.php")
 
 										<div class="divider"></div>
 
-										<p>Data: <span class="date-format"><?= $post_createdAt ?></span></p>
+										<p>Data: <?= strftime('%A, %d de %B de %Y', strtotime(date($post_createdAt))) ?></p>
 
 										<div class="divider"></div>
 
@@ -129,7 +132,6 @@ include_once("$root/assets/src/php/Main.php")
 
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
 	<script src="<?= $assets ?>/src/js/main.js"></script>
-	<script src="<?= $assets ?>/src/js/moment.min.js"></script>
 	<script src="src/index.js"></script>
 </body>
 
