@@ -97,7 +97,7 @@ include_once("$root/assets/src/php/Main.php")
 
 								$sql->execute()
 								?>
-								<span class="card-title"><i class="material-icons left red-color-text">trending_up</i>As 3 Ferramentas mais populares</span>
+								<span class="card-title"><i class="material-icons left red-color-text">trending_up</i>As <?= $sql->rowCount() ?> Ferramentas mais populares</span>
 								<ul class="collection with-header mb-0">
 									<?php foreach ($sql as $data) : extract($data) ?>
 										<li class="collection-item grey lighten-5">
@@ -141,6 +141,27 @@ include_once("$root/assets/src/php/Main.php")
 						</div>
 					</div>
 
+					<div class="col s12">
+						<div class="card grey lighten-5">
+							<div class="card-content">
+								<?php
+								$sql = $database->prepare('SELECT post_id, post_title FROM posts WHERE post_status = "1" ORDER BY post_visits DESC LIMIT 3');
+								$sql->execute()
+								?>
+								<span class="card-title"><i class="material-icons left red-color-text">trending_up</i>As <?= $sql->rowCount() ?> postagens mais populares</span>
+								<ul class="collection with-header mb-0">
+									<?php foreach ($sql as $data) : extract($data) ?>
+										<li class="collection-item grey lighten-5">
+											<div style="font-size:16px"><?= $post_title ?><a title="Ver <?= $post_title ?>" href="<?= $root ?>/pages/blog/post/?post_id=<?= $post_id ?>" class="secondary-content"><i class="material-icons red-color-text">send</i></a></div>
+										</li>
+									<?php endforeach ?>
+								</ul>
+							</div>
+
+							<div class="top-div dark-grey"></div>
+						</div>
+					</div>
+
 					<div class="col s12 l6">
 						<div class="card grey lighten-5">
 							<div class="card-content">
@@ -149,7 +170,7 @@ include_once("$root/assets/src/php/Main.php")
 								$sql = $database->query('SELECT COUNT(post_id) FROM posts LIMIT 1');
 								$sql->execute();
 								?>
-								<p style="font-size:16px">Quantidade de Postagens: <span class="number"><?= $sql->fetchColumn() ?></span></p>
+								<p style="font-size:16px">Quantidade de postagens: <span class="number"><?= $sql->fetchColumn() ?></span></p>
 							</div>
 
 							<div class="top-div dark-grey"></div>
@@ -164,7 +185,7 @@ include_once("$root/assets/src/php/Main.php")
 								$sql = $database->prepare('SELECT SUM(post_visits) FROM posts WHERE post_status = "1" LIMIT 1');
 								$sql->execute();
 								?>
-								<p style="font-size:16px">Nossas Postagens foram vistas <span class="number"><?= $sql->fetchColumn() ?></span> vezes</p>
+								<p style="font-size:16px">Nossas postagens foram vistas <span class="number"><?= $sql->fetchColumn() ?></span> vezes</p>
 							</div>
 
 							<div class="top-div dark-grey"></div>

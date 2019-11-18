@@ -55,7 +55,8 @@ include_once("$root/assets/src/php/Main.php")
 									<div class="card-content">
 										<span class="card-title grey-text text-darken-4"><a href="./post/?post_id=<?= $post_id ?>"><?= $post_title ?></a><i title="Mais informações" class="material-icons activator right" style="cursor:pointer">more_vert</i></span>
 										<p><a href="./post/?post_id=<?= $post_id ?>">Clique aqui</a> para ver mais informações.</p>
-										<p class="mt-2 mb-0"><?= strftime('%A, %d de %B de %Y', strtotime(date($post_createdAt))) ?>, <span class="date-format"><?= $post_createdAt ?></span></p>
+										<p class="mt-2 mb-0">Postado: <?= strftime('%A, %d de %B de %Y', strtotime(date($post_createdAt))) ?></p>
+										<span class="date-format"><?= $post_createdAt ?></span>
 									</div>
 
 									<div class="card-reveal">

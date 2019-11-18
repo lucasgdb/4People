@@ -121,56 +121,16 @@ $admin_panel = true
 							</div>
 						</div>
 					</div>
-
-					<div class="col s12 m6">
-						<div class="card z-depth-1">
-							<div class="card-content left-div-margin-mobile" style="padding-top:4px;padding-bottom:4px">
-								<div class="row mb-0">
-									<div class="col s12 center-align">
-										<h6 class="mont-serrat mb-3" style="position:relative">Manutenção</h6>
-										<div class="divider"></div>
-										<a class="tooltiped" data-tooltip="Manutenção" href="maintenance/">
-											<i class="material-icons large mt-2" style="color:#212121">access_time</i>
-										</a>
-									</div>
-								</div>
-
-								<div class="left-div-mobile dark-grey"></div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col s12 m6">
-						<div class="card z-depth-1">
-							<div class="card-content left-div-margin-mobile" style="padding-top:4px;padding-bottom:4px">
-								<div class="row mb-0">
-									<div class="col s12 center-align">
-										<h6 class="mont-serrat mb-3" style="position:relative">Postagens</h6>
-										<div class="divider"></div>
-										<a class="tooltiped" data-tooltip="Postagens" href="blog/">
-											<i class="material-icons large mt-2" style="color:#212121">comment</i>
-										</a>
-									</div>
-								</div>
-
-								<div class="left-div-mobile dark-grey"></div>
-							</div>
-						</div>
-					</div>
 				</div>
 
-				<div class="divider mt-1"></div>
-
-				<canvas id="tools" class="mt-1" width="3" height="1">Esse browser não suporta Canvas.</canvas>
-
-				<div class="divider mt-1 mb-1"></div>
-
-				<canvas id="posts" width="3" height="1">Esse browser não suporta Canvas.</canvas>
-
-				<div class="divider mt-1 mb-1"></div>
-
-				<canvas id="tool_names" width="3" height="1">Esse browser não suporta Canvas.</canvas>
-
+				<div class="divider mt-2"></div>
+				<canvas id="tool_names" class="mt-2" width="3" height="1">Esse browser não suporta Canvas.</canvas>
+				<div class="divider mt-2"></div>
+				<canvas id="tools" class="mt-2" width="3" height="1">Esse browser não suporta Canvas.</canvas>
+				<div class="divider mt-2"></div>
+				<canvas id="post_visits" class="mt-2" width="3" height="1">Esse browser não suporta Canvas.</canvas>
+				<div class="divider mt-2"></div>
+				<canvas id="posts" class="mt-2" width="3" height="1">Esse browser não suporta Canvas.</canvas>
 				<div class="left-div dark-grey"></div>
 			</div>
 		</div>
@@ -217,7 +177,18 @@ $admin_panel = true
 
 			$data_tool_names[] = [$tool_visits, $tool_name];
 		}
-	} else $data_tool_names[] = null
+	} else $data_tool_names[] = null;
+
+	$sql = $database->prepare('SELECT post_title, post_visits FROM posts ORDER BY post_visits DESC LIMIT 10');
+	$sql->execute();
+
+	if ($sql->rowCount()) {
+		foreach ($sql as $posts) {
+			extract($posts);
+
+			$data_post_visits[] = [$post_visits, $post_title];
+		}
+	} else $data_post_visits[] = null
 	?>
 
 	<script>
@@ -248,7 +219,7 @@ $admin_panel = true
 					},
 					tooltips: {
 						callbacks: {
-							label: ttItem => ` ${ttItem.yLabel}`,
+							label: ttItem => ` ${ttItem.yLabel} visitas`,
 						}
 					},
 					title: {
@@ -282,7 +253,7 @@ $admin_panel = true
 					},
 					tooltips: {
 						callbacks: {
-							label: ttItem => ` ${ttItem.yLabel}`,
+							label: ttItem => ` ${ttItem.yLabel} visitas`,
 						}
 					},
 					title: {
@@ -294,7 +265,7 @@ $admin_panel = true
 
 			const encoded_tool_names = <?= json_encode($data_tool_names) ?>;
 			data = []
-			const labels = []
+			let labels = []
 
 			for (let i = encoded_tool_names.length - 1; i >= 0; i--) {
 				data.push(encoded_tool_names[i][0])
@@ -317,13 +288,48 @@ $admin_panel = true
 					},
 					tooltips: {
 						callbacks: {
-							label: ttItem => ` ${ttItem.yLabel}`,
+							label: ttItem => ` ${ttItem.yLabel} visitas`,
 							title: label => encoded_tool_names[encoded_tool_names.length - 1 - label[0].index][1]
 						}
 					},
 					title: {
 						display: true,
 						text: `As ${encoded_tool_names.length} Ferramentas mais populares do 4People.`
+					}
+				}
+			})
+
+			const encoded_post_visits = <?= json_encode($data_post_visits) ?>;
+			data = []
+			labels = []
+
+			for (let i = encoded_post_visits.length - 1; i >= 0; i--) {
+				data.push(encoded_post_visits[i][0])
+				labels.push(encoded_post_visits[i][1])
+			}
+
+			new Chart(document.querySelector('#post_visits'), {
+				type: 'bar',
+				data: {
+					datasets: [{
+						minBarLength: 2,
+						data,
+						backgroundColor: ['#a62023', '#1b1a25', '#a62023', '#1b1a25', '#a62023', '#1b1a25', '#a62023', '#1b1a25', '#a62023', '#1b1a25', '#a62023', '#1b1a25'],
+					}],
+					labels,
+				},
+				options: {
+					legend: {
+						display: false
+					},
+					tooltips: {
+						callbacks: {
+							label: ttItem => ` ${ttItem.yLabel} visitas`,
+						}
+					},
+					title: {
+						display: true,
+						text: `As ${encoded_post_visits.length} postagens mais populares do 4People.`
 					}
 				}
 			})
