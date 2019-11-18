@@ -75,7 +75,7 @@ include_once("$root/assets/src/php/Main.php")
 
 										<div class="divider"></div>
 
-										<p>Data: <?= strftime('%A, %d de %B de %Y', strtotime(date($post_createdAt))) ?></p>
+										<p>Postado: <?= strftime('%A, %d de %B de %Y', strtotime(date($post_createdAt))) ?></p>
 
 										<div class="divider"></div>
 

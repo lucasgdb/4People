@@ -29,18 +29,18 @@ try {
 	$data = $current_data->fetch();
 	$current_password = $data['admin_password'];
 	$current_admin_image = $data['admin_image'];
-	$ext = strtolower(pathinfo($_FILES['admin_image']['name'], PATHINFO_EXTENSION));
+	$ext = strtolower(pathinfo($admin_image['name'], PATHINFO_EXTENSION));
 
 	if ($ext) {
 		$long_name = "$admin_nickname.$ext";
 
-		if ($current_admin_image) unlink("../../../../assets/images/admin_images/$current_admin_image");
-		move_uploaded_file($_FILES['admin_image']['tmp_name'], "../../../../assets/images/admin_images/$long_name");
+		if ($current_admin_image) unlink("$assets/images/admin_images/$current_admin_image");
+		move_uploaded_file($admin_image['tmp_name'], "$assets/images/admin_images/$long_name");
 	} else unset($ext);
 
 	if (isset($admin_image_text) && $admin_image_text === '') {
 		$no_image = '';
-		if ($current_admin_image) unlink("../../../../assets/images/admin_images/$current_admin_image");
+		if ($current_admin_image) unlink("$assets/images/admin_images/$current_admin_image");
 	}
 
 	$sql = $database->prepare(
