@@ -1,6 +1,7 @@
 const dates = document.querySelectorAll('.date-format')
 const lblNumbers = document.querySelectorAll('.number')
 const formatter = Intl.NumberFormat('pt-BR')
+const current = new Date()
 const dateFormatter = new Intl.RelativeTimeFormat('pt-BR', {
 	style: 'narrow'
 });
@@ -13,7 +14,6 @@ for (let i = 0; i < lblNumbers.length; i += 1) {
 for (let i = 0; i < dates.length; i++) {
 	let format
 
-	const current = new Date()
 	const server = new Date(dates[i].innerHTML)
 
 	const difference = Math.abs(current.getTime() - server.getTime())
