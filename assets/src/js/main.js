@@ -122,8 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	for (let i = 0; i < secCollButtons.length; i += 1) {
 		secCollButtons[i].addEventListener('click', () => {
 			const icon = secCollButtons[i].querySelector(':last-child')
-			icon.style.transform =
-				icon.style.transform === 'rotateZ(-180deg)' ? 'rotateZ(0)' : 'rotateZ(-180deg)'
+			icon.style.transform = icon.style.transform === 'rotateZ(-180deg)' ? 'rotateZ(0)' : 'rotateZ(-180deg)'
 
 			const containerButtons = secCollButtons[i].parentElement.parentElement.querySelectorAll('.collapsible > li > .collapsible-header')
 			for (let j = 0; j < containerButtons.length; j++) {
@@ -138,8 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	for (let i = 0; i < mainCollButtons.length; i += 1) {
 		mainCollButtons[i].addEventListener('click', () => {
 			const icon = mainCollButtons[i].querySelector(':last-child')
-			icon.style.transform =
-				icon.style.transform === 'rotateZ(-180deg)' ? 'rotateZ(0)' : 'rotateZ(-180deg)'
+			icon.style.transform = icon.style.transform === 'rotateZ(-180deg)' ? 'rotateZ(0)' : 'rotateZ(-180deg)'
 
 			for (let j = 0; j < mainCollButtons.length; j++) {
 				if (mainCollButtons[i] !== mainCollButtons[j]) {

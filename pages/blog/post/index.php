@@ -94,7 +94,8 @@ if ($post->rowCount()) extract($post->fetch());
 								$year->bindValue(':year_number', date('Y'));
 								$year->execute();
 
-								if (!$year->rowCount()) {
+								if ($year->rowCount() === 1) $year_id = $year->fetchColumn();
+								else {
 									$year = $database->prepare('INSERT INTO years VALUES (DEFAULT, :current_year)');
 									$year->bindValue(':current_year', date('Y'));
 									$year->execute();
@@ -104,7 +105,7 @@ if ($post->rowCount()) extract($post->fetch());
 									$month_year = $database->prepare('INSERT INTO months_years VALUES (DEFAULT, "1", :year_id), (DEFAULT, "2", :year_id), (DEFAULT, "3", :year_id), (DEFAULT, "4", :year_id), (DEFAULT, "5", :year_id), (DEFAULT, "6", :year_id), (DEFAULT, "7", :year_id), (DEFAULT, "8", :year_id), (DEFAULT, "9", :year_id), (DEFAULT, "10", :year_id), (DEFAULT, "11", :year_id), (DEFAULT, "12", :year_id)');
 									$month_year->bindValue(':year_id', $year_id);
 									$month_year->execute();
-								} else $year_id = $year->fetchColumn();
+								}
 
 								$month_year = $database->prepare('SELECT month_year_id FROM months_years WHERE month_id = :month_id AND year_id = :year_id LIMIT 1');
 								$month_year->bindValue(':month_id', $month_id);

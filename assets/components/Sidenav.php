@@ -78,7 +78,7 @@ if ($logged) {
 								$name_section = $section_name;
 							} ?>
 						<li class="<?= $section_active ? 'active' : '' ?>">
-							<div style="position:relative" class="collapsible-header"><i class="material-icons"><?= $section_icon ?></i><?= $section_name ?><i class="material-icons" style="position:absolute;right:10px<?= $type_active ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
+							<div style="position:relative" class="collapsible-header"><i class="material-icons"><?= $section_icon ?></i><?= $section_name ?><i class="material-icons" style="position:absolute;right:10px<?= $section_active ? ';transform:rotateZ(-180deg)' : '' ?>">arrow_drop_down</i></div>
 							<div class="collapsible-body">
 								<ul>
 									<?php
@@ -121,7 +121,8 @@ if ($logged) {
 															$year->bindValue(':year_number', date('Y'));
 															$year->execute();
 
-															if (!$year->rowCount()) {
+															if ($year->rowCount() === 1) $year_id = $year->fetchColumn();
+															else {
 																$year = $database->prepare('INSERT INTO years VALUES (DEFAULT, :current_year)');
 																$year->bindValue(':current_year', date('Y'));
 																$year->execute();
@@ -131,7 +132,7 @@ if ($logged) {
 																$month_year = $database->prepare('INSERT INTO months_years VALUES (DEFAULT, "1", :year_id), (DEFAULT, "2", :year_id), (DEFAULT, "3", :year_id), (DEFAULT, "4", :year_id), (DEFAULT, "5", :year_id), (DEFAULT, "6", :year_id), (DEFAULT, "7", :year_id), (DEFAULT, "8", :year_id), (DEFAULT, "9", :year_id), (DEFAULT, "10", :year_id), (DEFAULT, "11", :year_id), (DEFAULT, "12", :year_id)');
 																$month_year->bindValue(':year_id', $year_id);
 																$month_year->execute();
-															} else $year_id = $year->fetchColumn();
+															}
 
 															$month_year = $database->prepare('SELECT month_year_id FROM months_years WHERE month_id = :month_id AND year_id = :year_id LIMIT 1');
 															$month_year->bindValue(':month_id', $month_id);

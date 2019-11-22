@@ -13,11 +13,11 @@ try {
 	include_once('../../../../assets/src/php/Connection.php');
 
 	$sql = $database->prepare(
-		'SELECT
-			message_id, message_name, message_email, message_subject, message_content, message_read
+		'SELECT message_id, message_name, message_email, message_subject, message_content, message_read
 			FROM messages
-			ORDER BY message_read, message_time'
+			ORDER BY message_read, message_createdAt'
 	);
+
 	$sql->execute();
 
 	if ($sql->rowCount()) {
