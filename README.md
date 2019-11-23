@@ -6,28 +6,19 @@
 
 O 4People é um Sistema Web que traz vários tipos de ferramentas Computacionais para Desenvolvedores de Softwares e estudantes de informática, assim como ferramentas Matemáticas para alunos e professores. 4People também possui um sistema de Blog totalmente otimizado. Além disso, ele é de código aberto, ou seja, qualquer um pode visualizar seu código fonte, e usá-lo para estudos e até mesmo melhorá-lo.
 
-## Tecnologias e Ferramentas usadas
+## Tecnologias
 
 - HTML5
 - CSS3
 - JavaScript
-- Materialize
 - PHP
-- Docker
 - MySQL
-- PHPMyAdmin
+
+## Ferramentas
+
 - VSCode
-
-## Extensões VSCode usadas
-
-- [Beautify](https://marketplace.visualstudio.com/items?itemName=HookyQR.beautify)
-- [EditorConfig for VS Code](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
-- [HTML CSS Support](https://marketplace.visualstudio.com/items?itemName=ecmel.vscode-html-css)
-- [PHP Intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client)
-- [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
-- [Visual Studio IntelliCode](https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode)
-- [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme)
-- [Dracula Official](https://marketplace.visualstudio.com/items?itemName=dracula-theme.theme-dracula)
+- Docker
+- phpMyAdmin
 
 ## Como usar o Projeto
 
