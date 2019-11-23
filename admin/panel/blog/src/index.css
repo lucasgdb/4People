@@ -49,3 +49,7 @@ strong {
 		width: 98%
 	}
 }
+
+.ql-editor>* {
+	cursor: text
+}

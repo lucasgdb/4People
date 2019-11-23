@@ -20,6 +20,10 @@ table th {
 	left: 10px !important
 }
 
+.ql-editor>* {
+	cursor: text
+}
+
 strong {
 	font-weight: bold
 }

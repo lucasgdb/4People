@@ -1,10 +1,13 @@
 M.FormSelect.init(document.querySelectorAll('select'))
 
+Quill.register("modules/htmlEditButton", htmlEditButton)
+
 const quill = new Quill('#snow-container', {
 	modules: {
 		formula: true,
 		syntax: true,
-		toolbar: '#toolbar-container'
+		toolbar: '#toolbar-container',
+		htmlEditButton: {}
 	},
 	placeholder: 'Escrever conteúdo...',
 	theme: 'snow'

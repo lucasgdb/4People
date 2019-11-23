@@ -42,7 +42,3 @@ pre {
 	word-wrap: break-word;
 	padding: 10px 20px !important
 }
-
-.ql-editor *:not(a) {
-	cursor: default !important
-}

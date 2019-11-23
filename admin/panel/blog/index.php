@@ -165,6 +165,7 @@ if (!isset($_SESSION['logged'])) {
 	<script src="<?= $assets ?>/src/js/main.js"></script>
 	<script src="<?= $assets ?>/src/js/katex.min.js"></script>
 	<script src="<?= $assets ?>/src/js/highlight.min.js"></script>
+	<script src="src/quill.htmlEditButton.min.js"></script>
 	<script src="<?= $assets ?>/src/js/quill.min.js"></script>
 	<script src="<?= $assets ?>/src/js/auto-render.min.js" onload="renderMathInElement(document.body)"></script>
 	<script src="src/index.js"></script>

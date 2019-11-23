@@ -151,6 +151,10 @@ if (!isset($_SESSION['logged'])) {
 
 	<script src="<?= $assets ?>/src/js/katex.min.js"></script>
 	<script src="<?= $assets ?>/src/js/highlight.min.js"></script>
+	<script>
+		let lblQuillContent
+	</script>
+	<script src="../src/quill.htmlEditButton.min.js"></script>
 	<script src="<?= $assets ?>/src/js/quill.min.js"></script>
 	<script src="<?= $assets ?>/src/js/auto-render.min.js" onload="renderMathInElement(document.body)"></script>
 	<script src="<?= $assets ?>/src/js/materialize.min.js"></script>
@@ -159,11 +163,14 @@ if (!isset($_SESSION['logged'])) {
 
 		const formUpdate = document.querySelector('form')
 
+		Quill.register("modules/htmlEditButton", htmlEditButton)
+
 		const quill = new Quill('#snow-container', {
 			modules: {
 				formula: true,
 				syntax: true,
-				toolbar: '#toolbar-container'
+				toolbar: '#toolbar-container',
+				htmlEditButton: {}
 			},
 			placeholder: 'Escrever conteúdo...',
 			theme: 'snow'
@@ -171,7 +178,6 @@ if (!isset($_SESSION['logged'])) {
 
 		quill.root.setAttribute('spellcheck', false)
 
-		let lblQuillContent
 		const btnUpdatePost = document.querySelector('#btnUpdatePost')
 		const postContent = document.querySelector('#postContent')
 
