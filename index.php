@@ -197,15 +197,15 @@ include_once("$root/assets/src/php/Main.php")
 
 				<div style="padding:0 20px">
 					<h2 class="mont-serrat mt-2 mb-0 center-align" style="font-size:35px">4People</h2>
-					<blockquote class="grey-text text-darken-3 mt-2" style="border-left-color:#A62023">
+					<blockquote class="grey-text text-darken-3 mt-2" style="text-align:justify;border-left-color:#A62023">
 						"O 4People é um Sistema Web que traz vários tipos de ferramentas Computacionais para Desenvolvedores de Softwares e estudantes de informática, assim como ferramentas Matemáticas para alunos e professores. 4People também possui um sistema de Blog totalmente otimizado. Além disso, ele é de código aberto, ou seja, qualquer um pode visualizar seu código fonte, e usá-lo para estudos e até mesmo melhorá-lo."
 					</blockquote>
 				</div>
 
 				<div class="divider mt-2 mb-2"></div>
 
-				<div title="Lucas Bittencourt" class="row mb-0">
-					<a href="https://github.com/lucasnaja" target="_blank" class="waves-effect col s12 m6 l4">
+				<div class="row mb-0">
+					<a title="Lucas Bittencourt" href="https://github.com/lucasnaja" target="_blank" class="waves-effect col s12 m6 l4">
 						<img class="responsive-img img-thumbnail" src="<?= $assets ?>/images/lucas_bittencourt.jpeg" alt="Lucas Bittencourt">
 					</a>
 
@@ -213,11 +213,35 @@ include_once("$root/assets/src/php/Main.php")
 						<p class="grey-text text-darken-4 mb-0">Nome: Lucas Bittencourt. Função: Desenvolvedor</p>
 
 						<div class="divider mt-2 mb-2"></div>
-						<blockquote class="grey-text text-darken-3 mt-0">
+						<blockquote class="grey-text text-darken-3 mt-0" style="text-align:justify">
 							"Lucas Bittencourt, 19, cursando Desenvolvimento de Sistemas na Etec de Guaratinguetá e atuando como Desenvolvedor do 4People.
 							Também cursando o curso de Análise e Desenvolvimento de Sistemas na Fatec de Guaratinguetá.
 							Amo café <img src="<?= $assets ?>/images/coffee.png" alt="Café" />, distribuições Linux <img height="20" src="<?= $assets ?>/images/linux.png" alt="Linux" />, JavaScript <img src="<?= $assets ?>/images/js.png" alt="JS" /> e desenvolver &lt;/&gt;."
 						</blockquote>
+
+						<a title="Dev.to" href="https://dev.to/lucasnaja" target="_blank" rel="noopener noreferrer nofollow">
+							<img loading="lady" src="<?= $assets ?>/images/dev.svg" alt="Perfil Dev Community Lucas Bittencourt" height="30" width="30">
+						</a>
+
+						<a title="GitHub" href="https://github.com/lucasnaja" target="_blank" rel="noopener noreferrer nofollow">
+							<img loading="lady" src="<?= $assets ?>/images/github.ico" alt="Perfil GitHub Lucas Bittencourt" height="30" width="30">
+						</a>
+
+						<a title="Facebook" href="https://facebook.com/lucas8bit" target="_blank" rel="noopener noreferrer nofollow">
+							<img loading="lady" src="<?= $assets ?>/images/facebook.png" alt="Perfil Facebook Lucas Bittencourt" height="30" width="30">
+						</a>
+
+						<a title="Twitter" href="https://twitter.com/lucasnaja0" target="_blank" rel="noopener noreferrer nofollow">
+							<img loading="lady" src="<?= $assets ?>/images/twitter.svg" alt="Perfil Facebook Lucas Bittencourt" height="30" width="30">
+						</a>
+
+						<a title="YouTube" href="https://youtube.com/c/lucasnaja" target="_blank" rel="noopener noreferrer nofollow">
+							<img loading="lady" src="<?= $assets ?>/images/youtube.svg" alt="Perfil Facebook Lucas Bittencourt" height="30" width="30">
+						</a>
+
+						<a title="LinkedIn" href="https://linkedin.com/in/lucas-bittencourt" target="_blank" rel="noopener noreferrer nofollow">
+							<img loading="lady" src="<?= $assets ?>/images/linkedin.svg" alt="Perfil LinkedIn Lucas Bittencourt" height="30" width="30">
+						</a>
 					</div>
 				</div>
 
@@ -232,7 +256,11 @@ include_once("$root/assets/src/php/Main.php")
 						<p class="grey-text text-darken-4 mb-0">Nome: Suzany Silva. Função: Analista</p>
 
 						<div class="divider mt-2 mb-2"></div>
-						<blockquote class="grey-text text-darken-3 mt-0">"Suzany Silva, 17, cursando Desenvolvimento de Sistemas na Etec de Guaratinguetá e atuando como Analista do 4People."</blockquote>
+						<blockquote class="grey-text text-darken-3 mt-0" style="text-align:justify">"Suzany Silva, 17, cursando Desenvolvimento de Sistemas na Etec de Guaratinguetá e atuando como Analista do 4People."</blockquote>
+
+						<a title="Facebook" href="https://facebook.com/suzany.castrodasilva" target="_blank" rel="noopener noreferrer nofollow">
+							<img loading="lady" src="<?= $assets ?>/images/facebook.png" alt="Perfil Facebook Suzany" height="30" width="30">
+						</a>
 					</div>
 				</div>
 
@@ -247,7 +275,11 @@ include_once("$root/assets/src/php/Main.php")
 						<p class="grey-text text-darken-4 mb-0">Nome: Renan Mattos. Função: Analista</p>
 
 						<div class="divider mt-2 mb-2"></div>
-						<blockquote class="grey-text text-darken-3 mt-0">"Renan Mattos, 22, cursando Desenvolvimento de Sistemas na Etec de Guaratinguetá e atuando como Analista do 4People."</btn-block>
+						<blockquote class="grey-text text-darken-3 mt-0" style="text-align:justify">"Renan Mattos, 22, cursando Desenvolvimento de Sistemas na Etec de Guaratinguetá e atuando como Analista do 4People."</blockquote>
+
+						<a title="Facebook" href="https://www.facebook.com/reenan.mattos" target="_blank" rel="noopener noreferrer nofollow">
+							<img loading="lady" src="<?= $assets ?>/images/facebook.png" alt="Perfil Facebook Renan" height="30" width="30">
+						</a>
 					</div>
 				</div>
 
