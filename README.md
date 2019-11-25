@@ -17,7 +17,7 @@ O 4People é um Sistema Web que traz vários tipos de ferramentas Computacionais
 ## Ferramentas
 
 - VSCode
-- Docker
+- Docker ou XAMPP
 - phpMyAdmin
 
 ## Como usar o Projeto

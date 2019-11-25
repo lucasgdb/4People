@@ -193,10 +193,10 @@ include_once("$root/assets/src/php/Main.php")
 					</div>
 				</div>
 
-				<div class="divider mb-2"></div>
+				<div class="divider"></div>
 
 				<div style="padding:0 20px">
-					<h2 class="mont-serrat mt-2 mb-0 center-align" style="font-size:35px">4People</h2>
+					<h2 class="mont-serrat mt-0 mb-0 center-align"><span style="color:#1b1a25">&lt;/<span class="red-color-text" style="font-size:28px">4People</span>&gt;</span></h2>
 					<blockquote class="grey-text text-darken-3 mt-2" style="text-align:justify;border-left-color:#A62023">
 						"O 4People é um Sistema Web que traz vários tipos de ferramentas Computacionais para Desenvolvedores de Softwares e estudantes de informática, assim como ferramentas Matemáticas para alunos e professores. 4People também possui um sistema de Blog totalmente otimizado. Além disso, ele é de código aberto, ou seja, qualquer um pode visualizar seu código fonte, e usá-lo para estudos e até mesmo melhorá-lo."
 					</blockquote>
