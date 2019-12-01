@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
--- Host: mysql
--- Generation Time: Nov 23, 2019 at 05:22 PM
--- Server version: 8.0.18
--- PHP Version: 7.2.22
+-- Host: 127.0.0.1
+-- Generation Time: 30-Nov-2019 às 02:40
+-- Versão do servidor: 10.1.34-MariaDB
+-- PHP Version: 5.6.37
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,26 +19,26 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `4People`
+-- Database: `4people`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admins`
+-- Estrutura da tabela `admins`
 --
 
 CREATE TABLE `admins` (
   `admin_id` int(11) NOT NULL,
-  `admin_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `admin_nickname` varchar(28) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `admin_email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `admin_password` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `admin_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `admin_name` varchar(64) NOT NULL,
+  `admin_nickname` varchar(28) NOT NULL,
+  `admin_email` varchar(255) NOT NULL,
+  `admin_password` varchar(32) NOT NULL,
+  `admin_image` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `admins`
+-- Extraindo dados da tabela `admins`
 --
 
 INSERT INTO `admins` (`admin_id`, `admin_name`, `admin_nickname`, `admin_email`, `admin_password`, `admin_image`) VALUES
@@ -49,18 +49,18 @@ INSERT INTO `admins` (`admin_id`, `admin_name`, `admin_nickname`, `admin_email`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin_logs`
+-- Estrutura da tabela `admin_logs`
 --
 
 CREATE TABLE `admin_logs` (
   `log_id` int(11) NOT NULL,
-  `log_action` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `log_action` varchar(64) NOT NULL,
   `log_createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `admin_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `admin_logs`
+-- Extraindo dados da tabela `admin_logs`
 --
 
 INSERT INTO `admin_logs` (`log_id`, `log_action`, `log_createdAt`, `admin_id`) VALUES
@@ -538,7 +538,7 @@ INSERT INTO `admin_logs` (`log_id`, `log_action`, `log_createdAt`, `admin_id`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `banneds`
+-- Estrutura da tabela `banneds`
 --
 
 CREATE TABLE `banneds` (
@@ -546,24 +546,24 @@ CREATE TABLE `banneds` (
   `banned_begin` datetime DEFAULT NULL,
   `banned_end` datetime DEFAULT NULL,
   `banned_amount` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `login_logs`
+-- Estrutura da tabela `login_logs`
 --
 
 CREATE TABLE `login_logs` (
   `log_id` int(11) NOT NULL,
-  `log_ip` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `log_nickname` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `log_password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `log_ip` varchar(64) NOT NULL,
+  `log_nickname` varchar(64) NOT NULL,
+  `log_password` varchar(255) NOT NULL,
   `log_createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `login_logs`
+-- Extraindo dados da tabela `login_logs`
 --
 
 INSERT INTO `login_logs` (`log_id`, `log_ip`, `log_nickname`, `log_password`, `log_createdAt`) VALUES
@@ -581,37 +581,38 @@ INSERT INTO `login_logs` (`log_id`, `log_ip`, `log_nickname`, `log_password`, `l
 -- --------------------------------------------------------
 
 --
--- Table structure for table `maintenances`
+-- Estrutura da tabela `maintenances`
 --
 
 CREATE TABLE `maintenances` (
   `maintenance_id` int(11) NOT NULL,
-  `maintenance_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `maintenance_name` varchar(255) NOT NULL,
   `maintenance_begin` datetime DEFAULT NULL,
   `maintenance_end` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `messages`
+-- Estrutura da tabela `messages`
 --
 
 CREATE TABLE `messages` (
   `message_id` int(11) NOT NULL,
-  `message_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `message_email` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `message_subject` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `message_content` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `message_name` varchar(45) NOT NULL,
+  `message_email` varchar(45) NOT NULL,
+  `message_subject` varchar(45) NOT NULL,
+  `message_content` text NOT NULL,
   `message_createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `message_read` int(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `messages`
+-- Extraindo dados da tabela `messages`
 --
 
 INSERT INTO `messages` (`message_id`, `message_name`, `message_email`, `message_subject`, `message_content`, `message_createdAt`, `message_read`) VALUES
+(1, 'Renan', 'bdwhqbwh@gmail.com', 'Outro', 'Olá Mundo!', '2019-11-30 01:24:12', 0),
 (77, 'Lucas Bittencourt', 'lucasnaja0@gmail.com', 'Bug', 'Há um bug na ferramenta de Fibonacci. (Não está sendo gerado os números da sequência)', '2019-10-26 23:39:06', 0),
 (78, 'Lucas Bittencourt', 'lucasnaja0@gmail.com', 'Sugestão', 'Olá, mundo', '2019-10-30 21:51:40', 0),
 (82, 'Lucas Bittencourt', 'lucasnaja0@gmail.com', 'Outro', 'Olá, mundo.', '2019-11-06 01:20:14', 0),
@@ -620,46 +621,46 @@ INSERT INTO `messages` (`message_id`, `message_name`, `message_email`, `message_
 -- --------------------------------------------------------
 
 --
--- Table structure for table `months`
+-- Estrutura da tabela `months`
 --
 
 CREATE TABLE `months` (
   `month_id` int(11) NOT NULL,
-  `month_name` varchar(9) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `month_name` varchar(9) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `months`
+-- Extraindo dados da tabela `months`
 --
 
 INSERT INTO `months` (`month_id`, `month_name`) VALUES
-(4, 'Abril'),
-(8, 'Agosto'),
-(12, 'Dezembro'),
-(2, 'Fevereiro'),
 (1, 'Janeiro'),
-(7, 'Julho'),
-(6, 'Junho'),
-(5, 'Maio'),
+(2, 'Fevereiro'),
 (3, 'Março'),
-(11, 'Novembro'),
+(4, 'Abril'),
+(5, 'Maio'),
+(6, 'Junho'),
+(7, 'Julho'),
+(8, 'Agosto'),
+(9, 'Setembro'),
 (10, 'Outubro'),
-(9, 'Setembro');
+(11, 'Novembro'),
+(12, 'Dezembro');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `months_years`
+-- Estrutura da tabela `months_years`
 --
 
 CREATE TABLE `months_years` (
   `month_year_id` int(11) NOT NULL,
   `month_id` int(11) NOT NULL,
   `year_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `months_years`
+-- Extraindo dados da tabela `months_years`
 --
 
 INSERT INTO `months_years` (`month_year_id`, `month_id`, `year_id`) VALUES
@@ -715,80 +716,88 @@ INSERT INTO `months_years` (`month_year_id`, `month_id`, `year_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `notifications`
+-- Estrutura da tabela `notifications`
 --
 
 CREATE TABLE `notifications` (
   `notification_id` int(11) NOT NULL,
-  `notification_text` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `notification_text` varchar(64) NOT NULL,
   `post_id` int(11) NOT NULL,
   `notification_createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `notifications`
+--
+
+INSERT INTO `notifications` (`notification_id`, `notification_text`, `post_id`, `notification_createdAt`) VALUES
+(1, 'Nova postagem', 45, '2019-11-30 01:38:06');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `posts`
+-- Estrutura da tabela `posts`
 --
 
 CREATE TABLE `posts` (
   `post_id` int(11) NOT NULL,
-  `post_title` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `post_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `post_description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `post_content` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `post_title` varchar(64) NOT NULL,
+  `post_image` varchar(255) NOT NULL,
+  `post_description` varchar(255) NOT NULL,
+  `post_content` mediumtext NOT NULL,
   `post_visits` bigint(20) NOT NULL DEFAULT '0',
   `post_status` int(1) NOT NULL DEFAULT '1',
   `post_createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `admin_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `posts`
+-- Extraindo dados da tabela `posts`
 --
 
 INSERT INTO `posts` (`post_id`, `post_title`, `post_image`, `post_description`, `post_content`, `post_visits`, `post_status`, `post_createdAt`, `admin_id`) VALUES
-(25, 'Lançamento', 'Lançamento.jpg', 'Primeira postagem do 4People', '<h1 class=\"ql-align-center\"><strong>4People publicado!</strong></h1><p><br></p><blockquote><span style=\"color: rgb(68, 68, 68);\">Hoje, dia 02 de Dezembro, depois de muito suor, foi lançado a primeira versão do 4People ao público. O planejamento do 4People começou em Fevereiro de 2019! O TCC é composto por 3 integrantes (1 Desenvolvedor e 2 analistas).</span></blockquote><p><br></p><h2><strong>Como a ideia surgiu?</strong></h2><p><br></p><p class=\"ql-align-justify\"><span style=\"color: rgb(68, 68, 68);\">O </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\"> foi pensado mais ou menos em 2014, que foi o ano em que o </span><a href=\"https://github.com/lucasnaja\" target=\"_blank\" style=\"color: rgb(0, 102, 204);\">Lucas Bittencourt</a><a href=\"https://github.com/lucasnaja\" target=\"_blank\" style=\"color: rgb(68, 68, 68);\">,</a><span style=\"color: rgb(68, 68, 68);\"> Administrador do </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\">, conheceu o </span><em style=\"color: rgb(68, 68, 68);\">4Devs</em><span style=\"color: rgb(68, 68, 68);\"> (concorrente direto do </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\">), desde então ficou em sua memória o quanto queria produzir algo do tipo, mas não tinha o conhecimento necessário. </span><em style=\"color: rgb(68, 68, 68);\">Lucas</em><span style=\"color: rgb(68, 68, 68);\"> no começo de sua jornada no Desenvolvimento de Software, sempre fez projetos pessoais baseados em sites que já existiam (para ter uma base). O </span><em style=\"color: rgb(68, 68, 68);\">4Devs</em><span style=\"color: rgb(68, 68, 68);\"> foi um deles. Mas, como não tinha o conhecimento necessário para produzir algo do tipo, deixou de lado.</span></p><p><br></p><p class=\"ql-align-justify\"><span style=\"color: rgb(68, 68, 68);\">Na Etec de Guaratinguetá, ele teve essa ideia novamente (mais ou menos em Novembro de 2018), de produzir algo parecido com </span><em style=\"color: rgb(68, 68, 68);\">4Devs</em>. <span style=\"color: rgb(68, 68, 68);\">Como o nome 4Devs tem o significado \"para Devs\", a equipe do 4People pensou em algo não só para </span><em style=\"color: rgb(68, 68, 68);\">Desenvolvedores</em><span style=\"color: rgb(68, 68, 68);\">, e sim para p</span><em style=\"color: rgb(68, 68, 68);\">essoas</em><span style=\"color: rgb(68, 68, 68);\">. Foi aí que surgiu o </span><strong style=\"color: rgb(68, 68, 68);\">4People</strong><span style=\"color: rgb(68, 68, 68);\">.</span></p><p class=\"ql-align-justify\"><br></p><h2 class=\"ql-align-justify\"><strong>Por que usar o 4People?</strong></h2><p class=\"ql-align-justify\"><br></p><p class=\"ql-align-justify\"><span style=\"color: rgb(68, 68, 68);\">O 4People é um </span><strong style=\"color: rgb(68, 68, 68);\">Sistema Web</strong><span style=\"color: rgb(68, 68, 68);\"> que traz vários tipos de ferramentas Computacionais para Desenvolvedores de Softwares e estudantes de informática, assim como ferramentas Matemáticas para alunos e professores. 4People também possui um sistema de Blog totalmente otimizado. Além disso, ele é de código aberto, ou seja, qualquer um pode visualizar seu código fonte, e usá-lo para estudos e até mesmo melhorá-lo.</span></p><p><br></p><h2><strong>Como foi o processo?</strong></h2><p><br></p><p class=\"ql-align-justify\"><span style=\"color: rgb(68, 68, 68);\">O 4People passou por várias mudanças ao decorrer do tempo, tanto visuais, como também de linguagem, frameworks, bibliotecas, entre outros. O processo de produção do 4People foi árduo e demorado, mas com todo o código gerado, foi possível reutilizar parte dele, em vários pedaços do Sistema, asO </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\"> é um </span><u style=\"color: rgb(68, 68, 68);\">Sistema Web</u><span style=\"color: rgb(68, 68, 68);\"> que traz vários tipos de ferramentas computacionais para Desenvolvedores de Softwares e estudantes de informática, e ferramentas matemáticas para alunos e professores. Mas ele vai muito além disso, 4People possui um sistema de Blog totalmente otimizado. Além disso, ele é de código aberto, ou seja, qualquer um pode visualizar seu código fonte, e usá-lo para estudos e até mesmo melhorá-lo.sim facilitando seu Desenvolvimento. As linguagens utilizadas no Desenvolvimento foram HTML5, CSS3, JavaScript, PHP e MySQL.</span></p><p class=\"ql-align-justify\"><br></p><h2 class=\"ql-align-justify\"><strong>Agradecimentos</strong></h2><p class=\"ql-align-justify\"><br></p><p class=\"ql-align-justify\"><span style=\"color: rgb(68, 68, 68);\">Foi um prazer fazer parte da primeira turma de Desenvolvimento de Sistemas da Etec de Guaratinguetá. Queremos desejar parabéns a todas as equipes pelos seus projetos e aos professores pelo carinho e ensino dado. Foram 1 ano e meio de muito aprendizado e amizade.</span></p><p class=\"ql-align-justify\"><span style=\"color: rgb(68, 68, 68);\">﻿</span></p><p><img src=\"https://i.imgur.com/XflR9YH.jpg\" alt=\"Equipe 4People\" width=\"100%\"></p><p><br></p><blockquote><strong>Etec 2019 - Primeira turma do curso de Desenvolvimento de Sistemas.</strong></blockquote>', 1, 1, '2019-11-03 00:27:58', 4),
+(25, 'Lançamento', 'Lançamento.jpg', 'Primeira postagem do 4People', '<h1 class=\"ql-align-center\"><strong>4People publicado!</strong></h1><p><br></p><blockquote><span style=\"color: rgb(68, 68, 68);\">Hoje, dia 02 de Dezembro, depois de muito suor, foi lançado a primeira versão do 4People ao público. O planejamento do 4People começou em Fevereiro de 2019! O TCC é composto por 3 integrantes (1 Desenvolvedor e 2 analistas).</span></blockquote><p><br></p><h2><strong>Como a ideia surgiu?</strong></h2><p><br></p><p class=\"ql-align-justify\"><span style=\"color: rgb(68, 68, 68);\">O </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\"> foi pensado mais ou menos em 2014, que foi o ano em que o </span><a href=\"https://github.com/lucasnaja\" target=\"_blank\" style=\"color: rgb(0, 102, 204);\">Lucas Bittencourt</a><a href=\"https://github.com/lucasnaja\" target=\"_blank\" style=\"color: rgb(68, 68, 68);\">,</a><span style=\"color: rgb(68, 68, 68);\"> Administrador do </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\">, conheceu o </span><em style=\"color: rgb(68, 68, 68);\">4Devs</em><span style=\"color: rgb(68, 68, 68);\"> (concorrente direto do </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\">), desde então ficou em sua memória o quanto queria produzir algo do tipo, mas não tinha o conhecimento necessário. </span><em style=\"color: rgb(68, 68, 68);\">Lucas</em><span style=\"color: rgb(68, 68, 68);\"> no começo de sua jornada no Desenvolvimento de Software, sempre fez projetos pessoais baseados em sites que já existiam (para ter uma base). O </span><em style=\"color: rgb(68, 68, 68);\">4Devs</em><span style=\"color: rgb(68, 68, 68);\"> foi um deles. Mas, como não tinha o conhecimento necessário para produzir algo do tipo, deixou de lado.</span></p><p><br></p><p class=\"ql-align-justify\"><span style=\"color: rgb(68, 68, 68);\">Na Etec de Guaratinguetá, ele teve essa ideia novamente (mais ou menos em Novembro de 2018), de produzir algo parecido com </span><em style=\"color: rgb(68, 68, 68);\">4Devs</em>. <span style=\"color: rgb(68, 68, 68);\">Como o nome 4Devs tem o significado \"para Devs\", a equipe do 4People pensou em algo não só para </span><em style=\"color: rgb(68, 68, 68);\">Desenvolvedores</em><span style=\"color: rgb(68, 68, 68);\">, e sim para p</span><em style=\"color: rgb(68, 68, 68);\">essoas</em><span style=\"color: rgb(68, 68, 68);\">. Foi aí que surgiu o </span><strong style=\"color: rgb(68, 68, 68);\">4People</strong><span style=\"color: rgb(68, 68, 68);\">.</span></p><p class=\"ql-align-justify\"><br></p><h2 class=\"ql-align-justify\"><strong>Por que usar o 4People?</strong></h2><p class=\"ql-align-justify\"><br></p><p class=\"ql-align-justify\"><span style=\"color: rgb(68, 68, 68);\">O 4People é um </span><strong style=\"color: rgb(68, 68, 68);\">Sistema Web</strong><span style=\"color: rgb(68, 68, 68);\"> que traz vários tipos de ferramentas Computacionais para Desenvolvedores de Softwares e estudantes de informática, assim como ferramentas Matemáticas para alunos e professores. 4People também possui um sistema de Blog totalmente otimizado. Além disso, ele é de código aberto, ou seja, qualquer um pode visualizar seu código fonte, e usá-lo para estudos e até mesmo melhorá-lo.</span></p><p><br></p><h2><strong>Como foi o processo?</strong></h2><p><br></p><p class=\"ql-align-justify\"><span style=\"color: rgb(68, 68, 68);\">O 4People passou por várias mudanças ao decorrer do tempo, tanto visuais, como também de linguagem, frameworks, bibliotecas, entre outros. O processo de produção do 4People foi árduo e demorado, mas com todo o código gerado, foi possível reutilizar parte dele, em vários pedaços do Sistema, asO </span><em style=\"color: rgb(68, 68, 68);\">4People</em><span style=\"color: rgb(68, 68, 68);\"> é um </span><u style=\"color: rgb(68, 68, 68);\">Sistema Web</u><span style=\"color: rgb(68, 68, 68);\"> que traz vários tipos de ferramentas computacionais para Desenvolvedores de Softwares e estudantes de informática, e ferramentas matemáticas para alunos e professores. Mas ele vai muito além disso, 4People possui um sistema de Blog totalmente otimizado. Além disso, ele é de código aberto, ou seja, qualquer um pode visualizar seu código fonte, e usá-lo para estudos e até mesmo melhorá-lo.sim facilitando seu Desenvolvimento. As linguagens utilizadas no Desenvolvimento foram HTML5, CSS3, JavaScript, PHP e MySQL.</span></p><p class=\"ql-align-justify\"><br></p><h2 class=\"ql-align-justify\"><strong>Agradecimentos</strong></h2><p class=\"ql-align-justify\"><br></p><p class=\"ql-align-justify\"><span style=\"color: rgb(68, 68, 68);\">Foi um prazer fazer parte da primeira turma de Desenvolvimento de Sistemas da Etec de Guaratinguetá. Queremos desejar parabéns a todas as equipes pelos seus projetos e aos professores pelo carinho e ensino dado. Foram 1 ano e meio de muito aprendizado e amizade.</span></p><p class=\"ql-align-justify\"><span style=\"color: rgb(68, 68, 68);\">﻿</span></p><p><img src=\"https://i.imgur.com/XflR9YH.jpg\" alt=\"Equipe 4People\" width=\"100%\"></p><p><br></p><blockquote><strong>Etec 2019 - Primeira turma do curso de Desenvolvimento de Sistemas.</strong></blockquote>', 2, 1, '2019-11-03 00:27:58', 4),
 (34, 'Manutenção', 'Manutenção.png', 'Possíveis manutenções serão agendadas aqui', '<blockquote><span style=\"color: rgb(68, 68, 68);\" class=\"ql-size-large\">Não há manutenções agendadas.</span></blockquote>', 0, 1, '2019-11-03 01:34:43', 4),
 (39, 'Arduino com JS', 'Arduino com JS.png', 'Aprendendo a controlar o Arduino com NodeJS e a biblioteca Johnny-Five', '<h1 class=\"ql-align-center\"><strong>Arduino com JS</strong></h1><p><br></p><h2><strong>Programas necessários</strong></h2><p><br></p><ul><li><a href=\"https://code.visualstudio.com/\" target=\"_blank\">VSCode</a> (ou qualquer outra IDE/Editor de Texto)</li><li><a href=\"https://docs.npmjs.com/cli/install\" target=\"_blank\">NPM</a></li><li><a href=\"https://nodejs.org/en/\" target=\"_blank\">Node</a></li></ul><p><br></p><h2><strong>Componentes necessários</strong></h2><p><br></p><ul><li><span style=\"color: rgb(68, 68, 68);\"> O Arduino UNO (e o cabo de conexão USB)</span></li><li><span style=\"color: rgb(68, 68, 68);\"> Um LED</span></li><li><span style=\"color: rgb(68, 68, 68);\"> Um resistor de 220 OHM</span></li></ul><p><br></p><h2><strong>Preparando o Arduino</strong></h2><p><br></p><ol><li><span style=\"color: rgb(68, 68, 68);\">Baixe o </span><a href=\"https://www.arduino.cc/en/Main/Software\" target=\"_blank\" style=\"color: rgb(0, 102, 204);\">Arduino IDE</a><span style=\"color: rgb(68, 68, 68);\">.</span><a href=\"https://www.arduino.cc/en/Main/Software\" target=\"_blank\" style=\"color: rgb(68, 68, 68);\">﻿</a></li><li><span style=\"background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);\">Plugue o Arduino na USB do computador.</span></li><li><span style=\"background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);\">Abra a IDE, depois abra o arquivo no caminho \'</span><span style=\"color: rgb(68, 68, 68);\">File > Examples > Firmata > StandardFirmata\'</span></li><li><span style=\"color: rgb(68, 68, 68);\">C</span><span style=\"color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);\">lique em upload.</span></li></ol><p><br></p><h2><strong>Preparando o Projeto</strong></h2><p><br></p><ol><li><span style=\"color: rgb(68, 68, 68);\">Digite</span> <strong style=\"background-color: rgb(255, 255, 204); color: rgb(68, 68, 68);\">npm init -y</strong><strong> </strong><span style=\"color: rgb(68, 68, 68);\">para iniciar um novo projeto em Node.</span></li><li><span style=\"color: rgb(68, 68, 68);\">Digite</span> <strong style=\"background-color: rgb(255, 255, 204); color: rgb(68, 68, 68);\">npm install -s johnny-five</strong> <span style=\"color: rgb(68, 68, 68);\">para instalar o johnny-five</span>.</li><li><span style=\"color: rgb(68, 68, 68);\">Crie um arquivo chamado index.js e cole o código abaixo:</span></li></ol><p><br></p><pre class=\"ql-syntax\" spellcheck=\"false\">const five = <span class=\"hljs-built_in\">require</span>(<span class=\"hljs-string\">\'johnny-five\'</span>);\r\n\r\nconst board = <span class=\"hljs-keyword\">new</span> five.Board();\r\n\r\n﻿let isReady = <span class=\"hljs-literal\">false</span>;\r\nlet isOn = <span class=\"hljs-literal\">false</span>;\r\nlet led;\r\n\r\nboard.<span class=\"hljs-literal\">on</span>(<span class=\"hljs-string\">\'ready\'</span>, <span class=\"hljs-function\"><span class=\"hljs-params\">()</span> =></span> {\r\n    led = <span class=\"hljs-keyword\">new</span> five.Led(<span class=\"hljs-number\">13</span>);\r\n\r\n    led.<span class=\"hljs-literal\">off</span>();\r\n\r\n    isReady = <span class=\"hljs-literal\">true</span>;\r\n});\r\n  \r\nhttp.createServer(<span class=\"hljs-function\"><span class=\"hljs-params\">(req, res)</span> =></span> {\r\n    toggleLed()\r\n\r\n    <span class=\"hljs-keyword\">if</span> (req.url == <span class=\"hljs-string\">\'/\'</span>) res.end(isOn + <span class=\"hljs-string\">\'\'</span>);\r\n    <span class=\"hljs-keyword\">else</span> res.end();\r\n}).listen(<span class=\"hljs-number\">3000</span>);\r\n  \r\n<span class=\"hljs-built_in\">console</span>.log(<span class=\"hljs-string\">\'listening at 3000\'</span>);\r\n\r\nfunction toggleLed () {\r\n    <span class=\"hljs-keyword\">if</span> (!isReady) { <span class=\"hljs-keyword\">return</span>; }\r\n  \r\n    <span class=\"hljs-keyword\">if</span> (isOn) {\r\n        led.<span class=\"hljs-literal\">off</span>();\r\n\r\n        isOn = <span class=\"hljs-literal\">false</span>;\r\n    } <span class=\"hljs-keyword\">else</span> {\r\n        led.<span class=\"hljs-literal\">on</span>();\r\n\r\n        isOn = <span class=\"hljs-literal\">true</span>;\r\n    }\r\n}\r\n</pre><p><br></p><h2><strong>Iniciando servidor</strong></h2><p><br></p><pre class=\"ql-syntax\" spellcheck=\"false\">node index.js\r\n</pre><p><br></p><p><span style=\"color: rgb(68, 68, 68);\">É isso! Agora basta modificar o código e deixá-lo à sua maneira.</span></p><p><br></p><blockquote><a href=\"https://github.com/lucasnaja/arduino-js\" target=\"_blank\" style=\"color: rgb(0, 102, 204);\">Clique aqui</a> <span style=\"color: rgb(68, 68, 68);\">para ir no meu GitHub e ver o projeto funcionando com socket.io e express.js com um código mais completo e detalhado. :)</span></blockquote>', 6, 1, '2019-11-03 17:41:57', 4),
-(44, 'Hacktoberfest', 'Hacktoberfest.png', 'Hacktoberfest - Um evento do GitHub patrocinado pela DigitalOcean e Dev Community', '<h1 class=\"ql-align-center\"><strong>Hacktoberfest</strong></h1><p><br></p><blockquote><strong style=\"background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);\">Hacktoberfest</strong><span style=\"background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);\"> é uma celebração mundial da comunidade Open Source que ocorre durante o mês de outubro para incentivar a contribuição em projetos de código aberto.</span></blockquote><p><br></p><h2><strong>Por que?</strong></h2><p><br></p><p class=\"ql-align-justify\"><span style=\"background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);\">Para quem é Desenvolvedor, estudante aprendendo a programar, empresa de qualquer tamanho, ou um curioso do mundo da Tecnologia, você é incentivado a participar do evento, não importa seu nível de conhecimento (estamos todos aqui para aprender cada vez mais). Você pode aproveitar para sair da zona de conforto, e começar a participar do mundo open-source, ganhando cada vez mais conhecimento, e recebendo algo em troca por isso.</span></p><p class=\"ql-align-justify\"><br></p><h2 class=\"ql-align-justify\"><strong style=\"background-color: rgb(255, 255, 255);\">O que ganha?</strong></h2><p class=\"ql-align-justify\"><br></p><p class=\"ql-align-justify\"><span style=\"background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);\">O prêmio para quem concluir o desafio é uma camiseta de edição limitada e stickers. Todo ano as camisetas mudam de design, no caso do evento que ocorreu em 2019, você pode ver a camiseta na thumbnail desse post. Mas não se esqueça, há um limite de camisetas, que são 50.000 unidades que serão entregues no mundo todo. Passando disso, você receberá somente os stickers.</span></p><p class=\"ql-align-justify\"><br></p><h2 class=\"ql-align-justify\"><strong style=\"background-color: rgb(255, 255, 255);\">Como funciona?</strong></h2><p class=\"ql-align-justify\"><br></p><p><span style=\"color: rgb(68, 68, 68);\">Você precisa abrir somente 4 Pull Requests em qualquer repositório (4 PRs em 1 repo ou 1 PR em 4 repos). Só isso. Para quem nunca mexeu no GitHub, recomendo fortemente pesquisar como funciona (eu fiquei pesquisando que nem louco no google como funcionava os PRs do GitHub, quando o meu professor da Etec de Guaratinguetá, Augusto da Silva Costa, me falou sobre o evento).</span></p><p><br></p><h2><strong>Por onde eu começo?</strong></h2><p><br></p><p>Você pode começar por um repositório fácil de ser mantido, e que foi bastante utilizado pelas pessoas no Hacktoberfest de 2019. O repositório é simples e intuitivo, um repositório que mostra as ferramentas mais úteis utilizadas por Desenvolvedores. Link do repositório no GitHub: <a href=\"https://github.com/lucasnaja/useful-dev-tools\" target=\"_blank\">Clique aqui</a></p>', 5, 1, '2019-11-04 00:12:09', 4);
+(44, 'Hacktoberfest', 'Hacktoberfest.jpeg', 'Hacktoberfest - Um evento do GitHub patrocinado pela DigitalOcean e Dev Community', '<h1 class=\"ql-align-center\"><strong>Hacktoberfest</strong></h1><p><br></p><blockquote><strong style=\"color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);\">Hacktoberfest</strong><span style=\"color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);\"> é uma celebração mundial da comunidade Open Source que ocorre durante o mês de outubro para incentivar a contribuição em projetos de código aberto.</span></blockquote><p><br></p><h2><strong>Por que?</strong></h2><p><br></p><p class=\"ql-align-justify\"><span style=\"color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);\">Para quem é Desenvolvedor, estudante aprendendo a programar, empresa de qualquer tamanho, ou um curioso do mundo da Tecnologia, você é incentivado a participar do evento, não importa seu nível de conhecimento (estamos todos aqui para aprender cada vez mais). Você pode aproveitar para sair da zona de conforto, e começar a participar do mundo open-source, ganhando cada vez mais conhecimento, e recebendo algo em troca por isso.</span></p><p class=\"ql-align-justify\"><br></p><h2 class=\"ql-align-justify\"><strong style=\"background-color: rgb(255, 255, 255);\">O que ganha?</strong></h2><p class=\"ql-align-justify\"><br></p><p class=\"ql-align-justify\"><span style=\"color: rgb(68, 68, 68); background-color: rgb(255, 255, 255);\">O prêmio para quem concluir o desafio é uma camiseta de edição limitada e stickers. Todo ano as camisetas mudam de design, no caso do evento que ocorreu em 2019, você pode ver a camiseta na thumbnail desse post. Mas não se esqueça, há um limite de camisetas, que são 50.000 unidades que serão entregues no mundo todo. Passando disso, você receberá somente os stickers.</span></p><p class=\"ql-align-justify\"><br></p><h2 class=\"ql-align-justify\"><strong style=\"background-color: rgb(255, 255, 255);\">Como funciona?</strong></h2><p class=\"ql-align-justify\"><br></p><p><span style=\"color: rgb(68, 68, 68);\">Você precisa abrir somente 4 Pull Requests em qualquer repositório (4 PRs em 1 repo ou 1 PR em 4 repos). Só isso. Para quem nunca mexeu no GitHub, recomendo fortemente pesquisar como funciona (eu fiquei pesquisando que nem louco no google como funcionava os PRs do GitHub, quando o meu professor da Etec de Guaratinguetá, Augusto da Silva Costa, me falou sobre o evento).</span></p><p><br></p><h2><strong>Por onde eu começo?</strong></h2><p><br></p><p>Você pode começar por um repositório fácil de ser mantido, e que foi bastante utilizado pelas pessoas no Hacktoberfest de 2019. O repositório é simples e intuitivo, um repositório que mostra as ferramentas mais úteis utilizadas por Desenvolvedores. Link do repositório no GitHub: <a href=\"https://github.com/lucasnaja/useful-dev-tools\" target=\"_blank\">Clique aqui</a></p>', 6, 1, '2019-11-04 00:12:09', 4),
+(45, 'fgfdggf', 'fgfdggf.jpg', 'fgdfgfgfg', '', 0, 1, '2019-11-30 01:38:06', 4);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `post_visits`
+-- Estrutura da tabela `post_visits`
 --
 
 CREATE TABLE `post_visits` (
   `post_visit_id` int(11) NOT NULL,
   `post_visit_visits` bigint(20) NOT NULL DEFAULT '1',
   `month_year_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `post_visits`
+-- Extraindo dados da tabela `post_visits`
 --
 
 INSERT INTO `post_visits` (`post_visit_id`, `post_visit_visits`, `month_year_id`) VALUES
-(1, 12, 11),
+(1, 14, 11),
 (2, 1, 28);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sections`
+-- Estrutura da tabela `sections`
 --
 
 CREATE TABLE `sections` (
   `section_id` int(11) NOT NULL,
-  `section_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `section_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `section_icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `section_name` varchar(255) NOT NULL,
+  `section_path` varchar(255) NOT NULL,
+  `section_icon` varchar(255) NOT NULL,
   `type_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `sections`
+-- Extraindo dados da tabela `sections`
 --
 
 INSERT INTO `sections` (`section_id`, `section_name`, `section_path`, `section_icon`, `type_id`) VALUES
@@ -805,27 +814,27 @@ INSERT INTO `sections` (`section_id`, `section_name`, `section_path`, `section_i
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tools`
+-- Estrutura da tabela `tools`
 --
 
 CREATE TABLE `tools` (
   `tool_id` int(11) NOT NULL,
-  `tool_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `tool_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `tool_description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
-  `tool_link` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  `tool_name` varchar(255) NOT NULL,
+  `tool_path` varchar(255) NOT NULL,
+  `tool_description` mediumtext,
+  `tool_link` mediumtext,
   `tool_visits` bigint(20) UNSIGNED NOT NULL DEFAULT '0',
   `tool_status` tinyint(1) NOT NULL DEFAULT '1',
   `section_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tools`
+-- Extraindo dados da tabela `tools`
 --
 
 INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_description`, `tool_link`, `tool_visits`, `tool_status`, `section_id`) VALUES
 (7, 'Gerador de CPF', 'cpf_generator', 'Gerador de CPF Online para Programadores testarem seus Softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/CPFGenerator.js', 0, 1, 2),
-(8, 'Gerador de Senha', 'password_generator', 'Gerador de Senha Online para gerar senhas personalizadas e fortes.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/passwordGenerator.js', 28, 1, 2),
+(8, 'Gerador de Senha', 'password_generator', 'Gerador de Senha Online para gerar senhas personalizadas e fortes.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/passwordGenerator.js', 29, 1, 2),
 (9, 'Gerador de Meta Tags', 'meta_tags_generator', 'Gerador de Meta Tags Online, feito para gerar várias das Meta Tags existentes.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/generators/metaTagsGenerator.js', 1, 1, 2),
 (11, 'Validador de CPF', 'cpf_validator', 'Validador de CPF Online para validar CPFs para programadores testarem seus softwares em desenvolvimento.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/validators/CPFValidator.js', 0, 1, 4),
 (12, 'Contador de Caracteres', 'characters_count', 'Contador de letras, caracteres sem espaço, palavras, espaços, vogais, consoantes, números e linhas.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/string_functions/charactersCount.js', 0, 1, 5),
@@ -834,7 +843,7 @@ INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_description`, `t
 (15, 'Buscar CEP', 'search_cep', 'Busque informações de seu CEP, como Rua, Cidade, Bairro e Estado aqui.', 'https://github.com/lucasnaja/4People/blob/master/pages/computation/network_internet/search_cep/src/index.js', 0, 1, 6),
 (16, 'Código Binário', 'binary_converter', 'Tradutor Online de Código Binário. Basta digitar o código binário ou texto abaixo e clicar no botão para converter.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/encoders_decoders/binaryConverter.js', 1, 1, 7),
 (17, 'Código de Evento das Teclas', 'keycode_event', 'Código de Eventos das Teclas para descobrir cada keyCode da tecla e criar eventos em sua linguagem de preferência.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/tables_and_patterns/jsEventKeyCodes.js', 0, 1, 8),
-(18, 'Fatorar Número', 'factorize_number', 'Calculadora Online para Fatorar Números.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/factorization.js', 5, 1, 12),
+(18, 'Fatorar Número', 'factorize_number', 'Calculadora Online para Fatorar Números.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/factorization.js', 6, 1, 12),
 (19, 'Máximo Divisor Comum', 'gcd', 'Calculadora Online para encontrar o Máximo Divisor Comum entre vários números.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/GCD.js', 0, 1, 12),
 (20, 'Mínimo Múltiplo Comum', 'lcm', 'Calculadora Online para encontrar o Mínimo Múltiplo Comum entre vários números.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/LCM.js', 0, 1, 12),
 (21, 'Índice de Massa Corporal', 'bmi', 'Calculadora de Índice de Massa Corporal Online para calcular o IMC e o seu peso ideal.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/calculators/BMI.js', 0, 1, 12),
@@ -858,7 +867,7 @@ INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_description`, `t
 (39, 'Área da Elipse', 'ellipse_area', 'Calculador de Área da Elipse Online. π = PI, Área da Elipse = π * Eixo maior * Eixo menor', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/ellipseArea.js', 0, 1, 10),
 (40, 'Área da Coroa Ciricular', 'circular_crown_area', 'Calculador de Área da Coroa Circular Online. π = PI, R = Raio maior, r = Raio menor, Área da Coroa Circular = π * (R² - r²)', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/circularCrownArea.js', 0, 1, 10),
 (41, 'Área do Setor Circular', 'circular_sector_area', 'Calculador de Área do Setor Circular Online. π = PI, Área do Setor Circular = π * (Raio² * Ângulo) / 360', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/areas_calculator/circularSectorArea.js', 0, 1, 10),
-(42, 'Diferença entre Datas', 'difference_between_dates', 'Calcular Diferença entre Datas. Possui um leque de recursos disponíveis, como calcular idades, tempo, etc.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/dates_calculator/differenceBetweenDates.js', 9, 1, 11),
+(42, 'Diferença entre Datas', 'difference_between_dates', 'Calcular Diferença entre Datas. Possui um leque de recursos disponíveis, como calcular idades, tempo, etc.', 'https://github.com/lucasnaja/4People/blob/master/assets/algorithms/dates_calculator/differenceBetweenDates.js', 10, 1, 11),
 (50, 'Gerador de Nomes', 'name_generator', 'Gerador de Nomes online e gratuito para gerar diversos tipos de nomes.', '', 0, 1, 2),
 (52, 'Tabela ASCII', 'ascii_table', 'Lista de códigos padrões da tabela ASC II.', 'https://github.com/lucasnaja/4People/tree/master/pages/computation/tables_patterns/ascii_table', 0, 1, 8),
 (53, 'Inverter Texto', 'reverse_text', 'Inversor de Texto online do 4People', 'https://github.com/lucasnaja/4People/tree/master/assets/algorithms/string_functions/reverseText.js', 0, 1, 5),
@@ -872,21 +881,21 @@ INSERT INTO `tools` (`tool_id`, `tool_name`, `tool_path`, `tool_description`, `t
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tool_visits`
+-- Estrutura da tabela `tool_visits`
 --
 
 CREATE TABLE `tool_visits` (
   `tool_visit_id` int(11) NOT NULL,
   `tool_visit_visits` bigint(20) NOT NULL DEFAULT '1',
   `month_year_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `tool_visits`
+-- Extraindo dados da tabela `tool_visits`
 --
 
 INSERT INTO `tool_visits` (`tool_visit_id`, `tool_visit_visits`, `month_year_id`) VALUES
-(1, 43, 11),
+(1, 46, 11),
 (2, 1, 16),
 (3, 1, 35),
 (4, 2, 28),
@@ -895,18 +904,18 @@ INSERT INTO `tool_visits` (`tool_visit_id`, `tool_visit_visits`, `month_year_id`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `types`
+-- Estrutura da tabela `types`
 --
 
 CREATE TABLE `types` (
   `type_id` int(11) NOT NULL,
-  `type_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `type_path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `type_icon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `type_name` varchar(255) NOT NULL,
+  `type_path` varchar(255) NOT NULL,
+  `type_icon` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `types`
+-- Extraindo dados da tabela `types`
 --
 
 INSERT INTO `types` (`type_id`, `type_name`, `type_path`, `type_icon`) VALUES
@@ -916,16 +925,16 @@ INSERT INTO `types` (`type_id`, `type_name`, `type_path`, `type_icon`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `years`
+-- Estrutura da tabela `years`
 --
 
 CREATE TABLE `years` (
   `year_id` int(11) NOT NULL,
   `year_number` int(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `years`
+-- Extraindo dados da tabela `years`
 --
 
 INSERT INTO `years` (`year_id`, `year_number`) VALUES
@@ -942,16 +951,13 @@ INSERT INTO `years` (`year_id`, `year_number`) VALUES
 -- Indexes for table `admins`
 --
 ALTER TABLE `admins`
-  ADD PRIMARY KEY (`admin_id`),
-  ADD UNIQUE KEY `admin_nickname` (`admin_nickname`),
-  ADD UNIQUE KEY `admin_email` (`admin_email`);
+  ADD PRIMARY KEY (`admin_id`);
 
 --
 -- Indexes for table `admin_logs`
 --
 ALTER TABLE `admin_logs`
-  ADD PRIMARY KEY (`log_id`),
-  ADD KEY `admin_id` (`admin_id`);
+  ADD PRIMARY KEY (`log_id`);
 
 --
 -- Indexes for table `banneds`
@@ -969,8 +975,7 @@ ALTER TABLE `login_logs`
 -- Indexes for table `maintenances`
 --
 ALTER TABLE `maintenances`
-  ADD PRIMARY KEY (`maintenance_id`),
-  ADD UNIQUE KEY `maintenance_name` (`maintenance_name`);
+  ADD PRIMARY KEY (`maintenance_id`);
 
 --
 -- Indexes for table `messages`
@@ -982,80 +987,61 @@ ALTER TABLE `messages`
 -- Indexes for table `months`
 --
 ALTER TABLE `months`
-  ADD PRIMARY KEY (`month_id`),
-  ADD UNIQUE KEY `month_name` (`month_name`);
+  ADD PRIMARY KEY (`month_id`);
 
 --
 -- Indexes for table `months_years`
 --
 ALTER TABLE `months_years`
-  ADD PRIMARY KEY (`month_year_id`),
-  ADD KEY `month_id` (`month_id`),
-  ADD KEY `year_id` (`year_id`);
+  ADD PRIMARY KEY (`month_year_id`);
 
 --
 -- Indexes for table `notifications`
 --
 ALTER TABLE `notifications`
-  ADD PRIMARY KEY (`notification_id`),
-  ADD KEY `post_id` (`post_id`);
+  ADD PRIMARY KEY (`notification_id`);
 
 --
 -- Indexes for table `posts`
 --
 ALTER TABLE `posts`
-  ADD PRIMARY KEY (`post_id`),
-  ADD UNIQUE KEY `post_title` (`post_title`),
-  ADD KEY `admin_id` (`admin_id`);
+  ADD PRIMARY KEY (`post_id`);
 
 --
 -- Indexes for table `post_visits`
 --
 ALTER TABLE `post_visits`
-  ADD PRIMARY KEY (`post_visit_id`),
-  ADD KEY `month_year_id` (`month_year_id`);
+  ADD PRIMARY KEY (`post_visit_id`);
 
 --
 -- Indexes for table `sections`
 --
 ALTER TABLE `sections`
-  ADD PRIMARY KEY (`section_id`),
-  ADD UNIQUE KEY `section_name` (`section_name`),
-  ADD UNIQUE KEY `section_path` (`section_path`),
-  ADD UNIQUE KEY `section_icon` (`section_icon`),
-  ADD KEY `type_id_fk` (`type_id`);
+  ADD PRIMARY KEY (`section_id`);
 
 --
 -- Indexes for table `tools`
 --
 ALTER TABLE `tools`
-  ADD PRIMARY KEY (`tool_id`),
-  ADD UNIQUE KEY `tool_name` (`tool_name`),
-  ADD UNIQUE KEY `tool_path` (`tool_path`),
-  ADD KEY `section_id_fk` (`section_id`);
+  ADD PRIMARY KEY (`tool_id`);
 
 --
 -- Indexes for table `tool_visits`
 --
 ALTER TABLE `tool_visits`
-  ADD PRIMARY KEY (`tool_visit_id`),
-  ADD KEY `month_year_id` (`month_year_id`);
+  ADD PRIMARY KEY (`tool_visit_id`);
 
 --
 -- Indexes for table `types`
 --
 ALTER TABLE `types`
-  ADD PRIMARY KEY (`type_id`),
-  ADD UNIQUE KEY `type_name` (`type_name`),
-  ADD UNIQUE KEY `type_path` (`type_path`),
-  ADD UNIQUE KEY `type_icon` (`type_icon`);
+  ADD PRIMARY KEY (`type_id`);
 
 --
 -- Indexes for table `years`
 --
 ALTER TABLE `years`
-  ADD PRIMARY KEY (`year_id`),
-  ADD UNIQUE KEY `year_number` (`year_number`);
+  ADD PRIMARY KEY (`year_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1074,6 +1060,12 @@ ALTER TABLE `admin_logs`
   MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=474;
 
 --
+-- AUTO_INCREMENT for table `banneds`
+--
+ALTER TABLE `banneds`
+  MODIFY `banned_ip` bigint(15) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `login_logs`
 --
 ALTER TABLE `login_logs`
@@ -1083,13 +1075,13 @@ ALTER TABLE `login_logs`
 -- AUTO_INCREMENT for table `maintenances`
 --
 ALTER TABLE `maintenances`
-  MODIFY `maintenance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `maintenance_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `months`
@@ -1107,13 +1099,13 @@ ALTER TABLE `months_years`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `post_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `post_visits`
@@ -1125,7 +1117,7 @@ ALTER TABLE `post_visits`
 -- AUTO_INCREMENT for table `sections`
 --
 ALTER TABLE `sections`
-  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tools`
@@ -1143,67 +1135,13 @@ ALTER TABLE `tool_visits`
 -- AUTO_INCREMENT for table `types`
 --
 ALTER TABLE `types`
-  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `years`
 --
 ALTER TABLE `years`
   MODIFY `year_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `admin_logs`
---
-ALTER TABLE `admin_logs`
-  ADD CONSTRAINT `admin_logs_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`admin_id`);
-
---
--- Constraints for table `months_years`
---
-ALTER TABLE `months_years`
-  ADD CONSTRAINT `months_years_ibfk_1` FOREIGN KEY (`month_id`) REFERENCES `months` (`month_id`),
-  ADD CONSTRAINT `months_years_ibfk_2` FOREIGN KEY (`year_id`) REFERENCES `years` (`year_id`);
-
---
--- Constraints for table `notifications`
---
-ALTER TABLE `notifications`
-  ADD CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`post_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `posts`
---
-ALTER TABLE `posts`
-  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admins` (`admin_id`);
-
---
--- Constraints for table `post_visits`
---
-ALTER TABLE `post_visits`
-  ADD CONSTRAINT `post_visits_ibfk_1` FOREIGN KEY (`month_year_id`) REFERENCES `months_years` (`month_year_id`),
-  ADD CONSTRAINT `post_visits_ibfk_2` FOREIGN KEY (`month_year_id`) REFERENCES `months_years` (`month_year_id`);
-
---
--- Constraints for table `sections`
---
-ALTER TABLE `sections`
-  ADD CONSTRAINT `type_id_fk` FOREIGN KEY (`type_id`) REFERENCES `types` (`type_id`);
-
---
--- Constraints for table `tools`
---
-ALTER TABLE `tools`
-  ADD CONSTRAINT `section_id_fk` FOREIGN KEY (`section_id`) REFERENCES `sections` (`section_id`);
-
---
--- Constraints for table `tool_visits`
---
-ALTER TABLE `tool_visits`
-  ADD CONSTRAINT `tool_visits_ibfk_1` FOREIGN KEY (`month_year_id`) REFERENCES `months_years` (`month_year_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
