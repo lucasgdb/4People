@@ -4,7 +4,7 @@
 
 ## Descrição
 
-O 4People é um Sistema Web que traz vários tipos de ferramentas Computacionais para Desenvolvedores de Softwares e estudantes de informática, assim como ferramentas Matemáticas para alunos e professores. 4People também possui um sistema de Blog totalmente otimizado. Além disso, ele é de código aberto, ou seja, qualquer um pode visualizar seu código fonte, e usá-lo para estudos e até mesmo melhorá-lo.
+O 4People é um Sistema Web que traz vários tipos de ferramentas Computacionais para Desenvolvedores de Softwares e estudantes de informática, assim como ferramentas Matemáticas para alunos e professores. 4People também possui um sistema de Blog integrado. Além disso, ele é de código aberto, ou seja, qualquer um pode visualizar seu código fonte, e usá-lo para estudos e até mesmo melhorá-lo.
 
 ## Tecnologias
 
@@ -27,6 +27,7 @@ O 4People é um Sistema Web que traz vários tipos de ferramentas Computacionais
 - Importar o banco de dados no MySQL/PHPMyAdmin.
   - Localização do database.sql: /assets/database/database.sql
 - Mudar as configurações de seu SQL em /assets/src/php/Connection.php
+	- Senha, host, dbname, entre outros.
 - Windows
   - Colar a pasta 4People no htdocs do xampp.
   - Ou como preferir.
