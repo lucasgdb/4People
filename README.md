@@ -1,6 +1,7 @@
 # 4People
 
-![CRAN/METACRAN](https://img.shields.io/cran/l/devtools)
+![CRAN/METACRAN](https://img.shields.io/github/license/lucasnaja/4People)
+![CRAN/METACRAN](https://img.shields.io/github/languages/top/lucasnaja/4People)
 
 ## Descrição
 
