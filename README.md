@@ -1,7 +1,7 @@
 # 4People
 
-![CRAN/METACRAN](https://img.shields.io/github/license/lucasnaja/4People)
-![CRAN/METACRAN](https://img.shields.io/github/languages/top/lucasnaja/4People)
+![CRAN/METACRAN](https://img.shields.io/github/license/lucasgdb/4People)
+![CRAN/METACRAN](https://img.shields.io/github/languages/top/lucasgdb/4People)
 
 ## Descrição
 
@@ -24,7 +24,7 @@ O 4People é um Sistema Web que traz vários tipos de ferramentas Computacionais
 ## Como usar o Projeto
 
 - Clonar este repositório.
-  - git clone [https://github.com/lucasnaja/4People.git](https://github.com/lucasnaja/4People.git)
+  - git clone [https://github.com/lucasgdb/4People.git](https://github.com/lucasgdb/4People.git)
 - Importar o banco de dados no MySQL/PHPMyAdmin.
   - Localização do database.sql: /assets/database/database.sql
 - Mudar as configurações de seu SQL em /assets/src/php/Connection.php
@@ -41,11 +41,11 @@ O 4People é um Sistema Web que traz vários tipos de ferramentas Computacionais
 
 - Faça os mesmos passos de como usar o Projeto acima.
 - Faça as mudanças.
-- Dê um Commit e abra um PR no [GitHub](https://github.com/lucasnaja/4People) do projeto.
+- Dê um Commit e abra um PR no [GitHub](https://github.com/lucasgdb/4People) do projeto.
 
 ## Autor
 
-| [<img src="https://avatars3.githubusercontent.com/u/13838273?v=3&s=115"><br><sub>@lucasnaja</sub>](https://github.com/lucasnaja) |
+| [<img src="https://avatars3.githubusercontent.com/u/13838273?v=3&s=115"><br><sub>@lucasgdb</sub>](https://github.com/lucasgdb) |
 | :---: |
 
 ## Imagens
