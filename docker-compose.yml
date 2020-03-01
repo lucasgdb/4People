@@ -1,0 +1,21 @@
+version: "3.3"
+
+services:
+  mysql:
+    container_name: mysql
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: "4People"
+      MYSQL_USER: "root"
+      MYSQL_ROOT_PASSWORD: "secret"
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    volumes:
+      - 4people_data:/var/lib/mysql
+      - ./assets/database/4People.sql:/docker-entrypoint-initdb.d/setup.sql
+volumes:
+  4people_data:
