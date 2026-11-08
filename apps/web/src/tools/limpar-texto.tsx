@@ -6,7 +6,7 @@ import { useToolForm } from '@/components/form/use-tool-form'
 import { cleanText } from '@/lib/algorithms/text'
 import { FormCard, OutputBlock, ResultCard, ToolLayout } from './_shared/tool-layout'
 
-const BREAKS = [
+const LINE_BREAK_OPTIONS = [
 	{ value: 'keep', label: 'Manter' },
 	{ value: 'space', label: 'Trocar por espaço' },
 	{ value: 'remove', label: 'Remover' },
@@ -47,23 +47,25 @@ export default function CleanText() {
 				}
 			>
 				<form.AppField name="text">
-					{(f) => <f.TextareaField label="Texto" rows={8} placeholder="Cole aqui o texto…" />}
+					{(field) => (
+						<field.TextareaField label="Texto" rows={8} placeholder="Cole aqui o texto…" />
+					)}
 				</form.AppField>
 				<form.AppField name="lineBreaks">
-					{(f) => <f.RadioField label="Quebras de linha" options={BREAKS} />}
+					{(field) => <field.RadioField label="Quebras de linha" options={LINE_BREAK_OPTIONS} />}
 				</form.AppField>
 				<div className="grid gap-3 sm:grid-cols-2">
 					<form.AppField name="removeAccents">
-						{(f) => <f.CheckboxField label="Remover acentos" description="ação → acao" />}
+						{(field) => <field.CheckboxField label="Remover acentos" description="ação → acao" />}
 					</form.AppField>
 					<form.AppField name="collapseSpaces">
-						{(f) => <f.CheckboxField label="Juntar espaços repetidos" />}
+						{(field) => <field.CheckboxField label="Juntar espaços repetidos" />}
 					</form.AppField>
 					<form.AppField name="trimLines">
-						{(f) => <f.CheckboxField label="Tirar espaços das pontas" />}
+						{(field) => <field.CheckboxField label="Tirar espaços das pontas" />}
 					</form.AppField>
 					<form.AppField name="removeEmptyLines">
-						{(f) => <f.CheckboxField label="Remover linhas vazias" />}
+						{(field) => <field.CheckboxField label="Remover linhas vazias" />}
 					</form.AppField>
 				</div>
 			</FormCard>

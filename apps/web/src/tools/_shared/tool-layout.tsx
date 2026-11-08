@@ -5,10 +5,10 @@ import { Download, Eraser } from 'lucide-react'
 import { type FormEvent, type ReactNode, useId } from 'react'
 import { downloadText } from '@/lib/format'
 
-/**
- * The work area: two white cards side by side on wide screens (stacked below 1280px), the form
- * first and the result second. Any direct child gets the card look, so custom panels match.
- */
+/** Matches the `xl` breakpoint, where the form and the result stop being side by side. */
+const SINGLE_COLUMN_QUERY = '(max-width: 79.99rem)'
+
+/** Two cards side by side on wide screens, stacked below. Every direct child gets the card style. */
 export function ToolLayout({ children, className }: { children: ReactNode; className?: string }) {
 	return (
 		<div
@@ -22,16 +22,13 @@ export function ToolLayout({ children, className }: { children: ReactNode; class
 	)
 }
 
-/** Numbered step heading ("1 Comece aqui", "2 Resultado"): tells people where to look next. */
-function StepTitle({
-	step,
-	id,
-	children,
-}: {
+type StepTitleProps = {
 	step: number | null
 	id?: string
 	children: ReactNode
-}) {
+}
+
+function StepTitle({ step, id, children }: StepTitleProps) {
 	return (
 		<h2 id={id} className="text-fg flex items-center gap-3 text-lg font-bold">
 			{step !== null ? (
@@ -47,25 +44,42 @@ function StepTitle({
 	)
 }
 
-/** The form card (step 1). */
+function prefersReducedMotion() {
+	return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
+
 /**
- * One column (phones, tablets): after a submit, bring the result card into view when it is below
- * the fold, so "Calcular" visibly does something. Skipped when the submit left an invalid field (the
- * form focuses it instead) or the result is already on screen. Waits two frames for the result to
- * render; honours reduced motion.
+ * On a single column, scrolls the result card into view after a submit, unless the submit left an
+ * invalid field (that field gets focus instead) or the result is already visible. Waits two frames
+ * so the new result has rendered.
  */
-function revealResult(form: HTMLFormElement) {
-	if (!window.matchMedia('(max-width: 79.99rem)').matches) return
+function scrollToResult(form: HTMLFormElement) {
+	if (!window.matchMedia(SINGLE_COLUMN_QUERY).matches) return
+
 	requestAnimationFrame(() =>
 		requestAnimationFrame(() => {
 			if (form.querySelector('[aria-invalid="true"]')) return
-			const result = form.nextElementSibling
-			if (!(result instanceof HTMLElement)) return
-			if (result.getBoundingClientRect().top < window.innerHeight * 0.7) return
-			const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-			result.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
+
+			const resultCard = form.nextElementSibling
+			if (!(resultCard instanceof HTMLElement)) return
+
+			const alreadyVisible = resultCard.getBoundingClientRect().top < window.innerHeight * 0.7
+			if (alreadyVisible) return
+
+			resultCard.scrollIntoView({
+				behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+				block: 'start',
+			})
 		}),
 	)
+}
+
+type FormCardProps = {
+	title?: string
+	onSubmit: () => void
+	actions: ReactNode
+	children: ReactNode
+	className?: string
 }
 
 export function FormCard({
@@ -74,19 +88,12 @@ export function FormCard({
 	actions,
 	children,
 	className,
-}: {
-	title?: string
-	onSubmit: () => void
-	actions: ReactNode
-	children: ReactNode
-	className?: string
-}) {
+}: FormCardProps) {
 	function handleSubmit(event: FormEvent<HTMLFormElement>) {
 		event.preventDefault()
 		event.stopPropagation()
-		const form = event.currentTarget
 		onSubmit()
-		revealResult(form)
+		scrollToResult(event.currentTarget)
 	}
 
 	return (
@@ -104,7 +111,23 @@ export function FormCard({
 	)
 }
 
-/** The result card (step 2). */
+type ResultCardProps = {
+	title?: string
+	/** `null` when the result is the only card on the page. */
+	step?: number | null
+	/** Shown next to the title, e.g. "Copiar todos". */
+	action?: ReactNode
+	/** Short notice below the result, e.g. "use only for tests". */
+	note?: ReactNode
+	empty?: boolean
+	emptyText?: string
+	copyText?: string
+	downloadName?: string
+	onClear?: () => void
+	children?: ReactNode
+	className?: string
+}
+
 export function ResultCard({
 	title = 'Resultado',
 	step = 2,
@@ -117,24 +140,11 @@ export function ResultCard({
 	note,
 	children,
 	className,
-}: {
-	title?: string
-	/** The step badge; `null` when the result is the only card (nothing comes before it). */
-	step?: number | null
-	/** Shown at the right of the title, e.g. "Copiar todos". */
-	action?: ReactNode
-	/** A short notice under the result, such as "use only for tests". */
-	note?: ReactNode
-	empty?: boolean
-	emptyText?: string
-	copyText?: string
-	downloadName?: string
-	onClear?: () => void
-	children?: ReactNode
-	className?: string
-}) {
-	const hasActions = !empty && (copyText !== undefined || downloadName || onClear)
+}: ResultCardProps) {
 	const titleId = useId()
+	const canCopy = copyText !== undefined
+	const canDownload = Boolean(downloadName && copyText)
+	const showActions = !empty && (canCopy || canDownload || onClear)
 
 	return (
 		<section aria-labelledby={titleId} className={cn('flex flex-col gap-5 p-5 sm:p-7', className)}>
@@ -144,7 +154,8 @@ export function ResultCard({
 				</StepTitle>
 				{!empty && action ? action : null}
 			</div>
-			{/* Only the result itself is live: titles and buttons aren't re-read on every change. */}
+
+			{/* Only the result is live, so titles and buttons aren't re-announced on every change. */}
 			<div aria-live="polite" className="flex flex-1 flex-col">
 				{empty ? (
 					<p className="rounded-control border-border-strong bg-surface-muted text-fg-muted flex min-h-20 flex-1 items-center justify-center border border-dashed px-5 py-5 text-center text-[0.9375rem] sm:min-h-40 sm:px-6 sm:py-8">
@@ -154,10 +165,11 @@ export function ResultCard({
 					<div className="flex flex-1 flex-col gap-4">{children}</div>
 				)}
 			</div>
-			{hasActions ? (
+
+			{showActions ? (
 				<div className="flex flex-wrap items-center gap-2">
-					{copyText !== undefined ? <CopyButton value={copyText} variant="primary" /> : null}
-					{downloadName && copyText ? (
+					{canCopy ? <CopyButton value={copyText} variant="primary" /> : null}
+					{canDownload && downloadName && copyText ? (
 						<Button
 							variant="secondary"
 							size="sm"
@@ -173,6 +185,7 @@ export function ResultCard({
 					) : null}
 				</div>
 			) : null}
+
 			{note ? (
 				<p className="rounded-control bg-warning-soft text-warning-ink px-4 py-3 text-sm leading-relaxed">
 					{note}
@@ -182,19 +195,15 @@ export function ResultCard({
 	)
 }
 
-/**
- * The main result, large on a soft ground. Codes (passwords, binary) take the
- * monospace so look-alike characters read apart; other values stay in the text face.
- */
-export function OutputValue({
-	children,
-	className,
-	code = false,
-}: {
+type OutputProps = {
 	children: ReactNode
 	className?: string
+	/** Monospace, so look-alike characters (l/1, O/0) read apart. */
 	code?: boolean
-}) {
+}
+
+/** The main result, large on a soft background. */
+export function OutputValue({ children, className, code = false }: OutputProps) {
 	return (
 		<output
 			className={cn(
@@ -208,19 +217,11 @@ export function OutputValue({
 	)
 }
 
-/** Multi-line code output (meta tags, binary, lists). */
-export function OutputBlock({
-	children,
-	className,
-	code = true,
-}: {
-	children: ReactNode
-	className?: string
-	code?: boolean
-}) {
+/** Multi-line output (code, lists, generated text). */
+export function OutputBlock({ children, className, code = true }: OutputProps) {
 	return (
 		<pre
-			// biome-ignore lint/a11y/noNoninteractiveTabindex: a scrollable block must be reachable by keyboard to scroll it
+			// biome-ignore lint/a11y/noNoninteractiveTabindex: a scrollable block must be reachable by keyboard
 			tabIndex={0}
 			className={cn(
 				'rounded-control bg-surface-muted text-fg focus-visible:ring-ring max-h-[28rem] overflow-auto px-5 py-4 text-[0.9375rem] leading-relaxed break-words whitespace-pre-wrap outline-none focus-visible:ring-4',

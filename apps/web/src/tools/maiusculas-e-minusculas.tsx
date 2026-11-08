@@ -8,15 +8,15 @@ import { FormCard, ResultCard, ToolLayout } from './_shared/tool-layout'
 
 const KINDS = Object.keys(CASES) as CaseKind[]
 
-function Conversions({ text, onClear }: { text: string; onClear: () => void }) {
-	const deferred = useDeferredValue(text)
+function CaseConversions({ text, onClear }: { text: string; onClear: () => void }) {
+	const deferredText = useDeferredValue(text)
 	const rows = useMemo(
 		() =>
 			KINDS.map((kind) => ({
 				label: CASES[kind],
-				value: deferred ? convertCase(deferred, kind) : '',
+				value: deferredText ? convertCase(deferredText, kind) : '',
 			})),
-		[deferred],
+		[deferredText],
 	)
 	return (
 		<ResultCard
@@ -44,11 +44,13 @@ export default function CaseConverter() {
 				}
 			>
 				<form.AppField name="text">
-					{(f) => <f.TextareaField label="Texto" rows={6} placeholder="Ex: nome do usuário" />}
+					{(field) => (
+						<field.TextareaField label="Texto" rows={6} placeholder="Ex: nome do usuário" />
+					)}
 				</form.AppField>
 			</FormCard>
 			<form.Subscribe selector={(state) => state.values.text}>
-				{(text) => <Conversions text={text} onClear={() => form.reset()} />}
+				{(text) => <CaseConversions text={text} onClear={() => form.reset()} />}
 			</form.Subscribe>
 		</ToolLayout>
 	)

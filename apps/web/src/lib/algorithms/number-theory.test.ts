@@ -60,7 +60,7 @@ describe('number theory', () => {
 const bar = (symbols: string, levels = 1) =>
 	[...symbols].map((symbol) => symbol + ROMAN_BAR.repeat(levels)).join('')
 
-/** The previous implementation, kept as the oracle for 1–3.999. */
+/** Reference implementation of the standard numeral, used as the oracle for 1–3.999. */
 function legacyRoman(value: number): string {
 	const table: [number, string][] = [
 		[1000, 'M'],

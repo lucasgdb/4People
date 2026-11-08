@@ -20,7 +20,7 @@ const INDENTS = [
 	{ value: '0', label: 'Minificar' },
 ] as const
 
-const bytes = (text: string) => new TextEncoder().encode(text).length
+const byteLength = (text: string) => new TextEncoder().encode(text).length
 
 /** Validates, pretty-prints or minifies JSON, pointing at the line of a syntax error. */
 export default function JsonFormatter() {
@@ -29,7 +29,7 @@ export default function JsonFormatter() {
 		schema,
 		defaultValues: { json: '', indent: '2' },
 		onSubmit: ({ json, indent }) =>
-			setResult({ ...formatJson(json, Number(indent)), inputBytes: bytes(json) }),
+			setResult({ ...formatJson(json, Number(indent)), inputBytes: byteLength(json) }),
 	})
 
 	return (
@@ -43,12 +43,16 @@ export default function JsonFormatter() {
 				}
 			>
 				<form.AppField name="json">
-					{(f) => (
-						<f.TextareaField label="JSON" rows={12} placeholder='Ex: {"nome":"Ana","idade":30}' />
+					{(field) => (
+						<field.TextareaField
+							label="JSON"
+							rows={12}
+							placeholder='Ex: {"nome":"Ana","idade":30}'
+						/>
 					)}
 				</form.AppField>
 				<form.AppField name="indent">
-					{(f) => <f.RadioField label="Saída" options={INDENTS} />}
+					{(field) => <field.RadioField label="Saída" options={INDENTS} />}
 				</form.AppField>
 			</FormCard>
 			<ResultCard
@@ -57,20 +61,21 @@ export default function JsonFormatter() {
 				downloadName={result?.ok ? 'formatado.json' : undefined}
 				onClear={() => setResult(null)}
 			>
-				{result?.ok ? (
+				{result?.ok && (
 					<>
 						<p className="text-fg-muted tabular text-sm">
-							JSON válido · {formatNumber(result.inputBytes)} → {formatNumber(bytes(result.output))}{' '}
-							bytes
+							JSON válido · {formatNumber(result.inputBytes)} →{' '}
+							{formatNumber(byteLength(result.output))} bytes
 						</p>
 						<OutputBlock className="max-h-[36rem]">{result.output}</OutputBlock>
 					</>
-				) : result ? (
+				)}
+				{result && !result.ok && (
 					<Alert tone="danger">
 						<CircleX />
 						{result.error}
 					</Alert>
-				) : null}
+				)}
 			</ResultCard>
 		</ToolLayout>
 	)

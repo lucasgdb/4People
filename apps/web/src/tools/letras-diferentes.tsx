@@ -8,15 +8,15 @@ import { FormCard, ResultCard, ToolLayout } from './_shared/tool-layout'
 
 const STYLES = Object.keys(FANCY_STYLES) as FancyStyle[]
 
-function Styles({ text, onClear }: { text: string; onClear: () => void }) {
-	const deferred = useDeferredValue(text)
+function StyledVersions({ text, onClear }: { text: string; onClear: () => void }) {
+	const deferredText = useDeferredValue(text)
 	const rows = useMemo(
 		() =>
 			STYLES.map((style) => ({
 				label: FANCY_STYLES[style],
-				value: deferred ? fancyText(deferred, style) : '',
+				value: deferredText ? fancyText(deferredText, style) : '',
 			})),
-		[deferred],
+		[deferredText],
 	)
 	return (
 		<ResultCard
@@ -44,8 +44,8 @@ export default function FancyLetters() {
 				}
 			>
 				<form.AppField name="text">
-					{(f) => (
-						<f.TextareaField
+					{(field) => (
+						<field.TextareaField
 							label="Texto"
 							rows={4}
 							placeholder="Ex: Lucas Bittencourt"
@@ -55,7 +55,7 @@ export default function FancyLetters() {
 				</form.AppField>
 			</FormCard>
 			<form.Subscribe selector={(state) => state.values.text}>
-				{(text) => <Styles text={text} onClear={() => form.reset()} />}
+				{(text) => <StyledVersions text={text} onClear={() => form.reset()} />}
 			</form.Subscribe>
 		</ToolLayout>
 	)

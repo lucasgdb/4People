@@ -48,11 +48,11 @@ export function ShiftDate({ direction }: { direction: 1 | -1 }) {
 					</form.AppForm>
 				}
 			>
-				<form.AppField name="date">{(f) => <f.DateField label="Data" />}</form.AppField>
+				<form.AppField name="date">{(field) => <field.DateField label="Data" />}</form.AppField>
 				<div className="grid grid-cols-2 items-end gap-x-3 gap-y-4 sm:gap-x-4">
 					<form.AppField name="amount">
-						{(f) => (
-							<f.NumberField
+						{(field) => (
+							<field.NumberField
 								label={`Quantidade a ${verb}`}
 								placeholder="Ex: 30"
 								integer
@@ -62,7 +62,7 @@ export function ShiftDate({ direction }: { direction: 1 | -1 }) {
 						)}
 					</form.AppField>
 					<form.AppField name="unit">
-						{(f) => <f.SelectField label="Unidade" options={UNITS} />}
+						{(field) => <field.SelectField label="Unidade" options={UNITS} />}
 					</form.AppField>
 				</div>
 			</FormCard>

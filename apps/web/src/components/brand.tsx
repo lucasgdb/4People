@@ -41,7 +41,7 @@ export function Wordmark({ className, size = 'md' }: { className?: string; size?
 			{/* Still being tested: said on every page, next to the name. */}
 			<span
 				title="Versão beta: ainda em testes"
-				className="border-accent/30 bg-accent-soft text-accent-soft-fg rounded-full border px-1.5 py-px text-[0.625rem] leading-4 font-bold tracking-wider uppercase"
+				className="border-accent/30 bg-accent-soft text-accent-soft-fg inline-flex h-[1.125rem] translate-y-[0.5px] items-center rounded-full border px-1.5 text-[0.625rem] leading-none font-bold uppercase"
 			>
 				Beta
 			</span>

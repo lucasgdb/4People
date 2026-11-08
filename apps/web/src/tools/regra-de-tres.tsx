@@ -30,21 +30,22 @@ const KINDS = [
 
 type Result = { x: number; formula: string }
 
-/** a está para b assim como c está para x, direct or inverse. */
+const formatTerm = (value: number) => formatNumber(value, 6)
+
+/** The calculation written out with the user's numbers. */
+function formulaText(a: number, b: number, c: number, kind: 'direct' | 'inverse') {
+	if (kind === 'direct') return `x = ${formatTerm(b)} × ${formatTerm(c)} ÷ ${formatTerm(a)}`
+	return `x = ${formatTerm(a)} × ${formatTerm(b)} ÷ ${formatTerm(c)}`
+}
+
+/** a is to b as c is to x, in direct or inverse proportion. */
 export default function RuleOfThree() {
 	const [result, setResult] = useState<Result | null>(null)
 	const form = useToolForm({
 		schema,
 		defaultValues: { a: '', b: '', c: '', kind: 'direct' },
-		onSubmit: ({ a, b, c, kind }) => {
-			const x = ruleOfThree(a, b, c, kind)
-			const n = (value: number) => formatNumber(value, 6)
-			setResult({
-				x,
-				formula:
-					kind === 'direct' ? `x = ${n(b)} × ${n(c)} ÷ ${n(a)}` : `x = ${n(a)} × ${n(b)} ÷ ${n(c)}`,
-			})
-		},
+		onSubmit: ({ a, b, c, kind }) =>
+			setResult({ x: ruleOfThree(a, b, c, kind), formula: formulaText(a, b, c, kind) }),
 	})
 
 	return (
@@ -58,27 +59,27 @@ export default function RuleOfThree() {
 				}
 			>
 				<form.AppField name="kind">
-					{(f) => (
-						<f.RadioField
+					{(field) => (
+						<field.RadioField
 							label="Proporção"
 							description="Direta: as duas grandezas crescem juntas. Inversa: uma cresce e a outra diminui."
 							options={KINDS}
 						/>
 					)}
 				</form.AppField>
-				{/* Laid out as the proportion is written in school: a → b, c → x. */}
+				{/* Laid out as the proportion is written: a → b, c → x. */}
 				<div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-end gap-x-3 gap-y-4">
 					<form.AppField name="a">
-						{(f) => <f.NumberField label="a" placeholder="Ex: 2" />}
+						{(field) => <field.NumberField label="a" placeholder="Ex: 2" />}
 					</form.AppField>
 					<span aria-hidden="true" className="text-fg-muted pb-2.5">
 						→
 					</span>
 					<form.AppField name="b">
-						{(f) => <f.NumberField label="b" placeholder="Ex: 10" />}
+						{(field) => <field.NumberField label="b" placeholder="Ex: 10" />}
 					</form.AppField>
 					<form.AppField name="c">
-						{(f) => <f.NumberField label="c" placeholder="Ex: 6" />}
+						{(field) => <field.NumberField label="c" placeholder="Ex: 6" />}
 					</form.AppField>
 					<span aria-hidden="true" className="text-fg-muted pb-2.5">
 						→
@@ -86,14 +87,14 @@ export default function RuleOfThree() {
 					<div className="flex flex-col gap-2">
 						<span className="text-fg text-sm leading-none font-medium">x</span>
 						<span className="rounded-control bg-surface-sunken text-fg-muted tabular flex h-11 items-center px-3 sm:h-10">
-							{result ? formatNumber(result.x, 6) : '?'}
+							{result ? formatTerm(result.x) : '?'}
 						</span>
 					</div>
 				</div>
 			</FormCard>
 			<ResultCard
 				empty={!result}
-				copyText={result ? formatNumber(result.x, 6) : ''}
+				copyText={result ? formatTerm(result.x) : ''}
 				onClear={() => {
 					setResult(null)
 					form.reset()
@@ -101,7 +102,7 @@ export default function RuleOfThree() {
 			>
 				{result ? (
 					<>
-						<OutputValue>x = {formatNumber(result.x, 6)}</OutputValue>
+						<OutputValue>x = {formatTerm(result.x)}</OutputValue>
 						<DataList
 							columns={1}
 							items={[

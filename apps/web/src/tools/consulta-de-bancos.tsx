@@ -21,29 +21,40 @@ import { type ReactNode, useDeferredValue, useMemo, useState } from 'react'
 import { z } from 'zod'
 import { formatNumber } from '@/lib/format'
 
-const banksSchema = z.array(
-	z.object({
-		ispb: z.string(),
-		name: z.string().nullable(),
-		code: z.number().nullable(),
-		fullName: z.string().nullable(),
-	}),
-)
+const BANKS_URL = 'https://brasilapi.com.br/api/banks/v1'
+const ONE_DAY_MS = 24 * 60 * 60_000
 
-async function fetchBanks() {
-	const response = await fetch('https://brasilapi.com.br/api/banks/v1')
+const bankSchema = z.object({
+	ispb: z.string(),
+	name: z.string().nullable(),
+	code: z.number().nullable(),
+	fullName: z.string().nullable(),
+})
+const banksSchema = z.array(bankSchema)
+
+type Bank = z.infer<typeof bankSchema>
+
+async function fetchBanks(): Promise<Bank[]> {
+	const response = await fetch(BANKS_URL)
 	if (!response.ok) throw new Error(`Falha ao consultar (${response.status}).`)
 	return banksSchema
 		.parse(await response.json())
 		.filter((bank) => bank.code !== null)
-		.sort((a, b) => (a.code ?? 0) - (b.code ?? 0))
+		.sort((first, second) => (first.code ?? 0) - (second.code ?? 0))
 }
 
-const normalize = (text: string) =>
-	text
+/** Lowercase without accents, so "itau" finds "Itaú". */
+function foldForSearch(text: string): string {
+	return text
 		.normalize('NFD')
 		.replace(/\p{Diacritic}/gu, '')
 		.toLowerCase()
+}
+
+/** COMPE codes are shown with three digits: 1 → "001". */
+function formatBankCode(code: number | null): string {
+	return String(code).padStart(3, '0')
+}
 
 /**
  * The commercial names people know and search for, by bank code. BrasilAPI returns the registered
@@ -70,23 +81,27 @@ const KNOWN_AS: Record<number, string> = {
 }
 
 /** Copy buttons appear with the row on mouse devices; always visible on touch and on focus. */
-const REVEAL =
+const REVEAL_ON_ROW_HOVER =
 	'[@media(pointer:fine)]:opacity-0 [@media(pointer:fine)]:group-hover/row:opacity-100 focus-visible:opacity-100 transition-opacity'
 
-/** Marks the first accent- and case-insensitive match of `query` (already normalized) in `text`. */
+/**
+ * Marks the first accent- and case-insensitive match of `query` (already folded) in `text`.
+ * Folding can change the length of a character, so each folded character remembers which original
+ * character it came from.
+ */
 function highlight(text: string, query: string): ReactNode {
 	if (!query) return text
-	const owner: number[] = []
+	const originalIndexOf: number[] = []
 	let folded = ''
-	for (let i = 0; i < text.length; i++) {
-		const piece = normalize(text[i] ?? '')
-		for (let k = 0; k < piece.length; k++) owner.push(i)
-		folded += piece
+	for (let index = 0; index < text.length; index++) {
+		const foldedCharacter = foldForSearch(text[index] ?? '')
+		originalIndexOf.push(...Array<number>(foldedCharacter.length).fill(index))
+		folded += foldedCharacter
 	}
-	const at = folded.indexOf(query)
-	if (at < 0) return text
-	const start = owner[at] ?? 0
-	const end = (owner[at + query.length - 1] ?? start) + 1
+	const matchIndex = folded.indexOf(query)
+	if (matchIndex < 0) return text
+	const start = originalIndexOf[matchIndex] ?? 0
+	const end = (originalIndexOf[matchIndex + query.length - 1] ?? start) + 1
 	return (
 		<>
 			{text.slice(0, start)}
@@ -98,27 +113,27 @@ function highlight(text: string, query: string): ReactNode {
 	)
 }
 
+/** Matches the code ("1", "001"), the start of the ISPB, or any of the bank's names. */
+function matchesQuery(bank: Bank, query: string): boolean {
+	if (formatBankCode(bank.code).startsWith(query)) return true
+	if (String(bank.code) === query) return true
+	if (bank.ispb.startsWith(query)) return true
+	const knownAs = KNOWN_AS[bank.code ?? -1] ?? ''
+	const searchableNames = `${bank.name ?? ''} ${bank.fullName ?? ''} ${knownAs}`
+	return foldForSearch(searchableNames).includes(query)
+}
+
 /** Bank codes for TED/PIX/boletos (COMPE) and ISPB, fetched once from BrasilAPI and filtered locally. */
 export default function BankLookup() {
 	const [query, setQuery] = useState('')
-	const deferred = useDeferredValue(normalize(query.trim()))
-	// The list barely changes: cache it for a day.
-	const banks = useQuery({ queryKey: ['banks'], queryFn: fetchBanks, staleTime: 24 * 60 * 60_000 })
+	const foldedQuery = useDeferredValue(foldForSearch(query.trim()))
+	// The list barely changes, so it is cached for a day.
+	const banks = useQuery({ queryKey: ['banks'], queryFn: fetchBanks, staleTime: ONE_DAY_MS })
 	const rows = useMemo(() => {
-		const list = banks.data ?? []
-		if (!deferred) return list
-		return list.filter(
-			(bank) =>
-				String(bank.code)
-					.padStart(3, '0')
-					.startsWith(deferred.padStart(Math.min(3, deferred.length), '0')) ||
-				String(bank.code) === deferred ||
-				bank.ispb.startsWith(deferred) ||
-				normalize(
-					`${bank.name ?? ''} ${bank.fullName ?? ''} ${KNOWN_AS[bank.code ?? -1] ?? ''}`,
-				).includes(deferred),
-		)
-	}, [banks.data, deferred])
+		const allBanks = banks.data ?? []
+		if (!foldedQuery) return allBanks
+		return allBanks.filter((bank) => matchesQuery(bank, foldedQuery))
+	}, [banks.data, foldedQuery])
 
 	if (banks.isError) {
 		return (
@@ -202,8 +217,9 @@ export default function BankLookup() {
 						</TableEmpty>
 					) : (
 						rows.map((bank) => {
-							const code = String(bank.code).padStart(3, '0')
+							const code = formatBankCode(bank.code)
 							const name = bank.name ?? bank.fullName ?? '—'
+							const knownAs = bank.code !== null ? KNOWN_AS[bank.code] : undefined
 							return (
 								<TableRow
 									key={bank.ispb}
@@ -222,22 +238,22 @@ export default function BankLookup() {
 												variant="ghost"
 												value={code}
 												label={`Copiar código ${code}`}
-												className={REVEAL}
+												className={REVEAL_ON_ROW_HOVER}
 											/>
 										</span>
 									</TableCell>
 									<TableCell>
 										<span className="flex flex-wrap items-center gap-x-2 gap-y-1">
-											<span className="text-fg font-semibold">{highlight(name, deferred)}</span>
-											{bank.code !== null && KNOWN_AS[bank.code] ? (
+											<span className="text-fg font-semibold">{highlight(name, foldedQuery)}</span>
+											{knownAs ? (
 												<span className="border-border text-fg-muted rounded-full border px-2 py-px text-xs font-medium">
-													{highlight(KNOWN_AS[bank.code] ?? '', deferred)}
+													{highlight(knownAs, foldedQuery)}
 												</span>
 											) : null}
 										</span>
 										{bank.fullName && bank.fullName !== bank.name ? (
 											<span className="text-fg-muted block text-[0.8125rem]">
-												{highlight(bank.fullName, deferred)}
+												{highlight(bank.fullName, foldedQuery)}
 											</span>
 										) : null}
 										{/* On phones the ISPB column folds in here. */}
@@ -264,7 +280,7 @@ export default function BankLookup() {
 												variant="ghost"
 												value={bank.ispb}
 												label={`Copiar ISPB de ${name}`}
-												className={REVEAL}
+												className={REVEAL_ON_ROW_HOVER}
 											/>
 										</span>
 									</TableCell>

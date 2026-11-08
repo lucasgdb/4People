@@ -9,18 +9,28 @@ import { base64Decode, base64Encode } from '@/lib/algorithms/encoding'
 import { useModeMemory } from './_shared/mode-memory'
 import { FormCard, OutputBlock, ResultCard, ToolLayout } from './_shared/tool-layout'
 
+const DIRECTIONS = [
+	{ value: 'encode', label: 'Codificar' },
+	{ value: 'decode', label: 'Decodificar' },
+] as const
+
 const schema = z.object({
 	direction: z.enum(['encode', 'decode']),
 	text: z.string().min(1, 'Digite algo para converter.'),
 	urlSafe: z.boolean(),
 })
 
-const DIRECTIONS = [
-	{ value: 'encode', label: 'Codificar' },
-	{ value: 'decode', label: 'Decodificar' },
-] as const
-
+type Values = z.infer<typeof schema>
 type Outcome = { ok: true; value: string } | { ok: false; error: string }
+
+function convert({ direction, text, urlSafe }: Values): Outcome {
+	try {
+		const value = direction === 'encode' ? base64Encode(text, { urlSafe }) : base64Decode(text)
+		return { ok: true, value }
+	} catch (error) {
+		return { ok: false, error: (error as Error).message }
+	}
+}
 
 /** UTF-8 text ⇄ Base64, with the URL-safe alphabet as an option. */
 export default function Base64() {
@@ -28,19 +38,9 @@ export default function Base64() {
 	const form = useToolForm({
 		schema,
 		defaultValues: { direction: 'encode', text: '', urlSafe: false },
-		onSubmit: ({ direction, text, urlSafe }) => {
-			try {
-				setOutcome({
-					ok: true,
-					value: direction === 'encode' ? base64Encode(text, { urlSafe }) : base64Decode(text),
-				})
-			} catch (error) {
-				setOutcome({ ok: false, error: (error as Error).message })
-			}
-		},
+		onSubmit: (values) => setOutcome(convert(values)),
 	})
-	// Each direction keeps its own input and result (no binary left in the text field).
-	const switchMode = useModeMemory(form, 'text', 'encode', outcome, setOutcome)
+	const switchDirection = useModeMemory(form, 'text', 'encode', outcome, setOutcome)
 
 	return (
 		<ToolLayout>
@@ -54,36 +54,37 @@ export default function Base64() {
 			>
 				<form.AppField
 					name="direction"
-					listeners={{ onChange: ({ value }) => switchMode(String(value)) }}
+					listeners={{ onChange: ({ value }) => switchDirection(String(value)) }}
 				>
-					{(f) => <f.RadioField label="Operação" options={DIRECTIONS} />}
+					{(field) => <field.RadioField label="Operação" options={DIRECTIONS} />}
 				</form.AppField>
 				<form.Subscribe selector={(state) => state.values.direction}>
-					{(direction) => (
-						<>
-							<form.AppField name="text">
-								{(f) => (
-									<f.TextareaField
-										label={direction === 'encode' ? 'Texto' : 'Base64'}
-										rows={6}
-										placeholder={
-											direction === 'encode' ? 'Ex: Olá, mundo!' : 'Ex: T2zDoSwgbXVuZG8h'
-										}
-									/>
-								)}
-							</form.AppField>
-							{direction === 'encode' ? (
-								<form.AppField name="urlSafe">
-									{(f) => (
-										<f.CheckboxField
-											label="Seguro para URL (Base64URL)"
-											description="Troca + e / por - e _, sem =."
+					{(direction) => {
+						const encoding = direction === 'encode'
+						return (
+							<>
+								<form.AppField name="text">
+									{(field) => (
+										<field.TextareaField
+											label={encoding ? 'Texto' : 'Base64'}
+											rows={6}
+											placeholder={encoding ? 'Ex: Olá, mundo!' : 'Ex: T2zDoSwgbXVuZG8h'}
 										/>
 									)}
 								</form.AppField>
-							) : null}
-						</>
-					)}
+								{encoding && (
+									<form.AppField name="urlSafe">
+										{(field) => (
+											<field.CheckboxField
+												label="Seguro para URL (Base64URL)"
+												description="Troca + e / por - e _, sem =."
+											/>
+										)}
+									</form.AppField>
+								)}
+							</>
+						)
+					}}
 				</form.Subscribe>
 			</FormCard>
 			<ResultCard
@@ -91,14 +92,13 @@ export default function Base64() {
 				copyText={outcome?.ok ? outcome.value : undefined}
 				onClear={() => setOutcome(null)}
 			>
-				{outcome?.ok ? (
-					<OutputBlock>{outcome.value}</OutputBlock>
-				) : outcome ? (
+				{outcome?.ok && <OutputBlock>{outcome.value}</OutputBlock>}
+				{outcome && !outcome.ok && (
 					<Alert tone="danger">
 						<CircleX />
 						{outcome.error}
 					</Alert>
-				) : null}
+				)}
 			</ResultCard>
 		</ToolLayout>
 	)

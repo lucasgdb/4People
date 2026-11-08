@@ -17,29 +17,48 @@ const UNITS = [
 
 const SYMBOL: Record<TemperatureUnit, string> = { C: '°C', F: '°F', K: 'K' }
 
+const DECIMAL_PLACES = ['0', '1', '2', '3', '4', '6', '10'] as const
+const DECIMAL_OPTIONS = DECIMAL_PLACES.map((places) => ({ value: places, label: places }))
+
 const schema = z.object({
 	value: numeric({}),
 	from: z.enum(['C', 'F', 'K']),
-	decimals: z.enum(['0', '1', '2', '3', '4', '6', '10']),
+	decimals: z.enum(DECIMAL_PLACES),
 })
 
+type Result = {
+	input: string
+	outputs: { unit: TemperatureUnit; value: string }[]
+}
+
+const unitLabel = (unit: TemperatureUnit) =>
+	UNITS.find((option) => option.value === unit)?.label ?? unit
+
+function convertToOtherUnits(value: number, from: TemperatureUnit, decimals: number): Result {
+	const withSymbol = (temperature: number, unit: TemperatureUnit) =>
+		`${formatNumber(temperature, decimals)} ${SYMBOL[unit]}`
+	const otherUnits = UNITS.filter((unit) => unit.value !== from).map((unit) => unit.value)
+	return {
+		input: withSymbol(value, from),
+		outputs: otherUnits.map((to) => ({
+			unit: to,
+			value: withSymbol(convertTemperature(value, from, to), to),
+		})),
+	}
+}
+
+const resultToText = ({ input, outputs }: Result) =>
+	[input, ...outputs.map((output) => output.value)].join(' = ')
+
+/** A temperature in the other two scales. */
 export default function TemperatureConverter() {
-	const [result, setResult] = useState<{
-		input: string
-		outputs: { unit: TemperatureUnit; value: string }[]
-	} | null>(null)
+	const [result, setResult] = useState<Result | null>(null)
 
 	const form = useToolForm({
 		schema,
 		defaultValues: { value: '', from: 'C', decimals: '2' },
 		onSubmit: ({ value, from, decimals }) =>
-			setResult({
-				input: `${formatNumber(value, Number(decimals))} ${SYMBOL[from]}`,
-				outputs: UNITS.filter((unit) => unit.value !== from).map(({ value: to }) => ({
-					unit: to,
-					value: `${formatNumber(convertTemperature(value, from, to), Number(decimals))} ${SYMBOL[to]}`,
-				})),
-			}),
+			setResult(convertToOtherUnits(value, from, Number(decimals))),
 	})
 
 	return (
@@ -54,29 +73,19 @@ export default function TemperatureConverter() {
 			>
 				<div className="grid gap-4 sm:grid-cols-2">
 					<form.AppField name="value">
-						{(f) => <f.NumberField label="Temperatura" placeholder="Ex: 36,5" />}
+						{(field) => <field.NumberField label="Temperatura" placeholder="Ex: 36,5" />}
 					</form.AppField>
 					<form.AppField name="from">
-						{(f) => <f.SelectField label="Unidade" options={UNITS} />}
+						{(field) => <field.SelectField label="Unidade" options={UNITS} />}
 					</form.AppField>
 				</div>
 				<form.AppField name="decimals">
-					{(f) => (
-						<f.SelectField
-							label="Casas decimais"
-							options={(['0', '1', '2', '3', '4', '6', '10'] as const).map((value) => ({
-								value,
-								label: value,
-							}))}
-						/>
-					)}
+					{(field) => <field.SelectField label="Casas decimais" options={DECIMAL_OPTIONS} />}
 				</form.AppField>
 			</FormCard>
 			<ResultCard
 				empty={!result}
-				copyText={
-					result ? `${result.input} = ${result.outputs.map((o) => o.value).join(' = ')}` : ''
-				}
+				copyText={result ? resultToText(result) : ''}
 				onClear={() => {
 					setResult(null)
 					form.reset()
@@ -85,7 +94,7 @@ export default function TemperatureConverter() {
 				{result ? (
 					<DataList
 						items={result.outputs.map((output) => ({
-							label: UNITS.find((unit) => unit.value === output.unit)?.label ?? output.unit,
+							label: unitLabel(output.unit),
 							value: output.value,
 						}))}
 					/>

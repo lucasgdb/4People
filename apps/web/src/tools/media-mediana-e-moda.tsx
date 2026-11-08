@@ -8,7 +8,10 @@ import { describe } from '@/lib/algorithms/statistics'
 import { formatNumber } from '@/lib/format'
 import { FormCard, ResultCard, ToolLayout } from './_shared/tool-layout'
 
-/** Comma, semicolon, space or line separated numbers; "1,5" is read as one and a half when ";" separates. */
+/**
+ * Numbers separated by commas, spaces, semicolons or lines. With ";" or line breaks as separators,
+ * a comma is a decimal separator ("1,5").
+ */
 const numberList = (required: boolean) =>
 	z
 		.string()
@@ -42,6 +45,38 @@ const schema = z
 
 type Result = ReturnType<typeof describe>
 
+const formatStat = (value: number) => formatNumber(value, 4)
+
+const formatModes = (modes: readonly number[]) => modes.map(formatStat).join(', ')
+
+const resultToText = ({ mean, median, modes }: Result) =>
+	[
+		`Média: ${formatStat(mean)}`,
+		`Mediana: ${formatStat(median)}`,
+		`Moda: ${formatModes(modes) || 'sem moda'}`,
+	].join('\n')
+
+function resultItems(result: Result) {
+	const weightedMean =
+		result.weightedMean === null
+			? []
+			: [{ label: 'Média ponderada', value: formatStat(result.weightedMean) }]
+	return [
+		{ label: 'Média', value: formatStat(result.mean) },
+		...weightedMean,
+		{ label: 'Mediana', value: formatStat(result.median) },
+		{
+			label: result.modes.length > 1 ? 'Modas' : 'Moda',
+			value: formatModes(result.modes) || 'Sem moda',
+		},
+		{ label: 'Mínimo e máximo', value: `${formatStat(result.min)} e ${formatStat(result.max)}` },
+		{ label: 'Amplitude', value: formatStat(result.range) },
+		{ label: 'Desvio padrão (população)', value: formatStat(result.populationStdDev) },
+		{ label: 'Desvio padrão (amostra)', value: formatStat(result.sampleStdDev) },
+		{ label: 'Quantidade', value: result.count, hint: `Soma: ${formatStat(result.sum)}` },
+	]
+}
+
 /** Mean, weighted mean, median, mode(s), range and standard deviation of a list. */
 export default function Statistics() {
 	const [result, setResult] = useState<Result | null>(null)
@@ -51,7 +86,6 @@ export default function Statistics() {
 		onSubmit: ({ values, weights }) =>
 			setResult(describe(values, weights.length > 0 ? weights : undefined)),
 	})
-	const n = (value: number) => formatNumber(value, 4)
 
 	return (
 		<ToolLayout>
@@ -64,11 +98,13 @@ export default function Statistics() {
 				}
 			>
 				<form.AppField name="values">
-					{(f) => <f.TextareaField label="Valores" rows={2} placeholder="Ex: 7, 8, 10, 6.5, 9" />}
+					{(field) => (
+						<field.TextareaField label="Valores" rows={2} placeholder="Ex: 7, 8, 10, 6.5, 9" />
+					)}
 				</form.AppField>
 				<form.AppField name="weights">
-					{(f) => (
-						<f.TextareaField
+					{(field) => (
+						<field.TextareaField
 							label="Pesos (opcional)"
 							rows={2}
 							placeholder="Ex: 2, 3, 5, 1, 1"
@@ -79,37 +115,13 @@ export default function Statistics() {
 			</FormCard>
 			<ResultCard
 				empty={!result}
-				copyText={
-					result
-						? `Média: ${n(result.mean)}\nMediana: ${n(result.median)}\nModa: ${result.modes.map(n).join(', ') || 'sem moda'}`
-						: ''
-				}
+				copyText={result ? resultToText(result) : ''}
 				onClear={() => {
 					setResult(null)
 					form.reset()
 				}}
 			>
-				{result ? (
-					<DataList
-						columns={2}
-						items={[
-							{ label: 'Média', value: n(result.mean) },
-							...(result.weightedMean !== null
-								? [{ label: 'Média ponderada', value: n(result.weightedMean) }]
-								: []),
-							{ label: 'Mediana', value: n(result.median) },
-							{
-								label: result.modes.length > 1 ? 'Modas' : 'Moda',
-								value: result.modes.map(n).join(', ') || 'Sem moda',
-							},
-							{ label: 'Mínimo e máximo', value: `${n(result.min)} e ${n(result.max)}` },
-							{ label: 'Amplitude', value: n(result.range) },
-							{ label: 'Desvio padrão (população)', value: n(result.populationStdDev) },
-							{ label: 'Desvio padrão (amostra)', value: n(result.sampleStdDev) },
-							{ label: 'Quantidade', value: result.count, hint: `Soma: ${n(result.sum)}` },
-						]}
-					/>
-				) : null}
+				{result ? <DataList columns={2} items={resultItems(result)} /> : null}
 			</ResultCard>
 		</ToolLayout>
 	)

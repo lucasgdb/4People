@@ -23,7 +23,27 @@ const schema = z.object({
 	custom: numeric({ integer: true, min: 2, max: 36 }),
 })
 
+type Values = z.infer<typeof schema>
 type Outcome = { ok: true; rows: CopyRow[] } | { ok: false; error: string }
+
+/** The common bases plus the custom one, unless the custom base is already listed. */
+function targetBases(customBase: number) {
+	const commonBases = BASES.map((base) => ({ label: base.label, base: Number(base.value) }))
+	if (commonBases.some(({ base }) => base === customBase)) return commonBases
+	return [...commonBases, { label: `Base ${customBase}`, base: customBase }]
+}
+
+function convert({ value, from, custom }: Values): Outcome {
+	try {
+		const rows = targetBases(custom).map(({ label, base }) => ({
+			label,
+			value: convertBase(value, Number(from), base).toUpperCase(),
+		}))
+		return { ok: true, rows }
+	} catch (error) {
+		return { ok: false, error: (error as Error).message }
+	}
+}
 
 /** An integer in every common base at once (exact with BigInt), plus any base from 2 to 36. */
 export default function NumberBaseConverter() {
@@ -31,22 +51,7 @@ export default function NumberBaseConverter() {
 	const form = useToolForm({
 		schema,
 		defaultValues: { value: '', from: '10', custom: '36' },
-		onSubmit: ({ value, from, custom }) => {
-			try {
-				const rows = [
-					...BASES.map((base) => ({ label: base.label, base: Number(base.value) })),
-					{ label: `Base ${custom}`, base: custom },
-				]
-					.filter((row, index, all) => all.findIndex((other) => other.base === row.base) === index)
-					.map(({ label, base }) => ({
-						label,
-						value: convertBase(value, Number(from), base).toUpperCase(),
-					}))
-				setOutcome({ ok: true, rows })
-			} catch (error) {
-				setOutcome({ ok: false, error: (error as Error).message })
-			}
-		},
+		onSubmit: (values) => setOutcome(convert(values)),
 	})
 
 	return (
@@ -60,8 +65,8 @@ export default function NumberBaseConverter() {
 				}
 			>
 				<form.AppField name="value">
-					{(f) => (
-						<f.TextField
+					{(field) => (
+						<field.TextField
 							label="Número"
 							placeholder="Ex: 255, FF ou 11111111"
 							inputMode="text"
@@ -71,11 +76,11 @@ export default function NumberBaseConverter() {
 				</form.AppField>
 				<div className="grid gap-4 sm:grid-cols-2">
 					<form.AppField name="from">
-						{(f) => <f.SelectField label="Está na base" options={BASES} />}
+						{(field) => <field.SelectField label="Está na base" options={BASES} />}
 					</form.AppField>
 					<form.AppField name="custom">
-						{(f) => (
-							<f.NumberField
+						{(field) => (
+							<field.NumberField
 								label="Converter também para a base"
 								description="De 2 a 36."
 								placeholder="Ex: 36"
@@ -88,14 +93,13 @@ export default function NumberBaseConverter() {
 				</div>
 			</FormCard>
 			<ResultCard empty={!outcome} onClear={() => setOutcome(null)}>
-				{outcome?.ok ? (
-					<CopyRows rows={outcome.rows} code />
-				) : outcome ? (
+				{outcome?.ok && <CopyRows rows={outcome.rows} code />}
+				{outcome && !outcome.ok && (
 					<Alert tone="danger">
 						<CircleX />
 						{outcome.error}
 					</Alert>
-				) : null}
+				)}
 			</ResultCard>
 		</ToolLayout>
 	)

@@ -34,7 +34,7 @@ function numericOptions({ constraints = { positive: true }, step, allowNegative 
 	const { min, max, integer, positive } = constraints
 	const options: NumericOptions = { min, max, integer, step, allowNegative }
 	if (positive && min === undefined) {
-		// > 0: an integer can start at 1; a decimal just can't take the minus sign.
+		// "> 0": an integer can start at 1; a decimal can only refuse the minus sign.
 		if (integer) options.min = 1
 		else options.allowNegative ??= false
 	}
@@ -43,6 +43,34 @@ function numericOptions({ constraints = { positive: true }, step, allowNegative 
 
 /** The single "Área" result of the area calculators. */
 export const areaOf = (value: number): FormulaResult[] => [{ label: 'Área', value }]
+
+/**
+ * Short numbers sit side by side even on a phone (Base | Altura), so the result comes up a screen
+ * sooner; three short labels (a, b, c) share one row, like the formula reads.
+ */
+function gridColumnsFor(fields: readonly FormulaField[]) {
+	const allLabelsShort = fields.every((field) => field.label.length <= 14)
+	if (fields.length === 3 && allLabelsShort) return 'grid-cols-3'
+	if (fields.length > 1) return 'grid-cols-2'
+	return undefined
+}
+
+const formatResultValue = (item: FormulaResult) => `${formatNumber(item.value)}${item.unit ?? ''}`
+
+function resultToText(result: FormulaResult[] | string): string {
+	if (typeof result === 'string') return result
+	return result.map((item) => `${item.label}: ${formatResultValue(item)}`).join('\n')
+}
+
+function FormulaOutput({ result }: { result: FormulaResult[] | string }) {
+	if (typeof result === 'string') return <p className="text-fg">{result}</p>
+	return (
+		<DataList
+			columns={result.length > 1 ? 2 : 1}
+			items={result.map((item) => ({ label: item.label, value: formatResultValue(item) }))}
+		/>
+	)
+}
 
 export type FormulaToolProps = {
 	fields: readonly FormulaField[]
@@ -80,15 +108,6 @@ export function FormulaTool({
 		onSubmit: (values) => setResult(compute(values as Record<string, number>)),
 	})
 
-	const copyText =
-		result === null
-			? ''
-			: typeof result === 'string'
-				? result
-				: result
-						.map((item) => `${item.label}: ${formatNumber(item.value)}${item.unit ?? ''}`)
-						.join('\n')
-
 	return (
 		<ToolLayout>
 			<FormCard
@@ -99,21 +118,11 @@ export function FormulaTool({
 					</form.AppForm>
 				}
 			>
-				{/* Short numbers side by side even on a phone (Base | Altura), so the button and the result
-				    come up a screen sooner. Labels that wrap still line their inputs up (items-end). */}
-				<div
-					className={cn(
-						'grid items-end gap-x-3 gap-y-4 sm:gap-x-4',
-						// Three short labels (a, b, c) fit one row even on a phone, like the formula reads.
-						fields.length === 3 && fields.every((field) => field.label.length <= 14)
-							? 'grid-cols-3'
-							: fields.length > 1 && 'grid-cols-2',
-					)}
-				>
+				<div className={cn('grid items-end gap-x-3 gap-y-4 sm:gap-x-4', gridColumnsFor(fields))}>
 					{fields.map((field) => (
 						<form.AppField key={field.name} name={field.name}>
-							{(f) => (
-								<f.NumberField
+							{(formField) => (
+								<formField.NumberField
 									label={field.label}
 									placeholder={field.placeholder}
 									suffix={field.suffix}
@@ -126,23 +135,13 @@ export function FormulaTool({
 			</FormCard>
 			<ResultCard
 				empty={result === null}
-				copyText={copyText}
+				copyText={result === null ? '' : resultToText(result)}
 				onClear={() => {
 					setResult(null)
 					form.reset()
 				}}
 			>
-				{typeof result === 'string' ? (
-					<p className="text-fg">{result}</p>
-				) : result ? (
-					<DataList
-						columns={result.length > 1 ? 2 : 1}
-						items={result.map((item) => ({
-							label: item.label,
-							value: `${formatNumber(item.value)}${item.unit ?? ''}`,
-						}))}
-					/>
-				) : null}
+				{result === null ? null : <FormulaOutput result={result} />}
 			</ResultCard>
 		</ToolLayout>
 	)

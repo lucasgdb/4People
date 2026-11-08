@@ -20,13 +20,10 @@ const LABELS: Record<keyof Counts, string> = {
 	numbers: 'Números',
 }
 
-/**
- * Counting runs on a deferred copy of the text: typing stays instant on long pastes, and the
- * numbers catch up right after.
- */
+/** Counts a deferred copy of the text, so typing stays instant on long pastes. */
 function CountResult({ text, onClear }: { text: string; onClear: () => void }) {
-	const deferred = useDeferredValue(text)
-	const counts = useMemo(() => countCharacters(deferred), [deferred])
+	const deferredText = useDeferredValue(text)
+	const counts = useMemo(() => countCharacters(deferredText), [deferredText])
 	const entries = Object.entries(counts) as [keyof Counts, number][]
 
 	return (
@@ -58,8 +55,12 @@ export default function CharactersCount() {
 				}
 			>
 				<form.AppField name="text">
-					{(f) => (
-						<f.TextareaField label="Texto" rows={10} placeholder="Digite ou cole seu texto aqui…" />
+					{(field) => (
+						<field.TextareaField
+							label="Texto"
+							rows={10}
+							placeholder="Digite ou cole seu texto aqui…"
+						/>
 					)}
 				</form.AppField>
 			</FormCard>

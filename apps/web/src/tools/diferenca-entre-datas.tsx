@@ -9,9 +9,6 @@ import { formatNumber } from '@/lib/format'
 import { isoDate, time } from '@/lib/schemas'
 import { FormCard, OutputValue, ResultCard, ToolLayout } from './_shared/tool-layout'
 
-const plural = (n: number, one: string, many: string) =>
-	`${formatNumber(n)} ${n === 1 ? one : many}`
-
 const differenceSchema = z.object({
 	startDate: isoDate('Informe a data inicial.'),
 	startTime: time(),
@@ -19,9 +16,22 @@ const differenceSchema = z.object({
 	endTime: time(),
 })
 
+const countWithUnit = (count: number, singular: string, plural: string) =>
+	`${formatNumber(count)} ${count === 1 ? singular : plural}`
+
+type Result = ReturnType<typeof dateDifference>
+
+/** "1 ano, 2 meses, 3 dias" */
+const calendarSummary = ({ years, months, days }: Result['calendar']) =>
+	[
+		countWithUnit(years, 'ano', 'anos'),
+		countWithUnit(months, 'mês', 'meses'),
+		countWithUnit(days, 'dia', 'dias'),
+	].join(', ')
+
 /** Interval between two dates and times, in calendar units and in totals. */
 export default function DifferenceBetweenDates() {
-	const [result, setResult] = useState<ReturnType<typeof dateDifference> | null>(null)
+	const [result, setResult] = useState<Result | null>(null)
 	const form = useToolForm({
 		schema: differenceSchema,
 		defaultValues: { startDate: '', startTime: '', endDate: '', endTime: '' },
@@ -38,13 +48,7 @@ export default function DifferenceBetweenDates() {
 		form.setFieldValue('endTime', toTime(now))
 	}, [form])
 
-	const summary = result
-		? [
-				plural(result.calendar.years, 'ano', 'anos'),
-				plural(result.calendar.months, 'mês', 'meses'),
-				plural(result.calendar.days, 'dia', 'dias'),
-			].join(', ')
-		: ''
+	const summary = result ? calendarSummary(result.calendar) : ''
 
 	return (
 		<ToolLayout>
@@ -59,14 +63,20 @@ export default function DifferenceBetweenDates() {
 				<fieldset className="grid grid-cols-[minmax(0,1fr)_7rem] gap-3">
 					<legend className="sr-only">Início</legend>
 					<form.AppField name="startDate">
-						{(f) => <f.DateField label="Data inicial" />}
+						{(field) => <field.DateField label="Data inicial" />}
 					</form.AppField>
-					<form.AppField name="startTime">{(f) => <f.TimeField label="Horário" />}</form.AppField>
+					<form.AppField name="startTime">
+						{(field) => <field.TimeField label="Horário" />}
+					</form.AppField>
 				</fieldset>
 				<fieldset className="grid grid-cols-[minmax(0,1fr)_7rem] gap-3">
 					<legend className="sr-only">Fim</legend>
-					<form.AppField name="endDate">{(f) => <f.DateField label="Data final" />}</form.AppField>
-					<form.AppField name="endTime">{(f) => <f.TimeField label="Horário" />}</form.AppField>
+					<form.AppField name="endDate">
+						{(field) => <field.DateField label="Data final" />}
+					</form.AppField>
+					<form.AppField name="endTime">
+						{(field) => <field.TimeField label="Horário" />}
+					</form.AppField>
 				</fieldset>
 			</FormCard>
 			<ResultCard empty={!result} copyText={summary} onClear={() => setResult(null)}>

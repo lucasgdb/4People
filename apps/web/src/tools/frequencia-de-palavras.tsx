@@ -23,6 +23,8 @@ const schema = z.object({
 	minLength: numeric({ integer: true, min: 1, max: 30 }),
 })
 
+const MAX_ROWS = 100
+
 type Result = ReturnType<typeof wordFrequency>
 
 /** Which words repeat the most, with count and share, optionally without "de", "a", "o"… */
@@ -34,7 +36,7 @@ export default function WordFrequency() {
 		onSubmit: ({ text, ignoreStopwords, minLength }) =>
 			setResult(wordFrequency(text, { ignoreStopwords, minLength })),
 	})
-	const top = result?.words.slice(0, 100) ?? []
+	const topWords = result?.words.slice(0, MAX_ROWS) ?? []
 	return (
 		<ToolLayout>
 			<FormCard
@@ -46,12 +48,14 @@ export default function WordFrequency() {
 				}
 			>
 				<form.AppField name="text">
-					{(f) => <f.TextareaField label="Texto" rows={10} placeholder="Cole aqui o seu texto…" />}
+					{(field) => (
+						<field.TextareaField label="Texto" rows={10} placeholder="Cole aqui o seu texto…" />
+					)}
 				</form.AppField>
 				<div className="grid items-start gap-4 sm:grid-cols-2">
 					<form.AppField name="minLength">
-						{(f) => (
-							<f.NumberField
+						{(field) => (
+							<field.NumberField
 								label="Tamanho mínimo da palavra"
 								suffix="letras"
 								integer
@@ -61,8 +65,8 @@ export default function WordFrequency() {
 						)}
 					</form.AppField>
 					<form.AppField name="ignoreStopwords">
-						{(f) => (
-							<f.CheckboxField
+						{(field) => (
+							<field.CheckboxField
 								label="Ignorar palavras comuns"
 								description="de, a, o, que, e, para…"
 							/>
@@ -72,7 +76,7 @@ export default function WordFrequency() {
 			</FormCard>
 			<ResultCard
 				empty={!result}
-				copyText={top.map((row) => `${row.word}\t${row.count}`).join('\n')}
+				copyText={topWords.map((row) => `${row.word}\t${row.count}`).join('\n')}
 				downloadName="frequencia.txt"
 				onClear={() => setResult(null)}
 			>
@@ -84,7 +88,9 @@ export default function WordFrequency() {
 							<p className="text-fg-muted tabular text-sm">
 								{formatNumber(result.total)} palavras, {formatNumber(result.words.length)}{' '}
 								diferentes
-								{result.words.length > 100 ? ' (mostrando as 100 mais frequentes)' : ''}
+								{result.words.length > MAX_ROWS
+									? ` (mostrando as ${MAX_ROWS} mais frequentes)`
+									: ''}
 							</p>
 						}
 					>
@@ -97,7 +103,7 @@ export default function WordFrequency() {
 								</tr>
 							</TableHeader>
 							<TableBody>
-								{top.map((row) => (
+								{topWords.map((row) => (
 									<TableRow key={row.word}>
 										<TableCell>{row.word}</TableCell>
 										<TableCell numeric>{formatNumber(row.count)}</TableCell>

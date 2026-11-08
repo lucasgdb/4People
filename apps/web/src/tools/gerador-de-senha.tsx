@@ -28,15 +28,20 @@ import {
 	randomPasswordBits,
 	strengthFromBits,
 } from '@/lib/algorithms/password'
-import { randomInt } from '@/lib/algorithms/random'
+import { pick } from '@/lib/algorithms/random'
 import { FormCard, ResultCard, ToolLayout } from './_shared/tool-layout'
 
+/**
+ * Phones show three short labels without icons (icons pushed them onto two lines); from sm up, each
+ * kind has its icon and full name. The hidden variant drops out of the accessible name.
+ */
+const KIND_ICON_CLASS = 'hidden size-4 sm:block'
 const KINDS = [
 	{
 		value: 'random',
 		label: (
 			<span className="flex items-center gap-2">
-				<Shuffle aria-hidden="true" className="size-4" /> Aleatória
+				<Shuffle aria-hidden="true" className={KIND_ICON_CLASS} /> Aleatória
 			</span>
 		),
 	},
@@ -44,7 +49,9 @@ const KINDS = [
 		value: 'memorable',
 		label: (
 			<span className="flex items-center gap-2">
-				<Lightbulb aria-hidden="true" className="size-4" /> Fácil de lembrar
+				<Lightbulb aria-hidden="true" className={KIND_ICON_CLASS} />
+				<span className="sm:hidden">Memorável</span>
+				<span className="hidden sm:inline">Fácil de lembrar</span>
 			</span>
 		),
 	},
@@ -52,11 +59,15 @@ const KINDS = [
 		value: 'pin',
 		label: (
 			<span className="flex items-center gap-2">
-				<Hash aria-hidden="true" className="size-4" /> PIN
+				<Hash aria-hidden="true" className={KIND_ICON_CLASS} /> PIN
 			</span>
 		),
 	},
 ] as const
+
+const CHARSET_KEYS: CharsetKey[] = ['lowerCase', 'upperCase', 'number', 'special']
+
+const STRENGTH_LEVELS = ['Muito fraca', 'Fraca', 'Razoável', 'Forte', 'Muito forte'] as const
 
 const SEPARATORS: ReadonlyArray<{ value: PassphraseSeparator; label: string }> = [
 	{ value: 'hyphen', label: 'Hífen ( - )' },
@@ -83,17 +94,21 @@ const schema = z
 		pinLength: z.number().int().min(4).max(12),
 		avoidObvious: z.boolean(),
 	})
-	.superRefine((v, ctx) => {
-		if (v.kind !== 'random') return
-		if (!v.number && !v.upperCase && !v.lowerCase && !v.special)
-			ctx.addIssue({
-				code: 'custom',
-				message: 'Ligue pelo menos um tipo de caractere.',
-				path: ['special'],
-			})
+	.superRefine((values, ctx) => {
+		if (!hasNoCharsetSelected(values)) return
+		ctx.addIssue({
+			code: 'custom',
+			message: 'Ligue pelo menos um tipo de caractere.',
+			path: ['special'],
+		})
 	})
 
 type Values = z.input<typeof schema>
+
+/** Random kind with every character type off: nothing to draw from. */
+function hasNoCharsetSelected(options: Pick<Values, 'kind' | CharsetKey>): boolean {
+	return options.kind === 'random' && !CHARSET_KEYS.some((key) => options[key])
+}
 
 const DEFAULTS: Values = {
 	kind: 'random',
@@ -182,12 +197,12 @@ function StrengthPanel({ bits, length }: { bits: number; length: number }) {
 				</h3>
 			</div>
 			<div aria-hidden="true" className="grid grid-cols-5 gap-1.5">
-				{STRENGTH_LEVELS.map((name, i) => (
+				{STRENGTH_LEVELS.map((name, index) => (
 					<span
 						key={name}
 						className={cn(
 							'h-2 rounded-full transition-colors duration-300',
-							i <= level ? style.fill : 'bg-fg/10',
+							index <= level ? style.fill : 'bg-fg/10',
 						)}
 					/>
 				))}
@@ -225,8 +240,6 @@ function StrengthPanel({ bits, length }: { bits: number; length: number }) {
 	)
 }
 
-const KEYS: CharsetKey[] = ['lowerCase', 'upperCase', 'number', 'special']
-
 /** The four character switches, each shown as a card with a sample of what it adds. */
 const CHAR_OPTIONS = [
 	{ name: 'lowerCase', label: 'Minúsculas', sample: 'abc', tone: 'text-fg-muted' },
@@ -242,41 +255,55 @@ const OPTION_CARD =
 const LENGTH_PRESETS = [8, 12, 16, 24, 32, 64] as const
 const PIN_PRESETS = [4, 6, 8] as const
 
-const STRENGTH_LEVELS = ['Muito fraca', 'Fraca', 'Razoável', 'Forte', 'Muito forte'] as const
+type GeneratedPassword = { password: string; bits: number }
 
-/** Random kind with every character type off: nothing to draw from. */
-const noCharset = (v: Values) => v.kind === 'random' && !KEYS.some((key) => v[key])
+function makePin(options: Values): GeneratedPassword {
+	// Excluding obvious PINs removes a tiny share of the space: the bits stay a fair estimate.
+	return {
+		password: generatePin(options.pinLength, options.avoidObvious),
+		bits: pinBits(options.pinLength),
+	}
+}
 
-function makePassword(v: Values): { password: string; bits: number } {
-	if (v.kind === 'pin') {
-		// Excluding obvious PINs removes a tiny share of the space: the bits stay a fair estimate.
-		return { password: generatePin(v.pinLength, v.avoidObvious), bits: pinBits(v.pinLength) }
+function makePassphrase(options: Values): GeneratedPassword {
+	return {
+		password: generatePassphrase({
+			words: options.words,
+			separator: options.separator,
+			capitalize: options.capitalize,
+			number: options.wordNumber,
+		}),
+		bits: passphraseBits({ words: options.words, number: options.wordNumber }),
 	}
-	if (v.kind === 'memorable') {
-		return {
-			password: generatePassphrase({
-				words: v.words,
-				separator: v.separator,
-				capitalize: v.capitalize,
-				number: v.wordNumber,
-			}),
-			bits: passphraseBits({ words: v.words, number: v.wordNumber }),
-		}
-	}
-	const charsets = KEYS.filter((key) => v[key])
+}
+
+function makeRandomPassword(options: Values): GeneratedPassword {
+	const charsets = CHARSET_KEYS.filter((key) => options[key])
 	const poolSize = charsets.reduce((size, key) => size + CHARSETS[key].length, 0)
-	// The first character comes from one of the chosen sets, picked at random.
-	const first = charsets[randomInt(charsets.length)] ?? 'lowerCase'
+	const firstCharset = charsets.length > 0 ? pick(charsets) : 'lowerCase'
 	return {
 		password: generatePassword({
-			length: v.length,
-			firstChar: first,
+			length: options.length,
+			firstChar: firstCharset,
 			charsets,
-			excludeEqualChars: v.excludeEqualChars,
-			excludeSimilarChars: v.excludeSimilarChars,
+			excludeEqualChars: options.excludeEqualChars,
+			excludeSimilarChars: options.excludeSimilarChars,
 		}),
-		bits: randomPasswordBits(v.length, poolSize, poolSize),
+		bits: randomPasswordBits(options.length, poolSize, poolSize),
 	}
+}
+
+function makePassword(options: Values): GeneratedPassword {
+	if (options.kind === 'pin') return makePin(options)
+	if (options.kind === 'memorable') return makePassphrase(options)
+	return makeRandomPassword(options)
+}
+
+/** Digits blue, letters plain, everything else (symbols) orange: easier to read back. */
+function charColorClass(char: string): string {
+	if (/\d/.test(char)) return 'text-code-digit'
+	if (/[a-z]/i.test(char)) return 'text-fg'
+	return 'text-code-symbol'
 }
 
 function Presets({
@@ -307,21 +334,14 @@ function Presets({
 	)
 }
 
-/** Each character coloured by class: letters plain, digits blue, symbols orange (easier to read back). */
 function ColoredPassword({ value }: { value: string }) {
 	return (
 		<span translate="no">
-			{[...value].map((char, i) => (
+			{[...value].map((char, index) => (
 				<span
 					// biome-ignore lint/suspicious/noArrayIndexKey: characters repeat; position is identity
-					key={i}
-					className={cn(
-						/\d/.test(char)
-							? 'text-code-digit'
-							: /[a-z]/i.test(char)
-								? 'text-fg'
-								: 'text-code-symbol',
-					)}
+					key={index}
+					className={charColorClass(char)}
 				>
 					{char === ' ' ? '␣' : char}
 				</span>
@@ -336,23 +356,24 @@ function ColoredPassword({ value }: { value: string }) {
  * entropy of how the password was made.
  */
 export default function PasswordGenerator() {
-	const [result, setResult] = useState<{ password: string; bits: number } | null>(null)
+	const [result, setResult] = useState<GeneratedPassword | null>(null)
 	const form = useToolForm({
 		schema,
 		defaultValues: DEFAULTS,
 		onSubmit: (values) => setResult(makePassword(values)),
 	})
 
-	// Live: a new password whenever the options change and are valid (also the first one, on mount).
-	// The last options seen are kept so React running effects twice doesn't make two passwords.
+	// A new password whenever the options change and are valid, including the first one on mount.
+	// Remembering the last options keeps React's double effect run from making two passwords.
 	const values = useStore(form.store, (state) => state.values)
-	const last = useRef('')
+	const lastOptionsKey = useRef('')
 	useEffect(() => {
-		const key = JSON.stringify(values)
-		if (key === last.current) return
-		last.current = key
+		const optionsKey = JSON.stringify(values)
+		if (optionsKey === lastOptionsKey.current) return
+		lastOptionsKey.current = optionsKey
 		if (schema.safeParse(values).success) setResult(makePassword(values))
-		else if (!noCharset(values)) form.handleSubmit()
+		// Submitting shows the field errors; with no charset the inline alert already explains it.
+		else if (!hasNoCharsetSelected(values)) form.handleSubmit()
 	}, [values, form])
 
 	const kind = values.kind
@@ -361,15 +382,15 @@ export default function PasswordGenerator() {
 		<ToolLayout>
 			<FormCard title="Escolha como quer" onSubmit={() => form.handleSubmit()} actions={null}>
 				<form.AppField name="kind">
-					{(f) => <f.RadioField label="Tipo de senha" options={KINDS} />}
+					{(field) => <field.RadioField label="Tipo de senha" options={KINDS} />}
 				</form.AppField>
 
 				{kind === 'random' ? (
 					<>
 						<div className="flex flex-col gap-3">
 							<form.AppField name="length">
-								{(f) => (
-									<f.SliderField label="Tamanho" min={4} max={128} editable unit="caracteres" />
+								{(field) => (
+									<field.SliderField label="Tamanho" min={4} max={128} editable unit="caracteres" />
 								)}
 							</form.AppField>
 							<Presets
@@ -384,8 +405,8 @@ export default function PasswordGenerator() {
 							<div className="grid gap-2 sm:grid-cols-2">
 								{CHAR_OPTIONS.map((option) => (
 									<form.AppField key={option.name} name={option.name}>
-										{(f) => (
-											<f.SwitchField
+										{(field) => (
+											<field.SwitchField
 												className={OPTION_CARD}
 												label={
 													<span className="flex items-center justify-between gap-3">
@@ -404,7 +425,7 @@ export default function PasswordGenerator() {
 									</form.AppField>
 								))}
 							</div>
-							{noCharset(values) ? (
+							{hasNoCharsetSelected(values) ? (
 								<p role="alert" className="text-danger mt-1 text-[0.8125rem] font-medium">
 									Ligue pelo menos um tipo de caractere. A senha anterior continua abaixo.
 								</p>
@@ -412,16 +433,16 @@ export default function PasswordGenerator() {
 						</fieldset>
 						<div className="flex flex-col">
 							<form.AppField name="excludeEqualChars">
-								{(f) => (
-									<f.SwitchField
+								{(field) => (
+									<field.SwitchField
 										label="Evitar caracteres iguais seguidos"
 										description="Ex.: AA, ll, 22"
 									/>
 								)}
 							</form.AppField>
 							<form.AppField name="excludeSimilarChars">
-								{(f) => (
-									<f.SwitchField
+								{(field) => (
+									<field.SwitchField
 										label="Evitar caracteres parecidos seguidos"
 										description="Ex.: lI, O0, gq"
 									/>
@@ -429,20 +450,24 @@ export default function PasswordGenerator() {
 							</form.AppField>
 						</div>
 					</>
-				) : kind === 'memorable' ? (
+				) : null}
+
+				{kind === 'memorable' ? (
 					<>
 						<form.AppField name="words">
-							{(f) => <f.SliderField label="Palavras" min={2} max={10} editable unit="palavras" />}
+							{(field) => (
+								<field.SliderField label="Palavras" min={2} max={10} editable unit="palavras" />
+							)}
 						</form.AppField>
 						<form.AppField name="separator">
-							{(f) => <f.SelectField label="Separador" options={SEPARATORS} />}
+							{(field) => <field.SelectField label="Separador" options={SEPARATORS} />}
 						</form.AppField>
 						<div className="grid gap-x-6 sm:grid-cols-2">
 							<form.AppField name="capitalize">
-								{(f) => <f.SwitchField label="Primeira letra maiúscula" />}
+								{(field) => <field.SwitchField label="Primeira letra maiúscula" />}
 							</form.AppField>
 							<form.AppField name="wordNumber">
-								{(f) => <f.SwitchField label="Incluir um número" />}
+								{(field) => <field.SwitchField label="Incluir um número" />}
 							</form.AppField>
 						</div>
 						<p className="text-fg-muted text-[0.8125rem]">
@@ -450,11 +475,15 @@ export default function PasswordGenerator() {
 							e de lembrar, e fora de qualquer dicionário.
 						</p>
 					</>
-				) : (
+				) : null}
+
+				{kind === 'pin' ? (
 					<>
 						<div className="flex flex-col gap-3">
 							<form.AppField name="pinLength">
-								{(f) => <f.SliderField label="Dígitos" min={4} max={12} editable unit="dígitos" />}
+								{(field) => (
+									<field.SliderField label="Dígitos" min={4} max={12} editable unit="dígitos" />
+								)}
 							</form.AppField>
 							<Presets
 								label="Tamanhos comuns de PIN"
@@ -464,15 +493,15 @@ export default function PasswordGenerator() {
 							/>
 						</div>
 						<form.AppField name="avoidObvious">
-							{(f) => (
-								<f.SwitchField
+							{(field) => (
+								<field.SwitchField
 									label="Evitar PINs óbvios"
 									description="Ex.: 0000, 1234, 9876, 1212"
 								/>
 							)}
 						</form.AppField>
 					</>
-				)}
+				) : null}
 			</FormCard>
 
 			<ResultCard title="Sua senha" empty={!result} emptyText="Gerando senha…">

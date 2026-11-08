@@ -39,6 +39,17 @@ const PERIOD_UNITS = [
 
 type Result = ReturnType<typeof compoundInterest>
 
+/** One row per year, plus the last month when the period isn't whole years. */
+const yearlyMilestones = (rows: Result['rows']) =>
+	rows.filter((row, index) => row.month % 12 === 0 || index === rows.length - 1)
+
+const resultToText = ({ invested, interest, balance }: Result) =>
+	[
+		`Total investido: ${formatCurrency(invested)}`,
+		`Juros: ${formatCurrency(interest)}`,
+		`Saldo final: ${formatCurrency(balance)}`,
+	].join('\n')
+
 /** Month-by-month compound growth with monthly deposits; the table shows one row per year. */
 export default function CompoundInterest() {
 	const [result, setResult] = useState<Result | null>(null)
@@ -52,16 +63,13 @@ export default function CompoundInterest() {
 			period: '5',
 			periodUnit: 'years',
 		},
-		onSubmit: ({ period, periodUnit, ...input }) =>
-			setResult(
-				compoundInterest({ ...input, months: periodUnit === 'years' ? period * 12 : period }),
-			),
+		onSubmit: ({ period, periodUnit, ...input }) => {
+			const months = periodUnit === 'years' ? period * 12 : period
+			setResult(compoundInterest({ ...input, months }))
+		},
 	})
 
-	// One row per year (and the last month when the period isn't whole years).
-	const milestones =
-		result?.rows.filter((row, index, rows) => row.month % 12 === 0 || index === rows.length - 1) ??
-		[]
+	const milestones = result ? yearlyMilestones(result.rows) : []
 
 	return (
 		<ToolLayout>
@@ -75,8 +83,8 @@ export default function CompoundInterest() {
 			>
 				<div className="grid grid-cols-2 items-end gap-x-3 gap-y-4 sm:gap-x-4">
 					<form.AppField name="principal">
-						{(f) => (
-							<f.NumberField
+						{(field) => (
+							<field.NumberField
 								label="Valor inicial"
 								placeholder="Ex: 1000"
 								suffix="R$"
@@ -86,8 +94,8 @@ export default function CompoundInterest() {
 						)}
 					</form.AppField>
 					<form.AppField name="monthlyDeposit">
-						{(f) => (
-							<f.NumberField
+						{(field) => (
+							<field.NumberField
 								label="Aporte mensal"
 								placeholder="Ex: 200"
 								suffix="R$"
@@ -97,8 +105,8 @@ export default function CompoundInterest() {
 						)}
 					</form.AppField>
 					<form.AppField name="rate">
-						{(f) => (
-							<f.NumberField
+						{(field) => (
+							<field.NumberField
 								label="Taxa de juros"
 								placeholder="Ex: 10"
 								suffix="%"
@@ -108,25 +116,21 @@ export default function CompoundInterest() {
 						)}
 					</form.AppField>
 					<form.AppField name="ratePeriod">
-						{(f) => <f.RadioField label="Taxa" options={RATE_PERIODS} />}
+						{(field) => <field.RadioField label="Taxa" options={RATE_PERIODS} />}
 					</form.AppField>
 					<form.AppField name="period">
-						{(f) => (
-							<f.NumberField label="Período" placeholder="Ex: 5" integer min={1} max={1200} />
+						{(field) => (
+							<field.NumberField label="Período" placeholder="Ex: 5" integer min={1} max={1200} />
 						)}
 					</form.AppField>
 					<form.AppField name="periodUnit">
-						{(f) => <f.SelectField label="Em" options={PERIOD_UNITS} />}
+						{(field) => <field.SelectField label="Em" options={PERIOD_UNITS} />}
 					</form.AppField>
 				</div>
 			</FormCard>
 			<ResultCard
 				empty={!result}
-				copyText={
-					result
-						? `Total investido: ${formatCurrency(result.invested)}\nJuros: ${formatCurrency(result.interest)}\nSaldo final: ${formatCurrency(result.balance)}`
-						: ''
-				}
+				copyText={result ? resultToText(result) : ''}
 				onClear={() => setResult(null)}
 			>
 				{result ? (

@@ -11,17 +11,27 @@ import { FormCard, ResultCard, ToolLayout } from './_shared/tool-layout'
 const WHITE: Rgb = { r: 255, g: 255, b: 255, alpha: 1 }
 const BLACK: Rgb = { r: 0, g: 0, b: 0, alpha: 1 }
 
-/** WCAG 2 verdict for text on this colour: AAA ≥ 7, AA ≥ 4.5, large text only ≥ 3. */
-function verdict(ratio: number) {
-	if (ratio >= 7)
+const FORMATS = [
+	['HEX', 'hex'],
+	['RGB', 'rgb'],
+	['HSL', 'hsl'],
+	['OKLCH', 'oklch'],
+	['CMYK', 'cmyk'],
+] as const
+
+/** WCAG 2 rating for text on this color: AAA ≥ 7, AA ≥ 4.5, large text only ≥ 3. */
+function contrastRating(ratio: number) {
+	if (ratio >= 7) {
 		return { level: 'AAA', tone: 'success', hint: 'Ótimo para qualquer texto' } as const
+	}
 	if (ratio >= 4.5) return { level: 'AA', tone: 'success', hint: 'Bom para texto normal' } as const
-	if (ratio >= 3)
+	if (ratio >= 3) {
 		return { level: 'AA grande', tone: 'neutral', hint: 'Só para texto grande' } as const
+	}
 	return { level: 'Falha', tone: 'danger', hint: 'Evite texto nesta cor' } as const
 }
 
-function parse(input: string) {
+function parseColorInput(input: string) {
 	try {
 		const rgb = parseColor(input)
 		return { ok: true as const, rgb, formats: formatColor(rgb) }
@@ -30,8 +40,8 @@ function parse(input: string) {
 	}
 }
 
-/** "Aa" drawn in the ink over the colour: shows the contrast (decorative; the verdict is text). */
-function Sample({ background, ink }: { background: string; ink: string }) {
+/** "Aa" drawn in the ink over the color: shows the contrast (decorative; the rating is text). */
+function ContrastSample({ background, ink }: { background: string; ink: string }) {
 	return (
 		<svg
 			aria-hidden="true"
@@ -54,40 +64,58 @@ function Sample({ background, ink }: { background: string; ink: string }) {
 	)
 }
 
-const FORMATS = [
-	['HEX', 'hex'],
-	['RGB', 'rgb'],
-	['HSL', 'hsl'],
-	['OKLCH', 'oklch'],
-	['CMYK', 'cmyk'],
-] as const
+function ContrastCard({
+	label,
+	background,
+	ink,
+	ratio,
+}: {
+	label: string
+	background: string
+	ink: string
+	ratio: number
+}) {
+	const rating = contrastRating(ratio)
+	return (
+		<div className="rounded-control border-border flex items-center gap-4 border p-3">
+			<ContrastSample background={background} ink={ink} />
+			<div className="flex min-w-0 flex-col gap-0.5">
+				<span className="text-fg-muted text-[0.8125rem]">{label}</span>
+				<span className="flex flex-wrap items-center gap-2">
+					<span className="text-fg tabular text-lg font-bold">{formatNumber(ratio, 2)}:1</span>
+					<Badge tone={rating.tone}>{rating.level}</Badge>
+				</span>
+				<span className="text-fg-muted text-[0.8125rem]">{rating.hint}</span>
+			</div>
+		</div>
+	)
+}
 
-function Conversion({ input }: { input: string }) {
-	const deferred = useDeferredValue(input)
-	const result = useMemo(() => parse(deferred), [deferred])
+function ColorDetails({ input }: { input: string }) {
+	const deferredInput = useDeferredValue(input)
+	const parsed = useMemo(() => parseColorInput(deferredInput), [deferredInput])
 
 	if (!input.trim()) {
 		return <ResultCard title="Sua cor" empty emptyText="Escolha ou digite uma cor." />
 	}
-	if (!result.ok) {
+	if (!parsed.ok) {
 		return (
 			<ResultCard title="Sua cor">
 				<Alert tone="danger">
 					<CircleX />
-					{result.error}
+					{parsed.error}
 				</Alert>
 			</ResultCard>
 		)
 	}
 
-	const { rgb, formats } = result
-	const onWhite = contrastRatio(rgb, WHITE)
-	const onBlack = contrastRatio(rgb, BLACK)
-	const ink = onWhite >= onBlack ? '#ffffff' : '#000000'
+	const { rgb, formats } = parsed
+	const contrastOnWhite = contrastRatio(rgb, WHITE)
+	const contrastOnBlack = contrastRatio(rgb, BLACK)
+	const readableInk = contrastOnWhite >= contrastOnBlack ? '#ffffff' : '#000000'
 
 	return (
 		<ResultCard title="Sua cor">
-			{/* The colour itself, large, with its code in whichever ink reads best on it. */}
 			<div
 				className="rounded-panel border-border flex h-36 flex-col justify-end border p-5"
 				style={{ background: formats.rgb }}
@@ -95,39 +123,25 @@ function Conversion({ input }: { input: string }) {
 				<span
 					translate="no"
 					className="font-mono text-2xl font-bold tracking-wide uppercase"
-					style={{ color: ink }}
+					style={{ color: readableInk }}
 				>
 					{formats.hex}
 				</span>
 			</div>
 
 			<div className="grid gap-3 sm:grid-cols-2">
-				{(
-					[
-						['Texto branco', '#ffffff', onWhite],
-						['Texto preto', '#000000', onBlack],
-					] as const
-				).map(([label, inkColor, ratio]) => {
-					const v = verdict(ratio)
-					return (
-						<div
-							key={label}
-							className="rounded-control border-border flex items-center gap-4 border p-3"
-						>
-							<Sample background={formats.rgb} ink={inkColor} />
-							<div className="flex min-w-0 flex-col gap-0.5">
-								<span className="text-fg-muted text-[0.8125rem]">{label}</span>
-								<span className="flex flex-wrap items-center gap-2">
-									<span className="text-fg tabular text-lg font-bold">
-										{formatNumber(ratio, 2)}:1
-									</span>
-									<Badge tone={v.tone}>{v.level}</Badge>
-								</span>
-								<span className="text-fg-muted text-[0.8125rem]">{v.hint}</span>
-							</div>
-						</div>
-					)
-				})}
+				<ContrastCard
+					label="Texto branco"
+					background={formats.rgb}
+					ink="#ffffff"
+					ratio={contrastOnWhite}
+				/>
+				<ContrastCard
+					label="Texto preto"
+					background={formats.rgb}
+					ink="#000000"
+					ratio={contrastOnBlack}
+				/>
 			</div>
 
 			<ul
@@ -167,14 +181,14 @@ export default function ColorConverter() {
 				actions={<p className="text-fg-muted text-[0.8125rem]">Atualiza enquanto você mexe.</p>}
 			>
 				<form.AppField name="color">
-					{(f) => {
-						const parsed = parse(f.state.value)
-						// The picker follows a valid typed colour; picking writes its HEX into the field.
-						const hex = parsed.ok ? parsed.formats.hex.slice(0, 7) : '#000000'
+					{(field) => {
+						const parsed = parseColorInput(field.state.value)
+						// The picker follows a valid typed color (alpha dropped); picking writes its HEX here.
+						const pickerHex = parsed.ok ? parsed.formats.hex.slice(0, 7) : '#000000'
 						return (
 							<>
-								<ColorArea value={hex} onValueChange={(next) => f.handleChange(next)} />
-								<f.TextField
+								<ColorArea value={pickerHex} onValueChange={(next) => field.handleChange(next)} />
+								<field.TextField
 									label="Ou digite em qualquer formato"
 									placeholder="Ex: #a62023, rgb(166 32 35), hsl(359 68% 39%)"
 									inputClassName="font-mono"
@@ -185,7 +199,7 @@ export default function ColorConverter() {
 				</form.AppField>
 			</FormCard>
 			<form.Subscribe selector={(state) => state.values.color}>
-				{(color) => <Conversion input={color} />}
+				{(color) => <ColorDetails input={color} />}
 			</form.Subscribe>
 		</ToolLayout>
 	)

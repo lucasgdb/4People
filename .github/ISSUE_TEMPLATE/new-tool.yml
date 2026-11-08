@@ -1,0 +1,63 @@
+name: Sugerir uma ferramenta
+description: Uma ferramenta nova que faria sentido no 4People.
+title: "[Ferramenta] "
+labels: ["nova ferramenta"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Boas ideias resolvem uma tarefa repetitiva e rodam no navegador, sem servidor nem cadastro.
+  - type: input
+    id: name
+    attributes:
+      label: Nome da ferramenta
+      placeholder: Gerador de chave PIX
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área
+      options:
+        - Computação
+        - Matemática
+        - Não sei
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Que problema ela resolve?
+      description: Quem usaria e em que situação.
+    validations:
+      required: true
+  - type: textarea
+    id: behaviour
+    attributes:
+      label: Como ela funcionaria?
+      description: O que a pessoa informa e o que recebe de volta. Exemplos de entrada e saída ajudam muito.
+      placeholder: |
+        Entrada: 123.456.789-09
+        Saída: chave PIX formatada e o QR Code
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: Regras ou referências
+      description: Especificação, norma, fórmula ou site que mostre como o cálculo deve ser feito.
+  - type: dropdown
+    id: network
+    attributes:
+      label: Precisa de internet?
+      description: O 4People prefere ferramentas que funcionam só no navegador.
+      options:
+        - Não, dá para calcular no navegador
+        - Sim, precisa consultar uma API pública
+        - Não sei
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Contribuição
+      options:
+        - label: Gostaria de implementar esta ferramenta e abrir o PR.

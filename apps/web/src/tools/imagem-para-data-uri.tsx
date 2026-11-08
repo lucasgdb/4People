@@ -8,67 +8,84 @@ import { dataUriSnippets, formatBytes } from '@/lib/algorithms/convert'
 import { formatNumber } from '@/lib/format'
 import { FormCard, ResultCard, ToolLayout } from './_shared/tool-layout'
 
-type Loaded = {
+type Dimensions = { width: number; height: number }
+
+type LoadedFile = {
 	name: string
 	mime: string
 	size: number
 	uri: string
-	dimensions?: { width: number; height: number }
+	dimensions?: Dimensions
 }
 
-/** Long data URIs are shown cut short (the copy buttons always copy everything). */
-const PREVIEW_CHARS = 600
-const BIG_FILE = 100 * 1024
+/** Long data URIs are shown cut short; the copy buttons always copy everything. */
+const PREVIEW_LENGTH = 600
+const LARGE_FILE_BYTES = 100 * 1024
 
-function readFile(file: File): Promise<Loaded> {
+const truncate = (text: string, maxLength: number) =>
+	text.length > maxLength ? `${text.slice(0, maxLength)}…` : text
+
+/** Natural size of an image URI, or undefined when it can't be decoded or has no intrinsic size. */
+function measureImage(uri: string): Promise<Dimensions | undefined> {
+	return new Promise((resolve) => {
+		const image = new Image()
+		image.onload = () =>
+			resolve(
+				image.naturalWidth ? { width: image.naturalWidth, height: image.naturalHeight } : undefined,
+			)
+		image.onerror = () => resolve(undefined)
+		image.src = uri
+	})
+}
+
+function readAsDataUri(file: File): Promise<string> {
 	return new Promise((resolve, reject) => {
 		const reader = new FileReader()
 		reader.onerror = () => reject(new Error('Não foi possível ler o arquivo. Tente de novo.'))
-		reader.onload = () => {
-			const uri = String(reader.result)
-			const loaded: Loaded = {
-				name: file.name,
-				mime: file.type || 'application/octet-stream',
-				size: file.size,
-				uri,
-			}
-			if (!file.type.startsWith('image/')) return resolve(loaded)
-			const image = new Image()
-			image.onload = () =>
-				resolve({
-					...loaded,
-					dimensions: image.naturalWidth
-						? { width: image.naturalWidth, height: image.naturalHeight }
-						: undefined,
-				})
-			image.onerror = () => resolve(loaded)
-			image.src = uri
-		}
+		reader.onload = () => resolve(String(reader.result))
 		reader.readAsDataURL(file)
 	})
 }
 
+async function loadFile(file: File): Promise<LoadedFile> {
+	const uri = await readAsDataUri(file)
+	const loaded: LoadedFile = {
+		name: file.name,
+		mime: file.type || 'application/octet-stream',
+		size: file.size,
+		uri,
+	}
+	if (!file.type.startsWith('image/')) return loaded
+	const dimensions = await measureImage(uri)
+	return dimensions ? { ...loaded, dimensions } : loaded
+}
+
+function formatDimensions(dimensions: Dimensions | undefined) {
+	if (!dimensions) return '—'
+	return `${formatNumber(dimensions.width)} × ${formatNumber(dimensions.height)} px`
+}
+
 /** Any file (usually an image) → Base64 data URI, with preview and CSS/HTML/Markdown snippets. */
 export default function ImagemParaDataUri() {
-	const [loaded, setLoaded] = useState<Loaded | null>(null)
+	const [loaded, setLoaded] = useState<LoadedFile | null>(null)
 	const [error, setError] = useState<string | null>(null)
 	const [dragging, setDragging] = useState(false)
 	const form = useAppForm({ defaultValues: { alt: '' } })
 
-	async function open(file: File | undefined) {
+	async function openFile(file: File | undefined) {
 		if (!file) return
 		setError(null)
 		try {
-			setLoaded(await readFile(file))
-		} catch (err) {
-			setError((err as Error).message)
+			setLoaded(await loadFile(file))
+		} catch (readError) {
+			setError((readError as Error).message)
 		}
 	}
 
 	function onDrop(event: DragEvent<HTMLLabelElement>) {
 		event.preventDefault()
 		setDragging(false)
-		void open(event.dataTransfer.files[0])
+		void openFile(event.dataTransfer.files[0])
 	}
 
 	return (
@@ -102,14 +119,14 @@ export default function ImagemParaDataUri() {
 						type="file"
 						className="sr-only"
 						onChange={(event) => {
-							void open(event.target.files?.[0])
+							void openFile(event.target.files?.[0])
 							event.target.value = ''
 						}}
 					/>
 				</label>
 				<form.AppField name="alt">
-					{(f) => (
-						<f.TextField
+					{(field) => (
+						<field.TextField
 							label="Texto alternativo (opcional)"
 							description="Usado no <img> e no Markdown."
 							placeholder="Ex.: Logotipo da empresa"
@@ -130,14 +147,13 @@ export default function ImagemParaDataUri() {
 							setError(null)
 						}}
 					>
-						{error ? (
+						{error && (
 							<Alert tone="danger">
 								<CircleX />
 								{error}
 							</Alert>
-						) : loaded ? (
-							<LoadedFile loaded={loaded} alt={alt} />
-						) : null}
+						)}
+						{!error && loaded && <LoadedFileDetails loaded={loaded} alt={alt} />}
 					</ResultCard>
 				)}
 			</form.Subscribe>
@@ -145,10 +161,10 @@ export default function ImagemParaDataUri() {
 	)
 }
 
-function LoadedFile({ loaded, alt }: { loaded: Loaded; alt: string }) {
+function LoadedFileDetails({ loaded, alt }: { loaded: LoadedFile; alt: string }) {
 	const snippets = dataUriSnippets(loaded.uri, loaded.dimensions, alt)
-	const growth = loaded.size ? (loaded.uri.length / loaded.size - 1) * 100 : 0
-	const rows = [
+	const growthPercent = loaded.size ? (loaded.uri.length / loaded.size - 1) * 100 : 0
+	const snippetRows = [
 		{ label: 'Data URI', value: snippets.uri },
 		{ label: 'CSS (background-image)', value: snippets.css },
 		{ label: 'HTML <img>', value: snippets.html },
@@ -156,7 +172,7 @@ function LoadedFile({ loaded, alt }: { loaded: Loaded; alt: string }) {
 	]
 	return (
 		<>
-			{loaded.mime.startsWith('image/') ? (
+			{loaded.mime.startsWith('image/') && (
 				<div className="rounded-control bg-surface-muted flex max-h-72 items-center justify-center overflow-hidden p-4">
 					{/* biome-ignore lint/performance/noImgElement: a local data URI preview, not an optimizable asset */}
 					<img
@@ -167,7 +183,7 @@ function LoadedFile({ loaded, alt }: { loaded: Loaded; alt: string }) {
 						className="h-auto max-h-64 w-auto max-w-full object-contain"
 					/>
 				</div>
-			) : null}
+			)}
 			<DataList
 				columns={2}
 				items={[
@@ -176,29 +192,24 @@ function LoadedFile({ loaded, alt }: { loaded: Loaded; alt: string }) {
 						value: <span className="text-base break-all">{loaded.name}</span>,
 						hint: loaded.mime,
 					},
-					{
-						label: 'Dimensões',
-						value: loaded.dimensions
-							? `${formatNumber(loaded.dimensions.width)} × ${formatNumber(loaded.dimensions.height)} px`
-							: '—',
-					},
+					{ label: 'Dimensões', value: formatDimensions(loaded.dimensions) },
 					{ label: 'Tamanho original', value: formatBytes(loaded.size) },
 					{
 						label: 'Tamanho do data URI',
 						value: formatBytes(loaded.uri.length),
-						hint: `${formatNumber(growth, 0)}% maior (Base64)`,
+						hint: `${formatNumber(growthPercent, 0)}% maior (Base64)`,
 					},
 				]}
 			/>
-			{loaded.size > BIG_FILE ? (
+			{loaded.size > LARGE_FILE_BYTES && (
 				<Alert tone="warning">
 					<CircleAlert />
 					Arquivos acima de 100 KB deixam o HTML ou CSS pesado e não entram no cache separado.
 					Prefira um arquivo comum para imagens grandes.
 				</Alert>
-			) : null}
+			)}
 			<ul className="flex flex-col gap-2">
-				{rows.map((row) => (
+				{snippetRows.map((row) => (
 					<li
 						key={row.label}
 						className="rounded-control bg-surface-muted flex items-center gap-3 py-2.5 pr-2.5 pl-5"
@@ -206,9 +217,7 @@ function LoadedFile({ loaded, alt }: { loaded: Loaded; alt: string }) {
 						<div className="flex min-w-0 flex-1 flex-col gap-0.5">
 							<span className="text-fg-muted text-[0.8125rem]">{row.label}</span>
 							<span className="text-fg line-clamp-3 font-mono text-sm break-all" translate="no">
-								{row.value.length > PREVIEW_CHARS
-									? `${row.value.slice(0, PREVIEW_CHARS)}…`
-									: row.value}
+								{truncate(row.value, PREVIEW_LENGTH)}
 							</span>
 						</div>
 						<CopyButton

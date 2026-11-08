@@ -76,8 +76,10 @@ export function SidebarNav({
 										href={sectionHref as Route}
 										onClick={onNavigate}
 										aria-current={pathname === sectionHref ? 'page' : undefined}
+										// Sticky while its tools scroll by, on the sheet's own background, so the
+										// list always says which topic it is in.
 										className={cn(
-											'rounded-control hover:text-fg focus-visible:ring-ring px-3 py-1.5 text-[0.8125rem] font-semibold tracking-wide uppercase outline-none focus-visible:ring-2',
+											'bg-bg rounded-control hover:text-fg focus-visible:ring-ring sticky top-0 z-10 px-3 py-2 text-[0.8125rem] font-semibold tracking-wide uppercase outline-none focus-visible:ring-2 focus-visible:ring-inset',
 											pathname === sectionHref ? 'text-fg font-semibold' : 'text-fg-muted',
 										)}
 									>

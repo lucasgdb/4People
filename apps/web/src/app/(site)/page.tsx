@@ -1,5 +1,13 @@
-import { buttonVariants } from '@4people/ui'
-import { ArrowRight, ShieldCheck, Sparkles, Target, Zap } from 'lucide-react'
+import { Accordion, buttonVariants } from '@4people/ui'
+import {
+	ArrowRight,
+	ArrowUpRight,
+	CircleHelp,
+	ShieldCheck,
+	Sparkles,
+	Target,
+	Zap,
+} from 'lucide-react'
 import type { Metadata, Route } from 'next'
 import Link from 'next/link'
 import { CATEGORIES, POPULAR_TOOLS, TOOLS } from '@/catalog/catalog'
@@ -12,6 +20,7 @@ import { ToolTable } from '@/components/screen'
 import { SiteFooter } from '@/components/shell/site-footer'
 import { SiteHeader } from '@/components/shell/site-header'
 import { generateCPF } from '@/lib/algorithms/documents'
+import { REPOSITORY_URL } from '@/lib/site'
 import { faqSchema } from '@/lib/structured-data'
 
 /**
@@ -63,19 +72,25 @@ function Hero() {
 					id="titulo"
 					className="text-fg text-[clamp(2.25rem,6vw,3.5rem)] leading-[1.05] font-extrabold tracking-[-0.035em]"
 				>
-					Ferramentas online grátis para o seu dia a dia
+					Ferramentas online <span className="text-accent">grátis</span> para o seu{' '}
+					{/* A soft marker under the last words: the promise, read at a glance. */}
+					<span className="bg-[linear-gradient(transparent_62%,var(--color-accent-soft)_62%)] box-decoration-clone">
+						dia a dia
+					</span>
 				</h1>
 				<p className="text-fg-muted max-w-[36rem] text-lg leading-relaxed sm:text-xl">
-					{TOOLS.length} ferramentas para desenvolvimento, estudo e trabalho: gere e valide
-					documentos, converta JSON, YAML e XML, teste regex e JWT, calcule sub-redes, datas,
-					porcentagens e muito mais. Tudo no navegador, sem cadastro e sem enviar seus dados.
+					<strong className="text-fg font-semibold">{TOOLS.length} ferramentas</strong> para
+					desenvolvimento, estudo e trabalho: gere e valide documentos, converta JSON, YAML e XML,
+					teste regex e JWT, calcule sub-redes, datas, porcentagens e muito mais. Tudo{' '}
+					<strong className="text-fg font-semibold">no navegador</strong>, sem cadastro e sem enviar
+					seus dados.
 				</p>
 				<div className="grid w-full gap-3 sm:flex sm:w-auto sm:flex-wrap">
 					<Link href={CPF_HREF as Route} className={buttonVariants({ size: 'lg' })}>
 						Gerar um CPF
 					</Link>
 					<Link
-						href={'/computacao' as Route}
+						href={'/ferramentas' as Route}
 						className={buttonVariants({ size: 'lg', variant: 'secondary' })}
 					>
 						Ver todas as ferramentas
@@ -214,20 +229,51 @@ function Validate() {
 
 function Questions() {
 	return (
-		<section id="perguntas" aria-labelledby="perguntas-titulo" className="flex flex-col gap-6">
+		<section
+			id="perguntas"
+			aria-labelledby="perguntas-titulo"
+			className="grid items-start gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-10"
+		>
 			<JsonLd data={faqSchema(SITE_FAQ)} />
-			<SectionTitle id="perguntas-titulo" title="Perguntas frequentes" />
-			<dl className="grid gap-3 md:grid-cols-2">
-				{SITE_FAQ.map((item) => (
-					<div
-						key={item.question}
-						className="rounded-panel border-border bg-surface flex flex-col gap-2 border p-6"
+			<div className="flex flex-col gap-4 lg:sticky lg:top-24">
+				<span className="text-accent-soft-fg flex items-center gap-2 text-sm font-bold tracking-wider uppercase">
+					<CircleHelp aria-hidden="true" className="size-4" /> Dúvidas
+				</span>
+				<h2
+					id="perguntas-titulo"
+					className="text-fg text-2xl font-extrabold tracking-[-0.02em] sm:text-[1.75rem]"
+				>
+					Perguntas frequentes
+				</h2>
+				<p className="text-fg-muted text-lg text-pretty">
+					O essencial sobre privacidade, custo e como as ferramentas funcionam.
+				</p>
+				<div className="rounded-panel bg-accent-soft mt-2 flex flex-col gap-2 p-5">
+					<span className="text-fg font-bold">Não achou sua resposta?</span>
+					<p className="text-fg-muted text-[0.9375rem]">
+						Pergunte ou sugira uma ferramenta: o projeto é aberto e cada ideia é lida.
+					</p>
+					<a
+						href={`${REPOSITORY_URL}/issues/new`}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="text-accent-soft-fg focus-visible:ring-ring inline-flex w-fit items-center gap-1 rounded-sm font-semibold outline-none hover:underline focus-visible:ring-4"
 					>
-						<dt className="text-fg text-lg font-bold">{item.question}</dt>
-						<dd className="text-fg-muted leading-relaxed">{item.answer}</dd>
-					</div>
-				))}
-			</dl>
+						Perguntar no GitHub
+						<ArrowUpRight aria-hidden="true" className="size-4" />
+						<span className="sr-only"> (abre em nova aba)</span>
+					</a>
+				</div>
+			</div>
+			<div className="rounded-panel border-border bg-surface border px-5 py-1 sm:px-7 sm:py-2">
+				<Accordion
+					items={SITE_FAQ.map((item, index) => ({
+						id: `faq-${index}`,
+						title: item.question,
+						content: item.answer,
+					}))}
+				/>
+			</div>
 		</section>
 	)
 }
@@ -246,7 +292,7 @@ export default function HomePage() {
 					<div className="flex flex-wrap items-end justify-between gap-3">
 						<SectionTitle id="populares" title="Mais usadas" />
 						<Link
-							href={'/computacao' as Route}
+							href={'/ferramentas' as Route}
 							className="text-accent-soft-fg flex min-h-11 items-center gap-1 font-semibold hover:underline"
 						>
 							Ver todas <ArrowRight className="size-4" aria-hidden="true" />

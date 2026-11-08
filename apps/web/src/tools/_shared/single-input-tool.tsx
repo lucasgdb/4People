@@ -37,7 +37,6 @@ export function SingleInputTool<TSchema extends z.ZodType<unknown, string>, TRes
 	toText,
 }: SingleInputToolProps<TSchema, TResult>) {
 	const [result, setResult] = useState<TResult | null>(null)
-	// Built once per field schema, not on every render.
 	const schema = useMemo(
 		() => z.object({ value: field as z.ZodType<z.output<TSchema>, string> }),
 		[field],
@@ -59,11 +58,11 @@ export function SingleInputTool<TSchema extends z.ZodType<unknown, string>, TRes
 				}
 			>
 				<form.AppField name="value">
-					{(f) =>
+					{(formField) =>
 						multiline ? (
-							<f.TextareaField label={label} placeholder={placeholder} rows={2} />
+							<formField.TextareaField label={label} placeholder={placeholder} rows={2} />
 						) : (
-							<f.NumberField label={label} placeholder={placeholder} {...numeric} />
+							<formField.NumberField label={label} placeholder={placeholder} {...numeric} />
 						)
 					}
 				</form.AppField>

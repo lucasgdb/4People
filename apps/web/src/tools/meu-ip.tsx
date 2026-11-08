@@ -6,22 +6,21 @@ import { CircleX, RefreshCw } from 'lucide-react'
 import { z } from 'zod'
 import { ResultCard, ToolLayout } from './_shared/tool-layout'
 
-const ipSchema = z.object({ ip: z.union([z.ipv4(), z.ipv6()]) })
+const IPIFY_URL = 'https://api.ipify.org?format=json'
 
-async function fetchJson<T>(url: string, schema: z.ZodType<T>): Promise<T> {
-	const response = await fetch(url, { headers: { Accept: 'application/json' } })
+const ipifyResponseSchema = z.object({ ip: z.union([z.ipv4(), z.ipv6()]) })
+
+async function fetchPublicIp(): Promise<string> {
+	const response = await fetch(IPIFY_URL, { headers: { Accept: 'application/json' } })
 	if (!response.ok) throw new Error(`Falha na requisição (${response.status}).`)
-	return schema.parse(await response.json())
+	return ipifyResponseSchema.parse(await response.json()).ip
 }
 
 /** Public IP of this connection, asked to ipify from the browser. */
 export default function MyIp() {
-	const ipv4 = useQuery({
-		queryKey: ['my-ip', 'v4'],
-		queryFn: () => fetchJson('https://api.ipify.org?format=json', ipSchema),
-	})
+	const ipQuery = useQuery({ queryKey: ['my-ip', 'v4'], queryFn: fetchPublicIp })
 
-	const ip = ipv4.data?.ip
+	const ip = ipQuery.data
 	const version = ip?.includes(':') ? 'IPv6' : 'IPv4'
 
 	return (
@@ -34,22 +33,21 @@ export default function MyIp() {
 					<Button
 						variant="secondary"
 						size="sm"
-						onClick={() => ipv4.refetch()}
-						disabled={ipv4.isFetching}
+						onClick={() => ipQuery.refetch()}
+						disabled={ipQuery.isFetching}
 					>
-						<RefreshCw className={ipv4.isFetching ? 'animate-spin' : undefined} />
-						{ipv4.isFetching ? 'Atualizando…' : 'Atualizar'}
+						<RefreshCw className={ipQuery.isFetching ? 'animate-spin' : undefined} />
+						{ipQuery.isFetching ? 'Atualizando…' : 'Atualizar'}
 					</Button>
 				}
 			>
-				{ipv4.isPending ? (
-					// Loading keeps the final layout: flat bars at the real sizes, no shimmer.
+				{ipQuery.isPending ? (
 					<div aria-busy="true" className="flex flex-col gap-3">
 						<span className="sr-only">Consultando seu IP…</span>
 						<span className="rounded-control bg-surface-sunken block h-[6.5rem] w-full" />
 						<span className="bg-surface-sunken block h-4 w-2/3 rounded-full" />
 					</div>
-				) : ipv4.isError ? (
+				) : ipQuery.isError ? (
 					<Alert tone="danger">
 						<CircleX />
 						Não foi possível consultar seu IP. Verifique a conexão ou desative o bloqueador de

@@ -81,9 +81,11 @@ pnpm dev
 
 ## Como colaborar
 
-1. Faça um fork e crie uma branch.
-2. Rode `pnpm lint && pnpm typecheck && pnpm test`.
-3. Abra um PR.
+- **Encontrou um problema ou tem uma ideia?** [Abra uma issue](https://github.com/lucasgdb/4People/issues/new/choose): há formulários para reportar um bug, sugerir uma ferramenta nova ou uma melhoria.
+- **Quer contribuir com código?**
+  1. Faça um fork e crie uma branch.
+  2. Rode `pnpm lint && pnpm typecheck && pnpm test`.
+  3. Abra um PR: o modelo traz o checklist do que conferir.
 
 ## Autor
 

@@ -21,7 +21,7 @@ const EXAMPLE = `{
 
 type Values = XmlWriteOptions & { input: string }
 const DEFAULTS: Values = { input: '', ...XML_WRITE_DEFAULTS, rootName: 'livraria' }
-const convert = ({ input, ...options }: Values) => jsonToXml(input, options)
+const convertJsonToXml = ({ input, ...options }: Values) => jsonToXml(input, options)
 
 /** JSON → XML as you type: arrays repeat the element, prefixed keys become attributes. */
 export default function JsonParaXml() {
@@ -33,8 +33,8 @@ export default function JsonParaXml() {
 				actions={<LiveActions onExample={() => form.setFieldValue('input', EXAMPLE)} />}
 			>
 				<form.AppField name="input">
-					{(f) => (
-						<f.TextareaField
+					{(field) => (
+						<field.TextareaField
 							label="JSON"
 							rows={14}
 							placeholder='Ex.: {"pessoa": {"nome": "Ana"}}'
@@ -42,8 +42,8 @@ export default function JsonParaXml() {
 					)}
 				</form.AppField>
 				<form.AppField name="rootName">
-					{(f) => (
-						<f.TextField
+					{(field) => (
+						<field.TextField
 							label="Elemento raiz"
 							description="Deixe vazio se o JSON já for um objeto com uma única chave."
 							placeholder="Ex.: root"
@@ -52,8 +52,8 @@ export default function JsonParaXml() {
 				</form.AppField>
 				<div className="grid gap-5 sm:grid-cols-2">
 					<form.AppField name="attributePrefix">
-						{(f) => (
-							<f.TextField
+						{(field) => (
+							<field.TextField
 								label="Prefixo dos atributos"
 								description="Chaves com ele viram atributos. Vazio: nenhum atributo."
 								placeholder="Ex.: @_"
@@ -61,8 +61,8 @@ export default function JsonParaXml() {
 						)}
 					</form.AppField>
 					<form.AppField name="textNodeName">
-						{(f) => (
-							<f.TextField
+						{(field) => (
+							<field.TextField
 								label="Chave do texto"
 								description="Vira o texto do elemento."
 								placeholder="Ex.: #text"
@@ -71,21 +71,21 @@ export default function JsonParaXml() {
 					</form.AppField>
 				</div>
 				<form.AppField name="indent">
-					{(f) => <f.RadioField label="Indentação" options={INDENTS} />}
+					{(field) => <field.RadioField label="Indentação" options={INDENTS} />}
 				</form.AppField>
 				<form.AppField name="declaration">
-					{(f) => <f.CheckboxField label='Incluir declaração <?xml version="1.0"?>' />}
+					{(field) => <field.CheckboxField label='Incluir declaração <?xml version="1.0"?>' />}
 				</form.AppField>
 			</FormCard>
 			<form.Subscribe selector={(state) => state.values}>
-				{(values) => <Result values={values} onClear={() => form.reset(DEFAULTS)} />}
+				{(values) => <XmlResult values={values} onClear={() => form.reset(DEFAULTS)} />}
 			</form.Subscribe>
 		</ToolLayout>
 	)
 }
 
-function Result({ values, onClear }: { values: Values; onClear: () => void }) {
-	const result = useLiveConversion(values, convert)
+function XmlResult({ values, onClear }: { values: Values; onClear: () => void }) {
+	const result = useLiveConversion(values, convertJsonToXml)
 	return (
 		<ConversionResult
 			title="XML"

@@ -11,10 +11,10 @@ import {
 } from '@4people/ui'
 import { useAppForm } from '@/components/form/form'
 import {
-	attempt,
 	type Conversion,
 	type CsvDelimiter,
 	csvToSql,
+	runConversion,
 	type SqlDialect,
 } from '@/lib/algorithms/convert'
 import {
@@ -72,16 +72,21 @@ const DEFAULTS: Values = {
 	batchSize: '100',
 }
 
-type Result = Conversion & { columns?: { name: string; type: string }[] }
+type CsvConversion = Conversion & { columns?: { name: string; type: string }[] }
 
-function convert({ input, batchSize, ...options }: Values): Result {
-	let columns: Result['columns']
-	const conversion = attempt(() => {
+function describeRows(rowCount: number, delimiter: CsvDelimiter) {
+	const rows = `${rowCount} ${rowCount === 1 ? 'linha' : 'linhas'}`
+	return `${rows} · separador: ${DELIMITER_NAMES[delimiter]}`
+}
+
+function convertCsv({ input, batchSize, ...options }: Values): CsvConversion {
+	let columns: CsvConversion['columns']
+	const conversion = runConversion(() => {
 		const result = csvToSql(input, { ...options, batchSize: Number(batchSize) || 100 })
 		columns = result.columns
 		return {
 			output: result.sql,
-			info: `${result.rows} ${result.rows === 1 ? 'linha' : 'linhas'} · separador: ${DELIMITER_NAMES[result.delimiter]}`,
+			info: describeRows(result.rows, result.delimiter),
 			warnings: result.warnings,
 		}
 	})
@@ -106,23 +111,27 @@ export default function CsvParaSql() {
 				}
 			>
 				<form.AppField name="input">
-					{(f) => (
-						<f.TextareaField label="CSV" rows={10} placeholder={'Ex.: id,nome\n1,Ana\n2,Bruno'} />
+					{(field) => (
+						<field.TextareaField
+							label="CSV"
+							rows={10}
+							placeholder={'Ex.: id,nome\n1,Ana\n2,Bruno'}
+						/>
 					)}
 				</form.AppField>
 				<div className="grid gap-5 sm:grid-cols-2">
 					<form.AppField name="tableName">
-						{(f) => <f.TextField label="Nome da tabela" placeholder="Ex.: clientes" />}
+						{(field) => <field.TextField label="Nome da tabela" placeholder="Ex.: clientes" />}
 					</form.AppField>
 					<form.AppField name="dialect">
-						{(f) => <f.SelectField label="Banco de dados" options={DIALECTS} />}
+						{(field) => <field.SelectField label="Banco de dados" options={DIALECTS} />}
 					</form.AppField>
 					<form.AppField name="delimiter">
-						{(f) => <f.SelectField label="Separador" options={DELIMITERS} />}
+						{(field) => <field.SelectField label="Separador" options={DELIMITERS} />}
 					</form.AppField>
 					<form.AppField name="batchSize">
-						{(f) => (
-							<f.NumberField
+						{(field) => (
+							<field.NumberField
 								label="Linhas por INSERT"
 								description="No SQL Server, no máximo 1.000."
 								placeholder="Ex.: 100"
@@ -133,16 +142,16 @@ export default function CsvParaSql() {
 					</form.AppField>
 				</div>
 				<form.AppField name="header">
-					{(f) => (
-						<f.CheckboxField
+					{(field) => (
+						<field.CheckboxField
 							label="A primeira linha é o cabeçalho"
 							description="Os nomes das colunas vêm dela. Sem cabeçalho: coluna_1, coluna_2…"
 						/>
 					)}
 				</form.AppField>
 				<form.AppField name="createTable">
-					{(f) => (
-						<f.CheckboxField
+					{(field) => (
+						<field.CheckboxField
 							label="Gerar CREATE TABLE"
 							description="Tipos inferidos: INTEGER, DECIMAL, BOOLEAN, DATE ou VARCHAR(n)."
 						/>
@@ -157,7 +166,7 @@ export default function CsvParaSql() {
 }
 
 function SqlResult({ values, onClear }: { values: Values; onClear: () => void }) {
-	const result = useLiveConversion(values, convert)
+	const result = useLiveConversion(values, convertCsv)
 	return (
 		<ConversionResult
 			title="SQL"
@@ -167,28 +176,32 @@ function SqlResult({ values, onClear }: { values: Values; onClear: () => void })
 			onClear={onClear}
 			emptyText="Cole um CSV e o SQL aparece aqui."
 		>
-			{result?.columns?.length ? (
-				<TableCard label="Colunas e tipos inferidos" maxHeight="20rem">
-					<Table>
-						<TableHeader>
-							<tr>
-								<TableHead>Coluna</TableHead>
-								<TableHead>Tipo</TableHead>
-							</tr>
-						</TableHeader>
-						<TableBody>
-							{result.columns.map((column) => (
-								<TableRow key={column.name}>
-									<TableCell translate="no">{column.name}</TableCell>
-									<TableCell className="text-fg-muted font-mono text-sm" translate="no">
-										{column.type}
-									</TableCell>
-								</TableRow>
-							))}
-						</TableBody>
-					</Table>
-				</TableCard>
-			) : null}
+			{result?.columns?.length ? <ColumnTypes columns={result.columns} /> : null}
 		</ConversionResult>
+	)
+}
+
+function ColumnTypes({ columns }: { columns: { name: string; type: string }[] }) {
+	return (
+		<TableCard label="Colunas e tipos inferidos" maxHeight="20rem">
+			<Table>
+				<TableHeader>
+					<tr>
+						<TableHead>Coluna</TableHead>
+						<TableHead>Tipo</TableHead>
+					</tr>
+				</TableHeader>
+				<TableBody>
+					{columns.map((column) => (
+						<TableRow key={column.name}>
+							<TableCell translate="no">{column.name}</TableCell>
+							<TableCell className="text-fg-muted font-mono text-sm" translate="no">
+								{column.type}
+							</TableCell>
+						</TableRow>
+					))}
+				</TableBody>
+			</Table>
+		</TableCard>
 	)
 }

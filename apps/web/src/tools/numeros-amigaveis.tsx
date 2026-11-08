@@ -9,16 +9,21 @@ import { formatNumber } from '@/lib/format'
 import { numeric } from '@/lib/schemas'
 import { FormCard, ResultCard, ToolLayout } from './_shared/tool-layout'
 
+const MAX = 1_000_000_000_000
+
 const friendlySchema = z.object({
-	a: numeric({ integer: true, min: 1, max: 1_000_000_000_000 }),
-	b: numeric({ integer: true, min: 1, max: 1_000_000_000_000 }),
+	a: numeric({ integer: true, min: 1, max: MAX }),
+	b: numeric({ integer: true, min: 1, max: MAX }),
 })
+
+type Result = ReturnType<typeof areFriendly> & { a: number; b: number }
+
+const resultToText = ({ a, b, friendly }: Result) =>
+	`${a} e ${b} ${friendly ? 'são' : 'não são'} números amigáveis.`
 
 /** Two numbers are friendly when each is the sum of the other's proper divisors (220 and 284). */
 export default function FriendlyNumbers() {
-	const [result, setResult] = useState<
-		(ReturnType<typeof areFriendly> & { a: number; b: number }) | null
-	>(null)
+	const [result, setResult] = useState<Result | null>(null)
 	const form = useToolForm({
 		schema: friendlySchema,
 		defaultValues: { a: '', b: '' },
@@ -37,24 +42,24 @@ export default function FriendlyNumbers() {
 			>
 				<div className="grid grid-cols-2 items-end gap-x-3 gap-y-4 sm:gap-x-4">
 					<form.AppField name="a">
-						{(f) => (
-							<f.NumberField
+						{(field) => (
+							<field.NumberField
 								label="Primeiro número"
 								placeholder="Ex: 220"
 								integer
 								min={1}
-								max={1_000_000_000_000}
+								max={MAX}
 							/>
 						)}
 					</form.AppField>
 					<form.AppField name="b">
-						{(f) => (
-							<f.NumberField
+						{(field) => (
+							<field.NumberField
 								label="Segundo número"
 								placeholder="Ex: 284"
 								integer
 								min={1}
-								max={1_000_000_000_000}
+								max={MAX}
 							/>
 						)}
 					</form.AppField>
@@ -62,11 +67,7 @@ export default function FriendlyNumbers() {
 			</FormCard>
 			<ResultCard
 				empty={!result}
-				copyText={
-					result
-						? `${result.a} e ${result.b} ${result.friendly ? 'são' : 'não são'} números amigáveis.`
-						: ''
-				}
+				copyText={result ? resultToText(result) : ''}
 				onClear={() => {
 					setResult(null)
 					form.reset()

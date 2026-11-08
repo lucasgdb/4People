@@ -27,24 +27,26 @@ export const XmlReadFields = withForm({
 		return (
 			<>
 				<form.AppField name="keepAttributes">
-					{(f) => (
-						<f.CheckboxField
+					{(field) => (
+						<field.CheckboxField
 							label="Manter atributos"
 							description='Ex.: id="1" vira a chave "@_id" ao lado dos elementos filhos.'
 						/>
 					)}
 				</form.AppField>
 				<form.Subscribe selector={(state) => state.values.keepAttributes}>
-					{(keep) => (
+					{(keepAttributes) => (
 						<div className="grid gap-5 sm:grid-cols-2">
-							{keep ? (
+							{keepAttributes ? (
 								<form.AppField name="attributePrefix">
-									{(f) => <f.TextField label="Prefixo dos atributos" placeholder="Ex.: @_" />}
+									{(field) => (
+										<field.TextField label="Prefixo dos atributos" placeholder="Ex.: @_" />
+									)}
 								</form.AppField>
 							) : null}
 							<form.AppField name="textNodeName">
-								{(f) => (
-									<f.TextField
+								{(field) => (
+									<field.TextField
 										label="Nome do nó de texto"
 										description="Usado quando um elemento tem texto e atributos."
 										placeholder="Ex.: #text"
@@ -55,8 +57,8 @@ export const XmlReadFields = withForm({
 					)}
 				</form.Subscribe>
 				<form.AppField name="parseValues">
-					{(f) => (
-						<f.CheckboxField
+					{(field) => (
+						<field.CheckboxField
 							label="Converter números e booleanos"
 							description='"1938" vira 1938 e "true" vira true. Desmarque para manter tudo como texto.'
 						/>

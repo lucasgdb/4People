@@ -51,8 +51,8 @@ export default function SortLines() {
 				}
 			>
 				<form.AppField name="text">
-					{(f) => (
-						<f.TextareaField
+					{(field) => (
+						<field.TextareaField
 							label="Uma linha por item"
 							rows={10}
 							placeholder={'banana\nÁrvore\nabacate\nitem 10\nitem 2'}
@@ -60,23 +60,23 @@ export default function SortLines() {
 					)}
 				</form.AppField>
 				<form.AppField name="order">
-					{(f) => <f.RadioField label="Ordem" options={ORDERS} />}
+					{(field) => <field.RadioField label="Ordem" options={ORDERS} />}
 				</form.AppField>
 				<div className="grid gap-3 sm:grid-cols-2">
 					<form.AppField name="ignoreCase">
-						{(f) => <f.CheckboxField label="Ignorar maiúsculas e acentos" />}
+						{(field) => <field.CheckboxField label="Ignorar maiúsculas e acentos" />}
 					</form.AppField>
 					<form.AppField name="natural">
-						{(f) => <f.CheckboxField label="Ordem natural (2 antes de 10)" />}
+						{(field) => <field.CheckboxField label="Ordem natural (2 antes de 10)" />}
 					</form.AppField>
 					<form.AppField name="unique">
-						{(f) => <f.CheckboxField label="Remover duplicadas" />}
+						{(field) => <field.CheckboxField label="Remover duplicadas" />}
 					</form.AppField>
 					<form.AppField name="removeEmpty">
-						{(f) => <f.CheckboxField label="Remover linhas vazias" />}
+						{(field) => <field.CheckboxField label="Remover linhas vazias" />}
 					</form.AppField>
 					<form.AppField name="trim">
-						{(f) => <f.CheckboxField label="Tirar espaços das pontas" />}
+						{(field) => <field.CheckboxField label="Tirar espaços das pontas" />}
 					</form.AppField>
 				</div>
 			</FormCard>

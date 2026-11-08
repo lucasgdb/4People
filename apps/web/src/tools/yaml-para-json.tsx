@@ -28,7 +28,7 @@ nome: segundo documento
 
 type Values = { input: string; indent: Indent }
 const DEFAULTS: Values = { input: '', indent: '2' }
-const convert = ({ input, indent }: Values) => yamlToJson(input, indent)
+const convertYamlToJson = ({ input, indent }: Values) => yamlToJson(input, indent)
 
 /** YAML → JSON as you type; several documents (---) become a JSON array. */
 export default function YamlParaJson() {
@@ -40,8 +40,8 @@ export default function YamlParaJson() {
 				actions={<LiveActions onExample={() => form.setFieldValue('input', EXAMPLE)} />}
 			>
 				<form.AppField name="input">
-					{(f) => (
-						<f.TextareaField
+					{(field) => (
+						<field.TextareaField
 							label="YAML"
 							description="Vários documentos separados por --- viram uma lista."
 							rows={14}
@@ -50,18 +50,18 @@ export default function YamlParaJson() {
 					)}
 				</form.AppField>
 				<form.AppField name="indent">
-					{(f) => <f.RadioField label="Indentação do JSON" options={INDENTS} />}
+					{(field) => <field.RadioField label="Indentação do JSON" options={INDENTS} />}
 				</form.AppField>
 			</FormCard>
 			<form.Subscribe selector={(state) => state.values}>
-				{(values) => <Result values={values} onClear={() => form.reset(DEFAULTS)} />}
+				{(values) => <JsonResult values={values} onClear={() => form.reset(DEFAULTS)} />}
 			</form.Subscribe>
 		</ToolLayout>
 	)
 }
 
-function Result({ values, onClear }: { values: Values; onClear: () => void }) {
-	const result = useLiveConversion(values, convert)
+function JsonResult({ values, onClear }: { values: Values; onClear: () => void }) {
+	const result = useLiveConversion(values, convertYamlToJson)
 	return (
 		<ConversionResult
 			title="JSON"

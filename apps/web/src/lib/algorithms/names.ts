@@ -5,15 +5,15 @@ export type NameFormat = 'first' | 'first-last' | 'full'
 export type NameSex = 'male' | 'female' | 'any'
 
 export function generateName(format: NameFormat, sex: NameSex): string {
-	const first = faker.person.firstName(sex === 'any' ? undefined : sex)
-	if (format === 'first') return first
+	const firstName = faker.person.firstName(sex === 'any' ? undefined : sex)
+	if (format === 'first') return firstName
 
-	const last = faker.person.lastName()
-	if (format === 'first-last') return `${first} ${last}`
+	const lastName = faker.person.lastName()
+	if (format === 'first-last') return `${firstName} ${lastName}`
 
-	let middle = faker.person.lastName()
-	while (middle === last) middle = faker.person.lastName()
-	return `${first} ${middle} ${last}`
+	let middleName = faker.person.lastName()
+	while (middleName === lastName) middleName = faker.person.lastName()
+	return `${firstName} ${middleName} ${lastName}`
 }
 
 export function generateNames(amount: number, format: NameFormat, sex: NameSex): string[] {

@@ -1720,7 +1720,7 @@ export const SITE_FAQ: Faq[] = [
 	{
 		question: 'O que eu digito sai do meu navegador?',
 		answer:
-			'Não. Todos os cálculos rodam no seu navegador. As únicas consultas externas são a busca de CEP, que pergunta à BrasilAPI, e o Meu IP, que pergunta ao ipify.',
+			'Não. Todos os cálculos rodam no seu navegador. Só quatro ferramentas consultam serviços públicos: Buscar CEP e Consulta de Bancos (BrasilAPI), Meu IP (ipify) e Cotação de Moedas (AwesomeAPI). O Testador de API REST envia apenas a requisição que você montar.',
 	},
 	{
 		question: 'Preciso criar conta ou pagar?',

@@ -8,6 +8,18 @@ import { numeric } from '@/lib/schemas'
 import { GeneratedResult, useGenerateOnMount } from './_shared/document-generator'
 import { FormCard, ToolLayout } from './_shared/tool-layout'
 
+const NAME_FORMATS = [
+	{ value: 'first', label: 'Apenas o nome' },
+	{ value: 'first-last', label: 'Nome + sobrenome' },
+	{ value: 'full', label: 'Nome + dois sobrenomes' },
+] as const
+
+const SEXES = [
+	{ value: 'any', label: 'Ambos' },
+	{ value: 'male', label: 'Masculino' },
+	{ value: 'female', label: 'Feminino' },
+] as const
+
 const schema = z.object({
 	format: z.enum(['first', 'first-last', 'full']),
 	sex: z.enum(['male', 'female', 'any']),
@@ -18,15 +30,17 @@ const schema = z.object({
 export default function NameGenerator() {
 	const [names, setNames] = useState<string[] | null>(null)
 	// Quick changes can overlap while faker loads: only the latest request may show its list.
-	const latest = useRef(0)
+	const latestRequestId = useRef(0)
 	const form = useToolForm({
 		schema,
 		defaultValues: { format: 'first-last', sex: 'any', amount: '10' },
 		// faker's pt_BR data is ~450KB: loaded when the first list is made, never with the page.
 		onSubmit: async ({ amount, format, sex }) => {
-			const request = ++latest.current
+			latestRequestId.current += 1
+			const requestId = latestRequestId.current
 			const { generateNames } = await import('@/lib/algorithms/names')
-			if (request === latest.current) setNames(generateNames(amount, format, sex))
+			if (requestId !== latestRequestId.current) return
+			setNames(generateNames(amount, format, sex))
 		},
 	})
 	useGenerateOnMount(() => form.handleSubmit())
@@ -46,32 +60,14 @@ export default function NameGenerator() {
 				}
 			>
 				<form.AppField name="format" listeners={regenerate}>
-					{(f) => (
-						<f.SelectField
-							label="Tipo de nome"
-							options={[
-								{ value: 'first', label: 'Apenas o nome' },
-								{ value: 'first-last', label: 'Nome + sobrenome' },
-								{ value: 'full', label: 'Nome + dois sobrenomes' },
-							]}
-						/>
-					)}
+					{(field) => <field.SelectField label="Tipo de nome" options={NAME_FORMATS} />}
 				</form.AppField>
 				<form.AppField name="sex" listeners={regenerate}>
-					{(f) => (
-						<f.RadioField
-							label="Sexo"
-							options={[
-								{ value: 'any', label: 'Ambos' },
-								{ value: 'male', label: 'Masculino' },
-								{ value: 'female', label: 'Feminino' },
-							]}
-						/>
-					)}
+					{(field) => <field.RadioField label="Sexo" options={SEXES} />}
 				</form.AppField>
 				<form.AppField name="amount" listeners={regenerate}>
-					{(f) => (
-						<f.NumberField
+					{(field) => (
+						<field.NumberField
 							label="Quantidade"
 							placeholder="Ex: 10"
 							description="De 1 a 500."

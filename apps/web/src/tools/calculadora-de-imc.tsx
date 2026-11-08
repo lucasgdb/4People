@@ -15,8 +15,22 @@ const schema = z.object({
 	height: numeric({ positive: true, max: 3 }),
 })
 
+const SEX_OPTIONS = [
+	{ value: 'male', label: 'Masculino' },
+	{ value: 'female', label: 'Feminino' },
+] as const
+
+type Result = ReturnType<typeof bmi>
+
+const formatBmi = (value: number) => formatNumber(value, 2)
+const formatIdealWeight = (kilograms: number) => `${formatNumber(kilograms, 1)} kg`
+
+const resultToText = ({ value, description, idealWeight }: Result) =>
+	`IMC: ${formatBmi(value)} (${description})\nPeso ideal: ${formatIdealWeight(idealWeight)}`
+
+/** Body mass index, its class and the ideal weight for the height and sex. */
 export default function Bmi() {
-	const [result, setResult] = useState<ReturnType<typeof bmi> | null>(null)
+	const [result, setResult] = useState<Result | null>(null)
 	const form = useToolForm({
 		schema,
 		defaultValues: { sex: 'male', weight: '', height: '' },
@@ -34,15 +48,7 @@ export default function Bmi() {
 				}
 			>
 				<form.AppField name="sex">
-					{(field) => (
-						<field.RadioField
-							label="Sexo"
-							options={[
-								{ value: 'male', label: 'Masculino' },
-								{ value: 'female', label: 'Feminino' },
-							]}
-						/>
-					)}
+					{(field) => <field.RadioField label="Sexo" options={SEX_OPTIONS} />}
 				</form.AppField>
 				<div className="grid grid-cols-2 items-end gap-x-3 gap-y-4 sm:gap-x-4">
 					<form.AppField name="weight">
@@ -71,11 +77,7 @@ export default function Bmi() {
 			</FormCard>
 			<ResultCard
 				empty={!result}
-				copyText={
-					result
-						? `IMC: ${formatNumber(result.value, 2)} (${result.description})\nPeso ideal: ${formatNumber(result.idealWeight, 1)} kg`
-						: ''
-				}
+				copyText={result ? resultToText(result) : ''}
 				onClear={() => {
 					setResult(null)
 					form.reset()
@@ -91,8 +93,8 @@ export default function Bmi() {
 						</Badge>
 						<DataList
 							items={[
-								{ label: 'IMC', value: formatNumber(result.value, 2) },
-								{ label: 'Peso ideal', value: `${formatNumber(result.idealWeight, 1)} kg` },
+								{ label: 'IMC', value: formatBmi(result.value) },
+								{ label: 'Peso ideal', value: formatIdealWeight(result.idealWeight) },
 							]}
 						/>
 					</div>

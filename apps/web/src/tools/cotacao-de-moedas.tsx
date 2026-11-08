@@ -52,13 +52,25 @@ import {
 } from '@/lib/algorithms/currency'
 import { FormCard, ResultCard, ToolLayout } from './_shared/tool-layout'
 
-const OPTIONS = CURRENCIES.map((currency) => ({
+const TOURIST_DOLLAR_ID = 'USDT'
+
+const CURRENCY_OPTIONS = CURRENCIES.map((currency) => ({
 	value: currency.id,
-	label: `${currency.id === 'USDT' ? 'USD' : currency.id} · ${currency.name}`,
+	label: `${currency.id === TOURIST_DOLLAR_ID ? 'USD' : currency.id} · ${currency.name}`,
 }))
 
+const REAL = CURRENCIES[0] as Currency
+
 type Side = 'from' | 'to'
-type State = { fromId: string; toId: string; active: Side; text: string }
+type ConverterState = {
+	fromId: string
+	toId: string
+	/** The side typed last: it keeps its text and the other side is computed from it. */
+	activeSide: Side
+	text: string
+}
+
+const INITIAL_STATE: ConverterState = { fromId: 'USD', toId: 'BRL', activeSide: 'from', text: '1' }
 
 /** The API refreshes about every 30 s; once a minute is live enough and gentle on a free service. */
 const REFRESH_MS = 60_000
@@ -69,27 +81,40 @@ async function fetchQuotes(): Promise<Map<string, Quote>> {
 	return parseQuotes(await response.json())
 }
 
-const time = new Intl.DateTimeFormat('pt-BR', { hour: '2-digit', minute: '2-digit' })
-const weekday = new Intl.DateTimeFormat('pt-BR', { weekday: 'long' })
-const dayMonth = new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: '2-digit' })
+const timeFormat = new Intl.DateTimeFormat('pt-BR', { hour: '2-digit', minute: '2-digit' })
+const weekdayFormat = new Intl.DateTimeFormat('pt-BR', { weekday: 'long' })
+const dayMonthFormat = new Intl.DateTimeFormat('pt-BR', { day: '2-digit', month: '2-digit' })
 
 /** "hoje às 19:04" or "sexta-feira, 06/11 às 19:04". */
-function when(date: Date, now: Date): string {
-	const sameDay = date.toDateString() === now.toDateString()
-	return sameDay
-		? `hoje às ${time.format(date)}`
-		: `${weekday.format(date)}, ${dayMonth.format(date)} às ${time.format(date)}`
+function describeUpdateTime(date: Date, now: Date): string {
+	const time = timeFormat.format(date)
+	if (date.toDateString() === now.toDateString()) return `hoje às ${time}`
+	return `${weekdayFormat.format(date)}, ${dayMonthFormat.format(date)} às ${time}`
+}
+
+/** "1 USD vale", with the tourist dollar spelled out. */
+function oneUnitLabel(currency: Currency): string {
+	return currency.id === TOURIST_DOLLAR_ID ? 'USD turismo' : currency.code
+}
+
+const TREND_STYLES = {
+	up: { Icon: ArrowUpRight, tone: 'success' },
+	down: { Icon: ArrowDownRight, tone: 'danger' },
+	flat: { Icon: Minus, tone: 'neutral' },
+} as const
+
+function trendOf(percent: number): keyof typeof TREND_STYLES {
+	const rounded = Math.round(percent * 100) / 100
+	if (rounded > 0) return 'up'
+	if (rounded < 0) return 'down'
+	return 'flat'
 }
 
 /** Up, down or flat, with the sign in the text too (color is never the only cue). */
 function Change({ percent, suffix }: { percent: number; suffix?: string }) {
-	const rounded = Math.round(percent * 100) / 100
-	const Icon = rounded > 0 ? ArrowUpRight : rounded < 0 ? ArrowDownRight : Minus
+	const { Icon, tone } = TREND_STYLES[trendOf(percent)]
 	return (
-		<Badge
-			tone={rounded > 0 ? 'success' : rounded < 0 ? 'danger' : 'neutral'}
-			className="tabular gap-1"
-		>
+		<Badge tone={tone} className="tabular gap-1">
 			<Icon aria-hidden="true" className="size-3.5" />
 			{formatChange(percent)}
 			{suffix ? <span className="font-normal">{suffix}</span> : null}
@@ -108,12 +133,7 @@ export default function CurrencyQuotes() {
 		refetchInterval: REFRESH_MS,
 		staleTime: 30_000,
 	})
-	const [state, setState] = useState<State>({
-		fromId: 'USD',
-		toId: 'BRL',
-		active: 'from',
-		text: '1',
-	})
+	const [state, setState] = useState<ConverterState>(INITIAL_STATE)
 
 	const from = currencyById(state.fromId) as Currency
 	const to = currencyById(state.toId) as Currency
@@ -121,53 +141,54 @@ export default function CurrencyQuotes() {
 	const toQuote = quotes.data?.get(to.id)
 	const now = new Date(quotes.dataUpdatedAt || Date.now())
 
-	const ready = fromQuote && toQuote
-	const rate = ready ? crossRate(fromQuote, toQuote) : null
-	// The side typed last keeps its text; the other side is computed from it.
-	const typed = parseMoneyInput(state.text)
-	const amount = state.active === 'from' ? typed : typed !== null && rate ? typed / rate : null
-	const converted =
-		state.active === 'to' ? typed : amount !== null && rate !== null ? amount * rate : null
-	const textOf = (side: Side) => {
-		if (state.active === side) return state.text
-		const value = side === 'from' ? amount : converted
-		return value === null
-			? ''
-			: formatMoneyValue(value, currencyDecimals(side === 'from' ? from : to))
+	const hasBothQuotes = fromQuote && toQuote
+	const rate = hasBothQuotes ? crossRate(fromQuote, toQuote) : null
+	const typedAmount = parseMoneyInput(state.text)
+	const fromAmount = computeFromAmount(state.activeSide, typedAmount, rate)
+	const toAmount = computeToAmount(state.activeSide, typedAmount, fromAmount, rate)
+
+	function displayedText(side: Side): string {
+		if (state.activeSide === side) return state.text
+		const amount = side === 'from' ? fromAmount : toAmount
+		if (amount === null) return ''
+		return formatMoneyValue(amount, currencyDecimals(side === 'from' ? from : to))
 	}
 
-	const type = (side: Side) => (text: string) => setState((s) => ({ ...s, active: side, text }))
+	function typeInto(side: Side, text: string) {
+		setState((current) => ({ ...current, activeSide: side, text }))
+	}
 
 	/** A new currency on the typed side keeps the amount, cut to that currency's decimals. */
-	const choose = (side: Side, id: string) =>
-		setState((s) => {
-			const next = { ...s, [side === 'from' ? 'fromId' : 'toId']: id }
+	function chooseCurrency(side: Side, id: string) {
+		setState((current) => {
+			const next = { ...current, [side === 'from' ? 'fromId' : 'toId']: id }
 			const currency = currencyById(id)
-			return s.active === side && currency
-				? { ...next, text: formatMoneyInput(s.text, currencyDecimals(currency)) }
-				: next
+			if (current.activeSide !== side || !currency) return next
+			return { ...next, text: formatMoneyInput(current.text, currencyDecimals(currency)) }
 		})
+	}
 
-	const swap = () =>
-		setState((s) => ({
-			...s,
-			fromId: s.toId,
-			toId: s.fromId,
-			active: s.active === 'from' ? 'to' : 'from',
+	function swapCurrencies() {
+		setState((current) => ({
+			...current,
+			fromId: current.toId,
+			toId: current.fromId,
+			activeSide: current.activeSide === 'from' ? 'to' : 'from',
 		}))
+	}
 
-	const pick = (id: string) => {
-		setState((s) => ({
+	function convertFromTable(id: string) {
+		setState((current) => ({
 			fromId: id,
 			toId: 'BRL',
-			active: 'from',
-			text: s.text && s.active === 'from' ? s.text : '1',
+			activeSide: 'from',
+			text: current.text && current.activeSide === 'from' ? current.text : '1',
 		}))
 		// Focusing the amount also scrolls the converter into view, ready to type.
 		document.getElementById('money-from')?.focus()
 	}
 
-	const field = (side: Side) => {
+	function renderSide(side: Side) {
 		const currency = side === 'from' ? from : to
 		return (
 			<div className="grid items-end gap-2 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
@@ -176,23 +197,28 @@ export default function CurrencyQuotes() {
 						id={`money-${side}`}
 						prefix={currencySymbol(currency)}
 						decimals={currencyDecimals(currency)}
-						value={textOf(side)}
-						onValueChange={type(side)}
+						value={displayedText(side)}
+						onValueChange={(text) => typeInto(side, text)}
 						placeholder="0,00"
 						enterKeyHint="done"
 						className="text-lg font-semibold"
 					/>
 				</Field>
 				<Field label={side === 'from' ? 'Moeda de origem' : 'Moeda de destino'} hideLabel>
-					<Select options={OPTIONS} value={currency.id} onValueChange={(id) => choose(side, id)} />
+					<Select
+						options={CURRENCY_OPTIONS}
+						value={currency.id}
+						onValueChange={(id) => chooseCurrency(side, id)}
+					/>
 				</Field>
 			</div>
 		)
 	}
 
-	const updated = ready ? lastUpdate(fromQuote, toQuote) : null
-	const closed = isMarketClosed(updated, now, Boolean(from.crypto || to.crypto))
-	const range = ready ? dayRange(from.id, fromQuote, to.id, toQuote) : null
+	const updatedAt = hasBothQuotes ? lastUpdate(fromQuote, toQuote) : null
+	const isClosed = isMarketClosed(updatedAt, now, Boolean(from.crypto || to.crypto))
+	const range = hasBothQuotes ? dayRange(from.id, fromQuote, to.id, toQuote) : null
+	const formattedToAmount = toAmount !== null ? formatMoney(toAmount, to, toAmount < 1) : null
 
 	return (
 		<ToolLayout>
@@ -206,22 +232,27 @@ export default function CurrencyQuotes() {
 				}
 			>
 				<div className="flex flex-col gap-1">
-					{field('from')}
+					{renderSide('from')}
 					<div className="flex items-center gap-3">
 						<span aria-hidden="true" className="bg-border h-px flex-1" />
 						<Equal aria-hidden="true" className="text-fg-subtle size-4" />
-						<Button variant="ghost" size="icon" aria-label="Inverter as moedas" onClick={swap}>
+						<Button
+							variant="ghost"
+							size="icon"
+							aria-label="Inverter as moedas"
+							onClick={swapCurrencies}
+						>
 							<ArrowLeftRight className="rotate-90" />
 						</Button>
 						<span aria-hidden="true" className="bg-border h-px flex-1" />
 					</div>
-					{field('to')}
+					{renderSide('to')}
 				</div>
 			</FormCard>
 
 			<ResultCard
 				title="Cotação"
-				copyText={converted !== null ? formatMoney(converted, to, converted < 1) : undefined}
+				copyText={formattedToAmount ?? undefined}
 				action={
 					<Button
 						variant="secondary"
@@ -246,7 +277,7 @@ export default function CurrencyQuotes() {
 						<CircleX />
 						Não foi possível consultar as cotações. Verifique a conexão e tente “Atualizar”.
 					</Alert>
-				) : !ready || rate === null ? (
+				) : !hasBothQuotes || rate === null ? (
 					<Alert tone="danger">
 						<CircleX />A cotação de {(fromQuote ? to : from).name} não veio nesta consulta. Tente
 						“Atualizar”.
@@ -255,20 +286,21 @@ export default function CurrencyQuotes() {
 					<div className="flex flex-col gap-4">
 						<div className="rounded-control bg-surface-muted flex flex-col gap-2 px-6 py-5">
 							<span className="text-fg-muted text-sm">
-								{amount !== null ? formatMoney(amount, from) : '—'} em {to.name.toLowerCase()}
+								{fromAmount !== null ? formatMoney(fromAmount, from) : '—'} em{' '}
+								{to.name.toLowerCase()}
 							</span>
 							<output
 								aria-live="polite"
 								translate="no"
 								className="text-fg tabular text-[clamp(1.75rem,6vw,2.75rem)] leading-none font-extrabold tracking-[-0.02em] break-all"
 							>
-								{converted !== null ? formatMoney(converted, to, converted < 1) : '—'}
+								{formattedToAmount ?? '—'}
 							</output>
 							{from.id !== to.id ? (
 								<span className="mt-1 flex flex-wrap items-center gap-2">
 									<Change
 										percent={crossChange(fromQuote, toQuote)}
-										suffix={closed ? 'na última sessão' : 'hoje'}
+										suffix={isClosed ? 'na última sessão' : 'hoje'}
 									/>
 								</span>
 							) : null}
@@ -276,13 +308,13 @@ export default function CurrencyQuotes() {
 
 						<dl className="text-fg-muted grid gap-x-6 gap-y-3 text-[0.8125rem] sm:grid-cols-2">
 							<div className="flex flex-col gap-0.5">
-								<dt>1 {from.id === 'USDT' ? 'USD turismo' : from.code} vale</dt>
+								<dt>1 {oneUnitLabel(from)} vale</dt>
 								<dd className="text-fg tabular text-[0.9375rem] font-semibold">
 									{formatRate(rate, to)}
 								</dd>
 							</div>
 							<div className="flex flex-col gap-0.5">
-								<dt>1 {to.id === 'USDT' ? 'USD turismo' : to.code} vale</dt>
+								<dt>1 {oneUnitLabel(to)} vale</dt>
 								<dd className="text-fg tabular text-[0.9375rem] font-semibold">
 									{formatRate(1 / rate, from)}
 								</dd>
@@ -297,29 +329,8 @@ export default function CurrencyQuotes() {
 							) : null}
 						</dl>
 
-						{updated ? (
-							<p className="text-fg-muted flex items-start gap-2 text-[0.8125rem]">
-								<span
-									aria-hidden="true"
-									className={cn(
-										'mt-1.5 size-2 shrink-0 rounded-full',
-										closed ? 'bg-fg-subtle' : 'bg-success animate-pulse motion-reduce:animate-none',
-									)}
-								/>
-								<span>
-									{closed ? (
-										<>
-											<strong className="text-fg font-semibold">Mercado de câmbio fechado.</strong>{' '}
-											Última cotação: {when(updated, now)}.
-										</>
-									) : (
-										<>
-											<strong className="text-fg font-semibold">Ao vivo.</strong> Cotação de{' '}
-											{when(updated, now)}, atualizada a cada minuto.
-										</>
-									)}
-								</span>
-							</p>
+						{updatedAt ? (
+							<MarketStatus updatedAt={updatedAt} now={now} isClosed={isClosed} />
 						) : null}
 					</div>
 				)}
@@ -369,7 +380,7 @@ export default function CurrencyQuotes() {
 											</span>
 										</TableCell>
 										<TableCell className="text-fg tabular text-right font-semibold whitespace-nowrap">
-											{formatRate(quote.bid, CURRENCIES[0] as Currency)}
+											{formatRate(quote.bid, REAL)}
 										</TableCell>
 										<TableCell className="text-right">
 											<Change percent={quote.pctChange} />
@@ -379,7 +390,7 @@ export default function CurrencyQuotes() {
 												variant="ghost"
 												size="sm"
 												className="max-sm:size-10 max-sm:px-0"
-												onClick={() => pick(currency.id)}
+												onClick={() => convertFromTable(currency.id)}
 											>
 												<ArrowRight aria-hidden="true" className="sm:hidden" />
 												<span className="max-sm:sr-only">Converter</span>
@@ -394,5 +405,62 @@ export default function CurrencyQuotes() {
 				</Table>
 			</TableCard>
 		</ToolLayout>
+	)
+}
+
+function computeFromAmount(
+	activeSide: Side,
+	typedAmount: number | null,
+	rate: number | null,
+): number | null {
+	if (activeSide === 'from') return typedAmount
+	if (typedAmount === null || !rate) return null
+	return typedAmount / rate
+}
+
+function computeToAmount(
+	activeSide: Side,
+	typedAmount: number | null,
+	fromAmount: number | null,
+	rate: number | null,
+): number | null {
+	if (activeSide === 'to') return typedAmount
+	if (fromAmount === null || rate === null) return null
+	return fromAmount * rate
+}
+
+function MarketStatus({
+	updatedAt,
+	now,
+	isClosed,
+}: {
+	updatedAt: Date
+	now: Date
+	isClosed: boolean
+}) {
+	const updateTime = describeUpdateTime(updatedAt, now)
+	return (
+		<p className="text-fg-muted flex items-start gap-2 text-[0.8125rem]">
+			<span
+				aria-hidden="true"
+				className={cn(
+					'mt-1.5 size-2 shrink-0 rounded-full',
+					isClosed ? 'bg-fg-subtle' : 'bg-success animate-pulse motion-reduce:animate-none',
+				)}
+			/>
+			<span>
+				{isClosed ? (
+					<>
+						<strong className="text-fg font-semibold">Mercado de câmbio fechado.</strong> Última
+						cotação: {updateTime}.
+					</>
+				) : (
+					<>
+						<strong className="text-fg font-semibold">Ao vivo.</strong> Cotação de {updateTime},
+						atualizada a cada minuto.
+					</>
+				)}
+			</span>
+		</p>
 	)
 }

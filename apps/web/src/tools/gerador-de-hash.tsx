@@ -41,7 +41,9 @@ export default function HashGenerator() {
 				}
 			>
 				<form.AppField name="text">
-					{(f) => <f.TextareaField label="Texto" rows={6} placeholder="Ex: minha mensagem" />}
+					{(field) => (
+						<field.TextareaField label="Texto" rows={6} placeholder="Ex: minha mensagem" />
+					)}
 				</form.AppField>
 			</FormCard>
 			<ResultCard

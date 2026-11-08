@@ -18,6 +18,7 @@ import { useDeferredValue, useId, useMemo } from 'react'
 import { useAppForm } from '@/components/form/form'
 import {
 	formatIPv4,
+	type IPv4Subnet,
 	ipv4Class,
 	ipv4Subnet,
 	ipv4Type,
@@ -39,58 +40,66 @@ const SPLIT_OPTIONS = [
 ] as const
 
 const DEFAULTS = { ip: '192.168.1.10/24', mask: '', mode: 'count' as SplitMode, amount: '4' }
-const MAX_ROWS = 256
+const MAX_SPLIT_ROWS = 256
 
 const SCOPE_TONE = { private: 'success', public: 'primary', special: 'neutral' } as const
 const SCOPE_LABEL = { private: 'Privado', public: 'Público', special: 'Uso especial' } as const
 
-type Calculation =
-	| { ok: false; error: string }
-	| {
-			ok: true
-			subnet: ReturnType<typeof ipv4Subnet>
-			split: { prefix: number; count: number; subnets: ReturnType<typeof ipv4Subnet>[] } | null
-			splitError: string | null
-	  }
+type FormValues = typeof DEFAULTS
+type Split = { prefix: number; count: number; subnets: IPv4Subnet[] }
+type SplitOutcome = { split: Split | null; splitError: string | null }
+type Calculation = { ok: false; error: string } | ({ ok: true; subnet: IPv4Subnet } & SplitOutcome)
 
-function calculate(values: typeof DEFAULTS): Calculation | null {
-	if (!values.ip.trim()) return null
-	let ip: number
-	let prefix: number
-	try {
-		;({ ip, prefix } = parseIPv4WithPrefix(values.ip, values.mask))
-	} catch (error) {
-		return { ok: false, error: (error as Error).message }
-	}
-	const subnet = ipv4Subnet(ip, prefix)
-	const amount = Number(values.amount.trim())
-	if (!values.amount.trim()) return { ok: true, subnet, split: null, splitError: null }
+function splitSubnet(ip: number, prefix: number, values: FormValues): SplitOutcome {
+	const amountText = values.amount.trim()
+	if (!amountText) return { split: null, splitError: null }
+	const amount = Number(amountText)
 	try {
 		if (!Number.isInteger(amount)) throw new Error('Use um número inteiro para dividir.')
 		const newPrefix =
 			values.mode === 'count'
 				? prefixForSubnetCount(prefix, amount)
 				: prefixForHosts(prefix, amount)
-		return {
-			ok: true,
-			subnet,
-			split: { prefix: newPrefix, ...splitIPv4(ip, prefix, newPrefix, MAX_ROWS) },
-			splitError: null,
-		}
+		const split = { prefix: newPrefix, ...splitIPv4(ip, prefix, newPrefix, MAX_SPLIT_ROWS) }
+		return { split, splitError: null }
 	} catch (error) {
-		return { ok: true, subnet, split: null, splitError: (error as Error).message }
+		return { split: null, splitError: (error as Error).message }
 	}
 }
 
+function calculate(values: FormValues): Calculation | null {
+	if (!values.ip.trim()) return null
+	let parsed: { ip: number; prefix: number }
+	try {
+		parsed = parseIPv4WithPrefix(values.ip, values.mask)
+	} catch (error) {
+		return { ok: false, error: (error as Error).message }
+	}
+	const subnet = ipv4Subnet(parsed.ip, parsed.prefix)
+	return { ok: true, subnet, ...splitSubnet(parsed.ip, parsed.prefix, values) }
+}
+
+function summaryText(subnet: IPv4Subnet): string {
+	return [
+		`Rede: ${formatIPv4(subnet.network)}/${subnet.prefix}`,
+		`Máscara: ${formatIPv4(subnet.netmask)}`,
+		`Wildcard: ${formatIPv4(subnet.wildcard)}`,
+		`Broadcast: ${formatIPv4(subnet.broadcast)}`,
+		`Primeiro host: ${formatIPv4(subnet.firstHost)}`,
+		`Último host: ${formatIPv4(subnet.lastHost)}`,
+		`Hosts utilizáveis: ${formatNumber(subnet.usableHosts)}`,
+	].join('\n')
+}
+
 function BinaryRow({ label, value, prefix }: { label: string; value: number; prefix: number }) {
-	const [network, host] = splitBinary(value, prefix)
+	const [networkBits, hostBits] = splitBinary(value, prefix)
 	return (
 		<li className="flex flex-col gap-0.5">
 			<span className="text-fg-muted text-[0.8125rem]">{label}</span>
 			<span translate="no" className="font-mono text-[0.875rem] break-all">
-				<span className="text-fg font-semibold">{network}</span>
-				{network && host ? <span className="text-accent px-1">|</span> : null}
-				<span className="text-fg-muted">{host}</span>
+				<span className="text-fg font-semibold">{networkBits}</span>
+				{networkBits && hostBits ? <span className="text-accent px-1">|</span> : null}
+				<span className="text-fg-muted">{hostBits}</span>
 			</span>
 		</li>
 	)
@@ -101,19 +110,7 @@ export default function CalculadoraDeSubRedeIpv4() {
 	const form = useAppForm({ defaultValues: DEFAULTS })
 	const values = useDeferredValue(useStore(form.store, (state) => state.values))
 	const result = useMemo(() => calculate(values), [values])
-
-	const summary =
-		result?.ok === true
-			? [
-					`Rede: ${formatIPv4(result.subnet.network)}/${result.subnet.prefix}`,
-					`Máscara: ${formatIPv4(result.subnet.netmask)}`,
-					`Wildcard: ${formatIPv4(result.subnet.wildcard)}`,
-					`Broadcast: ${formatIPv4(result.subnet.broadcast)}`,
-					`Primeiro host: ${formatIPv4(result.subnet.firstHost)}`,
-					`Último host: ${formatIPv4(result.subnet.lastHost)}`,
-					`Hosts utilizáveis: ${formatNumber(result.subnet.usableHosts)}`,
-				].join('\n')
-			: undefined
+	const isCountMode = values.mode === 'count'
 
 	return (
 		<div className="flex flex-col gap-5">
@@ -148,8 +145,8 @@ export default function CalculadoraDeSubRedeIpv4() {
 					<form.AppField name="amount">
 						{(field) => (
 							<field.NumberField
-								label={values.mode === 'count' ? 'Quantidade de sub-redes' : 'Hosts por sub-rede'}
-								placeholder={values.mode === 'count' ? 'Ex.: 4' : 'Ex.: 50'}
+								label={isCountMode ? 'Quantidade de sub-redes' : 'Hosts por sub-rede'}
+								placeholder={isCountMode ? 'Ex.: 4' : 'Ex.: 50'}
 								description="Deixe vazio para não dividir."
 								integer
 								min={1}
@@ -160,7 +157,7 @@ export default function CalculadoraDeSubRedeIpv4() {
 				<ResultCard
 					empty={!result}
 					emptyText="Digite um IPv4 com prefixo e o resultado aparece aqui."
-					copyText={summary}
+					copyText={result?.ok ? summaryText(result.subnet) : undefined}
 					onClear={() => form.reset({ ...DEFAULTS, ip: '', amount: '' })}
 				>
 					{result?.ok === false ? (
@@ -168,21 +165,32 @@ export default function CalculadoraDeSubRedeIpv4() {
 							<CircleX />
 							{result.error}
 						</Alert>
-					) : result?.ok ? (
-						<SubnetResult subnet={result.subnet} />
 					) : null}
+					{result?.ok ? <SubnetResult subnet={result.subnet} /> : null}
 				</ResultCard>
 			</ToolLayout>
 			{result?.ok && (result.split || result.splitError) ? (
-				<SplitTable split={result.split} error={result.splitError} prefix={result.subnet.prefix} />
+				<SplitSection
+					split={result.split}
+					error={result.splitError}
+					prefix={result.subnet.prefix}
+				/>
 			) : null}
 		</div>
 	)
 }
 
-function SubnetResult({ subnet }: { subnet: ReturnType<typeof ipv4Subnet> }) {
+function pointToPointNote(prefix: number): string | null {
+	if (prefix === 31)
+		return 'Uma /31 é um enlace ponto a ponto (RFC 3021): os dois endereços são hosts, sem rede nem broadcast.'
+	if (prefix === 32) return 'Uma /32 representa um único host.'
+	return null
+}
+
+function SubnetResult({ subnet }: { subnet: IPv4Subnet }) {
 	const type = ipv4Type(subnet.ip)
 	const ipClass = ipv4Class(subnet.ip)
+	const note = pointToPointNote(subnet.prefix)
 	return (
 		<>
 			<div className="flex flex-wrap items-center gap-2">
@@ -212,13 +220,7 @@ function SubnetResult({ subnet }: { subnet: ReturnType<typeof ipv4Subnet> }) {
 					{ label: 'Broadcast', value: formatIPv4(subnet.broadcast) },
 				]}
 			/>
-			{subnet.prefix >= 31 ? (
-				<p className="text-fg-muted text-[0.8125rem]">
-					{subnet.prefix === 31
-						? 'Uma /31 é um enlace ponto a ponto (RFC 3021): os dois endereços são hosts, sem rede nem broadcast.'
-						: 'Uma /32 representa um único host.'}
-				</p>
-			) : null}
+			{note ? <p className="text-fg-muted text-[0.8125rem]">{note}</p> : null}
 			<div className="flex flex-col gap-2">
 				<h3 className="text-fg text-sm font-semibold">Em binário</h3>
 				<p className="text-fg-muted text-[0.8125rem]">
@@ -236,12 +238,12 @@ function SubnetResult({ subnet }: { subnet: ReturnType<typeof ipv4Subnet> }) {
 	)
 }
 
-function SplitTable({
+function SplitSection({
 	split,
 	error,
 	prefix,
 }: {
-	split: { prefix: number; count: number; subnets: ReturnType<typeof ipv4Subnet>[] } | null
+	split: Split | null
 	error: string | null
 	prefix: number
 }) {
@@ -260,60 +262,57 @@ function SplitTable({
 						<CircleX />
 						{error}
 					</Alert>
-				) : split ? (
-					<TableCard
-						label="Tabela de sub-redes"
-						maxHeight="32rem"
-						toolbar={
-							<p className="text-fg-muted text-[0.9375rem]">
-								A /{prefix} dividida em{' '}
-								<strong className="text-fg tabular">{formatNumber(split.count)}</strong> sub-redes /
-								{split.prefix}, com{' '}
-								<strong className="text-fg tabular">
-									{formatNumber(ipv4Subnet(0, split.prefix).usableHosts)}
-								</strong>{' '}
-								hosts utilizáveis cada.
-								{split.count > split.subnets.length
-									? ` Mostrando as primeiras ${formatNumber(split.subnets.length)}.`
-									: ''}
-							</p>
-						}
-					>
-						<Table>
-							<TableHeader>
-								<tr>
-									<TableHead numeric>#</TableHead>
-									<TableHead>Rede</TableHead>
-									<TableHead>Primeiro host</TableHead>
-									<TableHead>Último host</TableHead>
-									<TableHead>Broadcast</TableHead>
-								</tr>
-							</TableHeader>
-							<TableBody translate="no" className="font-mono text-[0.875rem]">
-								{split.subnets.map((subnet, index) => (
-									<TableRow key={subnet.network}>
-										<TableCell numeric className="text-fg-muted">
-											{index + 1}
-										</TableCell>
-										<TableCell className="whitespace-nowrap">
-											{formatIPv4(subnet.network)}/{subnet.prefix}
-										</TableCell>
-										<TableCell className="whitespace-nowrap">
-											{formatIPv4(subnet.firstHost)}
-										</TableCell>
-										<TableCell className="whitespace-nowrap">
-											{formatIPv4(subnet.lastHost)}
-										</TableCell>
-										<TableCell className="whitespace-nowrap">
-											{formatIPv4(subnet.broadcast)}
-										</TableCell>
-									</TableRow>
-								))}
-							</TableBody>
-						</Table>
-					</TableCard>
 				) : null}
+				{split ? <SplitTable split={split} prefix={prefix} /> : null}
 			</div>
 		</section>
+	)
+}
+
+function SplitTable({ split, prefix }: { split: Split; prefix: number }) {
+	const hostsPerSubnet = ipv4Subnet(0, split.prefix).usableHosts
+	const isTruncated = split.count > split.subnets.length
+	return (
+		<TableCard
+			label="Tabela de sub-redes"
+			maxHeight="32rem"
+			toolbar={
+				<p className="text-fg-muted text-[0.9375rem]">
+					A /{prefix} dividida em{' '}
+					<strong className="text-fg tabular">{formatNumber(split.count)}</strong> sub-redes /
+					{split.prefix}, com{' '}
+					<strong className="text-fg tabular">{formatNumber(hostsPerSubnet)}</strong> hosts
+					utilizáveis cada.
+					{isTruncated ? ` Mostrando as primeiras ${formatNumber(split.subnets.length)}.` : ''}
+				</p>
+			}
+		>
+			<Table>
+				<TableHeader>
+					<tr>
+						<TableHead numeric>#</TableHead>
+						<TableHead>Rede</TableHead>
+						<TableHead>Primeiro host</TableHead>
+						<TableHead>Último host</TableHead>
+						<TableHead>Broadcast</TableHead>
+					</tr>
+				</TableHeader>
+				<TableBody translate="no" className="font-mono text-[0.875rem]">
+					{split.subnets.map((subnet, index) => (
+						<TableRow key={subnet.network}>
+							<TableCell numeric className="text-fg-muted">
+								{index + 1}
+							</TableCell>
+							<TableCell className="whitespace-nowrap">
+								{formatIPv4(subnet.network)}/{subnet.prefix}
+							</TableCell>
+							<TableCell className="whitespace-nowrap">{formatIPv4(subnet.firstHost)}</TableCell>
+							<TableCell className="whitespace-nowrap">{formatIPv4(subnet.lastHost)}</TableCell>
+							<TableCell className="whitespace-nowrap">{formatIPv4(subnet.broadcast)}</TableCell>
+						</TableRow>
+					))}
+				</TableBody>
+			</Table>
+		</TableCard>
 	)
 }

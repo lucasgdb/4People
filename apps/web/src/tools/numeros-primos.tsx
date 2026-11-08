@@ -23,7 +23,7 @@ export default function PrimeNumbers() {
 				return primes.length > 0 ? `Primos: ${primes.join(', ')}` : 'Nenhum número primo.'
 			}}
 			render={(rows) => {
-				const count = rows.filter((row) => row.prime).length
+				const primeCount = rows.filter((row) => row.prime).length
 				return (
 					<div className="flex flex-wrap gap-2">
 						{rows.map(({ number, prime }, index) => (
@@ -38,8 +38,8 @@ export default function PrimeNumbers() {
 							</Badge>
 						))}
 						<p className="text-fg-muted w-full pt-2 text-sm">
-							{count} de {rows.length} {rows.length === 1 ? 'número é primo' : 'números são primos'}
-							.
+							{primeCount} de {rows.length}{' '}
+							{rows.length === 1 ? 'número é primo' : 'números são primos'}.
 						</p>
 					</div>
 				)

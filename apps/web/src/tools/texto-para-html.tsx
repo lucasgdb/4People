@@ -12,6 +12,11 @@ const DIRECTIONS = [
 	{ value: 'toText', label: 'HTML → texto' },
 ] as const
 
+const TEXT_FIELD = {
+	toHtml: { label: 'Texto', placeholder: 'Ex: Preço < R$ 10 & frete grátis' },
+	toText: { label: 'HTML', placeholder: 'Ex: Pre&ccedil;o &lt; R$ 10' },
+} as const
+
 const schema = z.object({
 	direction: z.enum(['toHtml', 'toText']),
 	text: z.string().min(1, 'Digite algo para converter.'),
@@ -25,12 +30,13 @@ export default function TextToHtml() {
 	const form = useToolForm({
 		schema,
 		defaultValues: { direction: 'toHtml', text: '', paragraphs: true, links: false },
-		onSubmit: ({ direction, text, paragraphs, links }) =>
-			setOutput(
-				direction === 'toHtml' ? textToHtml(text, { paragraphs, links }) : htmlToText(text),
-			),
+		onSubmit: ({ direction, text, paragraphs, links }) => {
+			const converted =
+				direction === 'toHtml' ? textToHtml(text, { paragraphs, links }) : htmlToText(text)
+			setOutput(converted)
+		},
 	})
-	// Each direction keeps its own input and result (no binary left in the text field).
+	// Each direction keeps its own input and result.
 	const switchMode = useModeMemory(form, 'text', 'toHtml', output, setOutput)
 	return (
 		<ToolLayout>
@@ -46,36 +52,26 @@ export default function TextToHtml() {
 					name="direction"
 					listeners={{ onChange: ({ value }) => switchMode(String(value)) }}
 				>
-					{(f) => <f.RadioField label="Converter" options={DIRECTIONS} />}
+					{(field) => <field.RadioField label="Converter" options={DIRECTIONS} />}
 				</form.AppField>
 				<form.Subscribe selector={(state) => state.values.direction}>
 					{(direction) => (
 						<>
 							<form.AppField name="text">
-								{(f) => (
-									<f.TextareaField
-										label={direction === 'toHtml' ? 'Texto' : 'HTML'}
-										rows={8}
-										placeholder={
-											direction === 'toHtml'
-												? 'Ex: Preço < R$ 10 & frete grátis'
-												: 'Ex: Pre&ccedil;o &lt; R$ 10'
-										}
-									/>
-								)}
+								{(field) => <field.TextareaField {...TEXT_FIELD[direction]} rows={8} />}
 							</form.AppField>
 							{direction === 'toHtml' ? (
 								<div className="flex flex-col gap-3">
 									<form.AppField name="paragraphs">
-										{(f) => (
-											<f.CheckboxField
+										{(field) => (
+											<field.CheckboxField
 												label="Parágrafos"
 												description="Linha em branco vira <p>; quebra simples vira <br>."
 											/>
 										)}
 									</form.AppField>
 									<form.AppField name="links">
-										{(f) => <f.CheckboxField label="Transformar URLs em links" />}
+										{(field) => <field.CheckboxField label="Transformar URLs em links" />}
 									</form.AppField>
 								</div>
 							) : null}

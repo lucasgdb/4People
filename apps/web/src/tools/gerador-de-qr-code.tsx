@@ -38,8 +38,15 @@ const schema = z.object({
 	light: hexColor,
 })
 
-function download(href: string, name: string) {
-	Object.assign(document.createElement('a'), { href, download: name }).click()
+type ErrorCorrection = z.infer<typeof schema>['level']
+type EncodedCode = { render: typeof renderSVG; content: string; level: ErrorCorrection }
+
+const isHexColor = (value: string) => hexColor.safeParse(value).success
+
+const svgToDataUrl = (svg: string) => `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
+
+function download(href: string, fileName: string) {
+	Object.assign(document.createElement('a'), { href, download: fileName }).click()
 }
 
 /** Renders the SVG to a canvas at a print-friendly size and downloads it as PNG. */
@@ -50,56 +57,62 @@ function downloadPng(svg: string, size = 1024) {
 		canvas.getContext('2d')?.drawImage(image, 0, 0, size, size)
 		download(canvas.toDataURL('image/png'), 'qrcode.png')
 	}
-	image.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
+	image.src = svgToDataUrl(svg)
+}
+
+/** Warns when phone cameras may fail to read the code: low contrast or inverted colors. */
+function colorWarning(dark: string, light: string): string | null {
+	if (!isHexColor(dark) || !isHexColor(light)) return null
+	const darkRgb = parseColor(dark)
+	const lightRgb = parseColor(light)
+	const contrast = contrastRatio(darkRgb, lightRgb)
+	if (contrast < MIN_QR_CONTRAST) {
+		const formattedContrast = contrast.toFixed(1).replace('.', ',')
+		return `Pouco contraste (${formattedContrast}:1): câmeras podem não ler o código. Use módulos bem mais escuros que o fundo.`
+	}
+	const darkSum = darkRgb.r + darkRgb.g + darkRgb.b
+	const lightSum = lightRgb.r + lightRgb.g + lightRgb.b
+	if (darkSum > lightSum) {
+		return 'Módulos mais claros que o fundo: alguns leitores não leem QR Codes invertidos.'
+	}
+	return null
 }
 
 /**
- * QR Code for a link or text, made in the browser and downloadable as SVG or PNG. Kept simple on
- * purpose; the card below points to the full generator for PIX, Wi-Fi, logo and frames.
- * Needs content, so nothing is made on arrival. Once there is a code, it follows the form: the
- * content (after a short pause in typing) and the error correction encode it again, and the colours
- * only repaint the code on screen.
+ * QR Code for a link or text, made in the browser and downloadable as SVG or PNG. Nothing is made
+ * until the first "Gerar QR Code"; after that, content and error correction re-encode it as you
+ * type, and the colors only repaint it.
  */
 export default function QrCodeGenerator() {
-	const [code, setCode] = useState<{
-		render: typeof renderSVG
-		content: string
-		level: 'L' | 'M' | 'Q' | 'H'
-	} | null>(null)
+	const [encoded, setEncoded] = useState<EncodedCode | null>(null)
 	const form = useToolForm({
 		schema,
 		defaultValues: { content: '', level: 'M', dark: DEFAULT_DARK, light: DEFAULT_LIGHT },
 		onSubmit: async ({ content, level }) => {
 			// The encoder loads with the first code, not with the page.
 			const { renderSVG: render } = await import('uqr')
-			setCode({ render, content, level })
+			setEncoded({ render, content, level })
 		},
 	})
 	const dark = useStore(form.store, (state) => state.values.dark)
 	const light = useStore(form.store, (state) => state.values.light)
-	const darkRgb = hexColor.safeParse(dark).success ? parseColor(dark) : null
-	const lightRgb = hexColor.safeParse(light).success ? parseColor(light) : null
-	const contrast = darkRgb && lightRgb ? contrastRatio(darkRgb, lightRgb) : 21
-	const lowContrast = contrast < MIN_QR_CONTRAST
-	const invertedColors =
-		darkRgb && lightRgb
-			? darkRgb.r + darkRgb.g + darkRgb.b > lightRgb.r + lightRgb.g + lightRgb.b
-			: false
-	const blackColor = hexColor.safeParse(dark).success ? dark : DEFAULT_DARK
-	const whiteColor = hexColor.safeParse(light).success ? light : DEFAULT_LIGHT
-	const svg = useMemo(
-		() =>
-			code
-				? code.render(code.content, { ecc: code.level, border: 2, blackColor, whiteColor })
-				: null,
-		[code, blackColor, whiteColor],
-	)
-	const src = svg ? `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}` : ''
+	const warning = colorWarning(dark, light)
+	const moduleColor = isHexColor(dark) ? dark : DEFAULT_DARK
+	const backgroundColor = isHexColor(light) ? light : DEFAULT_LIGHT
+	const svg = useMemo(() => {
+		if (!encoded) return null
+		return encoded.render(encoded.content, {
+			ecc: encoded.level,
+			border: 2,
+			blackColor: moduleColor,
+			whiteColor: backgroundColor,
+		})
+	}, [encoded, moduleColor, backgroundColor])
+	const svgUrl = svg ? svgToDataUrl(svg) : ''
 
-	// Before the first code there is nothing to update: the form waits for "Gerar QR Code". After it,
-	// only valid values re-encode (an emptied text shows its error and keeps the last code).
-	const update = () => {
-		if (code && schema.safeParse(form.state.values).success) form.handleSubmit()
+	// Invalid values (e.g. emptied text) show their error and keep the last code.
+	const regenerate = () => {
+		if (encoded && schema.safeParse(form.state.values).success) form.handleSubmit()
 	}
 
 	return (
@@ -113,18 +126,21 @@ export default function QrCodeGenerator() {
 						</form.AppForm>
 					}
 				>
-					<form.AppField name="content" listeners={{ onChange: update, onChangeDebounceMs: 300 }}>
-						{(f) => (
-							<f.TextareaField
+					<form.AppField
+						name="content"
+						listeners={{ onChange: regenerate, onChangeDebounceMs: 300 }}
+					>
+						{(field) => (
+							<field.TextareaField
 								label="Texto ou link"
 								rows={4}
 								placeholder="Ex: https://4people.dev"
 							/>
 						)}
 					</form.AppField>
-					<form.AppField name="level" listeners={{ onChange: update }}>
-						{(f) => (
-							<f.RadioField
+					<form.AppField name="level" listeners={{ onChange: regenerate }}>
+						{(field) => (
+							<field.RadioField
 								label="Correção de erros"
 								description="Quanto do código pode estar sujo, rasgado ou coberto (por um logo, por exemplo) e ainda ser lido. Mais correção deixa o desenho mais denso."
 								options={LEVELS}
@@ -135,7 +151,7 @@ export default function QrCodeGenerator() {
 						<legend className="text-fg mb-2 text-sm font-medium">Cores</legend>
 						<div className="grid items-end gap-3 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
 							<form.AppField name="dark">
-								{(f) => <f.ColorField label="Módulos (quadradinhos)" />}
+								{(field) => <field.ColorField label="Módulos (quadradinhos)" />}
 							</form.AppField>
 							<Button
 								variant="ghost"
@@ -149,24 +165,18 @@ export default function QrCodeGenerator() {
 							>
 								<ArrowLeftRight />
 							</Button>
-							<form.AppField name="light">{(f) => <f.ColorField label="Fundo" />}</form.AppField>
+							<form.AppField name="light">
+								{(field) => <field.ColorField label="Fundo" />}
+							</form.AppField>
 						</div>
-						{lowContrast ? (
+						{warning && (
 							<p
 								role="status"
 								className="rounded-control bg-warning-soft text-warning-ink px-4 py-3 text-sm"
 							>
-								Pouco contraste ({contrast.toFixed(1).replace('.', ',')}:1): câmeras podem não ler o
-								código. Use módulos bem mais escuros que o fundo.
+								{warning}
 							</p>
-						) : invertedColors ? (
-							<p
-								role="status"
-								className="rounded-control bg-warning-soft text-warning-ink px-4 py-3 text-sm"
-							>
-								Módulos mais claros que o fundo: alguns leitores não leem QR Codes invertidos.
-							</p>
-						) : null}
+						)}
 					</fieldset>
 				</FormCard>
 				<ResultCard
@@ -174,18 +184,22 @@ export default function QrCodeGenerator() {
 					empty={!svg}
 					emptyText="Digite o texto ou o link e clique em “Gerar QR Code”."
 				>
-					{svg ? (
+					{svg && (
 						<div className="flex flex-col items-center gap-4">
 							{/* biome-ignore lint/performance/noImgElement: a client-made data: URL; next/image has nothing to optimize */}
 							<img
-								src={src}
+								src={svgUrl}
 								alt="QR Code gerado"
 								width={256}
 								height={256}
 								className="rounded-control border-border size-64 border"
 							/>
 							<div className="flex flex-wrap justify-center gap-2">
-								<Button variant="secondary" size="sm" onClick={() => download(src, 'qrcode.svg')}>
+								<Button
+									variant="secondary"
+									size="sm"
+									onClick={() => download(svgUrl, 'qrcode.svg')}
+								>
 									<Download /> Baixar SVG
 								</Button>
 								<Button variant="secondary" size="sm" onClick={() => downloadPng(svg)}>
@@ -193,7 +207,7 @@ export default function QrCodeGenerator() {
 								</Button>
 							</div>
 						</div>
-					) : null}
+					)}
 				</ResultCard>
 			</ToolLayout>
 			<aside

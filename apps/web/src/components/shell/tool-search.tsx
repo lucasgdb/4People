@@ -103,7 +103,7 @@ export function ToolSearch({
 					spellCheck={false}
 					autoComplete="off"
 					placeholder="O que você precisa? Ex.: CPF, CEP…"
-					className="border-border-strong bg-surface-muted text-fg placeholder:text-fg-subtle hover:border-fg-subtle focus-visible:border-accent focus-visible:bg-surface focus-visible:ring-ring h-11 w-full rounded-full border pr-11 pl-10 text-[0.9375rem] transition-[border-color,box-shadow] outline-none focus-visible:ring-4 focus-visible:outline-none"
+					className="border-border-strong bg-surface-muted text-fg placeholder:text-fg-subtle hover:border-accent/55 hover:ring-accent/10 focus-visible:border-accent focus-visible:bg-surface focus-visible:ring-ring h-11 w-full rounded-full border pr-11 pl-10 text-[0.9375rem] transition-[border-color,box-shadow,background-color] duration-(--ds-motion) ease-(--ease-out) outline-none hover:ring-[3px] focus-visible:ring-4 focus-visible:outline-none"
 				/>
 				<Kbd className="pointer-events-none absolute top-1/2 right-3 hidden -translate-y-1/2 sm:inline-flex">
 					/

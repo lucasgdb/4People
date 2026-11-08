@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict'
 import { describe, it } from 'node:test'
 import {
-	attempt,
 	buildDataUri,
 	columnNames,
+	convertIni,
 	csvToSql,
 	dataUriSnippets,
 	detectDelimiter,
@@ -11,7 +11,6 @@ import {
 	formatBytes,
 	inferColumnType,
 	inferScalar,
-	iniTo,
 	jsonErrorOffset,
 	jsonToXml,
 	jsonToYaml,
@@ -21,6 +20,7 @@ import {
 	parseIni,
 	parseJson,
 	quoteIdentifier,
+	runConversion,
 	sqlLiteral,
 	sqlType,
 	XML_READ_DEFAULTS,
@@ -45,16 +45,16 @@ describe('shared', () => {
 		assert.equal(jsonErrorOffset('01'), 1)
 		assert.equal(jsonErrorOffset(''), 0)
 	})
-	it('attempt wraps errors', () => {
+	it('runConversion wraps errors', () => {
 		assert.deepEqual(
-			attempt(() => 'x'),
+			runConversion(() => 'x'),
 			{ ok: true, output: 'x' },
 		)
 		assert.deepEqual(
-			attempt(() => ({ output: 'y', info: 'i' })),
+			runConversion(() => ({ output: 'y', info: 'i' })),
 			{ ok: true, output: 'y', info: 'i' },
 		)
-		const failed = attempt(() => JSON.stringify(parseIni('a=1\n[x')))
+		const failed = runConversion(() => JSON.stringify(parseIni('a=1\n[x')))
 		assert.ok(!failed.ok && failed.line === 2)
 	})
 	it('parseJson reports line and column', () => {
@@ -216,11 +216,11 @@ flag
 		assert.throws(() => parseIni('= 1'), /Chave vazia/)
 	})
 	it('converts to JSON, YAML and XML', async () => {
-		const json = await iniTo('[a]\nb=1', 'json', { inferTypes: true, indent: '0' })
+		const json = await convertIni('[a]\nb=1', 'json', { inferTypes: true, indent: '0' })
 		assert.ok(json.ok && json.output === '{"a":{"b":1}}')
-		const yaml = await iniTo('[a]\nb=1', 'yaml', { inferTypes: true, indent: '2' })
+		const yaml = await convertIni('[a]\nb=1', 'yaml', { inferTypes: true, indent: '2' })
 		assert.ok(yaml.ok && yaml.output === 'a:\n  b: 1\n')
-		const bad = await iniTo('[x', 'json', { inferTypes: true, indent: '2' })
+		const bad = await convertIni('[x', 'json', { inferTypes: true, indent: '2' })
 		assert.ok(!bad.ok && bad.line === 1)
 	})
 })

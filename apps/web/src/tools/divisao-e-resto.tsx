@@ -11,18 +11,18 @@ const FIELDS: FormulaField[] = [
 const refine = ({ divisor }: Record<string, number>) =>
 	divisor === 0 ? 'Não é possível dividir por zero.' : undefined
 
-/** Quotient, integer quotient and remainder (sign follows the dividend, like `%`). */
+/** Quotient, integer quotient and remainder (the remainder keeps the dividend's sign). */
 export default function DivisionRest() {
 	return (
 		<FormulaTool
 			fields={FIELDS}
 			refine={refine}
 			compute={({ dividend = 0, divisor = 1 }) => {
-				const { quotient, integerQuotient, rest } = division(dividend, divisor)
+				const { quotient, integerQuotient, remainder } = division(dividend, divisor)
 				return [
 					{ label: 'Quociente', value: quotient },
 					{ label: 'Quociente inteiro', value: integerQuotient },
-					{ label: 'Resto (módulo)', value: rest },
+					{ label: 'Resto (módulo)', value: remainder },
 				]
 			}}
 		/>

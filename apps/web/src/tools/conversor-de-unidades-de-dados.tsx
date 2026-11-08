@@ -22,12 +22,14 @@ const KINDS = [
 	{ value: 'rate', label: 'Taxa de transferência', hint: 'Mbps, MB/s, MiB/s…' },
 ] as const
 
-const toOptions = (units: readonly DataUnit[]) =>
-	units.map((unit) => ({ value: unit.id, label: `${unit.symbol} (${unit.name})` }))
+function toOptions(units: readonly DataUnit[]) {
+	return units.map((unit) => ({ value: unit.id, label: `${unit.symbol} (${unit.name})` }))
+}
+
 const SIZE_OPTIONS = toOptions(DATA_UNITS)
 const RATE_OPTIONS = toOptions(RATE_UNITS)
 
-const GROUPS = [
+const SYSTEM_GROUPS = [
 	{ system: 'bit', title: 'Em bits (base 1000)' },
 	{ system: 'decimal', title: 'Bytes decimais, SI (base 1000)' },
 	{ system: 'binary', title: 'Bytes binários, IEC (base 1024)' },
@@ -35,15 +37,23 @@ const GROUPS = [
 
 const DEFAULTS = { kind: 'size' as Kind, value: '1', sizeUnit: 'GB', rateUnit: 'Mbps' }
 
+type Conversion = { unit: DataUnit; value: number }
+
+function formatConversion(conversion: Conversion): string {
+	return `${formatSignificant(conversion.value)} ${conversion.unit.symbol}`
+}
+
 /** Bits and bytes in every decimal and binary unit at once, plus transfer rates. */
 export default function ConversorDeUnidadesDeDados() {
 	const form = useAppForm({ defaultValues: DEFAULTS })
 	const values = useStore(form.store, (state) => state.values)
-	const units = values.kind === 'size' ? DATA_UNITS : RATE_UNITS
-	const unitId = values.kind === 'size' ? values.sizeUnit : values.rateUnit
-	const value = parseNumber(values.value)
-	const invalid = values.value.trim() !== '' && (value === null || value < 0)
-	const results = value !== null && value >= 0 ? convertAll(value, unitId, units) : []
+	const isSize = values.kind === 'size'
+	const units = isSize ? DATA_UNITS : RATE_UNITS
+	const unitId = isSize ? values.sizeUnit : values.rateUnit
+	const amount = parseNumber(values.value)
+	const isValidAmount = amount !== null && amount >= 0
+	const isInvalid = values.value.trim() !== '' && !isValidAmount
+	const conversions = isValidAmount ? convertAll(amount, unitId, units) : []
 
 	return (
 		<ToolLayout>
@@ -58,7 +68,7 @@ export default function ConversorDeUnidadesDeDados() {
 					<form.AppField name="value">
 						{(field) => <field.NumberField label="Valor" placeholder="Ex.: 1,5" min={0} />}
 					</form.AppField>
-					{values.kind === 'size' ? (
+					{isSize ? (
 						<form.AppField name="sizeUnit">
 							{(field) => <field.SelectField label="Unidade" options={SIZE_OPTIONS} />}
 						</form.AppField>
@@ -87,34 +97,33 @@ export default function ConversorDeUnidadesDeDados() {
 			</FormCard>
 			<ResultCard
 				title="Conversões"
-				empty={results.length === 0 && !invalid}
+				empty={conversions.length === 0 && !isInvalid}
 				emptyText="Digite um valor e ele aparece em todas as unidades."
-				copyText={
-					results.length
-						? results.map((r) => `${formatSignificant(r.value)} ${r.unit.symbol}`).join('\n')
-						: undefined
-				}
+				copyText={conversions.length ? conversions.map(formatConversion).join('\n') : undefined}
 				onClear={() => form.setFieldValue('value', '')}
 			>
-				{invalid ? (
+				{isInvalid ? (
 					<Alert tone="danger">
 						<CircleX />
 						Digite um número positivo, como 1,5 ou 1024.
 					</Alert>
 				) : (
-					GROUPS.map((group) => {
-						const rows = results.filter((r) => r.unit.system === group.system)
-						return rows.length ? (
+					SYSTEM_GROUPS.map((group) => {
+						const groupConversions = conversions.filter(
+							(conversion) => conversion.unit.system === group.system,
+						)
+						if (groupConversions.length === 0) return null
+						return (
 							<div key={group.system} className="flex flex-col gap-2">
 								<h3 className="text-fg text-sm font-semibold">{group.title}</h3>
 								<CopyRows
-									rows={rows.map((r) => ({
-										label: r.unit.name,
-										value: `${formatSignificant(r.value)} ${r.unit.symbol}`,
+									rows={groupConversions.map((conversion) => ({
+										label: conversion.unit.name,
+										value: formatConversion(conversion),
 									}))}
 								/>
 							</div>
-						) : null
+						)
 					})
 				)}
 			</ResultCard>

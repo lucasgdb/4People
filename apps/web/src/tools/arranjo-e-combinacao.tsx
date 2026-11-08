@@ -18,6 +18,13 @@ const schema = z
 
 type Result = ReturnType<typeof combinatorics> & { n: number; k: number }
 
+const resultToText = ({ n, k, arrangement, combination }: Result) =>
+	`A(${n},${k}) = ${arrangement}\nC(${n},${k}) = ${combination}`
+
+function BigValue({ value }: { value: bigint }) {
+	return <span className="break-all">{formatBigInt(value)}</span>
+}
+
 /** Arrangement, combination, permutation and arrangement with repetition, exact with BigInt. */
 export default function Combinatorics() {
 	const [result, setResult] = useState<Result | null>(null)
@@ -26,7 +33,6 @@ export default function Combinatorics() {
 		defaultValues: { n: '', k: '' },
 		onSubmit: ({ n, k }) => setResult({ n, k, ...combinatorics(n, k) }),
 	})
-	const big = (value: bigint) => <span className="break-all">{formatBigInt(value)}</span>
 
 	return (
 		<ToolLayout>
@@ -40,8 +46,8 @@ export default function Combinatorics() {
 			>
 				<div className="grid grid-cols-2 items-end gap-x-3 gap-y-4 sm:gap-x-4">
 					<form.AppField name="n">
-						{(f) => (
-							<f.NumberField
+						{(field) => (
+							<field.NumberField
 								label="Total de elementos (n)"
 								placeholder="Ex: 60"
 								integer
@@ -51,8 +57,8 @@ export default function Combinatorics() {
 						)}
 					</form.AppField>
 					<form.AppField name="k">
-						{(f) => (
-							<f.NumberField
+						{(field) => (
+							<field.NumberField
 								label="Elementos escolhidos (k)"
 								placeholder="Ex: 6"
 								integer
@@ -65,11 +71,7 @@ export default function Combinatorics() {
 			</FormCard>
 			<ResultCard
 				empty={!result}
-				copyText={
-					result
-						? `A(${result.n},${result.k}) = ${result.arrangement}\nC(${result.n},${result.k}) = ${result.combination}`
-						: ''
-				}
+				copyText={result ? resultToText(result) : ''}
 				onClear={() => {
 					setResult(null)
 					form.reset()
@@ -81,17 +83,17 @@ export default function Combinatorics() {
 						items={[
 							{
 								label: `Combinação C(${result.n}, ${result.k}): a ordem não importa`,
-								value: big(result.combination),
+								value: <BigValue value={result.combination} />,
 							},
 							{
 								label: `Arranjo A(${result.n}, ${result.k}): a ordem importa`,
-								value: big(result.arrangement),
+								value: <BigValue value={result.arrangement} />,
 							},
 							{
 								label: `Arranjo com repetição ${result.n}^${result.k}`,
-								value: big(result.arrangementWithRepetition),
+								value: <BigValue value={result.arrangementWithRepetition} />,
 							},
-							{ label: `Permutação ${result.n}!`, value: big(result.permutation) },
+							{ label: `Permutação ${result.n}!`, value: <BigValue value={result.permutation} /> },
 						]}
 					/>
 				) : null}

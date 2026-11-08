@@ -1,17 +1,23 @@
-import { onlyDigits, randomDigits, randomInt } from './random.ts'
+import { onlyDigits, pick, randomDigits, randomInt } from './random.ts'
+
+const toDigitArray = (digits: string) => [...digits].map(Number)
+
+const allDigitsEqual = (digits: readonly number[]) => digits.every((digit) => digit === digits[0])
 
 const weightedSum = (digits: readonly number[], weights: readonly number[]) =>
 	weights.reduce((sum, weight, index) => sum + weight * (digits[index] ?? 0), 0)
 
-const mod11Digit = (sum: number) => {
-	const rest = sum % 11
-	return rest < 2 ? 0 : 11 - rest
+/** The usual Brazilian mod-11 check digit: remainders 0 and 1 give 0. */
+const mod11CheckDigit = (sum: number) => {
+	const remainder = sum % 11
+	return remainder < 2 ? 0 : 11 - remainder
 }
 
 /* ---------------------------------- CPF ---------------------------------- */
 
-const CPF_W1 = [10, 9, 8, 7, 6, 5, 4, 3, 2]
-const CPF_W2 = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2]
+const CPF_FIRST_CHECK_WEIGHTS = [10, 9, 8, 7, 6, 5, 4, 3, 2]
+const CPF_SECOND_CHECK_WEIGHTS = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2]
+const CPF_REGION_DIGIT_INDEX = 8
 
 /** Fiscal region (9th digit) → states. */
 export const CPF_REGIONS: Record<number, string> = {
@@ -69,71 +75,75 @@ export function generateCPF({
 } = {}) {
 	const digits = randomDigits(9)
 	const region = state ? STATE_TO_CPF_REGION[state] : undefined
-	if (region !== undefined) digits[8] = region
-	digits.push(mod11Digit(weightedSum(digits, CPF_W1)))
-	digits.push(mod11Digit(weightedSum(digits, CPF_W2)))
+	if (region !== undefined) digits[CPF_REGION_DIGIT_INDEX] = region
+	digits.push(mod11CheckDigit(weightedSum(digits, CPF_FIRST_CHECK_WEIGHTS)))
+	digits.push(mod11CheckDigit(weightedSum(digits, CPF_SECOND_CHECK_WEIGHTS)))
 	const cpf = digits.join('')
 	return punctuation ? formatCPF(cpf) : cpf
 }
 
 export function validateCPF(input: string) {
 	const cpf = onlyDigits(input)
-	const digits = [...cpf].map(Number)
+	const digits = toDigitArray(cpf)
 	const formatted = cpf.length === 11 ? formatCPF(cpf) : input
 
-	if (digits.length !== 11 || digits.every((d) => d === digits[0])) {
+	if (digits.length !== 11 || allDigitsEqual(digits)) {
 		return { valid: false, formatted, region: null }
 	}
 
 	const valid =
-		mod11Digit(weightedSum(digits, CPF_W1)) === digits[9] &&
-		mod11Digit(weightedSum(digits, CPF_W2)) === digits[10]
+		mod11CheckDigit(weightedSum(digits, CPF_FIRST_CHECK_WEIGHTS)) === digits[9] &&
+		mod11CheckDigit(weightedSum(digits, CPF_SECOND_CHECK_WEIGHTS)) === digits[10]
+	if (!valid) return { valid, formatted, region: null }
 
-	return { valid, formatted, region: valid ? (CPF_REGIONS[digits[8] ?? -1] ?? null) : null }
+	const regionDigit = digits[CPF_REGION_DIGIT_INDEX] ?? -1
+	return { valid, formatted, region: CPF_REGIONS[regionDigit] ?? null }
 }
 
 /* ---------------------------------- CNPJ --------------------------------- */
 
-const CNPJ_W1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
-const CNPJ_W2 = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+const CNPJ_FIRST_CHECK_WEIGHTS = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+const CNPJ_SECOND_CHECK_WEIGHTS = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+/** Branch number of a company's head office. */
+const CNPJ_HEAD_OFFICE = [0, 0, 0, 1]
 
 export const formatCNPJ = (digits: string) =>
 	digits.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, '$1.$2.$3/$4-$5')
 
 export function generateCNPJ({ punctuation = true }: { punctuation?: boolean } = {}) {
-	const digits = [...randomDigits(8), 0, 0, 0, 1]
-	digits.push(mod11Digit(weightedSum(digits, CNPJ_W1)))
-	digits.push(mod11Digit(weightedSum(digits, CNPJ_W2)))
+	const digits = [...randomDigits(8), ...CNPJ_HEAD_OFFICE]
+	digits.push(mod11CheckDigit(weightedSum(digits, CNPJ_FIRST_CHECK_WEIGHTS)))
+	digits.push(mod11CheckDigit(weightedSum(digits, CNPJ_SECOND_CHECK_WEIGHTS)))
 	const cnpj = digits.join('')
 	return punctuation ? formatCNPJ(cnpj) : cnpj
 }
 
 export function validateCNPJ(input: string) {
 	const cnpj = onlyDigits(input)
-	const digits = [...cnpj].map(Number)
+	const digits = toDigitArray(cnpj)
 	const formatted = cnpj.length === 14 ? formatCNPJ(cnpj) : input
 
-	if (digits.length !== 14 || digits.every((d) => d === digits[0])) {
+	if (digits.length !== 14 || allDigitsEqual(digits)) {
 		return { valid: false, formatted }
 	}
 
 	const valid =
-		mod11Digit(weightedSum(digits, CNPJ_W1)) === digits[12] &&
-		mod11Digit(weightedSum(digits, CNPJ_W2)) === digits[13]
+		mod11CheckDigit(weightedSum(digits, CNPJ_FIRST_CHECK_WEIGHTS)) === digits[12] &&
+		mod11CheckDigit(weightedSum(digits, CNPJ_SECOND_CHECK_WEIGHTS)) === digits[13]
 
 	return { valid, formatted }
 }
 
 /* ----------------------------------- RG ---------------------------------- */
-// Padrão SSP-SP: 8 dígitos + dígito verificador (0-9 ou X).
+// SSP-SP standard: 8 digits + a check digit (0-9 or X).
 
 const RG_WEIGHTS = [2, 3, 4, 5, 6, 7, 8, 9]
 
 const rgCheckDigit = (digits: readonly number[]) => {
-	const rest = weightedSum(digits, RG_WEIGHTS) % 11
-	if (rest === 0) return '0'
-	if (rest === 1) return 'X'
-	return String(11 - rest)
+	const remainder = weightedSum(digits, RG_WEIGHTS) % 11
+	if (remainder === 0) return '0'
+	if (remainder === 1) return 'X'
+	return String(11 - remainder)
 }
 
 export const formatRG = (rg: string) => rg.replace(/^(\d{2})(\d{3})(\d{3})([\dX])$/, '$1.$2.$3-$4')
@@ -150,43 +160,51 @@ export function validateRG(input: string) {
 
 	if (!/^\d{8}[\dX]$/.test(rg)) return { valid: false, formatted }
 
-	const digits = [...rg.slice(0, 8)].map(Number)
-	return { valid: rgCheckDigit(digits) === rg[8], formatted }
+	const baseDigits = toDigitArray(rg.slice(0, 8))
+	return { valid: rgCheckDigit(baseDigits) === rg[8], formatted }
 }
 
 /* ----------------------------------- CNH --------------------------------- */
-// 9 base digits + 2 check digits. The first DV feeds a discount ("dsc") into the second.
+// 9 base digits + 2 check digits. When the first check digit overflows (≥ 10) it becomes 0 and the
+// second one is discounted by 2.
 
-function cnhCheckDigits(base: readonly number[]): [number, number] | null {
-	let sum = base.reduce((acc, digit, i) => acc + digit * (9 - i), 0)
-	let dv1 = sum % 11
+function cnhCheckDigits(baseDigits: readonly number[]): [number, number] | null {
+	const descendingSum = baseDigits.reduce((sum, digit, index) => sum + digit * (9 - index), 0)
+	let firstCheckDigit = descendingSum % 11
 	let discount = 0
-	if (dv1 >= 10) {
-		dv1 = 0
+	if (firstCheckDigit >= 10) {
+		firstCheckDigit = 0
 		discount = 2
 	}
-	sum = base.reduce((acc, digit, i) => acc + digit * (i + 1), 0)
-	const rest = sum % 11
-	const dv2 = rest >= 10 ? 0 : rest - discount
+
+	const ascendingSum = baseDigits.reduce((sum, digit, index) => sum + digit * (index + 1), 0)
+	const remainder = ascendingSum % 11
+	const secondCheckDigit = remainder >= 10 ? 0 : remainder - discount
+
 	// A negative second digit has no valid CNH: those bases are never issued.
-	return dv2 < 0 ? null : [dv1, dv2]
+	if (secondCheckDigit < 0) return null
+	return [firstCheckDigit, secondCheckDigit]
 }
 
 export function generateCNH(): string {
 	for (;;) {
-		const base = randomDigits(9)
-		const dvs = cnhCheckDigits(base)
-		if (dvs && !base.every((d) => d === base[0])) return [...base, ...dvs].join('')
+		const baseDigits = randomDigits(9)
+		const checkDigits = cnhCheckDigits(baseDigits)
+		if (checkDigits && !allDigitsEqual(baseDigits)) {
+			return [...baseDigits, ...checkDigits].join('')
+		}
 	}
 }
 
 export function validateCNH(input: string) {
 	const cnh = onlyDigits(input)
-	const digits = [...cnh].map(Number)
-	if (digits.length !== 11 || digits.every((d) => d === digits[0]))
-		return { valid: false, formatted: input }
-	const dvs = cnhCheckDigits(digits.slice(0, 9))
-	return { valid: dvs !== null && dvs[0] === digits[9] && dvs[1] === digits[10], formatted: cnh }
+	const digits = toDigitArray(cnh)
+	if (digits.length !== 11 || allDigitsEqual(digits)) return { valid: false, formatted: input }
+
+	const checkDigits = cnhCheckDigits(digits.slice(0, 9))
+	const valid =
+		checkDigits !== null && checkDigits[0] === digits[9] && checkDigits[1] === digits[10]
+	return { valid, formatted: cnh }
 }
 
 /* -------------------------------- PIS/PASEP ------------------------------- */
@@ -197,18 +215,20 @@ export const formatPIS = (digits: string) =>
 	digits.replace(/^(\d{3})(\d{5})(\d{2})(\d)$/, '$1.$2.$3-$4')
 
 export function generatePIS({ punctuation = true }: { punctuation?: boolean } = {}) {
-	const base = randomDigits(10)
-	const pis = `${base.join('')}${mod11Digit(weightedSum(base, PIS_WEIGHTS))}`
+	const baseDigits = randomDigits(10)
+	const checkDigit = mod11CheckDigit(weightedSum(baseDigits, PIS_WEIGHTS))
+	const pis = `${baseDigits.join('')}${checkDigit}`
 	return punctuation ? formatPIS(pis) : pis
 }
 
 export function validatePIS(input: string) {
 	const pis = onlyDigits(input)
-	const digits = [...pis].map(Number)
+	const digits = toDigitArray(pis)
 	const formatted = pis.length === 11 ? formatPIS(pis) : input
-	if (digits.length !== 11 || digits.every((d) => d === digits[0]))
-		return { valid: false, formatted }
-	return { valid: mod11Digit(weightedSum(digits, PIS_WEIGHTS)) === digits[10], formatted }
+	if (digits.length !== 11 || allDigitsEqual(digits)) return { valid: false, formatted }
+
+	const valid = mod11CheckDigit(weightedSum(digits, PIS_WEIGHTS)) === digits[10]
+	return { valid, formatted }
 }
 
 /* --------------------------------- RENAVAM -------------------------------- */
@@ -216,32 +236,31 @@ export function validatePIS(input: string) {
 
 const RENAVAM_WEIGHTS = [3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
 
-const renavamDigit = (base: readonly number[]) => {
-	const value = (weightedSum(base, RENAVAM_WEIGHTS) * 10) % 11
+const renavamCheckDigit = (baseDigits: readonly number[]) => {
+	const value = (weightedSum(baseDigits, RENAVAM_WEIGHTS) * 10) % 11
 	return value === 10 ? 0 : value
 }
 
 export function generateRENAVAM(): string {
-	const base = randomDigits(10)
-	return `${base.join('')}${renavamDigit(base)}`
+	const baseDigits = randomDigits(10)
+	return `${baseDigits.join('')}${renavamCheckDigit(baseDigits)}`
 }
 
 export function validateRENAVAM(input: string) {
-	const renavam = onlyDigits(input).padStart(11, '0')
-	const digits = [...renavam].map(Number)
-	if (
-		onlyDigits(input).length < 9 ||
-		digits.length !== 11 ||
-		digits.every((d) => d === digits[0])
-	) {
+	const typedDigits = onlyDigits(input)
+	const renavam = typedDigits.padStart(11, '0')
+	const digits = toDigitArray(renavam)
+	if (typedDigits.length < 9 || digits.length !== 11 || allDigitsEqual(digits)) {
 		return { valid: false, formatted: input }
 	}
-	return { valid: renavamDigit(digits.slice(0, 10)) === digits[10], formatted: renavam }
+
+	const valid = renavamCheckDigit(digits.slice(0, 10)) === digits[10]
+	return { valid, formatted: renavam }
 }
 
-/* ----------------------------- Título de eleitor ------------------------------ */
-// 8 sequential digits + 2-digit UF code + 2 check digits. In SP (01) and MG (02) a remainder of 0
-// gives check digit 1 instead of 0.
+/* -------------------------------- Voter ID -------------------------------- */
+// 8 sequential digits + 2-digit state code + 2 check digits. In SP (01) and MG (02) a remainder of
+// 0 gives check digit 1 instead of 0.
 
 export const VOTER_UFS: Record<string, string> = {
 	'01': 'SP',
@@ -274,42 +293,60 @@ export const VOTER_UFS: Record<string, string> = {
 	'28': 'Exterior (ZZ)',
 }
 
-function voterCheckDigits(sequence: readonly number[], uf: string): [number, number] {
-	const special = uf === '01' || uf === '02'
-	const digit = (rest: number) => (rest === 10 ? 0 : rest === 0 && special ? 1 : rest)
-	const dv1 = digit(sequence.reduce((acc, d, i) => acc + d * (i + 2), 0) % 11)
-	const [u1 = 0, u2 = 0] = [...uf].map(Number)
-	const dv2 = digit((u1 * 7 + u2 * 8 + dv1 * 9) % 11)
-	return [dv1, dv2]
+const VOTER_ABROAD_CODE = '28'
+const VOTER_DOMESTIC_CODES = Object.keys(VOTER_UFS).filter((code) => code !== VOTER_ABROAD_CODE)
+
+function voterCheckDigit(remainder: number, isSpOrMg: boolean): number {
+	if (remainder === 10) return 0
+	if (remainder === 0 && isSpOrMg) return 1
+	return remainder
+}
+
+function voterCheckDigits(sequence: readonly number[], stateCode: string): [number, number] {
+	const isSpOrMg = stateCode === '01' || stateCode === '02'
+	const sequenceSum = sequence.reduce((sum, digit, index) => sum + digit * (index + 2), 0)
+	const firstCheckDigit = voterCheckDigit(sequenceSum % 11, isSpOrMg)
+
+	const [stateTens = 0, stateUnits = 0] = toDigitArray(stateCode)
+	const stateSum = stateTens * 7 + stateUnits * 8 + firstCheckDigit * 9
+	const secondCheckDigit = voterCheckDigit(stateSum % 11, isSpOrMg)
+
+	return [firstCheckDigit, secondCheckDigit]
 }
 
 export const formatVoterId = (digits: string) =>
 	digits.replace(/^(\d{4})(\d{4})(\d{4})$/, '$1 $2 $3')
 
 export function generateVoterId({ uf }: { uf?: string } = {}) {
-	const code = uf ?? Object.keys(VOTER_UFS)[randomInt(27)] ?? '01'
+	const stateCode = uf ?? pick(VOTER_DOMESTIC_CODES)
 	const sequence = randomDigits(8)
-	return formatVoterId(`${sequence.join('')}${code}${voterCheckDigits(sequence, code).join('')}`)
+	const checkDigits = voterCheckDigits(sequence, stateCode).join('')
+	return formatVoterId(`${sequence.join('')}${stateCode}${checkDigits}`)
 }
 
 export function validateVoterId(input: string) {
-	const id = onlyDigits(input)
-	const digits = [...id].map(Number)
-	const uf = id.slice(8, 10)
-	if (digits.length !== 12 || !VOTER_UFS[uf]) return { valid: false, formatted: input, state: null }
-	const [dv1, dv2] = voterCheckDigits(digits.slice(0, 8), uf)
-	const valid = dv1 === digits[10] && dv2 === digits[11]
-	return { valid, formatted: formatVoterId(id), state: valid ? (VOTER_UFS[uf] ?? null) : null }
+	const voterId = onlyDigits(input)
+	const digits = toDigitArray(voterId)
+	const stateCode = voterId.slice(8, 10)
+	if (digits.length !== 12 || !VOTER_UFS[stateCode]) {
+		return { valid: false, formatted: input, state: null }
+	}
+
+	const [firstCheckDigit, secondCheckDigit] = voterCheckDigits(digits.slice(0, 8), stateCode)
+	const valid = firstCheckDigit === digits[10] && secondCheckDigit === digits[11]
+	const state = valid ? (VOTER_UFS[stateCode] ?? null) : null
+	return { valid, formatted: formatVoterId(voterId), state }
 }
 
-/* ---------------------------- Cartão de crédito ----------------------------- */
+/* ------------------------------ Credit cards ------------------------------ */
 
 /** Luhn (mod 10) check digit for a number without its last digit. */
 export function luhnDigit(payload: string): number {
 	let sum = 0
-	for (let i = 0; i < payload.length; i += 1) {
-		let digit = Number(payload[payload.length - 1 - i])
-		if (i % 2 === 0) {
+	for (let positionFromRight = 0; positionFromRight < payload.length; positionFromRight += 1) {
+		let digit = Number(payload[payload.length - 1 - positionFromRight])
+		const isDoubled = positionFromRight % 2 === 0
+		if (isDoubled) {
 			digit *= 2
 			if (digit > 9) digit -= 9
 		}
@@ -344,6 +381,10 @@ export const CARD_BRANDS = {
 
 export type CardBrand = keyof typeof CARD_BRANDS
 
+const UNKNOWN_BRAND_LENGTH = 16
+const UNKNOWN_BRAND_CVV_LENGTH = 3
+const VISA_SHORT_LENGTH = 13
+
 /** Most specific match first, so Elo's "4011…" isn't read as Visa. */
 const BRAND_PATTERNS: [CardBrand, RegExp][] = [
 	[
@@ -361,13 +402,15 @@ const BRAND_PATTERNS: [CardBrand, RegExp][] = [
 
 export function detectCardBrand(number: string): CardBrand | null {
 	const digits = onlyDigits(number)
-	return BRAND_PATTERNS.find(([, pattern]) => pattern.test(digits))?.[0] ?? null
+	const match = BRAND_PATTERNS.find(([, pattern]) => pattern.test(digits))
+	return match ? match[0] : null
 }
 
-export const formatCard = (digits: string) =>
-	digits.length === 15
-		? digits.replace(/^(\d{4})(\d{6})(\d{5})$/, '$1 $2 $3')
-		: digits.replace(/(\d{4})(?=\d)/g, '$1 ')
+/** Groups of 4, or 4-6-5 for 15-digit (Amex) numbers. */
+export const formatCard = (digits: string) => {
+	if (digits.length === 15) return digits.replace(/^(\d{4})(\d{6})(\d{5})$/, '$1 $2 $3')
+	return digits.replace(/(\d{4})(?=\d)/g, '$1 ')
+}
 
 export type TestCard = {
 	/** Null when a custom BIN matches no known brand. */
@@ -403,7 +446,7 @@ export type CardOptions = {
 /** What a BIN says about the card: its brand (when known), number length and CVV length. */
 export function binInfo(bin: string): { brand: CardBrand | null; length: number; cvv: number } {
 	const brand = detectCardBrand(bin)
-	if (!brand) return { brand: null, length: 16, cvv: 3 }
+	if (!brand) return { brand: null, length: UNKNOWN_BRAND_LENGTH, cvv: UNKNOWN_BRAND_CVV_LENGTH }
 	return { brand, length: CARD_BRANDS[brand].length, cvv: CARD_BRANDS[brand].cvv }
 }
 
@@ -412,13 +455,47 @@ export function binError(bin: string): string | null {
 	const digits = onlyDigits(bin)
 	if (!digits) return null
 	if (digits !== bin.replace(/\s/g, '')) return 'Use só números no BIN.'
-	const { length } = binInfo(digits)
+
 	// One digit is always left for the Luhn check and at least one to vary.
-	if (digits.length > length - 2) return `Use no máximo ${length - 2} dígitos neste BIN.`
+	const maxBinLength = binInfo(digits).length - 2
+	if (digits.length > maxBinLength) return `Use no máximo ${maxBinLength} dígitos neste BIN.`
 	return null
 }
 
-const pad2 = (n: number) => String(n).padStart(2, '0')
+/** Random digits after `prefix` up to `length`, closed by the Luhn check digit. */
+function luhnNumber(prefix: string, length: number): string {
+	const payload = prefix + randomDigits(length - prefix.length - 1).join('')
+	return payload + luhnDigit(payload)
+}
+
+function cardNumberFromBin(bin: string) {
+	const error = binError(bin)
+	if (error) throw new Error(error)
+	const info = binInfo(bin)
+	return { digits: luhnNumber(bin, info.length), brand: info.brand, cvvLength: info.cvv }
+}
+
+/** Retries until the number is detected as `brand` (some prefixes overlap other brands' ranges). */
+function cardNumberForBrand(brand: CardBrand) {
+	const { prefixes, length, cvv } = CARD_BRANDS[brand]
+	let digits: string
+	do {
+		digits = luhnNumber(pick(prefixes), length)
+	} while (detectCardBrand(digits) !== brand)
+	return { digits, brand, cvvLength: cvv }
+}
+
+function cardExpiry(now: Date, options: CardOptions): { month: number; year: number } {
+	if (options.expiry === 'custom' && options.month && options.year) {
+		return { month: options.month, year: options.year }
+	}
+	const currentYear = now.getFullYear()
+	const month = randomInt(12) + 1
+	if (options.expiry === 'expired') return { month, year: currentYear - 1 - randomInt(3) }
+	return { month, year: currentYear + 1 + randomInt(5) }
+}
+
+const twoDigits = (value: number) => String(value).padStart(2, '0')
 
 /** Luhn-valid test card. The number belongs to no account and is refused by any real payment. */
 export function generateCard(
@@ -427,49 +504,20 @@ export function generateCard(
 	options: CardOptions = {},
 ): TestCard {
 	const bin = onlyDigits(options.bin ?? '')
-	let digits: string
-	let cardBrand: CardBrand | null = brand
-	let cvvLength: number = CARD_BRANDS[brand].cvv
-	if (bin) {
-		const info = binInfo(bin)
-		const error = binError(bin)
-		if (error) throw new Error(error)
-		cardBrand = info.brand
-		cvvLength = info.cvv
-		const payload = bin + randomDigits(info.length - bin.length - 1).join('')
-		digits = payload + luhnDigit(payload)
-	} else {
-		const { prefixes, length } = CARD_BRANDS[brand]
-		do {
-			const prefix = prefixes[randomInt(prefixes.length)] ?? ''
-			const payload = prefix + randomDigits(length - prefix.length - 1).join('')
-			digits = payload + luhnDigit(payload)
-		} while (detectCardBrand(digits) !== brand)
-	}
-
-	const thisYear = now.getFullYear()
-	let month: number
-	let year: number
-	if (options.expiry === 'custom' && options.month && options.year) {
-		month = options.month
-		year = options.year
-	} else if (options.expiry === 'expired') {
-		year = thisYear - 1 - randomInt(3)
-		month = randomInt(12) + 1
-	} else {
-		year = thisYear + 1 + randomInt(5)
-		month = randomInt(12) + 1
-	}
-
+	const generated = bin ? cardNumberFromBin(bin) : cardNumberForBrand(brand)
+	const { month, year } = cardExpiry(now, options)
 	const fixedCvv = onlyDigits(options.cvv ?? '')
+	const cvv =
+		fixedCvv.length === generated.cvvLength ? fixedCvv : randomDigits(generated.cvvLength).join('')
+
 	return {
-		brand: cardBrand,
-		digits,
-		number: formatCard(digits),
-		month: pad2(month),
+		brand: generated.brand,
+		digits: generated.digits,
+		number: formatCard(generated.digits),
+		month: twoDigits(month),
 		year: String(year),
-		expiry: `${pad2(month)}/${pad2(year % 100)}`,
-		cvv: fixedCvv.length === cvvLength ? fixedCvv : randomDigits(cvvLength).join(''),
+		expiry: `${twoDigits(month)}/${twoDigits(year % 100)}`,
+		cvv,
 	}
 }
 
@@ -478,6 +526,53 @@ export type CardExportFormat = 'text' | 'pipe' | 'csv' | 'json'
 export type ExportableCard = TestCard & { holder?: string }
 
 const brandName = (card: TestCard) => (card.brand ? CARD_BRANDS[card.brand].name : 'Desconhecida')
+
+const quoteCsvValue = (value: string) =>
+	/[",\n]/.test(value) ? `"${value.replaceAll('"', '""')}"` : value
+
+function cardsAsPipeList(cards: readonly ExportableCard[]): string {
+	const includeHolder = cards.some((card) => card.holder)
+	return cards
+		.map((card) => {
+			const fields = [card.digits, card.month, card.year, card.cvv]
+			if (includeHolder) fields.push(card.holder ?? '')
+			return fields.join('|')
+		})
+		.join('\n')
+}
+
+function cardsAsCsv(cards: readonly ExportableCard[]): string {
+	const includeHolder = cards.some((card) => card.holder)
+	const header = ['bandeira', 'numero', 'mes', 'ano', 'cvv']
+	if (includeHolder) header.push('titular')
+	const rows = cards.map((card) => {
+		const fields = [brandName(card), card.digits, card.month, card.year, card.cvv]
+		if (includeHolder) fields.push(card.holder ?? '')
+		return fields.map(quoteCsvValue).join(',')
+	})
+	return [header.join(','), ...rows].join('\n')
+}
+
+function cardsAsJson(cards: readonly ExportableCard[], displayNumber: (card: TestCard) => string) {
+	const entries = cards.map((card) => ({
+		bandeira: brandName(card),
+		numero: displayNumber(card),
+		validade: card.expiry,
+		cvv: card.cvv,
+		...(card.holder ? { titular: card.holder } : {}),
+	}))
+	return JSON.stringify(entries, null, 2)
+}
+
+function cardsAsText(cards: readonly ExportableCard[], displayNumber: (card: TestCard) => string) {
+	return cards
+		.map((card) => {
+			const fields = [displayNumber(card), card.expiry, card.cvv]
+			if (card.holder) fields.push(card.holder)
+			return fields.join(' ')
+		})
+		.join('\n')
+}
 
 /**
  * Cards in the formats test tools take: one per line ("número validade cvv"), the pipe list many
@@ -488,85 +583,63 @@ export function exportCards(
 	format: CardExportFormat,
 	spaces = true,
 ): string {
-	const num = (card: TestCard) => (spaces ? card.number : card.digits)
-	const withHolder = cards.some((card) => card.holder)
+	const displayNumber = (card: TestCard) => (spaces ? card.number : card.digits)
 	switch (format) {
 		case 'pipe':
-			return cards
-				.map((c) =>
-					[c.digits, c.month, c.year, c.cvv, ...(withHolder ? [c.holder ?? ''] : [])].join('|'),
-				)
-				.join('\n')
-		case 'csv': {
-			const quote = (value: string) =>
-				/[",\n]/.test(value) ? `"${value.replaceAll('"', '""')}"` : value
-			const header = ['bandeira', 'numero', 'mes', 'ano', 'cvv', ...(withHolder ? ['titular'] : [])]
-			const rows = cards.map((c) =>
-				[brandName(c), c.digits, c.month, c.year, c.cvv, ...(withHolder ? [c.holder ?? ''] : [])]
-					.map(quote)
-					.join(','),
-			)
-			return [header.join(','), ...rows].join('\n')
-		}
+			return cardsAsPipeList(cards)
+		case 'csv':
+			return cardsAsCsv(cards)
 		case 'json':
-			return JSON.stringify(
-				cards.map((c) => ({
-					bandeira: brandName(c),
-					numero: num(c),
-					validade: c.expiry,
-					cvv: c.cvv,
-					...(c.holder ? { titular: c.holder } : {}),
-				})),
-				null,
-				2,
-			)
+			return cardsAsJson(cards, displayNumber)
 		default:
-			return cards
-				.map((c) => [num(c), c.expiry, c.cvv, ...(c.holder ? [c.holder] : [])].join(' '))
-				.join('\n')
+			return cardsAsText(cards, displayNumber)
 	}
 }
 
 /** "Ana Clara Souza" → "ANA C SOUZA": how names are embossed (uppercase, no accents, middle initial). */
 export function embossedName(name: string): string {
-	const parts = name
-		.normalize('NFD')
-		.replace(/[\u0300-\u036f]/g, '')
-		.toUpperCase()
-		.split(/\s+/)
-		.filter(Boolean)
+	const parts = name.normalize('NFD').replace(/[̀-ͯ]/g, '').toUpperCase().split(/\s+/).filter(Boolean)
 	if (parts.length <= 2) return parts.join(' ')
-	return [parts[0], ...parts.slice(1, -1).map((part) => part[0]), parts.at(-1)].join(' ')
+
+	const middleInitials = parts.slice(1, -1).map((part) => part[0])
+	return [parts[0], ...middleInitials, parts.at(-1)].join(' ')
+}
+
+function hasBrandLength(digits: string, brand: CardBrand | null): boolean {
+	if (!brand) return digits.length >= 12
+	if (brand === 'visa' && digits.length === VISA_SHORT_LENGTH) return true
+	return digits.length === CARD_BRANDS[brand].length
 }
 
 export function validateCard(input: string) {
 	const digits = onlyDigits(input)
 	const brand = detectCardBrand(digits)
-	const lengthOk = brand
-		? digits.length === CARD_BRANDS[brand].length || (brand === 'visa' && digits.length === 13)
-		: digits.length >= 12
-	return { valid: luhnValid(digits) && lengthOk, brand, formatted: formatCard(digits) }
+	const valid = luhnValid(digits) && hasBrandLength(digits, brand)
+	return { valid, brand, formatted: formatCard(digits) }
 }
 
-/* ---------------------------------- Placas ---------------------------------- */
+/* ----------------------------- License plates ----------------------------- */
 
 const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-const randomLetters = (n: number) =>
-	Array.from({ length: n }, () => LETTERS[randomInt(26)]).join('')
+
+const randomLetters = (count: number) =>
+	Array.from({ length: count }, () => LETTERS[randomInt(LETTERS.length)]).join('')
+
+const normalizePlate = (input: string) => input.toUpperCase().replace(/[^A-Z0-9]/g, '')
 
 export type PlateFormat = 'mercosul' | 'old'
 
+/** Old: ABC-1234. Mercosul: ABC1D23, the 2nd digit written as a letter. */
 export function generatePlate(format: PlateFormat): string {
 	const letters = randomLetters(3)
-	const d = randomDigits(4)
-	return format === 'old'
-		? `${letters}-${d.join('')}`
-		: `${letters}${d[0]}${LETTERS[d[1] ?? 0]}${d[2]}${d[3]}`
+	const [first, second = 0, third, fourth] = randomDigits(4)
+	if (format === 'old') return `${letters}-${first}${second}${third}${fourth}`
+	return `${letters}${first}${LETTERS[second]}${third}${fourth}`
 }
 
 /** Detects the format of a plate (with or without hyphen). */
 export function plateFormat(input: string): PlateFormat | null {
-	const plate = input.toUpperCase().replace(/[^A-Z0-9]/g, '')
+	const plate = normalizePlate(input)
 	if (/^[A-Z]{3}\d{4}$/.test(plate)) return 'old'
 	if (/^[A-Z]{3}\d[A-Z]\d{2}$/.test(plate)) return 'mercosul'
 	return null
@@ -574,16 +647,23 @@ export function plateFormat(input: string): PlateFormat | null {
 
 /** Old ⇄ Mercosul: the 2nd digit becomes a letter (0→A … 9→J), and back. */
 export function convertPlate(input: string): string {
-	const plate = input.toUpperCase().replace(/[^A-Z0-9]/g, '')
+	const plate = normalizePlate(input)
 	const format = plateFormat(plate)
-	if (format === 'old') return `${plate.slice(0, 4)}${LETTERS[Number(plate[4])]}${plate.slice(5)}`
+
+	if (format === 'old') {
+		const secondDigitAsLetter = LETTERS[Number(plate[4])]
+		return `${plate.slice(0, 4)}${secondDigitAsLetter}${plate.slice(5)}`
+	}
+
 	if (format === 'mercosul') {
-		const digit = LETTERS.indexOf(plate[4] ?? '')
-		if (digit > 9)
+		const secondDigit = LETTERS.indexOf(plate[4] ?? '')
+		if (secondDigit > 9) {
 			throw new Error(
 				'Esta placa Mercosul não tem equivalente no formato antigo (5º caractere além de J).',
 			)
-		return `${plate.slice(0, 3)}-${plate[3]}${digit}${plate.slice(5)}`
+		}
+		return `${plate.slice(0, 3)}-${plate[3]}${secondDigit}${plate.slice(5)}`
 	}
+
 	throw new Error('Use o formato ABC-1234 (antigo) ou ABC1D23 (Mercosul).')
 }

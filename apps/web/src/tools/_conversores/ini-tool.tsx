@@ -1,7 +1,7 @@
 'use client'
 
 import { useAppForm } from '@/components/form/form'
-import { type Indent, iniTo } from '@/lib/algorithms/convert'
+import { convertIni, type Indent } from '@/lib/algorithms/convert'
 import { FormCard, ToolLayout } from '../_shared/tool-layout'
 import { ConversionResult, LiveActions, useLiveConversion } from './live-conversion'
 
@@ -34,7 +34,7 @@ const INDENTS = {
 	],
 } as const
 
-const NAMES = { json: 'JSON', yaml: 'YAML' } as const
+const FORMAT_LABELS = { json: 'JSON', yaml: 'YAML' } as const
 
 type Format = 'json' | 'yaml'
 type Values = { input: string; inferTypes: boolean; indent: Indent }
@@ -50,8 +50,8 @@ export function IniTool({ format }: { format: Format }) {
 				actions={<LiveActions onExample={() => form.setFieldValue('input', EXAMPLE)} />}
 			>
 				<form.AppField name="input">
-					{(f) => (
-						<f.TextareaField
+					{(field) => (
+						<field.TextareaField
 							label="INI"
 							description="Seções [nome] e [pai.filho], chave = valor ou chave: valor, comentários com ; ou #."
 							rows={14}
@@ -60,16 +60,19 @@ export function IniTool({ format }: { format: Format }) {
 					)}
 				</form.AppField>
 				<form.AppField name="inferTypes">
-					{(f) => (
-						<f.CheckboxField
+					{(field) => (
+						<field.CheckboxField
 							label="Converter números e booleanos"
 							description='"5432" vira 5432 e "true", "yes" ou "on" viram true.'
 						/>
 					)}
 				</form.AppField>
 				<form.AppField name="indent">
-					{(f) => (
-						<f.RadioField label={`Indentação do ${NAMES[format]}`} options={INDENTS[format]} />
+					{(field) => (
+						<field.RadioField
+							label={`Indentação do ${FORMAT_LABELS[format]}`}
+							options={INDENTS[format]}
+						/>
 					)}
 				</form.AppField>
 			</FormCard>
@@ -92,11 +95,11 @@ function IniResult({
 	onClear: () => void
 }) {
 	const result = useLiveConversion(values, ({ input, ...options }: Values) =>
-		iniTo(input, format, options),
+		convertIni(input, format, options),
 	)
 	return (
 		<ConversionResult
-			title={NAMES[format]}
+			title={FORMAT_LABELS[format]}
 			source={values.input}
 			result={result}
 			downloadName={`convertido.${format}`}

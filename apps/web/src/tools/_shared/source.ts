@@ -2,64 +2,85 @@ import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 
 /**
- * Where a tool's calculation lives, for the "ver o código" link. Runs only at build time (the tool
- * pages are static), reading the tool's screen to find the algorithm it imports from
- * `src/lib/algorithms/`, and the line where the first imported function is declared.
- * Tools with no algorithm of their own (API lookups, keyboard events) link to their screen.
+ * Finds where a tool's calculation lives, for the "Ver o código" link. Runs at build time: reads the
+ * tool's screen, takes the first function it imports from `src/lib/algorithms/`, and finds the line
+ * where that function is declared. Tools without an algorithm of their own link to their screen.
  */
 
 const WEB_ROOT = 'apps/web'
 
-/** Tools whose algorithm comes in through a shared screen instead of a direct import. */
-const VIA_SHARED: Record<string, { module: string; name: string }> = {
-	'somar-em-data': { module: 'dates', name: 'shiftDate' },
-	'subtrair-em-data': { module: 'dates', name: 'shiftDate' },
+type AlgorithmImport = { module: string; functionName: string }
+
+/** Screens that reach their algorithm through a shared component instead of a direct import. */
+const IMPORTED_THROUGH_SHARED_SCREEN: Record<string, AlgorithmImport> = {
+	'somar-em-data': { module: 'dates', functionName: 'shiftDate' },
+	'subtrair-em-data': { module: 'dates', functionName: 'shiftDate' },
 }
 
-/** `const { a } = await import('@/lib/algorithms/x')`: lazy-loaded, so it is the tool's main algorithm. */
 const LAZY_IMPORT = /\{([^{}]*)\}\s*=\s*await\s+import\(\s*'@\/lib\/algorithms\/([\w-]+)'/
-const IMPORT = /import\s*\{([^}]*)\}\s*from\s*'@\/lib\/algorithms\/([\w-]+)'/
+const STATIC_IMPORT = /import\s*\{([^}]*)\}\s*from\s*'@\/lib\/algorithms\/([\w-]+)'/
 
 export type ToolSource = { path: string; line?: number; file: string }
 
-export function toolSource(slug: string): ToolSource {
-	const screen = `src/tools/${slug}.tsx`
-	// Build-time only (static pages): tell Turbopack not to trace the whole project for this read.
-	const read = (path: string) =>
-		readFileSync(join(/* turbopackIgnore: true */ process.cwd(), path), 'utf8')
+function readProjectFile(path: string) {
+	// turbopackIgnore: a build-time read, so Turbopack shouldn't trace the whole project.
+	return readFileSync(join(/* turbopackIgnore: true */ process.cwd(), path), 'utf8')
+}
 
-	const code = read(screen)
-	let found = VIA_SHARED[slug]
-	if (!found) {
-		const match = code.match(LAZY_IMPORT) ?? code.match(IMPORT)
-		if (match?.[2]) {
-			const names = (match[1] ?? '')
-				.split(',')
-				.map((name) => name.trim())
-				.filter((name) => name && !name.startsWith('type '))
-				.map((name) => name.split(/\s+as\s+/)[0] ?? name)
-			found = { module: match[2], name: names[0] ?? '' }
-		}
-	}
-	if (!found) return { path: `${WEB_ROOT}/${screen}`, file: `${slug}.tsx` }
-
-	const algorithm = `src/lib/algorithms/${found.module}.ts`
-	const declaration = new RegExp(
-		`^export\\s+(?:async\\s+)?(?:function\\*?|const|let)\\s+${found.name}\\b`,
+function firstImportedFunction(importList: string) {
+	return (
+		importList
+			.split(',')
+			.map((name) => name.trim())
+			.filter((name) => name && !name.startsWith('type '))
+			.map((name) => name.split(/\s+as\s+/)[0] ?? name)[0] ?? ''
 	)
-	const lines = read(algorithm).split('\n')
-	let index = found.name ? lines.findIndex((line) => declaration.test(line)) : -1
-	// An object of formulas (`areas.circleByRadius(…)`): point at the member the screen uses.
-	const member = found.name ? code.match(new RegExp(`\\b${found.name}\\.(\\w+)`))?.[1] : undefined
-	if (member && index >= 0) {
-		const memberLine = lines.findIndex(
-			(line, i) => i > index && new RegExp(`^\\s+${member}:`).test(line),
-		)
-		if (memberLine >= 0) index = memberLine
-	}
+}
+
+function findAlgorithmImport(slug: string, screenCode: string): AlgorithmImport | undefined {
+	const viaSharedScreen = IMPORTED_THROUGH_SHARED_SCREEN[slug]
+	if (viaSharedScreen) return viaSharedScreen
+
+	// A lazy import is the tool's main (heavy) algorithm, so it wins over static imports.
+	const match = screenCode.match(LAZY_IMPORT) ?? screenCode.match(STATIC_IMPORT)
+	const [, importList = '', module] = match ?? []
+	if (!module) return undefined
+	return { module, functionName: firstImportedFunction(importList) }
+}
+
+/** Line index of the declaration, or of the object member the screen uses (`areas.circle`). */
+function findDeclarationIndex(lines: string[], functionName: string, screenCode: string) {
+	if (!functionName) return -1
+
+	const declaration = new RegExp(
+		`^export\\s+(?:async\\s+)?(?:function\\*?|const|let)\\s+${functionName}\\b`,
+	)
+	const declarationIndex = lines.findIndex((line) => declaration.test(line))
+	if (declarationIndex < 0) return -1
+
+	const usedMember = screenCode.match(new RegExp(`\\b${functionName}\\.(\\w+)`))?.[1]
+	if (!usedMember) return declarationIndex
+
+	const memberIndex = lines.findIndex(
+		(line, index) => index > declarationIndex && new RegExp(`^\\s+${usedMember}:`).test(line),
+	)
+	return memberIndex >= 0 ? memberIndex : declarationIndex
+}
+
+export function toolSource(slug: string): ToolSource {
+	const screenPath = `src/tools/${slug}.tsx`
+	const screenCode = readProjectFile(screenPath)
+
+	const algorithm = findAlgorithmImport(slug, screenCode)
+	if (!algorithm) return { path: `${WEB_ROOT}/${screenPath}`, file: `${slug}.tsx` }
+
+	const algorithmPath = `src/lib/algorithms/${algorithm.module}.ts`
+	const lines = readProjectFile(algorithmPath).split('\n')
+	const index = findDeclarationIndex(lines, algorithm.functionName, screenCode)
+
 	return {
-		path: `${WEB_ROOT}/${algorithm}`,
+		path: `${WEB_ROOT}/${algorithmPath}`,
 		line: index >= 0 ? index + 1 : undefined,
-		file: `${found.module}.ts`,
+		file: `${algorithm.module}.ts`,
 	}
 }

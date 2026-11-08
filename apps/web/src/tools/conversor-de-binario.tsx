@@ -9,32 +9,37 @@ import { binaryToText, textToBinary } from '@/lib/algorithms/encoding'
 import { useModeMemory } from './_shared/mode-memory'
 import { FormCard, OutputBlock, ResultCard, ToolLayout } from './_shared/tool-layout'
 
+const DIRECTIONS = [
+	{ value: 'encode', label: 'Texto → Binário' },
+	{ value: 'decode', label: 'Binário → Texto' },
+] as const
+
 const schema = z.object({
 	direction: z.enum(['encode', 'decode']),
 	input: z.string().min(1, 'Digite algo para converter.'),
 })
 
-export default function BinaryConverter() {
-	const [result, setResult] = useState<
-		{ ok: true; value: string } | { ok: false; error: string } | null
-	>(null)
+type Values = z.infer<typeof schema>
+type Outcome = { ok: true; value: string } | { ok: false; error: string }
 
+function convert({ direction, input }: Values): Outcome {
+	try {
+		const value = direction === 'encode' ? textToBinary(input) : binaryToText(input)
+		return { ok: true, value }
+	} catch (error) {
+		return { ok: false, error: (error as Error).message }
+	}
+}
+
+/** UTF-8 text ⇄ space-separated 8-bit binary groups. */
+export default function BinaryConverter() {
+	const [outcome, setOutcome] = useState<Outcome | null>(null)
 	const form = useToolForm({
 		schema,
 		defaultValues: { direction: 'encode', input: '' },
-		onSubmit: ({ direction, input }) => {
-			try {
-				setResult({
-					ok: true,
-					value: direction === 'encode' ? textToBinary(input) : binaryToText(input),
-				})
-			} catch (error) {
-				setResult({ ok: false, error: (error as Error).message })
-			}
-		},
+		onSubmit: (values) => setOutcome(convert(values)),
 	})
-	// Each direction keeps its own input and result (no binary left in the text field).
-	const switchMode = useModeMemory(form, 'input', 'encode', result, setResult)
+	const switchDirection = useModeMemory(form, 'input', 'encode', outcome, setOutcome)
 
 	return (
 		<ToolLayout>
@@ -48,23 +53,15 @@ export default function BinaryConverter() {
 			>
 				<form.AppField
 					name="direction"
-					listeners={{ onChange: ({ value }) => switchMode(String(value)) }}
+					listeners={{ onChange: ({ value }) => switchDirection(String(value)) }}
 				>
-					{(f) => (
-						<f.RadioField
-							label="Converter"
-							options={[
-								{ value: 'encode', label: 'Texto → Binário' },
-								{ value: 'decode', label: 'Binário → Texto' },
-							]}
-						/>
-					)}
+					{(field) => <field.RadioField label="Converter" options={DIRECTIONS} />}
 				</form.AppField>
 				<form.Subscribe selector={(state) => state.values.direction}>
 					{(direction) => (
 						<form.AppField name="input">
-							{(f) => (
-								<f.TextareaField
+							{(field) => (
+								<field.TextareaField
 									label={direction === 'encode' ? 'Texto' : 'Código binário'}
 									rows={6}
 									placeholder={
@@ -79,22 +76,21 @@ export default function BinaryConverter() {
 				</form.Subscribe>
 			</FormCard>
 			<ResultCard
-				empty={!result}
-				copyText={result?.ok ? result.value : ''}
-				downloadName={result?.ok ? 'binario.txt' : undefined}
+				empty={!outcome}
+				copyText={outcome?.ok ? outcome.value : ''}
+				downloadName={outcome?.ok ? 'binario.txt' : undefined}
 				onClear={() => {
-					setResult(null)
+					setOutcome(null)
 					form.reset()
 				}}
 			>
-				{result?.ok ? (
-					<OutputBlock>{result.value}</OutputBlock>
-				) : result ? (
+				{outcome?.ok && <OutputBlock>{outcome.value}</OutputBlock>}
+				{outcome && !outcome.ok && (
 					<Alert tone="danger">
 						<CircleX />
-						{result.error}
+						{outcome.error}
 					</Alert>
-				) : null}
+				)}
 			</ResultCard>
 		</ToolLayout>
 	)

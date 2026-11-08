@@ -42,13 +42,13 @@ export function ValueList({ values, label }: { values: readonly string[]; label:
  * match), and only once even when React runs effects twice (Strict Mode in development).
  */
 export function useGenerateOnMount(generate: () => void) {
-	const generated = useRef(false)
-	const run = useRef(generate)
-	run.current = generate
+	const hasGenerated = useRef(false)
+	const latestGenerate = useRef(generate)
+	latestGenerate.current = generate
 	useEffect(() => {
-		if (generated.current) return
-		generated.current = true
-		run.current()
+		if (hasGenerated.current) return
+		hasGenerated.current = true
+		latestGenerate.current()
 	}, [])
 }
 
@@ -69,8 +69,9 @@ export function GeneratedResult({
 	note?: string
 	title?: string
 }) {
-	const all = (values ?? []).join('\n')
+	const allValuesText = (values ?? []).join('\n')
 	const count = values?.length ?? 0
+	const hasMany = count > 1
 	return (
 		<ResultCard
 			title={title}
@@ -79,13 +80,17 @@ export function GeneratedResult({
 			note={note}
 			action={
 				<div className="flex gap-2">
-					<Button variant="secondary" size="sm" onClick={() => downloadText(filename, all)}>
+					<Button
+						variant="secondary"
+						size="sm"
+						onClick={() => downloadText(filename, allValuesText)}
+					>
 						<Download /> Salvar .txt
 					</Button>
 					<CopyButton
-						value={all}
-						label={count > 1 ? 'Copiar todos' : 'Copiar'}
-						aria-label={count > 1 ? `Copiar todos os ${count} ${plural}` : undefined}
+						value={allValuesText}
+						label={hasMany ? 'Copiar todos' : 'Copiar'}
+						aria-label={hasMany ? `Copiar todos os ${count} ${plural}` : undefined}
 					/>
 				</div>
 			}
@@ -95,7 +100,10 @@ export function GeneratedResult({
 	)
 }
 
-const STRIP_PUNCTUATION = /[.\-/\s]/g
+const PUNCTUATION = /[.\-/\s]/g
+
+const DEFAULT_NOTE =
+	'Use só para testes. Esses números são válidos na conta, mas não pertencem a ninguém de propósito.'
 
 const schema = z.object({
 	format: z.enum(['punctuated', 'digits']),
@@ -121,7 +129,7 @@ export function DocumentGenerator({
 	generate,
 	examples,
 	states,
-	note = 'Use só para testes. Esses números são válidos na conta, mas não pertencem a ninguém de propósito.',
+	note = DEFAULT_NOTE,
 }: {
 	label: string
 	plural: string
@@ -137,21 +145,18 @@ export function DocumentGenerator({
 	const form = useToolForm({
 		schema,
 		defaultValues: { format: 'punctuated', state: 'any', amount: 4 },
-		onSubmit: ({ state, amount }) =>
-			setValues(
-				Array.from({ length: amount }, () =>
-					generate({ state: state === 'any' ? undefined : state }),
-				),
-			),
+		onSubmit: ({ state, amount }) => {
+			const chosenState = state === 'any' ? undefined : state
+			setValues(Array.from({ length: amount }, () => generate({ state: chosenState })))
+		},
 	})
-	const punctuated = useStore(form.store, (state) => state.values.format) === 'punctuated'
+	const format = useStore(form.store, (state) => state.values.format)
 
 	useGenerateOnMount(() => form.handleSubmit())
 
-	const shown =
-		values?.map((value) =>
-			examples && !punctuated ? value.replace(STRIP_PUNCTUATION, '') : value,
-		) ?? null
+	const showDigitsOnly = examples !== undefined && format === 'digits'
+	const displayedValues =
+		values?.map((value) => (showDigitsOnly ? value.replace(PUNCTUATION, '') : value)) ?? null
 	const regenerate = { onChange: () => form.handleSubmit() }
 
 	return (
@@ -169,8 +174,8 @@ export function DocumentGenerator({
 			>
 				{examples ? (
 					<form.AppField name="format">
-						{(f) => (
-							<f.RadioField
+						{(field) => (
+							<field.RadioField
 								label="Formato"
 								options={[
 									{
@@ -190,8 +195,8 @@ export function DocumentGenerator({
 				)}
 				{states ? (
 					<form.AppField name="state" listeners={regenerate}>
-						{(f) => (
-							<f.SelectField
+						{(field) => (
+							<field.SelectField
 								label={states.label}
 								description={states.description}
 								options={states.options}
@@ -200,10 +205,10 @@ export function DocumentGenerator({
 					</form.AppField>
 				) : null}
 				<form.AppField name="amount" listeners={regenerate}>
-					{(f) => <f.SliderField label={`Quantos ${plural}?`} min={1} max={20} />}
+					{(field) => <field.SliderField label={`Quantos ${plural}?`} min={1} max={20} />}
 				</form.AppField>
 			</FormCard>
-			<GeneratedResult values={shown} plural={plural} filename={filename} note={note} />
+			<GeneratedResult values={displayedValues} plural={plural} filename={filename} note={note} />
 		</ToolLayout>
 	)
 }

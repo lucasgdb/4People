@@ -26,7 +26,27 @@ const DIRECTIONS = [
 	{ value: 'fromRoman', label: 'Romano → número' },
 ] as const
 
-type Outcome = { ok: true; value: string; parts?: RomanPart[] } | { ok: false; error: string }
+type Direction = (typeof DIRECTIONS)[number]['value']
+
+const VALUE_FIELD = {
+	toRoman: {
+		label: 'Número inteiro positivo',
+		placeholder: 'Ex: 2026',
+		inputMode: 'numeric',
+		description: undefined,
+	},
+	fromRoman: {
+		label: 'Número romano',
+		placeholder: 'Ex: MMXXVI',
+		inputMode: 'text',
+		description:
+			'Acima de 3.999, cole o resultado da conversão ou use parênteses: cada par vale uma barra (× 1.000). Ex.: (IV) = 4.000.',
+	},
+} as const satisfies Record<Direction, object>
+
+type Conversion = { value: string; parts?: RomanPart[] }
+
+type Outcome = ({ ok: true } & Conversion) | { ok: false; error: string }
 
 /** Up to this many bars are drawn as stacked lines; more would be an unreadable wall of lines. */
 const MAX_STACKED_BARS = 3
@@ -56,18 +76,74 @@ function Barred({ bars, children }: { bars: number; children: ReactNode }) {
 }
 
 /** How a screen reader should say the numeral: the bars are visual only. */
-const spoken = (parts: RomanPart[]) =>
+const spokenNumeral = (parts: readonly RomanPart[]) =>
 	parts
-		.map(({ symbols, bars }) =>
-			bars === 0
-				? symbols
-				: `${symbols} com ${bars} ${bars === 1 ? 'barra' : 'barras'} (× ${formatBigInt(1000n ** BigInt(bars))})`,
-		)
+		.map(({ symbols, bars }) => {
+			if (bars === 0) return symbols
+			const barWord = bars === 1 ? 'barra' : 'barras'
+			return `${symbols} com ${bars} ${barWord} (× ${formatBigInt(1000n ** BigInt(bars))})`
+		})
 		.join(', ')
 
-/** Bigger numerals get a smaller face so they still fit and wrap. */
-const sizeFor = (length: number) =>
-	length > 120 ? 'text-lg' : length > 40 ? 'text-2xl' : length > 14 ? 'text-4xl' : 'text-5xl'
+/** Font size by symbol count: bigger numerals get a smaller face so they still fit and wrap. */
+const SIZE_BY_LENGTH: ReadonlyArray<{ above: number; className: string }> = [
+	{ above: 120, className: 'text-lg' },
+	{ above: 40, className: 'text-2xl' },
+	{ above: 14, className: 'text-4xl' },
+]
+
+const sizeFor = (symbolCount: number) =>
+	SIZE_BY_LENGTH.find(({ above }) => symbolCount > above)?.className ?? 'text-5xl'
+
+const symbolCountOf = ({ value, parts }: Conversion) =>
+	parts ? parts.reduce((count, part) => count + part.symbols.length, 0) : value.length
+
+function convert(direction: Direction, input: string): Conversion {
+	if (direction === 'fromRoman') return { value: formatBigInt(fromRoman(input)) }
+	const number = parsePositiveInteger(input)
+	return { value: toRoman(number), parts: toRomanParts(number) }
+}
+
+function NumeralOutput({ value, parts }: Conversion) {
+	const hasBars = parts?.some((part) => part.bars > 0) ?? false
+	const hasCountBadge = parts?.some((part) => part.bars > MAX_STACKED_BARS) ?? false
+	return (
+		<div
+			className="flex flex-col gap-2"
+			// Copying a selection gives the numeral text (bars as U+0305), like "Copiar", not the
+			// badges or the screen-reader description.
+			onCopy={(event) => {
+				event.preventDefault()
+				event.clipboardData.setData('text/plain', value)
+			}}
+		>
+			<OutputValue
+				className={cn('font-extrabold tracking-wide', sizeFor(symbolCountOf({ value, parts })))}
+			>
+				{parts && hasBars ? (
+					<>
+						<span aria-hidden="true" translate="no" className="leading-[1.5] uppercase">
+							{parts.map((part) => (
+								<Barred key={`${part.bars}-${part.symbols}`} bars={part.bars}>
+									{part.symbols}
+								</Barred>
+							))}
+						</span>
+						<span className="sr-only">{spokenNumeral(parts)}</span>
+					</>
+				) : (
+					value
+				)}
+			</OutputValue>
+			{hasCountBadge ? (
+				<p className="text-fg-muted text-[0.8125rem]">
+					Um número sobre a barra indica quantas barras ela representa; cada barra multiplica por
+					1.000. O texto copiado traz todas as barras.
+				</p>
+			) : null}
+		</div>
+	)
+}
 
 /**
  * Positive integers ⇄ Roman numerals, with no upper limit: above 3.999 it uses the vinculum (bars
@@ -81,21 +157,13 @@ export default function RomanNumerals() {
 		defaultValues: { direction: 'toRoman', value: '' },
 		onSubmit: ({ direction, value }) => {
 			try {
-				setOutcome({
-					ok: true,
-					...(direction === 'toRoman'
-						? (() => {
-								const number = parsePositiveInteger(value)
-								return { value: toRoman(number), parts: toRomanParts(number) }
-							})()
-						: { value: formatBigInt(fromRoman(value)) }),
-				})
+				setOutcome({ ok: true, ...convert(direction, value) })
 			} catch (error) {
 				setOutcome({ ok: false, error: (error as Error).message })
 			}
 		},
 	})
-	// Each direction keeps its own input and result (no binary left in the text field).
+	// Each direction keeps its own input and result.
 	const switchMode = useModeMemory(form, 'value', 'toRoman', outcome, setOutcome)
 
 	return (
@@ -112,24 +180,12 @@ export default function RomanNumerals() {
 					name="direction"
 					listeners={{ onChange: ({ value }) => switchMode(String(value)) }}
 				>
-					{(f) => <f.RadioField label="Converter" options={DIRECTIONS} />}
+					{(field) => <field.RadioField label="Converter" options={DIRECTIONS} />}
 				</form.AppField>
 				<form.Subscribe selector={(state) => state.values.direction}>
 					{(direction) => (
 						<form.AppField name="value">
-							{(f) => (
-								<f.TextField
-									label={direction === 'toRoman' ? 'Número inteiro positivo' : 'Número romano'}
-									placeholder={direction === 'toRoman' ? 'Ex: 2026' : 'Ex: MMXXVI'}
-									inputMode={direction === 'toRoman' ? 'numeric' : 'text'}
-									enterKeyHint="go"
-									description={
-										direction === 'toRoman'
-											? undefined
-											: 'Acima de 3.999, cole o resultado da conversão ou use parênteses: cada par vale uma barra (× 1.000). Ex.: (IV) = 4.000.'
-									}
-								/>
-							)}
+							{(field) => <field.TextField {...VALUE_FIELD[direction]} enterKeyHint="go" />}
 						</form.AppField>
 					)}
 				</form.Subscribe>
@@ -140,47 +196,7 @@ export default function RomanNumerals() {
 				onClear={() => setOutcome(null)}
 			>
 				{outcome?.ok ? (
-					<div
-						className="flex flex-col gap-2"
-						// Selecting the result and copying gives the numeral itself (bars as U+0305), the same
-						// text as "Copiar", not the badges or the screen-reader description around it.
-						onCopy={(event) => {
-							event.preventDefault()
-							event.clipboardData.setData('text/plain', outcome.value)
-						}}
-					>
-						<OutputValue
-							className={cn(
-								'font-extrabold tracking-wide',
-								sizeFor(
-									outcome.parts
-										? outcome.parts.reduce((n, p) => n + p.symbols.length, 0)
-										: outcome.value.length,
-								),
-							)}
-						>
-							{outcome.parts?.some((part) => part.bars > 0) ? (
-								<>
-									<span aria-hidden="true" translate="no" className="leading-[1.5] uppercase">
-										{outcome.parts.map((part) => (
-											<Barred key={`${part.bars}-${part.symbols}`} bars={part.bars}>
-												{part.symbols}
-											</Barred>
-										))}
-									</span>
-									<span className="sr-only">{spoken(outcome.parts)}</span>
-								</>
-							) : (
-								outcome.value
-							)}
-						</OutputValue>
-						{outcome.parts?.some((part) => part.bars > MAX_STACKED_BARS) ? (
-							<p className="text-fg-muted text-[0.8125rem]">
-								Um número sobre a barra indica quantas barras ela representa; cada barra multiplica
-								por 1.000. O texto copiado traz todas as barras.
-							</p>
-						) : null}
-					</div>
+					<NumeralOutput value={outcome.value} parts={outcome.parts} />
 				) : outcome ? (
 					<Alert tone="danger">
 						<CircleX />

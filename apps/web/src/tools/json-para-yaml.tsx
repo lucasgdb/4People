@@ -20,7 +20,7 @@ const EXAMPLE = `{
 
 type Values = { input: string; indent: '2' | '4' }
 const DEFAULTS: Values = { input: '', indent: '2' }
-const convert = ({ input, indent }: Values) => jsonToYaml(input, indent === '4' ? 4 : 2)
+const convertJsonToYaml = ({ input, indent }: Values) => jsonToYaml(input, indent === '4' ? 4 : 2)
 
 /** JSON → YAML as you type, with the line and column of syntax errors. */
 export default function JsonParaYaml() {
@@ -32,8 +32,8 @@ export default function JsonParaYaml() {
 				actions={<LiveActions onExample={() => form.setFieldValue('input', EXAMPLE)} />}
 			>
 				<form.AppField name="input">
-					{(f) => (
-						<f.TextareaField
+					{(field) => (
+						<field.TextareaField
 							label="JSON"
 							rows={14}
 							placeholder='Ex.: {"nome": "Ana", "idade": 30}'
@@ -41,18 +41,18 @@ export default function JsonParaYaml() {
 					)}
 				</form.AppField>
 				<form.AppField name="indent">
-					{(f) => <f.RadioField label="Indentação do YAML" options={INDENTS} />}
+					{(field) => <field.RadioField label="Indentação do YAML" options={INDENTS} />}
 				</form.AppField>
 			</FormCard>
 			<form.Subscribe selector={(state) => state.values}>
-				{(values) => <Result values={values} onClear={() => form.reset(DEFAULTS)} />}
+				{(values) => <YamlResult values={values} onClear={() => form.reset(DEFAULTS)} />}
 			</form.Subscribe>
 		</ToolLayout>
 	)
 }
 
-function Result({ values, onClear }: { values: Values; onClear: () => void }) {
-	const result = useLiveConversion(values, convert)
+function YamlResult({ values, onClear }: { values: Values; onClear: () => void }) {
+	const result = useLiveConversion(values, convertJsonToYaml)
 	return (
 		<ConversionResult
 			title="YAML"

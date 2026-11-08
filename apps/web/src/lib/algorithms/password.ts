@@ -50,31 +50,31 @@ export function generatePassword({
 	excludeSimilarChars = true,
 }: PasswordOptions): string {
 	const pool = [...new Set([...charsets.map((key) => CHARSETS[key]).join(''), ...additionalChars])]
-	const firstPool =
+	const firstCharPool =
 		firstChar === 'special' ? `${CHARSETS.special}${additionalChars}` : CHARSETS[firstChar]
 
-	let password = firstPool[randomInt(firstPool.length)] ?? ''
+	let password = firstCharPool[randomInt(firstCharPool.length)] ?? ''
 	if (pool.length === 0) return password
 
-	// Guard against impossible constraints (e.g. pool with a single char).
-	const canAvoid = pool.length > 2
+	// With 1 or 2 characters to draw from, avoiding neighbours could loop forever.
+	const canAvoidNeighbours = pool.length > 2
 
 	while (password.length < length) {
 		const previous = password.at(-1) ?? ''
-		const char = pool[randomInt(pool.length)] ?? ''
-		if (canAvoid && excludeEqualChars && char === previous) continue
-		if (canAvoid && excludeSimilarChars && SIMILAR_PAIRS.has(previous + char)) continue
-		password += char
+		const next = pool[randomInt(pool.length)] ?? ''
+		if (canAvoidNeighbours && excludeEqualChars && next === previous) continue
+		if (canAvoidNeighbours && excludeSimilarChars && SIMILAR_PAIRS.has(previous + next)) continue
+		password += next
 	}
 
 	return password
 }
 
-/* -------------------------------- Fácil de lembrar ------------------------------ */
+/* -------------------------------- Easy to remember ------------------------------ */
 
 /**
  * Pronounceable "words" made of consonant + vowel syllables (ba, te, ri…). No dictionary to ship,
- * and each 3-syllable word is one of 16³ × 5³ = 512.000, about 19 bits of entropy.
+ * and each 3-syllable word is one of 16³ × 5³ = 512,000, about 19 bits of entropy.
  */
 const CONSONANTS = 'bcdfghjlmnprstvz'
 const VOWELS = 'aeiou'
@@ -97,35 +97,45 @@ export type PassphraseOptions = {
 	number: boolean
 }
 
+const randomChar = (chars: string) => chars[randomInt(chars.length)] ?? ''
+
 function pronounceableWord(): string {
 	let word = ''
-	for (let i = 0; i < SYLLABLES_PER_WORD; i += 1)
-		word +=
-			(CONSONANTS[randomInt(CONSONANTS.length)] ?? '') + (VOWELS[randomInt(VOWELS.length)] ?? '')
+	for (let syllable = 0; syllable < SYLLABLES_PER_WORD; syllable += 1) {
+		word += randomChar(CONSONANTS) + randomChar(VOWELS)
+	}
 	return word
 }
 
+const capitalizeWord = (word: string) => word[0]?.toUpperCase() + word.slice(1)
+
 export function generatePassphrase({ words, separator, capitalize, number }: PassphraseOptions) {
-	const list = Array.from({ length: words }, () => {
+	const wordList = Array.from({ length: words }, () => {
 		const word = pronounceableWord()
-		return capitalize ? word[0]?.toUpperCase() + word.slice(1) : word
+		return capitalize ? capitalizeWord(word) : word
 	})
 	if (number) {
-		const at = randomInt(list.length)
-		list[at] = `${list[at]}${randomInt(10)}${randomInt(10)}`
+		const wordIndex = randomInt(wordList.length)
+		wordList[wordIndex] = `${wordList[wordIndex]}${randomInt(10)}${randomInt(10)}`
 	}
-	return list.join(PASSPHRASE_SEPARATORS[separator])
+	return wordList.join(PASSPHRASE_SEPARATORS[separator])
 }
 
 /* ------------------------------------- PIN ------------------------------------- */
 
 /** All digits equal (0000), a straight run (1234, 9876) or a repeated pair (1212). */
 export function isObviousPin(pin: string): boolean {
-	if (/^(\d)\1+$/.test(pin)) return true
+	const allEqual = /^(\d)\1+$/.test(pin)
+	if (allEqual) return true
+
 	const digits = [...pin].map(Number)
-	const steps = digits.slice(1).map((digit, i) => digit - (digits[i] ?? 0))
-	if (steps.every((step) => step === 1) || steps.every((step) => step === -1)) return true
-	return pin.length >= 4 && /^(\d\d)\1+\d?$/.test(pin)
+	const steps = digits.slice(1).map((digit, index) => digit - (digits[index] ?? 0))
+	const isAscendingRun = steps.every((step) => step === 1)
+	const isDescendingRun = steps.every((step) => step === -1)
+	if (isAscendingRun || isDescendingRun) return true
+
+	const isRepeatedPair = pin.length >= 4 && /^(\d\d)\1+\d?$/.test(pin)
+	return isRepeatedPair
 }
 
 export function generatePin(length: number, avoidObvious: boolean): string {
@@ -135,7 +145,7 @@ export function generatePin(length: number, avoidObvious: boolean): string {
 	}
 }
 
-/* ---------------------------------- Entropia ---------------------------------- */
+/* ----------------------------------- Entropy ----------------------------------- */
 
 /** Bits of entropy of a random password: first character from its own pool, the rest from `pool`. */
 export function randomPasswordBits(length: number, firstPoolSize: number, poolSize: number) {
@@ -144,13 +154,25 @@ export function randomPasswordBits(length: number, firstPoolSize: number, poolSi
 }
 
 export function passphraseBits({ words, number }: Pick<PassphraseOptions, 'words' | 'number'>) {
-	const perWord = SYLLABLES_PER_WORD * Math.log2(CONSONANTS.length * VOWELS.length)
-	return words * perWord + (number ? Math.log2(100) + Math.log2(words) : 0)
+	const bitsPerWord = SYLLABLES_PER_WORD * Math.log2(CONSONANTS.length * VOWELS.length)
+	// The number adds its 100 values and the choice of which word carries it.
+	const numberBits = number ? Math.log2(100) + Math.log2(words) : 0
+	return words * bitsPerWord + numberBits
 }
 
 export const pinBits = (length: number) => length * Math.log2(10)
 
 export type PasswordStrength = 'Muito fraca' | 'Fraca' | 'Razoável' | 'Forte' | 'Muito forte'
+
+/** Each label applies below its bit limit; anything above the last one is "Muito forte". */
+const STRENGTH_BIT_LIMITS: ReadonlyArray<[bitLimit: number, label: PasswordStrength]> = [
+	[28, 'Muito fraca'],
+	[36, 'Fraca'],
+	[60, 'Razoável'],
+	[100, 'Forte'],
+]
+
+const GUESSES_PER_SECOND = 1e10
 
 /**
  * Strength from entropy (the generator knows exactly how the password was made). Time to crack:
@@ -161,27 +183,19 @@ export function strengthFromBits(bits: number): {
 	score: number
 	crackSeconds: number
 } {
-	const label: PasswordStrength =
-		bits < 28
-			? 'Muito fraca'
-			: bits < 36
-				? 'Fraca'
-				: bits < 60
-					? 'Razoável'
-					: bits < 100
-						? 'Forte'
-						: 'Muito forte'
+	const limit = STRENGTH_BIT_LIMITS.find(([bitLimit]) => bits < bitLimit)
 	return {
-		label,
+		label: limit ? limit[1] : 'Muito forte',
 		score: Math.max(4, Math.min(100, Math.round(bits))),
-		crackSeconds: 2 ** bits / 2 / 1e10,
+		crackSeconds: 2 ** bits / 2 / GUESSES_PER_SECOND,
 	}
 }
 
 /** "instantâneo", "3 horas", "200 anos", "mais que a idade do universo". */
 export function formatCrackTime(seconds: number): string {
 	if (seconds < 1) return 'instantâneo'
-	const units: [number, string, string][] = [
+	// `size` is how many of a unit make the next one; 1.38e10 years is the age of the universe.
+	const units: [size: number, singular: string, plural: string][] = [
 		[60, 'segundo', 'segundos'],
 		[60, 'minuto', 'minutos'],
 		[24, 'hora', 'horas'],
@@ -189,10 +203,10 @@ export function formatCrackTime(seconds: number): string {
 		[1.38e10, 'ano', 'anos'],
 	]
 	let value = seconds
-	for (const [size, one, many] of units) {
+	for (const [size, singular, plural] of units) {
 		if (value < size) {
 			const rounded = Math.floor(value)
-			return `${new Intl.NumberFormat('pt-BR').format(rounded)} ${rounded === 1 ? one : many}`
+			return `${new Intl.NumberFormat('pt-BR').format(rounded)} ${rounded === 1 ? singular : plural}`
 		}
 		value /= size
 	}

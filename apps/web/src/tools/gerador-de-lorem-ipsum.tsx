@@ -50,8 +50,8 @@ export default function LoremIpsum() {
 			>
 				<div className="grid gap-4 sm:grid-cols-2">
 					<form.AppField name="amount" listeners={regenerate}>
-						{(f) => (
-							<f.NumberField
+						{(field) => (
+							<field.NumberField
 								label="Quantidade"
 								description="De 1 a 1.000."
 								integer
@@ -61,11 +61,11 @@ export default function LoremIpsum() {
 						)}
 					</form.AppField>
 					<form.AppField name="unit" listeners={regenerate}>
-						{(f) => <f.SelectField label="De" options={UNITS} />}
+						{(field) => <field.SelectField label="De" options={UNITS} />}
 					</form.AppField>
 				</div>
 				<form.AppField name="startWithLorem" listeners={regenerate}>
-					{(f) => <f.CheckboxField label="Começar com “Lorem ipsum dolor sit amet”" />}
+					{(field) => <field.CheckboxField label="Começar com “Lorem ipsum dolor sit amet”" />}
 				</form.AppField>
 			</FormCard>
 			<ResultCard

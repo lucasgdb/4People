@@ -1,6 +1,6 @@
 // Loaded on demand (faker's pt_BR data is ~450KB): import this module inside an event handler.
 import { faker } from '@faker-js/faker/locale/pt_BR'
-import { formatCPF, generateCPF, generateRG, STATE_TO_CPF_REGION } from './documents.ts'
+import { generateCPF, generateRG, STATE_TO_CPF_REGION } from './documents.ts'
 
 export type Person = {
 	nome: string
@@ -45,7 +45,8 @@ const NEIGHBORHOODS = [
 	'Alto da Boa Vista',
 	'Liberdade',
 ]
-const DDD: Record<string, string> = {
+/** Area code of each state's capital. */
+const AREA_CODE_BY_STATE: Record<string, string> = {
 	SP: '11',
 	RJ: '21',
 	MG: '31',
@@ -75,13 +76,33 @@ const DDD: Record<string, string> = {
 	RR: '95',
 }
 
-const slug = (text: string) =>
+const EMAIL_DOMAINS = ['gmail.com', 'outlook.com', 'yahoo.com.br', 'uol.com.br']
+
+/** "João Vítor" → "joao.vitor": lowercase ASCII letters joined by dots. */
+const emailSlug = (text: string) =>
 	text
 		.normalize('NFD')
 		.replace(/\p{Diacritic}/gu, '')
 		.toLowerCase()
 		.replace(/[^a-z]+/g, '.')
 		.replace(/^\.|\.$/g, '')
+
+function ageOn(today: Date, birthDate: Date): number {
+	const birthdayThisYear = new Date(today.getFullYear(), birthDate.getMonth(), birthDate.getDate())
+	const hadBirthdayThisYear = today >= birthdayThisYear
+	return today.getFullYear() - birthDate.getFullYear() - (hadBirthdayThisYear ? 0 : 1)
+}
+
+function randomEmail(firstName: string, lastName: string): string {
+	const suffix = faker.number.int({ min: 1, max: 99 })
+	const domain = faker.helpers.arrayElement(EMAIL_DOMAINS)
+	return `${emailSlug(firstName)}.${emailSlug(lastName)}${suffix}@${domain}`
+}
+
+function randomCellPhone(state: string): string {
+	const areaCode = AREA_CODE_BY_STATE[state] ?? '11'
+	return `(${areaCode}) 9${faker.string.numeric(4)}-${faker.string.numeric(4)}`
+}
 
 /** A consistent fake person: the CPF matches the state, the e-mail matches the name, age matches the birth date. */
 export function generatePerson({
@@ -94,34 +115,28 @@ export function generatePerson({
 	state?: string
 } = {}): Person {
 	const sex = faker.helpers.arrayElement(['male', 'female'] as const)
-	const first = faker.person.firstName(sex)
-	const last = faker.person.lastName()
-	const nome = `${first} ${faker.person.lastName()} ${last}`
-	const uf = state ?? faker.helpers.arrayElement(STATES)
-	const birth = faker.date.birthdate({ mode: 'age', min: minAge, max: maxAge })
-	const now = new Date()
-	const idade =
-		now.getFullYear() -
-		birth.getFullYear() -
-		(now < new Date(now.getFullYear(), birth.getMonth(), birth.getDate()) ? 1 : 0)
-	const cpf = formatCPF(generateCPF({ punctuation: false, state: uf }))
+	const firstName = faker.person.firstName(sex)
+	const familyName = faker.person.lastName()
+	const personState = state ?? faker.helpers.arrayElement(STATES)
+	const birthDate = faker.date.birthdate({ mode: 'age', min: minAge, max: maxAge })
+
 	return {
-		nome,
+		nome: `${firstName} ${faker.person.lastName()} ${familyName}`,
 		sexo: sex === 'male' ? 'Masculino' : 'Feminino',
-		nascimento: birth.toLocaleDateString('pt-BR'),
-		idade,
-		cpf,
+		nascimento: birthDate.toLocaleDateString('pt-BR'),
+		idade: ageOn(new Date(), birthDate),
+		cpf: generateCPF({ state: personState }),
 		rg: generateRG(),
-		email: `${slug(first)}.${slug(last)}${faker.number.int({ min: 1, max: 99 })}@${faker.helpers.arrayElement(['gmail.com', 'outlook.com', 'yahoo.com.br', 'uol.com.br'])}`,
-		celular: `(${DDD[uf] ?? '11'}) 9${faker.string.numeric(4)}-${faker.string.numeric(4)}`,
+		email: randomEmail(firstName, familyName),
+		celular: randomCellPhone(personState),
 		cep: faker.location.zipCode('#####-###'),
 		endereco: faker.location.street(),
 		numero: String(faker.number.int({ min: 1, max: 3000 })),
 		bairro: faker.helpers.arrayElement(NEIGHBORHOODS),
 		cidade: faker.location.city(),
-		estado: uf,
-		mae: `${faker.person.firstName('female')} ${faker.person.lastName()} ${last}`,
-		pai: `${faker.person.firstName('male')} ${last}`,
+		estado: personState,
+		mae: `${faker.person.firstName('female')} ${faker.person.lastName()} ${familyName}`,
+		pai: `${faker.person.firstName('male')} ${familyName}`,
 	}
 }
 

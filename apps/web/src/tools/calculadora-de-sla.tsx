@@ -46,7 +46,7 @@ const TIME_UNITS = [
 const UNIT_SECONDS: Record<TimeUnit, number> = { s: 1, min: 60, h: 3600 }
 
 const PERIOD_OPTIONS = PERIODS.map((period) => ({ value: period.id, label: period.label }))
-const PERIOD_LOWER: Record<PeriodId, string> = {
+const PER_PERIOD_LABEL: Record<PeriodId, string> = {
 	day: 'por dia',
 	week: 'por semana',
 	month: 'por mês',
@@ -55,20 +55,20 @@ const PERIOD_LOWER: Record<PeriodId, string> = {
 }
 
 const COMMON_SLAS = [
-	{ value: 99, nines: 'Dois noves' },
-	{ value: 99.5, nines: '' },
-	{ value: 99.9, nines: 'Três noves' },
-	{ value: 99.95, nines: '' },
-	{ value: 99.99, nines: 'Quatro noves' },
-	{ value: 99.999, nines: 'Cinco noves' },
-].map((sla) => ({ ...sla, table: downtimeTable(sla.value) }))
+	{ value: 99, ninesName: 'Dois noves' },
+	{ value: 99.5, ninesName: '' },
+	{ value: 99.9, ninesName: 'Três noves' },
+	{ value: 99.95, ninesName: '' },
+	{ value: 99.99, ninesName: 'Quatro noves' },
+	{ value: 99.999, ninesName: 'Cinco noves' },
+].map((sla) => ({ ...sla, downtime: downtimeTable(sla.value) }))
+
+const COMMON_SLA_PERIODS = ['day', 'month', 'year'] as const satisfies readonly PeriodId[]
 
 const COMPOSITE_MODES = [
 	{ value: 'series', label: 'Em série', hint: 'Todos precisam funcionar (ex.: app → banco)' },
 	{ value: 'parallel', label: 'Em paralelo', hint: 'Basta um funcionar (réplicas redundantes)' },
 ] as const
-
-const pct = (value: number) => `${formatNumber(value, 6)}%`
 
 const DEFAULTS = {
 	direction: 'availability' as Direction,
@@ -78,27 +78,49 @@ const DEFAULTS = {
 	period: 'month' as PeriodId,
 }
 
-type Outcome = { error: string } | { availability: number; table: Record<PeriodId, number> } | null
+type FormValues = typeof DEFAULTS
+type SlaResult = { availability: number; downtime: Record<PeriodId, number> }
+type Outcome = { error: string } | SlaResult | null
 
-function calculate(values: typeof DEFAULTS): Outcome {
-	if (values.direction === 'availability') {
-		const availability = parseNumber(values.availability)
-		if (availability === null)
-			return values.availability.trim() ? { error: 'Digite um número, como 99,95.' } : null
-		if (availability < 0 || availability > 100)
-			return { error: 'A disponibilidade vai de 0% a 100%.' }
-		return { availability, table: downtimeTable(availability) }
-	}
-	const amount = parseNumber(values.downtime)
-	if (amount === null)
+function formatPercent(value: number): string {
+	return `${formatNumber(value, 6)}%`
+}
+
+function resultFromAvailability(availability: number): SlaResult {
+	return { availability, downtime: downtimeTable(availability) }
+}
+
+function calculateFromAvailability(text: string): Outcome {
+	const availability = parseNumber(text)
+	if (availability === null) return text.trim() ? { error: 'Digite um número, como 99,95.' } : null
+	if (availability < 0 || availability > 100)
+		return { error: 'A disponibilidade vai de 0% a 100%.' }
+	return resultFromAvailability(availability)
+}
+
+function calculateFromDowntime(values: FormValues): Outcome {
+	const downtime = parseNumber(values.downtime)
+	if (downtime === null)
 		return values.downtime.trim() ? { error: 'Digite um número, como 4 ou 1,5.' } : null
 	const period = PERIODS.find((candidate) => candidate.id === values.period) ?? PERIODS[2]
 	try {
-		const availability = availabilityFor(amount * UNIT_SECONDS[values.unit], period.seconds)
-		return { availability, table: downtimeTable(availability) }
+		const downtimeSeconds = downtime * UNIT_SECONDS[values.unit]
+		return resultFromAvailability(availabilityFor(downtimeSeconds, period.seconds))
 	} catch (error) {
 		return { error: (error as Error).message }
 	}
+}
+
+function calculate(values: FormValues): Outcome {
+	if (values.direction === 'availability') return calculateFromAvailability(values.availability)
+	return calculateFromDowntime(values)
+}
+
+function summaryText(result: SlaResult): string {
+	return [
+		`Disponibilidade: ${formatPercent(result.availability)}`,
+		...PERIODS.map((period) => `${period.label}: ${formatDuration(result.downtime[period.id])}`),
+	].join('\n')
 }
 
 /** Availability ↔ allowed downtime for each period, common SLAs and composite SLAs. */
@@ -106,7 +128,7 @@ export default function CalculadoraDeSla() {
 	const form = useAppForm({ defaultValues: DEFAULTS })
 	const values = useStore(form.store, (state) => state.values)
 	const outcome = calculate(values)
-	const ok = outcome && 'availability' in outcome ? outcome : null
+	const result = outcome && 'availability' in outcome ? outcome : null
 
 	return (
 		<div className="flex flex-col gap-5">
@@ -149,38 +171,15 @@ export default function CalculadoraDeSla() {
 				<ResultCard
 					empty={!outcome}
 					emptyText="Informe a disponibilidade ou o tempo fora do ar."
-					copyText={
-						ok
-							? [
-									`Disponibilidade: ${pct(ok.availability)}`,
-									...PERIODS.map((p) => `${p.label}: ${formatDuration(ok.table[p.id])}`),
-								].join('\n')
-							: undefined
-					}
+					copyText={result ? summaryText(result) : undefined}
 				>
 					{outcome && 'error' in outcome ? (
 						<Alert tone="danger">
 							<CircleX />
 							{outcome.error}
 						</Alert>
-					) : ok ? (
-						<>
-							<div className="flex flex-col gap-1">
-								<span className="text-fg-muted text-[0.8125rem]">Disponibilidade</span>
-								<OutputValue>{pct(ok.availability)}</OutputValue>
-							</div>
-							<h3 className="text-fg text-sm font-semibold">Tempo fora do ar permitido</h3>
-							<DataList
-								items={PERIODS.map((period) => ({
-									label: PERIOD_LOWER[period.id],
-									value: formatDuration(ok.table[period.id]),
-								}))}
-							/>
-							<p className="text-fg-muted text-[0.8125rem]">
-								Ano de 365,25 dias; mês = ano ÷ 12 (30,44 dias); trimestre = ano ÷ 4.
-							</p>
-						</>
 					) : null}
+					{result ? <SlaResultView result={result} /> : null}
 				</ResultCard>
 			</ToolLayout>
 			<div className="grid items-start gap-5 xl:grid-cols-2">
@@ -188,6 +187,27 @@ export default function CalculadoraDeSla() {
 				<CompositeSla />
 			</div>
 		</div>
+	)
+}
+
+function SlaResultView({ result }: { result: SlaResult }) {
+	return (
+		<>
+			<div className="flex flex-col gap-1">
+				<span className="text-fg-muted text-[0.8125rem]">Disponibilidade</span>
+				<OutputValue>{formatPercent(result.availability)}</OutputValue>
+			</div>
+			<h3 className="text-fg text-sm font-semibold">Tempo fora do ar permitido</h3>
+			<DataList
+				items={PERIODS.map((period) => ({
+					label: PER_PERIOD_LABEL[period.id],
+					value: formatDuration(result.downtime[period.id]),
+				}))}
+			/>
+			<p className="text-fg-muted text-[0.8125rem]">
+				Ano de 365,25 dias; mês = ano ÷ 12 (30,44 dias); trimestre = ano ÷ 4.
+			</p>
+		</>
 	)
 }
 
@@ -206,9 +226,9 @@ function CommonSlas() {
 					<TableHeader>
 						<tr>
 							<TableHead>SLA</TableHead>
-							{(['day', 'month', 'year'] as const).map((id) => (
-								<TableHead key={id} numeric>
-									{PERIOD_LOWER[id]}
+							{COMMON_SLA_PERIODS.map((periodId) => (
+								<TableHead key={periodId} numeric>
+									{PER_PERIOD_LABEL[periodId]}
 								</TableHead>
 							))}
 						</tr>
@@ -220,16 +240,16 @@ function CommonSlas() {
 									scope="row"
 									className="border-rule text-fg h-auto border-t border-b-0 py-3 text-sm font-semibold tracking-normal normal-case group-first/row:border-t-0"
 								>
-									<span className="tabular">{pct(sla.value)}</span>
-									{sla.nines ? (
+									<span className="tabular">{formatPercent(sla.value)}</span>
+									{sla.ninesName ? (
 										<span className="text-fg-muted block text-[0.75rem] font-normal">
-											{sla.nines}
+											{sla.ninesName}
 										</span>
 									) : null}
 								</TableHead>
-								{(['day', 'month', 'year'] as const).map((id) => (
-									<TableCell key={id} numeric className="whitespace-nowrap">
-										{formatDuration(sla.table[id])}
+								{COMMON_SLA_PERIODS.map((periodId) => (
+									<TableCell key={periodId} numeric className="whitespace-nowrap">
+										{formatDuration(sla.downtime[periodId])}
 									</TableCell>
 								))}
 							</TableRow>
@@ -241,14 +261,25 @@ function CommonSlas() {
 	)
 }
 
+type CompositeMode = 'series' | 'parallel'
+
+/** The product shown under the composite SLA, e.g. "0,9995 × 0,9999" or "1 − (0,0005 × 0,0001)". */
+function compositeFormula(availabilities: number[], mode: CompositeMode): string {
+	if (mode === 'series')
+		return availabilities.map((percent) => formatNumber(percent / 100, 8)).join(' × ')
+	const failureProbabilities = availabilities.map((percent) => formatNumber(1 - percent / 100, 8))
+	return `1 − (${failureProbabilities.join(' × ')})`
+}
+
 function CompositeSla() {
 	const titleId = useId()
 	const form = useAppForm({
-		defaultValues: { list: '99,95 99,99 99,9', mode: 'series' as 'series' | 'parallel' },
+		defaultValues: { list: '99,95 99,99 99,9', mode: 'series' as CompositeMode },
 	})
 	const values = useStore(form.store, (state) => state.values)
-	const parsed = values.list.trim() ? parsePercentList(values.list) : null
-	const total = parsed ? compositeAvailability(parsed, values.mode) : null
+	const hasList = values.list.trim() !== ''
+	const availabilities = hasList ? parsePercentList(values.list) : null
+	const total = availabilities ? compositeAvailability(availabilities, values.mode) : null
 
 	return (
 		<section
@@ -274,22 +305,24 @@ function CompositeSla() {
 				</form.AppField>
 			</form>
 			<div aria-live="polite">
-				{total !== null && parsed ? (
+				{total !== null && availabilities ? (
 					<div className="rounded-control bg-surface-muted flex flex-col gap-1 px-5 py-4">
 						<span className="text-fg-muted text-[0.8125rem]">SLA composto</span>
 						<span className="flex items-center justify-between gap-3">
-							<span className="text-fg tabular text-2xl font-bold">{pct(total)}</span>
-							<CopyButton value={pct(total)} variant="ghost" aria-label="Copiar SLA composto" />
+							<span className="text-fg tabular text-2xl font-bold">{formatPercent(total)}</span>
+							<CopyButton
+								value={formatPercent(total)}
+								variant="ghost"
+								aria-label="Copiar SLA composto"
+							/>
 						</span>
 						<span className="text-fg-muted tabular text-[0.8125rem]">
-							{values.mode === 'series'
-								? parsed.map((value) => formatNumber(value / 100, 8)).join(' × ')
-								: `1 − (${parsed.map((value) => formatNumber(1 - value / 100, 8)).join(' × ')})`}
+							{compositeFormula(availabilities, values.mode)}
 							{' · '}
 							{formatDuration(downtimeTable(total).month)} fora do ar por mês
 						</span>
 					</div>
-				) : values.list.trim() ? (
+				) : hasList ? (
 					<p className="text-danger text-sm">
 						Use porcentagens de 0 a 100 separadas por espaço, como 99,95 99,9.
 					</p>

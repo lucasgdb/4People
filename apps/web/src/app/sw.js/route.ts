@@ -29,6 +29,7 @@ function staticFiles(): string[] {
 const pages = [
 	'/',
 	'/offline',
+	'/ferramentas',
 	...CATEGORIES.flatMap((category) => [
 		`/${category.slug}`,
 		...category.sections.map((section) => `/${category.slug}/${section.slug}`),

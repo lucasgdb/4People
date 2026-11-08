@@ -8,7 +8,7 @@ import { useToolForm } from '@/components/form/use-tool-form'
 import { MASKS } from '@/lib/masks'
 import { FormCard, ResultCard, ToolLayout } from './_shared/tool-layout'
 
-const cepResponse = z.object({
+const addressSchema = z.object({
 	cep: z.string(),
 	state: z.string(),
 	city: z.string(),
@@ -16,7 +16,7 @@ const cepResponse = z.object({
 	street: z.string().nullish(),
 })
 
-type Address = z.infer<typeof cepResponse>
+type Address = z.infer<typeof addressSchema>
 
 async function fetchCep(cep: string): Promise<Address> {
 	const response = await fetch(`https://brasilapi.com.br/api/cep/v1/${cep}`)
@@ -25,42 +25,46 @@ async function fetchCep(cep: string): Promise<Address> {
 			'CEP não encontrado. Confira os 8 dígitos ou procure o CEP no site dos Correios.',
 		)
 	if (!response.ok) throw new Error('Não foi possível consultar o CEP agora. Tente novamente.')
-	return cepResponse.parse(await response.json())
+	return addressSchema.parse(await response.json())
 }
 
-const cepSchema = z.object({
+const cepFormSchema = z.object({
 	cep: z
 		.string()
 		.trim()
-		.transform((value) => value.replace(/\D/g, ''))
+		.transform((cep) => cep.replace(/\D/g, ''))
 		.pipe(z.string().length(8, 'O CEP deve ter 8 dígitos.')),
 })
 
-/** Address of a CEP from BrasilAPI (Correios and other public sources), via TanStack Query. */
+function formatCep(cep: string): string {
+	return cep.replace(/^(\d{5})(\d{3})$/, '$1-$2')
+}
+
+function addressText(address: Address): string {
+	return [
+		`CEP: ${address.cep}`,
+		address.street && `Rua: ${address.street}`,
+		address.neighborhood && `Bairro: ${address.neighborhood}`,
+		`Cidade: ${address.city}`,
+		`Estado: ${address.state}`,
+	]
+		.filter(Boolean)
+		.join('\n')
+}
+
+/** Address of a CEP from BrasilAPI (Correios and other public sources). */
 export default function SearchCep() {
 	const lookup = useMutation({ mutationKey: ['cep'], mutationFn: fetchCep })
 	const form = useToolForm({
-		schema: cepSchema,
+		schema: cepFormSchema,
 		defaultValues: { cep: '' },
-		onSubmit: ({ cep }) =>
-			lookup.mutateAsync(cep).then(
-				() => undefined,
-				() => undefined,
-			),
+		onSubmit: async ({ cep }) => {
+			// The error is shown from the mutation state, so the rejection is not rethrown.
+			await lookup.mutateAsync(cep).catch(() => undefined)
+		},
 	})
 
 	const address = lookup.data
-	const text = address
-		? [
-				`CEP: ${address.cep}`,
-				address.street && `Rua: ${address.street}`,
-				address.neighborhood && `Bairro: ${address.neighborhood}`,
-				`Cidade: ${address.city}`,
-				`Estado: ${address.state}`,
-			]
-				.filter(Boolean)
-				.join('\n')
-		: ''
 
 	return (
 		<ToolLayout>
@@ -76,8 +80,8 @@ export default function SearchCep() {
 				}
 			>
 				<form.AppField name="cep">
-					{(f) => (
-						<f.TextField
+					{(field) => (
+						<field.TextField
 							label="CEP"
 							placeholder="Ex: 01310-200"
 							mask={MASKS.cep}
@@ -90,7 +94,7 @@ export default function SearchCep() {
 			<ResultCard
 				empty={!address && !lookup.isError}
 				emptyText={lookup.isPending ? 'Buscando…' : 'Digite um CEP para consultar o endereço.'}
-				copyText={text}
+				copyText={address ? addressText(address) : ''}
 				downloadName="cep.txt"
 				onClear={() => {
 					lookup.reset()
@@ -105,7 +109,7 @@ export default function SearchCep() {
 				) : address ? (
 					<DataList
 						items={[
-							{ label: 'CEP', value: address.cep.replace(/^(\d{5})(\d{3})$/, '$1-$2') },
+							{ label: 'CEP', value: formatCep(address.cep) },
 							{ label: 'Estado', value: address.state },
 							{ label: 'Cidade', value: address.city },
 							{ label: 'Bairro', value: address.neighborhood || '—' },

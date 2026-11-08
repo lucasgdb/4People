@@ -5,10 +5,8 @@ import type { z } from 'zod'
 import { focusFirstInvalid, useAppForm } from './form'
 
 /**
- * Standard form wiring for tools: validates with Zod on submit, then revalidates on every change,
- * hands the parsed (transformed) output to `onSubmit`, and when a submit fails, moves focus to the
- * first invalid field (TanStack Form's `onSubmitInvalid`), so keyboard and screen reader users land
- * on the error instead of staying on the button.
+ * Standard form wiring for tools: Zod validation on submit, then on every change. `onSubmit`
+ * receives the parsed output; a failed submit moves focus to the first invalid field.
  */
 export function useToolForm<
 	TSchema extends z.ZodType<Record<string, unknown>, Record<string, unknown>>,
@@ -26,7 +24,7 @@ export function useToolForm<
 		validationLogic: revalidateLogic(),
 		validators: { onDynamic: schema as unknown as z.ZodType<unknown, z.input<TSchema>> },
 		onSubmit: ({ value }) => onSubmit(schema.parse(value)),
-		// Errors are mapped onto the fields during this tick; focus after React has rendered them.
+		// Errors reach the fields during this tick; focus once React has rendered them.
 		onSubmitInvalid: ({ formApi }) => requestAnimationFrame(() => focusFirstInvalid(formApi)),
 	})
 }

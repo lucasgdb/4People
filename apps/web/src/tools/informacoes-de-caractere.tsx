@@ -14,11 +14,13 @@ import { useAppForm } from '@/components/form/form'
 import { charInfo } from '@/lib/algorithms/text'
 import { FormCard, ResultCard, ToolLayout } from './_shared/tool-layout'
 
-const LIMIT = 200
+const MAX_CHARACTERS = 200
 
-function Rows({ text, onClear }: { text: string; onClear: () => void }) {
-	const deferred = useDeferredValue(text)
-	const rows = useMemo(() => charInfo(deferred, LIMIT), [deferred])
+const COLUMNS = ['', 'Código', 'Tipo', 'UTF-8', 'HTML', 'JavaScript']
+
+function CharacterTable({ text, onClear }: { text: string; onClear: () => void }) {
+	const deferredText = useDeferredValue(text)
+	const rows = useMemo(() => charInfo(deferredText, MAX_CHARACTERS), [deferredText])
 	return (
 		<ResultCard
 			title="Caracteres"
@@ -30,8 +32,10 @@ function Rows({ text, onClear }: { text: string; onClear: () => void }) {
 				<Table className="text-[0.875rem]">
 					<TableHeader>
 						<tr>
-							{['', 'Código', 'Tipo', 'UTF-8', 'HTML', 'JavaScript'].map((h) => (
-								<TableHead key={h}>{h || <span className="sr-only">Caractere</span>}</TableHead>
+							{COLUMNS.map((column) => (
+								<TableHead key={column}>
+									{column || <span className="sr-only">Caractere</span>}
+								</TableHead>
 							))}
 						</tr>
 					</TableHeader>
@@ -60,8 +64,10 @@ function Rows({ text, onClear }: { text: string; onClear: () => void }) {
 					</TableBody>
 				</Table>
 			</TableCard>
-			{[...deferred].length > LIMIT ? (
-				<p className="text-fg-muted text-[0.8125rem]">Mostrando os primeiros {LIMIT} caracteres.</p>
+			{[...deferredText].length > MAX_CHARACTERS ? (
+				<p className="text-fg-muted text-[0.8125rem]">
+					Mostrando os primeiros {MAX_CHARACTERS} caracteres.
+				</p>
 			) : null}
 		</ResultCard>
 	)
@@ -77,11 +83,13 @@ export default function CharacterInfo() {
 				actions={<p className="text-fg-muted text-[0.8125rem]">Atualiza enquanto você digita.</p>}
 			>
 				<form.AppField name="text">
-					{(f) => <f.TextareaField label="Caracteres" rows={4} placeholder="Ex: ç, é, 😀, ™" />}
+					{(field) => (
+						<field.TextareaField label="Caracteres" rows={4} placeholder="Ex: ç, é, 😀, ™" />
+					)}
 				</form.AppField>
 			</FormCard>
 			<form.Subscribe selector={(state) => state.values.text}>
-				{(text) => <Rows text={text} onClear={() => form.reset()} />}
+				{(text) => <CharacterTable text={text} onClear={() => form.reset()} />}
 			</form.Subscribe>
 		</ToolLayout>
 	)

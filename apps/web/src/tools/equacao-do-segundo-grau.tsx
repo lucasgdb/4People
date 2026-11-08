@@ -22,12 +22,10 @@ export default function Bhaskara() {
 			compute={({ a = 1, b = 0, c = 0 }) => {
 				const { delta, roots, message } = bhaskara(a, b, c)
 				if (roots.length === 0) return `Δ = ${formatNumber(delta)}. ${message}`
+				const rootLabels = roots.length === 1 ? ['x₁ = x₂'] : ['x₁', 'x₂']
 				return [
 					{ label: 'Delta (Δ)', value: delta },
-					...roots.map((value, index) => ({
-						label: roots.length === 1 ? 'x₁ = x₂' : index === 0 ? 'x₁' : 'x₂',
-						value,
-					})),
+					...roots.map((value, index) => ({ label: rootLabels[index] ?? '', value })),
 				]
 			}}
 		/>

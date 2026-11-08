@@ -45,11 +45,11 @@ export default function NumberToWords() {
 				}
 			>
 				<form.AppField name="mode">
-					{(f) => <f.RadioField label="Escrever como" options={MODES} />}
+					{(field) => <field.RadioField label="Escrever como" options={MODES} />}
 				</form.AppField>
 				<form.AppField name="value">
-					{(f) => (
-						<f.TextField
+					{(field) => (
+						<field.TextField
 							label="Número"
 							placeholder="Ex: 1.234,56"
 							inputMode="decimal"

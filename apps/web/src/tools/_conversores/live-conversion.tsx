@@ -7,30 +7,40 @@ import type { Conversion } from '@/lib/algorithms/convert'
 import { formatNumber } from '@/lib/format'
 import { OutputBlock, ResultCard } from '../_shared/tool-layout'
 
+const hasBlankInput = (values: unknown) => {
+	const input = (values as { input?: unknown }).input
+	return typeof input === 'string' && !input.trim()
+}
+
 /**
  * Runs an (async) conversion whenever the form values change, on a deferred copy so typing stays
- * smooth. Stale results from an older run never overwrite a newer one; an empty `input` gives null.
+ * smooth. A stale run never overwrites a newer one. A blank `input` gives null without running, so
+ * the parser library isn't loaded until there is something to convert.
  */
-export function useLiveConversion<V, T>(values: V, run: (values: V) => Promise<T> | T): T | null {
-	const key = useDeferredValue(JSON.stringify(values))
-	const runRef = useRef(run)
-	runRef.current = run
-	const [result, setResult] = useState<T | null>(null)
+export function useLiveConversion<Values, Result>(
+	values: Values,
+	convert: (values: Values) => Promise<Result> | Result,
+): Result | null {
+	// Serialized so the effect reruns on content changes, not on every new values object.
+	const serializedValues = useDeferredValue(JSON.stringify(values))
+	const convertRef = useRef(convert)
+	convertRef.current = convert
+	const [result, setResult] = useState<Result | null>(null)
+
 	useEffect(() => {
-		let alive = true
-		Promise.resolve(JSON.parse(key) as V)
-			// An empty `input` skips the run, so the parser library isn't even loaded until needed.
-			.then((parsed) => {
-				const input = (parsed as { input?: unknown }).input
-				return typeof input === 'string' && !input.trim() ? null : runRef.current(parsed)
-			})
-			.then((next) => {
-				if (alive) setResult(next)
+		let isLatestRun = true
+		Promise.resolve(JSON.parse(serializedValues) as Values)
+			.then((latestValues) =>
+				hasBlankInput(latestValues) ? null : convertRef.current(latestValues),
+			)
+			.then((nextResult) => {
+				if (isLatestRun) setResult(nextResult)
 			})
 		return () => {
-			alive = false
+			isLatestRun = false
 		}
-	}, [key])
+	}, [serializedValues])
+
 	return result
 }
 
@@ -44,21 +54,22 @@ export function ErrorExcerpt({
 	line: number
 	column?: number
 }) {
-	const text = source.split(/\r?\n/)[line - 1]
-	if (text === undefined) return null
+	const lineText = source.split(/\r?\n/)[line - 1]
+	if (lineText === undefined) return null
 	const gutter = `${line} | `
+	const caretLine = column ? `\n${' '.repeat(gutter.length + Math.max(0, column - 1))}^` : null
 	return (
 		<OutputBlock className="text-danger-ink">
 			<span translate="no">
 				{gutter}
-				{text}
-				{column ? `\n${' '.repeat(gutter.length + Math.max(0, column - 1))}^` : null}
+				{lineText}
+				{caretLine}
 			</span>
 		</OutputBlock>
 	)
 }
 
-const bytes = (text: string) => new TextEncoder().encode(text).length
+const byteLength = (text: string) => new TextEncoder().encode(text).length
 
 /** Result card of a text → text converter: output, size, warnings, or the parse error in context. */
 export function ConversionResult({
@@ -79,44 +90,47 @@ export function ConversionResult({
 	/** Extra content under the output (tables, notes). */
 	children?: ReactNode
 }) {
-	const empty = !source.trim() || result === null
+	const visibleResult = source.trim() ? result : null
+	const output = visibleResult?.ok ? visibleResult.output : undefined
 	return (
 		<ResultCard
 			title={title}
-			empty={empty}
+			empty={!visibleResult}
 			emptyText={emptyText}
-			copyText={!empty && result?.ok ? result.output : undefined}
-			downloadName={!empty && result?.ok ? downloadName : undefined}
+			copyText={output}
+			downloadName={output === undefined ? undefined : downloadName}
 			onClear={onClear}
 		>
-			{empty ? null : result?.ok ? (
+			{visibleResult?.ok && (
 				<>
 					<p className="text-fg-muted tabular text-sm">
-						{formatNumber(bytes(source))} → {formatNumber(bytes(result.output))} bytes
-						{result.info ? ` · ${result.info}` : null}
+						{formatNumber(byteLength(source))} → {formatNumber(byteLength(visibleResult.output))}{' '}
+						bytes
+						{visibleResult.info ? ` · ${visibleResult.info}` : null}
 					</p>
-					{result.warnings?.map((warning) => (
+					{visibleResult.warnings?.map((warning) => (
 						<Alert key={warning} tone="warning">
 							<CircleAlert />
 							{warning}
 						</Alert>
 					))}
 					<OutputBlock className="max-h-[36rem]">
-						<span translate="no">{result.output}</span>
+						<span translate="no">{visibleResult.output}</span>
 					</OutputBlock>
 					{children}
 				</>
-			) : result ? (
+			)}
+			{visibleResult && !visibleResult.ok && (
 				<>
 					<Alert tone="danger">
 						<CircleX />
-						{result.error}
+						{visibleResult.error}
 					</Alert>
-					{result.line ? (
-						<ErrorExcerpt source={source} line={result.line} column={result.column} />
+					{visibleResult.line ? (
+						<ErrorExcerpt source={source} line={visibleResult.line} column={visibleResult.column} />
 					) : null}
 				</>
-			) : null}
+			)}
 		</ResultCard>
 	)
 }

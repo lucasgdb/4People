@@ -23,7 +23,7 @@ describe('calculators', () => {
 	})
 	it('rule of three, direct and inverse', () => {
 		assert.equal(ruleOfThree(2, 10, 6, 'direct'), 30) // 2 kg → R$10; 6 kg → R$30
-		assert.equal(ruleOfThree(4, 6, 3, 'inverse'), 8) // 4 pedreiros em 6 dias; 3 pedreiros → 8 dias
+		assert.equal(ruleOfThree(4, 6, 3, 'inverse'), 8) // 4 workers take 6 days; 3 workers → 8 days
 	})
 	it('compound interest', () => {
 		const result = compoundInterest({

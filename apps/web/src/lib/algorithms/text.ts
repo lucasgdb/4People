@@ -1,3 +1,5 @@
+/* ----------------------------- Character count ----------------------------- */
+
 const VOWELS = /[aeiouáàâãéêíóôõúü]/i
 const CONSONANTS = /[bcçdfghjklmnpqrstvwxyz]/i
 
@@ -8,7 +10,7 @@ export function countCharacters(text: string) {
 	let vowels = 0
 	let consonants = 0
 	let numbers = 0
-	// One pass over the text instead of one filter per metric (matters on long pastes).
+	// A single pass instead of one filter per metric: it matters on long pastes.
 	for (const char of chars) {
 		if (!/\s/.test(char)) withoutSpaces += 1
 		if (char === ' ') spaces += 1
@@ -28,7 +30,7 @@ export function countCharacters(text: string) {
 	}
 }
 
-/* ------------------------------ Conversor de caixa ---------------------------- */
+/* ------------------------------ Case converter ------------------------------ */
 
 export const CASES = {
 	upper: 'MAIÚSCULAS',
@@ -44,8 +46,10 @@ export const CASES = {
 
 export type CaseKind = keyof typeof CASES
 
+const LOCALE = 'pt-BR'
+
 /** Words of an identifier or sentence: splits on spaces, punctuation and camelCase humps. */
-const words = (text: string) =>
+const splitWords = (text: string) =>
 	text
 		.replace(/([\p{Ll}\d])(\p{Lu})/gu, '$1 $2')
 		.replace(/(\p{Lu})(\p{Lu}\p{Ll})/gu, '$1 $2')
@@ -53,51 +57,53 @@ const words = (text: string) =>
 		.filter(Boolean)
 
 const capitalize = (word: string) =>
-	word.charAt(0).toLocaleUpperCase('pt-BR') + word.slice(1).toLocaleLowerCase('pt-BR')
+	word.charAt(0).toLocaleUpperCase(LOCALE) + word.slice(1).toLocaleLowerCase(LOCALE)
+
 /** Identifiers drop accents ("ação" → "acao") so they work in code and URLs. */
-const plain = (word: string) => word.normalize('NFD').replace(/\p{Diacritic}/gu, '')
+const stripAccents = (word: string) => word.normalize('NFD').replace(/\p{Diacritic}/gu, '')
+
+const upperCaseLetter = (prefix: string, letter: string) =>
+	prefix + letter.toLocaleUpperCase(LOCALE)
 
 export function convertCase(text: string, kind: CaseKind): string {
+	const identifierWords = () => splitWords(text).map(stripAccents)
 	switch (kind) {
 		case 'upper':
-			return text.toLocaleUpperCase('pt-BR')
+			return text.toLocaleUpperCase(LOCALE)
 		case 'lower':
-			return text.toLocaleLowerCase('pt-BR')
+			return text.toLocaleLowerCase(LOCALE)
 		case 'title':
 			return text
-				.toLocaleLowerCase('pt-BR')
-				.replace(/(^|\s)(\p{L})/gu, (_, space, letter) => space + letter.toLocaleUpperCase('pt-BR'))
+				.toLocaleLowerCase(LOCALE)
+				.replace(/(^|\s)(\p{L})/gu, (_match, space, letter) => upperCaseLetter(space, letter))
 		case 'sentence':
 			return text
-				.toLocaleLowerCase('pt-BR')
-				.replace(
-					/(^\s*|[.!?]\s+)(\p{L})/gu,
-					(_, before, letter) => before + letter.toLocaleUpperCase('pt-BR'),
+				.toLocaleLowerCase(LOCALE)
+				.replace(/(^\s*|[.!?]\s+)(\p{L})/gu, (_match, before, letter) =>
+					upperCaseLetter(before, letter),
 				)
 		case 'camel':
-			return words(text)
-				.map((word, index) => (index === 0 ? plain(word).toLowerCase() : capitalize(plain(word))))
+			return identifierWords()
+				.map((word, index) => (index === 0 ? word.toLowerCase() : capitalize(word)))
 				.join('')
 		case 'pascal':
-			return words(text)
-				.map((word) => capitalize(plain(word)))
-				.join('')
+			return identifierWords().map(capitalize).join('')
 		case 'snake':
-			return words(text)
-				.map((word) => plain(word).toLowerCase())
+			return identifierWords()
+				.map((word) => word.toLowerCase())
 				.join('_')
 		case 'kebab':
-			return words(text)
-				.map((word) => plain(word).toLowerCase())
+			return identifierWords()
+				.map((word) => word.toLowerCase())
 				.join('-')
 		case 'constant':
-			return words(text)
-				.map((word) => plain(word).toUpperCase())
+			return identifierWords()
+				.map((word) => word.toUpperCase())
 				.join('_')
 	}
 }
 
-/* -------------------------------- Ordenar linhas ------------------------------- */
+/* ------------------------------- Sort lines ------------------------------- */
 
 export type SortOrder = 'asc' | 'desc' | 'length' | 'shuffle'
 
@@ -112,21 +118,35 @@ export type SortOptions = {
 	trim: boolean
 }
 
+/** Keeps the first of the lines the collator considers equal. */
+function removeDuplicates(lines: readonly string[], collator: Intl.Collator): string[] {
+	const kept: string[] = []
+	for (const line of lines) {
+		const isDuplicate = kept.some((keptLine) => collator.compare(keptLine, line) === 0)
+		if (!isDuplicate) kept.push(line)
+	}
+	return kept
+}
+
+/** Fisher–Yates shuffle. */
+function shuffleInPlace(lines: string[], random: () => number): string[] {
+	for (let index = lines.length - 1; index > 0; index -= 1) {
+		const swapIndex = Math.floor(random() * (index + 1))
+		;[lines[index], lines[swapIndex]] = [lines[swapIndex] as string, lines[index] as string]
+	}
+	return lines
+}
+
 export function sortLines(text: string, options: SortOptions, random = Math.random): string[] {
 	let lines = text.split(/\r?\n/)
 	if (options.trim) lines = lines.map((line) => line.trim())
 	if (options.removeEmpty) lines = lines.filter((line) => line.trim() !== '')
-	const collator = new Intl.Collator('pt-BR', {
+	const collator = new Intl.Collator(LOCALE, {
 		sensitivity: options.ignoreCase ? 'base' : 'variant',
 		numeric: options.natural,
 	})
-	if (options.unique) {
-		const kept: string[] = []
-		for (const line of lines) {
-			if (!kept.some((other) => collator.compare(other, line) === 0)) kept.push(line)
-		}
-		lines = kept
-	}
+	if (options.unique) lines = removeDuplicates(lines, collator)
+
 	switch (options.order) {
 		case 'asc':
 			return lines.sort(collator.compare)
@@ -135,15 +155,11 @@ export function sortLines(text: string, options: SortOptions, random = Math.rand
 		case 'length':
 			return lines.sort((a, b) => a.length - b.length || collator.compare(a, b))
 		case 'shuffle':
-			for (let i = lines.length - 1; i > 0; i -= 1) {
-				const j = Math.floor(random() * (i + 1))
-				;[lines[i], lines[j]] = [lines[j] as string, lines[i] as string]
-			}
-			return lines
+			return shuffleInPlace(lines, random)
 	}
 }
 
-/* ----------------------------- Frequência de palavras ----------------------------- */
+/* ------------------------------ Word frequency ------------------------------ */
 
 /** Most frequent Portuguese function words, skipped on request. */
 export const STOPWORDS_PT = new Set(
@@ -158,47 +174,56 @@ export function wordFrequency(
 	text: string,
 	{ ignoreStopwords = false, minLength = 1 } = {},
 ): { total: number; words: WordCount[] } {
-	const tokens = (
-		text.toLocaleLowerCase('pt-BR').match(/[\p{L}\p{N}][\p{L}\p{N}'’-]*/gu) ?? []
-	).filter((word) => word.length >= minLength && !(ignoreStopwords && STOPWORDS_PT.has(word)))
+	const allWords = text.toLocaleLowerCase(LOCALE).match(/[\p{L}\p{N}][\p{L}\p{N}'’-]*/gu) ?? []
+	const countedWords = allWords.filter(
+		(word) => word.length >= minLength && !(ignoreStopwords && STOPWORDS_PT.has(word)),
+	)
+	const total = countedWords.length
+
 	const counts = new Map<string, number>()
-	for (const word of tokens) counts.set(word, (counts.get(word) ?? 0) + 1)
-	const collator = new Intl.Collator('pt-BR')
+	for (const word of countedWords) counts.set(word, (counts.get(word) ?? 0) + 1)
+
+	const collator = new Intl.Collator(LOCALE)
 	const words = [...counts]
-		.map(([word, count]) => ({ word, count, share: tokens.length ? count / tokens.length : 0 }))
+		.map(([word, count]) => ({ word, count, share: total ? count / total : 0 }))
 		.sort((a, b) => b.count - a.count || collator.compare(a.word, b.word))
-	return { total: tokens.length, words }
+	return { total, words }
 }
 
-/* --------------------------------- Texto ⇄ HTML -------------------------------- */
+/* ------------------------------- Text ⇄ HTML ------------------------------- */
 
-const ESCAPES: Record<string, string> = {
+const HTML_ESCAPES: Record<string, string> = {
 	'&': '&amp;',
 	'<': '&lt;',
 	'>': '&gt;',
 	'"': '&quot;',
 	"'": '&#39;',
 }
+
 export const escapeHtml = (text: string) =>
-	text.replace(/[&<>"']/g, (char) => ESCAPES[char] ?? char)
+	text.replace(/[&<>"']/g, (char) => HTML_ESCAPES[char] ?? char)
+
+/** URLs become links; trailing punctuation is left out of the link. */
+const linkify = (html: string) =>
+	html.replace(/\bhttps?:\/\/[^\s<]+[^\s<.,;:!?)]/g, (url) => `<a href="${url}">${url}</a>`)
 
 /** Plain text → HTML: escapes special characters; blank lines make paragraphs, single breaks <br>. */
 export function textToHtml(text: string, { paragraphs = true, links = false } = {}): string {
-	const linkify = (html: string) =>
-		links
-			? html.replace(/\bhttps?:\/\/[^\s<]+[^\s<.,;:!?)]/g, (url) => `<a href="${url}">${url}</a>`)
-			: html
-	const block = (part: string) => linkify(escapeHtml(part)).replace(/\r?\n/g, '<br>\n')
-	if (!paragraphs) return block(text)
+	const toHtmlBlock = (block: string) => {
+		const escaped = escapeHtml(block)
+		const withLinks = links ? linkify(escaped) : escaped
+		return withLinks.replace(/\r?\n/g, '<br>\n')
+	}
+	if (!paragraphs) return toHtmlBlock(text)
 	return text
 		.split(/(?:\r?\n){2,}/)
-		.map((part) => part.trim())
+		.map((paragraph) => paragraph.trim())
 		.filter(Boolean)
-		.map((part) => `<p>${block(part)}</p>`)
+		.map((paragraph) => `<p>${toHtmlBlock(paragraph)}</p>`)
 		.join('\n')
 }
 
-const NAMED: Record<string, string> = {
+const NAMED_ENTITIES: Record<string, string> = {
 	amp: '&',
 	lt: '<',
 	gt: '>',
@@ -251,15 +276,15 @@ export function htmlToText(html: string): string {
 		.replace(/<br\s*\/?>/gi, '\n')
 		.replace(/<\/p>\s*/gi, '\n\n')
 		.replace(/<[^>]+>/g, '')
-		.replace(/&#x([0-9a-f]+);/gi, (_, hex: string) =>
+		.replace(/&#x([0-9a-f]+);/gi, (_match, hex: string) =>
 			String.fromCodePoint(Number.parseInt(hex, 16)),
 		)
-		.replace(/&#(\d+);/g, (_, dec: string) => String.fromCodePoint(Number(dec)))
-		.replace(/&([a-z]+);/gi, (entity, name: string) => NAMED[name] ?? entity)
+		.replace(/&#(\d+);/g, (_match, decimal: string) => String.fromCodePoint(Number(decimal)))
+		.replace(/&([a-z]+);/gi, (entity, name: string) => NAMED_ENTITIES[name] ?? entity)
 		.trim()
 }
 
-/* --------------------------- Informações de caractere --------------------------- */
+/* ---------------------------- Character details ---------------------------- */
 
 export type CharInfo = {
 	char: string
@@ -273,55 +298,53 @@ export type CharInfo = {
 	kind: string
 }
 
+/** Checked in order: the first matching Unicode category names the character. */
+const CHARACTER_KINDS: ReadonlyArray<[RegExp, string]> = [
+	[/\p{Lu}/u, 'Letra maiúscula'],
+	[/\p{Ll}/u, 'Letra minúscula'],
+	[/\p{L}/u, 'Letra'],
+	[/\p{Nd}/u, 'Dígito'],
+	[/\p{N}/u, 'Número'],
+	[/\p{Extended_Pictographic}/u, 'Emoji'],
+	[/\p{P}/u, 'Pontuação'],
+	[/\p{S}/u, 'Símbolo'],
+	[/\p{Zs}/u, 'Espaço'],
+	[/\p{Cc}/u, 'Controle'],
+	[/\p{M}/u, 'Marca combinante'],
+]
+
 const kindOf = (char: string) =>
-	/\p{Lu}/u.test(char)
-		? 'Letra maiúscula'
-		: /\p{Ll}/u.test(char)
-			? 'Letra minúscula'
-			: /\p{L}/u.test(char)
-				? 'Letra'
-				: /\p{Nd}/u.test(char)
-					? 'Dígito'
-					: /\p{N}/u.test(char)
-						? 'Número'
-						: /\p{Extended_Pictographic}/u.test(char)
-							? 'Emoji'
-							: /\p{P}/u.test(char)
-								? 'Pontuação'
-								: /\p{S}/u.test(char)
-									? 'Símbolo'
-									: /\p{Zs}/u.test(char)
-										? 'Espaço'
-										: /\p{Cc}/u.test(char)
-											? 'Controle'
-											: /\p{M}/u.test(char)
-												? 'Marca combinante'
-												: 'Outro'
+	CHARACTER_KINDS.find(([category]) => category.test(char))?.[1] ?? 'Outro'
+
+const toHex = (value: number, minDigits: number) =>
+	value.toString(16).toUpperCase().padStart(minDigits, '0')
+
+const utf8Bytes = (char: string) =>
+	[...new TextEncoder().encode(char)].map((byte) => toHex(byte, 2)).join(' ')
+
+const utf16CodeUnits = (char: string) =>
+	[...Array(char.length).keys()].map((index) => toHex(char.charCodeAt(index), 4)).join(' ')
 
 /** One row per code point, with every escape a developer may need. */
 export function charInfo(text: string, limit = 200): CharInfo[] {
 	return [...text].slice(0, limit).map((char) => {
-		const code = char.codePointAt(0) ?? 0
-		const hex = code.toString(16).toUpperCase()
+		const codePoint = char.codePointAt(0) ?? 0
+		const hex = toHex(codePoint, 0)
 		return {
 			char,
 			codePoint: `U+${hex.padStart(4, '0')}`,
-			decimal: code,
-			utf8: [...new TextEncoder().encode(char)]
-				.map((b) => b.toString(16).toUpperCase().padStart(2, '0'))
-				.join(' '),
-			utf16: [...Array(char.length).keys()]
-				.map((i) => char.charCodeAt(i).toString(16).toUpperCase().padStart(4, '0'))
-				.join(' '),
+			decimal: codePoint,
+			utf8: utf8Bytes(char),
+			utf16: utf16CodeUnits(char),
 			html: `&#x${hex};`,
-			js: code > 0xffff ? `\\u{${hex}}` : `\\u${hex.padStart(4, '0')}`,
+			js: codePoint > 0xffff ? `\\u{${hex}}` : `\\u${hex.padStart(4, '0')}`,
 			css: `\\${hex}`,
 			kind: kindOf(char),
 		}
 	})
 }
 
-/* --------------------------------- Limpar texto --------------------------------- */
+/* ------------------------------- Clean text ------------------------------- */
 
 export type CleanOptions = {
 	removeAccents: boolean
@@ -331,25 +354,25 @@ export type CleanOptions = {
 	removeEmptyLines: boolean
 }
 
+const mapLines = (text: string, transform: (lines: string[]) => string[]) =>
+	transform(text.split('\n')).join('\n')
+
 export function cleanText(text: string, options: CleanOptions): string {
-	let out = text.replace(/\r\n/g, '\n')
-	if (options.removeAccents)
-		out = out
+	let cleaned = text.replace(/\r\n/g, '\n')
+	if (options.removeAccents) {
+		cleaned = cleaned
 			.normalize('NFD')
 			.replace(/\p{Diacritic}/gu, '')
 			.normalize('NFC')
-	if (options.trimLines)
-		out = out
-			.split('\n')
-			.map((line) => line.trim())
-			.join('\n')
-	if (options.removeEmptyLines)
-		out = out
-			.split('\n')
-			.filter((line) => line.trim() !== '')
-			.join('\n')
-	if (options.lineBreaks === 'space') out = out.replace(/\n+/g, ' ')
-	if (options.lineBreaks === 'remove') out = out.replace(/\n+/g, '')
-	if (options.collapseSpaces) out = out.replace(/[ \t ]{2,}/g, ' ')
-	return options.trimLines ? out.trim() : out
+	}
+	if (options.trimLines) {
+		cleaned = mapLines(cleaned, (lines) => lines.map((line) => line.trim()))
+	}
+	if (options.removeEmptyLines) {
+		cleaned = mapLines(cleaned, (lines) => lines.filter((line) => line.trim() !== ''))
+	}
+	if (options.lineBreaks === 'space') cleaned = cleaned.replace(/\n+/g, ' ')
+	if (options.lineBreaks === 'remove') cleaned = cleaned.replace(/\n+/g, '')
+	if (options.collapseSpaces) cleaned = cleaned.replace(/[ \t ]{2,}/g, ' ')
+	return options.trimLines ? cleaned.trim() : cleaned
 }

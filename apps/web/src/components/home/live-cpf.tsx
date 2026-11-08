@@ -1,7 +1,7 @@
 'use client'
 
 import { Button, CopyButton } from '@4people/ui'
-import { ArrowRight, RefreshCw } from 'lucide-react'
+import { ArrowRight, CircleCheck, RefreshCw } from 'lucide-react'
 import type { Route } from 'next'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -46,14 +46,15 @@ export function LiveCpf({ initial }: { initial: string }) {
 			>
 				{cpf}
 			</output>
+			<p className="text-success-ink -mt-3 flex items-center gap-1.5 text-sm font-medium">
+				<CircleCheck aria-hidden="true" className="size-4" />
+				Dígitos verificadores válidos
+			</p>
 			<div className="flex flex-wrap items-center gap-2">
 				<Button size="sm" variant="secondary" onClick={() => setCpf(generateCPF())}>
 					<RefreshCw /> Gerar outro
 				</Button>
 				<CopyButton value={cpf} variant="primary" />
-				<span className="text-success ml-auto text-sm font-medium">
-					Dígitos verificadores válidos
-				</span>
 			</div>
 		</section>
 	)

@@ -23,18 +23,28 @@ const convertSchema = z.object({
 		.refine((value) => plateFormat(value) !== null, 'Use o formato ABC-1234 ou ABC1D23.'),
 })
 
+type Conversion = { ok: true; plate: string } | { ok: false; error: string }
+
+function ConversionResult({ conversion }: { conversion: Conversion }) {
+	if (conversion.ok) return <OutputValue>{conversion.plate}</OutputValue>
+	return (
+		<Alert tone="danger">
+			<CircleX />
+			{conversion.error}
+		</Alert>
+	)
+}
+
 function Converter() {
-	const [result, setResult] = useState<
-		{ ok: true; from: string; to: string } | { ok: false; error: string } | null
-	>(null)
+	const [conversion, setConversion] = useState<Conversion | null>(null)
 	const form = useToolForm({
 		schema: convertSchema,
 		defaultValues: { plate: '' },
 		onSubmit: ({ plate }) => {
 			try {
-				setResult({ ok: true, from: plate.toUpperCase(), to: convertPlate(plate) })
+				setConversion({ ok: true, plate: convertPlate(plate) })
 			} catch (error) {
-				setResult({ ok: false, error: (error as Error).message })
+				setConversion({ ok: false, error: (error as Error).message })
 			}
 		},
 	})
@@ -49,8 +59,8 @@ function Converter() {
 				}
 			>
 				<form.AppField name="plate">
-					{(f) => (
-						<f.TextField
+					{(field) => (
+						<field.TextField
 							label="Placa para converter"
 							placeholder="Ex: ABC-1234 ou ABC1C34"
 							description="Antiga ⇄ Mercosul: o 2º número vira letra (0 = A … 9 = J)."
@@ -61,18 +71,11 @@ function Converter() {
 			</FormCard>
 			<ResultCard
 				title="Placa convertida"
-				empty={!result}
-				copyText={result?.ok ? result.to : undefined}
-				onClear={() => setResult(null)}
+				empty={!conversion}
+				copyText={conversion?.ok ? conversion.plate : undefined}
+				onClear={() => setConversion(null)}
 			>
-				{result?.ok ? (
-					<OutputValue>{result.to}</OutputValue>
-				) : result ? (
-					<Alert tone="danger">
-						<CircleX />
-						{result.error}
-					</Alert>
-				) : null}
+				{conversion ? <ConversionResult conversion={conversion} /> : null}
 			</ResultCard>
 		</ToolLayout>
 	)
@@ -83,11 +86,11 @@ function Converter() {
  * arrival and changing the format makes a new one right away.
  */
 export default function PlateGenerator() {
-	const [value, setValue] = useState<string | null>(null)
+	const [plate, setPlate] = useState<string | null>(null)
 	const form = useToolForm({
 		schema: generateSchema,
 		defaultValues: { format: 'mercosul' },
-		onSubmit: ({ format }) => setValue(generatePlate(format)),
+		onSubmit: ({ format }) => setPlate(generatePlate(format)),
 	})
 	useGenerateOnMount(() => form.handleSubmit())
 
@@ -106,10 +109,10 @@ export default function PlateGenerator() {
 					}
 				>
 					<form.AppField name="format" listeners={{ onChange: () => form.handleSubmit() }}>
-						{(f) => <f.RadioField label="Formato" options={FORMATS} />}
+						{(field) => <field.RadioField label="Formato" options={FORMATS} />}
 					</form.AppField>
 				</FormCard>
-				<GeneratedResult values={value ? [value] : null} plural="placas" filename="placa.txt" />
+				<GeneratedResult values={plate ? [plate] : null} plural="placas" filename="placa.txt" />
 			</ToolLayout>
 			<Converter />
 		</div>

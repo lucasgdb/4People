@@ -26,14 +26,14 @@ export default function NotFound() {
 						continuam a um clique.
 					</p>
 					<div className="flex flex-wrap gap-3">
-						<Link href={'/computacao' as Route} className={buttonVariants({ size: 'lg' })}>
-							Ferramentas de Computação
+						<Link href={'/ferramentas' as Route} className={buttonVariants({ size: 'lg' })}>
+							Ver todas as ferramentas
 						</Link>
 						<Link
-							href={'/matematica' as Route}
+							href={'/' as Route}
 							className={buttonVariants({ variant: 'secondary', size: 'lg' })}
 						>
-							Ferramentas de Matemática
+							Página inicial
 						</Link>
 					</div>
 				</div>

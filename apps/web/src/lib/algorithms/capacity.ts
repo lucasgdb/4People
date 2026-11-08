@@ -3,7 +3,7 @@
  * download time and data-size / data-rate units.
  */
 
-/* ------------------------------------------- numbers ------------------------------------------ */
+// Numbers
 
 /** "1.234,5", "1234.5", "1,5" → number; empty or invalid → null. */
 export function parseNumber(raw: string): number | null {
@@ -15,8 +15,8 @@ export function parseNumber(raw: string): number | null {
 	return Number.isFinite(value) ? value : null
 }
 
-const significant = new Intl.NumberFormat('pt-BR', { maximumSignificantDigits: 10 })
-const scientific = new Intl.NumberFormat('pt-BR', {
+const significantFormat = new Intl.NumberFormat('pt-BR', { maximumSignificantDigits: 10 })
+const scientificFormat = new Intl.NumberFormat('pt-BR', {
 	notation: 'scientific',
 	maximumSignificantDigits: 6,
 })
@@ -25,16 +25,16 @@ const scientific = new Intl.NumberFormat('pt-BR', {
 export function formatSignificant(value: number): string {
 	if (value === 0) return '0'
 	const magnitude = Math.abs(value)
-	if (magnitude >= 1e18 || magnitude < 1e-9) return scientific.format(value)
-	return significant.format(value)
+	if (magnitude >= 1e18 || magnitude < 1e-9) return scientificFormat.format(value)
+	return significantFormat.format(value)
 }
 
-/** (100 − pct) / 100 without float noise: 100 − 99.95 is 0.0500000…, not 0.04999999999999716. */
+/** (100 − percent) / 100 without float noise: 100 − 99.95 is 0.0500000…, not 0.04999999999999716. */
 export function unavailability(percent: number): number {
 	return Number((100 - percent).toFixed(10)) / 100
 }
 
-/* ------------------------------------------ durations ----------------------------------------- */
+// Durations
 
 export const DAY = 86_400
 export const YEAR = 365.25 * DAY
@@ -47,37 +47,42 @@ export const PERIODS = [
 ] as const
 export type PeriodId = (typeof PERIODS)[number]['id']
 
-const decimal1 = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 1 })
+const oneDecimalFormat = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 1 })
+
+const TENTHS_PER_MINUTE = 600
+const TENTHS_PER_HOUR = 60 * TENTHS_PER_MINUTE
+const TENTHS_PER_DAY = 24 * TENTHS_PER_HOUR
 
 /** 31557.6 → "8h 45min 57,6s"; under one second → milliseconds. Rounded to tenths of a second. */
 export function formatDuration(seconds: number): string {
 	if (!Number.isFinite(seconds)) return '∞'
 	if (seconds <= 0) return '0s'
-	if (seconds < 1) return `${decimal1.format(seconds * 1000)}ms`
+	if (seconds < 1) return `${oneDecimalFormat.format(seconds * 1000)}ms`
 	const tenths = Math.round(seconds * 10)
-	const days = Math.floor(tenths / 864_000)
-	const hours = Math.floor((tenths % 864_000) / 36_000)
-	const minutes = Math.floor((tenths % 36_000) / 600)
-	const rest = (tenths % 600) / 10
+	const days = Math.floor(tenths / TENTHS_PER_DAY)
+	const hours = Math.floor((tenths % TENTHS_PER_DAY) / TENTHS_PER_HOUR)
+	const minutes = Math.floor((tenths % TENTHS_PER_HOUR) / TENTHS_PER_MINUTE)
+	const remainingSeconds = (tenths % TENTHS_PER_MINUTE) / 10
 	const parts: string[] = []
 	if (days) parts.push(`${days.toLocaleString('pt-BR')}d`)
 	if (hours) parts.push(`${hours}h`)
 	if (minutes) parts.push(`${minutes}min`)
-	if (rest) parts.push(`${decimal1.format(rest)}s`)
+	if (remainingSeconds) parts.push(`${oneDecimalFormat.format(remainingSeconds)}s`)
 	return parts.join(' ')
 }
 
 /** Clock format "h:mm:ss" (hours keep counting past 24), rounded to the nearest second. */
 export function formatHms(seconds: number): string {
 	if (!Number.isFinite(seconds)) return '∞'
-	const total = Math.max(0, Math.round(seconds))
-	const hours = Math.floor(total / 3600)
-	const minutes = Math.floor((total % 3600) / 60)
-	const secs = total % 60
-	return `${hours.toLocaleString('pt-BR')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`
+	const totalSeconds = Math.max(0, Math.round(seconds))
+	const hours = Math.floor(totalSeconds / 3600)
+	const minutes = Math.floor((totalSeconds % 3600) / 60)
+	const remainingSeconds = totalSeconds % 60
+	const twoDigits = (value: number) => String(value).padStart(2, '0')
+	return `${hours.toLocaleString('pt-BR')}:${twoDigits(minutes)}:${twoDigits(remainingSeconds)}`
 }
 
-/* --------------------------------------------- SLA -------------------------------------------- */
+// SLA
 
 function assertPercent(percent: number) {
 	if (!Number.isFinite(percent) || percent < 0 || percent > 100)
@@ -110,27 +115,35 @@ export function downtimeTable(availability: number): Record<PeriodId, number> {
  * Composite availability: in series every component must be up (product); in parallel (redundant)
  * only one must be up (1 − product of the failure probabilities).
  */
-export function compositeAvailability(values: readonly number[], mode: 'series' | 'parallel') {
-	if (values.length === 0) throw new Error('Informe pelo menos uma disponibilidade.')
-	for (const value of values) assertPercent(value)
-	if (mode === 'series') return 100 * values.reduce((product, value) => product * (value / 100), 1)
-	return 100 * (1 - values.reduce((product, value) => product * unavailability(value), 1))
+export function compositeAvailability(
+	availabilities: readonly number[],
+	mode: 'series' | 'parallel',
+): number {
+	if (availabilities.length === 0) throw new Error('Informe pelo menos uma disponibilidade.')
+	for (const availability of availabilities) assertPercent(availability)
+	if (mode === 'series') {
+		const allUp = availabilities.reduce((product, percent) => product * (percent / 100), 1)
+		return 100 * allUp
+	}
+	const allDown = availabilities.reduce((product, percent) => product * unavailability(percent), 1)
+	return 100 * (1 - allDown)
 }
 
-/** "99.9, 99,95; 99.99" → numbers. Decimal comma is only read as such when followed by digits. */
+/** "99.9, 99,95; 99.99" → numbers. A comma is a decimal separator only when digits follow it. */
 export function parsePercentList(text: string): number[] | null {
 	const tokens = text
 		.split(/[\s;]+|,(?!\d)/)
 		.map((token) => token.trim())
 		.filter(Boolean)
 	if (tokens.length === 0) return null
-	const values = tokens.map(parseNumber)
-	return values.every((value): value is number => value !== null && value >= 0 && value <= 100)
-		? values
-		: null
+	const percentages = tokens.map(parseNumber)
+	const allValid = percentages.every(
+		(percent): percent is number => percent !== null && percent >= 0 && percent <= 100,
+	)
+	return allValid ? percentages : null
 }
 
-/* -------------------------------------------- units ------------------------------------------- */
+// Units
 
 export type DataUnit = {
 	id: string
@@ -210,35 +223,35 @@ export function convertAll(
 	return units.map((unit) => ({ unit, value: bits / unit.bits }))
 }
 
+const DECIMAL_BYTE_SYMBOLS = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB']
+const BINARY_BYTE_SYMBOLS = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB']
+const BITRATE_SYMBOLS = ['bps', 'kbps', 'Mbps', 'Gbps', 'Tbps']
+
+const twoDecimalsFormat = new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 2 })
+
+/** Divides by `base` while the value is at least one of the next unit: 1500 → "1,5 k…". */
+function formatScaled(value: number, base: number, symbols: readonly string[]): string {
+	let scaled = value
+	let symbolIndex = 0
+	while (Math.abs(scaled) >= base && symbolIndex < symbols.length - 1) {
+		scaled /= base
+		symbolIndex++
+	}
+	return `${twoDecimalsFormat.format(scaled)} ${symbols[symbolIndex]}`
+}
+
 /** Bytes as the most readable decimal unit ("1,5 GB") or binary unit ("1,4 GiB"). */
 export function formatBytes(bytes: number, system: 'decimal' | 'binary' = 'decimal'): string {
-	const base = system === 'decimal' ? 1000 : 1024
-	const symbols =
-		system === 'decimal'
-			? ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB']
-			: ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB']
-	let value = bytes
-	let index = 0
-	while (Math.abs(value) >= base && index < symbols.length - 1) {
-		value /= base
-		index++
-	}
-	return `${new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 2 }).format(value)} ${symbols[index]}`
+	if (system === 'binary') return formatScaled(bytes, 1024, BINARY_BYTE_SYMBOLS)
+	return formatScaled(bytes, 1000, DECIMAL_BYTE_SYMBOLS)
 }
 
-/** Bits per second as bps, kbps, Mbps or Gbps. */
+/** Bits per second as bps, kbps, Mbps, Gbps or Tbps. */
 export function formatBitrate(bitsPerSecond: number): string {
-	const symbols = ['bps', 'kbps', 'Mbps', 'Gbps', 'Tbps']
-	let value = bitsPerSecond
-	let index = 0
-	while (Math.abs(value) >= 1000 && index < symbols.length - 1) {
-		value /= 1000
-		index++
-	}
-	return `${new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 2 }).format(value)} ${symbols[index]}`
+	return formatScaled(bitsPerSecond, 1000, BITRATE_SYMBOLS)
 }
 
-/* -------------------------------------------- download ---------------------------------------- */
+// Download
 
 /** Seconds to transfer `bytes` at `bitsPerSecond`, losing `overheadPercent` to protocol overhead. */
 export function downloadSeconds(bytes: number, bitsPerSecond: number, overheadPercent = 0): number {
@@ -246,5 +259,6 @@ export function downloadSeconds(bytes: number, bitsPerSecond: number, overheadPe
 	if (!(bitsPerSecond > 0)) throw new Error('A velocidade precisa ser maior que zero.')
 	if (overheadPercent < 0 || overheadPercent >= 100)
 		throw new Error('A perda (overhead) vai de 0% a menos de 100%.')
-	return (bytes * 8) / (bitsPerSecond * (1 - overheadPercent / 100))
+	const effectiveBitsPerSecond = bitsPerSecond * (1 - overheadPercent / 100)
+	return (bytes * 8) / effectiveBitsPerSecond
 }

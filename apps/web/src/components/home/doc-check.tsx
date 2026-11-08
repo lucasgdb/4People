@@ -63,7 +63,7 @@ export function DocCheck() {
 							aria-describedby="doc-verdict"
 							value={field.state.value}
 							onChange={(event) => field.handleChange(event.target.value)}
-							className="rounded-control border-border-strong bg-surface text-fg placeholder:text-fg-subtle hover:border-fg-subtle focus-visible:border-accent focus-visible:ring-ring h-16 w-full min-w-0 border px-5 font-mono text-2xl tabular-nums outline-none focus-visible:ring-4 focus-visible:outline-none sm:text-[1.75rem]"
+							className="rounded-control border-border-strong bg-surface text-fg placeholder:text-fg-subtle hover:border-accent/55 hover:ring-accent/10 focus-visible:border-accent focus-visible:ring-ring h-16 w-full min-w-0 border px-5 font-mono text-2xl tabular-nums transition-[border-color,box-shadow,background-color] duration-(--ds-motion) ease-(--ease-out) outline-none hover:ring-[3px] focus-visible:ring-4 focus-visible:outline-none sm:text-[1.75rem]"
 							placeholder="Ex.: 529.982.247-25"
 						/>
 						<div id="doc-verdict" aria-live="polite">
@@ -106,7 +106,7 @@ export function DocCheck() {
 										<button
 											type="button"
 											onClick={() => field.handleChange(example.value)}
-											className="rounded-control border-border bg-surface hover:border-accent/45 hover:ring-accent-soft focus-visible:ring-ring flex w-full cursor-pointer flex-col items-start gap-0.5 border px-4 py-2.5 text-left transition-[border-color,box-shadow] duration-(--ds-motion) outline-none hover:ring-4 focus-visible:ring-4"
+											className="rounded-control border-border bg-surface hover:border-accent/45 hover:ring-accent-soft focus-visible:ring-ring flex w-full cursor-pointer flex-col items-start gap-0.5 border px-4 py-2.5 text-left transition-[border-color,box-shadow,background-color] duration-(--ds-motion) duration-(--ds-motion) ease-(--ease-out) outline-none hover:ring-4 focus-visible:ring-4"
 										>
 											<span className="text-fg-muted text-[0.8125rem]">{example.hint}</span>
 											<span translate="no" className="text-fg tabular font-mono text-sm">

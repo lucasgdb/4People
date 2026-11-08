@@ -32,7 +32,7 @@ const schema = z
 		path: ['maxAge'],
 	})
 
-const LABELS: Record<keyof Person, string> = {
+const FIELD_LABELS: Record<keyof Person, string> = {
 	nome: 'Nome',
 	sexo: 'Sexo',
 	nascimento: 'Nascimento',
@@ -51,13 +51,24 @@ const LABELS: Record<keyof Person, string> = {
 	pai: 'Pai',
 }
 
-const toCsv = (people: Person[]) => {
-	const keys = Object.keys(LABELS) as (keyof Person)[]
-	const cell = (value: string | number) => `"${String(value).replace(/"/g, '""')}"`
-	return [
-		keys.map((key) => cell(LABELS[key])).join(','),
-		...people.map((p) => keys.map((key) => cell(p[key])).join(',')),
-	].join('\n')
+const PERSON_FIELDS = Object.keys(FIELD_LABELS) as (keyof Person)[]
+
+const quoteCsvCell = (value: string | number) => `"${String(value).replace(/"/g, '""')}"`
+
+function peopleToCsv(people: readonly Person[]): string {
+	const header = PERSON_FIELDS.map((field) => quoteCsvCell(FIELD_LABELS[field])).join(',')
+	const rows = people.map((person) =>
+		PERSON_FIELDS.map((field) => quoteCsvCell(person[field])).join(','),
+	)
+	return [header, ...rows].join('\n')
+}
+
+function PersonRows({ person }: { person: Person }) {
+	const rows = PERSON_FIELDS.map((field) => ({
+		label: FIELD_LABELS[field],
+		value: String(person[field]),
+	}))
+	return <CopyRows rows={rows} />
 }
 
 /**
@@ -67,18 +78,18 @@ const toCsv = (people: Person[]) => {
 export default function PeopleGenerator() {
 	const [people, setPeople] = useState<Person[] | null>(null)
 	// Quick changes can overlap while faker loads: only the latest request may show its people.
-	const latest = useRef(0)
+	const latestRequestId = useRef(0)
 	const form = useToolForm({
 		schema,
 		defaultValues: { amount: '1', minAge: '18', maxAge: '60', state: 'any' },
 		onSubmit: async ({ amount, minAge, maxAge, state }) => {
-			const request = ++latest.current
+			latestRequestId.current += 1
+			const requestId = latestRequestId.current
 			// faker's pt_BR data is large: loaded when the first people are made, never with the page.
 			const { generatePeople } = await import('@/lib/algorithms/people')
-			if (request !== latest.current) return
-			setPeople(
-				generatePeople(amount, { minAge, maxAge, state: state === 'any' ? undefined : state }),
-			)
+			if (requestId !== latestRequestId.current) return
+			const chosenState = state === 'any' ? undefined : state
+			setPeople(generatePeople(amount, { minAge, maxAge, state: chosenState }))
 		},
 	})
 	useGenerateOnMount(() => form.handleSubmit())
@@ -89,8 +100,8 @@ export default function PeopleGenerator() {
 			if (schema.safeParse(form.state.values).success) form.handleSubmit()
 		},
 	}
-	const person = people?.length === 1 ? people[0] : undefined
-	const json = people ? JSON.stringify(person ?? people, null, 2) : ''
+	const singlePerson = people?.length === 1 ? people[0] : undefined
+	const json = people ? JSON.stringify(singlePerson ?? people, null, 2) : ''
 
 	return (
 		<ToolLayout>
@@ -107,18 +118,28 @@ export default function PeopleGenerator() {
 			>
 				<div className="grid grid-cols-2 items-end gap-x-3 gap-y-4 sm:gap-x-4">
 					<form.AppField name="amount" listeners={regenerate}>
-						{(f) => (
-							<f.NumberField label="Quantidade" placeholder="Ex: 10" integer min={1} max={100} />
+						{(field) => (
+							<field.NumberField
+								label="Quantidade"
+								placeholder="Ex: 10"
+								integer
+								min={1}
+								max={100}
+							/>
 						)}
 					</form.AppField>
 					<form.AppField name="state" listeners={regenerate}>
-						{(f) => <f.SelectField label="Estado" options={STATES} />}
+						{(field) => <field.SelectField label="Estado" options={STATES} />}
 					</form.AppField>
 					<form.AppField name="minAge" listeners={regenerate}>
-						{(f) => <f.NumberField label="Idade mínima" suffix="anos" integer min={0} max={110} />}
+						{(field) => (
+							<field.NumberField label="Idade mínima" suffix="anos" integer min={0} max={110} />
+						)}
 					</form.AppField>
 					<form.AppField name="maxAge" listeners={regenerate}>
-						{(f) => <f.NumberField label="Idade máxima" suffix="anos" integer min={0} max={110} />}
+						{(field) => (
+							<field.NumberField label="Idade máxima" suffix="anos" integer min={0} max={110} />
+						)}
 					</form.AppField>
 				</div>
 			</FormCard>
@@ -132,7 +153,7 @@ export default function PeopleGenerator() {
 							<Button
 								variant="secondary"
 								size="sm"
-								onClick={() => downloadText('pessoas.csv', toCsv(people))}
+								onClick={() => downloadText('pessoas.csv', peopleToCsv(people))}
 							>
 								<Download /> Baixar CSV
 							</Button>
@@ -148,14 +169,8 @@ export default function PeopleGenerator() {
 					) : null
 				}
 			>
-				{person ? (
-					<CopyRows
-						rows={(Object.keys(LABELS) as (keyof Person)[]).map((key) => ({
-							label: LABELS[key],
-							value: String(person[key]),
-						}))}
-					/>
-				) : people ? (
+				{singlePerson ? <PersonRows person={singlePerson} /> : null}
+				{people && !singlePerson ? (
 					<OutputBlock className="max-h-[36rem]">{json}</OutputBlock>
 				) : null}
 			</ResultCard>

@@ -1,0 +1,36 @@
+name: Sugerir uma melhoria
+description: Uma ideia para deixar uma ferramenta existente (ou o site) melhor.
+title: "[Melhoria] "
+labels: ["melhoria"]
+body:
+  - type: input
+    id: url
+    attributes:
+      label: Ferramenta ou página
+      placeholder: https://4people.lucasbittencourt.dev/matematica/calculadoras/porcentagem
+    validations:
+      required: true
+  - type: textarea
+    id: today
+    attributes:
+      label: Como é hoje
+      description: O que está faltando, confuso ou difícil de usar.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Como poderia ser
+      description: A sua sugestão. Imagens ou exemplos ajudam.
+    validations:
+      required: true
+  - type: dropdown
+    id: device
+    attributes:
+      label: Onde você notou
+      multiple: true
+      options:
+        - Computador
+        - Celular
+        - Tablet
+        - App instalado (PWA)

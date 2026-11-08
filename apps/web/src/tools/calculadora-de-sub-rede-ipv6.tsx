@@ -8,6 +8,7 @@ import { useAppForm } from '@/components/form/form'
 import {
 	compressIPv6,
 	expandIPv6,
+	type IPv6Subnet,
 	ipv6ReverseName,
 	ipv6ReverseZone,
 	ipv6Subnet,
@@ -21,19 +22,26 @@ import { CopyRows } from './_shared/copy-rows'
 import { FormCard, ResultCard, ToolLayout } from './_shared/tool-layout'
 
 const DEFAULTS = { address: '2001:db8:abcd:12::1/48', prefix: '', splitPrefix: '64' }
-const SHOWN = 16
+const MAX_LISTED_SUBNETS = 16
 
 const SCOPE_TONE = { private: 'success', public: 'primary', special: 'neutral' } as const
 
 type Split = { prefix: number; count: bigint; subnets: bigint[] }
-type Calculation =
-	| { ok: false; error: string }
-	| {
-			ok: true
-			subnet: ReturnType<typeof ipv6Subnet>
-			split: Split | null
-			splitError: string | null
-	  }
+type SplitOutcome = { split: Split | null; splitError: string | null }
+type Calculation = { ok: false; error: string } | ({ ok: true; subnet: IPv6Subnet } & SplitOutcome)
+
+function splitSubnet(subnet: IPv6Subnet, splitPrefixText: string): SplitOutcome {
+	const prefixDigits = splitPrefixText.trim().replace(/^\//, '')
+	if (!prefixDigits) return { split: null, splitError: null }
+	try {
+		if (!/^\d{1,3}$/.test(prefixDigits)) throw new Error('O novo prefixo é um número, como 64.')
+		const newPrefix = Number(prefixDigits)
+		const subnets = splitIPv6(subnet.value, subnet.prefix, newPrefix, MAX_LISTED_SUBNETS)
+		return { split: { prefix: newPrefix, ...subnets }, splitError: null }
+	} catch (error) {
+		return { split: null, splitError: (error as Error).message }
+	}
+}
 
 function calculate(values: typeof DEFAULTS): Calculation | null {
 	if (!values.address.trim()) return null
@@ -44,20 +52,27 @@ function calculate(values: typeof DEFAULTS): Calculation | null {
 		return { ok: false, error: (error as Error).message }
 	}
 	const subnet = ipv6Subnet(parsed.value, parsed.prefix)
-	const raw = values.splitPrefix.trim().replace(/^\//, '')
-	if (!raw) return { ok: true, subnet, split: null, splitError: null }
-	try {
-		if (!/^\d{1,3}$/.test(raw)) throw new Error('O novo prefixo é um número, como 64.')
-		const newPrefix = Number(raw)
-		return {
-			ok: true,
-			subnet,
-			split: { prefix: newPrefix, ...splitIPv6(parsed.value, parsed.prefix, newPrefix, SHOWN) },
-			splitError: null,
-		}
-	} catch (error) {
-		return { ok: true, subnet, split: null, splitError: (error as Error).message }
-	}
+	return { ok: true, subnet, ...splitSubnet(subnet, values.splitPrefix) }
+}
+
+function summaryRows(subnet: IPv6Subnet): Array<{ label: string; value: string }> {
+	return [
+		{ label: 'Rede (CIDR)', value: `${compressIPv6(subnet.network)}/${subnet.prefix}` },
+		{ label: 'Primeiro endereço', value: compressIPv6(subnet.network) },
+		{ label: 'Último endereço', value: compressIPv6(subnet.last) },
+		{ label: 'Endereço compactado (RFC 5952)', value: compressIPv6(subnet.value) },
+		{ label: 'Endereço expandido', value: expandIPv6(subnet.value) },
+		{ label: 'Rede expandida', value: expandIPv6(subnet.network) },
+		{ label: 'DNS reverso do endereço (PTR)', value: ipv6ReverseName(subnet.value) },
+		{ label: 'Zona reversa do prefixo', value: ipv6ReverseZone(subnet.network, subnet.prefix) },
+	]
+}
+
+/** "2^80" plus, for large counts, its short scientific form. */
+function addressCountHint(subnet: IPv6Subnet): string {
+	const power = `2^${128 - subnet.prefix}`
+	if (subnet.total < 1_000_000n) return power
+	return `${power} ≈ ${scientificBigInt(subnet.total)}`
 }
 
 /** IPv6 prefix math with exact 128-bit counts: network, range, forms, type, reverse DNS and subnets. */
@@ -65,27 +80,7 @@ export default function CalculadoraDeSubRedeIpv6() {
 	const form = useAppForm({ defaultValues: DEFAULTS })
 	const values = useDeferredValue(useStore(form.store, (state) => state.values))
 	const result = useMemo(() => calculate(values), [values])
-	const splitTitle = useId()
-
-	const rows =
-		result?.ok === true
-			? [
-					{
-						label: 'Rede (CIDR)',
-						value: `${compressIPv6(result.subnet.network)}/${result.subnet.prefix}`,
-					},
-					{ label: 'Primeiro endereço', value: compressIPv6(result.subnet.network) },
-					{ label: 'Último endereço', value: compressIPv6(result.subnet.last) },
-					{ label: 'Endereço compactado (RFC 5952)', value: compressIPv6(result.subnet.value) },
-					{ label: 'Endereço expandido', value: expandIPv6(result.subnet.value) },
-					{ label: 'Rede expandida', value: expandIPv6(result.subnet.network) },
-					{ label: 'DNS reverso do endereço (PTR)', value: ipv6ReverseName(result.subnet.value) },
-					{
-						label: 'Zona reversa do prefixo',
-						value: ipv6ReverseZone(result.subnet.network, result.subnet.prefix),
-					},
-				]
-			: []
+	const rows = result?.ok ? summaryRows(result.subnet) : []
 
 	return (
 		<div className="flex flex-col gap-5">
@@ -140,7 +135,8 @@ export default function CalculadoraDeSubRedeIpv6() {
 							<CircleX />
 							{result.error}
 						</Alert>
-					) : result?.ok ? (
+					) : null}
+					{result?.ok ? (
 						<>
 							<TypeBadges value={result.subnet.value} />
 							<DataList
@@ -153,11 +149,7 @@ export default function CalculadoraDeSubRedeIpv6() {
 												{formatBigInt(result.subnet.total)}
 											</span>
 										),
-										hint: `2^${128 - result.subnet.prefix}${
-											result.subnet.total >= 1_000_000n
-												? ` ≈ ${scientificBigInt(result.subnet.total)}`
-												: ''
-										}`,
+										hint: addressCountHint(result.subnet),
 									},
 								]}
 							/>
@@ -167,50 +159,70 @@ export default function CalculadoraDeSubRedeIpv6() {
 				</ResultCard>
 			</ToolLayout>
 			{result?.ok && (result.split || result.splitError) ? (
-				<section
-					aria-labelledby={splitTitle}
-					className="rounded-panel border-border bg-surface flex flex-col gap-4 border p-6 sm:p-7"
-				>
-					<h2 id={splitTitle} className="text-fg text-lg font-bold">
-						Sub-redes
-					</h2>
-					<div aria-live="polite" className="flex flex-col gap-4">
-						{result.splitError ? (
-							<Alert tone="danger">
-								<CircleX />
-								{result.splitError}
-							</Alert>
-						) : result.split ? (
-							<>
-								<p className="text-fg-muted text-[0.9375rem]">
-									A /{result.subnet.prefix} tem{' '}
-									<strong className="text-fg tabular">{formatBigInt(result.split.count)}</strong>{' '}
-									sub-redes /{result.split.prefix}
-									{result.split.count > BigInt(result.split.subnets.length)
-										? `; estas são as primeiras ${result.split.subnets.length}.`
-										: '.'}
-								</p>
-								<ol
-									translate="no"
-									className="rounded-control bg-surface-muted grid gap-x-6 gap-y-1.5 px-5 py-4 font-mono text-[0.875rem] sm:grid-cols-2"
-								>
-									{result.split.subnets.map((network, index) => (
-										<li key={network.toString()} className="flex gap-3 break-all">
-											<span className="text-fg-muted tabular w-6 shrink-0 text-right">
-												{index + 1}
-											</span>
-											<span className="text-fg">
-												{compressIPv6(network)}/{result.split?.prefix}
-											</span>
-										</li>
-									))}
-								</ol>
-							</>
-						) : null}
-					</div>
-				</section>
+				<SplitSection
+					split={result.split}
+					error={result.splitError}
+					prefix={result.subnet.prefix}
+				/>
 			) : null}
 		</div>
+	)
+}
+
+function SplitSection({
+	split,
+	error,
+	prefix,
+}: {
+	split: Split | null
+	error: string | null
+	prefix: number
+}) {
+	const titleId = useId()
+	return (
+		<section
+			aria-labelledby={titleId}
+			className="rounded-panel border-border bg-surface flex flex-col gap-4 border p-6 sm:p-7"
+		>
+			<h2 id={titleId} className="text-fg text-lg font-bold">
+				Sub-redes
+			</h2>
+			<div aria-live="polite" className="flex flex-col gap-4">
+				{error ? (
+					<Alert tone="danger">
+						<CircleX />
+						{error}
+					</Alert>
+				) : null}
+				{split ? <SplitList split={split} prefix={prefix} /> : null}
+			</div>
+		</section>
+	)
+}
+
+function SplitList({ split, prefix }: { split: Split; prefix: number }) {
+	const isTruncated = split.count > BigInt(split.subnets.length)
+	return (
+		<>
+			<p className="text-fg-muted text-[0.9375rem]">
+				A /{prefix} tem <strong className="text-fg tabular">{formatBigInt(split.count)}</strong>{' '}
+				sub-redes /{split.prefix}
+				{isTruncated ? `; estas são as primeiras ${split.subnets.length}.` : '.'}
+			</p>
+			<ol
+				translate="no"
+				className="rounded-control bg-surface-muted grid gap-x-6 gap-y-1.5 px-5 py-4 font-mono text-[0.875rem] sm:grid-cols-2"
+			>
+				{split.subnets.map((network, index) => (
+					<li key={network.toString()} className="flex gap-3 break-all">
+						<span className="text-fg-muted tabular w-6 shrink-0 text-right">{index + 1}</span>
+						<span className="text-fg">
+							{compressIPv6(network)}/{split.prefix}
+						</span>
+					</li>
+				))}
+			</ol>
+		</>
 	)
 }
 

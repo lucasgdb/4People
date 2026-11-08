@@ -3,14 +3,14 @@
  * about every 30 seconds while the forex market is open (crypto trades around the clock).
  *
  * Every currency is fetched against the real (X-BRL) in one request, and any other pair is crossed
- * through the real: USD → EUR = (USD em R$) ÷ (EUR em R$). That keeps one request for every pair
- * and matches the direct quote to a fraction of a cent.
+ * through the real: USD → EUR = (USD in BRL) ÷ (EUR in BRL). One request covers every pair and
+ * matches the direct quote to a fraction of a cent.
  */
 
 import { z } from 'zod'
 
 export type Currency = {
-	/** Our id, also the select value. */
+	/** Our id, also the select value (USDT is the tourist dollar, not the stablecoin). */
 	id: string
 	/** ISO 4217 code for Intl (crypto has none, so it is formatted by hand). */
 	code: string
@@ -45,18 +45,18 @@ export const CURRENCIES: readonly Currency[] = [
 export const currencyById = (id: string): Currency | undefined =>
 	CURRENCIES.find((currency) => currency.id === id)
 
-export const QUOTES_URL = `https://economia.awesomeapi.com.br/json/last/${CURRENCIES.flatMap(
-	(currency) => (currency.pair ? [currency.pair] : []),
-).join(',')}`
+const REQUESTED_PAIRS = CURRENCIES.flatMap((currency) => (currency.pair ? [currency.pair] : []))
 
-/** How the API sends a quote: every number as a string. */
-const decimal = z.coerce.number().refine(Number.isFinite)
-const apiQuote = z.object({
-	bid: decimal.refine((value) => value > 0, 'cotação zerada'),
-	high: decimal,
-	low: decimal,
-	pctChange: decimal,
-	timestamp: decimal,
+export const QUOTES_URL = `https://economia.awesomeapi.com.br/json/last/${REQUESTED_PAIRS.join(',')}`
+
+/** The API sends every number as a string. */
+const numericString = z.coerce.number().refine(Number.isFinite)
+const apiQuoteSchema = z.object({
+	bid: numericString.refine((value) => value > 0, 'cotação zerada'),
+	high: numericString,
+	low: numericString,
+	pctChange: numericString,
+	timestamp: numericString,
 })
 
 export type Quote = {
@@ -69,7 +69,7 @@ export type Quote = {
 	updatedAt: Date
 }
 
-const REAL: Quote = { bid: 1, high: 1, low: 1, pctChange: 0, updatedAt: new Date(0) }
+const REAL_QUOTE: Quote = { bid: 1, high: 1, low: 1, pctChange: 0, updatedAt: new Date(0) }
 
 /**
  * Reads the API response into quotes by currency id. A currency missing from the response (the API
@@ -77,10 +77,10 @@ const REAL: Quote = { bid: 1, high: 1, low: 1, pctChange: 0, updatedAt: new Date
  */
 export function parseQuotes(json: unknown): Map<string, Quote> {
 	const body = z.record(z.string(), z.unknown()).parse(json)
-	const quotes = new Map<string, Quote>([['BRL', REAL]])
+	const quotes = new Map<string, Quote>([['BRL', REAL_QUOTE]])
 	for (const currency of CURRENCIES) {
 		if (!currency.key) continue
-		const parsed = apiQuote.safeParse(body[currency.key])
+		const parsed = apiQuoteSchema.safeParse(body[currency.key])
 		if (!parsed.success) continue
 		const { bid, high, low, pctChange, timestamp } = parsed.data
 		quotes.set(currency.id, { bid, high, low, pctChange, updatedAt: new Date(timestamp * 1000) })
@@ -94,9 +94,11 @@ export function crossRate(from: Quote, to: Quote): number {
 	return from.bid / to.bid
 }
 
-/** Today's change of the crossed pair, in percent: (1 + a) ÷ (1 + b) − 1. */
+/** Today's change of the crossed pair, in percent: (1 + from) ÷ (1 + to) − 1. */
 export function crossChange(from: Quote, to: Quote): number {
-	return ((1 + from.pctChange / 100) / (1 + to.pctChange / 100) - 1) * 100
+	const fromGrowth = 1 + from.pctChange / 100
+	const toGrowth = 1 + to.pctChange / 100
+	return (fromGrowth / toGrowth - 1) * 100
 }
 
 /**
@@ -117,8 +119,10 @@ export function dayRange(
 
 /** The newest update among the quotes that took part (the real has no date of its own). */
 export function lastUpdate(...quotes: Quote[]): Date | null {
-	const times = quotes.map((quote) => quote.updatedAt.getTime()).filter((time) => time > 0)
-	return times.length ? new Date(Math.max(...times)) : null
+	const timestamps = quotes
+		.map((quote) => quote.updatedAt.getTime())
+		.filter((timestamp) => timestamp > 0)
+	return timestamps.length ? new Date(Math.max(...timestamps)) : null
 }
 
 /**
@@ -134,12 +138,12 @@ export function isMarketClosed(updatedAt: Date | null, now: Date, crypto: boolea
 
 /** Digits that keep small rates readable: 0,00356 ARS, 5,5035 USD, 426.516 BTC. */
 function fractionDigits(value: number, crypto: boolean): { min: number; max: number } {
-	const size = Math.abs(value)
-	if (crypto) return size >= 1000 ? { min: 2, max: 2 } : { min: 2, max: 8 }
-	if (size === 0 || size >= 100) return { min: 2, max: 2 }
-	if (size >= 1) return { min: 2, max: 4 }
+	const magnitude = Math.abs(value)
+	if (crypto) return magnitude >= 1000 ? { min: 2, max: 2 } : { min: 2, max: 8 }
+	if (magnitude === 0 || magnitude >= 100) return { min: 2, max: 2 }
+	if (magnitude >= 1) return { min: 2, max: 4 }
 	// Below 1, keep four significant digits: 0,1817 · 0,003566 · 0,0008535.
-	const leadingZeros = Math.max(0, -Math.floor(Math.log10(size)) - 1)
+	const leadingZeros = Math.max(0, -Math.floor(Math.log10(magnitude)) - 1)
 	return { min: 2, max: Math.min(10, leadingZeros + 4) }
 }
 
@@ -152,9 +156,10 @@ export function formatMoney(value: number, currency: Currency, precise = false):
 	if (currency.crypto) {
 		return `${new Intl.NumberFormat('pt-BR', options).format(value)} ${currency.code}`
 	}
+	// Intl puts a no-break space after the symbol; swap it for a plain space.
 	return new Intl.NumberFormat('pt-BR', { ...options, style: 'currency', currency: currency.code })
 		.format(value)
-		.replace(/ /g, ' ')
+		.replace(/\u00a0/g, ' ')
 }
 
 /** A rate for "1 USD = R$ 5,5035": enough digits to compare, even for tiny values. */
@@ -163,11 +168,13 @@ export const formatRate = (value: number, currency: Currency) => formatMoney(val
 /** "+0,81%", "−0,01%", "0,00%". */
 export function formatChange(percent: number): string {
 	const rounded = Math.round(percent * 100) / 100
-	const text = new Intl.NumberFormat('pt-BR', {
+	const magnitude = new Intl.NumberFormat('pt-BR', {
 		minimumFractionDigits: 2,
 		maximumFractionDigits: 2,
 	}).format(Math.abs(rounded))
-	return rounded > 0 ? `+${text}%` : rounded < 0 ? `−${text}%` : `${text}%`
+	if (rounded > 0) return `+${magnitude}%`
+	if (rounded < 0) return `−${magnitude}%`
+	return `${magnitude}%`
 }
 
 /** Symbol shown inside the money field: "R$", "US$", "€", "BTC". */

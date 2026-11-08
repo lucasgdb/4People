@@ -65,7 +65,7 @@ export function AllToolsMenu() {
 								setOpen(false)
 								router.push(first.href as Route)
 							}}
-							className="border-border-strong bg-surface-muted text-fg placeholder:text-fg-subtle hover:border-fg-subtle focus-visible:border-accent focus-visible:bg-surface focus-visible:ring-ring h-11 w-full rounded-full border pr-4 pl-10 text-base transition-[border-color,box-shadow] outline-none focus-visible:ring-4"
+							className="border-border-strong bg-surface-muted text-fg placeholder:text-fg-subtle hover:border-accent/55 hover:ring-accent/10 focus-visible:border-accent focus-visible:bg-surface focus-visible:ring-ring h-11 w-full rounded-full border pr-4 pl-10 text-base transition-[border-color,box-shadow,background-color] duration-(--ds-motion) ease-(--ease-out) outline-none hover:ring-[3px] focus-visible:ring-4"
 						/>
 					</div>
 				</div>

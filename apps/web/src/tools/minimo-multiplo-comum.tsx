@@ -6,7 +6,7 @@ import { integerList } from '@/lib/schemas'
 import { SingleInputTool } from './_shared/single-input-tool'
 import { OutputValue } from './_shared/tool-layout'
 
-// Capped so the product stays within exact integer range.
+// Capped so the running product stays an exact (safe) integer.
 const field = integerList({ minItems: 2, max: 1_000_000 })
 
 /** Least common multiple (MMC) of any amount of numbers. */

@@ -14,7 +14,8 @@ const INDENTS = [
 
 const DEFAULTS = XML_READ_FORM
 type Values = typeof DEFAULTS
-const convert = ({ input, indent, ...options }: Values) => xmlToJson(input, options, indent)
+const convertXmlToJson = ({ input, indent, ...options }: Values) =>
+	xmlToJson(input, options, indent)
 
 /** XML → JSON as you type, keeping attributes with a prefix and pointing at syntax errors. */
 export default function XmlParaJson() {
@@ -26,8 +27,8 @@ export default function XmlParaJson() {
 				actions={<LiveActions onExample={() => form.setFieldValue('input', XML_EXAMPLE)} />}
 			>
 				<form.AppField name="input">
-					{(f) => (
-						<f.TextareaField
+					{(field) => (
+						<field.TextareaField
 							label="XML"
 							rows={14}
 							placeholder="Ex.: <pessoa><nome>Ana</nome></pessoa>"
@@ -36,18 +37,18 @@ export default function XmlParaJson() {
 				</form.AppField>
 				<XmlReadFields form={form} />
 				<form.AppField name="indent">
-					{(f) => <f.RadioField label="Indentação do JSON" options={INDENTS} />}
+					{(field) => <field.RadioField label="Indentação do JSON" options={INDENTS} />}
 				</form.AppField>
 			</FormCard>
 			<form.Subscribe selector={(state) => state.values}>
-				{(values) => <Result values={values} onClear={() => form.reset(DEFAULTS)} />}
+				{(values) => <JsonResult values={values} onClear={() => form.reset(DEFAULTS)} />}
 			</form.Subscribe>
 		</ToolLayout>
 	)
 }
 
-function Result({ values, onClear }: { values: Values; onClear: () => void }) {
-	const result = useLiveConversion(values, convert)
+function JsonResult({ values, onClear }: { values: Values; onClear: () => void }) {
+	const result = useLiveConversion(values, convertXmlToJson)
 	return (
 		<ConversionResult
 			title="JSON"

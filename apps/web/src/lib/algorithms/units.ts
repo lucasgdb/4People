@@ -1,6 +1,6 @@
 /**
  * Unit conversion like Google's converter: each category has a base unit and every unit says how to
- * go to and from it. Most units are a plain factor (1 pé = 0,3048 m); temperature has an offset and
+ * go to and from it. Most units are a plain factor (1 ft = 0.3048 m); temperature has an offset and
  * fuel economy has an inverse unit (L/100 km), so those use functions.
  *
  * Factors are exact by definition where one exists (international yard and pound, 1959; the
@@ -29,28 +29,35 @@ export type Category = {
 	formula?: (from: Unit, to: Unit) => string | null
 }
 
-const u = (id: string, name: string, symbol: string, factor: number): Unit => ({
-	id,
-	name,
-	symbol,
-	factor,
-})
+/** A unit that is a plain multiple of the category's base unit. */
+function linearUnit(id: string, name: string, symbol: string, factor: number): Unit {
+	return { id, name, symbol, factor }
+}
 
-const INCH = 0.0254
-const FOOT = 0.3048
-const YARD = 0.9144
-const MILE = 1609.344
-const NAUTICAL_MILE = 1852
-const POUND = 0.45359237
-const US_GALLON = 3.785411784 // litres
-const IMPERIAL_GALLON = 4.54609 // litres
-const CALORIE = 4.184 // joules
-const YEAR = 365.2425 * 86400 // Gregorian mean year, in seconds
+/** A temperature unit, converted through Celsius (the category's base). */
+function temperatureUnit(
+	id: string,
+	name: string,
+	symbol: string,
+	toCelsius: (value: number) => number,
+	fromCelsius: (celsius: number) => number,
+): Unit {
+	return { id, name, symbol, toBase: toCelsius, fromBase: fromCelsius }
+}
 
-const celsius = (offsetC: (v: number) => number, toC: (c: number) => number) => ({
-	toBase: offsetC,
-	fromBase: toC,
-})
+const INCH_METERS = 0.0254
+const FOOT_METERS = 0.3048
+const YARD_METERS = 0.9144
+const MILE_METERS = 1609.344
+const NAUTICAL_MILE_METERS = 1852
+const POUND_KILOGRAMS = 0.45359237
+const US_GALLON_LITERS = 3.785411784
+const IMPERIAL_GALLON_LITERS = 4.54609
+const CALORIE_JOULES = 4.184
+const BTU_JOULES = 1055.05585262
+const STANDARD_GRAVITY = 9.80665
+/** Gregorian mean year. */
+const YEAR_SECONDS = 365.2425 * 86400
 
 export const CATEGORIES: readonly Category[] = [
 	{
@@ -58,17 +65,17 @@ export const CATEGORIES: readonly Category[] = [
 		name: 'Comprimento',
 		pair: ['m', 'cm'],
 		units: [
-			u('km', 'Quilômetro', 'km', 1000),
-			u('m', 'Metro', 'm', 1),
-			u('cm', 'Centímetro', 'cm', 0.01),
-			u('mm', 'Milímetro', 'mm', 0.001),
-			u('um', 'Micrômetro', 'µm', 1e-6),
-			u('nm', 'Nanômetro', 'nm', 1e-9),
-			u('mi', 'Milha', 'mi', MILE),
-			u('yd', 'Jarda', 'yd', YARD),
-			u('ft', 'Pé', 'ft', FOOT),
-			u('in', 'Polegada', 'in', INCH),
-			u('nmi', 'Milha náutica', 'nmi', NAUTICAL_MILE),
+			linearUnit('km', 'Quilômetro', 'km', 1000),
+			linearUnit('m', 'Metro', 'm', 1),
+			linearUnit('cm', 'Centímetro', 'cm', 0.01),
+			linearUnit('mm', 'Milímetro', 'mm', 0.001),
+			linearUnit('um', 'Micrômetro', 'µm', 1e-6),
+			linearUnit('nm', 'Nanômetro', 'nm', 1e-9),
+			linearUnit('mi', 'Milha', 'mi', MILE_METERS),
+			linearUnit('yd', 'Jarda', 'yd', YARD_METERS),
+			linearUnit('ft', 'Pé', 'ft', FOOT_METERS),
+			linearUnit('in', 'Polegada', 'in', INCH_METERS),
+			linearUnit('nmi', 'Milha náutica', 'nmi', NAUTICAL_MILE_METERS),
 		],
 	},
 	{
@@ -76,15 +83,15 @@ export const CATEGORIES: readonly Category[] = [
 		name: 'Massa',
 		pair: ['kg', 'lb'],
 		units: [
-			u('t', 'Tonelada', 't', 1000),
-			u('arroba', 'Arroba', '@', 15),
-			u('kg', 'Quilograma', 'kg', 1),
-			u('g', 'Grama', 'g', 0.001),
-			u('mg', 'Miligrama', 'mg', 1e-6),
-			u('ug', 'Micrograma', 'µg', 1e-9),
-			u('lb', 'Libra', 'lb', POUND),
-			u('oz', 'Onça', 'oz', POUND / 16),
-			u('st', 'Stone', 'st', POUND * 14),
+			linearUnit('t', 'Tonelada', 't', 1000),
+			linearUnit('arroba', 'Arroba', '@', 15),
+			linearUnit('kg', 'Quilograma', 'kg', 1),
+			linearUnit('g', 'Grama', 'g', 0.001),
+			linearUnit('mg', 'Miligrama', 'mg', 1e-6),
+			linearUnit('ug', 'Micrograma', 'µg', 1e-9),
+			linearUnit('lb', 'Libra', 'lb', POUND_KILOGRAMS),
+			linearUnit('oz', 'Onça', 'oz', POUND_KILOGRAMS / 16),
+			linearUnit('st', 'Stone', 'st', POUND_KILOGRAMS * 14),
 		],
 	},
 	{
@@ -93,33 +100,27 @@ export const CATEGORIES: readonly Category[] = [
 		pair: ['c', 'f'],
 		allowNegative: true,
 		units: [
-			{
-				id: 'c',
-				name: 'Celsius',
-				symbol: '°C',
-				...celsius(
-					(v) => v,
-					(c) => c,
-				),
-			},
-			{
-				id: 'f',
-				name: 'Fahrenheit',
-				symbol: '°F',
-				...celsius(
-					(f) => ((f - 32) * 5) / 9,
-					(c) => (c * 9) / 5 + 32,
-				),
-			},
-			{
-				id: 'k',
-				name: 'Kelvin',
-				symbol: 'K',
-				...celsius(
-					(k) => k - 273.15,
-					(c) => c + 273.15,
-				),
-			},
+			temperatureUnit(
+				'c',
+				'Celsius',
+				'°C',
+				(celsius) => celsius,
+				(celsius) => celsius,
+			),
+			temperatureUnit(
+				'f',
+				'Fahrenheit',
+				'°F',
+				(fahrenheit) => ((fahrenheit - 32) * 5) / 9,
+				(celsius) => (celsius * 9) / 5 + 32,
+			),
+			temperatureUnit(
+				'k',
+				'Kelvin',
+				'K',
+				(kelvin) => kelvin - 273.15,
+				(celsius) => celsius + 273.15,
+			),
 		],
 		formula: (from, to) => TEMPERATURE_FORMULAS[`${from.id}-${to.id}`] ?? null,
 	},
@@ -128,17 +129,17 @@ export const CATEGORIES: readonly Category[] = [
 		name: 'Área',
 		pair: ['m2', 'ft2'],
 		units: [
-			u('km2', 'Quilômetro quadrado', 'km²', 1e6),
-			u('ha', 'Hectare', 'ha', 1e4),
-			u('alq-sp', 'Alqueire paulista', 'alq. SP', 24200),
-			u('alq-mg', 'Alqueire mineiro', 'alq. MG', 48400),
-			u('m2', 'Metro quadrado', 'm²', 1),
-			u('cm2', 'Centímetro quadrado', 'cm²', 1e-4),
-			u('mi2', 'Milha quadrada', 'mi²', MILE * MILE),
-			u('acre', 'Acre', 'ac', 4046.8564224),
-			u('yd2', 'Jarda quadrada', 'yd²', YARD * YARD),
-			u('ft2', 'Pé quadrado', 'ft²', FOOT * FOOT),
-			u('in2', 'Polegada quadrada', 'in²', INCH * INCH),
+			linearUnit('km2', 'Quilômetro quadrado', 'km²', 1e6),
+			linearUnit('ha', 'Hectare', 'ha', 1e4),
+			linearUnit('alq-sp', 'Alqueire paulista', 'alq. SP', 24200),
+			linearUnit('alq-mg', 'Alqueire mineiro', 'alq. MG', 48400),
+			linearUnit('m2', 'Metro quadrado', 'm²', 1),
+			linearUnit('cm2', 'Centímetro quadrado', 'cm²', 1e-4),
+			linearUnit('mi2', 'Milha quadrada', 'mi²', MILE_METERS * MILE_METERS),
+			linearUnit('acre', 'Acre', 'ac', 4046.8564224),
+			linearUnit('yd2', 'Jarda quadrada', 'yd²', YARD_METERS * YARD_METERS),
+			linearUnit('ft2', 'Pé quadrado', 'ft²', FOOT_METERS * FOOT_METERS),
+			linearUnit('in2', 'Polegada quadrada', 'in²', INCH_METERS * INCH_METERS),
 		],
 	},
 	{
@@ -146,20 +147,20 @@ export const CATEGORIES: readonly Category[] = [
 		name: 'Volume',
 		pair: ['l', 'ml'],
 		units: [
-			u('m3', 'Metro cúbico', 'm³', 1000),
-			u('l', 'Litro', 'L', 1),
-			u('ml', 'Mililitro', 'mL', 0.001),
-			u('cm3', 'Centímetro cúbico', 'cm³', 0.001),
-			u('cup', 'Xícara (240 mL)', 'xíc.', 0.24),
-			u('tbsp', 'Colher de sopa (15 mL)', 'c. sopa', 0.015),
-			u('tsp', 'Colher de chá (5 mL)', 'c. chá', 0.005),
-			u('gal', 'Galão americano', 'gal', US_GALLON),
-			u('qt', 'Quarto americano', 'qt', US_GALLON / 4),
-			u('pt', 'Pint americano', 'pt', US_GALLON / 8),
-			u('floz', 'Onça fluida americana', 'fl oz', US_GALLON / 128),
-			u('gal-uk', 'Galão imperial', 'gal (UK)', IMPERIAL_GALLON),
-			u('ft3', 'Pé cúbico', 'ft³', FOOT ** 3 * 1000),
-			u('in3', 'Polegada cúbica', 'in³', INCH ** 3 * 1000),
+			linearUnit('m3', 'Metro cúbico', 'm³', 1000),
+			linearUnit('l', 'Litro', 'L', 1),
+			linearUnit('ml', 'Mililitro', 'mL', 0.001),
+			linearUnit('cm3', 'Centímetro cúbico', 'cm³', 0.001),
+			linearUnit('cup', 'Xícara (240 mL)', 'xíc.', 0.24),
+			linearUnit('tbsp', 'Colher de sopa (15 mL)', 'c. sopa', 0.015),
+			linearUnit('tsp', 'Colher de chá (5 mL)', 'c. chá', 0.005),
+			linearUnit('gal', 'Galão americano', 'gal', US_GALLON_LITERS),
+			linearUnit('qt', 'Quarto americano', 'qt', US_GALLON_LITERS / 4),
+			linearUnit('pt', 'Pint americano', 'pt', US_GALLON_LITERS / 8),
+			linearUnit('floz', 'Onça fluida americana', 'fl oz', US_GALLON_LITERS / 128),
+			linearUnit('gal-uk', 'Galão imperial', 'gal (UK)', IMPERIAL_GALLON_LITERS),
+			linearUnit('ft3', 'Pé cúbico', 'ft³', FOOT_METERS ** 3 * 1000),
+			linearUnit('in3', 'Polegada cúbica', 'in³', INCH_METERS ** 3 * 1000),
 		],
 	},
 	{
@@ -167,11 +168,11 @@ export const CATEGORIES: readonly Category[] = [
 		name: 'Velocidade',
 		pair: ['kmh', 'mph'],
 		units: [
-			u('kmh', 'Quilômetro por hora', 'km/h', 1 / 3.6),
-			u('ms', 'Metro por segundo', 'm/s', 1),
-			u('mph', 'Milha por hora', 'mph', MILE / 3600),
-			u('kn', 'Nó', 'kn', NAUTICAL_MILE / 3600),
-			u('fts', 'Pé por segundo', 'ft/s', FOOT),
+			linearUnit('kmh', 'Quilômetro por hora', 'km/h', 1 / 3.6),
+			linearUnit('ms', 'Metro por segundo', 'm/s', 1),
+			linearUnit('mph', 'Milha por hora', 'mph', MILE_METERS / 3600),
+			linearUnit('kn', 'Nó', 'kn', NAUTICAL_MILE_METERS / 3600),
+			linearUnit('fts', 'Pé por segundo', 'ft/s', FOOT_METERS),
 		],
 	},
 	{
@@ -179,18 +180,18 @@ export const CATEGORIES: readonly Category[] = [
 		name: 'Tempo',
 		pair: ['h', 'min'],
 		units: [
-			u('ns', 'Nanossegundo', 'ns', 1e-9),
-			u('us', 'Microssegundo', 'µs', 1e-6),
-			u('ms', 'Milissegundo', 'ms', 0.001),
-			u('s', 'Segundo', 's', 1),
-			u('min', 'Minuto', 'min', 60),
-			u('h', 'Hora', 'h', 3600),
-			u('d', 'Dia', 'd', 86400),
-			u('wk', 'Semana', 'sem.', 604800),
-			u('mo', 'Mês (médio)', 'mês', YEAR / 12),
-			u('yr', 'Ano (médio)', 'ano', YEAR),
-			u('dec', 'Década', 'déc.', YEAR * 10),
-			u('cent', 'Século', 'séc.', YEAR * 100),
+			linearUnit('ns', 'Nanossegundo', 'ns', 1e-9),
+			linearUnit('us', 'Microssegundo', 'µs', 1e-6),
+			linearUnit('ms', 'Milissegundo', 'ms', 0.001),
+			linearUnit('s', 'Segundo', 's', 1),
+			linearUnit('min', 'Minuto', 'min', 60),
+			linearUnit('h', 'Hora', 'h', 3600),
+			linearUnit('d', 'Dia', 'd', 86400),
+			linearUnit('wk', 'Semana', 'sem.', 604800),
+			linearUnit('mo', 'Mês (médio)', 'mês', YEAR_SECONDS / 12),
+			linearUnit('yr', 'Ano (médio)', 'ano', YEAR_SECONDS),
+			linearUnit('dec', 'Década', 'déc.', YEAR_SECONDS * 10),
+			linearUnit('cent', 'Século', 'séc.', YEAR_SECONDS * 100),
 		],
 	},
 	{
@@ -198,17 +199,17 @@ export const CATEGORIES: readonly Category[] = [
 		name: 'Armazenamento de dados',
 		pair: ['gb', 'mb'],
 		units: [
-			u('bit', 'Bit', 'bit', 1 / 8),
-			u('b', 'Byte', 'B', 1),
-			u('kb', 'Quilobyte', 'kB', 1e3),
-			u('mb', 'Megabyte', 'MB', 1e6),
-			u('gb', 'Gigabyte', 'GB', 1e9),
-			u('tb', 'Terabyte', 'TB', 1e12),
-			u('pb', 'Petabyte', 'PB', 1e15),
-			u('kib', 'Kibibyte', 'KiB', 2 ** 10),
-			u('mib', 'Mebibyte', 'MiB', 2 ** 20),
-			u('gib', 'Gibibyte', 'GiB', 2 ** 30),
-			u('tib', 'Tebibyte', 'TiB', 2 ** 40),
+			linearUnit('bit', 'Bit', 'bit', 1 / 8),
+			linearUnit('b', 'Byte', 'B', 1),
+			linearUnit('kb', 'Quilobyte', 'kB', 1e3),
+			linearUnit('mb', 'Megabyte', 'MB', 1e6),
+			linearUnit('gb', 'Gigabyte', 'GB', 1e9),
+			linearUnit('tb', 'Terabyte', 'TB', 1e12),
+			linearUnit('pb', 'Petabyte', 'PB', 1e15),
+			linearUnit('kib', 'Kibibyte', 'KiB', 2 ** 10),
+			linearUnit('mib', 'Mebibyte', 'MiB', 2 ** 20),
+			linearUnit('gib', 'Gibibyte', 'GiB', 2 ** 30),
+			linearUnit('tib', 'Tebibyte', 'TiB', 2 ** 40),
 		],
 	},
 	{
@@ -216,13 +217,13 @@ export const CATEGORIES: readonly Category[] = [
 		name: 'Taxa de transferência',
 		pair: ['mbps', 'mbs'],
 		units: [
-			u('bps', 'Bit por segundo', 'bit/s', 1),
-			u('kbps', 'Quilobit por segundo', 'kbit/s', 1e3),
-			u('mbps', 'Megabit por segundo', 'Mbit/s', 1e6),
-			u('gbps', 'Gigabit por segundo', 'Gbit/s', 1e9),
-			u('kbs', 'Quilobyte por segundo', 'kB/s', 8e3),
-			u('mbs', 'Megabyte por segundo', 'MB/s', 8e6),
-			u('gbs', 'Gigabyte por segundo', 'GB/s', 8e9),
+			linearUnit('bps', 'Bit por segundo', 'bit/s', 1),
+			linearUnit('kbps', 'Quilobit por segundo', 'kbit/s', 1e3),
+			linearUnit('mbps', 'Megabit por segundo', 'Mbit/s', 1e6),
+			linearUnit('gbps', 'Gigabit por segundo', 'Gbit/s', 1e9),
+			linearUnit('kbs', 'Quilobyte por segundo', 'kB/s', 8e3),
+			linearUnit('mbs', 'Megabyte por segundo', 'MB/s', 8e6),
+			linearUnit('gbs', 'Gigabyte por segundo', 'GB/s', 8e9),
 		],
 	},
 	{
@@ -230,14 +231,14 @@ export const CATEGORIES: readonly Category[] = [
 		name: 'Energia',
 		pair: ['kcal', 'kj'],
 		units: [
-			u('j', 'Joule', 'J', 1),
-			u('kj', 'Quilojoule', 'kJ', 1000),
-			u('cal', 'Caloria', 'cal', CALORIE),
-			u('kcal', 'Quilocaloria', 'kcal', CALORIE * 1000),
-			u('wh', 'Watt-hora', 'Wh', 3600),
-			u('kwh', 'Quilowatt-hora', 'kWh', 3.6e6),
-			u('ev', 'Elétron-volt', 'eV', 1.602176634e-19),
-			u('btu', 'BTU', 'BTU', 1055.05585262),
+			linearUnit('j', 'Joule', 'J', 1),
+			linearUnit('kj', 'Quilojoule', 'kJ', 1000),
+			linearUnit('cal', 'Caloria', 'cal', CALORIE_JOULES),
+			linearUnit('kcal', 'Quilocaloria', 'kcal', CALORIE_JOULES * 1000),
+			linearUnit('wh', 'Watt-hora', 'Wh', 3600),
+			linearUnit('kwh', 'Quilowatt-hora', 'kWh', 3.6e6),
+			linearUnit('ev', 'Elétron-volt', 'eV', 1.602176634e-19),
+			linearUnit('btu', 'BTU', 'BTU', BTU_JOULES),
 		],
 	},
 	{
@@ -245,12 +246,12 @@ export const CATEGORIES: readonly Category[] = [
 		name: 'Potência',
 		pair: ['cv', 'kw'],
 		units: [
-			u('w', 'Watt', 'W', 1),
-			u('kw', 'Quilowatt', 'kW', 1000),
-			u('cv', 'Cavalo-vapor', 'cv', 735.49875),
+			linearUnit('w', 'Watt', 'W', 1),
+			linearUnit('kw', 'Quilowatt', 'kW', 1000),
+			linearUnit('cv', 'Cavalo-vapor', 'cv', 735.49875),
 			// Mechanical horsepower: 550 ft·lbf/s.
-			u('hp', 'Horsepower', 'hp', 550 * FOOT * POUND * 9.80665),
-			u('btuh', 'BTU por hora', 'BTU/h', 1055.05585262 / 3600),
+			linearUnit('hp', 'Horsepower', 'hp', 550 * FOOT_METERS * POUND_KILOGRAMS * STANDARD_GRAVITY),
+			linearUnit('btuh', 'BTU por hora', 'BTU/h', BTU_JOULES / 3600),
 		],
 	},
 	{
@@ -258,13 +259,18 @@ export const CATEGORIES: readonly Category[] = [
 		name: 'Pressão',
 		pair: ['psi', 'bar'],
 		units: [
-			u('pa', 'Pascal', 'Pa', 1),
-			u('kpa', 'Quilopascal', 'kPa', 1000),
-			u('bar', 'Bar', 'bar', 1e5),
-			u('atm', 'Atmosfera', 'atm', 101325),
-			u('psi', 'Libra por polegada quadrada', 'psi', (POUND * 9.80665) / (INCH * INCH)),
-			u('mmhg', 'Milímetro de mercúrio', 'mmHg', 133.322387415),
-			u('kgfcm2', 'Quilograma-força por cm²', 'kgf/cm²', 98066.5),
+			linearUnit('pa', 'Pascal', 'Pa', 1),
+			linearUnit('kpa', 'Quilopascal', 'kPa', 1000),
+			linearUnit('bar', 'Bar', 'bar', 1e5),
+			linearUnit('atm', 'Atmosfera', 'atm', 101325),
+			linearUnit(
+				'psi',
+				'Libra por polegada quadrada',
+				'psi',
+				(POUND_KILOGRAMS * STANDARD_GRAVITY) / (INCH_METERS * INCH_METERS),
+			),
+			linearUnit('mmhg', 'Milímetro de mercúrio', 'mmHg', 133.322387415),
+			linearUnit('kgfcm2', 'Quilograma-força por cm²', 'kgf/cm²', 98066.5),
 		],
 	},
 	{
@@ -272,11 +278,11 @@ export const CATEGORIES: readonly Category[] = [
 		name: 'Frequência',
 		pair: ['ghz', 'mhz'],
 		units: [
-			u('hz', 'Hertz', 'Hz', 1),
-			u('khz', 'Quilohertz', 'kHz', 1e3),
-			u('mhz', 'Megahertz', 'MHz', 1e6),
-			u('ghz', 'Gigahertz', 'GHz', 1e9),
-			u('rpm', 'Rotação por minuto', 'rpm', 1 / 60),
+			linearUnit('hz', 'Hertz', 'Hz', 1),
+			linearUnit('khz', 'Quilohertz', 'kHz', 1e3),
+			linearUnit('mhz', 'Megahertz', 'MHz', 1e6),
+			linearUnit('ghz', 'Gigahertz', 'GHz', 1e9),
+			linearUnit('rpm', 'Rotação por minuto', 'rpm', 1 / 60),
 		],
 	},
 	{
@@ -284,23 +290,23 @@ export const CATEGORIES: readonly Category[] = [
 		name: 'Consumo de combustível',
 		pair: ['kml', 'l100'],
 		units: [
-			u('kml', 'Quilômetro por litro', 'km/L', 1),
+			linearUnit('kml', 'Quilômetro por litro', 'km/L', 1),
 			{
 				id: 'l100',
 				name: 'Litro por 100 km',
 				symbol: 'L/100 km',
-				toBase: (v) => 100 / v,
-				fromBase: (kml) => 100 / kml,
+				toBase: (litersPer100Km) => 100 / litersPer100Km,
+				fromBase: (kmPerLiter) => 100 / kmPerLiter,
 			},
-			u('mpg', 'Milha por galão americano', 'mpg', MILE / 1000 / US_GALLON),
-			u('mpg-uk', 'Milha por galão imperial', 'mpg (UK)', MILE / 1000 / IMPERIAL_GALLON),
+			linearUnit('mpg', 'Milha por galão americano', 'mpg', MILE_METERS / 1000 / US_GALLON_LITERS),
+			linearUnit(
+				'mpg-uk',
+				'Milha por galão imperial',
+				'mpg (UK)',
+				MILE_METERS / 1000 / IMPERIAL_GALLON_LITERS,
+			),
 		],
-		formula: (from, to) =>
-			from.id === 'l100' || to.id === 'l100'
-				? from.id === to.id
-					? null
-					: `divida ${formatFactor(100 / factorOf(from.id === 'l100' ? to : from))} pelo valor`
-				: null,
+		formula: fuelEconomyFormula,
 	},
 	{
 		id: 'angulo',
@@ -308,13 +314,13 @@ export const CATEGORIES: readonly Category[] = [
 		pair: ['deg', 'rad'],
 		allowNegative: true,
 		units: [
-			u('deg', 'Grau', '°', 1),
-			u('rad', 'Radiano', 'rad', 180 / Math.PI),
-			u('mrad', 'Miliradiano', 'mrad', 0.18 / Math.PI),
-			u('grad', 'Grado', 'grad', 0.9),
-			u('arcmin', 'Minuto de arco', '′', 1 / 60),
-			u('arcsec', 'Segundo de arco', '″', 1 / 3600),
-			u('turn', 'Volta', 'volta', 360),
+			linearUnit('deg', 'Grau', '°', 1),
+			linearUnit('rad', 'Radiano', 'rad', 180 / Math.PI),
+			linearUnit('mrad', 'Miliradiano', 'mrad', 0.18 / Math.PI),
+			linearUnit('grad', 'Grado', 'grad', 0.9),
+			linearUnit('arcmin', 'Minuto de arco', '′', 1 / 60),
+			linearUnit('arcsec', 'Segundo de arco', '″', 1 / 3600),
+			linearUnit('turn', 'Volta', 'volta', 360),
 		],
 	},
 ]
@@ -328,7 +334,17 @@ const TEMPERATURE_FORMULAS: Record<string, string> = {
 	'k-f': '(K − 273,15) × 9/5 + 32 = °F',
 }
 
-const factorOf = (unit: Unit) => unit.factor ?? 1
+function factorOf(unit: Unit): number {
+	return unit.factor ?? 1
+}
+
+/** L/100 km is the inverse of km/L, so converting to or from it divides a constant by the value. */
+function fuelEconomyFormula(from: Unit, to: Unit): string | null {
+	if (from.id === to.id) return null
+	if (from.id === 'l100') return `divida ${formatFactor(100 / factorOf(to))} pelo valor`
+	if (to.id === 'l100') return `divida ${formatFactor(100 / factorOf(from))} pelo valor`
+	return null
+}
 
 export function categoryById(id: string): Category | undefined {
 	return CATEGORIES.find((category) => category.id === id)
@@ -338,10 +354,13 @@ export function unitById(category: Category, id: string): Unit | undefined {
 	return category.units.find((unit) => unit.id === id)
 }
 
-const toBase = (unit: Unit, value: number) =>
-	unit.toBase ? unit.toBase(value) : value * factorOf(unit)
-const fromBase = (unit: Unit, value: number) =>
-	unit.fromBase ? unit.fromBase(value) : value / factorOf(unit)
+function toBase(unit: Unit, value: number): number {
+	return unit.toBase ? unit.toBase(value) : value * factorOf(unit)
+}
+
+function fromBase(unit: Unit, value: number): number {
+	return unit.fromBase ? unit.fromBase(value) : value / factorOf(unit)
+}
 
 /** `value` in `from`, expressed in `to`. Non-finite results (100 ÷ 0 km/L) come back as null. */
 export function convertUnit(value: number, from: Unit, to: Unit): number | null {
@@ -361,20 +380,28 @@ function formatFactor(value: number): string {
  */
 export function conversionFormula(category: Category, from: Unit, to: Unit): string | null {
 	if (from.id === to.id) return null
-	const custom = category.formula?.(from, to)
-	if (custom) return custom
+	const categoryFormula = category.formula?.(from, to)
+	if (categoryFormula) return categoryFormula
 	if (from.toBase || to.toBase) return null
-	const times = Number((factorOf(from) / factorOf(to)).toPrecision(10))
-	const divide = Number((factorOf(to) / factorOf(from)).toPrecision(10))
-	// The shorter, rounder number reads better: ÷ 2,54 instead of × 0,3937007874.
-	const digits = (n: number) =>
-		String(n)
-			.replace('.', '')
-			.replace(/^0+|0+$/g, '').length
-	const useDivide = digits(divide) === digits(times) ? times < 1 : digits(divide) < digits(times)
-	return useDivide
-		? `divida o valor por ${formatFactor(divide)}`
-		: `multiplique o valor por ${formatFactor(times)}`
+	const multiplier = Number((factorOf(from) / factorOf(to)).toPrecision(10))
+	const divisor = Number((factorOf(to) / factorOf(from)).toPrecision(10))
+	return prefersDivision(multiplier, divisor)
+		? `divida o valor por ${formatFactor(divisor)}`
+		: `multiplique o valor por ${formatFactor(multiplier)}`
+}
+
+/** The shorter, rounder number reads better: ÷ 2,54 instead of × 0,3937007874. */
+function prefersDivision(multiplier: number, divisor: number): boolean {
+	const multiplierDigits = significantDigitCount(multiplier)
+	const divisorDigits = significantDigitCount(divisor)
+	if (divisorDigits === multiplierDigits) return multiplier < 1
+	return divisorDigits < multiplierDigits
+}
+
+function significantDigitCount(value: number): number {
+	return String(value)
+		.replace('.', '')
+		.replace(/^0+|0+$/g, '').length
 }
 
 /** Reads what people type: "1,5", "1.5", "1.234,5", "-40", "1,2e-7". Empty or invalid → null. */
@@ -392,8 +419,8 @@ export function parseAmount(text: string): number | null {
  */
 export function formatAmount(value: number): string {
 	if (value === 0 || Object.is(value, -0)) return '0'
-	const size = Math.abs(value)
-	if (size >= 1e15 || size < 1e-7) {
+	const magnitude = Math.abs(value)
+	if (magnitude >= 1e15 || magnitude < 1e-7) {
 		const [mantissa = '0', exponent = '0'] = value.toExponential(6).split('e')
 		const trimmed = mantissa.replace(/\.?0+$/, '').replace('.', ',')
 		return `${trimmed}e${exponent.replace('+', '')}`
