@@ -1,23 +1,17 @@
 'use client'
 
 import { Button, toast } from '@4people/ui'
-import { Link2, Share2 } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { Share2 } from 'lucide-react'
 
 /**
  * Shares the current page with the device's own share sheet (phones, Safari, Edge…). Where the
- * browser has none, it copies the link instead, and the label says so.
+ * browser has none, it copies the link and a toast says so. The label is the same everywhere, so
+ * the server HTML and the page after load never disagree.
  */
 export function ShareButton({ title, text }: { title: string; text: string }) {
-	// Decided after mount: the server HTML can't know the device, and both labels fit the layout.
-	const [native, setNative] = useState(false)
-	useEffect(() => {
-		setNative(typeof navigator.share === 'function')
-	}, [])
-
 	async function share() {
 		const url = window.location.href
-		if (native) {
+		if (typeof navigator.share === 'function') {
 			try {
 				await navigator.share({ title, text, url })
 				return
@@ -36,8 +30,7 @@ export function ShareButton({ title, text }: { title: string; text: string }) {
 
 	return (
 		<Button variant="secondary" size="sm" onClick={share}>
-			{native ? <Share2 /> : <Link2 />}
-			{native ? 'Compartilhar' : 'Copiar link'}
+			<Share2 /> Compartilhar
 		</Button>
 	)
 }
