@@ -13,7 +13,13 @@ export {
 	CardTitle,
 } from './components/card.tsx'
 export { Checkbox, type CheckboxProps } from './components/checkbox.tsx'
-export { COLOR_PRESETS, ColorPicker, type ColorPickerProps } from './components/color-picker.tsx'
+export {
+	COLOR_PRESETS,
+	ColorArea,
+	type ColorAreaProps,
+	ColorPicker,
+	type ColorPickerProps,
+} from './components/color-picker.tsx'
 export { CopyButton, type CopyButtonProps } from './components/copy-button.tsx'
 export { DataList, type DataListItem, type DataListProps } from './components/data-list.tsx'
 export {

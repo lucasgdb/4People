@@ -11,7 +11,14 @@ import { JsonLd } from '@/components/json-ld'
 import { ToolTable } from '@/components/screen'
 import { SiteFooter } from '@/components/shell/site-footer'
 import { SiteHeader } from '@/components/shell/site-header'
+import { generateCPF } from '@/lib/algorithms/documents'
 import { faqSchema } from '@/lib/structured-data'
+
+/**
+ * Rendered per request (not at build time): the CPF in the hero is drawn on the server for each
+ * visit, so the page arrives with its own number.
+ */
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
 	title: { absolute: '4People: ferramentas online gratuitas para pessoas' },
@@ -75,7 +82,7 @@ function Hero() {
 					</Link>
 				</div>
 			</div>
-			<LiveCpf />
+			<LiveCpf initial={generateCPF()} />
 		</section>
 	)
 }

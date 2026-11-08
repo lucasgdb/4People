@@ -273,6 +273,95 @@
 }
 
 /* react-colorful, in the design system's shape (rounded area, round pointers with a white ring). */
+/*
+ * react-colorful's own base styles, copied here so the colour picker is styled in the server HTML.
+ * The library only injects them with JavaScript after loading, which made the picker flash
+ * unstyled on reload. Keep in sync when upgrading react-colorful.
+ */
+.react-colorful {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	width: 200px;
+	height: 200px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	cursor: default;
+}
+.react-colorful__saturation {
+	position: relative;
+	flex-grow: 1;
+	border-color: transparent;
+	border-bottom: 12px solid #000;
+	border-radius: 8px 8px 0 0;
+	background-image:
+		linear-gradient(0deg, #000, transparent), linear-gradient(90deg, #fff, hsla(0, 0%, 100%, 0));
+}
+.react-colorful__alpha-gradient,
+.react-colorful__pointer-fill {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	pointer-events: none;
+	border-radius: inherit;
+}
+.react-colorful__alpha-gradient,
+.react-colorful__saturation {
+	box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+.react-colorful__alpha,
+.react-colorful__hue {
+	position: relative;
+	height: 24px;
+}
+.react-colorful__hue {
+	background: linear-gradient(90deg, red 0, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, red);
+}
+.react-colorful__last-control {
+	border-radius: 0 0 8px 8px;
+}
+.react-colorful__interactive {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	border-radius: inherit;
+	outline: none;
+	touch-action: none;
+}
+.react-colorful__pointer {
+	position: absolute;
+	z-index: 1;
+	box-sizing: border-box;
+	width: 28px;
+	height: 28px;
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.react-colorful__interactive:focus .react-colorful__pointer {
+	transform: translate(-50%, -50%) scale(1.1);
+}
+.react-colorful__alpha,
+.react-colorful__alpha-pointer {
+	background-color: #fff;
+	background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill-opacity=".05"><path d="M8 0h8v8H8zM0 8h8v8H0z"/></svg>');
+}
+.react-colorful__saturation-pointer {
+	z-index: 3;
+}
+.react-colorful__hue-pointer {
+	z-index: 2;
+}
+
 .ds-color-picker.react-colorful {
 	width: 100%;
 	height: 11rem;
@@ -286,12 +375,30 @@
 	margin-top: 0.5rem;
 	border-radius: 999px;
 }
+/* biome-ignore lint/style/noDescendingSpecificity: overrides the size from react-colorful's base styles above; its focus rule only scales the pointer */
 .ds-color-picker .react-colorful__pointer {
 	width: 1.25rem;
 	height: 1.25rem;
 	border: 3px solid #ffffff;
 	box-shadow: 0 1px 4px rgb(23 32 51 / 0.35);
 }
+/* Inline colour area (ColorArea): taller, the saturation fully rounded, the hue a pill below. */
+.ds-color-picker-lg.react-colorful {
+	height: 15rem;
+}
+.ds-color-picker-lg .react-colorful__saturation {
+	border-radius: var(--radius-control);
+}
+.ds-color-picker-lg .react-colorful__hue {
+	height: 1.25rem;
+	margin-top: 0.875rem;
+}
+/* biome-ignore lint/style/noDescendingSpecificity: overrides the size from react-colorful's base styles above; its focus rule only scales the pointer */
+.ds-color-picker-lg .react-colorful__pointer {
+	width: 1.5rem;
+	height: 1.5rem;
+}
+
 .ds-color-picker .react-colorful__interactive:focus .react-colorful__pointer {
 	transform: translate(-50%, -50%) scale(1.15);
 	box-shadow: 0 0 0 4px var(--ds-ring);

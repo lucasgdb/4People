@@ -111,3 +111,48 @@ export function ColorPicker({
 		</Popover.Root>
 	)
 }
+
+export type ColorAreaProps = {
+	/** Hex, "#rrggbb". */
+	value: string
+	onValueChange: (hex: string) => void
+	presets?: readonly string[]
+	className?: string
+}
+
+/**
+ * The picker without the popover, for screens where choosing a colour is the main task (a colour
+ * converter): a large saturation area, the hue slider and the preset swatches, always visible.
+ */
+export function ColorArea({
+	value,
+	onValueChange,
+	presets = COLOR_PRESETS,
+	className,
+}: ColorAreaProps) {
+	return (
+		<div className={cn('flex flex-col gap-4', className)}>
+			<HexColorPicker
+				color={value}
+				onChange={onValueChange}
+				className="ds-color-picker ds-color-picker-lg"
+			/>
+			<fieldset
+				className="grid grid-cols-7 gap-2 sm:grid-cols-14 sm:gap-1.5"
+				aria-label="Cores prontas"
+			>
+				{presets.map((preset) => (
+					<button
+						key={preset}
+						type="button"
+						aria-label={preset}
+						aria-pressed={value.toLowerCase() === preset.toLowerCase()}
+						onClick={() => onValueChange(preset)}
+						className="border-border-strong focus-visible:ring-ring aria-pressed:ring-accent aspect-square w-full cursor-pointer rounded-[10px] border outline-none focus-visible:ring-4 aria-pressed:ring-2 aria-pressed:ring-offset-2"
+						style={{ background: preset }}
+					/>
+				))}
+			</fieldset>
+		</div>
+	)
+}

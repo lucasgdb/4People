@@ -4,26 +4,18 @@ import { Button, CopyButton } from '@4people/ui'
 import { ArrowRight, RefreshCw } from 'lucide-react'
 import type { Route } from 'next'
 import Link from 'next/link'
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { ToolIcon } from '@/components/tool-icons'
 import { generateCPF } from '@/lib/algorithms/documents'
 
-const SAMPLE_CPF = '529.982.247-25'
 const HREF = '/computacao/geradores/gerador-de-cpf'
 
 /**
- * The real tool in miniature: a new valid CPF on every visit. The server HTML carries a fixed valid
- * sample (shown without JavaScript); the browser replaces it once. The ref keeps it to once even
- * when React runs effects twice (Strict Mode in development), which made F5 generate two numbers.
+ * The real tool in miniature. The server draws a new valid CPF for every request, so each F5 shows
+ * a new number already in the HTML, with no swap after loading; "Gerar outro" draws in the browser.
  */
-export function LiveCpf() {
-	const [cpf, setCpf] = useState(SAMPLE_CPF)
-	const generated = useRef(false)
-	useEffect(() => {
-		if (generated.current) return
-		generated.current = true
-		setCpf(generateCPF())
-	}, [])
+export function LiveCpf({ initial }: { initial: string }) {
+	const [cpf, setCpf] = useState(initial)
 
 	return (
 		<section
