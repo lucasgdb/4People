@@ -1,0 +1,6 @@
+{
+	"extends": "../../tsconfig.base.json",
+	// Node types only for the unit tests (node --test); the components themselves use DOM types.
+	"compilerOptions": { "types": ["node"] },
+	"include": ["src"]
+}

@@ -1,0 +1,315 @@
+/*
+ * 4People Design System — tokens and base rules ("Acolhedor" direction).
+ * Import AFTER `@import "tailwindcss"` in the app stylesheet.
+ *
+ * Colour roles:
+ *   bg        the page ground: a cool, very light blue-grey
+ *   surface   white cards and the top bar
+ *   primary   blue: the main action of every screen, links and the selected state
+ *   accent    the same blue family: focus ring, icons, highlights
+ *   brand     the logo tile: the same blue as the interface
+ * Every tier that carries words reaches 4.5:1 on the surface it sits on.
+ * Light only, as in the chosen design: the site ignores the system's dark mode.
+ */
+
+:root {
+	color-scheme: light;
+	--ds-page: #ffffff;
+	--ds-band: #eef1f8;
+	--ds-bg: #f3f5fa;
+	--ds-surface: #ffffff;
+	--ds-surface-muted: #f7f8fc;
+	--ds-surface-sunken: #eceff7;
+	--ds-fg: #172033;
+	--ds-fg-muted: #4a5570;
+	--ds-fg-subtle: #5d6782;
+	--ds-border: #e3e7f0;
+	--ds-border-strong: #c9d0e2;
+	--ds-rule: #edf0f6;
+	--ds-primary: #2747c4;
+	--ds-primary-hover: #1f3aa6;
+	--ds-primary-fg: #ffffff;
+	--ds-accent: #2747c4;
+	--ds-accent-hover: #1a3399;
+	--ds-accent-fg: #ffffff;
+	--ds-accent-soft: #e8edfc;
+	--ds-accent-soft-fg: #1a3399;
+	--ds-brand: #2747c4;
+	--ds-brand-fg: #ffffff;
+	--ds-success: #1f7a4d;
+	--ds-success-soft: #e3f6ea;
+	--ds-success-ink: #0d3d24;
+	--ds-danger: #c4242a;
+	--ds-danger-soft: #ffedea;
+	--ds-danger-ink: #831c1e;
+	--ds-warning-soft: #fff7e6;
+	--ds-warning-ink: #6b4300;
+	/* Focus ring: solid enough to reach 3:1 against white and the page ground. */
+	--ds-ring: #6a80dc;
+	/* Character classes in generated codes (passwords): digits and symbols stand apart from letters. */
+	--ds-code-digit: #2747c4;
+	--ds-code-symbol: #b4440e;
+	--ds-scrollbar-thumb: #c9d0e2;
+	--ds-scrollbar-thumb-hover: #97a1bd;
+	--ds-shadow-float: 0 16px 40px -16px rgb(23 32 51 / 0.28), 0 2px 6px rgb(23 32 51 / 0.06);
+}
+
+@theme inline {
+	--color-page: var(--ds-page);
+	/* A full-width field one tone step off the page, for a section that changes ground. */
+	--color-band: var(--ds-band);
+	--color-bg: var(--ds-bg);
+	--color-surface: var(--ds-surface);
+	--color-surface-muted: var(--ds-surface-muted);
+	--color-surface-sunken: var(--ds-surface-sunken);
+	--color-fg: var(--ds-fg);
+	--color-fg-muted: var(--ds-fg-muted);
+	--color-fg-subtle: var(--ds-fg-subtle);
+	--color-border: var(--ds-border);
+	--color-border-strong: var(--ds-border-strong);
+	--color-rule: var(--ds-rule);
+	--color-primary: var(--ds-primary);
+	--color-primary-hover: var(--ds-primary-hover);
+	--color-primary-fg: var(--ds-primary-fg);
+	--color-accent: var(--ds-accent);
+	--color-accent-hover: var(--ds-accent-hover);
+	--color-accent-fg: var(--ds-accent-fg);
+	--color-accent-soft: var(--ds-accent-soft);
+	--color-accent-soft-fg: var(--ds-accent-soft-fg);
+	--color-brand: var(--ds-brand);
+	--color-brand-fg: var(--ds-brand-fg);
+	--color-warning-soft: var(--ds-warning-soft);
+	--color-warning-ink: var(--ds-warning-ink);
+	--color-success: var(--ds-success);
+	--color-success-soft: var(--ds-success-soft);
+	--color-success-ink: var(--ds-success-ink);
+	--color-danger: var(--ds-danger);
+	--color-danger-soft: var(--ds-danger-soft);
+	--color-danger-ink: var(--ds-danger-ink);
+	--color-ring: var(--ds-ring);
+	--color-code-digit: var(--ds-code-digit);
+	--color-code-symbol: var(--ds-code-symbol);
+	--shadow-float: var(--ds-shadow-float);
+
+	--font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+	--font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+	--font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+	/* Soft, nested radii: sheet → panel (cards) → control (inputs, buttons) → chip. */
+	--radius-sheet: 28px;
+	--radius-panel: 24px;
+	--radius-control: 14px;
+	--radius-chip: 10px;
+
+	--ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+	--ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+	--ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+
+	/*
+	 * DS motion, two speeds. --ds-motion-fast: feedback on the spot (hover, colour, focus).
+	 * --ds-motion: things that open, close, move or turn (panels, popups, chevrons, menus). Parts that
+	 * move together share it and the --ease-out curve, so they finish together.
+	 * Use: duration-(--ds-motion) ease-(--ease-out), or duration-(--ds-motion-fast).
+	 */
+	--ds-motion-fast: 150ms;
+	--ds-motion: 200ms;
+}
+
+@layer base {
+	*,
+	::after,
+	::before {
+		border-color: var(--color-border);
+	}
+
+	html {
+		-webkit-tap-highlight-color: transparent;
+		text-size-adjust: 100%;
+		/* Keyboard focus and #anchors land below the 64px sticky header, never under it. */
+		scroll-padding-top: 5rem;
+	}
+
+	h1,
+	h2,
+	h3 {
+		text-wrap: balance;
+	}
+
+	/*
+	 * Scrollbars: a slim rounded thumb on a clear track, no arrow buttons, everywhere (page, search
+	 * list, menus, tables, code). Chromium and Safari use the ::-webkit-scrollbar parts below; Firefox,
+	 * which has no such parts, gets the standard properties. Chromium ignores the ::-webkit parts as
+	 * soon as `scrollbar-color` is set, so the standard ones stay inside the Firefox-only block.
+	 */
+	@supports not selector(::-webkit-scrollbar) {
+		* {
+			scrollbar-width: thin;
+			scrollbar-color: var(--ds-scrollbar-thumb) transparent;
+		}
+	}
+
+	::-webkit-scrollbar {
+		width: 12px;
+		height: 12px;
+	}
+
+	::-webkit-scrollbar-track,
+	::-webkit-scrollbar-corner {
+		background: transparent;
+	}
+
+	::-webkit-scrollbar-thumb {
+		min-height: 40px;
+		border: 3px solid transparent;
+		border-radius: 999px;
+		background-color: var(--ds-scrollbar-thumb);
+		background-clip: padding-box;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background-color: var(--ds-scrollbar-thumb-hover);
+	}
+
+	::-webkit-scrollbar-button {
+		display: none;
+		width: 0;
+		height: 0;
+	}
+
+	a,
+	button,
+	input,
+	label,
+	select,
+	summary,
+	textarea,
+	[role="button"],
+	[role="option"],
+	[role="radio"],
+	[role="checkbox"],
+	[role="switch"],
+	[role="tab"] {
+		touch-action: manipulation;
+	}
+
+	/* Reduced motion: no slides, scales or spins; state changes stay instant and readable. */
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		::before,
+		::after {
+			/* biome-ignore lint/complexity/noImportantStyles: reduced motion must win over every component transition */
+			animation-duration: 0.01ms !important;
+			/* biome-ignore lint/complexity/noImportantStyles: reduced motion must win over every component transition */
+			animation-iteration-count: 1 !important;
+			/* biome-ignore lint/complexity/noImportantStyles: reduced motion must win over every component transition */
+			transition-duration: 0.01ms !important;
+			/* biome-ignore lint/complexity/noImportantStyles: reduced motion must win over every component transition */
+			scroll-behavior: auto !important;
+		}
+	}
+
+	body {
+		background-color: var(--color-bg);
+		color: var(--color-fg);
+		font-family: var(--font-sans);
+		font-size: 1rem;
+		line-height: 1.5;
+		-webkit-font-smoothing: antialiased;
+		/* Plus Jakarta Sans sets a tight word space; open it a little for running text. */
+		word-spacing: 0.04em;
+	}
+
+	::selection {
+		background-color: var(--color-accent);
+		color: var(--color-accent-fg);
+	}
+
+	/*
+	 * Every clickable area shows the pointer. Tailwind v4 resets buttons to `cursor: default`,
+	 * so the rule lives in the design system rather than on each component.
+	 */
+	a[href],
+	button:not(:disabled),
+	summary,
+	select:not(:disabled),
+	label:has(
+		input:not(:disabled),
+		button:not(:disabled),
+		[role="radio"],
+		[role="checkbox"],
+		[role="switch"]
+	),
+	input[type="checkbox"]:not(:disabled),
+	input[type="radio"]:not(:disabled),
+	input[type="file"]:not(:disabled),
+	input[type="date"]:not(:disabled),
+	input[type="datetime-local"]:not(:disabled),
+	[role="button"]:not([aria-disabled="true"]),
+	[role="link"],
+	[role="tab"],
+	[role="option"]:not([aria-disabled="true"]),
+	[role="menuitem"]:not([aria-disabled="true"]),
+	[role="radio"]:not([aria-disabled="true"]),
+	[role="checkbox"]:not([aria-disabled="true"]),
+	[role="switch"]:not([aria-disabled="true"]),
+	[role="combobox"]:not([aria-disabled="true"]) {
+		cursor: pointer;
+	}
+
+	:disabled,
+	[aria-disabled="true"],
+	[data-disabled] {
+		cursor: not-allowed;
+	}
+
+	:focus-visible {
+		outline: 3px solid var(--color-accent);
+		outline-offset: 2px;
+	}
+
+	.tabular {
+		font-variant-numeric: tabular-nums;
+	}
+}
+
+/* react-colorful, in the design system's shape (rounded area, round pointers with a white ring). */
+.ds-color-picker.react-colorful {
+	width: 100%;
+	height: 11rem;
+}
+.ds-color-picker .react-colorful__saturation {
+	border-radius: var(--radius-control) var(--radius-control) 0 0;
+	border-bottom: 0;
+}
+.ds-color-picker .react-colorful__hue {
+	height: 1rem;
+	margin-top: 0.5rem;
+	border-radius: 999px;
+}
+.ds-color-picker .react-colorful__pointer {
+	width: 1.25rem;
+	height: 1.25rem;
+	border: 3px solid #ffffff;
+	box-shadow: 0 1px 4px rgb(23 32 51 / 0.35);
+}
+.ds-color-picker .react-colorful__interactive:focus .react-colorful__pointer {
+	transform: translate(-50%, -50%) scale(1.15);
+	box-shadow: 0 0 0 4px var(--ds-ring);
+}
+
+/*
+ * Sideways scroll cue for wide content (tables on a phone): a soft shadow appears on an edge only
+ * while there is more to see that way. The "local" covers move with the content and hide the "scroll"
+ * shadows once an edge is reached. Pure CSS, no listeners.
+ */
+.ds-scroll-shadow-x {
+	background:
+		linear-gradient(to right, var(--color-surface) 30%, transparent) left center / 2.5rem 100%
+		no-repeat local,
+		linear-gradient(to left, var(--color-surface) 30%, transparent) right center / 2.5rem 100%
+		no-repeat local,
+		radial-gradient(farthest-side at 0 50%, rgb(23 32 51 / 0.16), transparent) left center /
+		0.875rem 100% no-repeat scroll,
+		radial-gradient(farthest-side at 100% 50%, rgb(23 32 51 / 0.16), transparent) right center /
+		0.875rem 100% no-repeat scroll;
+}

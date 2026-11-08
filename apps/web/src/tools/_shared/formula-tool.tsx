@@ -1,0 +1,149 @@
+'use client'
+
+import { cn, DataList, type NumericOptions } from '@4people/ui'
+import { useMemo, useState } from 'react'
+import { z } from 'zod'
+import { useToolForm } from '@/components/form/use-tool-form'
+import { formatNumber } from '@/lib/format'
+import { numeric } from '@/lib/schemas'
+import { FormCard, ResultCard, ToolLayout } from './tool-layout'
+
+export type FormulaField = {
+	name: string
+	label: string
+	placeholder?: string
+	suffix?: string
+	/** Defaults to positive numbers. */
+	constraints?: Parameters<typeof numeric>[0]
+	/** Arrow-key step and an explicit minus-sign override; limits come from `constraints`. */
+	step?: number
+	allowNegative?: boolean
+}
+
+export type FormulaResult = { label: string; value: number; unit?: string }
+
+/** Shorthand for a positive-number field. Declare fields at module scope so the schema is built once. */
+export const field = (name: string, label: string, placeholder = 'Ex: 10'): FormulaField => ({
+	name,
+	label,
+	placeholder,
+})
+
+/** The input's typing filter and arrow-key limits, derived from the field's Zod constraints. */
+function numericOptions({ constraints = { positive: true }, step, allowNegative }: FormulaField) {
+	const { min, max, integer, positive } = constraints
+	const options: NumericOptions = { min, max, integer, step, allowNegative }
+	if (positive && min === undefined) {
+		// > 0: an integer can start at 1; a decimal just can't take the minus sign.
+		if (integer) options.min = 1
+		else options.allowNegative ??= false
+	}
+	return options
+}
+
+/** The single "Área" result of the area calculators. */
+export const areaOf = (value: number): FormulaResult[] => [{ label: 'Área', value }]
+
+export type FormulaToolProps = {
+	fields: readonly FormulaField[]
+	compute: (values: Record<string, number>) => FormulaResult[] | string
+	submitLabel?: string
+	/** Extra cross-field validation; return an error message to block the result. */
+	refine?: (values: Record<string, number>) => string | undefined
+}
+
+/**
+ * Generic "fill numbers → compute" tool used by area calculators and simple formulas.
+ * `fields` and `refine` must be stable (module constants): the Zod schema is memoized on them.
+ */
+export function FormulaTool({
+	fields,
+	compute,
+	refine,
+	submitLabel = 'Calcular',
+}: FormulaToolProps) {
+	const [result, setResult] = useState<FormulaResult[] | string | null>(null)
+
+	const schema = useMemo(() => {
+		const shape = Object.fromEntries(
+			fields.map((field) => [field.name, numeric(field.constraints ?? { positive: true })]),
+		)
+		return z.object(shape).superRefine((values, ctx) => {
+			const message = refine?.(values as Record<string, number>)
+			if (message) ctx.addIssue({ code: 'custom', message, path: [fields.at(-1)?.name ?? ''] })
+		})
+	}, [fields, refine])
+
+	const form = useToolForm({
+		schema,
+		defaultValues: Object.fromEntries(fields.map((field) => [field.name, ''])),
+		onSubmit: (values) => setResult(compute(values as Record<string, number>)),
+	})
+
+	const copyText =
+		result === null
+			? ''
+			: typeof result === 'string'
+				? result
+				: result
+						.map((item) => `${item.label}: ${formatNumber(item.value)}${item.unit ?? ''}`)
+						.join('\n')
+
+	return (
+		<ToolLayout>
+			<FormCard
+				onSubmit={() => form.handleSubmit()}
+				actions={
+					<form.AppForm>
+						<form.SubmitButton>{submitLabel}</form.SubmitButton>
+					</form.AppForm>
+				}
+			>
+				{/* Short numbers side by side even on a phone (Base | Altura), so the button and the result
+				    come up a screen sooner. Labels that wrap still line their inputs up (items-end). */}
+				<div
+					className={cn(
+						'grid items-end gap-x-3 gap-y-4 sm:gap-x-4',
+						// Three short labels (a, b, c) fit one row even on a phone, like the formula reads.
+						fields.length === 3 && fields.every((field) => field.label.length <= 14)
+							? 'grid-cols-3'
+							: fields.length > 1 && 'grid-cols-2',
+					)}
+				>
+					{fields.map((field) => (
+						<form.AppField key={field.name} name={field.name}>
+							{(f) => (
+								<f.NumberField
+									label={field.label}
+									placeholder={field.placeholder}
+									suffix={field.suffix}
+									{...numericOptions(field)}
+								/>
+							)}
+						</form.AppField>
+					))}
+				</div>
+			</FormCard>
+			<ResultCard
+				empty={result === null}
+				copyText={copyText}
+				onClear={() => {
+					setResult(null)
+					form.reset()
+				}}
+			>
+				{typeof result === 'string' ? (
+					<p className="text-fg">{result}</p>
+				) : result ? (
+					<DataList
+						columns={result.length > 1 ? 2 : 1}
+						items={result.map((item) => ({
+							label: item.label,
+							value: `${formatNumber(item.value)}${item.unit ?? ''}`,
+						}))}
+					/>
+				) : null}
+			</ResultCard>
+		</ToolLayout>
+	)
+}

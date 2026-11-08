@@ -1,0 +1,31 @@
+# Development: `docker compose up` → http://localhost:3000 with HMR.
+# Edits on the host reflect immediately; rebuild only when the Dockerfile changes.
+# Production image: see compose.prod.yaml.
+name: 4people
+
+services:
+  web:
+    build:
+      context: .
+      target: dev
+    image: 4people/web:dev
+    container_name: 4people-web-dev
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      NEXT_TELEMETRY_DISABLED: "1"
+    volumes:
+      - .:/app
+      # Container-only dependencies and build cache (see Dockerfile `dev` stage).
+      - node_modules:/app/node_modules
+      - web_node_modules:/app/apps/web/node_modules
+      - ui_node_modules:/app/packages/ui/node_modules
+      - next_cache:/app/apps/web/.next
+      - pnpm_store:/pnpm/store
+
+volumes:
+  node_modules:
+  web_node_modules:
+  ui_node_modules:
+  next_cache:
+  pnpm_store:

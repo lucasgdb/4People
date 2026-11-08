@@ -1,0 +1,16 @@
+# Production image (static build + standalone server):
+#   docker compose -f compose.prod.yaml up -d --build
+name: 4people-prod
+
+services:
+  web:
+    build:
+      context: .
+      target: runner
+      args:
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+    image: 4people/web:latest
+    container_name: 4people-web
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"

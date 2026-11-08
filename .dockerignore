@@ -1,0 +1,13 @@
+**/node_modules
+**/.next
+**/.turbo
+**/*.tsbuildinfo
+.git
+.github
+.vscode
+.idea
+Dockerfile
+compose.yaml
+*.md
+!README.md
+.env*
