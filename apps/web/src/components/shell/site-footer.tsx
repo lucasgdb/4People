@@ -9,7 +9,7 @@ import { GithubIcon } from '@/components/github-icon'
 import { AUTHOR, PRIVACY_URL, REPOSITORY_URL, TERMS_URL } from '@/lib/site'
 
 const linkClass =
-	'text-fg-muted hover:text-fg focus-visible:ring-ring inline-block rounded-sm py-1.5 text-sm leading-6 whitespace-nowrap underline-offset-4 outline-none hover:underline focus-visible:ring-4'
+	'text-fg-muted hover:text-fg focus-visible:ring-ring inline-block rounded-sm py-1.5 text-sm leading-6 underline-offset-4 outline-none hover:underline focus-visible:ring-4'
 
 /**
  * A link to another site: opens in a new tab, so 4People stays where it was, and says so. The arrow
@@ -17,7 +17,12 @@ const linkClass =
  */
 function ExternalLink({ href, children }: { href: string; children: ReactNode }) {
 	return (
-		<a href={href} target="_blank" rel="noopener noreferrer" className={linkClass}>
+		<a
+			href={href}
+			target="_blank"
+			rel="noopener noreferrer"
+			className={cn(linkClass, 'whitespace-nowrap')}
+		>
 			{children}
 			<ArrowUpRight
 				aria-hidden="true"
@@ -54,8 +59,8 @@ export function SiteFooter() {
 	return (
 		<footer className="border-border bg-surface border-t">
 			<div className="mx-auto flex w-full max-w-[1200px] flex-col gap-10 px-4 pt-12 pb-8 sm:px-6">
-				{/* Links never wrap (the arrow stays with its text): Projeto and Legal take a full row, or half
-				    of one, until the five-column layout has room for them (xl). */}
+				{/* External links keep their arrow on the text's line, so Projeto and Legal take a full row
+				    (or half of one) until the five-column layout fits them (xl). */}
 				<div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 xl:grid-cols-[minmax(0,1.4fr)_repeat(4,minmax(0,1fr))] xl:gap-8">
 					<div className="col-span-2 flex flex-col items-start gap-4 sm:col-span-4 xl:col-span-1">
 						<Wordmark />

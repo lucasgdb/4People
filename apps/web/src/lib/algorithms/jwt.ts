@@ -10,7 +10,9 @@ import { relativeTime } from './dev.ts'
 type Bytes = Uint8Array<ArrayBuffer>
 
 const encoder = new TextEncoder()
-const utf8 = (text: string): Bytes => {
+
+/** UTF-8 bytes backed by a plain ArrayBuffer, the type Web Crypto expects. */
+function utf8(text: string): Bytes {
 	const encoded = encoder.encode(text)
 	const bytes = new Uint8Array(encoded.length)
 	bytes.set(encoded)
@@ -32,8 +34,8 @@ export function base64ToBytes(input: string): Bytes {
 	if (!/^[A-Za-z0-9+/]*={0,2}$/.test(normalized) || normalized.length % 4 === 1) {
 		throw new Error('O texto não é Base64 válido.')
 	}
-	const padded = normalized.padEnd(normalized.length + ((4 - (normalized.length % 4)) % 4), '=')
-	const binary = atob(padded)
+	const paddingLength = (4 - (normalized.length % 4)) % 4
+	const binary = atob(normalized + '='.repeat(paddingLength))
 	const bytes = new Uint8Array(binary.length)
 	for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i)
 	return bytes
@@ -53,31 +55,34 @@ export type JwtParts = {
 const isObject = (value: unknown): value is Record<string, unknown> =>
 	typeof value === 'object' && value !== null && !Array.isArray(value)
 
-/** Splits and decodes a compact JWS (header.payload.signature). Throws a message in Portuguese. */
-export function decodeJwtParts(token: string): JwtParts {
-	const parts = token.trim().replace(/\s/g, '').split('.')
-	if (parts.length !== 3) {
+/** Decodes a Base64URL segment holding a JSON object. `name` is "header" or "payload". */
+function decodeJsonSegment(segment: string, name: string): Record<string, unknown> {
+	let value: unknown
+	try {
+		const json = new TextDecoder('utf-8', { fatal: true }).decode(base64ToBytes(segment))
+		value = JSON.parse(json)
+	} catch {
 		throw new Error(
-			`Um JWT tem três partes separadas por ponto (header.payload.assinatura); este tem ${parts.length}.`,
+			`O ${name} do token não é um JSON em Base64URL válido. Confira se copiou o token inteiro.`,
 		)
 	}
-	const [rawHeader = '', rawPayload = '', signature = ''] = parts
-	const parse = (part: string, name: string) => {
-		let value: unknown
-		try {
-			value = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(base64ToBytes(part)))
-		} catch {
-			throw new Error(
-				`O ${name} do token não é um JSON em Base64URL válido. Confira se copiou o token inteiro.`,
-			)
-		}
-		if (!isObject(value)) throw new Error(`O ${name} do token precisa ser um objeto JSON.`)
-		return value
+	if (!isObject(value)) throw new Error(`O ${name} do token precisa ser um objeto JSON.`)
+	return value
+}
+
+/** Splits and decodes a compact JWS (header.payload.signature). Throws a message in Portuguese. */
+export function decodeJwtParts(token: string): JwtParts {
+	const segments = token.trim().replace(/\s/g, '').split('.')
+	if (segments.length !== 3) {
+		throw new Error(
+			`Um JWT tem três partes separadas por ponto (header.payload.assinatura); este tem ${segments.length}.`,
+		)
 	}
+	const [header = '', payload = '', signature = ''] = segments
 	return {
-		raw: [rawHeader, rawPayload, signature],
-		header: parse(rawHeader, 'header'),
-		payload: parse(rawPayload, 'payload'),
+		raw: [header, payload, signature],
+		header: decodeJsonSegment(header, 'header'),
+		payload: decodeJsonSegment(payload, 'payload'),
 	}
 }
 
@@ -122,23 +127,23 @@ export type ClaimInfo = {
 	relative?: string
 }
 
-const asText = (value: unknown) =>
-	typeof value === 'string'
-		? value
-		: Array.isArray(value) && value.every((item) => typeof item === 'string')
-			? value.join(', ')
-			: JSON.stringify(value)
+function claimValueAsText(value: unknown): string {
+	if (typeof value === 'string') return value
+	const isStringList = Array.isArray(value) && value.every((item) => typeof item === 'string')
+	if (isStringList) return value.join(', ')
+	return JSON.stringify(value)
+}
 
 /** The registered claims present in the payload, in a fixed order, explained in Portuguese. */
 export function describeClaims(payload: Record<string, unknown>, now: Date): ClaimInfo[] {
 	return Object.keys(CLAIM_NAMES)
 		.filter((claim) => payload[claim] !== undefined)
 		.map((claim) => {
-			const meta = CLAIM_NAMES[claim] as { name: string; description: string }
-			const raw = payload[claim]
-			const info: ClaimInfo = { claim, ...meta, value: asText(raw) }
-			if (TIME_CLAIMS.has(claim) && typeof raw === 'number' && Number.isFinite(raw)) {
-				info.date = new Date(raw * 1000)
+			const label = CLAIM_NAMES[claim] as { name: string; description: string }
+			const value = payload[claim]
+			const info: ClaimInfo = { claim, ...label, value: claimValueAsText(value) }
+			if (TIME_CLAIMS.has(claim) && typeof value === 'number' && Number.isFinite(value)) {
+				info.date = new Date(value * 1000)
 				info.relative = relativeTime(info.date, now)
 			}
 			return info
@@ -153,12 +158,13 @@ export type TokenTimeStatus =
 
 /** Validity by time alone (exp and nbf); the signature is a separate question. */
 export function tokenTimeStatus(payload: Record<string, unknown>, now: Date): TokenTimeStatus {
-	const exp = typeof payload.exp === 'number' ? new Date(payload.exp * 1000) : null
-	const nbf = typeof payload.nbf === 'number' ? new Date(payload.nbf * 1000) : null
-	if (exp && exp.getTime() <= now.getTime()) return { state: 'expired', since: exp }
-	if (nbf && nbf.getTime() > now.getTime()) return { state: 'not-yet', from: nbf }
-	if (!exp && !nbf) return { state: 'no-time' }
-	return { state: 'valid', until: exp }
+	const expiresAt = typeof payload.exp === 'number' ? new Date(payload.exp * 1000) : null
+	const notBefore = typeof payload.nbf === 'number' ? new Date(payload.nbf * 1000) : null
+	if (expiresAt && expiresAt.getTime() <= now.getTime())
+		return { state: 'expired', since: expiresAt }
+	if (notBefore && notBefore.getTime() > now.getTime()) return { state: 'not-yet', from: notBefore }
+	if (!expiresAt && !notBefore) return { state: 'no-time' }
+	return { state: 'valid', until: expiresAt }
 }
 
 /* ------------------------------- algorithms ------------------------------- */
@@ -186,14 +192,17 @@ export const isJwtAlgorithm = (alg: unknown): alg is JwtAlgorithm =>
 
 export const algorithmFamily = (alg: JwtAlgorithm) => alg.slice(0, 2) as AlgorithmFamily
 
-const bitsOf = (alg: JwtAlgorithm) => Number(alg.slice(2)) as 256 | 384 | 512
-const hashOf = (alg: JwtAlgorithm) => `SHA-${bitsOf(alg)}`
-const CURVES = { 256: 'P-256', 384: 'P-384', 512: 'P-521' } as const
+/** 256, 384 or 512: the hash size in the algorithm name. */
+const hashBits = (alg: JwtAlgorithm) => Number(alg.slice(2)) as 256 | 384 | 512
+const hashName = (alg: JwtAlgorithm) => `SHA-${hashBits(alg)}`
+/** ES512 uses P-521, not a typo. */
+const CURVE_BY_HASH_BITS = { 256: 'P-256', 384: 'P-384', 512: 'P-521' } as const
+const curveOf = (alg: JwtAlgorithm) => CURVE_BY_HASH_BITS[hashBits(alg)]
 
 function importParams(
 	alg: JwtAlgorithm,
 ): RsaHashedImportParams | EcKeyImportParams | HmacImportParams {
-	const hash = hashOf(alg)
+	const hash = hashName(alg)
 	switch (algorithmFamily(alg)) {
 		case 'HS':
 			return { name: 'HMAC', hash }
@@ -202,7 +211,7 @@ function importParams(
 		case 'PS':
 			return { name: 'RSA-PSS', hash }
 		case 'ES':
-			return { name: 'ECDSA', namedCurve: CURVES[bitsOf(alg)] }
+			return { name: 'ECDSA', namedCurve: curveOf(alg) }
 	}
 }
 
@@ -214,10 +223,10 @@ function signParams(alg: JwtAlgorithm): AlgorithmIdentifier | RsaPssParams | Ecd
 			return 'RSASSA-PKCS1-v1_5'
 		case 'PS':
 			// RFC 7518 §3.5: the salt is as long as the hash output.
-			return { name: 'RSA-PSS', saltLength: bitsOf(alg) / 8 }
+			return { name: 'RSA-PSS', saltLength: hashBits(alg) / 8 }
 		case 'ES':
 			// Web Crypto's ECDSA output is r‖s (IEEE P1363), which is exactly the JWS format.
-			return { name: 'ECDSA', hash: hashOf(alg) }
+			return { name: 'ECDSA', hash: hashName(alg) }
 	}
 }
 
@@ -229,34 +238,39 @@ type ParsedKey = { kind: 'pem'; label: string; der: Bytes } | { kind: 'jwk'; jwk
 export function parseKeyText(text: string, kid?: unknown): ParsedKey {
 	const trimmed = text.trim()
 	if (!trimmed) throw new Error('Informe a chave.')
-	if (trimmed.startsWith('{')) {
-		let json: unknown
-		try {
-			json = JSON.parse(trimmed)
-		} catch {
-			throw new Error('A chave parece um JWK, mas o JSON é inválido. Confira aspas e vírgulas.')
-		}
-		if (isObject(json) && Array.isArray(json.keys)) {
-			const keys = json.keys.filter(isObject)
-			const match = keys.find((key) => kid !== undefined && key.kid === kid) ?? keys[0]
-			if (!match) throw new Error('O JWKS não tem nenhuma chave em "keys".')
-			return { kind: 'jwk', jwk: match as JsonWebKey }
-		}
-		if (!isObject(json) || typeof json.kty !== 'string') {
-			throw new Error('Um JWK precisa do campo "kty" (RSA, EC ou oct).')
-		}
-		return { kind: 'jwk', jwk: json as JsonWebKey }
+	return trimmed.startsWith('{') ? parseJwkText(trimmed, kid) : parsePemText(trimmed)
+}
+
+function parseJwkText(text: string, kid: unknown): ParsedKey {
+	let json: unknown
+	try {
+		json = JSON.parse(text)
+	} catch {
+		throw new Error('A chave parece um JWK, mas o JSON é inválido. Confira aspas e vírgulas.')
 	}
-	const match = /-----BEGIN ([A-Z0-9 ]+)-----([\s\S]*?)-----END \1-----/.exec(trimmed)
+	if (isObject(json) && Array.isArray(json.keys)) {
+		const keys = json.keys.filter(isObject)
+		const chosen = keys.find((key) => kid !== undefined && key.kid === kid) ?? keys[0]
+		if (!chosen) throw new Error('O JWKS não tem nenhuma chave em "keys".')
+		return { kind: 'jwk', jwk: chosen as JsonWebKey }
+	}
+	if (!isObject(json) || typeof json.kty !== 'string') {
+		throw new Error('Um JWK precisa do campo "kty" (RSA, EC ou oct).')
+	}
+	return { kind: 'jwk', jwk: json as JsonWebKey }
+}
+
+function parsePemText(text: string): ParsedKey {
+	const match = /-----BEGIN ([A-Z0-9 ]+)-----([\s\S]*?)-----END \1-----/.exec(text)
 	if (!match) {
 		throw new Error(
 			'Formato de chave não reconhecido. Cole um PEM (-----BEGIN PUBLIC KEY----- …) ou um JWK em JSON.',
 		)
 	}
-	const label = match[1] as string
+	const [, label = '', base64Body = ''] = match
 	let der: Bytes
 	try {
-		der = base64ToBytes(match[2] as string)
+		der = base64ToBytes(base64Body)
 	} catch {
 		throw new Error('O conteúdo do PEM não é Base64 válido.')
 	}
@@ -270,7 +284,8 @@ export function toPem(der: ArrayBuffer | Uint8Array, label: string): string {
 	return `-----BEGIN ${label}-----\n${lines.join('\n')}\n-----END ${label}-----`
 }
 
-const PKCS1_HINT: Record<string, string> = {
+/** PEM labels Web Crypto can't import, with the openssl command that converts them. */
+const UNSUPPORTED_PEM_HINTS: Record<string, string> = {
 	'RSA PUBLIC KEY':
 		'Esta é uma chave PKCS#1 (BEGIN RSA PUBLIC KEY). Use o formato SPKI (BEGIN PUBLIC KEY): openssl rsa -RSAPublicKey_in -in chave.pem -pubout.',
 	'RSA PRIVATE KEY':
@@ -281,104 +296,110 @@ const PKCS1_HINT: Record<string, string> = {
 		'Isto é um certificado. Extraia a chave pública: openssl x509 -pubkey -noout -in certificado.pem.',
 }
 
+export type KeyInput = {
+	/** HS*: the shared secret. RS/PS/ES: a PEM (SPKI to verify, PKCS#8 to sign) or a JWK. */
+	key: string
+	/** HS* only: the secret is written in Base64. */
+	base64Secret?: boolean
+}
+
+type KeyUsage = 'sign' | 'verify'
+
 const PRIVATE_JWK_FIELDS = ['d', 'p', 'q', 'dp', 'dq', 'qi', 'oth'] as const
+const METADATA_JWK_FIELDS = ['alg', 'key_ops', 'use', 'ext', 'kid', 'x5c', 'x5t', 'x5u'] as const
 
 /** Leaves only what Web Crypto needs, so a key tagged with another `alg` or `key_ops` still imports. */
-function cleanJwk(jwk: JsonWebKey, usage: 'sign' | 'verify'): JsonWebKey {
+function cleanJwk(jwk: JsonWebKey, usage: KeyUsage): JsonWebKey {
 	const copy: Record<string, unknown> = { ...jwk }
-	for (const field of ['alg', 'key_ops', 'use', 'ext', 'kid', 'x5c', 'x5t', 'x5u'])
-		delete copy[field]
+	for (const field of METADATA_JWK_FIELDS) delete copy[field]
 	if (usage === 'verify' && jwk.kty !== 'oct') {
 		for (const field of PRIVATE_JWK_FIELDS) delete copy[field]
 	}
 	return copy as JsonWebKey
 }
 
-const FAMILY_KTY: Record<AlgorithmFamily, string> = { HS: 'oct', RS: 'RSA', PS: 'RSA', ES: 'EC' }
+const KEY_TYPE_BY_FAMILY: Record<AlgorithmFamily, string> = {
+	HS: 'oct',
+	RS: 'RSA',
+	PS: 'RSA',
+	ES: 'EC',
+}
 
 /** A message about the key itself, worded for the user; anything else is a Web Crypto failure. */
 class KeyError extends Error {}
 
+function importJwk(alg: JwtAlgorithm, jwk: JsonWebKey, usage: KeyUsage) {
+	const expectedKeyType = KEY_TYPE_BY_FAMILY[algorithmFamily(alg)]
+	if (jwk.kty !== expectedKeyType) {
+		throw new KeyError(`${alg} precisa de uma chave ${expectedKeyType}; este JWK é ${jwk.kty}.`)
+	}
+	if (usage === 'sign' && !jwk.d) {
+		throw new KeyError('Este JWK é público. Para assinar, use a chave privada (com o campo "d").')
+	}
+	return crypto.subtle.importKey('jwk', cleanJwk(jwk, usage), importParams(alg), false, [usage])
+}
+
+/** Verifying takes an SPKI public key; signing a PKCS#8 private key. */
+function importPem(alg: JwtAlgorithm, label: string, der: Bytes, usage: KeyUsage) {
+	const hint = UNSUPPORTED_PEM_HINTS[label]
+	if (hint) throw new KeyError(hint)
+	if (usage === 'verify' && label !== 'PUBLIC KEY') {
+		throw new KeyError('Para verificar, use a chave pública (-----BEGIN PUBLIC KEY-----).')
+	}
+	if (usage === 'sign' && label !== 'PRIVATE KEY') {
+		throw new KeyError('Para assinar, use a chave privada em PKCS#8 (-----BEGIN PRIVATE KEY-----).')
+	}
+	const format = usage === 'verify' ? 'spki' : 'pkcs8'
+	return crypto.subtle.importKey(format, der, importParams(alg), false, [usage])
+}
+
 async function importAsymmetric(
 	alg: JwtAlgorithm,
 	keyText: string,
-	usage: 'sign' | 'verify',
+	usage: KeyUsage,
 	kid?: unknown,
 ) {
 	const parsed = parseKeyText(keyText, kid)
-	const params = importParams(alg)
-	const family = algorithmFamily(alg)
 	try {
-		if (parsed.kind === 'jwk') {
-			if (parsed.jwk.kty !== FAMILY_KTY[family]) {
-				throw new KeyError(
-					`${alg} precisa de uma chave ${FAMILY_KTY[family]}; este JWK é ${parsed.jwk.kty}.`,
-				)
-			}
-			if (usage === 'sign' && !parsed.jwk.d) {
-				throw new KeyError(
-					'Este JWK é público. Para assinar, use a chave privada (com o campo "d").',
-				)
-			}
-			return await crypto.subtle.importKey('jwk', cleanJwk(parsed.jwk, usage), params, false, [
-				usage,
-			])
-		}
-		const hint = PKCS1_HINT[parsed.label]
-		if (hint) throw new KeyError(hint)
-		const expected = usage === 'verify' ? 'PUBLIC KEY' : 'PRIVATE KEY'
-		if (parsed.label !== expected) {
-			throw new KeyError(
-				usage === 'verify'
-					? 'Para verificar, use a chave pública (-----BEGIN PUBLIC KEY-----).'
-					: 'Para assinar, use a chave privada em PKCS#8 (-----BEGIN PRIVATE KEY-----).',
-			)
-		}
-		return await crypto.subtle.importKey(
-			usage === 'verify' ? 'spki' : 'pkcs8',
-			parsed.der,
-			params,
-			false,
-			[usage],
-		)
+		if (parsed.kind === 'jwk') return await importJwk(alg, parsed.jwk, usage)
+		return await importPem(alg, parsed.label, parsed.der, usage)
 	} catch (error) {
 		if (error instanceof KeyError) throw error
 		throw new Error(
-			family === 'ES'
-				? `A chave não é uma chave EC válida para ${alg} (curva ${CURVES[bitsOf(alg)]}).`
+			algorithmFamily(alg) === 'ES'
+				? `A chave não é uma chave EC válida para ${alg} (curva ${curveOf(alg)}).`
 				: `A chave não é uma chave RSA válida para ${alg}.`,
 		)
 	}
 }
 
-async function importSecret(
-	alg: JwtAlgorithm,
-	secret: string,
-	base64: boolean,
-	usage: 'sign' | 'verify',
-) {
-	if (!secret) throw new Error('Informe o segredo.')
+function decodeBase64Secret(secret: string): Bytes {
 	let bytes: Bytes
-	if (base64) {
-		try {
-			bytes = base64ToBytes(secret.trim())
-		} catch {
-			throw new Error(
-				'O segredo não é Base64 válido. Desmarque "Segredo em Base64" se ele for texto puro.',
-			)
-		}
-		if (bytes.length === 0) throw new Error('O segredo em Base64 está vazio.')
-	} else {
-		bytes = utf8(secret)
+	try {
+		bytes = base64ToBytes(secret.trim())
+	} catch {
+		throw new Error(
+			'O segredo não é Base64 válido. Desmarque "Segredo em Base64" se ele for texto puro.',
+		)
 	}
+	if (bytes.length === 0) throw new Error('O segredo em Base64 está vazio.')
+	return bytes
+}
+
+async function importSecret(alg: JwtAlgorithm, secret: string, isBase64: boolean, usage: KeyUsage) {
+	if (!secret) throw new Error('Informe o segredo.')
+	const bytes = isBase64 ? decodeBase64Secret(secret) : utf8(secret)
 	return crypto.subtle.importKey('raw', bytes, importParams(alg), false, [usage])
 }
 
-export type KeyInput = {
-	/** HS*: the shared secret. RS/PS/ES: a PEM (SPKI to verify, PKCS#8 to sign) or a JWK. */
-	key: string
-	/** HS* only: the secret is written in Base64. */
-	base64Secret?: boolean
+function importKeyFor(
+	alg: JwtAlgorithm,
+	{ key, base64Secret = false }: KeyInput,
+	usage: KeyUsage,
+	kid?: unknown,
+) {
+	if (algorithmFamily(alg) === 'HS') return importSecret(alg, key, base64Secret, usage)
+	return importAsymmetric(alg, key, usage, kid)
 }
 
 /* ------------------------------ verify / sign ------------------------------ */
@@ -388,36 +409,28 @@ export type VerifyResult =
 	| { status: 'invalid'; alg: JwtAlgorithm }
 
 /** Verifies the signature with the algorithm named in the header. Throws for bad input. */
-export async function verifyJwt(
-	token: string,
-	{ key, base64Secret = false }: KeyInput,
-): Promise<VerifyResult> {
+export async function verifyJwt(token: string, keyInput: KeyInput): Promise<VerifyResult> {
 	const { raw, header } = decodeJwtParts(token)
 	const alg = header.alg
-	if (alg === 'none')
+	if (alg === 'none') {
 		throw new Error('O token usa "alg": "none" e não tem assinatura para verificar.')
+	}
 	if (!isJwtAlgorithm(alg)) {
 		throw new Error(
 			`Algoritmo não suportado: ${String(alg)}. Suportados: ${JWT_ALGORITHMS.join(', ')}.`,
 		)
 	}
-	const cryptoKey =
-		algorithmFamily(alg) === 'HS'
-			? await importSecret(alg, key, base64Secret, 'verify')
-			: await importAsymmetric(alg, key, 'verify', header.kid)
+	const cryptoKey = await importKeyFor(alg, keyInput, 'verify', header.kid)
+	const [encodedHeader, encodedPayload, encodedSignature] = raw
 	let signature: Bytes
 	try {
-		signature = base64ToBytes(raw[2])
+		signature = base64ToBytes(encodedSignature)
 	} catch {
 		return { status: 'invalid', alg }
 	}
-	const ok = await crypto.subtle.verify(
-		signParams(alg),
-		cryptoKey,
-		signature,
-		utf8(`${raw[0]}.${raw[1]}`),
-	)
-	return { status: ok ? 'valid' : 'invalid', alg }
+	const signingInput = utf8(`${encodedHeader}.${encodedPayload}`)
+	const isValid = await crypto.subtle.verify(signParams(alg), cryptoKey, signature, signingInput)
+	return { status: isValid ? 'valid' : 'invalid', alg }
 }
 
 /** Parses JSON text that must be an object, with a message that says where it broke. */
@@ -427,8 +440,9 @@ export function parseJsonObject(text: string, name: string): Record<string, unkn
 		value = JSON.parse(text)
 	} catch (error) {
 		const position = Number(/position (\d+)/.exec((error as Error).message)?.[1])
-		if (Number.isNaN(position))
+		if (Number.isNaN(position)) {
 			throw new Error(`O JSON do ${name} é inválido. Confira aspas e vírgulas.`)
+		}
 		const before = text.slice(0, position)
 		const line = before.split('\n').length
 		const column = position - before.lastIndexOf('\n')
@@ -443,16 +457,12 @@ export async function signJwt(
 	header: Record<string, unknown>,
 	payload: Record<string, unknown>,
 	alg: JwtAlgorithm,
-	{ key, base64Secret = false }: KeyInput,
+	keyInput: KeyInput,
 ): Promise<string> {
-	const fullHeader = { ...header, alg }
-	const cryptoKey =
-		algorithmFamily(alg) === 'HS'
-			? await importSecret(alg, key, base64Secret, 'sign')
-			: await importAsymmetric(alg, key, 'sign')
-	const input = `${base64UrlJson(fullHeader)}.${base64UrlJson(payload)}`
-	const signature = await crypto.subtle.sign(signParams(alg), cryptoKey, utf8(input))
-	return `${input}.${base64UrlEncode(new Uint8Array(signature))}`
+	const cryptoKey = await importKeyFor(alg, keyInput, 'sign')
+	const signingInput = `${base64UrlJson({ ...header, alg })}.${base64UrlJson(payload)}`
+	const signature = await crypto.subtle.sign(signParams(alg), cryptoKey, utf8(signingInput))
+	return `${signingInput}.${base64UrlEncode(new Uint8Array(signature))}`
 }
 
 export type GeneratedKeyPair = { privateKey: string; publicKey: string }
@@ -463,7 +473,7 @@ export async function generateKeyPair(alg: JwtAlgorithm): Promise<GeneratedKeyPa
 	if (family === 'HS') throw new Error('HS* usa um segredo compartilhado, não um par de chaves.')
 	const params =
 		family === 'ES'
-			? { name: 'ECDSA', namedCurve: CURVES[bitsOf(alg)] }
+			? { name: 'ECDSA', namedCurve: curveOf(alg) }
 			: {
 					...(importParams(alg) as RsaHashedImportParams),
 					modulusLength: 2048,
@@ -479,7 +489,7 @@ export async function generateKeyPair(alg: JwtAlgorithm): Promise<GeneratedKeyPa
 
 /** A random secret for HS*, as long as the hash output, in Base64URL. */
 export function randomSecret(alg: JwtAlgorithm): string {
-	const bytes = new Uint8Array(bitsOf(alg) / 8)
+	const bytes = new Uint8Array(hashBits(alg) / 8)
 	crypto.getRandomValues(bytes)
 	return base64UrlEncode(bytes)
 }

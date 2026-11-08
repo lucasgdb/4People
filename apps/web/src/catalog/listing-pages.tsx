@@ -77,7 +77,7 @@ export function CategoryPage({ slug }: { slug: string }) {
 									<Icon name={section.icon} className="size-5" />
 								</span>
 								{section.name}
-								<span className="bg-surface-sunken text-fg-muted tabular rounded-full px-2.5 py-0.5 text-sm font-semibold">
+								<span className="bg-surface-sunken text-fg-muted tabular inline-flex h-6 items-center rounded-full px-2.5 text-sm leading-none font-semibold">
 									{section.tools.length}
 								</span>
 							</h2>

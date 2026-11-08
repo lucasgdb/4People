@@ -21,7 +21,9 @@ import {
 	type Change,
 	type DiffUnit,
 	diffStats,
+	type SideCell,
 	sideBySideRows,
+	type UnifiedLine,
 	unifiedLines,
 } from '@/lib/algorithms/dev'
 import { formatNumber } from '@/lib/format'
@@ -52,20 +54,57 @@ const VIEWS = [
 	{ value: 'unified', label: 'Unificado' },
 ] as const
 
-const UNIT_WORDS: Record<DiffUnit, [string, string]> = {
+const UNIT_WORDS: Record<DiffUnit, [singular: string, plural: string]> = {
 	lines: ['linha', 'linhas'],
 	words: ['palavra', 'palavras'],
 	chars: ['caractere', 'caracteres'],
 }
 
+type View = 'split' | 'unified'
+type Values = z.infer<typeof schema>
 type Result = { changes: Change[]; unit: DiffUnit }
 
 const REMOVED = 'bg-danger-soft text-danger-ink'
 const ADDED = 'bg-success-soft text-success-ink'
 
+/** Loads jsdiff on demand and diffs by the chosen unit. */
+async function computeChanges({
+	original,
+	changed,
+	unit,
+	ignoreWhitespace,
+	ignoreCase,
+}: Values): Promise<Change[]> {
+	const { diffChars, diffLines, diffWords, diffWordsWithSpace } = await import('diff')
+	if (unit === 'lines') {
+		// ignoreCase works for lines at runtime (jsdiff's base comparator), but isn't in the types.
+		const options = { ignoreCase, ignoreWhitespace } as {
+			ignoreCase: boolean
+			ignoreWhitespace: boolean
+		}
+		return diffLines(original, changed, { ...options, newlineIsToken: false })
+	}
+	if (unit === 'words') {
+		return ignoreWhitespace
+			? diffWords(original, changed, { ignoreCase })
+			: diffWordsWithSpace(original, changed, { ignoreCase })
+	}
+	const collapseWhitespace = (text: string) => (ignoreWhitespace ? text.replace(/\s+/g, ' ') : text)
+	return diffChars(collapseWhitespace(original), collapseWhitespace(changed), { ignoreCase })
+}
+
+/** "+ 3 linhas adicionadas"; "caracteres" is masculine, "linhas" and "palavras" feminine. */
+function changeCountText(count: number, unit: DiffUnit, participleStem: string): string {
+	const [singular, plural] = UNIT_WORDS[unit]
+	const isSingular = count === 1
+	const genderEnding = unit === 'chars' ? 'o' : 'a'
+	const participle = `${participleStem}${genderEnding}${isSingular ? '' : 's'}`
+	return `${formatNumber(count)} ${isSingular ? singular : plural} ${participle}`
+}
+
 /** A removed/added run inside running text: struck through or underlined, with a spoken label. */
 function InlineChange({ change }: { change: Change }) {
-	if (change.removed)
+	if (change.removed) {
 		return (
 			<del className={cn(REMOVED, 'rounded-[3px] decoration-2')}>
 				<span className="sr-only">[removido: </span>
@@ -73,7 +112,8 @@ function InlineChange({ change }: { change: Change }) {
 				<span className="sr-only">]</span>
 			</del>
 		)
-	if (change.added)
+	}
+	if (change.added) {
 		return (
 			<ins className={cn(ADDED, 'rounded-[3px] decoration-2 underline-offset-4')}>
 				<span className="sr-only">[adicionado: </span>
@@ -81,6 +121,7 @@ function InlineChange({ change }: { change: Change }) {
 				<span className="sr-only">]</span>
 			</ins>
 		)
+	}
 	return <span>{change.value}</span>
 }
 
@@ -99,21 +140,35 @@ function ScrollTable({ label, children }: { label: string; children: ReactNode }
 const diffCell = 'border-t-0 py-0 first:pl-2 last:pr-2'
 const numberCell = cn(diffCell, 'text-fg-subtle w-10 px-2 align-top select-none')
 const textCell = cn(diffCell, 'px-2 align-top break-all whitespace-pre-wrap')
-const REMOVED_ROW = cn(REMOVED, 'hover:bg-danger-soft')
-const ADDED_ROW = cn(ADDED, 'hover:bg-success-soft')
 
-function LineDiff({ changes, view }: { changes: Change[]; view: 'split' | 'unified' }) {
+const ROW_CLASS_BY_SIGN: Record<UnifiedLine['sign'], string | undefined> = {
+	'-': cn(REMOVED, 'hover:bg-danger-soft'),
+	'+': cn(ADDED, 'hover:bg-success-soft'),
+	' ': undefined,
+}
+/** The minus sign (U+2212) lines up with + in the monospace column. */
+const SYMBOL_BY_SIGN: Record<UnifiedLine['sign'], string> = { '-': '−', '+': '+', ' ': '' }
+
+function SideCellText({ cell, symbol }: { cell: SideCell | null; symbol: string }) {
+	if (!cell) return null
+	return (
+		<>
+			{cell.changed ? <span className="font-bold">{symbol} </span> : null}
+			{cell.text || ' '}
+		</>
+	)
+}
+
+function LineDiff({ changes, view }: { changes: Change[]; view: View }) {
 	if (view === 'unified') {
 		return (
 			<ScrollTable label="Diferenças linha a linha">
 				<TableBody>
-					{unifiedLines(changes).map((line, i) => (
+					{unifiedLines(changes).map((line, position) => (
 						<TableRow
 							// biome-ignore lint/suspicious/noArrayIndexKey: positional lines
-							key={i}
-							className={
-								line.sign === '-' ? REMOVED_ROW : line.sign === '+' ? ADDED_ROW : undefined
-							}
+							key={position}
+							className={ROW_CLASS_BY_SIGN[line.sign]}
 						>
 							<TableCell numeric className={numberCell}>
 								{line.oldNumber ?? ''}
@@ -126,7 +181,7 @@ function LineDiff({ changes, view }: { changes: Change[]; view: 'split' | 'unifi
 								className={cn(diffCell, 'w-5 px-1 align-top font-bold')}
 								aria-hidden={line.sign === ' '}
 							>
-								{line.sign === '-' ? '−' : line.sign === '+' ? '+' : ''}
+								{SYMBOL_BY_SIGN[line.sign]}
 							</TableCell>
 							<TableCell className={textCell}>{line.text || ' '}</TableCell>
 						</TableRow>
@@ -148,19 +203,14 @@ function LineDiff({ changes, view }: { changes: Change[]; view: 'split' | 'unifi
 				</tr>
 			</TableHeader>
 			<TableBody>
-				{sideBySideRows(changes).map((row, i) => (
+				{sideBySideRows(changes).map((row, position) => (
 					// biome-ignore lint/suspicious/noArrayIndexKey: positional rows
-					<TableRow key={i}>
+					<TableRow key={position}>
 						<TableCell numeric className={cn(numberCell, row.left?.changed && REMOVED)}>
 							{row.left?.number ?? ''}
 						</TableCell>
 						<TableCell className={cn(textCell, 'w-1/2', row.left?.changed && REMOVED)}>
-							{row.left ? (
-								<>
-									{row.left.changed ? <span className="font-bold">− </span> : null}
-									{row.left.text || ' '}
-								</>
-							) : null}
+							<SideCellText cell={row.left} symbol="−" />
 						</TableCell>
 						<TableCell
 							numeric
@@ -169,12 +219,7 @@ function LineDiff({ changes, view }: { changes: Change[]; view: 'split' | 'unifi
 							{row.right?.number ?? ''}
 						</TableCell>
 						<TableCell className={cn(textCell, 'w-1/2', row.right?.changed && ADDED)}>
-							{row.right ? (
-								<>
-									{row.right.changed ? <span className="font-bold">+ </span> : null}
-									{row.right.text || ' '}
-								</>
-							) : null}
+							<SideCellText cell={row.right} symbol="+" />
 						</TableCell>
 					</TableRow>
 				))}
@@ -183,13 +228,13 @@ function LineDiff({ changes, view }: { changes: Change[]; view: 'split' | 'unifi
 	)
 }
 
-function InlineDiff({ changes, view }: { changes: Change[]; view: 'split' | 'unified' }) {
+function InlineDiff({ changes, view }: { changes: Change[]; view: View }) {
 	if (view === 'unified') {
 		return (
 			<OutputBlock>
-				{changes.map((change, i) => (
+				{changes.map((change, position) => (
 					// biome-ignore lint/suspicious/noArrayIndexKey: positional changes
-					<InlineChange key={i} change={change} />
+					<InlineChange key={position} change={change} />
 				))}
 			</OutputBlock>
 		)
@@ -202,9 +247,9 @@ function InlineDiff({ changes, view }: { changes: Change[]; view: 'split' | 'uni
 					<OutputBlock>
 						{changes
 							.filter((change) => (side === 'Original' ? !change.added : !change.removed))
-							.map((change, i) => (
+							.map((change, position) => (
 								// biome-ignore lint/suspicious/noArrayIndexKey: positional changes
-								<InlineChange key={i} change={change} />
+								<InlineChange key={position} change={change} />
 							))}
 					</OutputBlock>
 				</div>
@@ -222,39 +267,18 @@ export default function TextDiff() {
 			original: '',
 			changed: '',
 			unit: 'lines' as DiffUnit,
-			view: 'split' as 'split' | 'unified',
+			view: 'split' as View,
 			ignoreWhitespace: false,
 			ignoreCase: false,
 		},
-		onSubmit: async ({ original, changed, unit, ignoreWhitespace, ignoreCase }) => {
-			const { diffChars, diffLines, diffWords, diffWordsWithSpace } = await import('diff')
-			// ignoreCase works for every unit at runtime (jsdiff's base comparator), though lines don't type it.
-			const options = { ignoreCase, ignoreWhitespace } as {
-				ignoreCase: boolean
-				ignoreWhitespace: boolean
-			}
-			const changes =
-				unit === 'lines'
-					? diffLines(original, changed, { ...options, newlineIsToken: false })
-					: unit === 'words'
-						? ignoreWhitespace
-							? diffWords(original, changed, { ignoreCase })
-							: diffWordsWithSpace(original, changed, { ignoreCase })
-						: diffChars(
-								ignoreWhitespace ? original.replace(/\s+/g, ' ') : original,
-								ignoreWhitespace ? changed.replace(/\s+/g, ' ') : changed,
-								{ ignoreCase },
-							)
-			setResult({ changes, unit })
+		onSubmit: async (values) => {
+			const changes = await computeChanges(values)
+			setResult({ changes, unit: values.unit })
 		},
 	})
 	const view = useStore(form.store, (state) => state.values.view)
 	const stats = result ? diffStats(result.changes, result.unit) : null
-	const words = result ? UNIT_WORDS[result.unit] : null
-	const plural = (n: number) => (n === 1 ? words?.[0] : words?.[1])
-	// "caracteres" is masculine; "linhas" and "palavras" are feminine.
-	const participle = (stem: string, n: number) =>
-		`${stem}${result?.unit === 'chars' ? 'o' : 'a'}${n === 1 ? '' : 's'}`
+	const recomputeIfShown = { onChange: () => result && form.handleSubmit() }
 
 	return (
 		<ToolLayout className="xl:grid-cols-1">
@@ -269,8 +293,8 @@ export default function TextDiff() {
 			>
 				<div className="grid gap-5 lg:grid-cols-2">
 					<form.AppField name="original">
-						{(f) => (
-							<f.TextareaField
+						{(field) => (
+							<field.TextareaField
 								label="Texto original"
 								rows={10}
 								placeholder="Ex.: a versão antiga"
@@ -278,8 +302,8 @@ export default function TextDiff() {
 						)}
 					</form.AppField>
 					<form.AppField name="changed">
-						{(f) => (
-							<f.TextareaField
+						{(field) => (
+							<field.TextareaField
 								label="Texto modificado"
 								rows={10}
 								placeholder="Ex.: a versão nova"
@@ -288,30 +312,24 @@ export default function TextDiff() {
 					</form.AppField>
 				</div>
 				<div className="flex flex-wrap gap-x-8 gap-y-5">
-					<form.AppField name="unit" listeners={{ onChange: () => result && form.handleSubmit() }}>
-						{(f) => <f.RadioField label="Comparar por" options={UNITS} />}
+					<form.AppField name="unit" listeners={recomputeIfShown}>
+						{(field) => <field.RadioField label="Comparar por" options={UNITS} />}
 					</form.AppField>
 					<form.AppField name="view">
-						{(f) => <f.RadioField label="Visualização" options={VIEWS} />}
+						{(field) => <field.RadioField label="Visualização" options={VIEWS} />}
 					</form.AppField>
 				</div>
 				<div className="flex flex-wrap gap-x-8">
-					<form.AppField
-						name="ignoreWhitespace"
-						listeners={{ onChange: () => result && form.handleSubmit() }}
-					>
-						{(f) => (
-							<f.CheckboxField
+					<form.AppField name="ignoreWhitespace" listeners={recomputeIfShown}>
+						{(field) => (
+							<field.CheckboxField
 								label="Ignorar espaços"
 								description="Espaços extras e no fim das linhas."
 							/>
 						)}
 					</form.AppField>
-					<form.AppField
-						name="ignoreCase"
-						listeners={{ onChange: () => result && form.handleSubmit() }}
-					>
-						{(f) => <f.CheckboxField label="Ignorar maiúsculas e minúsculas" />}
+					<form.AppField name="ignoreCase" listeners={recomputeIfShown}>
+						{(field) => <field.CheckboxField label="Ignorar maiúsculas e minúsculas" />}
 					</form.AppField>
 				</div>
 			</FormCard>
@@ -334,12 +352,10 @@ export default function TextDiff() {
 						) : (
 							<p className="flex flex-wrap items-center gap-2">
 								<Badge tone="success" className="tabular">
-									+ {formatNumber(stats.added)} {plural(stats.added)}{' '}
-									{participle('adicionad', stats.added)}
+									+ {changeCountText(stats.added, result.unit, 'adicionad')}
 								</Badge>
 								<Badge tone="danger" className="tabular">
-									− {formatNumber(stats.removed)} {plural(stats.removed)}{' '}
-									{participle('removid', stats.removed)}
+									− {changeCountText(stats.removed, result.unit, 'removid')}
 								</Badge>
 							</p>
 						)}

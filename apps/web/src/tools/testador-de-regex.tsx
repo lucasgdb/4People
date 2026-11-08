@@ -16,7 +16,13 @@ import { useStore } from '@tanstack/react-form'
 import { CircleX } from 'lucide-react'
 import { useDeferredValue, useMemo } from 'react'
 import { useAppForm } from '@/components/form/form'
-import { highlightSegments, REGEX_FLAGS, runRegex } from '@/lib/algorithms/dev'
+import {
+	highlightSegments,
+	REGEX_FLAGS,
+	type RegexMatch,
+	runRegex,
+	type Segment,
+} from '@/lib/algorithms/dev'
 import { formatNumber } from '@/lib/format'
 import { FormCard, OutputBlock, ResultCard, ToolLayout } from './_shared/tool-layout'
 
@@ -32,9 +38,101 @@ const DEFAULTS = {
 	replacement: '$<ano>-$<mes>-$<dia>',
 }
 
-const LIMIT = 1000
+const MATCH_LIMIT = 1000
 /** Two alternating tints so adjacent matches read apart; the list below names each one. */
-const MARKS = ['bg-accent-soft text-accent-soft-fg', 'bg-warning-soft text-warning-ink'] as const
+const MATCH_TINTS = [
+	'bg-accent-soft text-accent-soft-fg',
+	'bg-warning-soft text-warning-ink',
+] as const
+
+function matchCountText(count: number, truncated: boolean): string {
+	const total =
+		count === 0
+			? 'Nenhuma correspondência.'
+			: `${formatNumber(count)} ${count === 1 ? 'correspondência' : 'correspondências'}`
+	return truncated ? `${total} (mostrando as primeiras ${formatNumber(MATCH_LIMIT)})` : total
+}
+
+function HighlightedText({ segments }: { segments: Segment[] }) {
+	return (
+		<OutputBlock>
+			{segments.map((segment, position) =>
+				segment.match === null ? (
+					// biome-ignore lint/suspicious/noArrayIndexKey: positional segments of one text
+					<span key={position}>{segment.text}</span>
+				) : (
+					<mark
+						// biome-ignore lint/suspicious/noArrayIndexKey: positional segments of one text
+						key={position}
+						title={`Correspondência ${segment.match + 1}`}
+						className={`rounded-[4px] underline decoration-1 underline-offset-4 ${MATCH_TINTS[segment.match % 2]}`}
+					>
+						{segment.text}
+					</mark>
+				),
+			)}
+		</OutputBlock>
+	)
+}
+
+function GroupList({ groups }: { groups: RegexMatch['groups'] }) {
+	return (
+		<ul className="mt-1 flex flex-col gap-0.5 text-[0.8125rem]">
+			{groups.map((group) => (
+				<li key={group.number} className="flex flex-wrap gap-2">
+					<Badge tone="neutral">
+						{group.name ? `${group.number} · ${group.name}` : `Grupo ${group.number}`}
+					</Badge>
+					<code translate="no" className="font-mono break-all">
+						{group.value === undefined ? (
+							<span className="text-fg-subtle">não participou</span>
+						) : (
+							group.value
+						)}
+					</code>
+				</li>
+			))}
+		</ul>
+	)
+}
+
+function MatchTable({ matches }: { matches: RegexMatch[] }) {
+	return (
+		<TableCard label="Lista de correspondências" maxHeight="28rem">
+			<Table>
+				<TableHeader>
+					<tr>
+						<TableHead numeric className="w-10">
+							#
+						</TableHead>
+						<TableHead numeric className="w-20">
+							Posição
+						</TableHead>
+						<TableHead>Trecho e grupos</TableHead>
+					</tr>
+				</TableHeader>
+				<TableBody>
+					{matches.map((match, position) => (
+						<TableRow key={match.index}>
+							<TableCell numeric className="text-fg-muted align-top">
+								{position + 1}
+							</TableCell>
+							<TableCell numeric className="align-top whitespace-nowrap">
+								{match.index}–{match.end}
+							</TableCell>
+							<TableCell className="align-top">
+								<code translate="no" className="font-mono break-all whitespace-pre-wrap">
+									{match.text || <span className="text-fg-subtle">(vazio)</span>}
+								</code>
+								{match.groups.length > 0 ? <GroupList groups={match.groups} /> : null}
+							</TableCell>
+						</TableRow>
+					))}
+				</TableBody>
+			</Table>
+		</TableCard>
+	)
+}
 
 /** Tests a JavaScript regular expression: highlighted matches, groups and a replace preview. */
 export default function RegexTester() {
@@ -44,8 +142,9 @@ export default function RegexTester() {
 
 	const result = useMemo(() => {
 		if (!values.pattern) return null
-		const outcome = runRegex(values.pattern, flags, values.text, LIMIT)
+		const outcome = runRegex(values.pattern, flags, values.text, MATCH_LIMIT)
 		if (!outcome.ok) return outcome
+		// A fresh RegExp: the matched one has a moved lastIndex, which a sticky replace would honor.
 		const regex = new RegExp(values.pattern, flags)
 		return {
 			...outcome,
@@ -62,8 +161,8 @@ export default function RegexTester() {
 				actions={<p className="text-fg-muted text-[0.8125rem]">Atualiza enquanto você digita.</p>}
 			>
 				<form.AppField name="pattern">
-					{(f) => (
-						<f.TextField
+					{(field) => (
+						<field.TextField
 							label="Expressão regular"
 							placeholder="Ex.: \d{3}\.\d{3}\.\d{3}-\d{2}"
 							inputClassName="font-mono"
@@ -78,19 +177,23 @@ export default function RegexTester() {
 					<div className="grid gap-x-4 sm:grid-cols-2">
 						{REGEX_FLAGS.map(({ flag, label, hint }) => (
 							<form.AppField key={flag} name={flag}>
-								{(f) => <f.CheckboxField label={label} description={hint} />}
+								{(field) => <field.CheckboxField label={label} description={hint} />}
 							</form.AppField>
 						))}
 					</div>
 				</fieldset>
 				<form.AppField name="text">
-					{(f) => (
-						<f.TextareaField label="Texto de teste" rows={7} placeholder="Ex.: cole aqui o texto" />
+					{(field) => (
+						<field.TextareaField
+							label="Texto de teste"
+							rows={7}
+							placeholder="Ex.: cole aqui o texto"
+						/>
 					)}
 				</form.AppField>
 				<form.AppField name="replacement">
-					{(f) => (
-						<f.TextField
+					{(field) => (
+						<field.TextField
 							label="Substituir por (opcional)"
 							placeholder="Ex.: $1, $<nome> ou $&"
 							inputClassName="font-mono"
@@ -105,87 +208,13 @@ export default function RegexTester() {
 				emptyText="Digite uma expressão regular para ver as correspondências."
 				onClear={() => form.reset({ ...DEFAULTS, pattern: '', text: '', replacement: '' })}
 			>
-				{result?.ok ? (
+				{result?.ok === true && (
 					<>
 						<p className="text-fg tabular font-semibold">
-							{result.matches.length === 0
-								? 'Nenhuma correspondência.'
-								: `${formatNumber(result.matches.length)} ${result.matches.length === 1 ? 'correspondência' : 'correspondências'}`}
-							{result.truncated ? ` (mostrando as primeiras ${formatNumber(LIMIT)})` : ''}
+							{matchCountText(result.matches.length, result.truncated)}
 						</p>
-						{values.text ? (
-							<OutputBlock>
-								{result.segments.map((segment, i) =>
-									segment.match === null ? (
-										// biome-ignore lint/suspicious/noArrayIndexKey: positional segments of one text
-										<span key={i}>{segment.text}</span>
-									) : (
-										<mark
-											// biome-ignore lint/suspicious/noArrayIndexKey: positional segments of one text
-											key={i}
-											title={`Correspondência ${segment.match + 1}`}
-											className={`rounded-[4px] underline decoration-1 underline-offset-4 ${MARKS[segment.match % 2]}`}
-										>
-											{segment.text}
-										</mark>
-									),
-								)}
-							</OutputBlock>
-						) : null}
-						{result.matches.length > 0 ? (
-							<TableCard label="Lista de correspondências" maxHeight="28rem">
-								<Table>
-									<TableHeader>
-										<tr>
-											<TableHead numeric className="w-10">
-												#
-											</TableHead>
-											<TableHead numeric className="w-20">
-												Posição
-											</TableHead>
-											<TableHead>Trecho e grupos</TableHead>
-										</tr>
-									</TableHeader>
-									<TableBody>
-										{result.matches.map((match, i) => (
-											<TableRow key={match.index}>
-												<TableCell numeric className="text-fg-muted align-top">
-													{i + 1}
-												</TableCell>
-												<TableCell numeric className="align-top whitespace-nowrap">
-													{match.index}–{match.end}
-												</TableCell>
-												<TableCell className="align-top">
-													<code translate="no" className="font-mono break-all whitespace-pre-wrap">
-														{match.text || <span className="text-fg-subtle">(vazio)</span>}
-													</code>
-													{match.groups.length > 0 ? (
-														<ul className="mt-1 flex flex-col gap-0.5 text-[0.8125rem]">
-															{match.groups.map((group) => (
-																<li key={group.number} className="flex flex-wrap gap-2">
-																	<Badge tone="neutral">
-																		{group.name
-																			? `${group.number} · ${group.name}`
-																			: `Grupo ${group.number}`}
-																	</Badge>
-																	<code translate="no" className="font-mono break-all">
-																		{group.value === undefined ? (
-																			<span className="text-fg-subtle">não participou</span>
-																		) : (
-																			group.value
-																		)}
-																	</code>
-																</li>
-															))}
-														</ul>
-													) : null}
-												</TableCell>
-											</TableRow>
-										))}
-									</TableBody>
-								</Table>
-							</TableCard>
-						) : null}
+						{values.text ? <HighlightedText segments={result.segments} /> : null}
+						{result.matches.length > 0 ? <MatchTable matches={result.matches} /> : null}
 						{values.replacement ? (
 							<div className="flex flex-col gap-2">
 								<div className="flex flex-wrap items-center justify-between gap-2">
@@ -201,12 +230,13 @@ export default function RegexTester() {
 							</div>
 						) : null}
 					</>
-				) : result ? (
+				)}
+				{result?.ok === false && (
 					<Alert tone="danger">
 						<CircleX />
 						{result.error}
 					</Alert>
-				) : null}
+				)}
 			</ResultCard>
 		</ToolLayout>
 	)

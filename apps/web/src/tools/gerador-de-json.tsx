@@ -44,15 +44,30 @@ const schema = z.object({
 	amount: numeric({ integer: true, min: 1, max: 100, required: 'Informe quantos itens gerar.' }),
 })
 
-type Field = { id: number; name: string; type: FieldType }
+type TemplateField = { id: number; name: string; type: FieldType }
 
-const DEFAULT_FIELDS: Field[] = [
+const DEFAULT_FIELDS: TemplateField[] = [
 	{ id: 1, name: 'id', type: 'uuid' },
 	{ id: 2, name: 'nome', type: 'nome' },
 	{ id: 3, name: 'email', type: 'email' },
 ]
 
 type Outcome = { ok: true; json: string } | { ok: false; error: string }
+
+/** faker's pt_BR data is large: it loads with the first result, never with the page. */
+async function loadGenerators() {
+	const [{ faker }, { fakerGenerators }] = await Promise.all([
+		import('@faker-js/faker/locale/pt_BR'),
+		import('@/lib/algorithms/web'),
+	])
+	return { ...BASE_GENERATORS, ...fakerGenerators(faker) }
+}
+
+function downloadJson(json: string) {
+	const url = URL.createObjectURL(new Blob([json], { type: 'application/json' }))
+	Object.assign(document.createElement('a'), { href: url, download: 'dados.json' }).click()
+	URL.revokeObjectURL(url)
+}
 
 /**
  * Fake JSON from a template with {{placeholders}} or a field list, using faker (pt_BR) on demand.
@@ -61,30 +76,27 @@ type Outcome = { ok: true; json: string } | { ok: false; error: string }
  * isn't valid JSON yet).
  */
 export default function JsonGenerator() {
-	const [fields, setFields] = useState<Field[]>(DEFAULT_FIELDS)
+	const [fields, setFields] = useState<TemplateField[]>(DEFAULT_FIELDS)
 	const [outcome, setOutcome] = useState<Outcome | null>(null)
 	// Quick changes can overlap while faker loads: only the latest request may show its result.
-	const latest = useRef(0)
+	const latestRequestId = useRef(0)
 	const form = useToolForm({
 		schema,
 		defaultValues: { mode: 'template', template: SAMPLE, amount: '3' },
 		onSubmit: async ({ mode, template, amount }) => {
-			const request = ++latest.current
-			const show = (next: Outcome) => {
-				if (request === latest.current) setOutcome(next)
+			const requestId = ++latestRequestId.current
+			const showIfLatest = (next: Outcome) => {
+				if (requestId === latestRequestId.current) setOutcome(next)
 			}
 			try {
-				const source = mode === 'fields' ? templateFromFields(fields) : template
-				if (!source.trim()) throw new Error('Escreva um modelo JSON ou use a lista de campos.')
-				// faker's pt_BR data is large: loaded with the first result, never with the page.
-				const [{ faker }, { fakerGenerators }] = await Promise.all([
-					import('@faker-js/faker/locale/pt_BR'),
-					import('@/lib/algorithms/web'),
-				])
-				const generators = { ...BASE_GENERATORS, ...fakerGenerators(faker) }
-				show({ ok: true, json: generateJson(source, amount, generators) })
+				const templateText = mode === 'fields' ? templateFromFields(fields) : template
+				if (!templateText.trim()) {
+					throw new Error('Escreva um modelo JSON ou use a lista de campos.')
+				}
+				const generators = await loadGenerators()
+				showIfLatest({ ok: true, json: generateJson(templateText, amount, generators) })
 			} catch (error) {
-				show({ ok: false, error: (error as Error).message })
+				showIfLatest({ ok: false, error: (error as Error).message })
 			}
 		},
 	})
@@ -92,14 +104,19 @@ export default function JsonGenerator() {
 	const mode = useStore(form.store, (state) => state.values.mode)
 	const regenerate = { onChange: () => form.handleSubmit() }
 
-	const updateField = (id: number, patch: Partial<Field>) =>
-		setFields((rows) => rows.map((row) => (row.id === id ? { ...row, ...patch } : row)))
-
-	function download(json: string) {
-		const url = URL.createObjectURL(new Blob([json], { type: 'application/json' }))
-		Object.assign(document.createElement('a'), { href: url, download: 'dados.json' }).click()
-		URL.revokeObjectURL(url)
-	}
+	const updateField = (id: number, patch: Partial<TemplateField>) =>
+		setFields((current) =>
+			current.map((templateField) =>
+				templateField.id === id ? { ...templateField, ...patch } : templateField,
+			),
+		)
+	const removeField = (id: number) =>
+		setFields((current) => current.filter((templateField) => templateField.id !== id))
+	const addField = () =>
+		setFields((current) => {
+			const nextId = Math.max(0, ...current.map((templateField) => templateField.id)) + 1
+			return [...current, { id: nextId, name: '', type: 'nome' }]
+		})
 
 	return (
 		<ToolLayout>
@@ -115,12 +132,12 @@ export default function JsonGenerator() {
 				}
 			>
 				<form.AppField name="mode" listeners={regenerate}>
-					{(f) => <f.RadioField label="Montar a partir de" options={MODES} />}
+					{(field) => <field.RadioField label="Montar a partir de" options={MODES} />}
 				</form.AppField>
 				{mode === 'template' ? (
 					<form.AppField name="template">
-						{(f) => (
-							<f.TextareaField
+						{(field) => (
+							<field.TextareaField
 								label="Modelo JSON"
 								rows={14}
 								description="Troque os valores por marcadores, como {{nome}}. A lista completa está abaixo."
@@ -131,54 +148,45 @@ export default function JsonGenerator() {
 				) : (
 					<fieldset className="flex flex-col gap-2">
 						<legend className="text-fg mb-1 text-sm font-medium">Campos</legend>
-						{fields.map((field, i) => (
-							<div key={field.id} className="flex items-center gap-2">
+						{fields.map((templateField, position) => (
+							<div key={templateField.id} className="flex items-center gap-2">
 								<Input
-									aria-label={`Nome do campo ${i + 1}`}
+									aria-label={`Nome do campo ${position + 1}`}
 									placeholder="Ex.: nome"
-									value={field.name}
+									value={templateField.name}
 									autoComplete="off"
 									spellCheck={false}
-									onChange={(event) => updateField(field.id, { name: event.target.value })}
+									onChange={(event) => updateField(templateField.id, { name: event.target.value })}
 									className="min-w-0 flex-1"
 								/>
 								<div className="min-w-0 flex-1">
 									<Select<FieldType>
-										aria-label={`Tipo do campo ${i + 1}`}
+										aria-label={`Tipo do campo ${position + 1}`}
 										options={FIELD_TYPES}
-										value={field.type}
-										onValueChange={(type) => updateField(field.id, { type })}
+										value={templateField.type}
+										onValueChange={(type) => updateField(templateField.id, { type })}
 									/>
 								</div>
 								<Button
 									variant="ghost"
 									size="icon"
-									aria-label={`Remover campo ${i + 1}`}
-									onClick={() => setFields((rows) => rows.filter((row) => row.id !== field.id))}
+									aria-label={`Remover campo ${position + 1}`}
+									onClick={() => removeField(templateField.id)}
 								>
 									<X />
 								</Button>
 							</div>
 						))}
 						<div>
-							<Button
-								variant="soft"
-								size="sm"
-								onClick={() =>
-									setFields((rows) => [
-										...rows,
-										{ id: Math.max(0, ...rows.map((r) => r.id)) + 1, name: '', type: 'nome' },
-									])
-								}
-							>
+							<Button variant="soft" size="sm" onClick={addField}>
 								<Plus /> Adicionar campo
 							</Button>
 						</div>
 					</fieldset>
 				)}
 				<form.AppField name="amount" listeners={regenerate}>
-					{(f) => (
-						<f.NumberField
+					{(field) => (
+						<field.NumberField
 							label="Quantidade"
 							placeholder="Ex.: 10"
 							description="De 1 a 100. Com 1, sai um objeto; com mais, uma lista."
@@ -197,13 +205,14 @@ export default function JsonGenerator() {
 						vira texto: <code className="font-mono">"pedido-{'{{inteiro(1, 999)}}'}"</code>.
 					</p>
 					<dl className="mt-3 flex flex-col gap-2 text-sm">
-						{PLACEHOLDERS.map((doc) => (
-							<div key={doc.syntax} className="flex flex-col gap-0.5">
+						{PLACEHOLDERS.map((placeholder) => (
+							<div key={placeholder.syntax} className="flex flex-col gap-0.5">
 								<dt className="text-fg font-mono text-[0.8125rem] font-semibold" translate="no">
-									{doc.syntax}
+									{placeholder.syntax}
 								</dt>
 								<dd className="text-fg-muted">
-									{doc.description}. Ex.: <span className="font-mono">{doc.example}</span>
+									{placeholder.description}. Ex.:{' '}
+									<span className="font-mono">{placeholder.example}</span>
 								</dd>
 							</div>
 						))}
@@ -217,7 +226,7 @@ export default function JsonGenerator() {
 				action={
 					outcome?.ok ? (
 						<div className="flex gap-2">
-							<Button variant="secondary" size="sm" onClick={() => download(outcome.json)}>
+							<Button variant="secondary" size="sm" onClick={() => downloadJson(outcome.json)}>
 								<Download /> Baixar .json
 							</Button>
 							<CopyButton value={outcome.json} label="Copiar JSON" />
@@ -226,16 +235,17 @@ export default function JsonGenerator() {
 				}
 				note={outcome?.ok ? 'Dados fictícios, só para testes.' : undefined}
 			>
-				{outcome?.ok ? (
+				{outcome?.ok === true && (
 					<OutputBlock className="max-h-[36rem]">
 						<span translate="no">{outcome.json}</span>
 					</OutputBlock>
-				) : outcome ? (
+				)}
+				{outcome?.ok === false && (
 					<Alert tone="danger">
 						<CircleX />
 						{outcome.error}
 					</Alert>
-				) : null}
+				)}
 			</ResultCard>
 		</ToolLayout>
 	)

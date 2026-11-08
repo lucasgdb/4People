@@ -8,7 +8,10 @@ import { useId, useState } from 'react'
 import { z } from 'zod'
 import { useToolForm } from '@/components/form/use-tool-form'
 import {
+	type BodyType,
+	type BuiltRequest,
 	buildRequest,
+	byteLength,
 	explainFetchError,
 	formatBytes,
 	HTTP_METHODS,
@@ -29,6 +32,13 @@ const BODY_TYPES = [
 	{ value: 'form', label: 'Formulário' },
 ] as const
 
+/** Label and placeholder of the body field for each body type. */
+const BODY_FIELD: Record<Exclude<BodyType, 'none'>, { label: string; placeholder: string }> = {
+	json: { label: 'JSON', placeholder: 'Ex.: {"title":"Comprar pão","done":false}' },
+	form: { label: 'Campos (um por linha, chave=valor)', placeholder: 'Ex.: nome=Ana\nidade=30' },
+	text: { label: 'Texto', placeholder: 'Ex.: olá' },
+}
+
 const schema = z.object({
 	method: z.enum(HTTP_METHODS),
 	url: z.string().trim().min(1, 'Informe a URL da API, como https://api.exemplo.com/usuarios.'),
@@ -36,20 +46,18 @@ const schema = z.object({
 	body: z.string(),
 })
 
-/** Binary responses are measured, not printed. */
-const isBinary = (type: string) =>
-	/^(image|audio|video|font)\//.test(type) || /octet-stream|pdf|zip|protobuf|wasm/.test(type)
+type Values = z.infer<typeof schema>
+type HeaderRow = KeyValue & { id: number }
 
-type Response =
+type RequestOutcome =
 	| {
 			ok: true
 			status: number
 			statusText: string
-			ms: number
+			durationMs: number
 			bytes: number
 			headers: [string, string][]
 			body: string
-			json: boolean
 			binary: boolean
 			contentType: string
 			curl: string
@@ -59,78 +67,98 @@ type Response =
 
 const TIMEOUT_MS = 30_000
 
+/** Binary responses are measured, not printed. */
+const isBinary = (contentType: string) =>
+	/^(image|audio|video|font)\//.test(contentType) ||
+	/octet-stream|pdf|zip|protobuf|wasm/.test(contentType)
+
+function statusTone(status: number): 'success' | 'neutral' | 'danger' {
+	const statusFamily = statusClass(status)
+	if (statusFamily === '2xx') return 'success'
+	if (statusFamily === '3xx') return 'neutral'
+	return 'danger'
+}
+
+/** Reads the body as text, or only measures it when it is binary. */
+async function readBody(response: Response, binary: boolean) {
+	if (binary) return { text: '', bytes: (await response.blob()).size }
+	const text = await response.text()
+	return { text, bytes: byteLength(text) }
+}
+
+/** Never throws: invalid input, network and CORS errors become a readable outcome. */
+async function sendRequest(values: Values, headers: readonly KeyValue[]): Promise<RequestOutcome> {
+	let request: BuiltRequest
+	try {
+		request = buildRequest({ ...values, headers })
+	} catch (error) {
+		return { ok: false, error: (error as Error).message, cors: false, ignoredHeaders: [] }
+	}
+	const curl = toCurl(request)
+	const startedAt = performance.now()
+	try {
+		const response = await fetch(request.url, {
+			method: request.method,
+			headers: request.headers,
+			body: request.body,
+			signal: AbortSignal.timeout(TIMEOUT_MS),
+		})
+		const contentType = response.headers.get('content-type') ?? ''
+		const binary = isBinary(contentType)
+		const { text, bytes } = await readBody(response, binary)
+		const durationMs = performance.now() - startedAt
+		return {
+			ok: true,
+			status: response.status,
+			statusText: response.statusText,
+			durationMs,
+			bytes,
+			headers: [...response.headers.entries()],
+			body: prettyBody(text, contentType).text,
+			binary,
+			contentType,
+			curl,
+			ignoredHeaders: request.ignoredHeaders,
+		}
+	} catch (error) {
+		return {
+			ok: false,
+			error: explainFetchError(error, request.url, window.location.protocol),
+			// fetch() rejects with a TypeError when CORS blocks the response.
+			cors: (error as Error)?.name === 'TypeError',
+			curl,
+			ignoredHeaders: request.ignoredHeaders,
+		}
+	}
+}
+
+function ResponseBody({ outcome }: { outcome: Extract<RequestOutcome, { ok: true }> }) {
+	if (outcome.binary) {
+		return (
+			<p className="text-fg-muted text-[0.9375rem]">
+				Corpo binário ({outcome.contentType}), não exibido.
+			</p>
+		)
+	}
+	if (!outcome.body) return <p className="text-fg-muted text-[0.9375rem]">Resposta sem corpo.</p>
+	return (
+		<OutputBlock className="max-h-[32rem]">
+			<span translate="no">{outcome.body}</span>
+		</OutputBlock>
+	)
+}
+
 /** Sends a request with fetch() from this page and shows status, time, size, headers and body. */
 export default function RestApiTester() {
-	const [headers, setHeaders] = useState<(KeyValue & { id: number })[]>([
+	const [headers, setHeaders] = useState<HeaderRow[]>([
 		{ id: 0, key: 'Accept', value: 'application/json' },
 	])
 	const headersId = useId()
 
-	// One request per submit, through React Query: it tracks the request in flight and keeps the last
-	// result. The function never throws: network and CORS errors become a readable result.
+	// React Query tracks the request in flight and keeps the last outcome.
 	const send = useMutation({
 		mutationKey: ['rest-request'],
-		mutationFn: async ({
-			method,
-			url,
-			bodyType,
-			body,
-		}: z.infer<typeof schema>): Promise<Response> => {
-			let request: ReturnType<typeof buildRequest>
-			try {
-				request = buildRequest({ method, url, headers, bodyType, body })
-			} catch (error) {
-				return {
-					ok: false,
-					error: (error as Error).message,
-					cors: false,
-					ignoredHeaders: [],
-				}
-			}
-			const curl = toCurl(request)
-			const started = performance.now()
-			try {
-				const res = await fetch(request.url, {
-					method: request.method,
-					headers: request.headers,
-					body: request.body,
-					signal: AbortSignal.timeout(TIMEOUT_MS),
-				})
-				const contentType = res.headers.get('content-type') ?? ''
-				const binary = isBinary(contentType)
-				let text = ''
-				let bytes = 0
-				if (binary) bytes = (await res.blob()).size
-				else {
-					text = await res.text()
-					bytes = new TextEncoder().encode(text).length
-				}
-				const ms = performance.now() - started
-				const pretty = prettyBody(text, contentType)
-				return {
-					ok: true,
-					status: res.status,
-					statusText: res.statusText,
-					ms,
-					bytes,
-					headers: [...res.headers.entries()],
-					body: pretty.text,
-					json: pretty.json,
-					binary,
-					contentType,
-					curl,
-					ignoredHeaders: request.ignoredHeaders,
-				}
-			} catch (error) {
-				return {
-					ok: false,
-					error: explainFetchError(error, request.url, window.location.protocol),
-					cors: (error as Error)?.name === 'TypeError',
-					curl,
-					ignoredHeaders: request.ignoredHeaders,
-				}
-			}
-		},
+		mutationFn: (values: Values) => sendRequest(values, headers),
 	})
 	const response = send.data ?? null
 
@@ -145,6 +173,12 @@ export default function RestApiTester() {
 
 	const updateHeader = (id: number, patch: Partial<KeyValue>) =>
 		setHeaders((rows) => rows.map((row) => (row.id === id ? { ...row, ...patch } : row)))
+	const removeHeader = (id: number) => setHeaders((rows) => rows.filter((row) => row.id !== id))
+	const addHeader = () =>
+		setHeaders((rows) => {
+			const nextId = Math.max(0, ...rows.map((row) => row.id)) + 1
+			return [...rows, { id: nextId, key: '', value: '' }]
+		})
 
 	return (
 		<ToolLayout>
@@ -159,11 +193,11 @@ export default function RestApiTester() {
 			>
 				<div className="grid gap-4 sm:grid-cols-[9rem_1fr]">
 					<form.AppField name="method">
-						{(f) => <f.SelectField label="Método" options={METHOD_OPTIONS} />}
+						{(field) => <field.SelectField label="Método" options={METHOD_OPTIONS} />}
 					</form.AppField>
 					<form.AppField name="url">
-						{(f) => (
-							<f.TextField
+						{(field) => (
+							<field.TextField
 								label="URL"
 								type="url"
 								inputMode="url"
@@ -175,14 +209,14 @@ export default function RestApiTester() {
 				</div>
 				<fieldset className="flex flex-col gap-2" aria-describedby={`${headersId}-desc`}>
 					<legend className="text-fg mb-1 text-sm font-medium">Cabeçalhos</legend>
-					{headers.map((row, i) => (
+					{headers.map((row, position) => (
 						// Phones: name over value, the remove button beside both; from sm up, one row.
 						<div
 							key={row.id}
 							className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 sm:flex"
 						>
 							<Input
-								aria-label={`Nome do cabeçalho ${i + 1}`}
+								aria-label={`Nome do cabeçalho ${position + 1}`}
 								placeholder="Ex.: Authorization"
 								value={row.key}
 								autoComplete="off"
@@ -191,7 +225,7 @@ export default function RestApiTester() {
 								className="min-w-0 sm:flex-[2]"
 							/>
 							<Input
-								aria-label={`Valor do cabeçalho ${i + 1}`}
+								aria-label={`Valor do cabeçalho ${position + 1}`}
 								placeholder="Ex.: Bearer eyJhbGci…"
 								value={row.value}
 								autoComplete="off"
@@ -203,24 +237,15 @@ export default function RestApiTester() {
 								variant="ghost"
 								size="icon"
 								className="col-start-2 row-span-2 row-start-1"
-								aria-label={`Remover cabeçalho ${i + 1}`}
-								onClick={() => setHeaders((rows) => rows.filter((r) => r.id !== row.id))}
+								aria-label={`Remover cabeçalho ${position + 1}`}
+								onClick={() => removeHeader(row.id)}
 							>
 								<X />
 							</Button>
 						</div>
 					))}
 					<div>
-						<Button
-							variant="soft"
-							size="sm"
-							onClick={() =>
-								setHeaders((rows) => [
-									...rows,
-									{ id: Math.max(0, ...rows.map((r) => r.id)) + 1, key: '', value: '' },
-								])
-							}
-						>
+						<Button variant="soft" size="sm" onClick={addHeader}>
 							<Plus /> Adicionar cabeçalho
 						</Button>
 					</div>
@@ -232,27 +257,15 @@ export default function RestApiTester() {
 				{acceptsBody ? (
 					<>
 						<form.AppField name="bodyType">
-							{(f) => <f.RadioField label="Corpo" options={BODY_TYPES} />}
+							{(field) => <field.RadioField label="Corpo" options={BODY_TYPES} />}
 						</form.AppField>
 						{bodyType !== 'none' ? (
 							<form.AppField name="body">
-								{(f) => (
-									<f.TextareaField
-										label={
-											bodyType === 'json'
-												? 'JSON'
-												: bodyType === 'form'
-													? 'Campos (um por linha, chave=valor)'
-													: 'Texto'
-										}
+								{(field) => (
+									<field.TextareaField
+										label={BODY_FIELD[bodyType].label}
 										rows={7}
-										placeholder={
-											bodyType === 'json'
-												? 'Ex.: {"title":"Comprar pão","done":false}'
-												: bodyType === 'form'
-													? 'Ex.: nome=Ana\nidade=30'
-													: 'Ex.: olá'
-										}
+										placeholder={BODY_FIELD[bodyType].placeholder}
 									/>
 								)}
 							</form.AppField>
@@ -286,7 +299,7 @@ export default function RestApiTester() {
 						ignorados.
 					</Alert>
 				) : null}
-				{response?.ok ? (
+				{response?.ok === true && (
 					<>
 						<DataList
 							columns={3}
@@ -296,21 +309,13 @@ export default function RestApiTester() {
 									value: (
 										<span className="flex flex-wrap items-center gap-2">
 											{response.status}
-											<Badge
-												tone={
-													statusClass(response.status) === '2xx'
-														? 'success'
-														: statusClass(response.status) === '3xx'
-															? 'neutral'
-															: 'danger'
-												}
-											>
+											<Badge tone={statusTone(response.status)}>
 												{response.statusText || statusClass(response.status)}
 											</Badge>
 										</span>
 									),
 								},
-								{ label: 'Tempo', value: `${formatNumber(Math.round(response.ms))} ms` },
+								{ label: 'Tempo', value: `${formatNumber(Math.round(response.durationMs))} ms` },
 								{ label: 'Tamanho', value: formatBytes(response.bytes) },
 							]}
 						/>
@@ -331,19 +336,10 @@ export default function RestApiTester() {
 								Access-Control-Expose-Headers.
 							</p>
 						</details>
-						{response.binary ? (
-							<p className="text-fg-muted text-[0.9375rem]">
-								Corpo binário ({response.contentType}), não exibido.
-							</p>
-						) : response.body ? (
-							<OutputBlock className="max-h-[32rem]">
-								<span translate="no">{response.body}</span>
-							</OutputBlock>
-						) : (
-							<p className="text-fg-muted text-[0.9375rem]">Resposta sem corpo.</p>
-						)}
+						<ResponseBody outcome={response} />
 					</>
-				) : response ? (
+				)}
+				{response?.ok === false && (
 					<Alert tone="danger">
 						<CircleX />
 						<span>
@@ -353,7 +349,7 @@ export default function RestApiTester() {
 							) : null}
 						</span>
 					</Alert>
-				) : null}
+				)}
 			</ResultCard>
 		</ToolLayout>
 	)

@@ -128,7 +128,7 @@ function Sections() {
 									<span className="flex min-w-0 flex-1 flex-col gap-1">
 										<span className="text-fg flex items-center justify-between gap-2 font-bold">
 											{section.name}
-											<span className="bg-surface-sunken text-fg-muted tabular rounded-full px-2.5 py-0.5 text-sm font-semibold">
+											<span className="bg-surface-sunken text-fg-muted tabular inline-flex h-6 items-center rounded-full px-2.5 text-sm leading-none font-semibold">
 												{section.tools.length}
 											</span>
 										</span>

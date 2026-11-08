@@ -5,8 +5,10 @@ import { CircleX, Download, ShieldCheck, Upload } from 'lucide-react'
 import { type ChangeEvent, useDeferredValue, useMemo, useState } from 'react'
 import { useAppForm } from '@/components/form/form'
 import {
+	byteLength,
 	ensureSvgNamespace,
 	minifySvg,
+	type SvgInfo,
 	svgDataUrl,
 	svgInfo,
 	withSvgSize,
@@ -17,6 +19,40 @@ import { FormCard, OutputBlock, ResultCard, ToolLayout } from './_shared/tool-la
 const SCALES = [1, 2, 4] as const
 /** Browsers refuse canvases much larger than this on a side. */
 const MAX_CANVAS_SIDE = 16_384
+const MAX_FILE_BYTES = 10 * 1024 * 1024
+
+type Rendered =
+	| {
+			ok: true
+			info: SvgInfo
+			/** What the user copies: the input, trimmed or minified. */
+			output: string
+			outputBytes: number
+			addedNamespace: boolean
+			/** `output` with xmlns ensured, so it renders as a standalone image. */
+			renderable: string
+			src: string
+	  }
+	| { ok: false; error: string }
+
+function renderSvg(input: string, minify: boolean): Rendered {
+	try {
+		const info = svgInfo(input)
+		const output = minify ? minifySvg(input) : input.trim()
+		const renderable = ensureSvgNamespace(output)
+		return {
+			ok: true,
+			info,
+			output,
+			outputBytes: byteLength(output),
+			addedNamespace: renderable !== output,
+			renderable,
+			src: svgDataUrl(renderable),
+		}
+	} catch (error) {
+		return { ok: false, error: (error as Error).message }
+	}
+}
 
 function downloadBlob(blob: Blob, name: string) {
 	const url = URL.createObjectURL(blob)
@@ -25,24 +61,34 @@ function downloadBlob(blob: Blob, name: string) {
 }
 
 /** Draws the SVG (as an image, so scripts never run) on a canvas and saves a PNG. */
-function downloadPng(svg: string, width: number, height: number, onError: (msg: string) => void) {
-	const w = Math.round(width)
-	const h = Math.round(height)
-	if (w > MAX_CANVAS_SIDE || h > MAX_CANVAS_SIDE) {
-		onError(`O PNG ficaria com ${w}×${h} px, maior que o navegador permite. Use uma escala menor.`)
+function downloadPng(
+	svg: string,
+	width: number,
+	height: number,
+	onError: (message: string) => void,
+) {
+	const pixelWidth = Math.round(width)
+	const pixelHeight = Math.round(height)
+	if (pixelWidth > MAX_CANVAS_SIDE || pixelHeight > MAX_CANVAS_SIDE) {
+		onError(
+			`O PNG ficaria com ${pixelWidth}×${pixelHeight} px, maior que o navegador permite. Use uma escala menor.`,
+		)
 		return
 	}
 	const image = new Image()
 	image.onload = () => {
-		const canvas = Object.assign(document.createElement('canvas'), { width: w, height: h })
-		canvas.getContext('2d')?.drawImage(image, 0, 0, w, h)
+		const canvas = Object.assign(document.createElement('canvas'), {
+			width: pixelWidth,
+			height: pixelHeight,
+		})
+		canvas.getContext('2d')?.drawImage(image, 0, 0, pixelWidth, pixelHeight)
 		canvas.toBlob((blob) => {
 			if (blob) downloadBlob(blob, 'imagem.png')
 			else onError('Não foi possível gerar o PNG neste navegador.')
 		}, 'image/png')
 	}
 	image.onerror = () => onError('O navegador não conseguiu desenhar este SVG para gerar o PNG.')
-	image.src = svgDataUrl(withSvgSize(svg, w, h))
+	image.src = svgDataUrl(withSvgSize(svg, pixelWidth, pixelHeight))
 }
 
 /** Safe SVG preview (rendered as <img>, never injected), size info, minify and SVG/PNG download. */
@@ -56,7 +102,7 @@ export default function SvgViewer() {
 		const file = event.target.files?.[0]
 		event.target.value = ''
 		if (!file) return
-		if (file.size > 10 * 1024 * 1024) {
+		if (file.size > MAX_FILE_BYTES) {
 			setFileError('Arquivo grande demais (mais de 10 MB).')
 			return
 		}
@@ -94,8 +140,8 @@ export default function SvgViewer() {
 					</Alert>
 				) : null}
 				<form.AppField name="svg">
-					{(f) => (
-						<f.TextareaField
+					{(field) => (
+						<field.TextareaField
 							label="Código SVG"
 							rows={12}
 							placeholder='Ex.: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">…</svg>'
@@ -103,8 +149,8 @@ export default function SvgViewer() {
 					)}
 				</form.AppField>
 				<form.AppField name="minify">
-					{(f) => (
-						<f.CheckboxField
+					{(field) => (
+						<field.CheckboxField
 							label="Minificar"
 							description="Remove comentários, metadados, dados de editor (Inkscape) e espaços entre tags."
 						/>
@@ -119,9 +165,9 @@ export default function SvgViewer() {
 						brokenSrc={brokenSrc}
 						onBroken={setBrokenSrc}
 						pngError={pngError}
-						onPng={(svg, w, h) => {
+						onPng={(svg, width, height) => {
 							setPngError(null)
-							downloadPng(svg, w, h, setPngError)
+							downloadPng(svg, width, height, setPngError)
 						}}
 						onClear={() => {
 							form.reset()
@@ -151,26 +197,11 @@ function Preview({
 	onPng: (svg: string, width: number, height: number) => void
 	onClear: () => void
 }) {
-	const deferred = useDeferredValue(input)
-	const result = useMemo(() => {
-		if (!deferred.trim()) return null
-		try {
-			const info = svgInfo(deferred)
-			const output = minify ? minifySvg(deferred) : deferred.trim()
-			const renderable = ensureSvgNamespace(output)
-			return {
-				ok: true as const,
-				info,
-				output,
-				outputBytes: new TextEncoder().encode(output).length,
-				addedNamespace: renderable !== output,
-				src: svgDataUrl(renderable),
-				renderable,
-			}
-		} catch (error) {
-			return { ok: false as const, error: (error as Error).message }
-		}
-	}, [deferred, minify])
+	const deferredInput = useDeferredValue(input)
+	const result = useMemo(
+		() => (deferredInput.trim() ? renderSvg(deferredInput, minify) : null),
+		[deferredInput, minify],
+	)
 
 	return (
 		<ResultCard
@@ -180,7 +211,7 @@ function Preview({
 			copyText={result?.ok ? result.output : undefined}
 			onClear={onClear}
 		>
-			{result?.ok ? (
+			{result?.ok === true && (
 				<>
 					{brokenSrc === result.src ? (
 						<Alert tone="danger">
@@ -241,23 +272,21 @@ function Preview({
 						>
 							<Download /> Baixar SVG
 						</Button>
-						{SCALES.map((scale) => (
-							<Button
-								key={scale}
-								variant="secondary"
-								size="sm"
-								onClick={() =>
-									onPng(
-										result.renderable,
-										result.info.pixelWidth * scale,
-										result.info.pixelHeight * scale,
-									)
-								}
-								aria-label={`Baixar PNG em ${scale}× (${Math.round(result.info.pixelWidth * scale)} × ${Math.round(result.info.pixelHeight * scale)} px)`}
-							>
-								<Download /> PNG {scale}×
-							</Button>
-						))}
+						{SCALES.map((scale) => {
+							const width = result.info.pixelWidth * scale
+							const height = result.info.pixelHeight * scale
+							return (
+								<Button
+									key={scale}
+									variant="secondary"
+									size="sm"
+									onClick={() => onPng(result.renderable, width, height)}
+									aria-label={`Baixar PNG em ${scale}× (${Math.round(width)} × ${Math.round(height)} px)`}
+								>
+									<Download /> PNG {scale}×
+								</Button>
+							)
+						})}
 					</div>
 					{pngError ? (
 						<Alert tone="danger">
@@ -271,12 +300,13 @@ function Preview({
 						</OutputBlock>
 					) : null}
 				</>
-			) : result ? (
+			)}
+			{result?.ok === false && (
 				<Alert tone="danger">
 					<CircleX />
 					{result.error}
 				</Alert>
-			) : null}
+			)}
 		</ResultCard>
 	)
 }

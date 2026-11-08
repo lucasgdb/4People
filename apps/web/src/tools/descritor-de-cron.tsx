@@ -24,6 +24,32 @@ type Outcome =
 
 const RUN_COUNT = 10
 
+/** Loads cronstrue and cron-parser on demand and describes the expression. Throws in Portuguese. */
+async function describeCron(expression: string): Promise<Outcome> {
+	const fields = cronBreakdown(expression)
+	const expanded = CRON_MACROS[expression.toLowerCase()] ?? expression
+	const [{ default: cronstrue }, { CronExpressionParser }] = await Promise.all([
+		import('cronstrue/i18n'),
+		import('cron-parser'),
+	])
+	const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+	try {
+		const description = cronstrue.toString(expanded, {
+			locale: 'pt_BR',
+			use24HourTimeFormat: true,
+		})
+		const runs = CronExpressionParser.parse(expanded, { tz: timeZone, currentDate: new Date() })
+			.take(RUN_COUNT)
+			.map((date) => date.toDate())
+		return { ok: true, description, fields, runs, timeZone }
+	} catch (error) {
+		const reason = String((error as Error)?.message ?? error)
+		throw new Error(
+			`Expressão inválida: ${reason}. Formato: minuto hora dia-do-mês mês dia-da-semana (ex.: 0 9 * * 1-5).`,
+		)
+	}
+}
+
 /** Describes a cron expression in Portuguese and lists its next runs in the user's time zone. */
 export default function CronDescriber() {
 	const form = useAppForm({ defaultValues: { expression: '30 8 * * 1-5' } })
@@ -32,38 +58,14 @@ export default function CronDescriber() {
 	).trim()
 	const [outcome, setOutcome] = useState<Outcome | null>(null)
 
-	// cronstrue and cron-parser load on demand; the next runs depend on the clock and the user's
-	// time zone, so everything is computed in the browser after mount.
+	// The next runs depend on the clock and the user's time zone, so they are computed after mount.
 	useEffect(() => {
 		if (!expression) {
 			setOutcome(null)
 			return
 		}
 		let cancelled = false
-		const run = async () => {
-			const fields = cronBreakdown(expression)
-			const expanded = CRON_MACROS[expression.toLowerCase()] ?? expression
-			const [{ default: cronstrue }, { CronExpressionParser }] = await Promise.all([
-				import('cronstrue/i18n'),
-				import('cron-parser'),
-			])
-			const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
-			let description: string
-			let runs: Date[]
-			try {
-				description = cronstrue.toString(expanded, { locale: 'pt_BR', use24HourTimeFormat: true })
-				runs = CronExpressionParser.parse(expanded, { tz: timeZone, currentDate: new Date() })
-					.take(RUN_COUNT)
-					.map((date) => date.toDate())
-			} catch (error) {
-				const message = String((error as Error)?.message ?? error)
-				throw new Error(
-					`Expressão inválida: ${message}. Formato: minuto hora dia-do-mês mês dia-da-semana (ex.: 0 9 * * 1-5).`,
-				)
-			}
-			return { ok: true as const, description, fields, runs, timeZone }
-		}
-		run()
+		describeCron(expression)
 			.then((result) => !cancelled && setOutcome(result))
 			.catch((error: Error) => !cancelled && setOutcome({ ok: false, error: error.message }))
 		return () => {
@@ -71,14 +73,15 @@ export default function CronDescriber() {
 		}
 	}, [expression])
 
-	const runFormat = new Intl.DateTimeFormat('pt-BR', {
+	const hasSeconds = outcome?.ok && outcome.fields.length === 6
+	const runDateFormat = new Intl.DateTimeFormat('pt-BR', {
 		weekday: 'short',
 		day: '2-digit',
 		month: 'short',
 		year: 'numeric',
 		hour: '2-digit',
 		minute: '2-digit',
-		second: outcome?.ok && outcome.fields.length === 6 ? '2-digit' : undefined,
+		second: hasSeconds ? '2-digit' : undefined,
 	})
 
 	return (
@@ -89,8 +92,8 @@ export default function CronDescriber() {
 				actions={<p className="text-fg-muted text-[0.8125rem]">Atualiza enquanto você digita.</p>}
 			>
 				<form.AppField name="expression">
-					{(f) => (
-						<f.TextField
+					{(field) => (
+						<field.TextField
 							label="Expressão"
 							placeholder="Ex.: */15 * * * *"
 							inputClassName="font-mono text-lg"
@@ -122,7 +125,7 @@ export default function CronDescriber() {
 				copyText={outcome?.ok ? outcome.description : undefined}
 				onClear={() => form.reset({ expression: '' })}
 			>
-				{outcome?.ok ? (
+				{outcome?.ok === true && (
 					<>
 						<p className="rounded-control bg-surface-muted text-fg px-5 py-4 text-xl leading-snug font-bold">
 							{outcome.description}
@@ -137,23 +140,23 @@ export default function CronDescriber() {
 									</tr>
 								</TableHeader>
 								<TableBody>
-									{outcome.fields.map((field) => (
-										<TableRow key={field.kind}>
+									{outcome.fields.map((cronField) => (
+										<TableRow key={cronField.kind}>
 											<TableHead
 												scope="row"
 												className="border-rule text-fg h-auto border-t border-b-0 py-3 align-top text-sm font-medium tracking-normal normal-case group-first/row:border-t-0"
 											>
-												{field.name}
+												{cronField.name}
 												<span className="text-fg-muted block text-[0.75rem] font-normal">
-													{field.range}
+													{cronField.range}
 												</span>
 											</TableHead>
 											<TableCell className="align-top">
 												<code translate="no" className="font-mono font-semibold">
-													{field.value}
+													{cronField.value}
 												</code>
 											</TableCell>
-											<TableCell className="align-top">{field.description}</TableCell>
+											<TableCell className="align-top">{cronField.description}</TableCell>
 										</TableRow>
 									))}
 								</TableBody>
@@ -164,25 +167,26 @@ export default function CronDescriber() {
 								Próximas {outcome.runs.length} execuções ({outcome.timeZone})
 							</h3>
 							<ol className="rounded-panel border-border divide-rule divide-y border">
-								{outcome.runs.map((date, i) => (
+								{outcome.runs.map((date, position) => (
 									<li key={date.getTime()} className="flex items-center gap-3 px-4 py-2">
 										<span className="text-fg-subtle tabular w-6 text-right text-[0.8125rem]">
-											{i + 1}
+											{position + 1}
 										</span>
 										<time dateTime={date.toISOString()} className="tabular first-letter:uppercase">
-											{runFormat.format(date)}
+											{runDateFormat.format(date)}
 										</time>
 									</li>
 								))}
 							</ol>
 						</div>
 					</>
-				) : outcome ? (
+				)}
+				{outcome?.ok === false && (
 					<Alert tone="danger">
 						<CircleX />
 						{outcome.error}
 					</Alert>
-				) : null}
+				)}
 			</ResultCard>
 		</ToolLayout>
 	)

@@ -7,7 +7,7 @@
 
 const relativeFormat = new Intl.RelativeTimeFormat('pt-BR', { numeric: 'always' })
 
-const UNITS: ReadonlyArray<[Intl.RelativeTimeFormatUnit, number]> = [
+const SECONDS_PER_UNIT: ReadonlyArray<[Intl.RelativeTimeFormatUnit, number]> = [
 	['year', 365 * 24 * 3600],
 	['month', 30 * 24 * 3600],
 	['day', 24 * 3600],
@@ -18,15 +18,13 @@ const UNITS: ReadonlyArray<[Intl.RelativeTimeFormatUnit, number]> = [
 
 /** "há 3 dias", "em 2 horas", "agora": the largest unit that fits, rounded toward zero. */
 export function relativeTime(date: Date, now: Date): string {
-	const seconds = (date.getTime() - now.getTime()) / 1000
-	const abs = Math.abs(seconds)
-	for (const [unit, size] of UNITS) {
-		if (abs >= size || unit === 'second') {
-			const value = Math.trunc(seconds / size)
-			return value === 0 ? 'agora' : relativeFormat.format(value, unit)
-		}
-	}
-	return 'agora'
+	const secondsFromNow = (date.getTime() - now.getTime()) / 1000
+	const distance = Math.abs(secondsFromNow)
+	const [unit, unitSeconds] = SECONDS_PER_UNIT.find(
+		([candidate, candidateSeconds]) => distance >= candidateSeconds || candidate === 'second',
+	) as [Intl.RelativeTimeFormatUnit, number]
+	const amount = Math.trunc(secondsFromNow / unitSeconds)
+	return amount === 0 ? 'agora' : relativeFormat.format(amount, unit)
 }
 
 /* ---------------------------------- regex ---------------------------------- */
@@ -48,25 +46,28 @@ export type RegexFlag = (typeof REGEX_FLAGS)[number]['flag']
  */
 export function captureGroupNames(pattern: string): (string | null)[] {
 	const names: (string | null)[] = []
-	let inClass = false
+	let insideCharacterClass = false
 	for (let i = 0; i < pattern.length; i++) {
 		const char = pattern[i]
 		if (char === '\\') {
 			i++
 			continue
 		}
-		if (inClass) {
-			if (char === ']') inClass = false
+		if (insideCharacterClass) {
+			if (char === ']') insideCharacterClass = false
 			continue
 		}
-		if (char === '[') inClass = true
-		else if (char === '(') {
-			if (pattern[i + 1] !== '?') names.push(null)
-			else {
-				const named = /^\?<([A-Za-z_$][\w$]*)>/.exec(pattern.slice(i + 1))
-				if (named) names.push(named[1] as string)
-			}
+		if (char === '[') {
+			insideCharacterClass = true
+			continue
 		}
+		if (char !== '(') continue
+		if (pattern[i + 1] !== '?') {
+			names.push(null)
+			continue
+		}
+		const namedGroup = /^\?<([A-Za-z_$][\w$]*)>/.exec(pattern.slice(i + 1))
+		if (namedGroup) names.push(namedGroup[1] as string)
 	}
 	return names
 }
@@ -86,13 +87,13 @@ export function compileRegex(
 	try {
 		return { ok: true, regex: new RegExp(pattern, flags) }
 	} catch (error) {
-		const message = (error as Error).message.replace(
+		const engineReason = (error as Error).message.replace(
 			/^Invalid regular expression: \/.*\/[a-z]*: /s,
 			'',
 		)
 		return {
 			ok: false,
-			error: `Expressão inválida: ${message}. Confira parênteses, colchetes e barras invertidas.`,
+			error: `Expressão inválida: ${engineReason}. Confira parênteses, colchetes e barras invertidas.`,
 		}
 	}
 }
@@ -102,12 +103,16 @@ export function runRegex(pattern: string, flags: string, text: string, limit = 1
 	const compiled = compileRegex(pattern, flags)
 	if (!compiled.ok) return compiled
 	const { regex } = compiled
-	const names = captureGroupNames(pattern)
+	const groupNames = captureGroupNames(pattern)
 	const toMatch = (match: RegExpExecArray): RegexMatch => ({
 		index: match.index,
 		end: match.index + match[0].length,
 		text: match[0],
-		groups: match.slice(1).map((value, i) => ({ number: i + 1, name: names[i] ?? null, value })),
+		groups: match.slice(1).map((value, groupIndex) => ({
+			number: groupIndex + 1,
+			name: groupNames[groupIndex] ?? null,
+			value,
+		})),
 	})
 	const matches: RegexMatch[] = []
 	let truncated = false
@@ -133,10 +138,11 @@ export type Segment = { text: string; match: number | null }
 export function highlightSegments(text: string, matches: readonly RegexMatch[]): Segment[] {
 	const segments: Segment[] = []
 	let cursor = 0
-	matches.forEach((match, i) => {
-		if (match.end === match.index || match.index < cursor) return
+	matches.forEach((match, matchIndex) => {
+		const isEmpty = match.end === match.index
+		if (isEmpty || match.index < cursor) return
 		if (match.index > cursor) segments.push({ text: text.slice(cursor, match.index), match: null })
-		segments.push({ text: text.slice(match.index, match.end), match: i })
+		segments.push({ text: text.slice(match.index, match.end), match: matchIndex })
 		cursor = match.end
 	})
 	if (cursor < text.length) segments.push({ text: text.slice(cursor), match: null })
@@ -156,12 +162,16 @@ const splitLines = (value: string) => {
 	return lines
 }
 
-const countUnits = (value: string, unit: DiffUnit) =>
-	unit === 'lines'
-		? splitLines(value).length
-		: unit === 'words'
-			? (value.match(/\S+/g) ?? []).length
-			: [...value].length
+function countUnits(value: string, unit: DiffUnit): number {
+	switch (unit) {
+		case 'lines':
+			return splitLines(value).length
+		case 'words':
+			return (value.match(/\S+/g) ?? []).length
+		case 'chars':
+			return [...value].length
+	}
+}
 
 /** How many lines, words or characters were added and removed. */
 export function diffStats(changes: readonly Change[], unit: DiffUnit) {
@@ -216,20 +226,25 @@ export function sideBySideRows(changes: readonly Change[]): SideRow[] {
 			}
 			continue
 		}
-		const removed = change.removed ? splitLines(change.value) : []
-		const next = changes[i + 1]
-		let added: string[] = []
-		if (change.added) added = splitLines(change.value)
-		else if (next?.added) {
-			added = splitLines(next.value)
+		const removedLines = change.removed ? splitLines(change.value) : []
+		let addedLines: string[] = []
+		if (change.added) {
+			addedLines = splitLines(change.value)
+		} else if (changes[i + 1]?.added) {
+			addedLines = splitLines((changes[i + 1] as Change).value)
 			i++
 		}
-		for (let k = 0; k < Math.max(removed.length, added.length); k++) {
-			const left = removed[k]
-			const right = added[k]
+		const rowCount = Math.max(removedLines.length, addedLines.length)
+		for (let row = 0; row < rowCount; row++) {
+			const removedLine = removedLines[row]
+			const addedLine = addedLines[row]
 			rows.push({
-				left: left === undefined ? null : { number: oldNumber++, text: left, changed: true },
-				right: right === undefined ? null : { number: newNumber++, text: right, changed: true },
+				left:
+					removedLine === undefined
+						? null
+						: { number: oldNumber++, text: removedLine, changed: true },
+				right:
+					addedLine === undefined ? null : { number: newNumber++, text: addedLine, changed: true },
 			})
 		}
 	}
@@ -266,14 +281,19 @@ export const TIMESTAMP_UNIT_NAMES: Record<TimestampUnit, string> = {
 	ns: 'nanossegundos',
 }
 
-const UNIT_DIVISOR: Record<TimestampUnit, number> = { s: 0.001, ms: 1, us: 1000, ns: 1_000_000 }
+const UNITS_PER_MILLISECOND: Record<TimestampUnit, number> = {
+	s: 0.001,
+	ms: 1,
+	us: 1000,
+	ns: 1_000_000,
+}
 
 /** Guesses the unit by size: up to 11 digits are seconds (until year 5138), then ms, µs, ns. */
 export function detectTimestampUnit(value: number): TimestampUnit {
-	const abs = Math.abs(value)
-	if (abs < 1e11) return 's'
-	if (abs < 1e14) return 'ms'
-	if (abs < 1e17) return 'us'
+	const magnitude = Math.abs(value)
+	if (magnitude < 1e11) return 's'
+	if (magnitude < 1e14) return 'ms'
+	if (magnitude < 1e17) return 'us'
 	return 'ns'
 }
 
@@ -289,59 +309,82 @@ export function parseTimestamp(
 	input: string,
 	unit: TimestampUnit | 'auto' = 'auto',
 ): ParsedTimestamp {
-	const text = input.trim().replace(/[\s_]/g, '')
-	if (!/^-?\d+(\.\d+)?$/.test(text)) {
+	const digits = input.trim().replace(/[\s_]/g, '')
+	if (!/^-?\d+(\.\d+)?$/.test(digits)) {
 		throw new Error(
 			'Digite só números, como 1700000000 (segundos) ou 1700000000000 (milissegundos).',
 		)
 	}
-	const value = Number(text)
-	const actual = unit === 'auto' ? detectTimestampUnit(value) : unit
-	const milliseconds = value / UNIT_DIVISOR[actual]
+	const value = Number(digits)
+	const resolvedUnit = unit === 'auto' ? detectTimestampUnit(value) : unit
+	const milliseconds = value / UNITS_PER_MILLISECOND[resolvedUnit]
 	const date = new Date(milliseconds)
-	if (Number.isNaN(date.getTime()))
+	if (Number.isNaN(date.getTime())) {
 		throw new Error('Esse timestamp está fora do intervalo de datas suportado.')
+	}
 	return {
 		date,
-		unit: actual,
+		unit: resolvedUnit,
 		seconds: Math.floor(milliseconds / 1000),
 		milliseconds: Math.round(milliseconds),
 	}
 }
 
 const pad = (value: number, size = 2) => String(Math.abs(value)).padStart(size, '0')
-const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const ENGLISH_WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+const ENGLISH_MONTHS = [
+	'Jan',
+	'Feb',
+	'Mar',
+	'Apr',
+	'May',
+	'Jun',
+	'Jul',
+	'Aug',
+	'Sep',
+	'Oct',
+	'Nov',
+	'Dec',
+]
 
-const offsetText = (minutes: number, colon: boolean) =>
-	`${minutes < 0 ? '-' : '+'}${pad(Math.trunc(minutes / 60))}${colon ? ':' : ''}${pad(minutes % 60)}`
+/** "+0300" or "-03:00". */
+function formatOffset(offsetMinutes: number, withColon: boolean): string {
+	const sign = offsetMinutes < 0 ? '-' : '+'
+	const hours = pad(Math.trunc(offsetMinutes / 60))
+	const minutes = pad(offsetMinutes % 60)
+	return `${sign}${hours}${withColon ? ':' : ''}${minutes}`
+}
 
 /** The wall-clock parts of `date` at a fixed UTC offset (in minutes). */
-function shifted(date: Date, offsetMinutes: number) {
-	const d = new Date(date.getTime() + offsetMinutes * 60_000)
+function wallClockAt(date: Date, offsetMinutes: number) {
+	const shifted = new Date(date.getTime() + offsetMinutes * 60_000)
 	return {
-		year: d.getUTCFullYear(),
-		month: d.getUTCMonth(),
-		day: d.getUTCDate(),
-		weekday: d.getUTCDay(),
-		hours: d.getUTCHours(),
-		minutes: d.getUTCMinutes(),
-		seconds: d.getUTCSeconds(),
-		ms: d.getUTCMilliseconds(),
+		year: shifted.getUTCFullYear(),
+		month: shifted.getUTCMonth(),
+		day: shifted.getUTCDate(),
+		weekday: shifted.getUTCDay(),
+		hours: shifted.getUTCHours(),
+		minutes: shifted.getUTCMinutes(),
+		seconds: shifted.getUTCSeconds(),
+		milliseconds: shifted.getUTCMilliseconds(),
 	}
 }
 
 /** RFC 2822 (e-mail, HTTP): "Sat, 07 Nov 2026 12:00:00 +0000". */
 export function formatRfc2822(date: Date, offsetMinutes = 0): string {
-	const p = shifted(date, offsetMinutes)
-	return `${DAYS[p.weekday]}, ${pad(p.day)} ${MONTHS[p.month]} ${p.year} ${pad(p.hours)}:${pad(p.minutes)}:${pad(p.seconds)} ${offsetText(offsetMinutes, false)}`
+	const clock = wallClockAt(date, offsetMinutes)
+	const day = `${ENGLISH_WEEKDAYS[clock.weekday]}, ${pad(clock.day)} ${ENGLISH_MONTHS[clock.month]} ${clock.year}`
+	const time = `${pad(clock.hours)}:${pad(clock.minutes)}:${pad(clock.seconds)}`
+	return `${day} ${time} ${formatOffset(offsetMinutes, false)}`
 }
 
 /** ISO 8601 with an explicit offset: "2026-11-07T09:00:00.000-03:00" (Z at offset 0). */
 export function formatIsoOffset(date: Date, offsetMinutes = 0): string {
 	if (offsetMinutes === 0) return date.toISOString()
-	const p = shifted(date, offsetMinutes)
-	return `${String(p.year).padStart(4, '0')}-${pad(p.month + 1)}-${pad(p.day)}T${pad(p.hours)}:${pad(p.minutes)}:${pad(p.seconds)}.${pad(p.ms, 3)}${offsetText(offsetMinutes, true)}`
+	const clock = wallClockAt(date, offsetMinutes)
+	const day = `${String(clock.year).padStart(4, '0')}-${pad(clock.month + 1)}-${pad(clock.day)}`
+	const time = `${pad(clock.hours)}:${pad(clock.minutes)}:${pad(clock.seconds)}.${pad(clock.milliseconds, 3)}`
+	return `${day}T${time}${formatOffset(offsetMinutes, true)}`
 }
 
 /** "2026-11-07" + "09:30" → epoch milliseconds, read as local time or UTC. */
@@ -350,19 +393,25 @@ export function dateTimeToEpoch(isoDate: string, time: string, zone: 'local' | '
 	if (!dateMatch) throw new Error('Escolha uma data válida (dd/mm/aaaa).')
 	const timeMatch = /^(\d{2}):(\d{2})(?::(\d{2}))?$/.exec(time || '00:00')
 	if (!timeMatch) throw new Error('Digite o horário como hh:mm.')
-	const [, y, mo, d] = dateMatch.map(Number) as [number, number, number, number]
-	const [, h, mi, s = 0] = timeMatch.map((part) => Number(part ?? 0)) as [
+	const [, year, month, day] = dateMatch.map(Number) as [number, number, number, number]
+	const [, hours, minutes, seconds = 0] = timeMatch.map((part) => Number(part ?? 0)) as [
 		number,
 		number,
 		number,
 		number,
 	]
-	if (h > 23 || mi > 59 || s > 59) throw new Error('Horário inválido: use de 00:00 a 23:59.')
+	if (hours > 23 || minutes > 59 || seconds > 59) {
+		throw new Error('Horário inválido: use de 00:00 a 23:59.')
+	}
+	const monthIndex = month - 1
 	const epoch =
-		zone === 'utc' ? Date.UTC(y, mo - 1, d, h, mi, s) : new Date(y, mo - 1, d, h, mi, s).getTime()
-	const check = new Date(epoch)
-	const day = zone === 'utc' ? check.getUTCDate() : check.getDate()
-	if (day !== d) throw new Error('Essa data não existe no calendário.')
+		zone === 'utc'
+			? Date.UTC(year, monthIndex, day, hours, minutes, seconds)
+			: new Date(year, monthIndex, day, hours, minutes, seconds).getTime()
+	// Date rolls 31/02 over to March, so a different day means the date does not exist.
+	const result = new Date(epoch)
+	const resultDay = zone === 'utc' ? result.getUTCDate() : result.getDate()
+	if (resultDay !== day) throw new Error('Essa data não existe no calendário.')
 	return epoch
 }
 
@@ -393,7 +442,9 @@ export const CRON_MACROS: Record<string, string> = {
 
 export type CronFieldKind = 'second' | 'minute' | 'hour' | 'dayOfMonth' | 'month' | 'dayOfWeek'
 
-const FIELD_INFO: Record<CronFieldKind, { name: string; range: string; unit: [string, string] }> = {
+type CronFieldInfo = { name: string; range: string; unit: [singular: string, plural: string] }
+
+const FIELD_INFO: Record<CronFieldKind, CronFieldInfo> = {
 	second: { name: 'Segundo', range: '0–59', unit: ['segundo', 'segundos'] },
 	minute: { name: 'Minuto', range: '0–59', unit: ['minuto', 'minutos'] },
 	hour: { name: 'Hora', range: '0–23', unit: ['hora', 'horas'] },
@@ -447,48 +498,56 @@ const MONTH_ALIASES = [
 const WEEKDAY_ALIASES = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
 
 /** One value of a field in words: 3 → "março" (month), 1 → "segunda" (weekday), 7 → "7". */
-function valueName(raw: string, kind: CronFieldKind): string {
-	const upper = raw.toUpperCase()
+function valueName(value: string, kind: CronFieldKind): string {
+	const uppercase = value.toUpperCase()
 	if (kind === 'month') {
-		const alias = MONTH_ALIASES.indexOf(upper)
-		const index = alias >= 0 ? alias : Number(raw) - 1
-		return MONTH_NAMES[index] ?? raw
+		const aliasIndex = MONTH_ALIASES.indexOf(uppercase)
+		const monthIndex = aliasIndex >= 0 ? aliasIndex : Number(value) - 1
+		return MONTH_NAMES[monthIndex] ?? value
 	}
 	if (kind === 'dayOfWeek') {
-		const alias = WEEKDAY_ALIASES.indexOf(upper)
-		const index = alias >= 0 ? alias : Number(raw)
-		return WEEKDAY_NAMES[index] ?? raw
+		const aliasIndex = WEEKDAY_ALIASES.indexOf(uppercase)
+		const weekdayIndex = aliasIndex >= 0 ? aliasIndex : Number(value)
+		return WEEKDAY_NAMES[weekdayIndex] ?? value
 	}
-	return raw
+	return value
+}
+
+/** "5/10" → "a cada 10 minutos, a partir de 5"; "1-5/2" also names the range. */
+function describeStep(base: string, interval: number, kind: CronFieldKind): string {
+	const [singular, plural] = FIELD_INFO[kind].unit
+	const every = `a cada ${interval} ${interval === 1 ? singular : plural}`
+	if (base === '*') return every
+	if (base.includes('-')) return `${every}, ${describeListItem(base, kind)}`
+	return `${every}, a partir de ${valueName(base, kind)}`
+}
+
+/** One comma-separated item of a field. */
+function describeListItem(item: string, kind: CronFieldKind): string {
+	if (item === '*' || item === '?') return `qualquer ${FIELD_INFO[kind].unit[0]}`
+	if (kind === 'dayOfMonth' && item.toUpperCase() === 'L') return 'último dia do mês'
+	if (kind === 'dayOfWeek' && /^\w+#\d$/.test(item)) {
+		const [weekday = '', occurrence = ''] = item.split('#')
+		return `${occurrence}ª ${valueName(weekday, kind)} do mês`
+	}
+	if (kind === 'dayOfWeek' && /^\w+L$/i.test(item)) {
+		return `última ${valueName(item.slice(0, -1), kind)} do mês`
+	}
+	const step = /^(.+)\/(\d+)$/.exec(item)
+	if (step) return describeStep(step[1] ?? '', Number(step[2]), kind)
+	const range = /^([^-]+)-([^-]+)$/.exec(item)
+	if (range) {
+		return `de ${valueName(range[1] as string, kind)} a ${valueName(range[2] as string, kind)}`
+	}
+	return valueName(item, kind)
 }
 
 /** One cron field in Portuguese: "*" → "qualquer minuto", "*\/15" → "a cada 15 minutos". */
 export function describeCronField(value: string, kind: CronFieldKind): string {
-	const { unit } = FIELD_INFO[kind]
-	const describePart = (part: string): string => {
-		if (part === '*' || part === '?') return `qualquer ${unit[0]}`
-		if (kind === 'dayOfMonth' && part.toUpperCase() === 'L') return 'último dia do mês'
-		if (kind === 'dayOfWeek' && /^\w+#\d$/.test(part)) {
-			const [day = '', nth = ''] = part.split('#')
-			return `${nth}ª ${valueName(day, kind)} do mês`
-		}
-		if (kind === 'dayOfWeek' && /^\w+L$/i.test(part))
-			return `última ${valueName(part.slice(0, -1), kind)} do mês`
-		const step = /^(.+)\/(\d+)$/.exec(part)
-		if (step) {
-			const [, base = '', every = ''] = step
-			const n = Number(every)
-			const each = `a cada ${n} ${n === 1 ? unit[0] : unit[1]}`
-			if (base === '*') return each
-			if (base.includes('-')) return `${each}, ${describePart(base)}`
-			return `${each}, a partir de ${valueName(base, kind)}`
-		}
-		const range = /^([^-]+)-([^-]+)$/.exec(part)
-		if (range)
-			return `de ${valueName(range[1] as string, kind)} a ${valueName(range[2] as string, kind)}`
-		return valueName(part, kind)
-	}
-	return value.split(',').map(describePart).join(', ')
+	return value
+		.split(',')
+		.map((item) => describeListItem(item, kind))
+		.join(', ')
 }
 
 export type CronField = {
@@ -501,8 +560,8 @@ export type CronField = {
 
 /** Splits a 5-field (or 6-field, with seconds first) expression and explains each field. */
 export function cronBreakdown(expression: string): CronField[] {
-	const text = expression.trim()
-	const expanded = CRON_MACROS[text.toLowerCase()] ?? text
+	const trimmed = expression.trim()
+	const expanded = CRON_MACROS[trimmed.toLowerCase()] ?? trimmed
 	const fields = expanded.split(/\s+/).filter(Boolean)
 	if (fields.length !== 5 && fields.length !== 6) {
 		throw new Error(
@@ -511,8 +570,8 @@ export function cronBreakdown(expression: string): CronField[] {
 	}
 	const kinds: CronFieldKind[] = ['minute', 'hour', 'dayOfMonth', 'month', 'dayOfWeek']
 	if (fields.length === 6) kinds.unshift('second')
-	return fields.map((value, i) => {
-		const kind = kinds[i] as CronFieldKind
+	return fields.map((value, position) => {
+		const kind = kinds[position] as CronFieldKind
 		const info = FIELD_INFO[kind]
 		return {
 			kind,
@@ -550,7 +609,8 @@ const DEFAULT_PORTS: Record<string, string> = {
 	'ftp:': '21',
 }
 
-const safeDecode = (text: string) => {
+/** decodeURIComponent that keeps malformed sequences (a lone %) as typed. */
+function safeDecode(text: string): string {
 	try {
 		return decodeURIComponent(text)
 	} catch {
@@ -566,8 +626,9 @@ export function parseUrl(input: string): UrlParts {
 	try {
 		url = new URL(text)
 	} catch {
+		const looksLikeDomain = /^[\w.-]+\.[a-z]{2,}/i.test(text)
 		throw new Error(
-			/^[\w.-]+\.[a-z]{2,}/i.test(text)
+			looksLikeDomain
 				? 'Inclua o protocolo no começo, por exemplo https://'
 				: 'Não parece uma URL válida. Ex.: https://exemplo.com/caminho?a=1#topo',
 		)
@@ -590,7 +651,9 @@ export function parseUrl(input: string): UrlParts {
 export function rebuildUrl(base: string, params: readonly UrlParam[]): string {
 	const url = new URL(base.trim())
 	const search = new URLSearchParams()
-	for (const { key, value } of params) if (key) search.append(key, value)
+	for (const { key, value } of params) {
+		if (key) search.append(key, value)
+	}
 	url.search = search.toString()
 	return url.toString()
 }

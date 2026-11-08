@@ -26,7 +26,7 @@ const LANGUAGES = [
 ] as const
 
 /** What each language does, shown under the select. */
-const HINTS: Record<EscapeLanguage, string> = {
+const LANGUAGE_HINTS: Record<EscapeLanguage, string> = {
 	js: 'Escapa \\ \' " e quebras de linha; controles viram \\xHH. Cole entre aspas simples ou duplas.',
 	json: 'Igual ao JSON.stringify: \\" \\\\ \\n e controles como \\u0001. Cole entre aspas duplas.',
 	java: 'Escapa \\ \' " \\n \\t; controles viram \\uXXXX. Vale para Java e C#.',
@@ -45,6 +45,17 @@ const schema = z.object({
 })
 
 type Result = { ok: true; value: string } | { ok: false; error: string }
+type Values = z.infer<typeof schema>
+
+function convert({ direction, language, input }: Values): Result {
+	try {
+		const value =
+			direction === 'escape' ? escapeString(input, language) : unescapeString(input, language)
+		return { ok: true, value }
+	} catch (error) {
+		return { ok: false, error: (error as Error).message }
+	}
+}
 
 /** Escapes and unescapes string literals for seven languages, live, both directions. */
 export default function StringEscape() {
@@ -52,20 +63,7 @@ export default function StringEscape() {
 	const form = useToolForm({
 		schema,
 		defaultValues: { direction: 'escape', language: 'js', input: '' },
-		onSubmit: ({ direction, language, input }) => {
-			if (!input) return setResult(null)
-			try {
-				setResult({
-					ok: true,
-					value:
-						direction === 'escape'
-							? escapeString(input, language)
-							: unescapeString(input, language),
-				})
-			} catch (error) {
-				setResult({ ok: false, error: (error as Error).message })
-			}
-		},
+		onSubmit: (values) => setResult(values.input ? convert(values) : null),
 	})
 	const switchMode = useModeMemory(form, 'input', 'escape', result, setResult)
 	const direction = useStore(form.store, (state) => state.values.direction)
@@ -74,10 +72,10 @@ export default function StringEscape() {
 
 	function swap() {
 		if (!result?.ok) return
-		const next = direction === 'escape' ? 'unescape' : 'escape'
+		const oppositeDirection = direction === 'escape' ? 'unescape' : 'escape'
 		const output = result.value
-		switchMode(next)
-		form.setFieldValue('direction', next)
+		switchMode(oppositeDirection)
+		form.setFieldValue('direction', oppositeDirection)
 		form.setFieldValue('input', output)
 		form.handleSubmit()
 	}
@@ -104,16 +102,20 @@ export default function StringEscape() {
 						},
 					}}
 				>
-					{(f) => <f.RadioField label="Operação" options={DIRECTIONS} />}
+					{(field) => <field.RadioField label="Operação" options={DIRECTIONS} />}
 				</form.AppField>
 				<form.AppField name="language" listeners={recompute}>
-					{(f) => (
-						<f.SelectField label="Linguagem" options={LANGUAGES} description={HINTS[language]} />
+					{(field) => (
+						<field.SelectField
+							label="Linguagem"
+							options={LANGUAGES}
+							description={LANGUAGE_HINTS[language]}
+						/>
 					)}
 				</form.AppField>
 				<form.AppField name="input" listeners={recompute}>
-					{(f) => (
-						<f.TextareaField
+					{(field) => (
+						<field.TextareaField
 							label={direction === 'escape' ? 'Texto original' : 'Texto escapado'}
 							rows={8}
 							placeholder={
@@ -134,16 +136,17 @@ export default function StringEscape() {
 					form.setFieldValue('input', '')
 				}}
 			>
-				{result?.ok ? (
+				{result?.ok === true && (
 					<OutputBlock className="max-h-[36rem]">
 						<span translate="no">{result.value}</span>
 					</OutputBlock>
-				) : result ? (
+				)}
+				{result?.ok === false && (
 					<Alert tone="danger">
 						<CircleX />
 						{result.error}
 					</Alert>
-				) : null}
+				)}
 			</ResultCard>
 		</ToolLayout>
 	)

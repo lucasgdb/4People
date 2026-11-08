@@ -1,4 +1,5 @@
-const CONTROL = [
+/** Abbreviation and Portuguese name of the control characters 0–31, as "ABBR Name". */
+const CONTROL_CHARACTERS = [
 	'NUL Nulo',
 	'SOH Início de cabeçalho',
 	'STX Início de texto',
@@ -33,6 +34,10 @@ const CONTROL = [
 	'US Separador de unidade',
 ]
 
+const DELETE_CODE = 127
+const SPACE_CODE = 32
+const NO_BREAK_SPACE_CODE = 160
+
 export type AsciiRow = {
 	code: number
 	hex: string
@@ -43,27 +48,39 @@ export type AsciiRow = {
 	description: string
 }
 
+const isC0Control = (code: number) => code < 32 || code === DELETE_CODE
+const isC1Control = (code: number) => code >= 128 && code < 160
+
+/** Abbreviation and name of a C0 control character or DEL. */
+function controlCharacter(code: number) {
+	if (code === DELETE_CODE) return { abbreviation: 'DEL', name: 'Apagar' }
+	const [abbreviation = '', ...nameWords] = (CONTROL_CHARACTERS[code] ?? '').split(' ')
+	return { abbreviation, name: nameWords.join(' ') }
+}
+
+/** What the table shows in the "character" column: the abbreviation for controls, ␠ for space. */
+function displayChar(code: number): string {
+	if (isC0Control(code)) return controlCharacter(code).abbreviation
+	if (isC1Control(code)) return ''
+	if (code === SPACE_CODE) return '␠'
+	return String.fromCharCode(code)
+}
+
+function describe(code: number): string {
+	if (isC0Control(code)) return controlCharacter(code).name
+	if (code === SPACE_CODE) return 'Espaço'
+	if (code === NO_BREAK_SPACE_CODE) return 'Espaço sem quebra'
+	if (isC1Control(code)) return 'Controle C1'
+	return ''
+}
+
 /** 0–255: ASCII (0–127) and the Latin-1 extension (128–255) that Windows and the web use for Portuguese. */
-export const ASCII_TABLE: AsciiRow[] = Array.from({ length: 256 }, (_, code) => {
-	const control = code < 32 || code === 127 || (code >= 128 && code < 160)
-	const [abbr, ...name] =
-		code < 32 ? (CONTROL[code] ?? '').split(' ') : code === 127 ? ['DEL', 'Apagar'] : []
-	return {
-		code,
-		hex: code.toString(16).toUpperCase().padStart(2, '0'),
-		octal: code.toString(8).padStart(3, '0'),
-		binary: code.toString(2).padStart(8, '0'),
-		char: control ? (abbr ?? '') : code === 32 ? '␠' : String.fromCharCode(code),
-		html: `&#${code};`,
-		description:
-			code < 32 || code === 127
-				? name.join(' ')
-				: code === 32
-					? 'Espaço'
-					: code === 160
-						? 'Espaço sem quebra'
-						: code >= 128 && code < 160
-							? 'Controle C1'
-							: '',
-	}
-})
+export const ASCII_TABLE: AsciiRow[] = Array.from({ length: 256 }, (_, code) => ({
+	code,
+	hex: code.toString(16).toUpperCase().padStart(2, '0'),
+	octal: code.toString(8).padStart(3, '0'),
+	binary: code.toString(2).padStart(8, '0'),
+	char: displayChar(code),
+	html: `&#${code};`,
+	description: describe(code),
+}))

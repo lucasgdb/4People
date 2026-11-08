@@ -12,24 +12,29 @@ import {
 	TableRow,
 } from '@4people/ui'
 import { useDeferredValue, useMemo, useState } from 'react'
-import { ASCII_TABLE } from '@/lib/algorithms/ascii'
+import { ASCII_TABLE, type AsciiRow } from '@/lib/algorithms/ascii'
+
+const COLUMNS = ['Dec', 'Hex', 'Oct', 'Binário', 'Caractere', 'HTML', 'Descrição']
+/** Dec, Hex, Oct and Binário are right-aligned. */
+const NUMERIC_COLUMN_COUNT = 4
+
+/** Exact code (decimal or hex, with or without 0x) or character, or part of the description. */
+function matchesFilter(row: AsciiRow, filter: string): boolean {
+	return (
+		String(row.code) === filter ||
+		row.hex.toLowerCase() === filter.replace(/^0x/, '') ||
+		row.char.toLowerCase() === filter ||
+		row.description.toLowerCase().includes(filter)
+	)
+}
 
 /** ASCII 0–127 and Latin-1 128–255 in decimal, hex, octal, binary and HTML, with a filter. */
 export default function AsciiTable() {
 	const [query, setQuery] = useState('')
-	const deferred = useDeferredValue(query.trim().toLowerCase())
+	const filter = useDeferredValue(query.trim().toLowerCase())
 	const rows = useMemo(
-		() =>
-			deferred
-				? ASCII_TABLE.filter(
-						(row) =>
-							String(row.code) === deferred ||
-							row.hex.toLowerCase() === deferred.replace(/^0x/, '') ||
-							row.char.toLowerCase() === deferred ||
-							row.description.toLowerCase().includes(deferred),
-					)
-				: ASCII_TABLE,
-		[deferred],
+		() => (filter ? ASCII_TABLE.filter((row) => matchesFilter(row, filter)) : ASCII_TABLE),
+		[filter],
 	)
 	return (
 		<TableCard
@@ -57,9 +62,9 @@ export default function AsciiTable() {
 			<Table>
 				<TableHeader>
 					<tr>
-						{['Dec', 'Hex', 'Oct', 'Binário', 'Caractere', 'HTML', 'Descrição'].map((h, i) => (
-							<TableHead key={h} numeric={i < 4}>
-								{h}
+						{COLUMNS.map((column, columnIndex) => (
+							<TableHead key={column} numeric={columnIndex < NUMERIC_COLUMN_COUNT}>
+								{column}
 							</TableHead>
 						))}
 					</tr>
@@ -86,7 +91,7 @@ export default function AsciiTable() {
 						</TableRow>
 					))}
 					{rows.length === 0 ? (
-						<TableEmpty colSpan={7}>Nada encontrado para “{query}”.</TableEmpty>
+						<TableEmpty colSpan={COLUMNS.length}>Nada encontrado para “{query}”.</TableEmpty>
 					) : null}
 				</TableBody>
 			</Table>

@@ -30,10 +30,19 @@ const DIRECTIONS = [
 ] as const
 type Direction = (typeof DIRECTIONS)[number]['value']
 
-const pad = (n: number) => String(n).padStart(2, '0')
+type Zone = 'local' | 'utc'
+type CopyRow = { label: string; value: string }
+type Conversion<Extra = object> =
+	| ({ ok: true; rows: CopyRow[] } & Extra)
+	| { ok: false; error: string }
+
+const padTwoDigits = (value: number) => String(value).padStart(2, '0')
 /** "2026-11-18" and "10:00" for the date and time fields, in local time. */
-const localDate = (d: Date) => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`
-const localTime = (d: Date) => `${pad(d.getHours())}:${pad(d.getMinutes())}`
+const localDateField = (date: Date) =>
+	`${date.getFullYear()}-${padTwoDigits(date.getMonth() + 1)}-${padTwoDigits(date.getDate())}`
+const localTimeField = (date: Date) =>
+	`${padTwoDigits(date.getHours())}:${padTwoDigits(date.getMinutes())}`
+const unixSeconds = (date: Date) => String(Math.floor(date.getTime() / 1000))
 
 const ZONES = [
 	{ value: 'local', label: 'Meu fuso horário' },
@@ -46,6 +55,49 @@ const utcFormat = new Intl.DateTimeFormat('pt-BR', {
 	timeZone: 'UTC',
 })
 const localFormat = new Intl.DateTimeFormat('pt-BR', { dateStyle: 'full', timeStyle: 'long' })
+
+function convertTimestamp(
+	timestamp: string,
+	unit: TimestampUnit | 'auto',
+	now: Date,
+): Conversion<{ unit: TimestampUnit }> {
+	try {
+		const parsed = parseTimestamp(timestamp, unit)
+		const localOffsetMinutes = -parsed.date.getTimezoneOffset()
+		return {
+			ok: true,
+			unit: parsed.unit,
+			rows: [
+				{ label: 'UTC', value: utcFormat.format(parsed.date) },
+				{ label: 'Seu horário local', value: localFormat.format(parsed.date) },
+				{ label: 'ISO 8601 (UTC)', value: parsed.date.toISOString() },
+				{ label: 'ISO 8601 (local)', value: formatIsoOffset(parsed.date, localOffsetMinutes) },
+				{ label: 'RFC 2822', value: formatRfc2822(parsed.date) },
+				{ label: 'Relativo', value: relativeTime(parsed.date, now) },
+				{ label: 'Em segundos', value: String(parsed.seconds) },
+				{ label: 'Em milissegundos', value: String(parsed.milliseconds) },
+			],
+		}
+	} catch (error) {
+		return { ok: false, error: (error as Error).message }
+	}
+}
+
+function convertDate(date: string, time: string, zone: Zone): Conversion {
+	try {
+		const epochMilliseconds = dateTimeToEpoch(date, time, zone)
+		return {
+			ok: true,
+			rows: [
+				{ label: 'Timestamp em segundos', value: String(Math.floor(epochMilliseconds / 1000)) },
+				{ label: 'Timestamp em milissegundos', value: String(epochMilliseconds) },
+				{ label: 'ISO 8601 (UTC)', value: new Date(epochMilliseconds).toISOString() },
+			],
+		}
+	} catch (error) {
+		return { ok: false, error: (error as Error).message }
+	}
+}
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
 	return (
@@ -65,64 +117,39 @@ export default function TimestampConverter() {
 			unit: 'auto' as TimestampUnit | 'auto',
 			date: '',
 			time: '',
-			zone: 'local' as 'local' | 'utc',
+			zone: 'local' as Zone,
 		},
 	})
 	const values = useDeferredValue(useStore(form.store, (state) => state.values))
 	const [now, setNow] = useState<Date | null>(null)
 
 	// The clock is read only on the client: prefill "now" once after mount, never on the server.
-	const filled = useRef(false)
+	const prefilled = useRef(false)
 	useEffect(() => {
-		if (filled.current) return
-		filled.current = true
+		if (prefilled.current) return
+		prefilled.current = true
 		const current = new Date()
 		setNow(current)
-		form.setFieldValue('timestamp', String(Math.floor(current.getTime() / 1000)))
-		form.setFieldValue('date', localDate(current))
-		form.setFieldValue('time', localTime(current))
+		form.setFieldValue('timestamp', unixSeconds(current))
+		form.setFieldValue('date', localDateField(current))
+		form.setFieldValue('time', localTimeField(current))
 	}, [form])
 	const direction = values.direction
 
+	function fillTimestampWithNow() {
+		const current = new Date()
+		setNow(current)
+		form.setFieldValue('timestamp', unixSeconds(current))
+	}
+
 	const fromTimestamp = useMemo(() => {
 		if (!values.timestamp.trim() || !now) return null
-		try {
-			const parsed = parseTimestamp(values.timestamp, values.unit)
-			const offset = -parsed.date.getTimezoneOffset()
-			return {
-				ok: true as const,
-				unit: parsed.unit,
-				rows: [
-					{ label: 'UTC', value: utcFormat.format(parsed.date) },
-					{ label: 'Seu horário local', value: localFormat.format(parsed.date) },
-					{ label: 'ISO 8601 (UTC)', value: parsed.date.toISOString() },
-					{ label: 'ISO 8601 (local)', value: formatIsoOffset(parsed.date, offset) },
-					{ label: 'RFC 2822', value: formatRfc2822(parsed.date) },
-					{ label: 'Relativo', value: relativeTime(parsed.date, now) },
-					{ label: 'Em segundos', value: String(parsed.seconds) },
-					{ label: 'Em milissegundos', value: String(parsed.milliseconds) },
-				],
-			}
-		} catch (error) {
-			return { ok: false as const, error: (error as Error).message }
-		}
+		return convertTimestamp(values.timestamp, values.unit, now)
 	}, [values.timestamp, values.unit, now])
 
 	const fromDate = useMemo(() => {
 		if (!values.date) return null
-		try {
-			const epoch = dateTimeToEpoch(values.date, values.time, values.zone)
-			return {
-				ok: true as const,
-				rows: [
-					{ label: 'Timestamp em segundos', value: String(Math.floor(epoch / 1000)) },
-					{ label: 'Timestamp em milissegundos', value: String(epoch) },
-					{ label: 'ISO 8601 (UTC)', value: new Date(epoch).toISOString() },
-				],
-			}
-		} catch (error) {
-			return { ok: false as const, error: (error as Error).message }
-		}
+		return convertDate(values.date, values.time, values.zone)
 	}, [values.date, values.time, values.zone])
 
 	const timeZone = now ? Intl.DateTimeFormat().resolvedOptions().timeZone : ''
@@ -135,14 +162,14 @@ export default function TimestampConverter() {
 				actions={<p className="text-fg-muted text-[0.8125rem]">Atualiza enquanto você digita.</p>}
 			>
 				<form.AppField name="direction">
-					{(f) => <f.RadioField label="Direção" options={DIRECTIONS} />}
+					{(field) => <field.RadioField label="Direção" options={DIRECTIONS} />}
 				</form.AppField>
 				{direction === 'toDate' ? (
 					<div className="flex flex-col gap-4">
 						<div className="flex items-end gap-3">
 							<form.AppField name="timestamp">
-								{(f) => (
-									<f.TextField
+								{(field) => (
+									<field.TextField
 										label="Timestamp Unix"
 										placeholder="Ex.: 1700000000"
 										inputMode="numeric"
@@ -151,20 +178,13 @@ export default function TimestampConverter() {
 									/>
 								)}
 							</form.AppField>
-							<Button
-								variant="secondary"
-								onClick={() => {
-									const current = new Date()
-									setNow(current)
-									form.setFieldValue('timestamp', String(Math.floor(current.getTime() / 1000)))
-								}}
-							>
+							<Button variant="secondary" onClick={fillTimestampWithNow}>
 								<Clock /> Agora
 							</Button>
 						</div>
 						<form.AppField name="unit">
-							{(f) => (
-								<f.RadioField
+							{(field) => (
+								<field.RadioField
 									label="Unidade"
 									options={UNITS}
 									description="Detectar: até 11 dígitos são segundos; 13 dígitos, milissegundos."
@@ -175,11 +195,15 @@ export default function TimestampConverter() {
 				) : (
 					<div className="flex flex-col gap-4">
 						<div className="grid grid-cols-[minmax(0,1fr)_7.5rem] items-start gap-3 sm:grid-cols-[1fr_9rem]">
-							<form.AppField name="date">{(f) => <f.DateField label="Data" />}</form.AppField>
-							<form.AppField name="time">{(f) => <f.TimeField label="Horário" />}</form.AppField>
+							<form.AppField name="date">
+								{(field) => <field.DateField label="Data" />}
+							</form.AppField>
+							<form.AppField name="time">
+								{(field) => <field.TimeField label="Horário" />}
+							</form.AppField>
 						</div>
 						<form.AppField name="zone">
-							{(f) => <f.RadioField label="A data está em" options={ZONES} />}
+							{(field) => <field.RadioField label="A data está em" options={ZONES} />}
 						</form.AppField>
 					</div>
 				)}
@@ -221,16 +245,15 @@ export default function TimestampConverter() {
 						)}
 					</Section>
 				) : null}
-				{direction === 'toTimestamp' && fromDate ? (
-					fromDate.ok ? (
-						<CopyRows rows={fromDate.rows} code />
-					) : (
-						<Alert tone="danger">
-							<CircleX />
-							{fromDate.error}
-						</Alert>
-					)
-				) : null}
+				{direction === 'toTimestamp' && fromDate?.ok === true && (
+					<CopyRows rows={fromDate.rows} code />
+				)}
+				{direction === 'toTimestamp' && fromDate?.ok === false && (
+					<Alert tone="danger">
+						<CircleX />
+						{fromDate.error}
+					</Alert>
+				)}
 			</ResultCard>
 		</ToolLayout>
 	)

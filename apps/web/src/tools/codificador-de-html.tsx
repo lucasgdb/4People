@@ -34,6 +34,16 @@ const schema = z.object({
 })
 
 type Result = { ok: true; value: string }
+type Values = z.infer<typeof schema>
+
+function convert({ direction, input, format, scope }: Values): Result | null {
+	if (!input) return null
+	const value =
+		direction === 'encode'
+			? encodeHtmlEntities(input, { format, scope })
+			: decodeHtmlEntities(input)
+	return { ok: true, value }
+}
 
 /**
  * HTML entities both ways, live: named, decimal or hex, for the five special characters only or for
@@ -44,18 +54,7 @@ export default function HtmlEntityEncoder() {
 	const form = useToolForm({
 		schema,
 		defaultValues: { direction: 'encode', input: '', format: 'named', scope: 'special' },
-		onSubmit: ({ direction, input, format, scope }) =>
-			setResult(
-				input
-					? {
-							ok: true,
-							value:
-								direction === 'encode'
-									? encodeHtmlEntities(input, { format, scope })
-									: decodeHtmlEntities(input),
-						}
-					: null,
-			),
+		onSubmit: (values) => setResult(convert(values)),
 	})
 	const switchMode = useModeMemory(form, 'input', 'encode', result, setResult)
 	const direction = useStore(form.store, (state) => state.values.direction)
@@ -63,10 +62,10 @@ export default function HtmlEntityEncoder() {
 
 	function swap() {
 		if (!result) return
-		const next = direction === 'encode' ? 'decode' : 'encode'
+		const oppositeDirection = direction === 'encode' ? 'decode' : 'encode'
 		const output = result.value
-		switchMode(next)
-		form.setFieldValue('direction', next)
+		switchMode(oppositeDirection)
+		form.setFieldValue('direction', oppositeDirection)
 		form.setFieldValue('input', output)
 		form.handleSubmit()
 	}
@@ -93,11 +92,11 @@ export default function HtmlEntityEncoder() {
 						},
 					}}
 				>
-					{(f) => <f.RadioField label="Operação" options={DIRECTIONS} />}
+					{(field) => <field.RadioField label="Operação" options={DIRECTIONS} />}
 				</form.AppField>
 				<form.AppField name="input" listeners={recompute}>
-					{(f) => (
-						<f.TextareaField
+					{(field) => (
+						<field.TextareaField
 							label={direction === 'encode' ? 'Texto ou HTML' : 'Texto com entidades'}
 							rows={8}
 							placeholder={
@@ -111,11 +110,11 @@ export default function HtmlEntityEncoder() {
 				{direction === 'encode' ? (
 					<>
 						<form.AppField name="scope" listeners={recompute}>
-							{(f) => <f.RadioField label="O que codificar" options={SCOPES} />}
+							{(field) => <field.RadioField label="O que codificar" options={SCOPES} />}
 						</form.AppField>
 						<form.AppField name="format" listeners={recompute}>
-							{(f) => (
-								<f.RadioField
+							{(field) => (
+								<field.RadioField
 									label="Formato das entidades"
 									description="Caracteres sem nome conhecido usam a forma decimal."
 									options={FORMATS}

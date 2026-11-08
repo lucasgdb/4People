@@ -46,9 +46,69 @@ const EXAMPLES = [
 	{ path: '$..livros.length', label: 'Quantidade de livros' },
 ] as const
 
-type Outcome =
-	| { ok: true; items: { path: string; value: unknown }[] }
-	| { ok: false; error: string; tone: 'danger' | 'info' }
+type Match = { path: string; value: unknown }
+
+type Outcome = { ok: true; items: Match[] } | { ok: false; error: string; tone: 'danger' | 'info' }
+
+/** Loads jsonpath-plus on demand and runs `path` over the parsed document. */
+async function evaluateJsonPath(json: unknown, path: string): Promise<Outcome> {
+	try {
+		const { JSONPath } = await import('jsonpath-plus')
+		const matches = JSONPath({
+			path,
+			json: json as object,
+			resultType: 'all',
+			eval: 'safe',
+			wrap: true,
+		}) as Match[]
+		return { ok: true, items: matches.map(({ path, value }) => ({ path, value })) }
+	} catch (error) {
+		return {
+			ok: false,
+			tone: 'danger',
+			error: `Expressão inválida: ${(error as Error).message}. Comece com $ e confira colchetes e filtros ?().`,
+		}
+	}
+}
+
+function MatchList({ items }: { items: Match[] }) {
+	if (items.length === 0) {
+		return (
+			<Alert tone="info">
+				<CircleAlert />
+				Nenhum resultado. Confira os nomes das chaves (diferenciam maiúsculas) e os índices.
+			</Alert>
+		)
+	}
+	return (
+		<>
+			<p className="text-fg tabular font-semibold">
+				{formatNumber(items.length)} {items.length === 1 ? 'resultado' : 'resultados'}
+			</p>
+			<ol className="flex flex-col gap-3">
+				{items.map((item) => {
+					const valueJson = JSON.stringify(item.value, null, 2) ?? 'undefined'
+					return (
+						<li key={item.path} className="flex flex-col gap-1.5">
+							<div className="flex items-center justify-between gap-2">
+								<code
+									translate="no"
+									className="text-fg-muted min-w-0 font-mono text-[0.8125rem] break-all"
+								>
+									{item.path}
+								</code>
+								<CopyButton value={valueJson} aria-label={`Copiar valor de ${item.path}`} />
+							</div>
+							<OutputBlock className="max-h-60">
+								<span translate="no">{valueJson}</span>
+							</OutputBlock>
+						</li>
+					)
+				})}
+			</ol>
+		</>
+	)
+}
 
 /** Runs a JSONPath expression over a JSON document and lists each match with its path. */
 export default function JsonPathEvaluator() {
@@ -56,7 +116,6 @@ export default function JsonPathEvaluator() {
 	const values = useDeferredValue(useStore(form.store, (state) => state.values))
 	const [outcome, setOutcome] = useState<Outcome | null>(null)
 
-	// jsonpath-plus is loaded on demand, so evaluation is async and happens only in the browser.
 	useEffect(() => {
 		let cancelled = false
 		const path = values.path.trim()
@@ -69,35 +128,15 @@ export default function JsonPathEvaluator() {
 			setOutcome({ ok: false, error: parsed.error, tone: 'danger' })
 			return
 		}
-		import('jsonpath-plus')
-			.then(({ JSONPath }) => {
-				const found = JSONPath({
-					path,
-					json: parsed.value as object,
-					resultType: 'all',
-					eval: 'safe',
-					wrap: true,
-				}) as {
-					path: string
-					value: unknown
-				}[]
-				if (!cancelled)
-					setOutcome({ ok: true, items: found.map(({ path, value }) => ({ path, value })) })
-			})
-			.catch((error: Error) => {
-				if (!cancelled)
-					setOutcome({
-						ok: false,
-						tone: 'danger',
-						error: `Expressão inválida: ${error.message}. Comece com $ e confira colchetes e filtros ?().`,
-					})
-			})
+		evaluateJsonPath(parsed.value, path).then((result) => {
+			if (!cancelled) setOutcome(result)
+		})
 		return () => {
 			cancelled = true
 		}
 	}, [values])
 
-	const allValues = outcome?.ok
+	const allValuesJson = outcome?.ok
 		? JSON.stringify(
 				outcome.items.map((item) => item.value),
 				null,
@@ -113,8 +152,8 @@ export default function JsonPathEvaluator() {
 				actions={<p className="text-fg-muted text-[0.8125rem]">Atualiza enquanto você digita.</p>}
 			>
 				<form.AppField name="path">
-					{(f) => (
-						<f.TextField
+					{(field) => (
+						<field.TextField
 							label="Expressão JSONPath"
 							placeholder="Ex.: $.loja.livros[*].titulo"
 							inputClassName="font-mono"
@@ -142,8 +181,8 @@ export default function JsonPathEvaluator() {
 					</ul>
 				</div>
 				<form.AppField name="json">
-					{(f) => (
-						<f.TextareaField
+					{(field) => (
+						<field.TextareaField
 							label="JSON"
 							rows={14}
 							placeholder='Ex.: { "loja": { "livros": [] } }'
@@ -155,50 +194,16 @@ export default function JsonPathEvaluator() {
 				title="Resultados"
 				empty={!outcome}
 				emptyText="Cole um JSON e escreva uma expressão para ver os resultados."
-				copyText={allValues}
+				copyText={allValuesJson}
 				onClear={() => form.reset({ json: '', path: '' })}
 			>
-				{outcome?.ok ? (
-					outcome.items.length === 0 ? (
-						<Alert tone="info">
-							<CircleAlert />
-							Nenhum resultado. Confira os nomes das chaves (diferenciam maiúsculas) e os índices.
-						</Alert>
-					) : (
-						<>
-							<p className="text-fg tabular font-semibold">
-								{formatNumber(outcome.items.length)}{' '}
-								{outcome.items.length === 1 ? 'resultado' : 'resultados'}
-							</p>
-							<ol className="flex flex-col gap-3">
-								{outcome.items.map((item) => {
-									const text = JSON.stringify(item.value, null, 2) ?? 'undefined'
-									return (
-										<li key={item.path} className="flex flex-col gap-1.5">
-											<div className="flex items-center justify-between gap-2">
-												<code
-													translate="no"
-													className="text-fg-muted min-w-0 font-mono text-[0.8125rem] break-all"
-												>
-													{item.path}
-												</code>
-												<CopyButton value={text} aria-label={`Copiar valor de ${item.path}`} />
-											</div>
-											<OutputBlock className="max-h-60">
-												<span translate="no">{text}</span>
-											</OutputBlock>
-										</li>
-									)
-								})}
-							</ol>
-						</>
-					)
-				) : outcome ? (
+				{outcome?.ok === true && <MatchList items={outcome.items} />}
+				{outcome?.ok === false && (
 					<Alert tone={outcome.tone}>
 						<CircleX />
 						{outcome.error}
 					</Alert>
-				) : null}
+				)}
 			</ResultCard>
 		</ToolLayout>
 	)

@@ -6,10 +6,14 @@ import { CircleAlert, CircleCheck, CircleX, ShieldQuestion } from 'lucide-react'
 import { useDeferredValue, useEffect, useMemo, useState } from 'react'
 import { useAppForm } from '@/components/form/form'
 import {
+	type AlgorithmFamily,
 	algorithmFamily,
+	type ClaimInfo,
 	decodeJwtParts,
 	describeClaims,
 	isJwtAlgorithm,
+	type JwtParts,
+	type TokenTimeStatus,
 	tokenTimeStatus,
 	verifyJwt,
 } from '@/lib/algorithms/jwt'
@@ -22,7 +26,7 @@ const EXAMPLE = {
 	secret: 'your-256-bit-secret',
 }
 
-const dateTime = new Intl.DateTimeFormat('pt-BR', { dateStyle: 'long', timeStyle: 'medium' })
+const dateTimeFormat = new Intl.DateTimeFormat('pt-BR', { dateStyle: 'long', timeStyle: 'medium' })
 
 /** Header, payload and signature in three ink colours, each also named in the legend. */
 const PART_STYLES = [
@@ -46,11 +50,11 @@ function ColoredToken({ parts }: { parts: readonly string[] }) {
 			</ul>
 			<OutputBlock className="break-all">
 				<span translate="no">
-					{parts.map((part, i) => (
+					{parts.map((part, partIndex) => (
 						// biome-ignore lint/suspicious/noArrayIndexKey: the three fixed parts of a token
-						<span key={i}>
-							{i > 0 ? <span className="text-fg">.</span> : null}
-							<span className={PART_STYLES[i]?.className}>{part}</span>
+						<span key={partIndex}>
+							{partIndex > 0 ? <span className="text-fg">.</span> : null}
+							<span className={PART_STYLES[partIndex]?.className}>{part}</span>
 						</span>
 					))}
 				</span>
@@ -65,24 +69,129 @@ type Verification =
 	| { status: 'valid' | 'invalid' }
 	| { status: 'error'; message: string }
 
+type Decoded =
+	| ({ ok: true; claims: ClaimInfo[]; time: TokenTimeStatus } & JwtParts)
+	| { ok: false; error: string }
+
+function decodeToken(token: string): Decoded {
+	try {
+		const parts = decodeJwtParts(token)
+		// Only runs on the client, after the user typed: no server/client clock mismatch.
+		const now = new Date()
+		return {
+			ok: true,
+			...parts,
+			claims: describeClaims(parts.payload, now),
+			time: tokenTimeStatus(parts.payload, now),
+		}
+	} catch (error) {
+		return { ok: false, error: (error as Error).message }
+	}
+}
+
+/** Why the signature can't be checked yet, or null when it can. */
+function unverifiableReason(alg: unknown, family: AlgorithmFamily | null, key: string) {
+	if (!family) {
+		return alg === 'none'
+			? 'O token usa "alg": "none": não há assinatura para verificar.'
+			: `Algoritmo não suportado: ${String(alg)}.`
+	}
+	if (!key.trim()) {
+		return family === 'HS'
+			? 'Informe o segredo para verificar a assinatura.'
+			: 'Informe a chave pública para verificar a assinatura.'
+	}
+	return null
+}
+
+const TIME_BADGES: Record<
+	TokenTimeStatus['state'],
+	{ tone: 'danger' | 'success' | 'neutral'; label: string }
+> = {
+	expired: { tone: 'danger', label: 'Expirado' },
+	'not-yet': { tone: 'danger', label: 'Ainda não válido' },
+	valid: { tone: 'success', label: 'Válido (dentro do prazo)' },
+	'no-time': { tone: 'neutral', label: 'Sem data de expiração' },
+}
+
+function TimeBadge({ state }: { state: TokenTimeStatus['state'] }) {
+	const { tone, label } = TIME_BADGES[state]
+	return <Badge tone={tone}>{label}</Badge>
+}
+
 function SignatureBadge({ verification }: { verification: Verification }) {
-	if (verification.status === 'valid')
+	if (verification.status === 'valid') {
 		return (
 			<Badge tone="success">
 				<CircleCheck aria-hidden="true" /> Assinatura válida
 			</Badge>
 		)
-	if (verification.status === 'invalid')
+	}
+	if (verification.status === 'invalid') {
 		return (
 			<Badge tone="danger">
 				<CircleX aria-hidden="true" /> Assinatura inválida
 			</Badge>
 		)
+	}
 	return (
 		<Badge tone="neutral">
 			<ShieldQuestion aria-hidden="true" />
 			{verification.status === 'checking' ? 'Verificando…' : 'Assinatura não verificada'}
 		</Badge>
+	)
+}
+
+function VerificationAlert({ verification }: { verification: Verification }) {
+	if (verification.status === 'error') {
+		return (
+			<Alert tone="danger">
+				<CircleX />
+				{verification.message}
+			</Alert>
+		)
+	}
+	if (verification.status === 'invalid') {
+		return (
+			<Alert tone="danger">
+				<CircleX />A assinatura não confere: o token foi alterado ou a chave/segredo não é o usado
+				para assinar.
+			</Alert>
+		)
+	}
+	if (verification.status === 'idle' && verification.reason) {
+		return (
+			<Alert tone="info">
+				<CircleAlert />
+				{verification.reason}
+			</Alert>
+		)
+	}
+	return null
+}
+
+/** exp, nbf and iat show the date first and the raw number below. */
+function ClaimList({ claims }: { claims: ClaimInfo[] }) {
+	return (
+		<ul className="border-border rounded-panel divide-border divide-y border">
+			{claims.map((claim) => (
+				<li key={claim.claim} className="flex flex-col gap-1 px-4 py-3">
+					<span className="flex flex-wrap items-baseline gap-2">
+						<span className="text-fg font-semibold">{claim.name}</span>
+						<code translate="no" className="text-fg-muted font-mono text-[0.8125rem]">
+							{claim.claim}
+						</code>
+					</span>
+					<span className="text-fg break-all" translate={claim.date ? undefined : 'no'}>
+						{claim.date ? `${dateTimeFormat.format(claim.date)} (${claim.relative})` : claim.value}
+					</span>
+					{claim.date ? (
+						<span className="text-fg-muted tabular font-mono text-[0.8125rem]">{claim.value}</span>
+					) : null}
+					<span className="text-fg-muted text-[0.8125rem]">{claim.description}</span>
+				</li>
+			))}
+		</ul>
 	)
 }
 
@@ -94,22 +203,7 @@ export default function JwtDecoder() {
 	const values = useStore(form.store, (state) => state.values)
 	const token = useDeferredValue(values.token.trim())
 
-	const decoded = useMemo(() => {
-		if (!token) return null
-		try {
-			const parts = decodeJwtParts(token)
-			// Only computed on the client, after the user typed: no server/client clock mismatch.
-			const now = new Date()
-			return {
-				ok: true as const,
-				...parts,
-				claims: describeClaims(parts.payload, now),
-				time: tokenTimeStatus(parts.payload, now),
-			}
-		} catch (error) {
-			return { ok: false as const, error: (error as Error).message }
-		}
-	}, [token])
+	const decoded = useMemo(() => (token ? decodeToken(token) : null), [token])
 
 	const alg = decoded?.ok ? decoded.header.alg : undefined
 	const family = isJwtAlgorithm(alg) ? algorithmFamily(alg) : null
@@ -119,24 +213,9 @@ export default function JwtDecoder() {
 	const [verification, setVerification] = useState<Verification>({ status: 'idle', reason: '' })
 	useEffect(() => {
 		if (!decoded?.ok) return
-		if (!family) {
-			setVerification({
-				status: 'idle',
-				reason:
-					alg === 'none'
-						? 'O token usa "alg": "none": não há assinatura para verificar.'
-						: `Algoritmo não suportado: ${String(alg)}.`,
-			})
-			return
-		}
-		if (!key.trim()) {
-			setVerification({
-				status: 'idle',
-				reason:
-					family === 'HS'
-						? 'Informe o segredo para verificar a assinatura.'
-						: 'Informe a chave pública para verificar a assinatura.',
-			})
+		const reason = unverifiableReason(alg, family, key)
+		if (reason) {
+			setVerification({ status: 'idle', reason })
 			return
 		}
 		let cancelled = false
@@ -155,6 +234,12 @@ export default function JwtDecoder() {
 
 	const payloadJson = decoded?.ok ? JSON.stringify(decoded.payload, null, 2) : ''
 
+	function fillExample() {
+		form.setFieldValue('token', EXAMPLE.token)
+		form.setFieldValue('secret', EXAMPLE.secret)
+		form.setFieldValue('base64Secret', false)
+	}
+
 	return (
 		<ToolLayout>
 			<FormCard
@@ -162,15 +247,7 @@ export default function JwtDecoder() {
 				onSubmit={() => undefined}
 				actions={
 					<>
-						<Button
-							variant="secondary"
-							size="sm"
-							onClick={() => {
-								form.setFieldValue('token', EXAMPLE.token)
-								form.setFieldValue('secret', EXAMPLE.secret)
-								form.setFieldValue('base64Secret', false)
-							}}
-						>
+						<Button variant="secondary" size="sm" onClick={fillExample}>
 							Usar exemplo
 						</Button>
 						<p className="text-fg-muted text-[0.8125rem]">
@@ -180,8 +257,8 @@ export default function JwtDecoder() {
 				}
 			>
 				<form.AppField name="token">
-					{(f) => (
-						<f.TextareaField
+					{(field) => (
+						<field.TextareaField
 							label="Token JWT"
 							rows={7}
 							placeholder="Ex.: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MiJ9.assinatura"
@@ -193,8 +270,8 @@ export default function JwtDecoder() {
 					{family === 'HS' ? (
 						<>
 							<form.AppField name="secret">
-								{(f) => (
-									<f.TextField
+								{(field) => (
+									<field.TextField
 										label={`Segredo (${String(alg)})`}
 										placeholder="Ex.: your-256-bit-secret"
 										description="O mesmo segredo usado para assinar o token."
@@ -202,8 +279,8 @@ export default function JwtDecoder() {
 								)}
 							</form.AppField>
 							<form.AppField name="base64Secret">
-								{(f) => (
-									<f.CheckboxField
+								{(field) => (
+									<field.CheckboxField
 										label="Segredo em Base64"
 										description="Marque se o segredo foi gerado como bytes e escrito em Base64."
 									/>
@@ -212,8 +289,8 @@ export default function JwtDecoder() {
 						</>
 					) : family ? (
 						<form.AppField name="publicKey">
-							{(f) => (
-								<f.TextareaField
+							{(field) => (
+								<field.TextareaField
 									label={`Chave pública (${String(alg)})`}
 									rows={6}
 									placeholder={
@@ -238,36 +315,13 @@ export default function JwtDecoder() {
 				copyText={decoded?.ok ? payloadJson : undefined}
 				onClear={() => form.reset()}
 			>
-				{decoded?.ok ? (
+				{decoded?.ok === true && (
 					<>
 						<div className="flex flex-wrap items-center gap-2">
 							<SignatureBadge verification={verification} />
-							{decoded.time.state === 'expired' ? (
-								<Badge tone="danger">Expirado</Badge>
-							) : decoded.time.state === 'not-yet' ? (
-								<Badge tone="danger">Ainda não válido</Badge>
-							) : decoded.time.state === 'valid' ? (
-								<Badge tone="success">Válido (dentro do prazo)</Badge>
-							) : (
-								<Badge tone="neutral">Sem data de expiração</Badge>
-							)}
+							<TimeBadge state={decoded.time.state} />
 						</div>
-						{verification.status === 'error' ? (
-							<Alert tone="danger">
-								<CircleX />
-								{verification.message}
-							</Alert>
-						) : verification.status === 'invalid' ? (
-							<Alert tone="danger">
-								<CircleX />A assinatura não confere: o token foi alterado ou a chave/segredo não é o
-								usado para assinar.
-							</Alert>
-						) : verification.status === 'idle' && verification.reason ? (
-							<Alert tone="info">
-								<CircleAlert />
-								{verification.reason}
-							</Alert>
-						) : null}
+						<VerificationAlert verification={verification} />
 						<ColoredToken parts={decoded.raw} />
 						<h3 className="text-fg text-sm font-semibold">Header</h3>
 						<OutputBlock className="text-danger-ink">
@@ -280,38 +334,17 @@ export default function JwtDecoder() {
 						{decoded.claims.length > 0 ? (
 							<>
 								<h3 className="text-fg text-sm font-semibold">Claims registradas</h3>
-								<ul className="border-border rounded-panel divide-border divide-y border">
-									{decoded.claims.map((claim) => (
-										<li key={claim.claim} className="flex flex-col gap-1 px-4 py-3">
-											<span className="flex flex-wrap items-baseline gap-2">
-												<span className="text-fg font-semibold">{claim.name}</span>
-												<code translate="no" className="text-fg-muted font-mono text-[0.8125rem]">
-													{claim.claim}
-												</code>
-											</span>
-											<span className="text-fg break-all" translate={claim.date ? undefined : 'no'}>
-												{claim.date
-													? `${dateTime.format(claim.date)} (${claim.relative})`
-													: claim.value}
-											</span>
-											{claim.date ? (
-												<span className="text-fg-muted tabular font-mono text-[0.8125rem]">
-													{claim.value}
-												</span>
-											) : null}
-											<span className="text-fg-muted text-[0.8125rem]">{claim.description}</span>
-										</li>
-									))}
-								</ul>
+								<ClaimList claims={decoded.claims} />
 							</>
 						) : null}
 					</>
-				) : decoded ? (
+				)}
+				{decoded?.ok === false && (
 					<Alert tone="danger">
 						<CircleX />
 						{decoded.error}
 					</Alert>
-				) : null}
+				)}
 			</ResultCard>
 		</ToolLayout>
 	)

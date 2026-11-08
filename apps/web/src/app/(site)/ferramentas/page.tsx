@@ -127,7 +127,7 @@ export default function AllToolsPage() {
 									>
 										{section.name}
 									</Link>
-									<span className="bg-surface-sunken text-fg-muted tabular rounded-full px-2.5 py-0.5 text-sm font-semibold">
+									<span className="bg-surface-sunken text-fg-muted tabular inline-flex h-6 items-center rounded-full px-2.5 text-sm leading-none font-semibold">
 										{section.tools.length}
 									</span>
 								</h3>

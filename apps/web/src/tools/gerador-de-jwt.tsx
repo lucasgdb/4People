@@ -6,6 +6,7 @@ import { CircleX, KeyRound, LoaderCircle } from 'lucide-react'
 import { useDeferredValue, useEffect, useState } from 'react'
 import { useAppForm } from '@/components/form/form'
 import {
+	type AlgorithmFamily,
 	algorithmFamily,
 	type GeneratedKeyPair,
 	generateKeyPair,
@@ -17,13 +18,16 @@ import {
 } from '@/lib/algorithms/jwt'
 import { FormCard, OutputBlock, ResultCard, ToolLayout } from './_shared/tool-layout'
 
+const FAMILY_DESCRIPTIONS: Record<AlgorithmFamily, string> = {
+	HS: 'HMAC + segredo',
+	RS: 'RSA PKCS#1 v1.5',
+	PS: 'RSA-PSS',
+	ES: 'ECDSA',
+}
+
 const ALGORITHM_OPTIONS = JWT_ALGORITHMS.map((alg) => ({
 	value: alg,
-	label: `${alg} · ${
-		{ HS: 'HMAC + segredo', RS: 'RSA PKCS#1 v1.5', PS: 'RSA-PSS', ES: 'ECDSA' }[
-			algorithmFamily(alg)
-		]
-	}`,
+	label: `${alg} · ${FAMILY_DESCRIPTIONS[algorithmFamily(alg)]}`,
 }))
 
 const DEFAULTS = {
@@ -38,10 +42,14 @@ const DEFAULTS = {
 const PART_STYLES = ['text-danger-ink', 'text-accent-soft-fg', 'text-success-ink'] as const
 const PART_LABELS = ['Header', 'Payload', 'Assinatura'] as const
 
+type FormValues = typeof DEFAULTS
 type Outcome = { ok: true; token: string } | { ok: false; error: string } | null
 
-/** Rewrites a JSON object field, keeping the user's text when it doesn't parse. */
-function editJson(text: string, edit: (value: Record<string, unknown>) => void): string | null {
+/** Applies `edit` to a JSON object text; null when the text doesn't parse, so it stays as typed. */
+function rewriteJsonObject(
+	text: string,
+	edit: (value: Record<string, unknown>) => void,
+): string | null {
 	try {
 		const value = parseJsonObject(text, 'payload')
 		edit(value)
@@ -51,11 +59,59 @@ function editJson(text: string, edit: (value: Record<string, unknown>) => void):
 	}
 }
 
+/** Signs the token described by the form. Throws in Portuguese on invalid JSON or a missing key. */
+function signFromForm(values: FormValues): Promise<string> {
+	const header = parseJsonObject(values.header, 'header')
+	const payload = parseJsonObject(values.payload, 'payload')
+	const usesSecret = algorithmFamily(values.alg) === 'HS'
+	const key = usesSecret ? values.secret : values.privateKey
+	if (!key.trim()) {
+		throw new Error(
+			usesSecret
+				? 'Informe o segredo para assinar.'
+				: 'Cole a chave privada (PKCS#8 ou JWK) ou clique em "Gerar par de chaves".',
+		)
+	}
+	return signJwt(header, payload, values.alg, { key, base64Secret: values.base64Secret })
+}
+
+/** RFC 7518 §3.2: an HMAC key should be at least as long as the hash output. */
+const minimumSecretBytes = (alg: JwtAlgorithm) => Number(alg.slice(2)) / 8
+
+function ColoredToken({ token }: { token: string }) {
+	const parts = token.split('.')
+	return (
+		<>
+			<ul className="text-fg-muted flex flex-wrap gap-x-4 gap-y-1 text-[0.8125rem]">
+				{PART_LABELS.map((label, partIndex) => (
+					<li key={label} className="flex items-center gap-1.5">
+						<span aria-hidden="true" className={cn('font-mono font-bold', PART_STYLES[partIndex])}>
+							■
+						</span>
+						{label}
+					</li>
+				))}
+			</ul>
+			<OutputBlock className="break-all">
+				<span translate="no">
+					{parts.map((part, partIndex) => (
+						// biome-ignore lint/suspicious/noArrayIndexKey: the three fixed parts of a token
+						<span key={partIndex}>
+							{partIndex > 0 ? <span className="text-fg">.</span> : null}
+							<span className={PART_STYLES[partIndex]}>{part}</span>
+						</span>
+					))}
+				</span>
+			</OutputBlock>
+		</>
+	)
+}
+
 /** Builds and signs a JWT like jwt.io's encoder (HS, RS, PS, ES) with Web Crypto. */
 export default function JwtGenerator() {
 	const form = useAppForm({ defaultValues: DEFAULTS })
 	const values = useStore(form.store, (state) => state.values)
-	const deferred = useDeferredValue(values)
+	const deferredValues = useDeferredValue(values)
 	const family = algorithmFamily(values.alg)
 	const [pair, setPair] = useState<GeneratedKeyPair | null>(null)
 	const [generating, setGenerating] = useState(false)
@@ -65,37 +121,32 @@ export default function JwtGenerator() {
 	// Signing is async (Web Crypto) and runs only on the client, so the server renders no token.
 	useEffect(() => {
 		let cancelled = false
-		const run = async () => {
-			const header = parseJsonObject(deferred.header, 'header')
-			const payload = parseJsonObject(deferred.payload, 'payload')
-			const isHs = algorithmFamily(deferred.alg) === 'HS'
-			const key = isHs ? deferred.secret : deferred.privateKey
-			if (!key.trim()) {
-				throw new Error(
-					isHs
-						? 'Informe o segredo para assinar.'
-						: 'Cole a chave privada (PKCS#8 ou JWK) ou clique em "Gerar par de chaves".',
-				)
-			}
-			return signJwt(header, payload, deferred.alg, { key, base64Secret: deferred.base64Secret })
-		}
-		run()
+		// async so that signFromForm's synchronous throws become rejections.
+		const sign = async () => signFromForm(deferredValues)
+		sign()
 			.then((token) => !cancelled && setOutcome({ ok: true, token }))
 			.catch((error: Error) => !cancelled && setOutcome({ ok: false, error: error.message }))
 		return () => {
 			cancelled = true
 		}
-	}, [deferred])
+	}, [deferredValues])
 
 	function setPayloadTime(claim: 'iat' | 'exp', offsetSeconds: number) {
-		const now = Math.floor(Date.now() / 1000)
-		const next = editJson(form.getFieldValue('payload'), (value) => {
-			value[claim] = now + offsetSeconds
+		const nowSeconds = Math.floor(Date.now() / 1000)
+		const rewritten = rewriteJsonObject(form.getFieldValue('payload'), (payload) => {
+			payload[claim] = nowSeconds + offsetSeconds
 		})
-		if (next) {
-			form.setFieldValue('payload', next)
-			setJsonNotice('')
-		} else setJsonNotice('Corrija o JSON do payload antes de adicionar a data.')
+		if (!rewritten) {
+			setJsonNotice('Corrija o JSON do payload antes de adicionar a data.')
+			return
+		}
+		form.setFieldValue('payload', rewritten)
+		setJsonNotice('')
+	}
+
+	function fillRandomSecret() {
+		form.setFieldValue('secret', randomSecret(values.alg))
+		form.setFieldValue('base64Secret', true)
 	}
 
 	async function makePair() {
@@ -111,8 +162,7 @@ export default function JwtGenerator() {
 		}
 	}
 
-	const parts = outcome?.ok ? outcome.token.split('.') : []
-	const showPublic = pair && family !== 'HS' && values.privateKey === pair.privateKey
+	const showPublicKey = pair && family !== 'HS' && values.privateKey === pair.privateKey
 
 	return (
 		<ToolLayout>
@@ -130,20 +180,20 @@ export default function JwtGenerator() {
 					listeners={{
 						// Keep the header's "alg" in sync with the chosen algorithm.
 						onChange: ({ value }) => {
-							const next = editJson(form.getFieldValue('header'), (header) => {
+							const rewritten = rewriteJsonObject(form.getFieldValue('header'), (header) => {
 								header.alg = value
 							})
-							if (next) form.setFieldValue('header', next)
+							if (rewritten) form.setFieldValue('header', rewritten)
 							// An RSA pair serves RS* and PS*; an EC pair only its own curve.
 							if (pair && (algorithmFamily(value) === 'ES' || family === 'ES')) setPair(null)
 						},
 					}}
 				>
-					{(f) => <f.SelectField label="Algoritmo" options={ALGORITHM_OPTIONS} />}
+					{(field) => <field.SelectField label="Algoritmo" options={ALGORITHM_OPTIONS} />}
 				</form.AppField>
 				<form.AppField name="header">
-					{(f) => (
-						<f.TextareaField
+					{(field) => (
+						<field.TextareaField
 							label="Header (JSON)"
 							rows={4}
 							placeholder='Ex.: { "alg": "HS256", "typ": "JWT" }'
@@ -153,8 +203,8 @@ export default function JwtGenerator() {
 				</form.AppField>
 				<div className="flex flex-col gap-2">
 					<form.AppField name="payload">
-						{(f) => (
-							<f.TextareaField
+						{(field) => (
+							<field.TextareaField
 								label="Payload (JSON)"
 								rows={8}
 								placeholder='Ex.: { "sub": "42", "name": "Ana" }'
@@ -177,26 +227,19 @@ export default function JwtGenerator() {
 				{family === 'HS' ? (
 					<>
 						<form.AppField name="secret">
-							{(f) => (
-								<f.TextField
+							{(field) => (
+								<field.TextField
 									label="Segredo"
 									placeholder="Ex.: um-segredo-longo-e-aleatorio"
-									description={`Use pelo menos ${Number(values.alg.slice(2)) / 8} bytes para ${values.alg}.`}
+									description={`Use pelo menos ${minimumSecretBytes(values.alg)} bytes para ${values.alg}.`}
 								/>
 							)}
 						</form.AppField>
 						<div className="flex flex-wrap items-center justify-between gap-3">
 							<form.AppField name="base64Secret">
-								{(f) => <f.CheckboxField label="Segredo em Base64" />}
+								{(field) => <field.CheckboxField label="Segredo em Base64" />}
 							</form.AppField>
-							<Button
-								variant="ghost"
-								size="sm"
-								onClick={() => {
-									form.setFieldValue('secret', randomSecret(values.alg))
-									form.setFieldValue('base64Secret', true)
-								}}
-							>
+							<Button variant="ghost" size="sm" onClick={fillRandomSecret}>
 								<KeyRound /> Gerar segredo aleatório
 							</Button>
 						</div>
@@ -204,8 +247,8 @@ export default function JwtGenerator() {
 				) : (
 					<div className="flex flex-col gap-2">
 						<form.AppField name="privateKey">
-							{(f) => (
-								<f.TextareaField
+							{(field) => (
+								<field.TextareaField
 									label="Chave privada"
 									rows={6}
 									placeholder={
@@ -233,37 +276,16 @@ export default function JwtGenerator() {
 				empty={!outcome}
 				emptyText="O token assinado aparece aqui."
 			>
-				{outcome?.ok ? (
+				{outcome?.ok === true && (
 					<>
-						{/* Each block owns its copy button, in its own header row. */}
 						<div className="flex flex-col gap-2">
 							<div className="flex flex-wrap items-center justify-between gap-2">
 								<h3 className="text-fg text-sm font-semibold">Token</h3>
 								<CopyButton variant="primary" value={outcome.token} label="Copiar token" />
 							</div>
-							<ul className="text-fg-muted flex flex-wrap gap-x-4 gap-y-1 text-[0.8125rem]">
-								{PART_LABELS.map((label, i) => (
-									<li key={label} className="flex items-center gap-1.5">
-										<span aria-hidden="true" className={cn('font-mono font-bold', PART_STYLES[i])}>
-											■
-										</span>
-										{label}
-									</li>
-								))}
-							</ul>
-							<OutputBlock className="break-all">
-								<span translate="no">
-									{parts.map((part, i) => (
-										// biome-ignore lint/suspicious/noArrayIndexKey: the three fixed parts of a token
-										<span key={i}>
-											{i > 0 ? <span className="text-fg">.</span> : null}
-											<span className={PART_STYLES[i]}>{part}</span>
-										</span>
-									))}
-								</span>
-							</OutputBlock>
+							<ColoredToken token={outcome.token} />
 						</div>
-						{showPublic ? (
+						{showPublicKey ? (
 							<div className="border-border flex flex-col gap-2 border-t pt-5">
 								<div className="flex flex-wrap items-center justify-between gap-2">
 									<h3 className="text-fg text-sm font-semibold">Chave pública (para verificar)</h3>
@@ -278,12 +300,13 @@ export default function JwtGenerator() {
 							</div>
 						) : null}
 					</>
-				) : outcome ? (
+				)}
+				{outcome?.ok === false && (
 					<Alert tone="danger">
 						<CircleX />
 						{outcome.error}
 					</Alert>
-				) : null}
+				)}
 			</ResultCard>
 		</ToolLayout>
 	)

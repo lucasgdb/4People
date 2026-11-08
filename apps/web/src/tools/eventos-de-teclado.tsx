@@ -13,29 +13,34 @@ const KEY_LOCATIONS: Record<number, string> = {
 
 type KeyInfo = { key: string; code: string; keyCode: number; location: number; modifiers: string[] }
 
+function isFormField(element: HTMLElement): boolean {
+	return /^(input|textarea|select)$/i.test(element.tagName) || element.isContentEditable
+}
+
+function pressedModifiers(event: KeyboardEvent): string[] {
+	const modifiers: string[] = []
+	if (event.ctrlKey) modifiers.push('Ctrl')
+	if (event.altKey) modifiers.push('Alt')
+	if (event.shiftKey) modifiers.push('Shift')
+	return modifiers
+}
+
 /** Shows key, code, keyCode and location of the last key pressed. */
 export default function KeycodeEvent() {
 	const [info, setInfo] = useState<KeyInfo | null>(null)
 
 	useEffect(() => {
+		// Listens without preventDefault, so Tab, scrolling and browser shortcuts keep working.
 		function onKeyDown(event: KeyboardEvent) {
-			// Read the key without taking it over: Tab, Enter on links, scrolling and browser shortcuts
-			// keep working. Keys typed into a field belong to that field.
 			const target = event.target as HTMLElement
-			// Typing in a form field is not a probe, except in the touch field below, made for it.
-			const probe = target.hasAttribute('data-key-probe')
-			if (!probe && (/^(input|textarea|select)$/i.test(target.tagName) || target.isContentEditable))
-				return
+			const isProbeField = target.hasAttribute('data-key-probe')
+			if (!isProbeField && isFormField(target)) return
 			setInfo({
 				key: event.key === ' ' ? 'Espaço' : event.key,
 				code: event.code,
 				keyCode: event.keyCode,
 				location: event.location,
-				modifiers: [
-					event.ctrlKey && 'Ctrl',
-					event.altKey && 'Alt',
-					event.shiftKey && 'Shift',
-				].filter((value): value is string => Boolean(value)),
+				modifiers: pressedModifiers(event),
 			})
 		}
 		window.addEventListener('keydown', onKeyDown)
@@ -61,9 +66,9 @@ export default function KeycodeEvent() {
 								<>
 									{' '}
 									com{' '}
-									{info.modifiers.map((m) => (
-										<Kbd key={m} className="ml-1">
-											{m}
+									{info.modifiers.map((modifier) => (
+										<Kbd key={modifier} className="ml-1">
+											{modifier}
 										</Kbd>
 									))}
 								</>
@@ -87,8 +92,8 @@ export default function KeycodeEvent() {
 					</span>
 				</p>
 			)}
-			{/* Touch screens have no keyboard until a field has focus: this one opens it. Virtual
-			    keyboards often report keyCode 229 ("Unidentified") for letters, which is what they send. */}
+			{/* Touch screens show no keyboard until a field has focus. Virtual keyboards often report
+			    keyCode 229 ("Unidentified") for letters, and that is what this shows. */}
 			<div className="hidden flex-col gap-2 pointer-coarse:flex">
 				<label htmlFor="key-probe" className="text-sm font-medium">
 					Sem teclado físico? Toque aqui e digite:
