@@ -36,7 +36,7 @@ CMD ["sh", "-c", "pnpm install --frozen-lockfile --store-dir /pnpm/store && exec
 # ---------- build ----------
 FROM deps AS build
 COPY . .
-ARG NEXT_PUBLIC_SITE_URL=http://localhost:3000
+ARG NEXT_PUBLIC_SITE_URL=https://4people.lucasbittencourt.dev
 ENV NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
 RUN pnpm --filter @4people/web build
 

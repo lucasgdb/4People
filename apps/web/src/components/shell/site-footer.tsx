@@ -5,7 +5,7 @@ import type { ReactNode } from 'react'
 import { CATEGORIES, TOOLS } from '@/catalog/catalog'
 import { Wordmark } from '@/components/brand'
 import { GithubIcon } from '@/components/github-icon'
-import { AUTHOR, REPOSITORY_URL } from '@/lib/site'
+import { AUTHOR, PRIVACY_URL, REPOSITORY_URL, TERMS_URL } from '@/lib/site'
 
 const linkClass =
 	'text-fg-muted hover:text-fg focus-visible:ring-ring inline-flex min-h-9 items-center gap-1.5 rounded-sm text-sm underline-offset-4 outline-none hover:underline focus-visible:ring-4'
@@ -88,14 +88,10 @@ export function SiteFooter() {
 					</Column>
 					<Column title="Legal">
 						<li>
-							<Link href={'/termos-de-uso' as Route} className={linkClass}>
-								Termos de uso
-							</Link>
+							<ExternalLink href={TERMS_URL}>Termos de uso</ExternalLink>
 						</li>
 						<li>
-							<Link href={'/privacidade' as Route} className={linkClass}>
-								Política de privacidade
-							</Link>
+							<ExternalLink href={PRIVACY_URL}>Política de privacidade</ExternalLink>
 						</li>
 					</Column>
 				</div>

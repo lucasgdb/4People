@@ -12,6 +12,9 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3
 export const SITE_DESCRIPTION = `${TOOLS.length} ferramentas online gratuitas para desenvolvimento, estudo e trabalho: gerador e validador de CPF e CNPJ, senhas, UUID, JWT, regex, conversores de JSON, YAML e XML, calculadora de sub-rede, porcentagem, datas, Bhaskara e muito mais. Tudo roda no navegador, sem cadastro.`
 export const REPOSITORY_URL = 'https://github.com/lucasgdb/4People'
 export const AUTHOR_URL = 'https://lucasbittencourt.dev'
+/** 4People's legal documents live with the author's other tools, on lucasbittencourt.dev. */
+export const PRIVACY_URL = `${AUTHOR_URL}/pt-br/tool/4people/privacy`
+export const TERMS_URL = `${AUTHOR_URL}/pt-br/tool/4people/eula`
 export const AUTHOR = {
 	name: 'Lucas Bittencourt',
 	url: AUTHOR_URL,

@@ -6,8 +6,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 	const lastModified = new Date()
 	return [
 		{ url: absoluteUrl('/'), lastModified, changeFrequency: 'monthly', priority: 1 },
-		{ url: absoluteUrl('/termos-de-uso'), lastModified, changeFrequency: 'yearly', priority: 0.2 },
-		{ url: absoluteUrl('/privacidade'), lastModified, changeFrequency: 'yearly', priority: 0.2 },
 		...CATEGORIES.flatMap((category) => [
 			{
 				url: absoluteUrl(`/${category.slug}`),
