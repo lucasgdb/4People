@@ -22,11 +22,13 @@ export default function OfflinePage() {
 						Sem conexão
 					</span>
 					<h1 className="text-fg text-[clamp(2rem,5vw,3rem)] leading-[1.1] font-extrabold tracking-[-0.03em]">
-						Esta página ainda não foi aberta neste aparelho
+						Esta página ainda não foi salva neste aparelho
 					</h1>
 					<p className="text-fg-muted text-lg">
-						As ferramentas que você já usou continuam funcionando sem internet. Para abrir esta,{' '}
-						<span className="whitespace-nowrap">conecte-se</span> e tente de novo.
+						Com internet, o 4People baixa todas as ferramentas em segundo plano para funcionarem
+						offline. Parece que o download não terminou (ou a economia de dados está ligada).{' '}
+						<span className="whitespace-nowrap">Conecte-se</span> por alguns instantes e tente de
+						novo.
 					</p>
 					<a
 						href="/"
