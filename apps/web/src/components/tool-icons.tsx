@@ -443,6 +443,20 @@ const ICONS: Record<string, ReactNode> = {
 			{plus}
 		</>
 	),
+	'gerador-de-cep': (
+		<>
+			<path d="M10 20.75s-5.75-5-5.75-9.5a5.75 5.75 0 0 1 11.5 0c0 4.5-5.75 9.5-5.75 9.5Z" />
+			<circle cx="10" cy="11.25" r="2" />
+			{plus}
+		</>
+	),
+	'gerador-de-telefone': (
+		<>
+			<rect x="5.25" y="4.75" width="9.5" height="16.5" rx="2" />
+			<path d="M8.75 18.25h2.5" />
+			{plus}
+		</>
+	),
 	'gerador-de-placas': (
 		<>
 			<rect x="2.75" y="6.75" width="18.5" height="10.5" rx="1.5" />

@@ -98,6 +98,16 @@ export const CATEGORIES = [
 							'Gere cartões de teste válidos (Luhn) de Visa, Mastercard, Elo, Amex e mais, com validade e CVV.',
 					},
 					{
+						slug: 'gerador-de-cep',
+						name: 'Gerador de CEP',
+						description: 'Gere CEPs na faixa dos Correios de cada estado para testar formulários.',
+					},
+					{
+						slug: 'gerador-de-telefone',
+						name: 'Gerador de Telefone',
+						description: 'Gere números de celular ou fixo com DDD real do estado que quiser.',
+					},
+					{
 						slug: 'gerador-de-placas',
 						name: 'Gerador de Placas',
 						description: 'Gere placas no padrão Mercosul ou antigo e converta entre os dois.',

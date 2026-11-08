@@ -100,7 +100,8 @@ export function GeneratedResult({
 	)
 }
 
-const PUNCTUATION = /[.\-/\s]/g
+/** Everything but the characters of the value itself: dots, dashes, slashes, spaces, parentheses. */
+const PUNCTUATION = /[^0-9A-Z]/gi
 
 const DEFAULT_NOTE =
 	'Use só para testes. Esses números são válidos na conta, mas não pertencem a ninguém de propósito.'
@@ -125,7 +126,7 @@ export type StateOptions = {
 }
 
 /**
- * The document generators (CPF, CNPJ, RG, PIS, CNH, RENAVAM, título): pick the format, the state
+ * The document generators (CPF, CNPJ, RG, PIS, CNH, RENAVAM, título, CEP, telefone): pick the format, the state
  * when the number encodes one and how many; the list is ready on arrival and follows every change.
  * `examples` turns on the format choice; without it the document only exists as digits.
  */

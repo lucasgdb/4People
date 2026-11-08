@@ -1,5 +1,6 @@
 // Loaded on demand (faker's pt_BR data is ~450KB): import this module inside an event handler.
 import { faker } from '@faker-js/faker/locale/pt_BR'
+import { generateCEP, generatePhone } from './contact.ts'
 import { generateCPF, generateRG, STATE_TO_CPF_REGION } from './documents.ts'
 
 export type Person = {
@@ -45,37 +46,6 @@ const NEIGHBORHOODS = [
 	'Alto da Boa Vista',
 	'Liberdade',
 ]
-/** Area code of each state's capital. */
-const AREA_CODE_BY_STATE: Record<string, string> = {
-	SP: '11',
-	RJ: '21',
-	MG: '31',
-	RS: '51',
-	PR: '41',
-	SC: '48',
-	BA: '71',
-	PE: '81',
-	CE: '85',
-	DF: '61',
-	GO: '62',
-	PA: '91',
-	AM: '92',
-	ES: '27',
-	MA: '98',
-	PB: '83',
-	RN: '84',
-	AL: '82',
-	PI: '86',
-	SE: '79',
-	MT: '65',
-	MS: '67',
-	TO: '63',
-	RO: '69',
-	AC: '68',
-	AP: '96',
-	RR: '95',
-}
-
 const EMAIL_DOMAINS = ['gmail.com', 'outlook.com', 'yahoo.com.br', 'uol.com.br']
 
 /** "João Vítor" → "joao.vitor": lowercase ASCII letters joined by dots. */
@@ -97,11 +67,6 @@ function randomEmail(firstName: string, lastName: string): string {
 	const suffix = faker.number.int({ min: 1, max: 99 })
 	const domain = faker.helpers.arrayElement(EMAIL_DOMAINS)
 	return `${emailSlug(firstName)}.${emailSlug(lastName)}${suffix}@${domain}`
-}
-
-function randomCellPhone(state: string): string {
-	const areaCode = AREA_CODE_BY_STATE[state] ?? '11'
-	return `(${areaCode}) 9${faker.string.numeric(4)}-${faker.string.numeric(4)}`
 }
 
 /** A consistent fake person: the CPF matches the state, the e-mail matches the name, age matches the birth date. */
@@ -128,8 +93,8 @@ export function generatePerson({
 		cpf: generateCPF({ state: personState }),
 		rg: generateRG(),
 		email: randomEmail(firstName, familyName),
-		celular: randomCellPhone(personState),
-		cep: faker.location.zipCode('#####-###'),
+		celular: generatePhone({ state: personState, type: 'mobile' }),
+		cep: generateCEP({ state: personState }),
 		endereco: faker.location.street(),
 		numero: String(faker.number.int({ min: 1, max: 3000 })),
 		bairro: faker.helpers.arrayElement(NEIGHBORHOODS),

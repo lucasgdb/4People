@@ -2,7 +2,7 @@ import type { SectionContent } from './types.ts'
 
 export const content: SectionContent = {
 	intro: [
-		'Os geradores desta seção criam dados fictícios que passam nas mesmas regras de validação dos dados reais. Há geradores de documentos brasileiros (CPF, CNPJ, RG, CNH, PIS/PASEP, RENAVAM e título de eleitor), de números de cartão de crédito, de placas de veículo, de nomes e de pessoas completas, além de ferramentas de uso técnico: senhas, UUIDs e hashes. Tudo é calculado no navegador; documentos, senhas, cartões e UUIDs são sorteados com o gerador criptográfico da Web Crypto API.',
+		'Os geradores desta seção criam dados fictícios que passam nas mesmas regras de validação dos dados reais. Há geradores de documentos brasileiros (CPF, CNPJ, RG, CNH, PIS/PASEP, RENAVAM e título de eleitor), de números de cartão de crédito, de placas de veículo, de CEPs, de telefones com DDD, de nomes e de pessoas completas, além de ferramentas de uso técnico: senhas, UUIDs e hashes. Tudo é calculado no navegador; documentos, senhas, cartões e UUIDs são sorteados com o gerador criptográfico da Web Crypto API.',
 		'Para testar um formulário que valida um campo específico, use o gerador daquele documento: ele calcula os dígitos verificadores pela regra oficial, então o número passa na mesma conta que o seu sistema faz. Para popular um banco de dados ou montar fixtures, o gerador de pessoas entrega registros inteiros e coerentes, com CPF do estado escolhido, idade compatível com a data de nascimento e exportação em JSON ou CSV. Para checkouts, o gerador de cartão de crédito cria números que passam no algoritmo de Luhn. Senha, UUID e hash atendem outras necessidades: proteger contas, criar identificadores únicos e conferir a integridade de textos.',
 		'Os documentos, cartões e placas gerados aqui são válidos apenas na matemática dos dígitos verificadores. Eles não são consultados nem registrados em nenhum órgão, não pertencem a ninguém de propósito e não servem para cadastro real, compra, emissão de nota fiscal ou qualquer identificação. Use-os só em ambientes de desenvolvimento e teste.',
 	],
@@ -473,6 +473,67 @@ export const content: SectionContent = {
 			},
 			updatedAt: '2026-11-08',
 		},
+		'gerador-de-cep': {
+			title: 'Gerador de CEP aleatório por estado',
+			metaDescription:
+				'Gere CEPs aleatórios na faixa dos Correios de cada estado, com ou sem hífen, de 1 a 20 por vez. Ideal para testar formulários de endereço.',
+			answer:
+				'O gerador de CEP cria Códigos de Endereçamento Postal aleatórios dentro da faixa que os Correios reservam para cada estado: de 01000-000 a 19999-999 é São Paulo, de 20000-000 a 28999-999 é Rio de Janeiro, de 90000-000 a 99999-999 é Rio Grande do Sul, e assim por diante. Você escolhe o estado (ou deixa qualquer um), o formato com hífen (00000-000) ou só números (00000000) e a quantidade, de 1 a 20. Os três últimos dígitos ficam entre 000 e 899, a parte usada para ruas; os sufixos acima disso são reservados para caixas postais, grandes clientes e unidades dos Correios.',
+			faq: [
+				{
+					question: 'O CEP gerado existe?',
+					answer:
+						'Pode existir ou não. O gerador sorteia um número dentro da faixa do estado, mas não consulta a base dos Correios, então o CEP tem o formato e a região certos e pode não corresponder a uma rua real. Para descobrir o endereço de um CEP, use uma ferramenta de busca de CEP.',
+				},
+				{
+					question: 'Como saber o estado pelo CEP?',
+					answer:
+						'O primeiro dígito do CEP indica a região postal (0 e 1 são São Paulo, 2 é Rio de Janeiro e Espírito Santo, 3 é Minas Gerais, 9 é Rio Grande do Sul), e os dígitos seguintes estreitam até o estado, a cidade e o bairro. Cada estado tem uma ou duas faixas contínuas; Amazonas, Distrito Federal e Goiás têm duas.',
+				},
+				{
+					question: 'Para que serve um gerador de CEP?',
+					answer:
+						'Para testar formulários de endereço, máscaras de entrada, validações de formato e regras que dependem do estado, como cálculo de frete ou de imposto, sem usar o endereço de uma pessoa real.',
+				},
+			],
+			howTo: {
+				title: 'Como o CEP é formado',
+				steps: [
+					'O 1º dígito é a região postal, que agrupa um ou mais estados.',
+					'O 2º dígito é a sub-região e o 3º, o setor.',
+					'O 4º dígito é o subsetor e o 5º, o divisor de subsetor; os cinco juntos formam o prefixo.',
+					'Os três dígitos depois do hífen são o sufixo, que identifica a rua, o lado da rua ou um destino especial.',
+				],
+				example:
+					'No CEP 01310-100, o 0 indica a região de São Paulo capital e o prefixo 01310 aponta para a região da Avenida Paulista; o sufixo 100 identifica um trecho da via.',
+			},
+			updatedAt: '2026-11-08',
+		},
+		'gerador-de-telefone': {
+			title: 'Gerador de telefone com DDD (celular e fixo)',
+			metaDescription:
+				'Gere números de telefone brasileiros com DDD real de cada estado: celular com 9 dígitos ou fixo com 8, com máscara ou só números.',
+			answer:
+				'O gerador de telefone cria números brasileiros fictícios com um DDD real do estado escolhido, sorteado entre os códigos de área definidos pela Anatel (São Paulo tem do 11 ao 19, Minas Gerais tem 31 a 38, e assim por diante). O celular tem 9 dígitos e começa com 9, seguido de um dígito de 6 a 9, no formato (11) 98765-4321; o fixo tem 8 dígitos e começa com 2 a 5, no formato (11) 3456-7890. Você escolhe o tipo (celular, fixo ou os dois), o estado, o formato com máscara ou só números e a quantidade, de 1 a 20.',
+			faq: [
+				{
+					question: 'O telefone gerado é de alguém?',
+					answer:
+						'Pode ser. O DDD e o formato são reais, e os dígitos são sorteados sem consultar nenhuma operadora, então o número pode coincidir com uma linha em uso. Use os telefones gerados só em ambientes de teste e nunca para ligar ou enviar mensagens.',
+				},
+				{
+					question: 'Qual a diferença entre o número de celular e o de telefone fixo?',
+					answer:
+						'No Brasil, o celular tem 9 dígitos depois do DDD e sempre começa com 9, que foi acrescentado entre 2012 e 2016. O telefone fixo tem 8 dígitos e começa com 2, 3, 4 ou 5. Os dígitos 6 a 9 no início de um número de 8 dígitos eram usados por celulares antes do nono dígito.',
+				},
+				{
+					question: 'Como escrever o telefone no formato internacional?',
+					answer:
+						'Coloque +55, o código do Brasil, antes do DDD e tire o zero e a operadora, se houver: (11) 98765-4321 vira +55 11 98765-4321, ou +5511987654321 no formato E.164, que é o que APIs como as do WhatsApp esperam.',
+				},
+			],
+			updatedAt: '2026-11-08',
+		},
 		'gerador-de-placas': {
 			title: 'Gerador de placas Mercosul e conversor',
 			metaDescription:
@@ -514,7 +575,7 @@ export const content: SectionContent = {
 			metaDescription:
 				'Gere até 100 pessoas fictícias com nome, CPF, RG, nascimento, e-mail, celular e endereço, coerentes entre si. Exporte em JSON ou CSV para testes.',
 			answer:
-				'O gerador de pessoas cria registros fictícios completos e coerentes entre si para testes e protótipos. Cada pessoa tem nome com dois sobrenomes, sexo, data de nascimento e idade, CPF, RG, e-mail, celular, CEP, endereço com número e bairro, cidade, estado e os nomes da mãe e do pai. O CPF corresponde ao estado sorteado ou escolhido, o celular usa o DDD da capital desse estado, a idade bate com a data de nascimento, o e-mail é formado pelo nome e os pais compartilham o sobrenome de família. Você define a quantidade (1 a 100), o estado e a faixa de idade, e exporta o resultado em JSON ou CSV.',
+				'O gerador de pessoas cria registros fictícios completos e coerentes entre si para testes e protótipos. Cada pessoa tem nome com dois sobrenomes, sexo, data de nascimento e idade, CPF, RG, e-mail, celular, CEP, endereço com número e bairro, cidade, estado e os nomes da mãe e do pai. O CPF corresponde ao estado sorteado ou escolhido, o celular usa um DDD e o CEP fica na faixa dos Correios desse estado, a idade bate com a data de nascimento, o e-mail é formado pelo nome e os pais compartilham o sobrenome de família. Você define a quantidade (1 a 100), o estado e a faixa de idade, e exporta o resultado em JSON ou CSV.',
 			faq: [
 				{
 					question: 'Os dados gerados são de pessoas reais?',
@@ -524,7 +585,7 @@ export const content: SectionContent = {
 				{
 					question: 'O CEP da pessoa gerada corresponde à cidade?',
 					answer:
-						'Não necessariamente. No gerador de pessoas, CEP, rua, bairro e cidade são sorteados de forma independente, então o endereço é plausível, mas não existe. Para um endereço real a partir do CEP, use uma ferramenta de busca de CEP.',
+						'Corresponde ao estado, mas não necessariamente à cidade. No gerador de pessoas, o CEP é sorteado dentro da faixa dos Correios do estado da pessoa, e rua, bairro e cidade são sorteados à parte, então o endereço é plausível, mas não existe. Para um endereço real a partir do CEP, use uma ferramenta de busca de CEP.',
 				},
 				{
 					question: 'Em que formato posso exportar as pessoas geradas?',
