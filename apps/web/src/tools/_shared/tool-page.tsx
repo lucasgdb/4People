@@ -123,13 +123,21 @@ function SectionTitle({ id, icon, aside, children }: SectionTitleProps) {
 	)
 }
 
+/** Companions that are neither a generator nor a validator get their own question. */
+const COMPANION_PROMPT: Record<string, string> = {
+	'buscar-cep': 'Quer o endereço de um CEP?',
+	'gerador-de-cep': 'Precisa de CEPs para testar?',
+}
+
 /** "Precisa validar? Validador de CPF →": the generator and the validator of a document link each other. */
 function CompanionLink({ slug }: { slug: string }) {
 	const companion = companionOf(slug)
 	if (!companion) return null
-	const prompt = companion.slug.startsWith('validador')
-		? 'Precisa conferir um número?'
-		: 'Precisa de números para testar?'
+	const prompt =
+		COMPANION_PROMPT[companion.slug] ??
+		(companion.slug.startsWith('validador')
+			? 'Precisa conferir um número?'
+			: 'Precisa de números para testar?')
 	return (
 		<Link
 			href={companion.href as Route}

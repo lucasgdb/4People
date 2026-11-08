@@ -782,7 +782,7 @@ export const toolsIn = (categorySlug: string, sectionSlug?: string) =>
 			tool.category.slug === categorySlug && (!sectionSlug || tool.section.slug === sectionSlug),
 	)
 
-/** Tools that complete each other: every generator points to its validator and back. */
+/** Tools that complete each other: every generator points to its validator (or lookup) and back. */
 export const COMPANION_TOOL: Record<string, string> = {
 	'gerador-de-cpf': 'validador-de-cpf',
 	'validador-de-cpf': 'gerador-de-cpf',
@@ -800,6 +800,8 @@ export const COMPANION_TOOL: Record<string, string> = {
 	'validador-de-titulo-de-eleitor': 'gerador-de-titulo-de-eleitor',
 	'gerador-de-cartao-de-credito': 'validador-de-cartao-de-credito',
 	'validador-de-cartao-de-credito': 'gerador-de-cartao-de-credito',
+	'gerador-de-cep': 'buscar-cep',
+	'buscar-cep': 'gerador-de-cep',
 }
 
 export const companionOf = (slug: string) => {
