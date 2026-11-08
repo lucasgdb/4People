@@ -99,7 +99,7 @@ export default function RandomNumbers() {
 	}
 
 	return (
-		<ToolLayout>
+		<ToolLayout resultFirst>
 			<FormCard
 				title="Escolha como quer"
 				onSubmit={() => form.handleSubmit()}

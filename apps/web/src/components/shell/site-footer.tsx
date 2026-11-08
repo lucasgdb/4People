@@ -44,7 +44,8 @@ function Column({
 }) {
 	return (
 		<nav aria-label={title} className={cn('flex flex-col gap-2', className)}>
-			<h2 className="text-fg text-sm font-bold">{title}</h2>
+			{/* Not a heading: the same footer on every page would add 4 identical h2s to each outline. */}
+			<p className="text-fg text-sm font-bold">{title}</p>
 			<ul className="flex flex-col">{children}</ul>
 		</nav>
 	)
@@ -98,6 +99,11 @@ export function SiteFooter() {
 						</Column>
 					))}
 					<Column title="Projeto" className="col-span-2 xl:col-span-1">
+						<li>
+							<Link href={'/sobre' as Route} className={linkClass}>
+								Sobre o 4People
+							</Link>
+						</li>
 						<li>
 							<ExternalLink href={REPOSITORY_URL}>Código no GitHub</ExternalLink>
 						</li>

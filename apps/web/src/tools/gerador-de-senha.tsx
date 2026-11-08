@@ -379,7 +379,7 @@ export default function PasswordGenerator() {
 	const kind = values.kind
 
 	return (
-		<ToolLayout>
+		<ToolLayout resultFirst>
 			<FormCard title="Escolha como quer" onSubmit={() => form.handleSubmit()} actions={null}>
 				<form.AppField name="kind">
 					{(field) => <field.RadioField label="Tipo de senha" options={KINDS} />}

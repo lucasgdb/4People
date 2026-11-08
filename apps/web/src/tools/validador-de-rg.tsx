@@ -8,7 +8,7 @@ export default function RgValidator() {
 	return (
 		<DocumentValidator
 			label="RG"
-			placeholder="Ex: 24.678.131-4"
+			placeholder="Ex: 24.678.131-2"
 			digits={9}
 			mask={MASKS.rg}
 			validate={validateRG}

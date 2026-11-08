@@ -15,6 +15,8 @@ type AlgorithmImport = { module: string; functionName: string }
 const IMPORTED_THROUGH_SHARED_SCREEN: Record<string, AlgorithmImport> = {
 	'somar-em-data': { module: 'dates', functionName: 'shiftDate' },
 	'subtrair-em-data': { module: 'dates', functionName: 'shiftDate' },
+	'cotacao-de-moedas': { module: 'currency', functionName: 'crossRate' },
+	'dolar-hoje': { module: 'currency', functionName: 'crossRate' },
 }
 
 const LAZY_IMPORT = /\{([^{}]*)\}\s*=\s*await\s+import\(\s*'@\/lib\/algorithms\/([\w-]+)'/

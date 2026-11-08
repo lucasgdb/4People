@@ -14,27 +14,37 @@ export type Validation = { valid: boolean; formatted: string; detail?: string | 
 /** Exact length, or [min, max] (cards have 13 to 19 digits). */
 type DigitCount = number | readonly [number, number]
 
-const countDigits = (value: string) => value.replace(/[^\dXx]/g, '').length
+/** `alphanumeric` counts letters too (the CNPJ since July 2026). */
+type Characters = 'digits' | 'alphanumeric'
 
-function hasDigitCount(value: string, digits: DigitCount): boolean {
-	const length = countDigits(value)
+const countCharacters = (value: string, characters: Characters) =>
+	value.replace(characters === 'alphanumeric' ? /[^\dA-Za-z]/g : /[^\dXx]/g, '').length
+
+function hasDigitCount(value: string, digits: DigitCount, characters: Characters): boolean {
+	const length = countCharacters(value, characters)
 	if (typeof digits === 'number') return length === digits
 	const [min, max] = digits
 	return length >= min && length <= max
 }
 
-function digitCountMessage(label: string, digits: DigitCount): string {
+function digitCountMessage(label: string, digits: DigitCount, characters: Characters): string {
+	if (characters === 'alphanumeric') {
+		return `O ${label} deve ter ${digits} caracteres (letras e números).`
+	}
 	if (typeof digits === 'number') return `O ${label} deve ter ${digits} dígitos.`
 	return `O ${label} deve ter de ${digits[0]} a ${digits[1]} dígitos.`
 }
 
-function documentSchema(label: string, digits: DigitCount) {
+function documentSchema(label: string, digits: DigitCount, characters: Characters) {
 	return z.object({
 		document: z
 			.string()
 			.trim()
 			.min(1, `Informe o ${label}.`)
-			.refine((value) => hasDigitCount(value, digits), digitCountMessage(label, digits)),
+			.refine(
+				(value) => hasDigitCount(value, digits, characters),
+				digitCountMessage(label, digits, characters),
+			),
 	})
 }
 
@@ -46,17 +56,22 @@ export function DocumentValidator({
 	label,
 	placeholder,
 	digits,
+	characters = 'digits',
 	mask,
 	validate,
 }: {
 	label: string
 	placeholder: string
 	digits: DigitCount
+	characters?: Characters
 	mask: Mask
 	validate: (value: string) => Validation
 }) {
 	const [result, setResult] = useState<Validation | null>(null)
-	const schema = useMemo(() => documentSchema(label, digits), [label, digits])
+	const schema = useMemo(
+		() => documentSchema(label, digits, characters),
+		[label, digits, characters],
+	)
 	const form = useToolForm({
 		schema,
 		defaultValues: { document: '' },

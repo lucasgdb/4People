@@ -5,8 +5,8 @@
  *   FILES     every file under /_next/static (scripts, styles, fonts).
  *
  * Install: downloads the whole site in the background (files an older version already has are
- * copied from its cache, not downloaded again), then takes over. With Save-Data on, only the
- * essentials. So after one visit online, every tool opens offline, and each deploy refreshes it.
+ * copied from its cache, not downloaded again), then takes over. With Save-Data on or on 2G/3G,
+ * only the essentials. So after one visit online, every tool opens offline, and each deploy refreshes it.
  * Online, everything comes from the server (never the saved copy); offline, the saved copy (or
  * /offline for a page that was never saved).
  * Third-party APIs (CEP, IP, banks, quotes) are never intercepted: they need the network anyway.
@@ -36,13 +36,19 @@ async function saveAll(cache, urls, reuse) {
 	await Promise.all(Array.from({ length: 6 }, worker))
 }
 
+/** Data saver on, or a 2G/3G link: keep only the essentials instead of the whole site. */
+function isConstrainedConnection() {
+	const connection = self.navigator.connection
+	if (!connection) return false
+	return connection.saveData === true || /(^|-)(2g|3g)$/.test(connection.effectiveType ?? '')
+}
+
 self.addEventListener('install', (event) => {
 	event.waitUntil(
 		(async () => {
 			const cache = await caches.open(CACHE)
 			await cache.addAll(ESSENTIALS)
-			const saveData = self.navigator.connection?.saveData === true
-			if (!saveData) {
+			if (!isConstrainedConnection()) {
 				// Hashed files are the same across versions: reuse them. Pages are rebuilt every deploy.
 				await saveAll(cache, FILES, true)
 				await saveAll(cache, PAGES, false)

@@ -104,7 +104,7 @@ export default function PeopleGenerator() {
 	const json = people ? JSON.stringify(singlePerson ?? people, null, 2) : ''
 
 	return (
-		<ToolLayout>
+		<ToolLayout resultFirst>
 			<FormCard
 				title="Escolha como quer"
 				onSubmit={() => form.handleSubmit()}

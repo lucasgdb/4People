@@ -8,12 +8,23 @@ import { downloadText } from '@/lib/format'
 /** Matches the `xl` breakpoint, where the form and the result stop being side by side. */
 const SINGLE_COLUMN_QUERY = '(max-width: 79.99rem)'
 
+type ToolLayoutProps = {
+	children: ReactNode
+	className?: string
+	/**
+	 * Below xl, show the second card (the result) before the form: generators already have a result
+	 * when the page opens, and on a phone it would otherwise sit below the fold.
+	 */
+	resultFirst?: boolean
+}
+
 /** Two cards side by side on wide screens, stacked below. Every direct child gets the card style. */
-export function ToolLayout({ children, className }: { children: ReactNode; className?: string }) {
+export function ToolLayout({ children, className, resultFirst = false }: ToolLayoutProps) {
 	return (
 		<div
 			className={cn(
 				'[&>*]:rounded-panel [&>*]:border-border [&>*]:bg-surface grid items-start gap-5 xl:grid-cols-2 [&>*]:min-w-0 [&>*]:border',
+				resultFirst && 'max-xl:[&>*:nth-child(2)]:order-first',
 				className,
 			)}
 		>

@@ -195,3 +195,25 @@ export function currencyDecimals(currency: Currency): number {
 			.maximumFractionDigits ?? 2
 	)
 }
+
+/** Quotes in a JSON-safe shape, so the server can render them and hand them to the browser. */
+export type QuoteSnapshot = {
+	fetchedAt: number
+	quotes: Array<[string, Omit<Quote, 'updatedAt'> & { updatedAt: number }]>
+}
+
+export function snapshotFromQuotes(quotes: Map<string, Quote>, fetchedAt: number): QuoteSnapshot {
+	return {
+		fetchedAt,
+		quotes: [...quotes].map(([id, quote]) => [
+			id,
+			{ ...quote, updatedAt: quote.updatedAt.getTime() },
+		]),
+	}
+}
+
+export function quotesFromSnapshot(snapshot: QuoteSnapshot): Map<string, Quote> {
+	return new Map(
+		snapshot.quotes.map(([id, quote]) => [id, { ...quote, updatedAt: new Date(quote.updatedAt) }]),
+	)
+}

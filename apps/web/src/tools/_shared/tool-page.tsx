@@ -1,16 +1,22 @@
 import { Accordion } from '@4people/ui'
-import { BookOpen, CircleHelp, Globe, ShieldCheck } from 'lucide-react'
-import type { Metadata } from 'next'
+import { ArrowRight, BookOpen, CircleHelp, Globe, ShieldCheck } from 'lucide-react'
+import type { Metadata, Route } from 'next'
+import Link from 'next/link'
 import type { ComponentType, ReactNode } from 'react'
-import { TOOLS, toolsIn } from '@/catalog/catalog'
-import { TOOL_CONTENT, type ToolContent } from '@/catalog/content'
+import { companionOf, TOOLS, toolsIn } from '@/catalog/catalog'
+import { type HowTo, TOOL_CONTENT, type ToolContent } from '@/catalog/content'
 import { GithubIcon } from '@/components/github-icon'
 import { JsonLd } from '@/components/json-ld'
 import { ScreenHeader, ToolTable } from '@/components/screen'
 import { ShareButton } from '@/components/share-button'
 import { ToolIcon } from '@/components/tool-icons'
 import { REPOSITORY_URL } from '@/lib/site'
-import { breadcrumbSchema, faqSchema, toolSchema } from '@/lib/structured-data'
+import {
+	type ApplicationCategory,
+	breadcrumbSchema,
+	faqSchema,
+	toolSchema,
+} from '@/lib/structured-data'
 import { type ToolSource, toolSource } from './source'
 
 /** Tools that call a public API; every other tool runs entirely in the browser. */
@@ -39,17 +45,44 @@ function sourceUrl(source: ToolSource) {
 	return `${REPOSITORY_URL}/blob/main/${source.path}${lineAnchor}`
 }
 
+/** schema.org category: what kind of app each topic (or tool) is. */
+const CATEGORY_BY_TOPIC: Record<string, ApplicationCategory> = {
+	'funcoes-de-texto': 'UtilitiesApplication',
+	utilitarios: 'UtilitiesApplication',
+	'calculo-de-areas': 'EducationalApplication',
+	'calculo-de-datas': 'UtilitiesApplication',
+	calculadoras: 'EducationalApplication',
+}
+const CATEGORY_BY_TOOL: Record<string, ApplicationCategory> = {
+	'cotacao-de-moedas': 'FinanceApplication',
+	'juros-compostos': 'FinanceApplication',
+	porcentagem: 'FinanceApplication',
+	'calculadora-de-imc': 'HealthApplication',
+}
+
+function applicationCategory(tool: Tool): ApplicationCategory {
+	return (
+		CATEGORY_BY_TOOL[tool.slug] ?? CATEGORY_BY_TOPIC[tool.section.slug] ?? 'DeveloperApplication'
+	)
+}
+
+const ogImagePath = (id: string) => `/og/${id}`
+
+const longDate = new Intl.DateTimeFormat('pt-BR', { dateStyle: 'long', timeZone: 'UTC' })
+const formatUpdatedAt = (isoDate: string) => longDate.format(new Date(`${isoDate}T00:00:00Z`))
+
 export function toolMetadata(id: ToolId): Metadata {
-	const { tool } = requireTool(id)
-	const title = `${tool.name} online e grátis`
-	const ogImage = { url: `/og/${id}`, width: 1200, height: 630, alt: tool.name }
+	const { tool, content } = requireTool(id)
+	const title = content.title ?? `${tool.name} online e grátis`
+	const description = content.metaDescription ?? tool.description
+	const ogImage = { url: ogImagePath(id), width: 1200, height: 630, alt: tool.name }
 	return {
 		title,
-		description: tool.description,
+		description,
 		alternates: { canonical: tool.href },
 		openGraph: {
 			title,
-			description: tool.description,
+			description,
 			url: tool.href,
 			type: 'website',
 			images: [ogImage],
@@ -57,7 +90,7 @@ export function toolMetadata(id: ToolId): Metadata {
 		twitter: {
 			card: 'summary_large_image',
 			title,
-			description: tool.description,
+			description,
 			images: [ogImage.url],
 		},
 	}
@@ -90,6 +123,36 @@ function SectionTitle({ id, icon, aside, children }: SectionTitleProps) {
 	)
 }
 
+/** "Precisa validar? Validador de CPF →": the generator and the validator of a document link each other. */
+function CompanionLink({ slug }: { slug: string }) {
+	const companion = companionOf(slug)
+	if (!companion) return null
+	const prompt = companion.slug.startsWith('validador')
+		? 'Precisa conferir um número?'
+		: 'Precisa de números para testar?'
+	return (
+		<Link
+			href={companion.href as Route}
+			className="rounded-panel border-border bg-surface hover:border-accent/55 focus-visible:ring-ring group flex items-center gap-4 border p-4 transition-[border-color] duration-(--ds-motion) outline-none focus-visible:ring-4 sm:p-5"
+		>
+			<span
+				aria-hidden="true"
+				className="bg-accent-soft text-accent grid size-10 shrink-0 place-items-center rounded-[12px]"
+			>
+				<ToolIcon slug={companion.slug} size={20} />
+			</span>
+			<span className="flex min-w-0 flex-1 flex-col">
+				<span className="text-fg-muted text-sm">{prompt}</span>
+				<span className="text-fg font-semibold">{companion.name}</span>
+			</span>
+			<ArrowRight
+				aria-hidden="true"
+				className="text-accent size-5 shrink-0 transition-transform duration-(--ds-motion) group-hover:translate-x-0.5"
+			/>
+		</Link>
+	)
+}
+
 function FeatureList({ usesNetwork }: { usesNetwork: boolean }) {
 	const features = [
 		'Grátis',
@@ -114,14 +177,50 @@ function FeatureList({ usesNetwork }: { usesNetwork: boolean }) {
 	)
 }
 
+function HowToSteps({ howTo }: { howTo: HowTo }) {
+	return (
+		<div className="flex flex-col gap-3">
+			<h3 className="text-fg text-lg font-bold">{howTo.title}</h3>
+			<ol className="marker:text-accent flex list-decimal flex-col gap-2 pl-5 leading-7 wrap-anywhere">
+				{howTo.steps.map((step) => (
+					<li key={step} className="text-fg pl-1 text-pretty">
+						{step}
+					</li>
+				))}
+			</ol>
+			{howTo.example ? (
+				<p className="rounded-control bg-surface-muted text-fg px-4 py-3 leading-7 wrap-anywhere">
+					<strong className="font-semibold">Exemplo:</strong> {howTo.example}
+				</p>
+			) : null}
+			{howTo.source ? (
+				<p className="text-fg-muted text-sm">
+					Fonte:{' '}
+					<a
+						href={howTo.source.url}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="text-accent-soft-fg font-semibold underline-offset-4 hover:underline"
+					>
+						{howTo.source.label}
+						<span className="sr-only"> (abre em nova aba)</span>
+					</a>
+				</p>
+			) : null}
+		</div>
+	)
+}
+
 type HowItWorksProps = {
 	answer: string
 	formula?: string
+	howTo?: HowTo
+	updatedAt?: string
 	usesNetwork: boolean
 	source: ToolSource
 }
 
-function HowItWorks({ answer, formula, usesNetwork, source }: HowItWorksProps) {
+function HowItWorks({ answer, formula, howTo, updatedAt, usesNetwork, source }: HowItWorksProps) {
 	const sourceLabel = source.file.endsWith('.ts')
 		? 'Ver o código do cálculo'
 		: 'Ver o código desta ferramenta'
@@ -131,7 +230,7 @@ function HowItWorks({ answer, formula, usesNetwork, source }: HowItWorksProps) {
 			<SectionTitle id="como-funciona" icon={<BookOpen />}>
 				Como funciona
 			</SectionTitle>
-			<p className="text-fg text-base leading-7 text-pretty">{answer}</p>
+			<p className="text-fg text-base leading-7 text-pretty wrap-anywhere">{answer}</p>
 
 			{formula ? (
 				<div className="rounded-control bg-accent-soft flex flex-col gap-1 px-4 py-3">
@@ -147,7 +246,14 @@ function HowItWorks({ answer, formula, usesNetwork, source }: HowItWorksProps) {
 				</div>
 			) : null}
 
+			{howTo ? <HowToSteps howTo={howTo} /> : null}
+
 			<div className="border-border flex flex-col gap-2 border-t pt-4">
+				{updatedAt ? (
+					<p className="text-fg-muted text-sm">
+						Atualizado em <time dateTime={updatedAt}>{formatUpdatedAt(updatedAt)}</time>.
+					</p>
+				) : null}
 				<p className="text-fg-muted flex items-start gap-2 text-sm">
 					{usesNetwork ? (
 						<>
@@ -219,6 +325,9 @@ function toolStructuredData(tool: Tool, content: ToolContent) {
 			description: tool.description,
 			path: tool.href,
 			answer: content.answer,
+			image: ogImagePath(tool.id),
+			category: applicationCategory(tool),
+			dateModified: content.updatedAt,
 		}),
 		faqSchema(content.faq),
 	]
@@ -267,6 +376,7 @@ export function ToolPage({
 					<p className="text-fg-muted max-w-2xl text-[1.0625rem] text-pretty">{tool.description}</p>
 				</ScreenHeader>
 				<ToolComponent />
+				<CompanionLink slug={tool.slug} />
 			</div>
 
 			<section
@@ -276,6 +386,8 @@ export function ToolPage({
 				<HowItWorks
 					answer={content.answer}
 					formula={formula}
+					howTo={content.howTo}
+					updatedAt={content.updatedAt}
 					usesNetwork={usesNetwork}
 					source={toolSource(tool.slug)}
 				/>

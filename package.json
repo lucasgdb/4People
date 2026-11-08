@@ -15,7 +15,8 @@
 		"format": "biome format --write .",
 		"typecheck": "pnpm -r typecheck",
 		"test": "pnpm -r test",
-		"gen:routes": "pnpm --filter @4people/web gen:routes"
+		"gen:routes": "pnpm --filter @4people/web gen:routes",
+		"indexnow": "pnpm --filter ./apps/web indexnow"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.6.6",

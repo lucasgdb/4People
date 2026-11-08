@@ -435,7 +435,7 @@ export default function CardGenerator() {
 	const singleCard = displayedCards?.length === 1 ? displayedCards[0] : null
 
 	return (
-		<ToolLayout>
+		<ToolLayout resultFirst>
 			<FormCard
 				title="Escolha como quer"
 				onSubmit={() => form.handleSubmit()}

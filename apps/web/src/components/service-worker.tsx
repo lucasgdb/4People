@@ -20,14 +20,32 @@ export function ServiceWorker() {
 			}
 		}
 		navigator.serviceWorker.addEventListener('message', onMessage)
-		navigator.serviceWorker
-			// updateViaCache "none": the browser always asks the server for /sw.js, so a deploy is
-			// noticed on the next visit.
-			.register('/sw.js', { scope: '/', updateViaCache: 'none' })
-			.catch(() => {
-				// Installability and offline are an enhancement; the site works without them.
-			})
-		return () => navigator.serviceWorker.removeEventListener('message', onMessage)
+
+		// Registered once the page has loaded and the browser is idle, so the background download of
+		// the site never competes with the first visit.
+		const register = () =>
+			navigator.serviceWorker
+				// updateViaCache "none": the browser always asks the server for /sw.js, so a deploy is
+				// noticed on the next visit.
+				.register('/sw.js', { scope: '/', updateViaCache: 'none' })
+				.catch(() => {
+					// Installability and offline are an enhancement; the site works without them.
+				})
+		const whenIdle = () => {
+			// Safari has no requestIdleCallback: a short delay after load does the same job there.
+			if (typeof window.requestIdleCallback === 'function') {
+				window.requestIdleCallback(() => register(), { timeout: 5000 })
+			} else {
+				setTimeout(register, 2000)
+			}
+		}
+		if (document.readyState === 'complete') whenIdle()
+		else window.addEventListener('load', whenIdle, { once: true })
+
+		return () => {
+			navigator.serviceWorker.removeEventListener('message', onMessage)
+			window.removeEventListener('load', whenIdle)
+		}
 	}, [])
 	return null
 }

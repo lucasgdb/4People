@@ -7,7 +7,7 @@ import { JsonLd } from '@/components/json-ld'
 import { ScreenHeader, ToolTable } from '@/components/screen'
 import { SiteFooter } from '@/components/shell/site-footer'
 import { SiteHeader } from '@/components/shell/site-header'
-import { breadcrumbSchema, itemListSchema } from '@/lib/structured-data'
+import { breadcrumbSchema, collectionPageSchema } from '@/lib/structured-data'
 
 const title = 'Todas as ferramentas'
 const description = `As ${TOOLS.length} ferramentas do 4People, de Computação e de Matemática, agrupadas por tópico. Grátis, sem cadastro e no navegador.`
@@ -38,10 +38,12 @@ export default function AllToolsPage() {
 							{ name: 'Início', path: '/' },
 							{ name: title, path: '/ferramentas' },
 						]),
-						itemListSchema(
-							title,
-							TOOLS.map((tool) => ({ name: tool.name, path: tool.href })),
-						),
+						collectionPageSchema({
+							name: title,
+							description,
+							path: '/ferramentas',
+							items: TOOLS.map((tool) => ({ name: tool.name, path: tool.href })),
+						}),
 					]}
 				/>
 				<ScreenHeader crumbs={[{ label: 'Início', href: '/' }, { label: title }]} title={title}>

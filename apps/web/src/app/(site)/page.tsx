@@ -28,6 +28,8 @@ import { faqSchema } from '@/lib/structured-data'
  * visit, so the page arrives with its own number.
  */
 export const dynamic = 'force-dynamic'
+/** Rendered next to the Brazilian audience instead of the default US region. */
+export const preferredRegion = 'gru1'
 
 export const metadata: Metadata = {
 	title: { absolute: '4People: ferramentas online gratuitas para pessoas' },

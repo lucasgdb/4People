@@ -30,6 +30,7 @@ const pages = [
 	'/',
 	'/offline',
 	'/ferramentas',
+	'/sobre',
 	...CATEGORIES.flatMap((category) => [
 		`/${category.slug}`,
 		...category.sections.map((section) => `/${category.slug}/${section.slug}`),

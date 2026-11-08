@@ -1,7 +1,18 @@
 import type { Faq } from '@/catalog/content'
-import { AUTHOR, absoluteUrl, REPOSITORY_URL, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from './site'
+import {
+	AUTHOR,
+	absoluteUrl,
+	FOUNDING_YEAR,
+	LICENSE_URL,
+	REPOSITORY_URL,
+	SITE_DESCRIPTION,
+	SITE_NAME,
+	SITE_URL,
+} from './site'
 
-const PUBLISHER_ID = `${SITE_URL}/#person`
+/** The same @id lucasbittencourt.dev uses, so both sites describe one person. */
+const PERSON_ID = `${AUTHOR.url}/#person`
+const ORGANIZATION_ID = `${SITE_URL}/#organization`
 const WEBSITE_ID = `${SITE_URL}/#website`
 
 export const websiteSchema = () => ({
@@ -14,14 +25,27 @@ export const websiteSchema = () => ({
 			name: SITE_NAME,
 			description: SITE_DESCRIPTION,
 			inLanguage: 'pt-BR',
-			publisher: { '@id': PUBLISHER_ID },
+			publisher: { '@id': ORGANIZATION_ID },
+		},
+		{
+			'@type': 'Organization',
+			'@id': ORGANIZATION_ID,
+			name: SITE_NAME,
+			url: absoluteUrl('/'),
+			logo: absoluteUrl('/icons/icon-512.png'),
+			description: SITE_DESCRIPTION,
+			foundingDate: FOUNDING_YEAR,
+			founder: { '@id': PERSON_ID },
+			sameAs: [REPOSITORY_URL],
 		},
 		{
 			'@type': 'Person',
-			'@id': PUBLISHER_ID,
+			'@id': PERSON_ID,
 			name: AUTHOR.name,
+			alternateName: AUTHOR.alternateName,
+			jobTitle: AUTHOR.jobTitle,
 			url: AUTHOR.url,
-			sameAs: [AUTHOR.github, REPOSITORY_URL],
+			sameAs: [AUTHOR.github, AUTHOR.linkedin],
 		},
 	],
 })
@@ -49,11 +73,21 @@ export const faqSchema = (faq: Faq[]) => ({
 	})),
 })
 
+export type ApplicationCategory =
+	| 'DeveloperApplication'
+	| 'EducationalApplication'
+	| 'FinanceApplication'
+	| 'HealthApplication'
+	| 'UtilitiesApplication'
+
 export const toolSchema = (tool: {
 	name: string
 	description: string
 	path: string
 	answer: string
+	image: string
+	category: ApplicationCategory
+	dateModified?: string
 }) => ({
 	'@context': 'https://schema.org',
 	'@type': 'WebApplication',
@@ -61,18 +95,26 @@ export const toolSchema = (tool: {
 	url: absoluteUrl(tool.path),
 	description: tool.answer,
 	abstract: tool.description,
-	applicationCategory: 'UtilitiesApplication',
+	image: absoluteUrl(tool.image),
+	applicationCategory: tool.category,
 	operatingSystem: 'Qualquer navegador moderno',
 	browserRequirements: 'Requer JavaScript.',
 	inLanguage: 'pt-BR',
 	isAccessibleForFree: true,
-	offers: { '@type': 'Offer', price: '0', priceCurrency: 'BRL' },
+	license: LICENSE_URL,
+	offers: {
+		'@type': 'Offer',
+		price: '0',
+		priceCurrency: 'BRL',
+		availability: 'https://schema.org/InStock',
+	},
+	...(tool.dateModified ? { dateModified: tool.dateModified } : {}),
 	isPartOf: { '@id': WEBSITE_ID },
-	author: { '@id': PUBLISHER_ID },
+	author: { '@id': PERSON_ID },
+	publisher: { '@id': ORGANIZATION_ID },
 })
 
-export const itemListSchema = (name: string, items: { name: string; path: string }[]) => ({
-	'@context': 'https://schema.org',
+const itemList = (name: string, items: { name: string; path: string }[]) => ({
 	'@type': 'ItemList',
 	name,
 	numberOfItems: items.length,
@@ -82,4 +124,21 @@ export const itemListSchema = (name: string, items: { name: string; path: string
 		name: item.name,
 		url: absoluteUrl(item.path),
 	})),
+})
+
+/** A listing page (all tools, an area, a topic) with its tools as the main entity. */
+export const collectionPageSchema = (page: {
+	name: string
+	description: string
+	path: string
+	items: { name: string; path: string }[]
+}) => ({
+	'@context': 'https://schema.org',
+	'@type': 'CollectionPage',
+	name: page.name,
+	description: page.description,
+	url: absoluteUrl(page.path),
+	inLanguage: 'pt-BR',
+	isPartOf: { '@id': WEBSITE_ID },
+	mainEntity: itemList(page.name, page.items),
 })

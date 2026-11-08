@@ -68,7 +68,8 @@ export const CATEGORIES = [
 					{
 						slug: 'gerador-de-hash',
 						name: 'Gerador de Hash',
-						description: 'Calcule o hash SHA-1, SHA-256, SHA-384 ou SHA-512 de um texto.',
+						description:
+							'Calcule o hash MD5, SHA-1, SHA-256, SHA-384, SHA-512 ou CRC32 de um texto.',
 					},
 					{
 						slug: 'gerador-de-cnh',
@@ -505,6 +506,12 @@ export const CATEGORIES = [
 						description:
 							'Dólar, euro, bitcoin e outras moedas em tempo real, com conversor entre qualquer par.',
 					},
+					{
+						slug: 'dolar-hoje',
+						name: 'Dólar Hoje',
+						description:
+							'Cotação do dólar comercial e turismo agora, com a variação do dia e conversor para reais.',
+					},
 				],
 			},
 		],
@@ -764,6 +771,31 @@ export const toolsIn = (categorySlug: string, sectionSlug?: string) =>
 		(tool) =>
 			tool.category.slug === categorySlug && (!sectionSlug || tool.section.slug === sectionSlug),
 	)
+
+/** Tools that complete each other: every generator points to its validator and back. */
+export const COMPANION_TOOL: Record<string, string> = {
+	'gerador-de-cpf': 'validador-de-cpf',
+	'validador-de-cpf': 'gerador-de-cpf',
+	'gerador-de-cnpj': 'validador-de-cnpj',
+	'validador-de-cnpj': 'gerador-de-cnpj',
+	'gerador-de-rg': 'validador-de-rg',
+	'validador-de-rg': 'gerador-de-rg',
+	'gerador-de-cnh': 'validador-de-cnh',
+	'validador-de-cnh': 'gerador-de-cnh',
+	'gerador-de-pis': 'validador-de-pis',
+	'validador-de-pis': 'gerador-de-pis',
+	'gerador-de-renavam': 'validador-de-renavam',
+	'validador-de-renavam': 'gerador-de-renavam',
+	'gerador-de-titulo-de-eleitor': 'validador-de-titulo-de-eleitor',
+	'validador-de-titulo-de-eleitor': 'gerador-de-titulo-de-eleitor',
+	'gerador-de-cartao-de-credito': 'validador-de-cartao-de-credito',
+	'validador-de-cartao-de-credito': 'gerador-de-cartao-de-credito',
+}
+
+export const companionOf = (slug: string) => {
+	const companionSlug = COMPANION_TOOL[slug]
+	return companionSlug ? TOOLS.find((tool) => tool.slug === companionSlug) : undefined
+}
 
 /** The most used tools: suggested when the search opens and listed first on the home page. */
 export const POPULAR_TOOLS: ToolEntry[] = [

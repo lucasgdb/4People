@@ -9,7 +9,8 @@
 		"start": "next start",
 		"typecheck": "next typegen && tsc --noEmit",
 		"test": "node --experimental-strip-types --no-warnings scripts/gen-routes.ts --check && node --test --experimental-strip-types \"src/**/*.test.ts\"",
-		"gen:routes": "node --experimental-strip-types --no-warnings scripts/gen-routes.ts"
+		"gen:routes": "node --experimental-strip-types --no-warnings scripts/gen-routes.ts",
+		"indexnow": "node --experimental-strip-types --no-warnings scripts/indexnow.ts"
 	},
 	"dependencies": {
 		"@4people/ui": "workspace:*",

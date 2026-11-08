@@ -108,8 +108,15 @@ const DEFAULT_NOTE =
 const schema = z.object({
 	format: z.enum(['punctuated', 'digits']),
 	state: z.string(),
+	variant: z.string(),
 	amount: z.number().int().min(1).max(20),
 })
+
+/** A choice between kinds of the same document (numeric or alphanumeric CNPJ). */
+export type VariantOptions = {
+	label: string
+	options: ReadonlyArray<{ value: string; label: string; hint?: string }>
+}
 
 export type StateOptions = {
 	label: string
@@ -129,25 +136,35 @@ export function DocumentGenerator({
 	generate,
 	examples,
 	states,
+	variants,
 	note = DEFAULT_NOTE,
 }: {
 	label: string
 	plural: string
 	filename: string
 	/** Returns one value, punctuated when the document has punctuation. */
-	generate: (options: { state?: string }) => string
-	/** Format patterns, e.g. `000.000.000-00` and `00000000000`; `separators` names the first option. */
-	examples?: { punctuated: string; digits: string; separators?: string }
+	generate: (options: { state?: string; variant?: string }) => string
+	/**
+	 * Format patterns, e.g. `000.000.000-00` and `00000000000`; `separators` names the first option
+	 * and `plain` the second (default "Só números").
+	 */
+	examples?: { punctuated: string; digits: string; separators?: string; plain?: string }
 	states?: StateOptions
+	variants?: VariantOptions
 	note?: string
 }) {
 	const [values, setValues] = useState<string[] | null>(null)
 	const form = useToolForm({
 		schema,
-		defaultValues: { format: 'punctuated', state: 'any', amount: 4 },
-		onSubmit: ({ state, amount }) => {
+		defaultValues: {
+			format: 'punctuated',
+			state: 'any',
+			variant: variants?.options[0]?.value ?? '',
+			amount: 4,
+		},
+		onSubmit: ({ state, variant, amount }) => {
 			const chosenState = state === 'any' ? undefined : state
-			setValues(Array.from({ length: amount }, () => generate({ state: chosenState })))
+			setValues(Array.from({ length: amount }, () => generate({ state: chosenState, variant })))
 		},
 	})
 	const format = useStore(form.store, (state) => state.values.format)
@@ -160,7 +177,7 @@ export function DocumentGenerator({
 	const regenerate = { onChange: () => form.handleSubmit() }
 
 	return (
-		<ToolLayout>
+		<ToolLayout resultFirst>
 			<FormCard
 				title="Escolha como quer"
 				onSubmit={() => form.handleSubmit()}
@@ -183,7 +200,11 @@ export function DocumentGenerator({
 										label: examples.separators ?? 'Com pontos',
 										hint: examples.punctuated,
 									},
-									{ value: 'digits', label: 'Só números', hint: examples.digits },
+									{
+										value: 'digits',
+										label: examples.plain ?? 'Só números',
+										hint: examples.digits,
+									},
 								]}
 							/>
 						)}
@@ -193,6 +214,11 @@ export function DocumentGenerator({
 						O {label} é escrito só com números, sem pontuação.
 					</p>
 				)}
+				{variants ? (
+					<form.AppField name="variant" listeners={regenerate}>
+						{(field) => <field.RadioField label={variants.label} options={variants.options} />}
+					</form.AppField>
+				) : null}
 				{states ? (
 					<form.AppField name="state" listeners={regenerate}>
 						{(field) => (

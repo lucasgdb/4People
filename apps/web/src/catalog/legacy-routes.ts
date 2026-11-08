@@ -114,7 +114,18 @@ export function legacyRedirects() {
 			`/${old(tool.category.slug)}/${old(tool.section.slug)}/${old(tool.slug)}`,
 			tool.href,
 		])
+	pairs.push(...ALIASES)
+	// `{/}?` takes the trailing-slash form too, so an old link reaches its page in one hop.
 	return pairs
 		.filter(([source, destination]) => source !== destination)
-		.map(([source, destination]) => ({ source, destination, permanent: true }))
+		.map(([source, destination]) => ({ source: `${source}{/}?`, destination, permanent: true }))
 }
+
+/** Short paths people type or link to. */
+const ALIASES: Array<[string, string]> = [
+	['/tools', '/ferramentas'],
+	['/ferramenta', '/ferramentas'],
+	['/mathematics', '/matematica'],
+	['/computing', '/computacao'],
+	['/about', '/sobre'],
+]

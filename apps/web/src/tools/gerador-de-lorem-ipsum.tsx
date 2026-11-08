@@ -36,7 +36,7 @@ export default function LoremIpsum() {
 	const regenerate = { onChange: () => form.handleSubmit() }
 
 	return (
-		<ToolLayout>
+		<ToolLayout resultFirst>
 			<FormCard
 				title="Escolha como quer"
 				onSubmit={() => form.handleSubmit()}

@@ -2,10 +2,11 @@ import { ArrowRight } from 'lucide-react'
 import type { Metadata, Route } from 'next'
 import Link from 'next/link'
 import { getCategory, getSection, toolsIn } from '@/catalog/catalog'
+import { sectionIntro } from '@/catalog/content'
 import { Icon } from '@/components/icon'
 import { JsonLd } from '@/components/json-ld'
 import { ScreenHeader, ToolTable } from '@/components/screen'
-import { breadcrumbSchema, itemListSchema } from '@/lib/structured-data'
+import { breadcrumbSchema, collectionPageSchema } from '@/lib/structured-data'
 
 function requireCategory(slug: string) {
 	const category = getCategory(slug)
@@ -42,10 +43,12 @@ export function CategoryPage({ slug }: { slug: string }) {
 						{ name: 'Início', path: '/' },
 						{ name: category.name, path: `/${category.slug}` },
 					]),
-					itemListSchema(
-						`Ferramentas de ${category.name}`,
-						tools.map((tool) => ({ name: tool.name, path: tool.href })),
-					),
+					collectionPageSchema({
+						name: `Ferramentas de ${category.name}`,
+						description: category.description,
+						path: `/${category.slug}`,
+						items: tools.map((tool) => ({ name: tool.name, path: tool.href })),
+					}),
 				]}
 			/>
 			<ScreenHeader
@@ -110,15 +113,52 @@ function requireSection(categorySlug: string, sectionSlug: string) {
 	}
 }
 
+const META_DESCRIPTION_LIMIT = 155
+
+const countLabel = (count: number) => (count === 1 ? '1 ferramenta' : `${count} ferramentas`)
+
+/** "<n> ferramentas de geradores grátis: Gerador de CPF, Gerador de CNPJ… e mais.", up to 155 chars. */
+function topicDescription(topicName: string, tools: { name: string }[]) {
+	const lead = `${countLabel(tools.length)} de ${topicName.toLowerCase()} grátis e sem cadastro: `
+	let names = ''
+	for (const tool of tools) {
+		const next = names ? `${names}, ${tool.name}` : tool.name
+		if (`${lead}${next} e mais.`.length > META_DESCRIPTION_LIMIT) break
+		names = next
+	}
+	const ending = names.split(', ').length < tools.length ? ' e mais.' : '.'
+	return `${lead}${names}${ending}`
+}
+
+function TopicIntro({ name, paragraphs }: { name: string; paragraphs: string[] }) {
+	if (paragraphs.length === 0) return null
+	return (
+		<section
+			aria-labelledby="sobre-o-topico"
+			className="rounded-panel border-border bg-surface flex max-w-4xl flex-col gap-3 border p-5 sm:p-7"
+		>
+			<h2 id="sobre-o-topico" className="text-fg text-xl font-bold">
+				Sobre {name.toLowerCase()}
+			</h2>
+			{paragraphs.map((paragraph) => (
+				<p key={paragraph.slice(0, 40)} className="text-fg-muted leading-7 text-pretty">
+					{paragraph}
+				</p>
+			))}
+		</section>
+	)
+}
+
 /** Metadata of a section listing (e.g. /computacao/geradores). */
 export function sectionMetadata(categorySlug: string, sectionSlug: string): Metadata {
 	const { section, tools, path } = requireSection(categorySlug, sectionSlug)
-	const description = `${section.name} online e grátis: ${tools.map((tool) => tool.name).join(', ')}. Sem cadastro, direto no navegador.`
+	const description = topicDescription(section.name, tools)
+	const title = `${section.name} grátis: ${countLabel(tools.length)} online`
 	return {
-		title: section.name,
+		title,
 		description,
 		alternates: { canonical: path },
-		openGraph: { title: section.name, description, url: path },
+		openGraph: { title, description, url: path },
 	}
 }
 
@@ -140,10 +180,12 @@ export function SectionPage({
 						{ name: category.name, path: `/${category.slug}` },
 						{ name: section.name, path },
 					]),
-					itemListSchema(
-						section.name,
-						tools.map((tool) => ({ name: tool.name, path: tool.href })),
-					),
+					collectionPageSchema({
+						name: section.name,
+						description: topicDescription(section.name, tools),
+						path,
+						items: tools.map((tool) => ({ name: tool.name, path: tool.href })),
+					}),
 				]}
 			/>
 			<ScreenHeader
@@ -161,6 +203,7 @@ export function SectionPage({
 				</p>
 			</ScreenHeader>
 			<ToolTable tools={tools} />
+			<TopicIntro name={section.name} paragraphs={sectionIntro(category.slug, section.slug)} />
 			<nav aria-labelledby="outros-topicos" className="flex flex-col gap-3 pt-4">
 				<h2 id="outros-topicos" className="text-fg text-lg font-bold">
 					Outros tópicos de {category.name}

@@ -2,7 +2,7 @@
 
 import { Button, CopyButton, cn, Field, Input, Select } from '@4people/ui'
 import { ArrowLeftRight, Equal } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
 	CATEGORIES,
 	type Category,
@@ -44,6 +44,57 @@ function initialStateFor(category: Category): ConverterState {
 }
 
 /**
+ * The conversion lives in the URL (?grandeza=comprimento&de=in&para=cm&valor=10), so a link opens
+ * on that pair and value. Invalid or missing parameters fall back to the defaults.
+ */
+const URL_PARAMS = { category: 'grandeza', from: 'de', to: 'para', value: 'valor', side: 'lado' }
+
+function stateFromSearch(search: string): ConverterState | null {
+	const params = new URLSearchParams(search)
+	const category = categoryById(params.get(URL_PARAMS.category) ?? '')
+	if (!category) return null
+
+	const defaults = initialStateFor(category)
+	const fromId = params.get(URL_PARAMS.from) ?? ''
+	const toId = params.get(URL_PARAMS.to) ?? ''
+	return {
+		...defaults,
+		fromId: unitById(category, fromId) ? fromId : defaults.fromId,
+		toId: unitById(category, toId) ? toId : defaults.toId,
+		activeSide: params.get(URL_PARAMS.side) === 'para' ? 'to' : 'from',
+		text: params.get(URL_PARAMS.value) ?? defaults.text,
+	}
+}
+
+function searchFromState(state: ConverterState) {
+	const params = new URLSearchParams({
+		[URL_PARAMS.category]: state.categoryId,
+		[URL_PARAMS.from]: state.fromId,
+		[URL_PARAMS.to]: state.toId,
+		[URL_PARAMS.value]: state.text,
+	})
+	if (state.activeSide === 'to') params.set(URL_PARAMS.side, 'para')
+	return `?${params}`
+}
+
+/** Reads the conversion from the URL once, then keeps the URL in step (without new history entries). */
+function useConversionInUrl(state: ConverterState, setState: (state: ConverterState) => void) {
+	const readUrl = useRef(false)
+
+	useEffect(() => {
+		if (readUrl.current) return
+		readUrl.current = true
+		const fromUrl = stateFromSearch(window.location.search)
+		if (fromUrl) setState(fromUrl)
+	}, [setState])
+
+	useEffect(() => {
+		if (!readUrl.current) return
+		window.history.replaceState(null, '', searchFromState(state))
+	}, [state])
+}
+
+/**
  * Keeps only characters a number can have. A minus sign stays after an exponent (1e-7) and, where
  * negatives mean something (temperature, angle), at the start.
  */
@@ -70,6 +121,7 @@ function formatConverted(value: number | null): string {
  */
 export default function UnitConverter() {
 	const [state, setState] = useState<ConverterState>(() => initialStateFor(DEFAULT_CATEGORY))
+	useConversionInUrl(state, setState)
 	const category = categoryById(state.categoryId) ?? DEFAULT_CATEGORY
 	const from = unitById(category, state.fromId) ?? (category.units[0] as Unit)
 	const to = unitById(category, state.toId) ?? (category.units[1] as Unit)

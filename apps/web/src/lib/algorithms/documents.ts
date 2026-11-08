@@ -107,31 +107,67 @@ const CNPJ_SECOND_CHECK_WEIGHTS = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
 /** Branch number of a company's head office. */
 const CNPJ_HEAD_OFFICE = [0, 0, 0, 1]
 
-export const formatCNPJ = (digits: string) =>
-	digits.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, '$1.$2.$3/$4-$5')
+/**
+ * Since July 2026 the Receita Federal also issues alphanumeric CNPJs: the 12 first characters can be
+ * letters (A–Z) or digits, the 2 check digits stay numeric. Each character is worth its ASCII code
+ * minus 48 ("0" = 0 … "9" = 9, "A" = 17 … "Z" = 42), and the module-11 rule is the same as before.
+ */
+const CNPJ_ALPHANUMERIC_CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+const CNPJ_PATTERN = /^[0-9A-Z]{12}\d{2}$/
 
-export function generateCNPJ({ punctuation = true }: { punctuation?: boolean } = {}) {
-	const digits = [...randomDigits(8), ...CNPJ_HEAD_OFFICE]
-	digits.push(mod11CheckDigit(weightedSum(digits, CNPJ_FIRST_CHECK_WEIGHTS)))
-	digits.push(mod11CheckDigit(weightedSum(digits, CNPJ_SECOND_CHECK_WEIGHTS)))
-	const cnpj = digits.join('')
+const cnpjCharValue = (char: string) => char.charCodeAt(0) - 48
+
+/** Uppercase letters and digits only: "12.abc.345/01de-35" → "12ABC34501DE35". */
+export const normalizeCNPJ = (input: string) => input.toUpperCase().replace(/[^0-9A-Z]/g, '')
+
+export const isAlphanumericCNPJ = (cnpj: string) => /[A-Z]/.test(normalizeCNPJ(cnpj))
+
+export const formatCNPJ = (cnpj: string) =>
+	cnpj.replace(/^([0-9A-Z]{2})([0-9A-Z]{3})([0-9A-Z]{3})([0-9A-Z]{4})(\d{2})$/, '$1.$2.$3/$4-$5')
+
+function cnpjCheckDigits(base: string) {
+	const values = [...base].map(cnpjCharValue)
+	const first = mod11CheckDigit(weightedSum(values, CNPJ_FIRST_CHECK_WEIGHTS))
+	const second = mod11CheckDigit(weightedSum([...values, first], CNPJ_SECOND_CHECK_WEIGHTS))
+	return `${first}${second}`
+}
+
+function randomCNPJRoot(alphanumeric: boolean) {
+	if (!alphanumeric) return randomDigits(8).join('')
+	return Array.from(
+		{ length: 8 },
+		() => CNPJ_ALPHANUMERIC_CHARS[randomInt(CNPJ_ALPHANUMERIC_CHARS.length)],
+	).join('')
+}
+
+export function generateCNPJ({
+	punctuation = true,
+	alphanumeric = false,
+}: {
+	punctuation?: boolean
+	/** Letters in the root (the new format); a numeric CNPJ otherwise. */
+	alphanumeric?: boolean
+} = {}) {
+	// An alphanumeric draw can come out all digits; draw again so the option always shows letters.
+	let root = randomCNPJRoot(alphanumeric)
+	while (alphanumeric && !/[A-Z]/.test(root)) root = randomCNPJRoot(true)
+
+	const base = root + CNPJ_HEAD_OFFICE.join('')
+	const cnpj = base + cnpjCheckDigits(base)
 	return punctuation ? formatCNPJ(cnpj) : cnpj
 }
 
 export function validateCNPJ(input: string) {
-	const cnpj = onlyDigits(input)
-	const digits = toDigitArray(cnpj)
+	const cnpj = normalizeCNPJ(input)
 	const formatted = cnpj.length === 14 ? formatCNPJ(cnpj) : input
+	const alphanumeric = /[A-Z]/.test(cnpj)
 
-	if (digits.length !== 14 || allDigitsEqual(digits)) {
-		return { valid: false, formatted }
+	if (!CNPJ_PATTERN.test(cnpj) || new Set(cnpj).size === 1) {
+		return { valid: false, formatted, alphanumeric }
 	}
 
-	const valid =
-		mod11CheckDigit(weightedSum(digits, CNPJ_FIRST_CHECK_WEIGHTS)) === digits[12] &&
-		mod11CheckDigit(weightedSum(digits, CNPJ_SECOND_CHECK_WEIGHTS)) === digits[13]
-
-	return { valid, formatted }
+	const valid = cnpjCheckDigits(cnpj.slice(0, 12)) === cnpj.slice(12)
+	return { valid, formatted, alphanumeric }
 }
 
 /* ----------------------------------- RG ---------------------------------- */

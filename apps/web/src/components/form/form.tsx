@@ -30,6 +30,9 @@ import { LoaderCircle } from 'lucide-react'
 import { type HTMLInputTypeAttribute, type ReactNode, useCallback, useState } from 'react'
 import { applyMask, type Mask } from '@/lib/masks'
 
+/** Numeric keyboard on phones, unless the mask also takes letters (alphanumeric CNPJ). */
+const maskInputMode = (mask: Mask) => (mask.includes('A') ? 'text' : 'numeric')
+
 export const { fieldContext, formContext, useFieldContext, useFormContext } =
 	createFormHookContexts()
 
@@ -143,7 +146,8 @@ function TextField({
 			type={type}
 			value={field.state.value}
 			placeholder={placeholder}
-			inputMode={mask ? 'numeric' : inputMode}
+			inputMode={mask ? maskInputMode(mask) : inputMode}
+			autoCapitalize={mask?.includes('A') ? 'characters' : undefined}
 			autoComplete={autoComplete}
 			enterKeyHint={enterKeyHint}
 			spellCheck={false}
