@@ -1,5 +1,5 @@
 import { buttonVariants } from '@4people/ui'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ShieldCheck, Sparkles, Target, Zap } from 'lucide-react'
 import type { Metadata, Route } from 'next'
 import Link from 'next/link'
 import { CATEGORIES, POPULAR_TOOLS, TOOLS } from '@/catalog/catalog'
@@ -40,7 +40,7 @@ function Hero() {
 			<div className="flex flex-col items-start gap-6">
 				<ul
 					aria-label="Características"
-					className="text-fg-muted flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-medium sm:gap-2"
+					className="text-fg-muted flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.8125rem] font-medium sm:gap-2 sm:text-sm"
 				>
 					{['Grátis', 'Sem cadastro', 'Roda no seu navegador'].map((feature) => (
 						<li
@@ -128,6 +128,59 @@ function Sections() {
 	)
 }
 
+/** Why use a tool instead of asking an AI: repetitive work done by the browser costs no tokens. */
+const AI_POINTS = [
+	{
+		icon: Zap,
+		title: 'Na hora',
+		text: 'Sem esperar a resposta de um modelo: o resultado sai enquanto você digita.',
+	},
+	{
+		icon: Target,
+		title: 'Exato',
+		text: 'Dígitos verificadores, conversões e contas seguem o algoritmo, sem alucinação.',
+	},
+	{
+		icon: ShieldCheck,
+		title: 'Privado',
+		text: 'Nada do que você digita vai para um servidor, nem para um chat.',
+	},
+] as const
+
+function SaveTokens() {
+	return (
+		<section
+			aria-labelledby="economize-tokens"
+			className="rounded-panel bg-accent-soft grid gap-8 p-6 sm:p-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:p-10"
+		>
+			<div className="flex flex-col gap-3">
+				<span className="text-accent-soft-fg flex items-center gap-2 text-sm font-bold tracking-wider uppercase">
+					<Sparkles aria-hidden="true" className="size-4" /> Para quem usa IA
+				</span>
+				<h2
+					id="economize-tokens"
+					className="text-fg text-2xl font-extrabold tracking-[-0.02em] text-balance sm:text-[1.75rem]"
+				>
+					Economize tokens da IA: mande o navegador fazer o trabalho repetitivo
+				</h2>
+				<p className="text-fg-muted text-lg text-pretty">
+					Gerar um CPF de teste, formatar um JSON ou converter um timestamp não precisa de um
+					modelo. Deixe a IA para o que só ela faz.
+				</p>
+			</div>
+			<ul className="grid gap-3 sm:grid-cols-3">
+				{AI_POINTS.map(({ icon: PointIcon, title, text }) => (
+					<li key={title} className="rounded-control bg-surface flex flex-col gap-2 p-5">
+						<PointIcon aria-hidden="true" className="text-accent size-5" />
+						<span className="text-fg font-bold">{title}</span>
+						<span className="text-fg-muted text-[0.9375rem] leading-relaxed">{text}</span>
+					</li>
+				))}
+			</ul>
+		</section>
+	)
+}
+
 function Validate() {
 	return (
 		<section
@@ -194,6 +247,7 @@ export default function HomePage() {
 					</div>
 					<ToolTable tools={POPULAR_TOOLS} showSection />
 				</section>
+				<SaveTokens />
 				<Sections />
 				<Validate />
 				<Questions />

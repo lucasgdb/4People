@@ -33,6 +33,13 @@ const haystack = new Map(
 /** Shown as soon as the search opens, before anything is typed. */
 const SUGGESTED = POPULAR_TOOLS.slice(0, 8)
 
+/** Whether the tool with this id (`area/topic/slug`) matches every word of the query. */
+export function toolMatches(id: string, query: string) {
+	const terms = normalize(query).split(/\s+/).filter(Boolean)
+	const text = haystack.get(id as ToolEntry['id']) ?? ''
+	return terms.every((term) => text.includes(term))
+}
+
 function matches(tool: ToolEntry, query: string) {
 	const terms = normalize(query).split(/\s+/).filter(Boolean)
 	const text = haystack.get(tool.id) ?? ''

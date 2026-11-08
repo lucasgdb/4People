@@ -5,7 +5,7 @@
  *  - icons, fonts, images: stale-while-revalidate.
  * Third-party APIs (CEP, IP, banks) are never intercepted: they need the network anyway.
  */
-const VERSION = 'v1'
+const VERSION = 'v2'
 const PAGES = `pages-${VERSION}`
 const STATIC = `static-${VERSION}`
 const ASSETS = `assets-${VERSION}`
@@ -29,9 +29,43 @@ self.addEventListener('activate', (event) => {
 			.then((keys) =>
 				Promise.all(keys.filter((key) => !keep.has(key)).map((key) => caches.delete(key))),
 			)
-			.then(() => self.clients.claim()),
+			.then(() => self.clients.claim())
+			.then(cacheOpenPages),
 	)
 })
+
+/**
+ * The page that installed the worker loaded before the worker existed, so it never went through it.
+ * Save the pages open right now (and the files they use), so the first visit already works offline.
+ */
+async function cacheOpenPages() {
+	const windows = await self.clients.matchAll({ type: 'window' })
+	const pages = await caches.open(PAGES)
+	await Promise.all(
+		windows.map(async (client) => {
+			const url = new URL(client.url)
+			if (url.origin !== self.location.origin) return
+			try {
+				const response = await fetch(url.href, { credentials: 'same-origin' })
+				if (!response.ok) return
+				await pages.put(url.href, response.clone())
+				// The page's own scripts and styles, so it also runs offline, not just shows up.
+				const html = await response.text()
+				const files = [...html.matchAll(/(?:src|href)="(\/_next\/static\/[^"]+)"/g)].map(
+					(m) => m[1],
+				)
+				const statics = await caches.open(STATIC)
+				await Promise.all(
+					[...new Set(files)].map((file) =>
+						statics.match(file).then((hit) => hit || statics.add(file).catch(() => undefined)),
+					),
+				)
+			} catch {
+				// Offline already, or the page went away: nothing to save.
+			}
+		}),
+	)
+}
 
 async function networkFirst(request) {
 	const cache = await caches.open(PAGES)

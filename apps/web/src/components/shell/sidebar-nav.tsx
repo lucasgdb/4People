@@ -7,17 +7,49 @@ import { usePathname } from 'next/navigation'
 import { CATEGORIES } from '@/catalog/catalog'
 import { Icon } from '../icon'
 import { ToolIcon } from '../tool-icons'
+import { toolMatches } from './tool-search'
 
 const rowClass =
 	'flex min-h-10 items-center gap-2.5 rounded-control px-3 text-[0.9375rem] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring'
 
-/** Every tool, grouped by category and section: 40px rows, a soft blue fill on the active item. */
-export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
+/**
+ * Every tool, grouped by category and section: 40px rows, a soft blue fill on the active item.
+ * With a `query`, only the matching tools stay (and the sections and areas that still have some).
+ */
+export function SidebarNav({
+	onNavigate,
+	query = '',
+}: {
+	onNavigate?: () => void
+	query?: string
+}) {
 	const pathname = usePathname()
+	const filtering = query.trim() !== ''
+	const categories = CATEGORIES.map((category) => ({
+		...category,
+		sections: category.sections
+			.map((section) => ({
+				...section,
+				tools: filtering
+					? section.tools.filter((tool) =>
+							toolMatches(`${category.slug}/${section.slug}/${tool.slug}`, query),
+						)
+					: section.tools,
+			}))
+			.filter((section) => section.tools.length > 0),
+	})).filter((category) => category.sections.length > 0)
+
+	if (categories.length === 0) {
+		return (
+			<p className="text-fg-muted px-7 py-6 text-[0.9375rem]">
+				Nenhuma ferramenta encontrada para “{query.trim()}”.
+			</p>
+		)
+	}
 
 	return (
 		<nav aria-label="Ferramentas" className="flex flex-col gap-6 px-3 pt-2 pb-8">
-			{CATEGORIES.map((category) => {
+			{categories.map((category) => {
 				const categoryHref = `/${category.slug}`
 				return (
 					<div key={category.slug} className="flex flex-col gap-0.5">

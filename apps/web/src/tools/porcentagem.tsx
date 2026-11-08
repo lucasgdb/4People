@@ -359,7 +359,7 @@ function CalcCard({ calc }: { calc: Calc }) {
 					<span className="flex items-center gap-2">
 						{calc.parts[1] ? <span>{calc.parts[1]}</span> : null}
 						{renderInput(second)}
-						{glued ? <span className="-ml-1.5">{glued}</span> : null}
+						{glued ? <span className="-ml-0.5">{glued}</span> : null}
 					</span>
 					{loose ? <span>{loose}</span> : null}
 				</div>
