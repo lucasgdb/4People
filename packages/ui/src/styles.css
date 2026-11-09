@@ -90,6 +90,16 @@
 	--color-code-digit: var(--ds-code-digit);
 	--color-code-symbol: var(--ds-code-symbol);
 	--shadow-float: var(--ds-shadow-float);
+	/* A value that was just replaced (a new generated number): rises in from a little below. */
+	--animate-value-in: value-in var(--ds-motion) var(--ease-out) both;
+
+	@keyframes value-in {
+		from {
+			opacity: 0;
+			transform: translateY(0.25em);
+			filter: blur(2px);
+		}
+	}
 
 	--font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 	--font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
