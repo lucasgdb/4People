@@ -802,6 +802,8 @@ export const COMPANION_TOOL: Record<string, string> = {
 	'validador-de-cartao-de-credito': 'gerador-de-cartao-de-credito',
 	'gerador-de-cep': 'buscar-cep',
 	'buscar-cep': 'gerador-de-cep',
+	'gerador-de-jwt': 'decodificador-de-jwt',
+	'decodificador-de-jwt': 'gerador-de-jwt',
 }
 
 export const companionOf = (slug: string) => {

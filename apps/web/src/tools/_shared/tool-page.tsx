@@ -127,6 +127,8 @@ function SectionTitle({ id, icon, aside, children }: SectionTitleProps) {
 const COMPANION_PROMPT: Record<string, string> = {
 	'buscar-cep': 'Quer o endereço de um CEP?',
 	'gerador-de-cep': 'Precisa de CEPs para testar?',
+	'decodificador-de-jwt': 'Quer inspecionar um token?',
+	'gerador-de-jwt': 'Precisa de um token para testar?',
 }
 
 /** "Precisa validar? Validador de CPF →": the generator and the validator of a document link each other. */
