@@ -191,29 +191,61 @@ function SaveTokens() {
 	return (
 		<section
 			aria-labelledby="economize-tokens"
-			className="rounded-panel bg-accent-soft grid gap-8 p-6 sm:p-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:p-10"
+			className="rounded-panel border-accent/15 relative isolate grid gap-8 overflow-hidden border bg-[linear-gradient(135deg,var(--color-accent-soft),color-mix(in_oklab,var(--color-accent-soft)_40%,var(--color-surface)))] p-6 sm:p-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:items-center lg:gap-12 lg:p-12"
 		>
-			<div className="flex flex-col gap-3">
-				<span className="text-accent-soft-fg flex items-center gap-2 text-sm font-bold tracking-wider uppercase">
-					<Sparkles aria-hidden="true" className="size-4" /> Para quem usa IA
+			{/* Two soft glows: white behind the points, blue in the far corner. */}
+			<div
+				aria-hidden="true"
+				className="pointer-events-none absolute -top-32 -right-24 -z-10 size-[28rem] rounded-full bg-[radial-gradient(closest-side,rgb(255_255_255/0.7),transparent)]"
+			/>
+			<div
+				aria-hidden="true"
+				className="pointer-events-none absolute -bottom-40 -left-32 -z-10 size-[26rem] rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--color-accent)_14%,transparent),transparent)]"
+			/>
+			<div className="flex flex-col items-start gap-4">
+				<span className="text-accent-soft-fg bg-surface/70 border-accent/15 flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-bold tracking-wider uppercase">
+					<Sparkles aria-hidden="true" className="size-3.5" /> Para quem usa IA
 				</span>
 				<h2
 					id="economize-tokens"
-					className="text-fg text-2xl font-extrabold tracking-[-0.02em] text-balance sm:text-[1.75rem]"
+					className="text-fg text-2xl font-extrabold tracking-[-0.02em] text-balance sm:text-[2rem] sm:leading-tight"
 				>
-					Economize tokens da IA: mande o navegador fazer o trabalho repetitivo
+					Economize tokens da IA: mande o <span className="text-accent">navegador</span> fazer o
+					trabalho repetitivo
 				</h2>
 				<p className="text-fg-muted text-lg text-pretty">
 					Gerar um CPF de teste, formatar um JSON ou converter um timestamp não precisa de um
 					modelo. Deixe a IA para o que só ela faz.
 				</p>
+				{/* The point in one number. */}
+				<p className="bg-surface border-border mt-1 flex items-center gap-3 rounded-[16px] border py-2.5 pr-5 pl-2.5 shadow-[0_1px_2px_rgb(23_32_51/0.05)]">
+					<span className="bg-accent text-accent-fg tabular grid h-10 min-w-10 place-items-center rounded-[12px] px-2 text-xl leading-none font-extrabold">
+						0
+					</span>
+					<span className="flex flex-col leading-tight">
+						<span className="text-fg font-bold">tokens gastos</span>
+						<span className="text-fg-muted text-sm">em qualquer ferramenta daqui</span>
+					</span>
+				</p>
 			</div>
-			<ul className="grid gap-3 sm:grid-cols-3">
+			<ul className="flex flex-col gap-3">
 				{AI_POINTS.map(({ icon: PointIcon, title, text }) => (
-					<li key={title} className="rounded-control bg-surface flex flex-col gap-2 p-5">
-						<PointIcon aria-hidden="true" className="text-accent size-5" />
-						<span className="text-fg font-bold">{title}</span>
-						<span className="text-fg-muted text-[0.9375rem] leading-relaxed">{text}</span>
+					<li
+						key={title}
+						className="rounded-control bg-surface/90 border-border flex items-start gap-4 border p-5 shadow-[0_1px_2px_rgb(23_32_51/0.04)] backdrop-blur-sm"
+					>
+						<span
+							aria-hidden="true"
+							className="bg-accent-soft text-accent ring-accent/10 grid size-11 shrink-0 place-items-center rounded-[12px] ring-1 ring-inset"
+						>
+							<PointIcon className="size-5" />
+						</span>
+						<span className="flex flex-col gap-1">
+							<span className="text-fg font-bold">{title}</span>
+							<span className="text-fg-muted text-[0.9375rem] leading-relaxed text-pretty">
+								{text}
+							</span>
+						</span>
 					</li>
 				))}
 			</ul>
