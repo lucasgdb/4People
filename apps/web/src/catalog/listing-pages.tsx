@@ -130,18 +130,19 @@ function topicDescription(topicName: string, tools: { name: string }[]) {
 	return `${lead}${names}${ending}`
 }
 
+/** The topic's intro: a card as wide as the tool grid, its lines kept to a readable length. */
 function TopicIntro({ name, paragraphs }: { name: string; paragraphs: string[] }) {
 	if (paragraphs.length === 0) return null
 	return (
 		<section
 			aria-labelledby="sobre-o-topico"
-			className="rounded-panel border-border bg-surface flex max-w-4xl flex-col gap-3 border p-5 sm:p-7"
+			className="rounded-panel border-border bg-surface flex flex-col gap-3 border p-5 sm:p-7"
 		>
 			<h2 id="sobre-o-topico" className="text-fg text-xl font-bold">
 				Sobre {name.toLowerCase()}
 			</h2>
 			{paragraphs.map((paragraph) => (
-				<p key={paragraph.slice(0, 40)} className="text-fg-muted leading-7 text-pretty">
+				<p key={paragraph.slice(0, 40)} className="text-fg-muted max-w-4xl leading-7 text-pretty">
 					{paragraph}
 				</p>
 			))}
