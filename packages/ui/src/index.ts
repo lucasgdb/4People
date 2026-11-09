@@ -29,6 +29,7 @@ export {
 	TimeInput,
 	type TimeInputProps,
 } from './components/date-picker.tsx'
+export { Dialog } from './components/dialog.tsx'
 export { Field, FieldDescription, FieldLabel, type FieldProps } from './components/field.tsx'
 export { Input, type InputProps } from './components/input.tsx'
 export { Kbd } from './components/kbd.tsx'

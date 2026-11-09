@@ -1,11 +1,12 @@
 'use client'
 
-import { Autocomplete, cn, Kbd } from '@4people/ui'
-import { Search } from 'lucide-react'
+import { Autocomplete, cn, Dialog, Kbd } from '@4people/ui'
+import { CornerDownLeft, Search, Star } from 'lucide-react'
 import type { Route } from 'next'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import { POPULAR_TOOLS, TOOLS, type ToolEntry } from '@/catalog/catalog'
+import { CATEGORIES, POPULAR_TOOLS, TOOLS, type ToolEntry } from '@/catalog/catalog'
+import { Icon, type IconName } from '@/components/icon'
 import { ToolIcon } from '../tool-icons'
 
 /** Case- and accent-insensitive, so "calculo" finds "Cálculo" and "imc" finds "Índice…". */
@@ -30,9 +31,6 @@ const haystack = new Map(
 	]),
 )
 
-/** Shown as soon as the search opens, before anything is typed. */
-const SUGGESTED = POPULAR_TOOLS.slice(0, 8)
-
 /** Whether the tool with this id (`area/topic/slug`) matches every word of the query. */
 export function toolMatches(id: string, query: string) {
 	const terms = normalize(query).split(/\s+/).filter(Boolean)
@@ -40,26 +38,51 @@ export function toolMatches(id: string, query: string) {
 	return terms.every((term) => text.includes(term))
 }
 
-function matches(tool: ToolEntry, query: string) {
-	const terms = normalize(query).split(/\s+/).filter(Boolean)
-	const text = haystack.get(tool.id) ?? ''
-	return terms.every((term) => text.includes(term))
+/** A row of the palette. A tool can sit in two groups (Mais usadas and its topic), hence the key. */
+type PaletteItem = { key: string; tool: ToolEntry }
+type PaletteGroup = {
+	value: string
+	label: string
+	/** The area the topic belongs to, beside its name ("Computação"). */
+	area?: string
+	icon?: IconName
+	items: PaletteItem[]
 }
 
-export function ToolSearch({
-	className,
-	suggestions = true,
-}: {
-	className?: string
-	/** Show the most used tools as soon as the field is clicked (off in the menu, which lists them all). */
-	suggestions?: boolean
-}) {
-	const inputRef = useRef<HTMLInputElement>(null)
-	const [query, setQuery] = useState('')
-	const browsing = query.trim() === ''
-	const showSuggestions = suggestions && browsing
+const POPULAR_GROUP: PaletteGroup = {
+	value: 'populares',
+	label: 'Mais usadas',
+	items: POPULAR_TOOLS.slice(0, 6).map((tool) => ({ key: `popular:${tool.id}`, tool })),
+}
 
-	// "/" or Ctrl/Cmd+K focuses the search from anywhere, unless the user is typing in a field.
+/** Every tool, grouped by topic in the catalog's order. */
+const TOPIC_GROUPS: PaletteGroup[] = CATEGORIES.flatMap((category) =>
+	category.sections.map((section) => ({
+		value: `${category.slug}/${section.slug}`,
+		label: section.name,
+		area: category.name,
+		icon: section.icon,
+		items: TOOLS.filter(
+			(tool) => tool.category.slug === category.slug && tool.section.slug === section.slug,
+		).map((tool) => ({ key: tool.id, tool })),
+	})),
+)
+
+const BROWSE_GROUPS = [POPULAR_GROUP, ...TOPIC_GROUPS]
+
+/**
+ * The search, Spotlight style: a field-like button in the header (an icon on phones) opens a panel
+ * in the middle of the screen with the input focused and every tool grouped by topic, the most used
+ * first. Typing filters the groups; arrows move, Enter opens, Esc closes. "/" or Ctrl/Cmd+K opens
+ * it from anywhere.
+ */
+export function ToolSearch({ className }: { className?: string }) {
+	const [open, setOpen] = useState(false)
+	const [query, setQuery] = useState('')
+	const inputRef = useRef<HTMLInputElement>(null)
+	const browsing = query.trim() === ''
+
+	// "/" or Ctrl/Cmd+K opens the search from anywhere, unless the user is typing in a field.
 	useEffect(() => {
 		function onKeyDown(event: KeyboardEvent) {
 			const target = event.target as HTMLElement
@@ -71,81 +94,142 @@ export function ToolSearch({
 				(event.key.toLowerCase() === 'k' && (event.metaKey || event.ctrlKey))
 			) {
 				event.preventDefault()
-				inputRef.current?.focus()
+				setOpen(true)
 			}
 		}
 		window.addEventListener('keydown', onKeyDown)
 		return () => window.removeEventListener('keydown', onKeyDown)
 	}, [])
 
+	function changeOpen(next: boolean) {
+		setOpen(next)
+		if (!next) setQuery('')
+	}
+
 	return (
-		<Autocomplete.Root
-			items={browsing ? (suggestions ? SUGGESTED : []) : TOOLS}
-			value={query}
-			onValueChange={setQuery}
-			itemToStringValue={(tool: ToolEntry) => tool.name}
-			filter={(tool: ToolEntry, text: string) => text.trim() === '' || matches(tool, text)}
-			limit={8}
-			openOnInputClick={suggestions}
-			autoHighlight
-		>
-			<div className={cn('relative', className)}>
-				<Search
-					aria-hidden="true"
-					className="text-fg-muted pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2"
-				/>
-				<Autocomplete.Input
-					ref={inputRef}
+		<Dialog.Root open={open} onOpenChange={changeOpen}>
+			<div className={cn('flex', className)}>
+				{/* From md up: looks like the field it opens. */}
+				<Dialog.Trigger className="border-border-strong bg-surface-muted text-fg-subtle hover:border-accent/55 hover:ring-accent/10 focus-visible:border-accent focus-visible:ring-ring hidden h-11 w-full cursor-pointer items-center gap-2.5 rounded-full border pr-3 pl-4 text-left text-[0.9375rem] transition-[border-color,box-shadow] duration-(--ds-motion) ease-(--ease-out) outline-none hover:ring-[3px] focus-visible:ring-4 md:flex">
+					<Search aria-hidden="true" className="text-fg-muted size-4 shrink-0" />
+					<span className="flex-1 truncate">O que você precisa? Ex.: CPF, CEP…</span>
+					<Kbd aria-hidden="true">/</Kbd>
+				</Dialog.Trigger>
+				{/* Phones and small tablets: an icon beside the GitHub link. */}
+				<Dialog.Trigger
 					aria-label="Buscar ferramenta"
-					name="busca"
-					type="search"
-					enterKeyHint="go"
-					spellCheck={false}
-					autoComplete="off"
-					placeholder="O que você precisa? Ex.: CPF, CEP…"
-					className="border-border-strong bg-surface-muted text-fg placeholder:text-fg-subtle hover:border-accent/55 hover:ring-accent/10 focus-visible:border-accent focus-visible:bg-surface focus-visible:ring-ring h-11 w-full rounded-full border pr-11 pl-10 text-[0.9375rem] transition-[border-color,box-shadow,background-color] duration-(--ds-motion) ease-(--ease-out) outline-none hover:ring-[3px] focus-visible:ring-4 focus-visible:outline-none"
-				/>
-				<Kbd className="pointer-events-none absolute top-1/2 right-3 hidden -translate-y-1/2 sm:inline-flex">
-					/
-				</Kbd>
+					className="text-fg-muted hover:bg-surface-sunken hover:text-fg focus-visible:ring-ring grid size-11 cursor-pointer place-items-center rounded-full transition-colors duration-(--ds-motion-fast) outline-none focus-visible:ring-4 md:hidden"
+				>
+					<Search aria-hidden="true" className="size-5" />
+				</Dialog.Trigger>
 			</div>
-			<Autocomplete.Portal>
-				<Autocomplete.Positioner className="z-50 outline-none" sideOffset={6}>
-					<Autocomplete.Popup className="rounded-panel border-border bg-surface text-fg shadow-float w-(--anchor-width) max-w-(--available-width) min-w-[min(22rem,var(--available-width))] origin-(--transform-origin) border p-1.5 transition-[scale,opacity] duration-(--ds-motion-fast) outline-none data-ending-style:scale-[0.98] data-ending-style:opacity-0 data-starting-style:scale-[0.98] data-starting-style:opacity-0">
-						<Autocomplete.Empty className="text-fg-muted px-3 py-3 text-sm empty:hidden">
-							{browsing ? null : 'Nenhuma ferramenta encontrada.'}
-						</Autocomplete.Empty>
-						{showSuggestions ? (
-							<p className="text-fg-subtle px-3 pt-1.5 pb-1 text-xs font-medium tracking-wide uppercase">
-								Mais usadas
-							</p>
-						) : null}
-						<Autocomplete.List className="max-h-[min(26rem,var(--available-height))] overflow-y-auto overscroll-contain outline-none">
-							{(tool: ToolEntry) => (
-								<Autocomplete.Item
-									key={tool.id}
-									value={tool}
-									render={<Link prefetch={false} href={tool.href as Route} />}
-									className="rounded-control data-highlighted:bg-accent-soft flex cursor-pointer items-center gap-3 px-3 py-2.5 outline-none select-none"
-								>
-									<span
-										aria-hidden="true"
-										className="bg-accent-soft text-accent grid size-9 shrink-0 place-items-center rounded-[10px]"
-									>
-										<ToolIcon slug={tool.slug} size={18} />
-									</span>
-									<span className="flex min-w-0 flex-col">
-										<span className="truncate text-sm font-medium">{tool.name}</span>
-										<span className="text-fg-muted truncate text-[0.8125rem]">
-											{tool.section.name}
-										</span>
-									</span>
-								</Autocomplete.Item>
+			<Dialog.Portal>
+				<Dialog.Backdrop className="bg-fg/25 fixed inset-0 z-50 backdrop-blur-[3px] transition-opacity duration-(--ds-motion) data-ending-style:opacity-0 data-starting-style:opacity-0" />
+				<Dialog.Popup
+					initialFocus={inputRef}
+					className="bg-surface/95 border-border shadow-float fixed top-[max(1rem,12dvh)] left-1/2 z-50 flex max-h-[min(36rem,calc(100dvh-2rem))] w-[min(40rem,calc(100vw-2rem))] -translate-x-1/2 flex-col overflow-hidden rounded-[22px] border backdrop-blur-xl backdrop-saturate-150 transition-[scale,opacity,translate] duration-(--ds-motion) ease-(--ease-out) outline-none data-ending-style:-translate-y-1 data-ending-style:scale-[0.98] data-ending-style:opacity-0 data-starting-style:-translate-y-1 data-starting-style:scale-[0.98] data-starting-style:opacity-0"
+				>
+					<Dialog.Title className="sr-only">Buscar ferramenta</Dialog.Title>
+					<Autocomplete.Root
+						inline
+						open
+						items={browsing ? BROWSE_GROUPS : TOPIC_GROUPS}
+						value={query}
+						onValueChange={setQuery}
+						itemToStringValue={(item: PaletteItem) => item.tool.name}
+						filter={(item: PaletteItem, text: string) =>
+							text.trim() === '' || toolMatches(item.tool.id, text)
+						}
+						autoHighlight="always"
+					>
+						<div className="border-border flex items-center gap-3 border-b px-5">
+							<Search aria-hidden="true" className="text-accent size-5 shrink-0" />
+							<Autocomplete.Input
+								ref={inputRef}
+								aria-label="Buscar ferramenta"
+								name="busca"
+								type="search"
+								enterKeyHint="go"
+								spellCheck={false}
+								autoComplete="off"
+								placeholder="Buscar: CPF, CEP, JSON…"
+								className="text-fg placeholder:text-fg-subtle h-16 min-w-0 flex-1 bg-transparent text-lg outline-none [&::-webkit-search-cancel-button]:hidden"
+							/>
+							<Dialog.Close
+								aria-label="Fechar busca"
+								className="focus-visible:ring-ring hidden cursor-pointer rounded-md outline-none focus-visible:ring-4 sm:block"
+							>
+								<Kbd aria-hidden="true">esc</Kbd>
+							</Dialog.Close>
+						</div>
+						<Autocomplete.List className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-2 pt-1 pb-2 outline-none">
+							{(group: PaletteGroup) => (
+								<Autocomplete.Group key={group.value} items={group.items} className="pt-2">
+									<Autocomplete.GroupLabel className="bg-surface/95 text-fg-subtle sticky top-0 z-10 flex items-center gap-2 px-3 py-1.5 text-xs font-semibold tracking-wider uppercase backdrop-blur-sm">
+										{group.icon ? (
+											<Icon name={group.icon} className="text-accent size-3.5" />
+										) : (
+											<Star aria-hidden="true" className="text-accent size-3.5" />
+										)}
+										<span className="text-fg-muted">{group.label}</span>
+										{group.area ? (
+											<span className="font-medium tracking-normal normal-case">
+												· {group.area}
+											</span>
+										) : null}
+									</Autocomplete.GroupLabel>
+									<Autocomplete.Collection>
+										{(item: PaletteItem) => (
+											<Autocomplete.Item
+												key={item.key}
+												value={item}
+												onClick={() => changeOpen(false)}
+												render={<Link prefetch={false} href={item.tool.href as Route} />}
+												className="group/item rounded-control data-highlighted:bg-accent-soft flex cursor-pointer items-center gap-3 px-3 py-2 outline-none select-none"
+											>
+												<span
+													aria-hidden="true"
+													className="bg-accent-soft text-accent group-data-highlighted/item:bg-accent group-data-highlighted/item:text-accent-fg grid size-9 shrink-0 place-items-center rounded-[10px] transition-colors duration-(--ds-motion-fast)"
+												>
+													<ToolIcon slug={item.tool.slug} size={18} />
+												</span>
+												<span className="flex min-w-0 flex-1 flex-col">
+													<span className="text-fg truncate text-[0.9375rem] font-medium">
+														{item.tool.name}
+													</span>
+													<span className="text-fg-muted truncate text-[0.8125rem]">
+														{item.tool.description}
+													</span>
+												</span>
+												<CornerDownLeft
+													aria-hidden="true"
+													className="text-accent-soft-fg hidden size-4 shrink-0 group-data-highlighted/item:block"
+												/>
+											</Autocomplete.Item>
+										)}
+									</Autocomplete.Collection>
+								</Autocomplete.Group>
 							)}
 						</Autocomplete.List>
-					</Autocomplete.Popup>
-				</Autocomplete.Positioner>
-			</Autocomplete.Portal>
-		</Autocomplete.Root>
+						<Autocomplete.Empty className="text-fg-muted px-5 py-10 text-center empty:hidden">
+							{browsing ? null : `Nenhuma ferramenta para “${query.trim()}”.`}
+						</Autocomplete.Empty>
+					</Autocomplete.Root>
+					<div className="border-border text-fg-subtle flex items-center gap-4 border-t px-5 py-2.5 text-xs pointer-coarse:hidden">
+						<span className="flex items-center gap-1.5">
+							<Kbd>↑</Kbd>
+							<Kbd>↓</Kbd> navegar
+						</span>
+						<span className="flex items-center gap-1.5">
+							<Kbd>↵</Kbd> abrir
+						</span>
+						<span className="flex items-center gap-1.5">
+							<Kbd>esc</Kbd> fechar
+						</span>
+						<span className="ml-auto">{TOOLS.length} ferramentas</span>
+					</div>
+				</Dialog.Popup>
+			</Dialog.Portal>
+		</Dialog.Root>
 	)
 }

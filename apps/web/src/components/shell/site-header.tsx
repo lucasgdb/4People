@@ -19,7 +19,7 @@ export function SiteHeader() {
 				</div>
 				<Wordmark />
 				<PrimaryNav className="hidden lg:block" />
-				<ToolSearch className="ml-auto hidden w-full max-w-[22rem] md:block" />
+				<ToolSearch className="ml-auto md:w-full md:max-w-[22rem]" />
 				<a
 					href={REPOSITORY_URL}
 					target="_blank"
@@ -28,7 +28,7 @@ export function SiteHeader() {
 					className={buttonVariants({
 						variant: 'ghost',
 						size: 'icon',
-						className: 'ml-auto shrink-0 md:ml-0',
+						className: 'shrink-0',
 					})}
 				>
 					<GithubIcon className="size-5" />
