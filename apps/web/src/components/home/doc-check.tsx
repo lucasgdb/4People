@@ -6,10 +6,11 @@ import { useAppForm } from '@/components/form/form'
 import { validateCNPJ, validateCPF } from '@/lib/algorithms/documents'
 import { onlyDigits } from '@/lib/algorithms/random'
 
+/** `tone` is the verdict the example gives: its dot is that colour before you even try it. */
 const EXAMPLES = [
-	{ value: '11.222.333/0001-81', hint: 'CNPJ válido' },
-	{ value: '123.456.789-00', hint: 'CPF inválido' },
-	{ value: '111.111.111-11', hint: 'Dígitos repetidos' },
+	{ value: '11.222.333/0001-81', hint: 'CNPJ válido', tone: 'bg-success' },
+	{ value: '123.456.789-00', hint: 'CPF inválido', tone: 'bg-danger' },
+	{ value: '111.111.111-11', hint: 'Dígitos repetidos', tone: 'bg-warning-ink' },
 ] as const
 
 type Verdict =
@@ -52,34 +53,82 @@ export function DocCheck() {
 		<form.Field name="doc">
 			{(field) => {
 				const verdict = check(field.state.value)
+				const done = verdict.kind !== 'incomplete'
+				// The type the digits so far point to: a CPF up to 11, a CNPJ beyond. Its badge sits in the
+				// field from sm up; on phones the field keeps the room for the number.
+				const kind = done ? verdict.kind : verdict.digits > 11 ? 'CNPJ' : 'CPF'
+				const target = kind === 'CNPJ' ? 14 : 11
 				return (
 					<div className="flex flex-col gap-5">
-						<input
-							id="doc"
-							name="doc"
-							inputMode="numeric"
-							autoComplete="off"
-							spellCheck={false}
-							aria-describedby="doc-verdict"
-							value={field.state.value}
-							onChange={(event) => field.handleChange(event.target.value)}
-							className="rounded-control border-border-strong bg-surface text-fg placeholder:text-fg-subtle hover:border-accent/55 hover:ring-accent/10 focus-visible:border-accent focus-visible:ring-ring h-16 w-full min-w-0 border px-5 font-mono text-2xl tabular-nums transition-[border-color,box-shadow,background-color] duration-(--ds-motion) ease-(--ease-out) outline-none hover:ring-[3px] focus-visible:ring-4 focus-visible:outline-none sm:text-[1.75rem]"
-							placeholder="Ex.: 529.982.247-25"
-						/>
+						<div className="relative">
+							<span
+								aria-hidden="true"
+								className={cn(
+									'rounded-chip pointer-events-none absolute top-1/2 left-3 hidden -translate-y-1/2 px-2 py-1 text-xs font-bold tracking-wider transition-colors duration-(--ds-motion) sm:block',
+									!done && 'bg-surface-sunken text-fg-muted',
+									done && verdict.valid && 'bg-success-soft text-success-ink',
+									done && !verdict.valid && 'bg-danger-soft text-danger-ink',
+								)}
+							>
+								{kind}
+							</span>
+							<input
+								id="doc"
+								name="doc"
+								inputMode="numeric"
+								autoComplete="off"
+								spellCheck={false}
+								aria-describedby="doc-verdict"
+								value={field.state.value}
+								onChange={(event) => field.handleChange(event.target.value)}
+								className={cn(
+									'rounded-control bg-surface text-fg placeholder:text-fg-subtle focus-visible:ring-ring h-16 w-full min-w-0 border pr-12 pl-4 font-mono text-xl tabular-nums shadow-[inset_0_1px_2px_rgb(23_32_51/0.06)] transition-[border-color,box-shadow] duration-(--ds-motion) ease-(--ease-out) outline-none focus-visible:ring-4 focus-visible:outline-none sm:pr-14 sm:pl-[4.75rem] sm:text-[1.75rem]',
+									!done &&
+										'border-border-strong hover:border-accent/55 focus-visible:border-accent',
+									done && verdict.valid && 'border-success/60 focus-visible:border-success',
+									done && !verdict.valid && 'border-danger/60 focus-visible:border-danger',
+								)}
+								placeholder="529.982.247-25"
+							/>
+							{done ? (
+								<span
+									aria-hidden="true"
+									key={`${verdict.kind}-${verdict.valid}`}
+									className="animate-value-in pointer-events-none absolute top-1/2 right-3.5 -translate-y-1/2 sm:right-4"
+								>
+									{verdict.valid ? (
+										<CircleCheck className="text-success size-6" />
+									) : (
+										<CircleX className="text-danger size-6" />
+									)}
+								</span>
+							) : null}
+						</div>
 						<div id="doc-verdict" aria-live="polite">
 							{verdict.kind === 'incomplete' ? (
-								<p className="rounded-control bg-surface-muted text-fg-muted px-5 py-4 text-[1.0625rem]">
-									{verdict.digits === 0
-										? 'Digite os 11 dígitos de um CPF ou os 14 de um CNPJ.'
-										: `${verdict.digits} dígitos até agora. Um CPF tem 11 e um CNPJ tem 14.`}
-								</p>
+								<div className="rounded-control bg-surface-muted flex flex-col gap-3 px-5 py-4">
+									<p className="text-fg-muted text-[1.0625rem]">
+										{verdict.digits === 0
+											? 'Digite os 11 dígitos de um CPF ou os 14 de um CNPJ.'
+											: `${verdict.digits} de ${target} dígitos de um ${kind}.`}
+									</p>
+									<span
+										aria-hidden="true"
+										className="bg-surface-sunken h-1.5 overflow-hidden rounded-full"
+									>
+										<span
+											className="bg-accent block h-full rounded-full transition-[width] duration-(--ds-motion) ease-(--ease-out)"
+											style={{ width: `${(Math.min(verdict.digits, target) / target) * 100}%` }}
+										/>
+									</span>
+								</div>
 							) : (
 								<div
 									className={cn(
-										'rounded-control flex items-start gap-3 px-5 py-4',
+										'rounded-control flex items-start gap-3 border px-5 py-4',
 										verdict.valid
-											? 'bg-success-soft text-success-ink'
-											: 'bg-danger-soft text-danger-ink',
+											? 'border-success/20 bg-success-soft text-success-ink'
+											: 'border-danger/20 bg-danger-soft text-danger-ink',
 									)}
 								>
 									{verdict.valid ? (
@@ -96,25 +145,38 @@ export function DocCheck() {
 								</div>
 							)}
 						</div>
-						<div className="flex flex-col gap-2">
-							<span id="doc-exemplos" className="text-fg-muted text-sm">
-								Ou experimente um destes:
+						<div className="flex flex-col gap-2.5">
+							<span
+								id="doc-exemplos"
+								className="text-fg-subtle text-xs font-semibold tracking-wider uppercase"
+							>
+								Ou experimente um destes
 							</span>
 							<ul aria-labelledby="doc-exemplos" className="grid gap-2 sm:grid-cols-3">
-								{EXAMPLES.map((example) => (
-									<li key={example.value} className="flex">
-										<button
-											type="button"
-											onClick={() => field.handleChange(example.value)}
-											className="rounded-control border-border bg-surface hover:border-accent/45 hover:ring-accent-soft focus-visible:ring-ring flex w-full cursor-pointer flex-col items-start gap-0.5 border px-4 py-2.5 text-left transition-[border-color,box-shadow,background-color] duration-(--ds-motion) duration-(--ds-motion) ease-(--ease-out) outline-none hover:ring-4 focus-visible:ring-4"
-										>
-											<span className="text-fg-muted text-[0.8125rem]">{example.hint}</span>
-											<span translate="no" className="text-fg tabular font-mono text-sm">
-												{example.value}
-											</span>
-										</button>
-									</li>
-								))}
+								{EXAMPLES.map((example) => {
+									const current = field.state.value === example.value
+									return (
+										<li key={example.value} className="flex">
+											<button
+												type="button"
+												aria-pressed={current}
+												onClick={() => field.handleChange(example.value)}
+												className="rounded-control border-border bg-surface hover:border-accent/35 hover:shadow-float focus-visible:ring-ring aria-pressed:border-accent aria-pressed:bg-accent-soft/40 flex w-full cursor-pointer flex-col items-start gap-1 border px-4 py-3 text-left shadow-[0_1px_2px_rgb(23_32_51/0.04)] transition-[translate,border-color,box-shadow,background-color] duration-(--ds-motion) ease-(--ease-out) outline-none hover:-translate-y-0.5 focus-visible:ring-4"
+											>
+												<span className="text-fg-muted flex items-center gap-1.5 text-[0.8125rem] font-medium">
+													<span
+														aria-hidden="true"
+														className={cn('size-2 rounded-full', example.tone)}
+													/>
+													{example.hint}
+												</span>
+												<span translate="no" className="text-fg tabular font-mono text-sm">
+													{example.value}
+												</span>
+											</button>
+										</li>
+									)
+								})}
 							</ul>
 						</div>
 					</div>

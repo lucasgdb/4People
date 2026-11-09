@@ -1,5 +1,5 @@
 import { cn } from '@4people/ui'
-import { ChevronRight } from 'lucide-react'
+import { ArrowUpRight, ChevronRight } from 'lucide-react'
 import type { Route } from 'next'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
@@ -82,9 +82,26 @@ export function ScreenHeader({
 }
 
 /**
- * Tools as a grid of cards: an icon tile, the name and one line about what it does. The whole card
- * is the link, so the target is large on touch screens.
+ * The shell of every card that links somewhere (tools, sections): white, softly lifted, and on
+ * hover it rises a little with a float shadow and an accent edge. Use with `group`.
  */
+export const LINK_CARD =
+	'group border-border bg-surface relative flex w-full rounded-[20px] border p-5 shadow-[0_1px_2px_rgb(23_32_51/0.04)] outline-none transition-[translate,border-color,box-shadow] duration-(--ds-motion) ease-(--ease-out) hover:-translate-y-0.5 hover:border-accent/35 hover:shadow-float focus-visible:border-accent focus-visible:ring-4 focus-visible:ring-ring'
+
+/** The icon tile of a link card: a soft accent gradient that fills with the accent on hover. */
+export const LINK_CARD_ICON =
+	'grid size-12 shrink-0 place-items-center rounded-[14px] bg-[linear-gradient(145deg,var(--color-accent-soft),color-mix(in_oklab,var(--color-accent-soft)_45%,white))] text-accent ring-1 ring-accent/10 ring-inset transition-[background,color,box-shadow] duration-(--ds-motion) group-hover:bg-accent group-hover:bg-none group-hover:text-accent-fg group-hover:shadow-[0_6px_16px_-6px_var(--color-accent)]'
+
+/** The corner arrow of a link card: faint at rest, accent and nudged out on hover. */
+export function LinkCardArrow() {
+	return (
+		<ArrowUpRight
+			aria-hidden="true"
+			className="text-fg-subtle/50 group-hover:text-accent absolute top-5 right-5 size-[18px] transition-[color,translate] duration-(--ds-motion) ease-(--ease-out) group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+		/>
+	)
+}
+
 export function ToolTable({
 	tools,
 	showSection = false,
@@ -93,31 +110,29 @@ export function ToolTable({
 	showSection?: boolean
 }) {
 	return (
-		<ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+		<ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 			{tools.map((tool) => (
 				<li key={tool.id} className="flex">
 					<Link
 						prefetch={false}
 						href={tool.href as Route}
-						className="group border-border bg-surface hover:border-accent/45 hover:ring-accent-soft focus-visible:border-accent focus-visible:ring-ring flex w-full items-start gap-4 rounded-[16px] border p-5 transition-[border-color,box-shadow] duration-(--ds-motion) ease-out outline-none hover:ring-4 focus-visible:ring-4"
+						className={cn(LINK_CARD, 'items-start gap-4')}
 					>
-						<span
-							aria-hidden="true"
-							className="bg-accent-soft text-accent group-hover:bg-accent group-hover:text-accent-fg grid size-11 shrink-0 place-items-center rounded-[14px] transition-colors duration-(--ds-motion)"
-						>
+						<span aria-hidden="true" className={LINK_CARD_ICON}>
 							<ToolIcon slug={tool.slug} size={22} />
 						</span>
-						<span className="flex min-w-0 flex-1 flex-col gap-1">
-							<span className="text-fg font-bold">{tool.name}</span>
+						<span className="flex min-w-0 flex-1 flex-col gap-1 pr-6">
 							{showSection ? (
-								<span className="text-accent-soft-fg text-[0.8125rem] font-semibold">
+								<span className="text-accent-soft-fg text-xs font-semibold tracking-wider uppercase">
 									{tool.section.name}
 								</span>
 							) : null}
-							<span className="text-fg-muted text-[0.9375rem] leading-snug">
+							<span className="text-fg font-bold">{tool.name}</span>
+							<span className="text-fg-muted text-[0.9375rem] leading-snug text-pretty">
 								{tool.description}
 							</span>
 						</span>
+						<LinkCardArrow />
 					</Link>
 				</li>
 			))}

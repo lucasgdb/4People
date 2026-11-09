@@ -1,11 +1,14 @@
-import { Accordion, buttonVariants } from '@4people/ui'
+import { Accordion, buttonVariants, cn } from '@4people/ui'
 import {
+	AppWindow,
 	ArrowRight,
 	ArrowUpRight,
 	CircleHelp,
+	Gift,
 	ShieldCheck,
 	Sparkles,
 	Target,
+	UserRoundX,
 	Zap,
 } from 'lucide-react'
 import type { Metadata, Route } from 'next'
@@ -16,7 +19,7 @@ import { DocCheck } from '@/components/home/doc-check'
 import { LiveCpf } from '@/components/home/live-cpf'
 import { Icon } from '@/components/icon'
 import { JsonLd } from '@/components/json-ld'
-import { ToolTable } from '@/components/screen'
+import { LINK_CARD, LINK_CARD_ICON, LinkCardArrow, ToolTable } from '@/components/screen'
 import { SiteFooter } from '@/components/shell/site-footer'
 import { SiteHeader } from '@/components/shell/site-header'
 import { generateCPF } from '@/lib/algorithms/documents'
@@ -49,6 +52,13 @@ function SectionTitle({ id, title, children }: { id: string; title: string; chil
 	)
 }
 
+/** The three promises above the hero title, each with its icon. */
+const HERO_FEATURES = [
+	{ icon: Gift, label: 'Grátis' },
+	{ icon: UserRoundX, label: 'Sem cadastro' },
+	{ icon: AppWindow, label: 'Roda no seu navegador' },
+] as const
+
 function Hero() {
 	return (
 		<section
@@ -58,15 +68,21 @@ function Hero() {
 			<div className="flex flex-col items-start gap-6">
 				<ul
 					aria-label="Características"
-					className="text-fg-muted flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.8125rem] font-medium sm:gap-2 sm:text-sm"
+					className="text-fg-muted flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[0.8125rem] font-medium sm:gap-2 sm:text-sm"
 				>
-					{['Grátis', 'Sem cadastro', 'Roda no seu navegador'].map((feature) => (
+					{HERO_FEATURES.map(({ icon: FeatureIcon, label }) => (
 						<li
-							key={feature}
-							// Phones: one quiet line ("Grátis · Sem cadastro · …"); from sm up, outlined chips.
-							className="sm:border-border sm:bg-surface whitespace-nowrap not-first:before:mr-2 not-first:before:content-['·'] sm:rounded-full sm:border sm:px-3.5 sm:py-1.5 sm:not-first:before:hidden"
+							key={label}
+							// Phones: a quiet line of icon + word; from sm up, soft white chips.
+							className="sm:border-border sm:bg-surface/80 flex items-center gap-1.5 whitespace-nowrap sm:rounded-full sm:border sm:py-1.5 sm:pr-3.5 sm:pl-2 sm:shadow-[0_1px_2px_rgb(23_32_51/0.05)]"
 						>
-							{feature}
+							<span
+								aria-hidden="true"
+								className="sm:bg-accent-soft text-accent grid place-items-center sm:size-6 sm:rounded-full"
+							>
+								<FeatureIcon className="size-3.5" />
+							</span>
+							{label}
 						</li>
 					))}
 				</ul>
@@ -114,34 +130,34 @@ function Sections() {
 						<Icon name={category.icon} className="size-4" />
 						{category.name}
 					</h3>
-					<ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+					<ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 						{category.sections.map((section) => (
 							<li key={section.slug} className="flex">
 								<Link
 									href={`/${category.slug}/${section.slug}` as Route}
-									className="group border-border bg-surface hover:border-accent/45 hover:ring-accent-soft focus-visible:border-accent focus-visible:ring-ring flex w-full items-start gap-4 rounded-[16px] border p-5 transition-[border-color,box-shadow] duration-(--ds-motion) ease-out outline-none hover:ring-4 focus-visible:ring-4"
+									className={cn(LINK_CARD, 'flex-col gap-4')}
 								>
-									<span
-										aria-hidden="true"
-										className="bg-accent-soft text-accent group-hover:bg-accent group-hover:text-accent-fg grid size-11 shrink-0 place-items-center rounded-[14px] transition-colors duration-(--ds-motion)"
-									>
-										<Icon name={section.icon} className="size-[22px]" />
+									<span className="flex items-center gap-3 pr-6">
+										<span aria-hidden="true" className={LINK_CARD_ICON}>
+											<Icon name={section.icon} className="size-[22px]" />
+										</span>
+										<span className="text-fg font-bold">{section.name}</span>
 									</span>
-									<span className="flex min-w-0 flex-1 flex-col gap-1">
-										<span className="text-fg flex items-center justify-between gap-2 font-bold">
-											{section.name}
-											<span className="bg-surface-sunken text-fg-muted tabular inline-flex h-6 items-center rounded-full px-2.5 text-sm leading-none font-semibold">
-												{section.tools.length}
+									{/* The first tools as chips: what the section holds, at a glance. */}
+									<span className="flex flex-wrap gap-1.5">
+										{section.tools.slice(0, 3).map((tool) => (
+											<span
+												key={tool.slug}
+												className="bg-surface-muted text-fg-muted border-rule rounded-chip border px-2 py-0.5 text-[0.8125rem]"
+											>
+												{tool.name}
 											</span>
-										</span>
-										<span className="text-fg-muted text-[0.9375rem] leading-snug">
-											{section.tools
-												.slice(0, 3)
-												.map((tool) => tool.name)
-												.join(', ')}
-											{section.tools.length > 3 ? '…' : ''}
-										</span>
+										))}
 									</span>
+									<span className="text-accent-soft-fg mt-auto text-sm font-semibold">
+										<span className="tabular">{section.tools.length}</span> ferramentas
+									</span>
+									<LinkCardArrow />
 								</Link>
 							</li>
 						))}
