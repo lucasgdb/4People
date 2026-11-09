@@ -13,7 +13,7 @@ const HREF = '/computacao/geradores/gerador-de-cpf'
 /**
  * The real tool in miniature. The server draws a new valid CPF for every request, so each F5 shows
  * a new number already in the HTML, with no swap after loading; "Gerar outro" draws in the browser.
- * The two check digits carry the hero's soft marker and the note under the number names them.
+ * The two check digits stand out in the accent and the note under the number names them.
  */
 export function LiveCpf({ initial }: { initial: string }) {
 	const [cpf, setCpf] = useState(initial)
@@ -76,9 +76,7 @@ export function LiveCpf({ initial }: { initial: string }) {
 						{check && (
 							<>
 								<span className="text-fg-subtle">-</span>
-								<span className="text-accent rounded-[4px] bg-[linear-gradient(transparent_62%,var(--color-accent-soft)_62%)] px-0.5">
-									{check}
-								</span>
+								<span className="text-accent">{check}</span>
 							</>
 						)}
 					</span>
