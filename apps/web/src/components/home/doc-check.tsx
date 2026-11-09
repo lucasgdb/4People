@@ -1,6 +1,6 @@
 'use client'
 
-import { cn } from '@4people/ui'
+import { cn, Input } from '@4people/ui'
 import { CircleCheck, CircleX } from 'lucide-react'
 import { useAppForm } from '@/components/form/form'
 import { validateCNPJ, validateCPF } from '@/lib/algorithms/documents'
@@ -72,22 +72,19 @@ export function DocCheck() {
 							>
 								{kind}
 							</span>
-							<input
+							{/* The DS input carries the verdict: aria-invalid / data-success tint border, hover and focus ring. */}
+							<Input
 								id="doc"
 								name="doc"
 								inputMode="numeric"
 								autoComplete="off"
 								spellCheck={false}
 								aria-describedby="doc-verdict"
+								aria-invalid={done && !verdict.valid ? true : undefined}
+								data-success={done && verdict.valid ? '' : undefined}
 								value={field.state.value}
 								onChange={(event) => field.handleChange(event.target.value)}
-								className={cn(
-									'rounded-control bg-surface text-fg placeholder:text-fg-subtle focus-visible:ring-ring h-16 w-full min-w-0 border pr-12 pl-4 font-mono text-xl tabular-nums shadow-[inset_0_1px_2px_rgb(23_32_51/0.06)] transition-[border-color,box-shadow] duration-(--ds-motion) ease-(--ease-out) outline-none focus-visible:ring-4 focus-visible:outline-none sm:pr-14 sm:pl-[4.75rem] sm:text-[1.75rem]',
-									!done &&
-										'border-border-strong hover:border-accent/55 focus-visible:border-accent',
-									done && verdict.valid && 'border-success/60 focus-visible:border-success',
-									done && !verdict.valid && 'border-danger/60 focus-visible:border-danger',
-								)}
+								className="h-16 min-w-0 pr-12 pl-4 font-mono text-xl tabular-nums shadow-[inset_0_1px_2px_rgb(23_32_51/0.06)] sm:pr-14 sm:pl-[4.75rem] sm:text-[1.75rem]"
 								placeholder="529.982.247-25"
 							/>
 							{done ? (
