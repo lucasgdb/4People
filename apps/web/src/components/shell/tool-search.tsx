@@ -164,28 +164,43 @@ export function ToolSearch({ className }: { className?: string }) {
 						</div>
 						<Autocomplete.List className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-2 pt-1 pb-2 outline-none">
 							{(group: PaletteGroup) => (
-								<Autocomplete.Group key={group.value} items={group.items} className="pt-2">
-									<Autocomplete.GroupLabel className="bg-surface/95 text-fg-subtle sticky top-0 z-10 flex items-center gap-2 px-3 py-1.5 text-xs font-semibold tracking-wider uppercase backdrop-blur-sm">
-										{group.icon ? (
-											<Icon name={group.icon} className="text-accent size-3.5" />
-										) : (
-											<Star aria-hidden="true" className="text-accent size-3.5" />
-										)}
-										<span className="text-fg-muted">{group.label}</span>
+								<Autocomplete.Group
+									key={group.value}
+									items={group.items}
+									className="flex flex-col not-first:mt-2"
+								>
+									{/* A quiet divider, not a sticky bar: nothing covers the rows while the arrows scroll. */}
+									<Autocomplete.GroupLabel className="flex items-center gap-2 px-3 pt-3 pb-1.5">
+										<span
+											aria-hidden="true"
+											className="bg-accent-soft text-accent grid size-5 shrink-0 place-items-center rounded-[6px]"
+										>
+											{group.icon ? (
+												<Icon name={group.icon} className="size-3" />
+											) : (
+												<Star className="size-3" />
+											)}
+										</span>
+										<span className="text-fg-muted text-[0.6875rem] font-bold tracking-[0.08em] uppercase">
+											{group.label}
+										</span>
 										{group.area ? (
-											<span className="font-medium tracking-normal normal-case">
-												· {group.area}
-											</span>
+											<span className="text-fg-subtle text-xs">{group.area}</span>
 										) : null}
+										<span aria-hidden="true" className="bg-rule ml-1 h-px flex-1" />
 									</Autocomplete.GroupLabel>
 									<Autocomplete.Collection>
-										{(item: PaletteItem) => (
+										{(item: PaletteItem, index: number) => (
 											<Autocomplete.Item
 												key={item.key}
 												value={item}
 												onClick={() => changeOpen(false)}
 												render={<Link prefetch={false} href={item.tool.href as Route} />}
-												className="group/item rounded-control data-highlighted:bg-accent-soft flex cursor-pointer items-center gap-3 px-3 py-2 outline-none select-none"
+												className={cn(
+													'group/item rounded-control data-highlighted:bg-accent-soft flex cursor-pointer items-center gap-3 px-3 py-2 outline-none select-none',
+													// Scrolling up to a group's first row brings its title into view too.
+													index === 0 && 'scroll-mt-10',
+												)}
 											>
 												<span
 													aria-hidden="true"
