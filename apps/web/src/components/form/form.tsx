@@ -166,7 +166,7 @@ function TextField({
 			{suffix ? (
 				<div className="relative">
 					{input}
-					<span className="text-fg-subtle pointer-events-none absolute inset-y-0 right-3.5 flex items-center text-sm">
+					<span className="text-fg-subtle pointer-events-none absolute inset-y-0 right-4 flex items-center text-sm">
 						{suffix}
 					</span>
 				</div>
@@ -237,7 +237,7 @@ function NumberField({
 			{suffix ? (
 				<div className="relative">
 					{input}
-					<span className="text-fg-subtle pointer-events-none absolute inset-y-0 right-3.5 flex items-center text-sm">
+					<span className="text-fg-subtle pointer-events-none absolute inset-y-0 right-4 flex items-center text-sm">
 						{suffix}
 					</span>
 				</div>
@@ -400,8 +400,8 @@ function SliderField({
 		if (value !== null && value >= min && value <= max) field.handleChange(value)
 	}
 	return (
-		<div className="flex flex-col gap-3">
-			<div className="flex items-center justify-between gap-3">
+		<div className="flex flex-col gap-4">
+			<div className="flex items-center justify-between gap-4">
 				<span id={`${id}-label`} className="text-fg text-sm font-medium">
 					{label}
 				</span>
@@ -546,7 +546,7 @@ function SubmitButton({ children, size = 'lg', ...props }: Omit<ButtonProps, 'ty
 				>
 					{isSubmitting ? <LoaderCircle aria-hidden="true" className="animate-spin" /> : null}
 					{children}
-					<SubmitShortcutHint className="ml-1.5 opacity-75" />
+					<SubmitShortcutHint className="ml-2 opacity-75" />
 				</Button>
 			)}
 		</form.Subscribe>

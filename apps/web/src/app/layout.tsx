@@ -60,7 +60,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 			<body className="min-h-dvh">
 				<a
 					href="#conteudo"
-					className="rounded-control bg-primary text-primary-fg fixed top-2 left-2 z-[200] -translate-y-20 px-4 py-2.5 text-sm font-semibold transition-transform focus-visible:translate-y-0"
+					className="rounded-control bg-primary text-primary-fg fixed top-2 left-2 z-[200] -translate-y-20 px-4 py-2 text-sm font-semibold transition-transform focus-visible:translate-y-0"
 				>
 					Pular para o conteúdo
 				</a>

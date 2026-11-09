@@ -116,7 +116,7 @@ export default function SvgViewer() {
 				onSubmit={() => undefined}
 				actions={<p className="text-fg-muted text-[0.8125rem]">Atualiza enquanto você digita.</p>}
 			>
-				<div className="flex flex-wrap items-center gap-3">
+				<div className="flex flex-wrap items-center gap-4">
 					<label
 						className={cn(
 							buttonVariants({ variant: 'secondary' }),

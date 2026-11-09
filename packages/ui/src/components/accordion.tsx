@@ -62,7 +62,7 @@ export function Accordion({ items, defaultOpen, multiple = false, className }: A
 							MOTION,
 						)}
 					>
-						<div className="text-fg-muted pr-9 pb-4 leading-7 text-pretty">{item.content}</div>
+						<div className="text-fg-muted pr-10 pb-4 leading-7 text-pretty">{item.content}</div>
 					</BaseAccordion.Panel>
 				</BaseAccordion.Item>
 			))}

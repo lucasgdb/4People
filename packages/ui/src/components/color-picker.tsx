@@ -60,13 +60,13 @@ export function ColorPicker({
 				{...aria}
 				className={cn(
 					controlClass,
-					'data-popup-open:border-accent flex h-12 cursor-pointer items-center gap-3 text-left',
+					'data-popup-open:border-accent flex h-12 cursor-pointer items-center gap-4 text-left',
 					className,
 				)}
 			>
 				<span
 					aria-hidden="true"
-					className="border-border-strong size-7 shrink-0 rounded-[8px] border"
+					className="border-border-strong rounded-chip size-8 shrink-0 border"
 					style={{ background: value }}
 				/>
 				<span translate="no" className="text-fg tabular font-mono text-[0.9375rem] uppercase">
@@ -77,7 +77,7 @@ export function ColorPicker({
 				<Popover.Positioner sideOffset={8} className="z-50">
 					<Popover.Popup
 						aria-label="Escolher cor"
-						className="rounded-panel border-border bg-surface shadow-float flex w-64 origin-(--transform-origin) flex-col gap-3 border p-3 transition-[opacity,scale] duration-(--ds-motion-fast) outline-none data-ending-style:scale-[0.97] data-ending-style:opacity-0 data-starting-style:scale-[0.97] data-starting-style:opacity-0"
+						className="rounded-panel border-border bg-surface shadow-float flex w-64 origin-(--transform-origin) flex-col gap-4 border p-4 transition-[opacity,scale] duration-(--ds-motion-fast) outline-none data-ending-style:scale-[0.97] data-ending-style:opacity-0 data-starting-style:scale-[0.97] data-starting-style:opacity-0"
 					>
 						<HexColorPicker color={value} onChange={onValueChange} className="ds-color-picker" />
 						<div className="flex items-center gap-2 text-sm">
@@ -92,7 +92,7 @@ export function ColorPicker({
 								className={cn(controlClass, 'h-10 flex-1 font-mono text-sm uppercase')}
 							/>
 						</div>
-						<fieldset className="grid grid-cols-7 gap-1.5" aria-label="Cores prontas">
+						<fieldset className="grid grid-cols-7 gap-2" aria-label="Cores prontas">
 							{presets.map((preset) => (
 								<button
 									key={preset}
@@ -100,7 +100,7 @@ export function ColorPicker({
 									aria-label={preset}
 									aria-pressed={value.toLowerCase() === preset.toLowerCase()}
 									onClick={() => onValueChange(preset)}
-									className="border-border-strong focus-visible:ring-ring aria-pressed:ring-accent size-7 cursor-pointer rounded-[8px] border outline-none focus-visible:ring-4 aria-pressed:ring-2 aria-pressed:ring-offset-2"
+									className="border-border-strong focus-visible:ring-ring aria-pressed:ring-accent rounded-chip size-8 cursor-pointer border outline-none focus-visible:ring-4 aria-pressed:ring-2 aria-pressed:ring-offset-2"
 									style={{ background: preset }}
 								/>
 							))}
@@ -137,10 +137,7 @@ export function ColorArea({
 				onChange={onValueChange}
 				className="ds-color-picker ds-color-picker-lg"
 			/>
-			<fieldset
-				className="grid grid-cols-7 gap-2 sm:grid-cols-14 sm:gap-1.5"
-				aria-label="Cores prontas"
-			>
+			<fieldset className="grid grid-cols-7 gap-2 sm:grid-cols-14" aria-label="Cores prontas">
 				{presets.map((preset) => (
 					<button
 						key={preset}
@@ -148,7 +145,7 @@ export function ColorArea({
 						aria-label={preset}
 						aria-pressed={value.toLowerCase() === preset.toLowerCase()}
 						onClick={() => onValueChange(preset)}
-						className="border-border-strong focus-visible:ring-ring aria-pressed:ring-accent aspect-square w-full cursor-pointer rounded-[10px] border outline-none focus-visible:ring-4 aria-pressed:ring-2 aria-pressed:ring-offset-2"
+						className="border-border-strong focus-visible:ring-ring aria-pressed:ring-accent rounded-chip aspect-square w-full cursor-pointer border outline-none focus-visible:ring-4 aria-pressed:ring-2 aria-pressed:ring-offset-2"
 						style={{ background: preset }}
 					/>
 				))}

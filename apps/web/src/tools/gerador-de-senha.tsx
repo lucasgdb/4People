@@ -179,13 +179,13 @@ function StrengthPanel({ bits, length }: { bits: number; length: number }) {
 	return (
 		<section
 			aria-labelledby="password-strength"
-			className={cn('flex flex-col gap-4 rounded-[18px] p-4 sm:p-5', style.panel)}
+			className={cn('rounded-control flex flex-col gap-4 p-4 sm:p-6', style.panel)}
 		>
-			<div className="flex items-center gap-3">
+			<div className="flex items-center gap-4">
 				<span
 					aria-hidden="true"
 					className={cn(
-						'bg-surface grid size-11 shrink-0 place-items-center rounded-full',
+						'bg-surface grid size-12 shrink-0 place-items-center rounded-full',
 						style.ink,
 					)}
 				>
@@ -196,7 +196,7 @@ function StrengthPanel({ bits, length }: { bits: number; length: number }) {
 					<span className={cn('text-lg leading-tight font-bold', style.ink)}>{strength.label}</span>
 				</h3>
 			</div>
-			<div aria-hidden="true" className="grid grid-cols-5 gap-1.5">
+			<div aria-hidden="true" className="grid grid-cols-5 gap-2">
 				{STRENGTH_LEVELS.map((name, index) => (
 					<span
 						key={name}
@@ -220,13 +220,13 @@ function StrengthPanel({ bits, length }: { bits: number; length: number }) {
 				{style.tip}
 			</p>
 			<dl className="flex flex-wrap gap-2 text-[0.8125rem]">
-				<div className="bg-surface text-fg flex items-center gap-1.5 rounded-full px-3 py-1">
+				<div className="bg-surface text-fg flex items-center gap-2 rounded-full px-4 py-1">
 					<dt className="sr-only">Tamanho</dt>
 					<dd className="tabular">
 						<strong>{length}</strong> caracteres
 					</dd>
 				</div>
-				<div className="bg-surface text-fg flex items-center gap-1.5 rounded-full px-3 py-1">
+				<div className="bg-surface text-fg flex items-center gap-2 rounded-full px-4 py-1">
 					<dt className="sr-only">Entropia</dt>
 					<dd className="tabular">
 						<strong>≈ {Math.round(bits)}</strong> bits de entropia
@@ -249,7 +249,7 @@ const CHAR_OPTIONS = [
 ] as const
 
 const OPTION_CARD =
-	'rounded-control border-border bg-surface hover:border-border-strong has-data-checked:border-accent/40 has-data-checked:bg-accent-soft/40 border px-3.5 py-1.5 transition-colors [&>span:last-child]:flex-1'
+	'rounded-control border-border bg-surface hover:border-border-strong has-data-checked:border-accent/40 has-data-checked:bg-accent-soft/40 border px-4 py-2 transition-colors [&>span:last-child]:flex-1'
 
 /** One-tap sizes under the slider. */
 const LENGTH_PRESETS = [8, 12, 16, 24, 32, 64] as const
@@ -318,14 +318,14 @@ function Presets({
 	onPick: (value: number) => void
 }) {
 	return (
-		<fieldset aria-label={label} className="flex flex-wrap gap-1.5">
+		<fieldset aria-label={label} className="flex flex-wrap gap-2">
 			{values.map((value) => (
 				<button
 					key={value}
 					type="button"
 					aria-pressed={current === value}
 					onClick={() => onPick(value)}
-					className="border-border text-fg-muted hover:border-border-strong hover:text-fg aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-primary-fg focus-visible:ring-ring tabular h-9 min-w-11 rounded-full border px-3 text-sm font-medium transition-colors outline-none focus-visible:ring-4"
+					className="border-border text-fg-muted hover:border-border-strong hover:text-fg aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-primary-fg focus-visible:ring-ring tabular h-10 min-w-12 rounded-full border px-4 text-sm font-medium transition-colors outline-none focus-visible:ring-4"
 				>
 					{value}
 				</button>
@@ -387,7 +387,7 @@ export default function PasswordGenerator() {
 
 				{kind === 'random' ? (
 					<>
-						<div className="flex flex-col gap-3">
+						<div className="flex flex-col gap-4">
 							<form.AppField name="length">
 								{(field) => (
 									<field.SliderField label="Tamanho" min={4} max={128} editable unit="caracteres" />
@@ -409,7 +409,7 @@ export default function PasswordGenerator() {
 											<field.SwitchField
 												className={OPTION_CARD}
 												label={
-													<span className="flex items-center justify-between gap-3">
+													<span className="flex items-center justify-between gap-4">
 														{option.label}
 														<span
 															aria-hidden="true"
@@ -479,7 +479,7 @@ export default function PasswordGenerator() {
 
 				{kind === 'pin' ? (
 					<>
-						<div className="flex flex-col gap-3">
+						<div className="flex flex-col gap-4">
 							<form.AppField name="pinLength">
 								{(field) => (
 									<field.SliderField label="Dígitos" min={4} max={12} editable unit="dígitos" />
@@ -506,9 +506,9 @@ export default function PasswordGenerator() {
 
 			<ResultCard title="Sua senha" empty={!result} emptyText="Gerando senha…">
 				{result ? (
-					<div className="flex flex-col gap-5">
+					<div className="flex flex-col gap-6">
 						<div className="flex flex-col gap-2">
-							<output className="rounded-control bg-surface-muted block px-5 py-6 text-center font-mono text-[clamp(1.25rem,3vw,1.75rem)] leading-snug font-semibold tracking-wide break-all select-all">
+							<output className="rounded-control bg-surface-muted block p-6 text-center font-mono text-[clamp(1.25rem,3vw,1.75rem)] leading-snug font-semibold tracking-wide break-all select-all">
 								<ColoredPassword value={result.password} />
 							</output>
 							{kind === 'random' ? (
@@ -516,14 +516,14 @@ export default function PasswordGenerator() {
 									aria-label="Cores da senha"
 									className="text-fg-muted flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs"
 								>
-									<li className="flex items-center gap-1.5">
+									<li className="flex items-center gap-2">
 										<span aria-hidden="true" className="bg-fg size-2 rounded-full" /> Letras
 									</li>
-									<li className="flex items-center gap-1.5">
+									<li className="flex items-center gap-2">
 										<span aria-hidden="true" className="bg-code-digit size-2 rounded-full" />{' '}
 										Números
 									</li>
-									<li className="flex items-center gap-1.5">
+									<li className="flex items-center gap-2">
 										<span aria-hidden="true" className="bg-code-symbol size-2 rounded-full" />{' '}
 										Símbolos
 									</li>

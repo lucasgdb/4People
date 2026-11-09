@@ -56,10 +56,10 @@ export default async function DollarToday() {
 		: false
 
 	return (
-		<div className="flex flex-col gap-5">
+		<div className="flex flex-col gap-6">
 			<section
 				aria-labelledby="dolar-agora"
-				className="rounded-panel border-border bg-surface flex flex-col gap-6 border p-5 sm:p-7"
+				className="rounded-panel border-border bg-surface flex flex-col gap-6 border p-6 sm:p-8"
 			>
 				<h2 id="dolar-agora" className="text-fg text-lg font-bold">
 					Dólar agora, em reais

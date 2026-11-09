@@ -4,7 +4,7 @@ import { cn } from '../lib/cn.ts'
 
 /** Status pill: a pale tint with dark text of the same hue. Inside rows and beside values only. */
 export const badgeVariants = cva(
-	'inline-flex h-6 flex-none items-center gap-1 rounded-full px-2.5 text-xs font-medium whitespace-nowrap [&_svg]:size-3.5',
+	'inline-flex h-6 flex-none items-center gap-1 rounded-full px-2 text-xs font-medium whitespace-nowrap [&_svg]:size-3.5',
 	{
 		variants: {
 			tone: {

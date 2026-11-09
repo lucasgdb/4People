@@ -23,7 +23,7 @@ export function ToolLayout({ children, className, resultFirst = false }: ToolLay
 	return (
 		<div
 			className={cn(
-				'[&>*]:rounded-panel [&>*]:border-border [&>*]:bg-surface grid items-start gap-5 xl:grid-cols-2 [&>*]:min-w-0 [&>*]:border',
+				'[&>*]:rounded-panel [&>*]:border-border [&>*]:bg-surface grid items-start gap-6 xl:grid-cols-2 [&>*]:min-w-0 [&>*]:border',
 				resultFirst && 'max-xl:[&>*:nth-child(2)]:order-first',
 				className,
 			)}
@@ -41,7 +41,7 @@ type StepTitleProps = {
 
 function StepTitle({ step, id, children }: StepTitleProps) {
 	return (
-		<h2 id={id} className="text-fg flex items-center gap-3 text-lg font-bold">
+		<h2 id={id} className="text-fg flex items-center gap-4 text-lg font-bold">
 			{step !== null ? (
 				<span
 					aria-hidden="true"
@@ -111,11 +111,11 @@ export function FormCard({
 		<form
 			noValidate
 			onSubmit={handleSubmit}
-			className={cn('flex flex-col gap-6 p-6 sm:p-7', className)}
+			className={cn('flex flex-col gap-6 p-6 sm:p-8', className)}
 		>
 			<StepTitle step={1}>{title}</StepTitle>
-			<div className="flex flex-1 flex-col gap-5">{children}</div>
-			<div className="flex flex-wrap items-center gap-3 [&>button[type=submit]]:w-full">
+			<div className="flex flex-1 flex-col gap-6">{children}</div>
+			<div className="flex flex-wrap items-center gap-4 [&>button[type=submit]]:w-full">
 				{actions}
 			</div>
 		</form>
@@ -158,8 +158,8 @@ export function ResultCard({
 	const showActions = !empty && (canCopy || canDownload || onClear)
 
 	return (
-		<section aria-labelledby={titleId} className={cn('flex flex-col gap-5 p-5 sm:p-7', className)}>
-			<div className="flex min-h-11 flex-wrap items-center justify-between gap-3">
+		<section aria-labelledby={titleId} className={cn('flex flex-col gap-6 p-6 sm:p-8', className)}>
+			<div className="flex min-h-12 flex-wrap items-center justify-between gap-4">
 				<StepTitle step={step} id={titleId}>
 					{title}
 				</StepTitle>
@@ -169,7 +169,7 @@ export function ResultCard({
 			{/* Only the result is live, so titles and buttons aren't re-announced on every change. */}
 			<div aria-live="polite" className="flex flex-1 flex-col">
 				{empty ? (
-					<p className="rounded-control border-border-strong bg-surface-muted text-fg-muted flex min-h-20 flex-1 items-center justify-center border border-dashed px-5 py-5 text-center text-[0.9375rem] sm:min-h-40 sm:px-6 sm:py-8">
+					<p className="rounded-control border-border-strong bg-surface-muted text-fg-muted flex min-h-20 flex-1 items-center justify-center border border-dashed p-6 text-center text-[0.9375rem] sm:min-h-40 sm:py-8">
 						{emptyText}
 					</p>
 				) : (
@@ -198,7 +198,7 @@ export function ResultCard({
 			) : null}
 
 			{note ? (
-				<p className="rounded-control bg-warning-soft text-warning-ink px-4 py-3 text-sm leading-relaxed">
+				<p className="rounded-control bg-warning-soft text-warning-ink p-4 text-sm leading-relaxed">
 					{note}
 				</p>
 			) : null}
@@ -218,7 +218,7 @@ export function OutputValue({ children, className, code = false }: OutputProps) 
 	return (
 		<output
 			className={cn(
-				'rounded-control bg-surface-muted text-fg tabular block px-5 py-5 text-2xl leading-tight font-bold break-all select-all sm:text-[1.75rem]',
+				'rounded-control bg-surface-muted text-fg tabular block p-6 text-2xl leading-tight font-bold break-all select-all sm:text-[1.75rem]',
 				code && 'font-mono text-xl sm:text-2xl',
 				className,
 			)}
@@ -235,7 +235,7 @@ export function OutputBlock({ children, className, code = true }: OutputProps) {
 			// biome-ignore lint/a11y/noNoninteractiveTabindex: a scrollable block must be reachable by keyboard
 			tabIndex={0}
 			className={cn(
-				'rounded-control bg-surface-muted text-fg focus-visible:ring-ring max-h-[28rem] overflow-auto px-5 py-4 text-[0.9375rem] leading-relaxed break-words whitespace-pre-wrap outline-none focus-visible:ring-4',
+				'rounded-control bg-surface-muted text-fg focus-visible:ring-ring max-h-[28rem] overflow-auto px-6 py-4 text-[0.9375rem] leading-relaxed break-words whitespace-pre-wrap outline-none focus-visible:ring-4',
 				code ? 'font-mono text-[0.875rem]' : 'font-sans',
 				className,
 			)}

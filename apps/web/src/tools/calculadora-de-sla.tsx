@@ -131,7 +131,7 @@ export default function CalculadoraDeSla() {
 	const result = outcome && 'availability' in outcome ? outcome : null
 
 	return (
-		<div className="flex flex-col gap-5">
+		<div className="flex flex-col gap-6">
 			<ToolLayout>
 				<FormCard
 					onSubmit={() => undefined}
@@ -182,7 +182,7 @@ export default function CalculadoraDeSla() {
 					{result ? <SlaResultView result={result} /> : null}
 				</ResultCard>
 			</ToolLayout>
-			<div className="grid items-start gap-5 xl:grid-cols-2">
+			<div className="grid items-start gap-6 xl:grid-cols-2">
 				<CommonSlas />
 				<CompositeSla />
 			</div>
@@ -216,7 +216,7 @@ function CommonSlas() {
 	return (
 		<section
 			aria-labelledby={titleId}
-			className="rounded-panel border-border bg-surface flex min-w-0 flex-col gap-4 border p-6 sm:p-7"
+			className="rounded-panel border-border bg-surface flex min-w-0 flex-col gap-4 border p-6 sm:p-8"
 		>
 			<h2 id={titleId} className="text-fg text-lg font-bold">
 				SLAs comuns
@@ -238,7 +238,7 @@ function CommonSlas() {
 							<TableRow key={sla.value}>
 								<TableHead
 									scope="row"
-									className="border-rule text-fg h-auto border-t border-b-0 py-3 text-sm font-semibold tracking-normal normal-case group-first/row:border-t-0"
+									className="border-rule text-fg h-auto border-t border-b-0 py-4 text-sm font-semibold tracking-normal normal-case group-first/row:border-t-0"
 								>
 									<span className="tabular">{formatPercent(sla.value)}</span>
 									{sla.ninesName ? (
@@ -284,12 +284,12 @@ function CompositeSla() {
 	return (
 		<section
 			aria-labelledby={titleId}
-			className="rounded-panel border-border bg-surface flex min-w-0 flex-col gap-5 border p-6 sm:p-7"
+			className="rounded-panel border-border bg-surface flex min-w-0 flex-col gap-6 border p-6 sm:p-8"
 		>
 			<h2 id={titleId} className="text-fg text-lg font-bold">
 				SLA composto
 			</h2>
-			<form noValidate onSubmit={(event) => event.preventDefault()} className="flex flex-col gap-5">
+			<form noValidate onSubmit={(event) => event.preventDefault()} className="flex flex-col gap-6">
 				<form.AppField name="list">
 					{(field) => (
 						<field.TextField
@@ -306,9 +306,9 @@ function CompositeSla() {
 			</form>
 			<div aria-live="polite">
 				{total !== null && availabilities ? (
-					<div className="rounded-control bg-surface-muted flex flex-col gap-1 px-5 py-4">
+					<div className="rounded-control bg-surface-muted flex flex-col gap-1 px-6 py-4">
 						<span className="text-fg-muted text-[0.8125rem]">SLA composto</span>
-						<span className="flex items-center justify-between gap-3">
+						<span className="flex items-center justify-between gap-4">
 							<span className="text-fg tabular text-2xl font-bold">{formatPercent(total)}</span>
 							<CopyButton
 								value={formatPercent(total)}

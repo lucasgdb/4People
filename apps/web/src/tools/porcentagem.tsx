@@ -353,7 +353,7 @@ function CalculatorOutcome({ outcome }: { outcome: Outcome | null }) {
 	if ('error' in outcome) return <span className="text-danger text-sm">{outcome.error}</span>
 	return (
 		<>
-			<span className="flex items-center justify-between gap-3">
+			<span className="flex items-center justify-between gap-4">
 				<span className="flex min-w-0 items-baseline gap-2">
 					{outcome.tag ? <span className="text-fg-muted text-sm">{outcome.tag}</span> : null}
 					<span className="text-fg tabular truncate text-2xl font-semibold">{outcome.value}</span>
@@ -418,11 +418,11 @@ function CalculatorCard({ calculator }: { calculator: Calculator }) {
 			aria-labelledby={titleId}
 			className="rounded-panel border-border bg-surface flex flex-col overflow-hidden border"
 		>
-			<div className="flex flex-1 flex-col gap-3 p-5">
+			<div className="flex flex-1 flex-col gap-4 p-6">
 				<h3 id={titleId} className="text-fg text-base font-semibold">
 					{calculator.title}
 				</h3>
-				<div className="text-fg flex flex-wrap items-center gap-x-2 gap-y-2 text-[0.9375rem]">
+				<div className="text-fg flex flex-wrap items-center gap-2 text-[0.9375rem]">
 					{/* Each input is glued to the words before it, so a narrow screen breaks the sentence
 					    between phrases, never leaving an input or a lone "?" on a line of its own. */}
 					<span className="flex items-center gap-2">
@@ -440,7 +440,7 @@ function CalculatorCard({ calculator }: { calculator: Calculator }) {
 			<output
 				aria-live="polite"
 				aria-labelledby={titleId}
-				className="bg-surface-muted border-border flex min-h-16 flex-col justify-center gap-1 border-t px-5 py-3 sm:min-h-24"
+				className="bg-surface-muted border-border flex min-h-16 flex-col justify-center gap-1 border-t px-6 py-4 sm:min-h-24"
 			>
 				<CalculatorOutcome outcome={outcome} />
 			</output>
@@ -453,7 +453,7 @@ export default function Percentage() {
 	return (
 		<div className="flex flex-col gap-8">
 			{GROUPS.map((group) => (
-				<div key={group.title} className="flex flex-col gap-3">
+				<div key={group.title} className="flex flex-col gap-4">
 					<h2 className="text-fg-muted text-sm font-medium tracking-wide uppercase">
 						{group.title}
 					</h2>

@@ -17,7 +17,7 @@ export function ValueList({ values, label }: { values: readonly string[]; label:
 				<li
 					// biome-ignore lint/suspicious/noArrayIndexKey: two random values can repeat; the position is the identity
 					key={index}
-					className="rounded-control bg-surface-muted flex min-w-0 items-center gap-3 py-2 pr-2 pl-4 sm:pl-5"
+					className="rounded-control bg-surface-muted flex min-w-0 items-center gap-4 py-2 pr-2 pl-4 sm:pl-6"
 				>
 					<span
 						translate="no"
@@ -211,7 +211,7 @@ export function DocumentGenerator({
 						)}
 					</form.AppField>
 				) : (
-					<p className="rounded-control bg-surface-muted text-fg-muted px-4 py-3 text-[0.9375rem]">
+					<p className="rounded-control bg-surface-muted text-fg-muted p-4 text-[0.9375rem]">
 						O {label} é escrito só com números, sem pontuação.
 					</p>
 				)}

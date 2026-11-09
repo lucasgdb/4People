@@ -84,7 +84,7 @@ function ColoredToken({ token }: { token: string }) {
 		<>
 			<ul className="text-fg-muted flex flex-wrap gap-x-4 gap-y-1 text-[0.8125rem]">
 				{PART_LABELS.map((label, partIndex) => (
-					<li key={label} className="flex items-center gap-1.5">
+					<li key={label} className="flex items-center gap-2">
 						<span aria-hidden="true" className={cn('font-mono font-bold', PART_STYLES[partIndex])}>
 							■
 						</span>
@@ -235,7 +235,7 @@ export default function JwtGenerator() {
 								/>
 							)}
 						</form.AppField>
-						<div className="flex flex-wrap items-center justify-between gap-3">
+						<div className="flex flex-wrap items-center justify-between gap-4">
 							<form.AppField name="base64Secret">
 								{(field) => <field.CheckboxField label="Segredo em Base64" />}
 							</form.AppField>
@@ -286,7 +286,7 @@ export default function JwtGenerator() {
 							<ColoredToken token={outcome.token} />
 						</div>
 						{showPublicKey ? (
-							<div className="border-border flex flex-col gap-2 border-t pt-5">
+							<div className="border-border flex flex-col gap-2 border-t pt-6">
 								<div className="flex flex-wrap items-center justify-between gap-2">
 									<h3 className="text-fg text-sm font-semibold">Chave pública (para verificar)</h3>
 									<CopyButton value={pair.publicKey} label="Copiar chave" />

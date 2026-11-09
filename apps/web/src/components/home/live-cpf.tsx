@@ -29,18 +29,18 @@ export function LiveCpf({ initial }: { initial: string }) {
 	return (
 		<section
 			aria-labelledby="cpf-ao-vivo"
-			className="rounded-panel border-border bg-surface shadow-float relative isolate flex flex-col gap-5 overflow-hidden border p-6 sm:p-7"
+			className="rounded-panel border-border bg-surface shadow-float relative isolate flex flex-col gap-6 overflow-hidden border p-6 sm:p-8"
 		>
 			{/* A soft blue glow in the top corner, behind everything. */}
 			<div
 				aria-hidden="true"
 				className="pointer-events-none absolute -top-24 -right-20 -z-10 size-64 rounded-full bg-[radial-gradient(closest-side,var(--color-accent-soft),transparent)]"
 			/>
-			<div className="flex items-start justify-between gap-3">
-				<div className="flex items-center gap-3">
+			<div className="flex items-start justify-between gap-4">
+				<div className="flex items-center gap-4">
 					<span
 						aria-hidden="true"
-						className="bg-accent text-accent-fg grid size-11 shrink-0 place-items-center rounded-[14px] shadow-[0_6px_16px_-6px_var(--color-accent)]"
+						className="bg-accent text-accent-fg rounded-control grid size-12 shrink-0 place-items-center shadow-[0_6px_16px_-6px_var(--color-accent)]"
 					>
 						<ToolIcon slug="gerador-de-cpf" size={22} />
 					</span>
@@ -53,7 +53,7 @@ export function LiveCpf({ initial }: { initial: string }) {
 				</div>
 				<Link
 					href={HREF as Route}
-					className="group text-accent-soft-fg hover:bg-accent-soft -mr-2 flex min-h-11 items-center gap-1 rounded-full px-3 text-sm font-semibold transition-colors duration-(--ds-motion-fast)"
+					className="group text-accent-soft-fg hover:bg-accent-soft -mr-2 flex min-h-12 items-center gap-1 rounded-full px-4 text-sm font-semibold transition-colors duration-(--ds-motion-fast)"
 				>
 					Abrir <span className="sr-only">o gerador de CPF</span>
 					<ArrowRight
@@ -63,7 +63,7 @@ export function LiveCpf({ initial }: { initial: string }) {
 				</Link>
 			</div>
 
-			<div className="rounded-control border-border bg-surface-muted flex flex-col gap-3 border px-5 pt-5 pb-4">
+			<div className="rounded-control border-border bg-surface-muted flex flex-col gap-4 border px-6 pt-6 pb-4">
 				<output
 					aria-live="polite"
 					className="text-fg tabular block text-[clamp(1.75rem,7vw,2.5rem)] leading-none font-extrabold tracking-[-0.01em]"
@@ -81,7 +81,7 @@ export function LiveCpf({ initial }: { initial: string }) {
 						)}
 					</span>
 				</output>
-				<p className="text-success-ink flex items-center gap-1.5 text-sm font-medium">
+				<p className="text-success-ink flex items-center gap-2 text-sm font-medium">
 					<CircleCheck aria-hidden="true" className="size-4 shrink-0" />
 					<span>
 						Dígitos verificadores <span className="text-accent font-semibold">{check}</span> válidos

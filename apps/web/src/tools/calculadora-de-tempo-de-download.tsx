@@ -157,7 +157,7 @@ function DownloadResultView({ result }: { result: DownloadResult }) {
 		<>
 			<div className="flex flex-col gap-1">
 				<span className="text-fg-muted text-[0.8125rem]">Tempo (h:mm:ss)</span>
-				<div className="flex items-center gap-3">
+				<div className="flex items-center gap-4">
 					<OutputValue className="flex-1">{time}</OutputValue>
 					<CopyButton variant="primary" value={time} aria-label={`Copiar tempo ${time}`} />
 				</div>
@@ -198,7 +198,7 @@ function DownloadResultView({ result }: { result: DownloadResult }) {
 								<TableRow key={speed.label}>
 									<TableHead
 										scope="row"
-										className="border-rule text-fg tabular h-auto border-t border-b-0 py-3 text-sm font-medium tracking-normal normal-case group-first/row:border-t-0"
+										className="border-rule text-fg tabular h-auto border-t border-b-0 py-4 text-sm font-medium tracking-normal normal-case group-first/row:border-t-0"
 									>
 										{speed.label}
 									</TableHead>

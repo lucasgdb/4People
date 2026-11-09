@@ -319,11 +319,11 @@ export default function RestApiTester() {
 								{ label: 'Tamanho', value: formatBytes(response.bytes) },
 							]}
 						/>
-						<details className="rounded-control bg-surface-muted px-4 py-3">
+						<details className="rounded-control bg-surface-muted p-4">
 							<summary className="text-fg cursor-pointer text-sm font-semibold">
 								Cabeçalhos da resposta ({response.headers.length})
 							</summary>
-							<dl className="mt-3 flex flex-col gap-1.5 font-mono text-[0.8125rem]">
+							<dl className="mt-4 flex flex-col gap-2 font-mono text-[0.8125rem]">
 								{response.headers.map(([name, value]) => (
 									<div key={name} className="break-all" translate="no">
 										<dt className="text-fg-muted inline">{name}: </dt>
@@ -331,7 +331,7 @@ export default function RestApiTester() {
 									</div>
 								))}
 							</dl>
-							<p className="text-fg-muted mt-3 text-[0.8125rem]">
+							<p className="text-fg-muted mt-4 text-[0.8125rem]">
 								O navegador só mostra os cabeçalhos que a API libera em
 								Access-Control-Expose-Headers.
 							</p>

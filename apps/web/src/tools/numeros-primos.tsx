@@ -31,7 +31,7 @@ export default function PrimeNumbers() {
 								// biome-ignore lint/suspicious/noArrayIndexKey: the list may repeat numbers
 								key={index}
 								tone={prime ? 'success' : 'neutral'}
-								className="tabular px-3 text-sm"
+								className="tabular px-4 text-sm"
 							>
 								{number}
 								{prime ? <Check aria-label="primo" /> : null}

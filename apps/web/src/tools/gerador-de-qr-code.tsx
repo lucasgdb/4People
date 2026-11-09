@@ -147,9 +147,9 @@ export default function QrCodeGenerator() {
 							/>
 						)}
 					</form.AppField>
-					<fieldset className="flex flex-col gap-3">
+					<fieldset className="flex flex-col gap-4">
 						<legend className="text-fg mb-2 text-sm font-medium">Cores</legend>
-						<div className="grid items-end gap-3 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
+						<div className="grid items-end gap-4 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
 							<form.AppField name="dark">
 								{(field) => <field.ColorField label="Módulos (quadradinhos)" />}
 							</form.AppField>
@@ -172,7 +172,7 @@ export default function QrCodeGenerator() {
 						{warning && (
 							<p
 								role="status"
-								className="rounded-control bg-warning-soft text-warning-ink px-4 py-3 text-sm"
+								className="rounded-control bg-warning-soft text-warning-ink p-4 text-sm"
 							>
 								{warning}
 							</p>
@@ -212,7 +212,7 @@ export default function QrCodeGenerator() {
 			</ToolLayout>
 			<aside
 				aria-labelledby="qr-completo"
-				className="rounded-panel border-border bg-surface flex flex-col gap-4 border p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6"
+				className="rounded-panel border-border bg-surface flex flex-col gap-4 border p-6 sm:flex-row sm:items-center sm:justify-between"
 			>
 				<div className="flex flex-col gap-1">
 					<h2 id="qr-completo" className="text-fg text-base font-semibold">

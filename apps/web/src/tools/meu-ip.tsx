@@ -42,7 +42,7 @@ export default function MyIp() {
 				}
 			>
 				{ipQuery.isPending ? (
-					<div aria-busy="true" className="flex flex-col gap-3">
+					<div aria-busy="true" className="flex flex-col gap-4">
 						<span className="sr-only">Consultando seu IP…</span>
 						<span className="rounded-control bg-surface-sunken block h-[6.5rem] w-full" />
 						<span className="bg-surface-sunken block h-4 w-2/3 rounded-full" />
@@ -54,8 +54,8 @@ export default function MyIp() {
 						anúncios e tente “Atualizar”.
 					</Alert>
 				) : (
-					<div className="flex flex-col gap-3">
-						<div className="rounded-control bg-surface-muted flex flex-col gap-2 px-6 py-5">
+					<div className="flex flex-col gap-4">
+						<div className="rounded-control bg-surface-muted flex flex-col gap-2 p-6">
 							<span className="flex items-center gap-2">
 								<Badge tone="primary">{version}</Badge>
 								<span className="text-fg-muted text-sm">Endereço que os sites veem</span>

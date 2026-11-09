@@ -49,7 +49,7 @@ export function ShiftDate({ direction }: { direction: 1 | -1 }) {
 				}
 			>
 				<form.AppField name="date">{(field) => <field.DateField label="Data" />}</form.AppField>
-				<div className="grid grid-cols-2 items-end gap-x-3 gap-y-4 sm:gap-x-4">
+				<div className="grid grid-cols-2 items-end gap-4">
 					<form.AppField name="amount">
 						{(field) => (
 							<field.NumberField

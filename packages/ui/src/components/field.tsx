@@ -44,7 +44,7 @@ export function Field({
 			{description && !hasError ? <FieldDescription>{description}</FieldDescription> : null}
 			<BaseField.Error
 				match={hasError}
-				className="text-danger flex items-start gap-1.5 text-[0.8125rem] font-medium"
+				className="text-danger flex items-start gap-2 text-[0.8125rem] font-medium"
 			>
 				<svg viewBox="0 0 16 16" fill="none" aria-hidden="true" className="mt-px size-3.5 shrink-0">
 					<circle cx="8" cy="8" r="6.25" stroke="currentColor" strokeWidth="1.5" />

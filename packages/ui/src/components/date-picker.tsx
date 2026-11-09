@@ -220,7 +220,7 @@ function Calendar({
 					aria-label={header.up ? `${header.title}. ${header.upLabel}` : undefined}
 					id={titleId}
 					aria-live="polite"
-					className="rounded-control text-fg hover:bg-surface-sunken flex h-9 flex-1 cursor-pointer items-center gap-1 px-2 text-left text-sm font-semibold first-letter:uppercase disabled:cursor-default disabled:hover:bg-transparent"
+					className="rounded-control text-fg hover:bg-surface-sunken flex h-10 flex-1 cursor-pointer items-center gap-1 px-2 text-left text-sm font-semibold first-letter:uppercase disabled:cursor-default disabled:hover:bg-transparent"
 				>
 					<span className="first-letter:uppercase">{header.title}</span>
 					{header.up ? (
@@ -231,7 +231,7 @@ function Calendar({
 					type="button"
 					onClick={header.prev}
 					aria-label={header.prevLabel}
-					className="rounded-control text-fg-muted hover:bg-surface-sunken hover:text-fg flex size-9 cursor-pointer items-center justify-center"
+					className="rounded-control text-fg-muted hover:bg-surface-sunken hover:text-fg flex size-10 cursor-pointer items-center justify-center"
 				>
 					{arrow('m10 3.5-4.5 4.5 4.5 4.5')}
 				</button>
@@ -239,7 +239,7 @@ function Calendar({
 					type="button"
 					onClick={header.next}
 					aria-label={header.nextLabel}
-					className="rounded-control text-fg-muted hover:bg-surface-sunken hover:text-fg flex size-9 cursor-pointer items-center justify-center"
+					className="rounded-control text-fg-muted hover:bg-surface-sunken hover:text-fg flex size-10 cursor-pointer items-center justify-center"
 				>
 					{arrow('m6 3.5 4.5 4.5L6 12.5')}
 				</button>
@@ -359,11 +359,11 @@ function Calendar({
 				<button
 					type="button"
 					onClick={() => onSelect(toISO(today.y, today.m, today.d))}
-					className="rounded-control text-fg hover:bg-surface-sunken h-9 cursor-pointer px-3 text-sm font-semibold"
+					className="rounded-control text-fg hover:bg-surface-sunken h-10 cursor-pointer px-4 text-sm font-semibold"
 				>
 					Hoje
 				</button>
-				<Popover.Close className="rounded-control text-fg-muted hover:bg-surface-sunken hover:text-fg h-9 cursor-pointer px-3 text-sm">
+				<Popover.Close className="rounded-control text-fg-muted hover:bg-surface-sunken hover:text-fg h-10 cursor-pointer px-4 text-sm">
 					Fechar
 				</Popover.Close>
 			</div>
@@ -441,7 +441,7 @@ export function DatePicker({
 			<Popover.Root open={open} onOpenChange={setOpen}>
 				<Popover.Trigger
 					aria-label="Abrir calendário"
-					className="text-fg-muted hover:bg-surface-sunken hover:text-fg focus-visible:ring-ring data-popup-open:bg-surface-sunken data-popup-open:text-fg absolute top-1/2 right-1 flex size-9 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full transition-colors outline-none focus-visible:ring-2"
+					className="text-fg-muted hover:bg-surface-sunken hover:text-fg focus-visible:ring-ring data-popup-open:bg-surface-sunken data-popup-open:text-fg absolute top-1/2 right-1 flex size-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full transition-colors outline-none focus-visible:ring-2"
 				>
 					<svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="size-[1.125rem]">
 						<rect
@@ -477,7 +477,7 @@ export function DatePicker({
 						<Popover.Popup
 							initialFocus={focusRef}
 							aria-label="Calendário"
-							className="rounded-panel border-border bg-surface text-fg shadow-float origin-(--transform-origin) border p-3 transition-[scale,opacity] duration-(--ds-motion-fast) outline-none data-ending-style:scale-[0.97] data-ending-style:opacity-0 data-starting-style:scale-[0.97] data-starting-style:opacity-0"
+							className="rounded-panel border-border bg-surface text-fg shadow-float origin-(--transform-origin) border p-4 transition-[scale,opacity] duration-(--ds-motion-fast) outline-none data-ending-style:scale-[0.97] data-ending-style:opacity-0 data-starting-style:scale-[0.97] data-starting-style:opacity-0"
 						>
 							<Calendar
 								value={parseISO(value) ? value : ''}

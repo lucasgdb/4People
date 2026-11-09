@@ -78,7 +78,7 @@ export default function ConversorDeUnidadesDeDados() {
 						</form.AppField>
 					)}
 				</div>
-				<div className="rounded-control bg-surface-muted text-fg-muted flex flex-col gap-2 px-5 py-4 text-[0.875rem] leading-relaxed">
+				<div className="rounded-control bg-surface-muted text-fg-muted flex flex-col gap-2 px-6 py-4 text-[0.875rem] leading-relaxed">
 					<p>
 						<strong className="text-fg">1000 ou 1024?</strong> No SI, quilo, mega e giga são
 						potências de 1000: 1 kB = 1.000 bytes e 1 GB = 1.000.000.000 bytes. É assim que

@@ -39,7 +39,7 @@ export function TableCard({
 			)}
 		>
 			{toolbar ? (
-				<div className="border-border flex flex-wrap items-center justify-between gap-3 border-b px-4 py-3 sm:px-5">
+				<div className="border-border flex flex-wrap items-center justify-between gap-4 border-b p-4 sm:px-6">
 					{toolbar}
 				</div>
 			) : null}
@@ -62,9 +62,7 @@ export function TableCard({
 				{children}
 			</section>
 			{footer ? (
-				<div className="border-border text-fg-muted border-t px-4 py-3 text-sm sm:px-5">
-					{footer}
-				</div>
+				<div className="border-border text-fg-muted border-t p-4 text-sm sm:px-6">{footer}</div>
 			) : null}
 		</div>
 	)
@@ -113,7 +111,7 @@ export function TableHead({
 		<th
 			scope={scope}
 			className={cn(
-				'border-border text-fg-muted h-11 border-b px-4 text-xs font-semibold tracking-wide whitespace-nowrap uppercase first:pl-5 last:pr-5',
+				'border-border text-fg-muted h-12 border-b px-4 text-xs font-semibold tracking-wide whitespace-nowrap uppercase first:pl-6 last:pr-6',
 				ALIGN[align ?? (numeric ? 'right' : 'left')],
 				className,
 			)}
@@ -132,7 +130,7 @@ export function TableCell({
 	return (
 		<td
 			className={cn(
-				'border-rule border-t px-4 py-3 align-middle group-first/row:border-t-0 first:pl-5 last:pr-5',
+				'border-rule border-t p-4 align-middle group-first/row:border-t-0 first:pl-6 last:pr-6',
 				ALIGN[align ?? (numeric ? 'right' : 'left')],
 				numeric && 'tabular',
 				className,
@@ -153,7 +151,7 @@ export function TableSkeleton({ rows = 6, columns }: { rows?: number; columns: n
 						<td
 							// biome-ignore lint/suspicious/noArrayIndexKey: static placeholder cells
 							key={column}
-							className="border-rule border-t px-4 py-4 first:pl-5 last:pr-5"
+							className="border-rule border-t p-4 first:pl-6 last:pr-6"
 						>
 							<span
 								className={cn(
@@ -173,7 +171,7 @@ export function TableSkeleton({ rows = 6, columns }: { rows?: number; columns: n
 export function TableEmpty({ colSpan, children }: { colSpan: number; children: ReactNode }) {
 	return (
 		<tr>
-			<td colSpan={colSpan} className="text-fg-muted px-5 py-10 text-center text-[0.9375rem]">
+			<td colSpan={colSpan} className="text-fg-muted px-6 py-10 text-center text-[0.9375rem]">
 				{children}
 			</td>
 		</tr>

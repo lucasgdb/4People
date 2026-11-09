@@ -40,7 +40,7 @@ function ColoredToken({ parts }: { parts: readonly string[] }) {
 		<div className="flex flex-col gap-2">
 			<ul className="text-fg-muted flex flex-wrap gap-x-4 gap-y-1 text-[0.8125rem]">
 				{PART_STYLES.map((part) => (
-					<li key={part.label} className="flex items-center gap-1.5">
+					<li key={part.label} className="flex items-center gap-2">
 						<span aria-hidden="true" className={cn('font-mono font-bold', part.className)}>
 							■
 						</span>
@@ -175,7 +175,7 @@ function ClaimList({ claims }: { claims: ClaimInfo[] }) {
 	return (
 		<ul className="border-border rounded-panel divide-border divide-y border">
 			{claims.map((claim) => (
-				<li key={claim.claim} className="flex flex-col gap-1 px-4 py-3">
+				<li key={claim.claim} className="flex flex-col gap-1 p-4">
 					<span className="flex flex-wrap items-baseline gap-2">
 						<span className="text-fg font-semibold">{claim.name}</span>
 						<code translate="no" className="text-fg-muted font-mono text-[0.8125rem]">
@@ -265,7 +265,7 @@ export default function JwtDecoder() {
 						/>
 					)}
 				</form.AppField>
-				<fieldset className="border-border flex flex-col gap-4 border-t pt-5">
+				<fieldset className="border-border flex flex-col gap-4 border-t pt-6">
 					<legend className="text-fg pr-2 text-base font-semibold">Verificar assinatura</legend>
 					{family === 'HS' ? (
 						<>

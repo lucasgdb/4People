@@ -61,7 +61,7 @@ export default function TextToHtml() {
 								{(field) => <field.TextareaField {...TEXT_FIELD[direction]} rows={8} />}
 							</form.AppField>
 							{direction === 'toHtml' ? (
-								<div className="flex flex-col gap-3">
+								<div className="flex flex-col gap-4">
 									<form.AppField name="paragraphs">
 										{(field) => (
 											<field.CheckboxField

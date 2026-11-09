@@ -157,10 +157,10 @@ function NodeList({ nodes }: { nodes: NodeItem[] }) {
 				{formatNumber(nodes.length)} {nodes.length === 1 ? 'nó' : 'nós'}
 				{nodes.length >= MAX_NODES ? ` (mostrando os primeiros ${MAX_NODES})` : ''}
 			</p>
-			<ol className="flex flex-col gap-3">
+			<ol className="flex flex-col gap-4">
 				{nodes.map((node, position) => (
 					// biome-ignore lint/suspicious/noArrayIndexKey: result order is the identity
-					<li key={position} className="flex flex-col gap-1.5">
+					<li key={position} className="flex flex-col gap-2">
 						<p className="flex flex-wrap items-center gap-2 text-[0.9375rem]">
 							<Badge tone="neutral">{node.type}</Badge>
 							<code translate="no" className="text-fg font-mono font-semibold">
@@ -240,7 +240,7 @@ export default function XPathTester() {
 								<Button
 									variant="secondary"
 									size="sm"
-									className="h-auto min-h-9 max-w-full py-1.5 text-left whitespace-normal"
+									className="h-auto min-h-10 max-w-full py-2 text-left whitespace-normal"
 									title={example.label}
 									aria-label={`${example.label}: ${example.expression}`}
 									onClick={() => form.setFieldValue('expression', example.expression)}

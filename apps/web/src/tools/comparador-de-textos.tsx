@@ -106,7 +106,7 @@ function changeCountText(count: number, unit: DiffUnit, participleStem: string):
 function InlineChange({ change }: { change: Change }) {
 	if (change.removed) {
 		return (
-			<del className={cn(REMOVED, 'rounded-[3px] decoration-2')}>
+			<del className={cn(REMOVED, 'rounded-sm decoration-2')}>
 				<span className="sr-only">[removido: </span>
 				{change.value}
 				<span className="sr-only">]</span>
@@ -115,7 +115,7 @@ function InlineChange({ change }: { change: Change }) {
 	}
 	if (change.added) {
 		return (
-			<ins className={cn(ADDED, 'rounded-[3px] decoration-2 underline-offset-4')}>
+			<ins className={cn(ADDED, 'rounded-sm decoration-2 underline-offset-4')}>
 				<span className="sr-only">[adicionado: </span>
 				{change.value}
 				<span className="sr-only">]</span>
@@ -240,9 +240,9 @@ function InlineDiff({ changes, view }: { changes: Change[]; view: View }) {
 		)
 	}
 	return (
-		<div className="grid gap-3 lg:grid-cols-2">
+		<div className="grid gap-4 lg:grid-cols-2">
 			{(['Original', 'Modificado'] as const).map((side) => (
-				<div key={side} className="flex min-w-0 flex-col gap-1.5">
+				<div key={side} className="flex min-w-0 flex-col gap-2">
 					<h3 className="text-fg-muted text-[0.8125rem]">{side}</h3>
 					<OutputBlock>
 						{changes
@@ -291,7 +291,7 @@ export default function TextDiff() {
 					</form.AppForm>
 				}
 			>
-				<div className="grid gap-5 lg:grid-cols-2">
+				<div className="grid gap-6 lg:grid-cols-2">
 					<form.AppField name="original">
 						{(field) => (
 							<field.TextareaField
@@ -311,7 +311,7 @@ export default function TextDiff() {
 						)}
 					</form.AppField>
 				</div>
-				<div className="flex flex-wrap gap-x-8 gap-y-5">
+				<div className="flex flex-wrap gap-x-8 gap-y-6">
 					<form.AppField name="unit" listeners={recomputeIfShown}>
 						{(field) => <field.RadioField label="Comparar por" options={UNITS} />}
 					</form.AppField>

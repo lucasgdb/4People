@@ -208,15 +208,15 @@ function CardFace({ card }: { card: ExportableCard }) {
 	return (
 		<div
 			aria-hidden="true"
-			className="relative isolate flex aspect-[1.586] w-full max-w-sm flex-col justify-between overflow-hidden rounded-[18px] p-5 text-white shadow-[0_12px_32px_-12px_rgb(23_32_51/0.5)] sm:p-6"
+			className="rounded-control relative isolate flex aspect-[1.586] w-full max-w-sm flex-col justify-between overflow-hidden p-6 text-white shadow-[0_12px_32px_-12px_rgb(23_32_51/0.5)]"
 			style={{ background: faceGradient(card.brand) }}
 		>
 			<span className="absolute -top-16 -right-10 -z-10 size-48 rounded-full bg-white/10" />
 			<span className="absolute -bottom-20 -left-12 -z-10 size-56 rounded-full bg-white/5" />
 			<div className="flex items-start justify-between">
-				<span className="grid h-8 w-11 grid-cols-2 gap-px overflow-hidden rounded-md bg-amber-200/90 p-1 shadow-inner">
+				<span className="grid h-8 w-12 grid-cols-2 gap-px overflow-hidden rounded-lg bg-amber-200/90 p-1 shadow-inner">
 					{CHIP_CONTACTS.map((contact) => (
-						<span key={contact} className="rounded-[2px] border border-amber-600/40" />
+						<span key={contact} className="rounded-sm border border-amber-600/40" />
 					))}
 				</span>
 				<span className="text-sm font-bold tracking-wide italic">
@@ -227,13 +227,13 @@ function CardFace({ card }: { card: ExportableCard }) {
 				{card.number}
 			</span>
 			<div className="flex items-end justify-between gap-4 text-[0.6875rem] tracking-wider uppercase">
-				<span className="flex min-w-0 flex-col gap-0.5">
+				<span className="flex min-w-0 flex-col gap-1">
 					<span className="opacity-70">Titular</span>
 					<span className="truncate text-sm font-semibold tracking-wide">
 						{card.holder ?? 'NOME DO TITULAR'}
 					</span>
 				</span>
-				<span className="flex shrink-0 flex-col gap-0.5 text-right">
+				<span className="flex shrink-0 flex-col gap-1 text-right">
 					<span className="opacity-70">Validade</span>
 					<span className="font-mono text-sm font-semibold">{card.expiry}</span>
 				</span>
@@ -266,7 +266,7 @@ function CardList({ cards }: { cards: readonly ExportableCard[] }) {
 				<li
 					// biome-ignore lint/suspicious/noArrayIndexKey: random cards can repeat; the position is the identity
 					key={index}
-					className="rounded-control bg-surface-muted flex items-center gap-3 py-2 pr-2 pl-4"
+					className="rounded-control bg-surface-muted flex items-center gap-4 py-2 pr-2 pl-4"
 				>
 					<span
 						aria-hidden="true"
@@ -305,8 +305,8 @@ function ExportPanel({ cards, spaces }: { cards: readonly ExportableCard[]; spac
 	const fileExtension = exportOption.filename.split('.').pop()?.toUpperCase()
 
 	return (
-		<div className="border-border flex flex-col gap-3 border-t pt-4">
-			<div className="flex flex-wrap items-center justify-between gap-3">
+		<div className="border-border flex flex-col gap-4 border-t pt-4">
+			<div className="flex flex-wrap items-center justify-between gap-4">
 				<span className="text-fg text-sm font-semibold" id="card-export-label">
 					Exportar como
 				</span>
@@ -321,7 +321,7 @@ function ExportPanel({ cards, spaces }: { cards: readonly ExportableCard[]; spac
 				// biome-ignore lint/a11y/noNoninteractiveTabindex: a scrollable block must be reachable by keyboard
 				tabIndex={0}
 				className={cn(
-					'rounded-control bg-surface-muted text-fg focus-visible:ring-ring max-h-48 overflow-auto px-4 py-3 font-mono text-[0.8125rem] leading-relaxed outline-none focus-visible:ring-4',
+					'rounded-control bg-surface-muted text-fg focus-visible:ring-ring max-h-48 overflow-auto p-4 font-mono text-[0.8125rem] leading-relaxed outline-none focus-visible:ring-4',
 					exportFormat === 'json'
 						? 'whitespace-pre'
 						: '[overflow-wrap:anywhere] whitespace-pre-wrap',
@@ -354,7 +354,7 @@ function StripeTestCards() {
 			label="Cartões de teste da Stripe"
 			className="xl:col-span-2"
 			toolbar={
-				<div className="flex flex-col gap-0.5">
+				<div className="flex flex-col gap-1">
 					<h2 className="text-fg text-base font-semibold">Cartões de teste da Stripe</h2>
 					<p className="text-fg-muted text-[0.8125rem]">
 						No modo de teste, cada número simula um resultado. Use qualquer validade futura e
@@ -448,7 +448,7 @@ export default function CardGenerator() {
 					</form.AppForm>
 				}
 			>
-				<div className="grid grid-cols-2 items-start gap-x-3 gap-y-4 sm:gap-x-4">
+				<div className="grid grid-cols-2 items-start gap-4">
 					<form.AppField name="brand">
 						{(field) => (
 							<field.SelectField
@@ -477,7 +477,7 @@ export default function CardGenerator() {
 					{(field) => <field.RadioField label="Validade" options={EXPIRY_MODES} />}
 				</form.AppField>
 				{values.expiry === 'custom' ? (
-					<div className="grid grid-cols-2 gap-x-3 gap-y-4 sm:gap-x-4">
+					<div className="grid grid-cols-2 gap-4">
 						<form.AppField name="month">
 							{(field) => <field.SelectField label="Mês" options={MONTHS} />}
 						</form.AppField>

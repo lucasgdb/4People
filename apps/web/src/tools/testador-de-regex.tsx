@@ -65,7 +65,7 @@ function HighlightedText({ segments }: { segments: Segment[] }) {
 						// biome-ignore lint/suspicious/noArrayIndexKey: positional segments of one text
 						key={position}
 						title={`Correspondência ${segment.match + 1}`}
-						className={`rounded-[4px] underline decoration-1 underline-offset-4 ${MATCH_TINTS[segment.match % 2]}`}
+						className={`rounded-sm underline decoration-1 underline-offset-4 ${MATCH_TINTS[segment.match % 2]}`}
 					>
 						{segment.text}
 					</mark>
@@ -77,7 +77,7 @@ function HighlightedText({ segments }: { segments: Segment[] }) {
 
 function GroupList({ groups }: { groups: RegexMatch['groups'] }) {
 	return (
-		<ul className="mt-1 flex flex-col gap-0.5 text-[0.8125rem]">
+		<ul className="mt-1 flex flex-col gap-1 text-[0.8125rem]">
 			{groups.map((group) => (
 				<li key={group.number} className="flex flex-wrap gap-2">
 					<Badge tone="neutral">

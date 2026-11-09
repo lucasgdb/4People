@@ -46,7 +46,7 @@ function ContrastSample({ background, ink }: { background: string; ink: string }
 		<svg
 			aria-hidden="true"
 			viewBox="0 0 56 56"
-			className="border-border size-14 shrink-0 rounded-[14px] border"
+			className="border-border rounded-control size-14 shrink-0 border"
 			style={{ background }}
 		>
 			<text
@@ -77,9 +77,9 @@ function ContrastCard({
 }) {
 	const rating = contrastRating(ratio)
 	return (
-		<div className="rounded-control border-border flex items-center gap-4 border p-3">
+		<div className="rounded-control border-border flex items-center gap-4 border p-4">
 			<ContrastSample background={background} ink={ink} />
-			<div className="flex min-w-0 flex-col gap-0.5">
+			<div className="flex min-w-0 flex-col gap-1">
 				<span className="text-fg-muted text-[0.8125rem]">{label}</span>
 				<span className="flex flex-wrap items-center gap-2">
 					<span className="text-fg tabular text-lg font-bold">{formatNumber(ratio, 2)}:1</span>
@@ -117,7 +117,7 @@ function ColorDetails({ input }: { input: string }) {
 	return (
 		<ResultCard title="Sua cor">
 			<div
-				className="rounded-panel border-border flex h-36 flex-col justify-end border p-5"
+				className="rounded-panel border-border flex h-36 flex-col justify-end border p-6"
 				style={{ background: formats.rgb }}
 			>
 				<span
@@ -129,7 +129,7 @@ function ColorDetails({ input }: { input: string }) {
 				</span>
 			</div>
 
-			<div className="grid gap-3 sm:grid-cols-2">
+			<div className="grid gap-4 sm:grid-cols-2">
 				<ContrastCard
 					label="Texto branco"
 					background={formats.rgb}
@@ -149,7 +149,7 @@ function ColorDetails({ input }: { input: string }) {
 				className="border-border divide-border rounded-control divide-y border"
 			>
 				{FORMATS.map(([label, key]) => (
-					<li key={key} className="flex items-center gap-3 py-1.5 pr-1.5 pl-4">
+					<li key={key} className="flex items-center gap-4 py-2 pr-2 pl-4">
 						<span className="text-fg-muted w-14 shrink-0 text-xs font-semibold tracking-wider">
 							{label}
 						</span>

@@ -127,7 +127,7 @@ export default function CronDescriber() {
 			>
 				{outcome?.ok === true && (
 					<>
-						<p className="rounded-control bg-surface-muted text-fg px-5 py-4 text-xl leading-snug font-bold">
+						<p className="rounded-control bg-surface-muted text-fg px-6 py-4 text-xl leading-snug font-bold">
 							{outcome.description}
 						</p>
 						<TableCard label="Campos da expressão">
@@ -144,7 +144,7 @@ export default function CronDescriber() {
 										<TableRow key={cronField.kind}>
 											<TableHead
 												scope="row"
-												className="border-rule text-fg h-auto border-t border-b-0 py-3 align-top text-sm font-medium tracking-normal normal-case group-first/row:border-t-0"
+												className="border-rule text-fg h-auto border-t border-b-0 py-4 align-top text-sm font-medium tracking-normal normal-case group-first/row:border-t-0"
 											>
 												{cronField.name}
 												<span className="text-fg-muted block text-[0.75rem] font-normal">
@@ -168,7 +168,7 @@ export default function CronDescriber() {
 							</h3>
 							<ol className="rounded-panel border-border divide-rule divide-y border">
 								{outcome.runs.map((date, position) => (
-									<li key={date.getTime()} className="flex items-center gap-3 px-4 py-2">
+									<li key={date.getTime()} className="flex items-center gap-4 px-4 py-2">
 										<span className="text-fg-subtle tabular w-6 text-right text-[0.8125rem]">
 											{position + 1}
 										</span>

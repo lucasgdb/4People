@@ -8,7 +8,7 @@
  * - success: `data-success` (opt-in: a value confirmed correct, e.g. a valid CPF) → success
  */
 export const controlClass = [
-	'w-full rounded-control border border-border-strong bg-surface px-3.5 text-base text-fg outline-none placeholder:text-fg-subtle',
+	'w-full rounded-control border border-border-strong bg-surface px-4 text-base text-fg outline-none placeholder:text-fg-subtle',
 	'transition-[border-color,box-shadow,background-color] duration-(--ds-motion) ease-(--ease-out)',
 	'hover:border-accent/55 hover:ring-[3px] hover:ring-accent/10',
 	'focus-visible:border-accent focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring',

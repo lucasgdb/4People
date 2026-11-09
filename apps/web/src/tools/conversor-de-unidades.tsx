@@ -208,7 +208,7 @@ export default function UnitConverter() {
 				</Field>
 				<div className="flex flex-col gap-1">
 					{renderSide('from')}
-					<div className="flex items-center gap-3">
+					<div className="flex items-center gap-4">
 						<span aria-hidden="true" className="bg-border h-px flex-1" />
 						<Equal aria-hidden="true" className="text-fg-subtle size-4" />
 						<Button
@@ -224,7 +224,7 @@ export default function UnitConverter() {
 					{renderSide('to')}
 				</div>
 				{formula ? (
-					<p className="rounded-control bg-surface-muted text-fg-muted px-4 py-3 text-sm">
+					<p className="rounded-control bg-surface-muted text-fg-muted p-4 text-sm">
 						<strong className="text-fg font-semibold">Fórmula:</strong>{' '}
 						<span translate="no">{formula}</span>
 					</p>
@@ -251,7 +251,7 @@ export default function UnitConverter() {
 							<li
 								key={unit.id}
 								className={cn(
-									'flex items-center justify-between gap-3 py-2',
+									'flex items-center justify-between gap-4 py-2',
 									isSource && 'opacity-60',
 								)}
 							>
@@ -260,7 +260,7 @@ export default function UnitConverter() {
 									disabled={isSource}
 									aria-pressed={unit.id === to.id}
 									onClick={() => chooseUnit('to', unit.id)}
-									className="text-fg-muted hover:text-fg focus-visible:ring-ring aria-pressed:text-accent-soft-fg -mx-2 flex min-w-0 flex-1 cursor-pointer items-baseline justify-between gap-3 rounded-[10px] px-2 py-1 text-left text-sm outline-none focus-visible:ring-4 disabled:cursor-default aria-pressed:font-semibold"
+									className="text-fg-muted hover:text-fg focus-visible:ring-ring aria-pressed:text-accent-soft-fg rounded-chip -mx-2 flex min-w-0 flex-1 cursor-pointer items-baseline justify-between gap-4 px-2 py-1 text-left text-sm outline-none focus-visible:ring-4 disabled:cursor-default aria-pressed:font-semibold"
 								>
 									<span className="min-w-0 truncate">{unit.name}</span>
 									<span translate="no" className="text-fg tabular shrink-0 font-semibold">

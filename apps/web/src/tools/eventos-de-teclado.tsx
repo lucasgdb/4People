@@ -52,7 +52,7 @@ export default function KeycodeEvent() {
 			data-captures-keys
 			aria-live="polite"
 			aria-label="Última tecla pressionada"
-			className="rounded-panel border-border bg-surface-muted flex flex-col gap-6 border p-5 sm:p-8"
+			className="rounded-panel border-border bg-surface-muted flex flex-col gap-6 border p-6 sm:p-8"
 		>
 			{info ? (
 				<>

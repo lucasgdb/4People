@@ -26,7 +26,7 @@ export function ScreenHeader({
 	children?: ReactNode
 }) {
 	return (
-		<header className="flex flex-col gap-3">
+		<header className="flex flex-col gap-4">
 			<nav aria-label="Trilha de navegação">
 				<ol className="text-fg-muted flex flex-wrap items-center gap-1 text-sm">
 					{crumbs.map((crumb, index) => (
@@ -52,11 +52,11 @@ export function ScreenHeader({
 			<div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between lg:gap-8">
 				{/* Phones: a small icon beside the title and the sentence below, full width. From sm up, a
 				    large icon tile beside both. */}
-				<div className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-2 sm:items-start sm:gap-x-5 sm:gap-y-1.5">
+				<div className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-center gap-x-4 gap-y-2 sm:items-start sm:gap-x-6">
 					{icon ? (
 						<span
 							aria-hidden="true"
-							className="bg-accent-soft text-accent grid size-11 shrink-0 place-items-center rounded-[14px] sm:row-span-2 sm:size-16 sm:rounded-[20px] [&_svg]:max-sm:size-6"
+							className="bg-accent-soft text-accent rounded-control sm:rounded-panel grid size-12 shrink-0 place-items-center sm:row-span-2 sm:size-16 [&_svg]:max-sm:size-6"
 						>
 							{icon}
 						</span>
@@ -86,18 +86,18 @@ export function ScreenHeader({
  * hover it rises a little with a float shadow and an accent edge. Use with `group`.
  */
 export const LINK_CARD =
-	'group border-border bg-surface relative flex w-full rounded-[20px] border p-5 shadow-[0_1px_2px_rgb(23_32_51/0.04)] outline-none transition-[translate,border-color,box-shadow] duration-(--ds-motion) ease-(--ease-out) hover:-translate-y-0.5 hover:border-accent/35 hover:shadow-float focus-visible:border-accent focus-visible:ring-4 focus-visible:ring-ring'
+	'group border-border bg-surface relative flex w-full rounded-panel border p-6 shadow-[0_1px_2px_rgb(23_32_51/0.04)] outline-none transition-[translate,border-color,box-shadow] duration-(--ds-motion) ease-(--ease-out) hover:-translate-y-0.5 hover:border-accent/35 hover:shadow-float focus-visible:border-accent focus-visible:ring-4 focus-visible:ring-ring'
 
 /** The icon tile of a link card: a soft accent gradient that fills with the accent on hover. */
 export const LINK_CARD_ICON =
-	'grid size-12 shrink-0 place-items-center rounded-[14px] bg-[linear-gradient(145deg,var(--color-accent-soft),color-mix(in_oklab,var(--color-accent-soft)_45%,white))] text-accent ring-1 ring-accent/10 ring-inset transition-[background,color,box-shadow] duration-(--ds-motion) group-hover:bg-accent group-hover:bg-none group-hover:text-accent-fg group-hover:shadow-[0_6px_16px_-6px_var(--color-accent)]'
+	'grid size-12 shrink-0 place-items-center rounded-control bg-[linear-gradient(145deg,var(--color-accent-soft),color-mix(in_oklab,var(--color-accent-soft)_45%,white))] text-accent ring-1 ring-accent/10 ring-inset transition-[background,color,box-shadow] duration-(--ds-motion) group-hover:bg-accent group-hover:bg-none group-hover:text-accent-fg group-hover:shadow-[0_6px_16px_-6px_var(--color-accent)]'
 
 /** The corner arrow of a link card: faint at rest, accent and nudged out on hover. */
 export function LinkCardArrow() {
 	return (
 		<ArrowUpRight
 			aria-hidden="true"
-			className="text-fg-subtle/50 group-hover:text-accent absolute top-5 right-5 size-[18px] transition-[color,translate] duration-(--ds-motion) ease-(--ease-out) group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+			className="text-fg-subtle/50 group-hover:text-accent absolute top-6 right-6 size-[18px] transition-[color,translate] duration-(--ds-motion) ease-(--ease-out) group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
 		/>
 	)
 }

@@ -14,9 +14,9 @@ export function CopyRows({ rows, code = false }: { rows: readonly CopyRow[]; cod
 			{rows.map((row) => (
 				<li
 					key={row.label}
-					className="rounded-control bg-surface-muted flex items-center gap-3 py-2.5 pr-2.5 pl-4 sm:pl-5"
+					className="rounded-control bg-surface-muted flex items-center gap-4 py-2 pr-2 pl-4 sm:pl-6"
 				>
-					<div className="flex min-w-0 flex-1 flex-col gap-0.5">
+					<div className="flex min-w-0 flex-1 flex-col gap-1">
 						<span className="text-fg-muted text-[0.8125rem]">{row.label}</span>
 						<span
 							className={cn(

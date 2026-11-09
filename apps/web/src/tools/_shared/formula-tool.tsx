@@ -118,7 +118,7 @@ export function FormulaTool({
 					</form.AppForm>
 				}
 			>
-				<div className={cn('grid items-end gap-x-3 gap-y-4 sm:gap-x-4', gridColumnsFor(fields))}>
+				<div className={cn('grid items-end gap-4', gridColumnsFor(fields))}>
 					{fields.map((field) => (
 						<form.AppField key={field.name} name={field.name}>
 							{(formField) => (

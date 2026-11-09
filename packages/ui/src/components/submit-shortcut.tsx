@@ -66,7 +66,7 @@ export function SubmitShortcutHint({ className }: { className?: string }) {
 			aria-hidden="true"
 			className={cn(
 				// Only with a real keyboard and room for it: never on phones (narrow or touch).
-				'hidden items-center gap-0.5 max-sm:!hidden [@media(pointer:fine)]:[form:has(:is(textarea,input:not([type=checkbox],[type=radio],[type=range],[type=hidden],[type=file],[type=color],[type=submit],[type=button],[aria-hidden=true],[tabindex="-1"])))_&]:inline-flex',
+				'hidden items-center gap-1 max-sm:!hidden [@media(pointer:fine)]:[form:has(:is(textarea,input:not([type=checkbox],[type=radio],[type=range],[type=hidden],[type=file],[type=color],[type=submit],[type=button],[aria-hidden=true],[tabindex="-1"])))_&]:inline-flex',
 				className,
 			)}
 		>

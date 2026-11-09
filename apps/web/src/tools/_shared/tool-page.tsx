@@ -106,14 +106,14 @@ type SectionTitleProps = {
 function SectionTitle({ id, icon, aside, children }: SectionTitleProps) {
 	return (
 		// The icon is centred on the whole text block: title alone, or title over the note on phones.
-		<div className="flex items-center gap-3">
+		<div className="flex items-center gap-4">
 			<span
 				aria-hidden="true"
-				className="bg-accent-soft text-accent grid size-9 shrink-0 place-items-center rounded-[12px] [&_svg]:size-[1.125rem]"
+				className="bg-accent-soft text-accent rounded-control grid size-10 shrink-0 place-items-center [&_svg]:size-[1.125rem]"
 			>
 				{icon}
 			</span>
-			<div className="flex min-w-0 flex-1 flex-col gap-0.5 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+			<div className="flex min-w-0 flex-1 flex-col gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
 				<h2 id={id} className="text-fg text-xl font-bold">
 					{children}
 				</h2>
@@ -143,11 +143,11 @@ function CompanionLink({ slug }: { slug: string }) {
 	return (
 		<Link
 			href={companion.href as Route}
-			className="rounded-panel border-border bg-surface hover:border-accent/55 focus-visible:ring-ring group flex items-center gap-4 border p-4 transition-[border-color] duration-(--ds-motion) outline-none focus-visible:ring-4 sm:p-5"
+			className="rounded-panel border-border bg-surface hover:border-accent/55 focus-visible:ring-ring group flex items-center gap-4 border p-4 transition-[border-color] duration-(--ds-motion) outline-none focus-visible:ring-4 sm:p-6"
 		>
 			<span
 				aria-hidden="true"
-				className="bg-accent-soft text-accent grid size-10 shrink-0 place-items-center rounded-[12px]"
+				className="bg-accent-soft text-accent rounded-control grid size-10 shrink-0 place-items-center"
 			>
 				<ToolIcon slug={companion.slug} size={20} />
 			</span>
@@ -178,7 +178,7 @@ function FeatureList({ usesNetwork }: { usesNetwork: boolean }) {
 				<li
 					key={feature}
 					// Plain words separated by dots on phones; outlined chips from sm up.
-					className="sm:border-border sm:bg-surface whitespace-nowrap not-first:before:mr-2 not-first:before:content-['·'] sm:rounded-full sm:border sm:px-3 sm:py-1 sm:not-first:before:hidden"
+					className="sm:border-border sm:bg-surface whitespace-nowrap not-first:before:mr-2 not-first:before:content-['·'] sm:rounded-full sm:border sm:px-4 sm:py-1 sm:not-first:before:hidden"
 				>
 					{feature}
 				</li>
@@ -189,9 +189,9 @@ function FeatureList({ usesNetwork }: { usesNetwork: boolean }) {
 
 function HowToSteps({ howTo }: { howTo: HowTo }) {
 	return (
-		<div className="flex flex-col gap-3">
+		<div className="flex flex-col gap-4">
 			<h3 className="text-fg text-lg font-bold">{howTo.title}</h3>
-			<ol className="marker:text-accent flex list-decimal flex-col gap-2 pl-5 leading-7 wrap-anywhere">
+			<ol className="marker:text-accent flex list-decimal flex-col gap-2 pl-6 leading-7 wrap-anywhere">
 				{howTo.steps.map((step) => (
 					<li key={step} className="text-fg pl-1 text-pretty">
 						{step}
@@ -199,7 +199,7 @@ function HowToSteps({ howTo }: { howTo: HowTo }) {
 				))}
 			</ol>
 			{howTo.example ? (
-				<p className="rounded-control bg-surface-muted text-fg px-4 py-3 leading-7 wrap-anywhere">
+				<p className="rounded-control bg-surface-muted text-fg p-4 leading-7 wrap-anywhere">
 					<strong className="font-semibold">Exemplo:</strong> {howTo.example}
 				</p>
 			) : null}
@@ -236,14 +236,14 @@ function HowItWorks({ answer, formula, howTo, updatedAt, usesNetwork, source }: 
 		: 'Ver o código desta ferramenta'
 
 	return (
-		<div className="rounded-panel border-border bg-surface flex flex-col gap-5 border p-5 sm:p-7">
+		<div className="rounded-panel border-border bg-surface flex flex-col gap-6 border p-6 sm:p-8">
 			<SectionTitle id="como-funciona" icon={<BookOpen />}>
 				Como funciona
 			</SectionTitle>
 			<p className="text-fg text-base leading-7 text-pretty wrap-anywhere">{answer}</p>
 
 			{formula ? (
-				<div className="rounded-control bg-accent-soft flex flex-col gap-1 px-4 py-3">
+				<div className="rounded-control bg-accent-soft flex flex-col gap-1 p-4">
 					<span className="text-accent-soft-fg text-xs font-semibold tracking-wider uppercase">
 						Fórmula
 					</span>
@@ -301,7 +301,7 @@ function HowItWorks({ answer, formula, howTo, updatedAt, usesNetwork, source }: 
 function FrequentQuestions({ faq }: { faq: ToolContent['faq'] }) {
 	const countLabel = `${faq.length} ${faq.length === 1 ? 'pergunta' : 'perguntas'}`
 	return (
-		<div className="rounded-panel border-border bg-surface flex flex-col gap-3 border p-5 sm:p-7">
+		<div className="rounded-panel border-border bg-surface flex flex-col gap-4 border p-6 sm:p-8">
 			<SectionTitle
 				id="perguntas-frequentes"
 				icon={<CircleHelp />}
@@ -364,7 +364,7 @@ export function ToolPage({
 	)
 
 	return (
-		<div className="flex flex-col gap-10">
+		<div className="flex flex-col gap-8">
 			<JsonLd data={toolStructuredData(tool, content)} />
 
 			<div className="flex flex-col gap-8">
@@ -375,9 +375,9 @@ export function ToolPage({
 						{ label: tool.section.name, href: topicPath },
 					]}
 					title={tool.name}
-					icon={<ToolIcon slug={tool.slug} size={32} className="size-7 sm:size-8" />}
+					icon={<ToolIcon slug={tool.slug} size={32} className="size-8" />}
 					aside={
-						<div className="flex flex-wrap items-center gap-x-4 gap-y-3 lg:flex-col lg:items-end">
+						<div className="flex flex-wrap items-center gap-4 lg:flex-col lg:items-end">
 							<FeatureList usesNetwork={usesNetwork} />
 							<ShareButton title={`${tool.name} · 4People`} text={tool.description} />
 						</div>
@@ -391,7 +391,7 @@ export function ToolPage({
 
 			<section
 				aria-labelledby="como-funciona"
-				className="grid items-start gap-5 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"
+				className="grid items-start gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"
 			>
 				<HowItWorks
 					answer={content.answer}

@@ -68,11 +68,11 @@ export default function RuleOfThree() {
 					)}
 				</form.AppField>
 				{/* Laid out as the proportion is written: a → b, c → x. */}
-				<div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-end gap-x-3 gap-y-4">
+				<div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-end gap-4">
 					<form.AppField name="a">
 						{(field) => <field.NumberField label="a" placeholder="Ex: 2" />}
 					</form.AppField>
-					<span aria-hidden="true" className="text-fg-muted pb-2.5">
+					<span aria-hidden="true" className="text-fg-muted pb-2">
 						→
 					</span>
 					<form.AppField name="b">
@@ -81,12 +81,12 @@ export default function RuleOfThree() {
 					<form.AppField name="c">
 						{(field) => <field.NumberField label="c" placeholder="Ex: 6" />}
 					</form.AppField>
-					<span aria-hidden="true" className="text-fg-muted pb-2.5">
+					<span aria-hidden="true" className="text-fg-muted pb-2">
 						→
 					</span>
 					<div className="flex flex-col gap-2">
 						<span className="text-fg text-sm leading-none font-medium">x</span>
-						<span className="rounded-control bg-surface-sunken text-fg-muted tabular flex h-11 items-center px-3 sm:h-10">
+						<span className="rounded-control bg-surface-sunken text-fg-muted tabular flex h-12 items-center px-4 sm:h-10">
 							{result ? formatTerm(result.x) : '?'}
 						</span>
 					</div>

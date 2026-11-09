@@ -83,7 +83,7 @@ export default function CalculadoraDeSubRedeIpv6() {
 	const rows = result?.ok ? summaryRows(result.subnet) : []
 
 	return (
-		<div className="flex flex-col gap-5">
+		<div className="flex flex-col gap-6">
 			<ToolLayout>
 				<FormCard
 					onSubmit={() => undefined}
@@ -182,7 +182,7 @@ function SplitSection({
 	return (
 		<section
 			aria-labelledby={titleId}
-			className="rounded-panel border-border bg-surface flex flex-col gap-4 border p-6 sm:p-7"
+			className="rounded-panel border-border bg-surface flex flex-col gap-4 border p-6 sm:p-8"
 		>
 			<h2 id={titleId} className="text-fg text-lg font-bold">
 				Sub-redes
@@ -211,10 +211,10 @@ function SplitList({ split, prefix }: { split: Split; prefix: number }) {
 			</p>
 			<ol
 				translate="no"
-				className="rounded-control bg-surface-muted grid gap-x-6 gap-y-1.5 px-5 py-4 font-mono text-[0.875rem] sm:grid-cols-2"
+				className="rounded-control bg-surface-muted grid gap-x-6 gap-y-2 px-6 py-4 font-mono text-[0.875rem] sm:grid-cols-2"
 			>
 				{split.subnets.map((network, index) => (
-					<li key={network.toString()} className="flex gap-3 break-all">
+					<li key={network.toString()} className="flex gap-4 break-all">
 						<span className="text-fg-muted tabular w-6 shrink-0 text-right">{index + 1}</span>
 						<span className="text-fg">
 							{compressIPv6(network)}/{split.prefix}

@@ -81,7 +81,7 @@ export default function CompoundInterest() {
 					</form.AppForm>
 				}
 			>
-				<div className="grid grid-cols-2 items-end gap-x-3 gap-y-4 sm:gap-x-4">
+				<div className="grid grid-cols-2 items-end gap-4">
 					<form.AppField name="principal">
 						{(field) => (
 							<field.NumberField

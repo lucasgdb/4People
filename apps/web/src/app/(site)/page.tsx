@@ -68,13 +68,13 @@ function Hero() {
 			<div className="flex flex-col items-start gap-6">
 				<ul
 					aria-label="Características"
-					className="text-fg-muted flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[0.8125rem] font-medium sm:gap-2 sm:text-sm"
+					className="text-fg-muted flex flex-wrap items-center gap-x-4 gap-y-2 text-[0.8125rem] font-medium sm:gap-2 sm:text-sm"
 				>
 					{HERO_FEATURES.map(({ icon: FeatureIcon, label }) => (
 						<li
 							key={label}
 							// Phones: a quiet line of icon + word; from sm up, soft white chips.
-							className="sm:border-border sm:bg-surface/80 flex items-center gap-1.5 whitespace-nowrap sm:rounded-full sm:border sm:py-1.5 sm:pr-3.5 sm:pl-2 sm:shadow-[0_1px_2px_rgb(23_32_51/0.05)]"
+							className="sm:border-border sm:bg-surface/80 flex items-center gap-2 whitespace-nowrap sm:rounded-full sm:border sm:py-2 sm:pr-4 sm:pl-2 sm:shadow-[0_1px_2px_rgb(23_32_51/0.05)]"
 						>
 							<span
 								aria-hidden="true"
@@ -103,7 +103,7 @@ function Hero() {
 					<strong className="text-fg font-semibold">no navegador</strong>, sem cadastro e sem enviar
 					seus dados.
 				</p>
-				<div className="grid w-full gap-3 sm:flex sm:w-auto sm:flex-wrap">
+				<div className="grid w-full gap-4 sm:flex sm:w-auto sm:flex-wrap">
 					<Link href={CPF_HREF as Route} className={buttonVariants({ size: 'lg' })}>
 						Gerar um CPF
 					</Link>
@@ -125,7 +125,7 @@ function Sections() {
 		<section aria-labelledby="secoes" className="flex flex-col gap-6">
 			<SectionTitle id="secoes" title="Explore por assunto" />
 			{CATEGORIES.map((category) => (
-				<div key={category.slug} className="flex flex-col gap-3">
+				<div key={category.slug} className="flex flex-col gap-4">
 					<h3 className="text-fg-muted flex items-center gap-2 text-sm font-semibold tracking-wide uppercase">
 						<Icon name={category.icon} className="size-4" />
 						{category.name}
@@ -137,18 +137,18 @@ function Sections() {
 									href={`/${category.slug}/${section.slug}` as Route}
 									className={cn(LINK_CARD, 'flex-col gap-4')}
 								>
-									<span className="flex items-center gap-3 pr-6">
+									<span className="flex items-center gap-4 pr-6">
 										<span aria-hidden="true" className={LINK_CARD_ICON}>
 											<Icon name={section.icon} className="size-[22px]" />
 										</span>
 										<span className="text-fg font-bold">{section.name}</span>
 									</span>
 									{/* The first tools as chips: what the section holds, at a glance. */}
-									<span className="flex flex-wrap gap-1.5">
+									<span className="flex flex-wrap gap-2">
 										{section.tools.slice(0, 3).map((tool) => (
 											<span
 												key={tool.slug}
-												className="bg-surface-muted text-fg-muted border-rule rounded-chip border px-2 py-0.5 text-[0.8125rem]"
+												className="bg-surface-muted text-fg-muted border-rule rounded-chip border px-2 py-1 text-[0.8125rem]"
 											>
 												{tool.name}
 											</span>
@@ -203,7 +203,7 @@ function SaveTokens() {
 				className="pointer-events-none absolute -bottom-40 -left-32 -z-10 size-[26rem] rounded-full bg-[radial-gradient(closest-side,color-mix(in_oklab,var(--color-accent)_14%,transparent),transparent)]"
 			/>
 			<div className="flex flex-col items-start gap-4">
-				<span className="text-accent-soft-fg bg-surface/70 border-accent/15 flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-bold tracking-wider uppercase">
+				<span className="text-accent-soft-fg bg-surface/70 border-accent/15 flex items-center gap-2 rounded-full border px-4 py-1 text-xs font-bold tracking-wider uppercase">
 					<Sparkles aria-hidden="true" className="size-3.5" /> Para quem usa IA
 				</span>
 				<h2
@@ -218,8 +218,8 @@ function SaveTokens() {
 					modelo. Deixe a IA para o que só ela faz.
 				</p>
 				{/* The point in one number. */}
-				<p className="bg-surface border-border mt-1 flex items-center gap-3 rounded-[16px] border py-2.5 pr-5 pl-2.5 shadow-[0_1px_2px_rgb(23_32_51/0.05)]">
-					<span className="bg-accent text-accent-fg tabular grid h-10 min-w-10 place-items-center rounded-[12px] px-2 text-xl leading-none font-extrabold">
+				<p className="bg-surface border-border rounded-control mt-1 flex items-center gap-4 border py-2 pr-6 pl-2 shadow-[0_1px_2px_rgb(23_32_51/0.05)]">
+					<span className="bg-accent text-accent-fg tabular rounded-control grid h-10 min-w-10 place-items-center px-2 text-xl leading-none font-extrabold">
 						0
 					</span>
 					<span className="flex flex-col leading-tight">
@@ -228,15 +228,15 @@ function SaveTokens() {
 					</span>
 				</p>
 			</div>
-			<ul className="flex flex-col gap-3">
+			<ul className="flex flex-col gap-4">
 				{AI_POINTS.map(({ icon: PointIcon, title, text }) => (
 					<li
 						key={title}
-						className="rounded-control bg-surface/90 border-border flex items-start gap-4 border p-5 shadow-[0_1px_2px_rgb(23_32_51/0.04)] backdrop-blur-sm"
+						className="rounded-control bg-surface/90 border-border flex items-start gap-4 border p-6 shadow-[0_1px_2px_rgb(23_32_51/0.04)] backdrop-blur-sm"
 					>
 						<span
 							aria-hidden="true"
-							className="bg-accent-soft text-accent ring-accent/10 grid size-11 shrink-0 place-items-center rounded-[12px] ring-1 ring-inset"
+							className="bg-accent-soft text-accent ring-accent/10 rounded-control grid size-12 shrink-0 place-items-center ring-1 ring-inset"
 						>
 							<PointIcon className="size-5" />
 						</span>
@@ -259,7 +259,7 @@ function Validate() {
 			aria-labelledby="validar"
 			className="rounded-panel border-border bg-surface grid gap-8 border p-6 sm:p-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:p-10"
 		>
-			<div className="flex flex-col gap-3">
+			<div className="flex flex-col gap-4">
 				<h2
 					id="validar"
 					className="text-fg text-2xl font-extrabold tracking-[-0.02em] sm:text-[1.75rem]"
@@ -298,7 +298,7 @@ function Questions() {
 				<p className="text-fg-muted text-lg text-pretty">
 					O essencial sobre privacidade, custo e como as ferramentas funcionam.
 				</p>
-				<div className="rounded-panel bg-accent-soft mt-2 flex flex-col gap-2 p-5">
+				<div className="rounded-panel bg-accent-soft mt-2 flex flex-col gap-2 p-6">
 					<span className="text-fg font-bold">Não achou sua resposta?</span>
 					<p className="text-fg-muted text-[0.9375rem]">
 						Pergunte ou sugira uma ferramenta: o projeto é aberto e cada ideia é lida.
@@ -315,7 +315,7 @@ function Questions() {
 					</a>
 				</div>
 			</div>
-			<div className="rounded-panel border-border bg-surface border px-5 py-1 sm:px-7 sm:py-2">
+			<div className="rounded-panel border-border bg-surface border px-6 py-1 sm:px-8 sm:py-2">
 				<Accordion
 					items={SITE_FAQ.map((item, index) => ({
 						id: `faq-${index}`,
@@ -339,11 +339,11 @@ export default function HomePage() {
 			>
 				<Hero />
 				<section aria-labelledby="populares" className="flex flex-col gap-6">
-					<div className="flex flex-wrap items-end justify-between gap-3">
+					<div className="flex flex-wrap items-end justify-between gap-4">
 						<SectionTitle id="populares" title="Mais usadas" />
 						<Link
 							href={'/ferramentas' as Route}
-							className="text-accent-soft-fg flex min-h-11 items-center gap-1 font-semibold hover:underline"
+							className="text-accent-soft-fg flex min-h-12 items-center gap-1 font-semibold hover:underline"
 						>
 							Ver todas <ArrowRight className="size-4" aria-hidden="true" />
 						</Link>

@@ -105,7 +105,7 @@ function highlight(text: string, query: string): ReactNode {
 	return (
 		<>
 			{text.slice(0, start)}
-			<mark className="bg-accent-soft text-accent-soft-fg rounded-[4px] px-0.5">
+			<mark className="bg-accent-soft text-accent-soft-fg rounded-sm px-0.5">
 				{text.slice(start, end)}
 			</mark>
 			{text.slice(end)}
@@ -139,7 +139,7 @@ export default function BankLookup() {
 		return (
 			<Alert tone="danger">
 				<CircleX />
-				<div className="flex flex-1 flex-wrap items-center justify-between gap-3">
+				<div className="flex flex-1 flex-wrap items-center justify-between gap-4">
 					Não foi possível carregar a lista de bancos agora.
 					<Button size="sm" variant="secondary" onClick={() => banks.refetch()}>
 						<RefreshCw /> Tentar de novo
@@ -172,7 +172,7 @@ export default function BankLookup() {
 							placeholder="Código, nome ou ISPB…"
 							value={query}
 							onChange={(event) => setQuery(event.target.value)}
-							className="bg-surface-muted pl-11"
+							className="bg-surface-muted pl-12"
 						/>
 					</div>
 					<p aria-live="polite" className="text-fg-muted tabular text-sm">
@@ -208,7 +208,7 @@ export default function BankLookup() {
 						<TableSkeleton rows={8} columns={3} />
 					) : rows.length === 0 ? (
 						<TableEmpty colSpan={3}>
-							<span className="flex flex-col items-center gap-3">
+							<span className="flex flex-col items-center gap-4">
 								Nenhum banco encontrado para “{query.trim()}”.
 								<Button variant="secondary" size="sm" onClick={() => setQuery('')}>
 									Limpar busca
@@ -229,7 +229,7 @@ export default function BankLookup() {
 										<span className="flex items-center gap-1">
 											<span
 												translate="no"
-												className="bg-accent-soft text-accent-soft-fg tabular rounded-chip inline-flex h-7 min-w-12 items-center justify-center px-2 font-mono text-sm font-semibold"
+												className="bg-accent-soft text-accent-soft-fg tabular rounded-chip inline-flex h-8 min-w-12 items-center justify-center px-2 font-mono text-sm font-semibold"
 											>
 												{code}
 											</span>

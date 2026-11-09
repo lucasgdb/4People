@@ -50,7 +50,7 @@ export default function Bmi() {
 				<form.AppField name="sex">
 					{(field) => <field.RadioField label="Sexo" options={SEX_OPTIONS} />}
 				</form.AppField>
-				<div className="grid grid-cols-2 items-end gap-x-3 gap-y-4 sm:gap-x-4">
+				<div className="grid grid-cols-2 items-end gap-4">
 					<form.AppField name="weight">
 						{(field) => (
 							<field.NumberField

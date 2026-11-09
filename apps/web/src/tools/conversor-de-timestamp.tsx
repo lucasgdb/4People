@@ -101,7 +101,7 @@ function convertDate(date: string, time: string, zone: Zone): Conversion {
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
 	return (
-		<section className="flex flex-col gap-3">
+		<section className="flex flex-col gap-4">
 			<h3 className="text-fg text-base font-semibold">{title}</h3>
 			{children}
 		</section>
@@ -166,7 +166,7 @@ export default function TimestampConverter() {
 				</form.AppField>
 				{direction === 'toDate' ? (
 					<div className="flex flex-col gap-4">
-						<div className="flex items-end gap-3">
+						<div className="flex items-end gap-4">
 							<form.AppField name="timestamp">
 								{(field) => (
 									<field.TextField
@@ -194,7 +194,7 @@ export default function TimestampConverter() {
 					</div>
 				) : (
 					<div className="flex flex-col gap-4">
-						<div className="grid grid-cols-[minmax(0,1fr)_7.5rem] items-start gap-3 sm:grid-cols-[1fr_9rem]">
+						<div className="grid grid-cols-[minmax(0,1fr)_7.5rem] items-start gap-4 sm:grid-cols-[1fr_9rem]">
 							<form.AppField name="date">
 								{(field) => <field.DateField label="Data" />}
 							</form.AppField>

@@ -38,11 +38,11 @@ function ExternalLink({ href, children }: { href: string; children: ReactNode })
 
 function Section({ id, heading, children }: { id: string; heading: string; children: ReactNode }) {
 	return (
-		<section aria-labelledby={id} className="flex flex-col gap-3">
+		<section aria-labelledby={id} className="flex flex-col gap-4">
 			<h2 id={id} className="text-fg text-xl font-bold">
 				{heading}
 			</h2>
-			<div className="text-fg-muted flex flex-col gap-3 leading-7 text-pretty">{children}</div>
+			<div className="text-fg-muted flex flex-col gap-4 leading-7 text-pretty">{children}</div>
 		</section>
 	)
 }
@@ -136,7 +136,7 @@ export default function AboutPage() {
 
 					<Link
 						href={'/ferramentas' as Route}
-						className="bg-primary text-primary-fg hover:bg-primary-hover focus-visible:ring-ring rounded-control inline-flex min-h-11 w-fit items-center px-5 font-semibold outline-none focus-visible:ring-4"
+						className="bg-primary text-primary-fg hover:bg-primary-hover focus-visible:ring-ring rounded-control inline-flex min-h-12 w-fit items-center px-6 font-semibold outline-none focus-visible:ring-4"
 					>
 						Ver todas as ferramentas
 					</Link>

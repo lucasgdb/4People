@@ -62,7 +62,7 @@ export default function SortLines() {
 				<form.AppField name="order">
 					{(field) => <field.RadioField label="Ordem" options={ORDERS} />}
 				</form.AppField>
-				<div className="grid gap-3 sm:grid-cols-2">
+				<div className="grid gap-4 sm:grid-cols-2">
 					<form.AppField name="ignoreCase">
 						{(field) => <field.CheckboxField label="Ignorar maiúsculas e acentos" />}
 					</form.AppField>

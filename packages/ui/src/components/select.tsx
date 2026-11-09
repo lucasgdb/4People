@@ -74,7 +74,7 @@ export function Select<T extends string>({
 								<BaseSelect.Item
 									key={option.value}
 									value={option.value}
-									className="data-highlighted:bg-surface-sunken grid cursor-pointer grid-cols-[1rem_1fr] items-center gap-2 rounded-md py-2 pr-4 pl-2 text-sm outline-none select-none data-selected:font-semibold"
+									className="data-highlighted:bg-surface-sunken grid cursor-pointer grid-cols-[1rem_1fr] items-center gap-2 rounded-lg py-2 pr-4 pl-2 text-sm outline-none select-none data-selected:font-semibold"
 								>
 									<BaseSelect.ItemIndicator className="text-fg col-start-1">
 										<svg viewBox="0 0 16 16" fill="none" className="size-3.5" aria-hidden="true">

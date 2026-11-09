@@ -34,7 +34,7 @@ export function DataList({ items, columns = 2, className, ...props }: DataListPr
 				<div
 					// biome-ignore lint/suspicious/noArrayIndexKey: static, positional list
 					key={index}
-					className="bg-surface flex min-w-0 flex-col gap-1 px-4 py-3"
+					className="bg-surface flex min-w-0 flex-col gap-1 p-4"
 				>
 					<dt className="text-fg-muted text-[0.8125rem]">{item.label}</dt>
 					<dd className="tabular text-fg text-xl leading-tight break-words">{item.value}</dd>

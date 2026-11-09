@@ -60,7 +60,7 @@ export default function DifferenceBetweenDates() {
 					</form.AppForm>
 				}
 			>
-				<fieldset className="grid grid-cols-[minmax(0,1fr)_7rem] gap-3">
+				<fieldset className="grid grid-cols-[minmax(0,1fr)_7rem] gap-4">
 					<legend className="sr-only">Início</legend>
 					<form.AppField name="startDate">
 						{(field) => <field.DateField label="Data inicial" />}
@@ -69,7 +69,7 @@ export default function DifferenceBetweenDates() {
 						{(field) => <field.TimeField label="Horário" />}
 					</form.AppField>
 				</fieldset>
-				<fieldset className="grid grid-cols-[minmax(0,1fr)_7rem] gap-3">
+				<fieldset className="grid grid-cols-[minmax(0,1fr)_7rem] gap-4">
 					<legend className="sr-only">Fim</legend>
 					<form.AppField name="endDate">
 						{(field) => <field.DateField label="Data final" />}

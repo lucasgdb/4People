@@ -67,7 +67,7 @@ export function PrimaryNav({ className }: { className?: string }) {
 									setOpen(null)
 								}}
 								className={cn(
-									'group focus-visible:ring-ring data-popup-open:bg-surface-sunken flex h-10 items-center gap-1.5 rounded-full px-4 text-[0.9375rem] transition-colors outline-none focus-visible:ring-4',
+									'group focus-visible:ring-ring data-popup-open:bg-surface-sunken flex h-10 items-center gap-2 rounded-full px-4 text-[0.9375rem] transition-colors outline-none focus-visible:ring-4',
 									active
 										? 'bg-accent-soft text-accent-soft-fg font-semibold'
 										: 'text-fg-muted hover:bg-surface-sunken hover:text-fg font-medium',
@@ -78,13 +78,13 @@ export function PrimaryNav({ className }: { className?: string }) {
 									<ChevronDown aria-hidden="true" className="size-4" />
 								</NavigationMenu.Icon>
 							</NavigationMenu.Trigger>
-							<NavigationMenu.Content className="max-h-[calc(100dvh-6rem)] w-max max-w-[calc(100vw-3rem)] overflow-y-auto overscroll-contain px-6 py-5">
+							<NavigationMenu.Content className="max-h-[calc(100dvh-6rem)] w-max max-w-[calc(100vw-3rem)] overflow-y-auto overscroll-contain p-6">
 								<p className="text-fg-muted mb-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.8125rem]">
 									{category.description}
 									<NavigationMenu.Link
 										closeOnClick
 										render={<Link prefetch={false} href={base as Route} />}
-										className="text-accent-soft-fg focus-visible:ring-ring -my-1 inline-flex items-center gap-1 rounded-full px-1.5 py-1 font-semibold outline-none hover:underline focus-visible:ring-4"
+										className="text-accent-soft-fg focus-visible:ring-ring -my-1 inline-flex items-center gap-1 rounded-full px-2 py-1 font-semibold outline-none hover:underline focus-visible:ring-4"
 									>
 										Ver tudo em {category.name}
 										<ArrowRight aria-hidden="true" className="size-3.5" />
@@ -92,7 +92,7 @@ export function PrimaryNav({ className }: { className?: string }) {
 								</p>
 								{/* As wide as its topics (up to 4 columns), so a short area doesn't leave an empty band. */}
 								<div
-									className="grid gap-x-6 gap-y-5"
+									className="grid gap-6"
 									style={{
 										gridTemplateColumns: `repeat(${Math.min(category.sections.length, 4)}, minmax(0, 15rem))`,
 									}}
@@ -104,11 +104,11 @@ export function PrimaryNav({ className }: { className?: string }) {
 												<NavigationMenu.Link
 													closeOnClick
 													render={<Link prefetch={false} href={sectionHref as Route} />}
-													className="text-fg focus-visible:ring-ring hover:bg-surface-sunken -mx-2 flex items-center gap-2 rounded-[10px] px-2 py-1.5 text-[0.9375rem] font-bold outline-none focus-visible:ring-4"
+													className="text-fg focus-visible:ring-ring hover:bg-surface-sunken rounded-chip -mx-2 flex items-center gap-2 p-2 text-[0.9375rem] font-bold outline-none focus-visible:ring-4"
 												>
 													<span
 														aria-hidden="true"
-														className="bg-accent-soft text-accent grid size-7 place-items-center rounded-[8px]"
+														className="bg-accent-soft text-accent rounded-chip grid size-8 place-items-center"
 													>
 														<Icon name={section.icon} className="size-4" />
 													</span>
@@ -125,7 +125,7 @@ export function PrimaryNav({ className }: { className?: string }) {
 																		closeOnClick
 																		render={<Link prefetch={false} href={href as Route} />}
 																		aria-current={pathname === href ? 'page' : undefined}
-																		className="text-fg-muted hover:bg-surface-sunken hover:text-fg focus-visible:ring-ring aria-[current=page]:text-accent-soft-fg -mx-2 block rounded-[10px] px-2 py-1 text-sm outline-none focus-visible:ring-4 aria-[current=page]:font-semibold"
+																		className="text-fg-muted hover:bg-surface-sunken hover:text-fg focus-visible:ring-ring aria-[current=page]:text-accent-soft-fg rounded-chip -mx-2 block px-2 py-1 text-sm outline-none focus-visible:ring-4 aria-[current=page]:font-semibold"
 																	>
 																		{tool.name}
 																	</NavigationMenu.Link>
@@ -137,7 +137,7 @@ export function PrimaryNav({ className }: { className?: string }) {
 															<NavigationMenu.Link
 																closeOnClick
 																render={<Link prefetch={false} href={sectionHref as Route} />}
-																className="text-accent-soft-fg focus-visible:ring-ring -mx-2 inline-flex items-center gap-1 rounded-[10px] px-2 py-1 text-sm font-semibold outline-none hover:underline focus-visible:ring-4"
+																className="text-accent-soft-fg focus-visible:ring-ring rounded-chip -mx-2 inline-flex items-center gap-1 px-2 py-1 text-sm font-semibold outline-none hover:underline focus-visible:ring-4"
 															>
 																Ver todas as {section.tools.length}
 																<span className="sr-only"> de {section.name}</span>

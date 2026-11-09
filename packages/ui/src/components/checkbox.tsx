@@ -14,7 +14,7 @@ export function Checkbox({ label, description, className, ...props }: CheckboxPr
 		<BaseCheckbox.Root
 			className={cn(
 				// taste-skill-ignore: a form control keeps its edge
-				'peer border-border-strong bg-surface focus-visible:ring-ring data-checked:border-primary data-checked:bg-primary flex size-5 shrink-0 cursor-pointer items-center justify-center rounded-[6px] border-[1.5px] transition-colors outline-none focus-visible:ring-4 data-disabled:opacity-50',
+				'peer border-border-strong bg-surface focus-visible:ring-ring data-checked:border-primary data-checked:bg-primary flex size-5 shrink-0 cursor-pointer items-center justify-center rounded-lg border-[1.5px] transition-colors outline-none focus-visible:ring-4 data-disabled:opacity-50',
 				// With a description the box lines up with the first line of text; alone it is centered.
 				description ? 'mt-0.5' : undefined,
 				className as string,
@@ -41,12 +41,12 @@ export function Checkbox({ label, description, className, ...props }: CheckboxPr
 		// biome-ignore lint/a11y/noLabelWithoutControl: Base UI renders the control inside the label.
 		<label
 			className={cn(
-				'flex min-h-11 cursor-pointer gap-3 py-1 text-[0.9375rem] select-none',
+				'flex min-h-12 cursor-pointer gap-4 py-1 text-[0.9375rem] select-none',
 				description ? 'items-start' : 'items-center',
 			)}
 		>
 			{control}
-			<span className="flex flex-col gap-0.5">
+			<span className="flex flex-col gap-1">
 				<span className="text-fg">{label}</span>
 				{description ? <span className="text-fg-muted text-[0.8125rem]">{description}</span> : null}
 			</span>

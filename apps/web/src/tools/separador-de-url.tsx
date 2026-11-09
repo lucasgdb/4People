@@ -106,7 +106,7 @@ export default function UrlSplitter() {
 				{parsed?.ok === true && (
 					<>
 						<CopyRows code rows={urlPartRows(parsed.parts)} />
-						<div className="flex flex-col gap-3">
+						<div className="flex flex-col gap-4">
 							<div className="flex flex-wrap items-center justify-between gap-2">
 								<h3 className="text-fg text-base font-semibold">Parâmetros da query</h3>
 								<Button variant="secondary" size="sm" onClick={addParam}>
@@ -130,7 +130,7 @@ export default function UrlSplitter() {
 										<TableBody>
 											{params.map((param, position) => (
 												<TableRow key={param.id}>
-													<TableCell className="px-2 py-1.5 first:pl-3">
+													<TableCell className="p-2 first:pl-4">
 														<Input
 															aria-label={`Nome do parâmetro ${position + 1}`}
 															value={param.key}
@@ -143,7 +143,7 @@ export default function UrlSplitter() {
 															}
 														/>
 													</TableCell>
-													<TableCell className="px-2 py-1.5">
+													<TableCell className="p-2">
 														<Input
 															aria-label={`Valor do parâmetro ${param.key || position + 1}`}
 															value={param.value}
@@ -156,7 +156,7 @@ export default function UrlSplitter() {
 															}
 														/>
 													</TableCell>
-													<TableCell align="center" className="px-2 py-1.5 last:pr-3">
+													<TableCell align="center" className="p-2 last:pr-4">
 														<Button
 															variant="ghost"
 															size="icon"

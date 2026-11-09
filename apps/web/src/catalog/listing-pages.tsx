@@ -54,7 +54,7 @@ export function CategoryPage({ slug }: { slug: string }) {
 			<ScreenHeader
 				crumbs={[{ label: 'Início', href: '/' }, { label: category.name }]}
 				title={category.name}
-				icon={<Icon name={category.icon} className="size-7 sm:size-9" />}
+				icon={<Icon name={category.icon} className="size-8 sm:size-10" />}
 			>
 				<p className="text-fg-muted max-w-2xl text-lg">
 					{tools.length} ferramentas em {category.sections.length} seções. {category.description}
@@ -68,26 +68,26 @@ export function CategoryPage({ slug }: { slug: string }) {
 						aria-labelledby={`topico-${section.slug}`}
 						className="flex flex-col gap-4"
 					>
-						<div className="flex flex-wrap items-center justify-between gap-3">
+						<div className="flex flex-wrap items-center justify-between gap-4">
 							<h2
 								id={`topico-${section.slug}`}
-								className="text-fg flex items-center gap-3 text-xl font-extrabold tracking-[-0.015em]"
+								className="text-fg flex items-center gap-4 text-xl font-extrabold tracking-[-0.015em]"
 							>
 								<span
 									aria-hidden="true"
-									className="bg-accent-soft text-accent grid size-9 place-items-center rounded-[12px]"
+									className="bg-accent-soft text-accent rounded-control grid size-10 place-items-center"
 								>
 									<Icon name={section.icon} className="size-5" />
 								</span>
 								{section.name}
-								<span className="bg-surface-sunken text-fg-muted tabular inline-flex h-6 items-center rounded-full px-2.5 text-sm leading-none font-semibold">
+								<span className="bg-surface-sunken text-fg-muted tabular inline-flex h-6 items-center rounded-full px-2 text-sm leading-none font-semibold">
 									{section.tools.length}
 								</span>
 							</h2>
 							<Link
 								prefetch={false}
 								href={href as Route}
-								className="text-accent-soft-fg focus-visible:ring-ring flex min-h-11 items-center gap-1 rounded-full px-2 text-[0.9375rem] font-semibold outline-none hover:underline focus-visible:ring-4"
+								className="text-accent-soft-fg focus-visible:ring-ring flex min-h-12 items-center gap-1 rounded-full px-2 text-[0.9375rem] font-semibold outline-none hover:underline focus-visible:ring-4"
 							>
 								Abrir {section.name}
 								<ArrowRight aria-hidden="true" className="size-4" />
@@ -155,11 +155,11 @@ function TopicIntro({
 			<div className="border-border flex flex-col gap-4 border-b bg-[linear-gradient(160deg,var(--color-accent-soft),color-mix(in_oklab,var(--color-accent-soft)_35%,var(--color-surface)))] p-6 sm:p-8 lg:border-r lg:border-b-0">
 				<span
 					aria-hidden="true"
-					className="bg-accent text-accent-fg grid size-12 place-items-center rounded-[14px] shadow-[0_6px_16px_-6px_var(--color-accent)]"
+					className="bg-accent text-accent-fg rounded-control grid size-12 place-items-center shadow-[0_6px_16px_-6px_var(--color-accent)]"
 				>
 					<Icon name={icon} className="size-6" />
 				</span>
-				<div className="flex flex-col gap-1.5">
+				<div className="flex flex-col gap-2">
 					<span className="text-accent-soft-fg text-xs font-bold tracking-wider uppercase">
 						Sobre o tópico
 					</span>
@@ -239,7 +239,7 @@ export function SectionPage({
 					{ label: section.name },
 				]}
 				title={section.name}
-				icon={<Icon name={section.icon} className="size-7 sm:size-9" />}
+				icon={<Icon name={section.icon} className="size-8 sm:size-10" />}
 			>
 				<p className="text-fg-muted max-w-2xl text-lg">
 					{tools.length === 1 ? '1 ferramenta' : `${tools.length} ferramentas`} de{' '}
@@ -253,7 +253,7 @@ export function SectionPage({
 				count={tools.length}
 				paragraphs={sectionIntro(category.slug, section.slug)}
 			/>
-			<nav aria-labelledby="outros-topicos" className="flex flex-col gap-3 pt-4">
+			<nav aria-labelledby="outros-topicos" className="flex flex-col gap-4 pt-4">
 				<h2 id="outros-topicos" className="text-fg text-lg font-bold">
 					Outros tópicos de {category.name}
 				</h2>
@@ -265,7 +265,7 @@ export function SectionPage({
 								<Link
 									prefetch={false}
 									href={`/${category.slug}/${other.slug}` as Route}
-									className="border-border bg-surface text-fg hover:border-accent/45 hover:ring-accent-soft focus-visible:ring-ring flex h-11 items-center gap-2 rounded-full border px-4 text-[0.9375rem] font-medium transition-[border-color,box-shadow] duration-(--ds-motion) outline-none hover:ring-4 focus-visible:ring-4"
+									className="border-border bg-surface text-fg hover:border-accent/45 hover:ring-accent-soft focus-visible:ring-ring flex h-12 items-center gap-2 rounded-full border px-4 text-[0.9375rem] font-medium transition-[border-color,box-shadow] duration-(--ds-motion) outline-none hover:ring-4 focus-visible:ring-4"
 								>
 									<Icon name={other.icon} className="text-accent size-4" />
 									{other.name}

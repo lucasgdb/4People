@@ -38,7 +38,7 @@ export function AllToolsMenu() {
 			</SheetTrigger>
 			<SheetContent title="Ferramentas">
 				{/* pt-1: room for the 4px focus ring inside the sheet's scroll area, which clips overflow. */}
-				<div className="px-4 pt-1 pb-3">
+				<div className="px-4 pt-1 pb-4">
 					{/* The list below is the result: typing filters it in place, no dropdown. Enter opens the
 					    first match. */}
 					<div className="relative">
@@ -65,7 +65,7 @@ export function AllToolsMenu() {
 								setOpen(false)
 								router.push(first.href as Route)
 							}}
-							className="border-border-strong bg-surface-muted text-fg placeholder:text-fg-subtle hover:border-accent/55 hover:ring-accent/10 focus-visible:border-accent focus-visible:bg-surface focus-visible:ring-ring h-11 w-full rounded-full border pr-4 pl-10 text-base transition-[border-color,box-shadow,background-color] duration-(--ds-motion) ease-(--ease-out) outline-none hover:ring-[3px] focus-visible:ring-4"
+							className="border-border-strong bg-surface-muted text-fg placeholder:text-fg-subtle hover:border-accent/55 hover:ring-accent/10 focus-visible:border-accent focus-visible:bg-surface focus-visible:ring-ring h-12 w-full rounded-full border pr-4 pl-10 text-base transition-[border-color,box-shadow,background-color] duration-(--ds-motion) ease-(--ease-out) outline-none hover:ring-[3px] focus-visible:ring-4"
 						/>
 					</div>
 				</div>

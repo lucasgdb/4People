@@ -156,7 +156,7 @@ export function OpenFileButton({
 	onText: (text: string) => void
 }) {
 	return (
-		<label className="border-border-strong text-fg hover:bg-surface-muted focus-within:ring-ring inline-flex h-9 cursor-pointer items-center gap-2 rounded-full border px-4 text-sm font-semibold focus-within:ring-4 [&_svg]:size-4">
+		<label className="border-border-strong text-fg hover:bg-surface-muted focus-within:ring-ring inline-flex h-10 cursor-pointer items-center gap-2 rounded-full border px-4 text-sm font-semibold focus-within:ring-4 [&_svg]:size-4">
 			<FolderOpen aria-hidden="true" /> Abrir arquivo
 			<input
 				type="file"

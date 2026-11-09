@@ -57,18 +57,18 @@ function ToastList() {
 				'data-ending-style:data-[swipe-direction=down]:[transform:translateY(calc(var(--toast-swipe-movement-y)+150%))] data-ending-style:data-[swipe-direction=right]:[transform:translateX(calc(var(--toast-swipe-movement-x)+150%))_translateY(var(--offset-y))]',
 			)}
 		>
-			<Toast.Content className="flex min-h-14 items-center gap-3 overflow-hidden py-3.5 pr-3 pl-5 transition-opacity duration-(--ds-motion) data-behind:opacity-0 data-expanded:opacity-100">
+			<Toast.Content className="flex min-h-14 items-center gap-4 overflow-hidden py-4 pr-4 pl-6 transition-opacity duration-(--ds-motion) data-behind:opacity-0 data-expanded:opacity-100">
 				<span
 					aria-hidden="true"
 					className={cn('size-2 shrink-0 rounded-full', toneDot[item.type ?? 'info'])}
 				/>
-				<div className="flex min-w-0 flex-1 flex-col gap-0.5">
+				<div className="flex min-w-0 flex-1 flex-col gap-1">
 					<Toast.Title className="text-[0.9375rem] font-medium" />
 					<Toast.Description className="text-fg-muted text-[0.8125rem]" />
 				</div>
 				<Toast.Close
 					aria-label="Fechar"
-					className="text-fg-subtle hover:bg-surface-sunken hover:text-fg focus-visible:ring-ring grid size-9 shrink-0 cursor-pointer place-items-center rounded-full outline-none focus-visible:ring-4"
+					className="text-fg-subtle hover:bg-surface-sunken hover:text-fg focus-visible:ring-ring grid size-10 shrink-0 cursor-pointer place-items-center rounded-full outline-none focus-visible:ring-4"
 				>
 					<svg viewBox="0 0 16 16" className="size-3.5" fill="none" aria-hidden="true">
 						<path

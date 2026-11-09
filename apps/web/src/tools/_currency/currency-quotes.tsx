@@ -269,7 +269,7 @@ export function CurrencyQuotes({ snapshot }: { snapshot: QuoteSnapshot | null })
 			>
 				<div className="flex flex-col gap-1">
 					{renderSide('from')}
-					<div className="flex items-center gap-3">
+					<div className="flex items-center gap-4">
 						<span aria-hidden="true" className="bg-border h-px flex-1" />
 						<Equal aria-hidden="true" className="text-fg-subtle size-4" />
 						<Button
@@ -303,7 +303,7 @@ export function CurrencyQuotes({ snapshot }: { snapshot: QuoteSnapshot | null })
 				note="Cotação comercial de referência, da AwesomeAPI. Bancos e casas de câmbio cobram spread e IOF: o valor que você paga é maior. Para dinheiro em espécie, compare com o dólar turismo."
 			>
 				{quotes.isPending ? (
-					<div aria-busy="true" className="flex flex-col gap-3">
+					<div aria-busy="true" className="flex flex-col gap-4">
 						<span className="sr-only">Consultando as cotações…</span>
 						<span className="rounded-control bg-surface-sunken block h-[7.5rem] w-full" />
 						<span className="bg-surface-sunken block h-4 w-2/3 rounded-full" />
@@ -320,7 +320,7 @@ export function CurrencyQuotes({ snapshot }: { snapshot: QuoteSnapshot | null })
 					</Alert>
 				) : (
 					<div className="flex flex-col gap-4">
-						<div className="rounded-control bg-surface-muted flex flex-col gap-2 px-6 py-5">
+						<div className="rounded-control bg-surface-muted flex flex-col gap-2 p-6">
 							<span className="text-fg-muted text-sm">
 								{fromAmount !== null ? formatMoney(fromAmount, from) : '—'} em{' '}
 								{to.name.toLowerCase()}
@@ -342,21 +342,21 @@ export function CurrencyQuotes({ snapshot }: { snapshot: QuoteSnapshot | null })
 							) : null}
 						</div>
 
-						<dl className="text-fg-muted grid gap-x-6 gap-y-3 text-[0.8125rem] sm:grid-cols-2">
-							<div className="flex flex-col gap-0.5">
+						<dl className="text-fg-muted grid gap-x-6 gap-y-4 text-[0.8125rem] sm:grid-cols-2">
+							<div className="flex flex-col gap-1">
 								<dt>1 {oneUnitLabel(from)} vale</dt>
 								<dd className="text-fg tabular text-[0.9375rem] font-semibold">
 									{formatRate(rate, to)}
 								</dd>
 							</div>
-							<div className="flex flex-col gap-0.5">
+							<div className="flex flex-col gap-1">
 								<dt>1 {oneUnitLabel(to)} vale</dt>
 								<dd className="text-fg tabular text-[0.9375rem] font-semibold">
 									{formatRate(1 / rate, from)}
 								</dd>
 							</div>
 							{range ? (
-								<div className="flex flex-col gap-0.5 sm:col-span-2">
+								<div className="flex flex-col gap-1 sm:col-span-2">
 									<dt>Mínima e máxima do dia</dt>
 									<dd className="text-fg tabular text-[0.9375rem] font-semibold">
 										{formatRate(range.low, to)} a {formatRate(range.high, to)}
@@ -402,10 +402,10 @@ export function CurrencyQuotes({ snapshot }: { snapshot: QuoteSnapshot | null })
 								return (
 									<TableRow key={currency.id}>
 										<TableCell>
-											<span className="flex items-center gap-3">
+											<span className="flex items-center gap-4">
 												<span
 													translate="no"
-													className="bg-accent-soft text-accent-soft-fg rounded-chip inline-flex h-7 min-w-12 items-center justify-center px-2 font-mono text-sm font-semibold"
+													className="bg-accent-soft text-accent-soft-fg rounded-chip inline-flex h-8 min-w-12 items-center justify-center px-2 font-mono text-sm font-semibold"
 												>
 													{currency.code}
 												</span>
@@ -480,7 +480,7 @@ function MarketStatus({
 			<span
 				aria-hidden="true"
 				className={cn(
-					'mt-1.5 size-2 shrink-0 rounded-full',
+					'mt-2 size-2 shrink-0 rounded-full',
 					isClosed ? 'bg-fg-subtle' : 'bg-success animate-pulse motion-reduce:animate-none',
 				)}
 			/>

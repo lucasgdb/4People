@@ -61,7 +61,7 @@ export function RadioGroup<T extends string>({
 	return (
 		<BaseRadioGroup
 			className={cn(
-				'bg-surface-sunken max-w-full gap-1 rounded-[18px] p-1',
+				'bg-surface-sunken rounded-control max-w-full gap-1 p-1',
 				cards ? cn('grid w-full', cardColumns) : pillLayout,
 				className as string,
 			)}
@@ -75,10 +75,10 @@ export function RadioGroup<T extends string>({
 					<label
 						key={option.value}
 						className={cn(
-							'text-fg-muted hover:text-fg has-data-checked:bg-surface has-data-checked:text-fg has-focus-visible:ring-ring relative flex cursor-pointer rounded-[14px] px-4 text-[0.9375rem] font-semibold transition-[color,background-color,box-shadow] duration-(--ds-motion-fast) select-none has-focus-visible:ring-4 has-data-checked:shadow-[0_1px_2px_rgb(23_32_51/0.08),0_0_0_1px_var(--color-border-strong)]',
+							'text-fg-muted hover:text-fg has-data-checked:bg-surface has-data-checked:text-fg has-focus-visible:ring-ring rounded-control relative flex cursor-pointer px-4 text-[0.9375rem] font-semibold transition-[color,background-color,box-shadow] duration-(--ds-motion-fast) select-none has-focus-visible:ring-4 has-data-checked:shadow-[0_1px_2px_rgb(23_32_51/0.08),0_0_0_1px_var(--color-border-strong)]',
 							cards
-								? 'min-h-16 flex-col justify-center gap-0.5 py-2.5'
-								: 'min-h-11 items-center justify-center px-3 py-2 text-center leading-tight sm:h-11 sm:px-4 sm:py-0',
+								? 'min-h-16 flex-col justify-center gap-1 py-2'
+								: 'min-h-12 items-center justify-center px-4 py-2 text-center leading-tight sm:h-12 sm:py-0',
 						)}
 					>
 						<Radio.Root

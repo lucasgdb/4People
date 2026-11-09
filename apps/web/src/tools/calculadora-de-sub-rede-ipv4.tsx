@@ -94,7 +94,7 @@ function summaryText(subnet: IPv4Subnet): string {
 function BinaryRow({ label, value, prefix }: { label: string; value: number; prefix: number }) {
 	const [networkBits, hostBits] = splitBinary(value, prefix)
 	return (
-		<li className="flex flex-col gap-0.5">
+		<li className="flex flex-col gap-1">
 			<span className="text-fg-muted text-[0.8125rem]">{label}</span>
 			<span translate="no" className="font-mono text-[0.875rem] break-all">
 				<span className="text-fg font-semibold">{networkBits}</span>
@@ -113,7 +113,7 @@ export default function CalculadoraDeSubRedeIpv4() {
 	const isCountMode = values.mode === 'count'
 
 	return (
-		<div className="flex flex-col gap-5">
+		<div className="flex flex-col gap-6">
 			<ToolLayout>
 				<FormCard
 					onSubmit={() => undefined}
@@ -227,7 +227,7 @@ function SubnetResult({ subnet }: { subnet: IPv4Subnet }) {
 					Antes da barra, os {subnet.prefix} bits de rede; depois, os {32 - subnet.prefix} bits de
 					host.
 				</p>
-				<ul className="rounded-control bg-surface-muted flex flex-col gap-2 px-5 py-4">
+				<ul className="rounded-control bg-surface-muted flex flex-col gap-2 px-6 py-4">
 					<BinaryRow label="Endereço" value={subnet.ip} prefix={subnet.prefix} />
 					<BinaryRow label="Máscara" value={subnet.netmask} prefix={subnet.prefix} />
 					<BinaryRow label="Rede" value={subnet.network} prefix={subnet.prefix} />
@@ -251,7 +251,7 @@ function SplitSection({
 	return (
 		<section
 			aria-labelledby={titleId}
-			className="rounded-panel border-border bg-surface flex flex-col gap-4 border p-6 sm:p-7"
+			className="rounded-panel border-border bg-surface flex flex-col gap-4 border p-6 sm:p-8"
 		>
 			<h2 id={titleId} className="text-fg text-lg font-bold">
 				Sub-redes

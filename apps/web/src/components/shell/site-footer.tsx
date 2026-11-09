@@ -9,7 +9,7 @@ import { GithubIcon } from '@/components/github-icon'
 import { AUTHOR, PRIVACY_URL, REPOSITORY_URL, TERMS_URL } from '@/lib/site'
 
 const linkClass =
-	'text-fg-muted hover:text-fg focus-visible:ring-ring inline-block rounded-sm py-1.5 text-sm leading-6 underline-offset-4 outline-none hover:underline focus-visible:ring-4'
+	'text-fg-muted hover:text-fg focus-visible:ring-ring inline-block rounded-sm py-2 text-sm leading-6 underline-offset-4 outline-none hover:underline focus-visible:ring-4'
 
 /**
  * A link to another site: opens in a new tab, so 4People stays where it was, and says so. The arrow
@@ -69,7 +69,7 @@ export function SiteFooter() {
 							{TOOLS.length} ferramentas grátis para desenvolvimento, estudo e trabalho. Tudo roda
 							no seu navegador, sem cadastro.
 						</p>
-						<p className="rounded-control bg-accent-soft text-accent-soft-fg max-w-xs px-3.5 py-2.5 text-[0.8125rem] leading-relaxed">
+						<p className="rounded-control bg-accent-soft text-accent-soft-fg max-w-xs px-4 py-2 text-[0.8125rem] leading-relaxed">
 							<strong className="font-semibold">Versão beta.</strong> O 4People ainda está em
 							testes. Achou algo errado?{' '}
 							<a
@@ -123,7 +123,7 @@ export function SiteFooter() {
 						</li>
 					</Column>
 				</div>
-				<div className="border-border text-fg-muted flex flex-col gap-3 border-t pt-6 text-[0.8125rem] sm:flex-row sm:items-center sm:justify-between">
+				<div className="border-border text-fg-muted flex flex-col gap-4 border-t pt-6 text-[0.8125rem] sm:flex-row sm:items-center sm:justify-between">
 					<p>
 						© {year} <span translate="no">4People</span> · código aberto sob a licença GPL-3.0 ·
 						feito por{' '}
@@ -142,7 +142,7 @@ export function SiteFooter() {
 						target="_blank"
 						rel="noopener noreferrer"
 						aria-label="4People no GitHub (abre em nova aba)"
-						className="hover:text-fg focus-visible:ring-ring grid size-9 place-items-center rounded-full outline-none focus-visible:ring-4"
+						className="hover:text-fg focus-visible:ring-ring grid size-10 place-items-center rounded-full outline-none focus-visible:ring-4"
 					>
 						<GithubIcon className="size-5" />
 					</a>

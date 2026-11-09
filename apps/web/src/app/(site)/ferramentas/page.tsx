@@ -53,20 +53,20 @@ export default function AllToolsPage() {
 					</p>
 				</ScreenHeader>
 
-				<nav aria-label="Áreas" className="grid gap-3 sm:grid-cols-2">
+				<nav aria-label="Áreas" className="grid gap-4 sm:grid-cols-2">
 					{CATEGORIES.map((category) => (
 						<a
 							key={category.slug}
 							href={`#area-${category.slug}`}
-							className="rounded-panel border-border bg-surface hover:border-border-strong focus-visible:ring-ring group flex items-center gap-4 border p-5 outline-none focus-visible:ring-4"
+							className="rounded-panel border-border bg-surface hover:border-border-strong focus-visible:ring-ring group flex items-center gap-4 border p-6 outline-none focus-visible:ring-4"
 						>
 							<span
 								aria-hidden="true"
-								className="bg-accent-soft text-accent grid size-12 shrink-0 place-items-center rounded-[14px]"
+								className="bg-accent-soft text-accent rounded-control grid size-12 shrink-0 place-items-center"
 							>
 								<Icon name={category.icon} className="size-6" />
 							</span>
-							<span className="flex min-w-0 flex-1 flex-col gap-0.5">
+							<span className="flex min-w-0 flex-1 flex-col gap-1">
 								<span className="text-fg text-lg font-bold">{category.name}</span>
 								<span className="text-fg-muted text-sm">
 									{toolsIn(category.slug).length} ferramentas · {category.sections.length} tópicos
@@ -87,7 +87,7 @@ export default function AllToolsPage() {
 						aria-labelledby={`titulo-${category.slug}`}
 						className="flex scroll-mt-24 flex-col gap-8"
 					>
-						<div className="border-border flex flex-wrap items-end justify-between gap-3 border-b pb-4">
+						<div className="border-border flex flex-wrap items-end justify-between gap-4 border-b pb-4">
 							<div className="flex flex-col gap-1">
 								<h2
 									id={`titulo-${category.slug}`}
@@ -100,7 +100,7 @@ export default function AllToolsPage() {
 							<Link
 								prefetch={false}
 								href={`/${category.slug}` as Route}
-								className="text-accent-soft-fg focus-visible:ring-ring flex min-h-11 items-center gap-1 rounded-full px-2 text-[0.9375rem] font-semibold outline-none hover:underline focus-visible:ring-4"
+								className="text-accent-soft-fg focus-visible:ring-ring flex min-h-12 items-center gap-1 rounded-full px-2 text-[0.9375rem] font-semibold outline-none hover:underline focus-visible:ring-4"
 							>
 								Abrir {category.name}
 								<ArrowRight aria-hidden="true" className="size-4" />
@@ -114,11 +114,11 @@ export default function AllToolsPage() {
 							>
 								<h3
 									id={`topico-${category.slug}-${section.slug}`}
-									className="text-fg flex items-center gap-3 text-lg font-bold"
+									className="text-fg flex items-center gap-4 text-lg font-bold"
 								>
 									<span
 										aria-hidden="true"
-										className="bg-accent-soft text-accent grid size-8 place-items-center rounded-[10px]"
+										className="bg-accent-soft text-accent rounded-chip grid size-8 place-items-center"
 									>
 										<Icon name={section.icon} className="size-4" />
 									</span>
@@ -129,7 +129,7 @@ export default function AllToolsPage() {
 									>
 										{section.name}
 									</Link>
-									<span className="bg-surface-sunken text-fg-muted tabular inline-flex h-6 items-center rounded-full px-2.5 text-sm leading-none font-semibold">
+									<span className="bg-surface-sunken text-fg-muted tabular inline-flex h-6 items-center rounded-full px-2 text-sm leading-none font-semibold">
 										{section.tools.length}
 									</span>
 								</h3>

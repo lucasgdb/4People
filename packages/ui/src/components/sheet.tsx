@@ -38,7 +38,7 @@ export function SheetContent({
 					<Dialog.Title className="text-base font-semibold">{title}</Dialog.Title>
 					<Dialog.Close
 						aria-label="Fechar"
-						className="text-fg-muted hover:bg-surface-sunken hover:text-fg focus-visible:ring-ring flex size-11 cursor-pointer items-center justify-center rounded-full outline-none focus-visible:ring-4"
+						className="text-fg-muted hover:bg-surface-sunken hover:text-fg focus-visible:ring-ring flex size-12 cursor-pointer items-center justify-center rounded-full outline-none focus-visible:ring-4"
 					>
 						<svg viewBox="0 0 16 16" className="size-4" fill="none" aria-hidden="true">
 							<path

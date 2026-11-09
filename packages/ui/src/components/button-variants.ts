@@ -19,11 +19,11 @@ export const buttonVariants = cva(
 			},
 			size: {
 				// Touch screens get a taller hit area (40px) for the small size.
-				sm: 'h-9 rounded-full px-4 text-sm pointer-coarse:h-10',
-				md: 'rounded-control h-11 px-5 text-[0.9375rem]',
-				lg: 'rounded-control h-13 px-7 text-base',
-				icon: 'size-11 rounded-full',
-				'icon-sm': 'size-9 rounded-full pointer-coarse:size-10',
+				sm: 'h-10 rounded-full px-4 text-sm pointer-coarse:h-10',
+				md: 'rounded-control h-12 px-6 text-[0.9375rem]',
+				lg: 'rounded-control h-14 px-8 text-base',
+				icon: 'size-12 rounded-full',
+				'icon-sm': 'size-10 rounded-full pointer-coarse:size-10',
 			},
 		},
 		defaultVariants: { variant: 'primary', size: 'md' },

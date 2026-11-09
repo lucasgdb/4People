@@ -59,12 +59,12 @@ export function DocCheck() {
 				const kind = done ? verdict.kind : verdict.digits > 11 ? 'CNPJ' : 'CPF'
 				const target = kind === 'CNPJ' ? 14 : 11
 				return (
-					<div className="flex flex-col gap-5">
+					<div className="flex flex-col gap-6">
 						<div className="relative">
 							<span
 								aria-hidden="true"
 								className={cn(
-									'rounded-chip pointer-events-none absolute top-1/2 left-3 hidden -translate-y-1/2 px-2 py-1 text-xs font-bold tracking-wider transition-colors duration-(--ds-motion) sm:block',
+									'rounded-chip pointer-events-none absolute top-1/2 left-4 hidden -translate-y-1/2 px-2 py-1 text-xs font-bold tracking-wider transition-colors duration-(--ds-motion) sm:block',
 									!done && 'bg-surface-sunken text-fg-muted',
 									done && verdict.valid && 'bg-success-soft text-success-ink',
 									done && !verdict.valid && 'bg-danger-soft text-danger-ink',
@@ -84,14 +84,14 @@ export function DocCheck() {
 								data-success={done && verdict.valid ? '' : undefined}
 								value={field.state.value}
 								onChange={(event) => field.handleChange(event.target.value)}
-								className="h-16 min-w-0 pr-12 pl-4 font-mono text-xl tabular-nums shadow-[inset_0_1px_2px_rgb(23_32_51/0.06)] sm:pr-14 sm:pl-[4.75rem] sm:text-[1.75rem]"
+								className="h-16 min-w-0 pr-12 pl-4 font-mono text-xl tabular-nums shadow-[inset_0_1px_2px_rgb(23_32_51/0.06)] sm:pr-14 sm:pl-20 sm:text-[1.75rem]"
 								placeholder="529.982.247-25"
 							/>
 							{done ? (
 								<span
 									aria-hidden="true"
 									key={`${verdict.kind}-${verdict.valid}`}
-									className="animate-value-in pointer-events-none absolute top-1/2 right-3.5 -translate-y-1/2 sm:right-4"
+									className="animate-value-in pointer-events-none absolute top-1/2 right-4 -translate-y-1/2"
 								>
 									{verdict.valid ? (
 										<CircleCheck className="text-success size-6" />
@@ -103,7 +103,7 @@ export function DocCheck() {
 						</div>
 						<div id="doc-verdict" aria-live="polite">
 							{verdict.kind === 'incomplete' ? (
-								<div className="rounded-control bg-surface-muted flex flex-col gap-3 px-5 py-4">
+								<div className="rounded-control bg-surface-muted flex flex-col gap-4 px-6 py-4">
 									<p className="text-fg-muted text-[1.0625rem]">
 										{verdict.digits === 0
 											? 'Digite os 11 dígitos de um CPF ou os 14 de um CNPJ.'
@@ -122,7 +122,7 @@ export function DocCheck() {
 							) : (
 								<div
 									className={cn(
-										'rounded-control flex items-start gap-3 border px-5 py-4',
+										'rounded-control flex items-start gap-4 border px-6 py-4',
 										verdict.valid
 											? 'border-success/20 bg-success-soft text-success-ink'
 											: 'border-danger/20 bg-danger-soft text-danger-ink',
@@ -142,7 +142,7 @@ export function DocCheck() {
 								</div>
 							)}
 						</div>
-						<div className="flex flex-col gap-2.5">
+						<div className="flex flex-col gap-2">
 							<span
 								id="doc-exemplos"
 								className="text-fg-subtle text-xs font-semibold tracking-wider uppercase"
@@ -158,9 +158,9 @@ export function DocCheck() {
 												type="button"
 												aria-pressed={current}
 												onClick={() => field.handleChange(example.value)}
-												className="rounded-control border-border bg-surface hover:border-accent/35 hover:shadow-float focus-visible:ring-ring aria-pressed:border-accent aria-pressed:bg-accent-soft/40 flex w-full cursor-pointer flex-col items-start gap-1 border px-4 py-3 text-left shadow-[0_1px_2px_rgb(23_32_51/0.04)] transition-[translate,border-color,box-shadow,background-color] duration-(--ds-motion) ease-(--ease-out) outline-none hover:-translate-y-0.5 focus-visible:ring-4"
+												className="rounded-control border-border bg-surface hover:border-accent/35 hover:shadow-float focus-visible:ring-ring aria-pressed:border-accent aria-pressed:bg-accent-soft/40 flex w-full cursor-pointer flex-col items-start gap-1 border p-4 text-left shadow-[0_1px_2px_rgb(23_32_51/0.04)] transition-[translate,border-color,box-shadow,background-color] duration-(--ds-motion) ease-(--ease-out) outline-none hover:-translate-y-0.5 focus-visible:ring-4"
 											>
-												<span className="text-fg-muted flex items-center gap-1.5 text-[0.8125rem] font-medium">
+												<span className="text-fg-muted flex items-center gap-2 text-[0.8125rem] font-medium">
 													<span
 														aria-hidden="true"
 														className={cn('size-2 rounded-full', example.tone)}

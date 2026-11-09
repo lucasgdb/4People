@@ -105,11 +105,19 @@
 	--font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 	--font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 
+	/*
+	 * 8pt grid. Spacing (padding, margin, gap, offsets), control sizes and radii are multiples of 8px;
+	 * 4px is the only half-step, for tight spots (icon to label, stacked label and hint, chip padding).
+	 * In Tailwind steps: 1, 2, 4, 6, 8, 10, 12, 14, 16… never 1.5, 2.5, 3, 3.5, 5, 7, 9, 11.
+	 * Controls: 40px (sm, icon-sm), 48px (md, icon, inputs), 56px (lg). Page blocks sit 32px apart,
+	 * cards in a grid 24px apart. Exceptions: 1px hairlines, ≤2px optical nudges that align an icon or
+	 * box with a line of text, em-based type tweaks, and icon glyph sizes (16/20/24).
+	 */
 	/* Soft, nested radii: sheet → panel (cards) → control (inputs, buttons) → chip. */
-	--radius-sheet: 28px;
+	--radius-sheet: 32px;
 	--radius-panel: 24px;
-	--radius-control: 14px;
-	--radius-chip: 10px;
+	--radius-control: 16px;
+	--radius-chip: 8px;
 
 	--ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 	--ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -401,7 +409,7 @@
 }
 .ds-color-picker-lg .react-colorful__hue {
 	height: 1.25rem;
-	margin-top: 0.875rem;
+	margin-top: 1rem;
 }
 /* biome-ignore lint/style/noDescendingSpecificity: overrides the size from react-colorful's base styles above; its focus rule only scales the pointer */
 .ds-color-picker-lg .react-colorful__pointer {

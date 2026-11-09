@@ -85,11 +85,11 @@ function MatchList({ items }: { items: Match[] }) {
 			<p className="text-fg tabular font-semibold">
 				{formatNumber(items.length)} {items.length === 1 ? 'resultado' : 'resultados'}
 			</p>
-			<ol className="flex flex-col gap-3">
+			<ol className="flex flex-col gap-4">
 				{items.map((item) => {
 					const valueJson = JSON.stringify(item.value, null, 2) ?? 'undefined'
 					return (
-						<li key={item.path} className="flex flex-col gap-1.5">
+						<li key={item.path} className="flex flex-col gap-2">
 							<div className="flex items-center justify-between gap-2">
 								<code
 									translate="no"

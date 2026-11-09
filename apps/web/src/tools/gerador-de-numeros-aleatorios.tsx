@@ -65,7 +65,7 @@ function DrawnNumbers({
 					// biome-ignore lint/suspicious/noArrayIndexKey: draws may repeat a number, so the position is the identity
 					key={position}
 					tone="neutral"
-					className="tabular h-10 min-w-10 justify-center px-3 text-lg"
+					className="tabular h-10 min-w-10 justify-center px-4 text-lg"
 				>
 					{number}
 				</Badge>
@@ -111,7 +111,7 @@ export default function RandomNumbers() {
 					</form.AppForm>
 				}
 			>
-				<div className="grid grid-cols-2 items-end gap-x-3 gap-y-4 sm:grid-cols-3 sm:gap-x-4">
+				<div className="grid grid-cols-2 items-end gap-4 sm:grid-cols-3">
 					<form.AppField name="min" listeners={regenerate}>
 						{(field) => (
 							<field.NumberField label="De" integer min={-VALUE_LIMIT} max={VALUE_LIMIT} />
@@ -126,7 +126,7 @@ export default function RandomNumbers() {
 						{(field) => <field.NumberField label="Quantidade" integer min={1} max={MAX_COUNT} />}
 					</form.AppField>
 				</div>
-				<div className="flex flex-col gap-3">
+				<div className="flex flex-col gap-4">
 					<form.AppField name="unique" listeners={regenerate}>
 						{(field) => <field.CheckboxField label="Sem repetir números" />}
 					</form.AppField>

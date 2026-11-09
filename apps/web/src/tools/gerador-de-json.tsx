@@ -196,17 +196,17 @@ export default function JsonGenerator() {
 						/>
 					)}
 				</form.AppField>
-				<details className="rounded-control bg-surface-muted px-4 py-3">
+				<details className="rounded-control bg-surface-muted p-4">
 					<summary className="text-fg cursor-pointer text-sm font-semibold">
 						Marcadores disponíveis
 					</summary>
-					<p className="text-fg-muted mt-3 text-[0.8125rem]">
+					<p className="text-fg-muted mt-4 text-[0.8125rem]">
 						Um marcador sozinho no valor gera o tipo certo (número, true/false); dentro de um texto,
 						vira texto: <code className="font-mono">"pedido-{'{{inteiro(1, 999)}}'}"</code>.
 					</p>
-					<dl className="mt-3 flex flex-col gap-2 text-sm">
+					<dl className="mt-4 flex flex-col gap-2 text-sm">
 						{PLACEHOLDERS.map((placeholder) => (
-							<div key={placeholder.syntax} className="flex flex-col gap-0.5">
+							<div key={placeholder.syntax} className="flex flex-col gap-1">
 								<dt className="text-fg font-mono text-[0.8125rem] font-semibold" translate="no">
 									{placeholder.syntax}
 								</dt>

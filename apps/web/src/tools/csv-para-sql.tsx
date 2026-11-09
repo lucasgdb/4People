@@ -119,7 +119,7 @@ export default function CsvParaSql() {
 						/>
 					)}
 				</form.AppField>
-				<div className="grid gap-5 sm:grid-cols-2">
+				<div className="grid gap-6 sm:grid-cols-2">
 					<form.AppField name="tableName">
 						{(field) => <field.TextField label="Nome da tabela" placeholder="Ex.: clientes" />}
 					</form.AppField>

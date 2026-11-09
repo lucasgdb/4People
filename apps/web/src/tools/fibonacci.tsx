@@ -24,7 +24,7 @@ export default function Fibonacci() {
 			}}
 			toText={({ sequence }) => sequence}
 			render={({ amount, sequence, lastTerm }) => (
-				<div className="flex flex-col gap-3">
+				<div className="flex flex-col gap-4">
 					<DataList
 						columns={1}
 						items={[

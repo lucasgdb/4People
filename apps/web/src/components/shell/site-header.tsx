@@ -13,7 +13,7 @@ import { ToolSearch } from './tool-search'
 export function SiteHeader() {
 	return (
 		<header className="bg-surface/75 sticky top-0 z-30 shadow-[inset_0_-1px_0_var(--color-border)] backdrop-blur-md backdrop-saturate-150">
-			<div className="mx-auto flex h-16 w-full max-w-[1200px] items-center gap-3 px-4 sm:px-6 lg:gap-6">
+			<div className="mx-auto flex h-16 w-full max-w-[1200px] items-center gap-4 px-4 sm:px-6 lg:gap-6">
 				<div className="lg:hidden">
 					<AllToolsMenu />
 				</div>

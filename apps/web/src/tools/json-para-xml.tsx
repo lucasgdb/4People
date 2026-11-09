@@ -50,7 +50,7 @@ export default function JsonParaXml() {
 						/>
 					)}
 				</form.AppField>
-				<div className="grid gap-5 sm:grid-cols-2">
+				<div className="grid gap-6 sm:grid-cols-2">
 					<form.AppField name="attributePrefix">
 						{(field) => (
 							<field.TextField

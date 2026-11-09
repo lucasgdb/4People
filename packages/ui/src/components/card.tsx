@@ -9,7 +9,7 @@ export function Card({ className, ...props }: ComponentProps<'div'>) {
 }
 
 export function CardHeader({ className, ...props }: ComponentProps<'div'>) {
-	return <div className={cn('flex flex-col gap-1 px-5 pt-5', className)} {...props} />
+	return <div className={cn('flex flex-col gap-1 px-6 pt-6', className)} {...props} />
 }
 
 export function CardTitle({ className, ...props }: ComponentProps<'h2'>) {
@@ -21,14 +21,14 @@ export function CardDescription({ className, ...props }: ComponentProps<'p'>) {
 }
 
 export function CardContent({ className, ...props }: ComponentProps<'div'>) {
-	return <div className={cn('p-5', className)} {...props} />
+	return <div className={cn('p-6', className)} {...props} />
 }
 
 export function CardFooter({ className, ...props }: ComponentProps<'div'>) {
 	return (
 		<div
 			className={cn(
-				'border-border flex flex-wrap items-center gap-2 border-t px-5 py-4',
+				'border-border flex flex-wrap items-center gap-2 border-t px-6 py-4',
 				className,
 			)}
 			{...props}

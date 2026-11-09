@@ -18,7 +18,7 @@ export function Textarea({ className, rows, style, ...props }: TextareaProps) {
 			render={<textarea />}
 			className={cn(
 				controlClass,
-				'[field-sizing:content] max-h-[24rem] max-w-full min-w-0 resize-y py-2.5 leading-relaxed [overflow-wrap:anywhere]',
+				'[field-sizing:content] max-h-[24rem] max-w-full min-w-0 resize-y py-2 leading-relaxed [overflow-wrap:anywhere]',
 				className,
 			)}
 			// Content sizing ignores `rows`, so the starting height comes from it here: `rows` lines plus the

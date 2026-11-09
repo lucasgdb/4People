@@ -29,7 +29,7 @@ export default function FactorizeNumber() {
 				`${value} = ${factors.join(' × ')} = ${powersToText(powers)}`
 			}
 			render={({ value, factors, powers }) => (
-				<div className="flex flex-col gap-3">
+				<div className="flex flex-col gap-4">
 					<OutputValue>
 						{value} ={' '}
 						{powers.map(({ base, exponent }, index) => (
