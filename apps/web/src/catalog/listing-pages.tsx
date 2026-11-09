@@ -3,7 +3,7 @@ import type { Metadata, Route } from 'next'
 import Link from 'next/link'
 import { getCategory, getSection, toolsIn } from '@/catalog/catalog'
 import { sectionIntro } from '@/catalog/content'
-import { Icon } from '@/components/icon'
+import { Icon, type IconName } from '@/components/icon'
 import { JsonLd } from '@/components/json-ld'
 import { ScreenHeader, ToolTable } from '@/components/screen'
 import { breadcrumbSchema, collectionPageSchema } from '@/lib/structured-data'
@@ -130,22 +130,65 @@ function topicDescription(topicName: string, tools: { name: string }[]) {
 	return `${lead}${names}${ending}`
 }
 
-/** The topic's intro: a card as wide as the tool grid, its lines kept to a readable length. */
-function TopicIntro({ name, paragraphs }: { name: string; paragraphs: string[] }) {
+/**
+ * The topic's intro, as wide as the tool grid: a soft accent side with the section's icon, title and
+ * count, and the text on the other side, where lines keep a readable length. The first paragraph
+ * leads a little larger. Stacks on phones.
+ */
+function TopicIntro({
+	name,
+	icon,
+	count,
+	paragraphs,
+}: {
+	name: string
+	icon: IconName
+	count: number
+	paragraphs: string[]
+}) {
 	if (paragraphs.length === 0) return null
 	return (
 		<section
 			aria-labelledby="sobre-o-topico"
-			className="rounded-panel border-border bg-surface flex flex-col gap-3 border p-5 sm:p-7"
+			className="rounded-panel border-border bg-surface grid overflow-hidden border lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]"
 		>
-			<h2 id="sobre-o-topico" className="text-fg text-xl font-bold">
-				Sobre {name.toLowerCase()}
-			</h2>
-			{paragraphs.map((paragraph) => (
-				<p key={paragraph.slice(0, 40)} className="text-fg-muted max-w-4xl leading-7 text-pretty">
-					{paragraph}
+			<div className="border-border flex flex-col gap-4 border-b bg-[linear-gradient(160deg,var(--color-accent-soft),color-mix(in_oklab,var(--color-accent-soft)_35%,var(--color-surface)))] p-6 sm:p-8 lg:border-r lg:border-b-0">
+				<span
+					aria-hidden="true"
+					className="bg-accent text-accent-fg grid size-12 place-items-center rounded-[14px] shadow-[0_6px_16px_-6px_var(--color-accent)]"
+				>
+					<Icon name={icon} className="size-6" />
+				</span>
+				<div className="flex flex-col gap-1.5">
+					<span className="text-accent-soft-fg text-xs font-bold tracking-wider uppercase">
+						Sobre o tópico
+					</span>
+					<h2
+						id="sobre-o-topico"
+						className="text-fg text-2xl font-extrabold tracking-[-0.02em] text-balance"
+					>
+						{name}
+					</h2>
+				</div>
+				<p className="text-fg-muted text-[0.9375rem]">
+					<span className="text-fg tabular font-semibold">{count}</span>{' '}
+					{count === 1 ? 'ferramenta' : 'ferramentas'}, todas grátis e no seu navegador.
 				</p>
-			))}
+			</div>
+			<div className="flex flex-col gap-4 p-6 sm:p-8">
+				{paragraphs.map((paragraph, index) => (
+					<p
+						key={paragraph.slice(0, 40)}
+						className={
+							index === 0
+								? 'text-fg text-[1.0625rem] leading-7 text-pretty'
+								: 'text-fg-muted leading-7 text-pretty'
+						}
+					>
+						{paragraph}
+					</p>
+				))}
+			</div>
 		</section>
 	)
 }
@@ -204,7 +247,12 @@ export function SectionPage({
 				</p>
 			</ScreenHeader>
 			<ToolTable tools={tools} />
-			<TopicIntro name={section.name} paragraphs={sectionIntro(category.slug, section.slug)} />
+			<TopicIntro
+				name={section.name}
+				icon={section.icon}
+				count={tools.length}
+				paragraphs={sectionIntro(category.slug, section.slug)}
+			/>
 			<nav aria-labelledby="outros-topicos" className="flex flex-col gap-3 pt-4">
 				<h2 id="outros-topicos" className="text-fg text-lg font-bold">
 					Outros tópicos de {category.name}
