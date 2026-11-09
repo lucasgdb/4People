@@ -288,7 +288,7 @@ function Calendar({
 												onClick={() => onSelect(iso)}
 												className={cn(
 													cellBase,
-													'h-12 w-full',
+													'aspect-square w-full',
 													isSelected
 														? 'bg-primary text-primary-fg font-semibold'
 														: isToday
