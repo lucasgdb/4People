@@ -11,6 +11,16 @@ const TOKEN_CLASS: Record<JsonToken['kind'], string | undefined> = {
 	space: undefined,
 }
 
+/** Colours one line of JSON, for the code editor. Works on unfinished JSON too (as it is typed). */
+export function highlightJsonLine(line: string) {
+	return jsonTokens(line).map((token, position) => (
+		// biome-ignore lint/suspicious/noArrayIndexKey: tokens have no identity besides their position
+		<span key={position} className={TOKEN_CLASS[token.kind]}>
+			{token.text}
+		</span>
+	))
+}
+
 /**
  * Pretty-printed JSON with coloured keys and values. A long line that wraps continues two columns
  * past its own indentation, under its key's text, instead of jumping to the left edge.

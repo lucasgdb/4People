@@ -4,6 +4,7 @@ import {
 	Button,
 	type ButtonProps,
 	Checkbox,
+	CodeEditor,
 	ColorPicker,
 	cn,
 	DatePicker,
@@ -26,15 +27,19 @@ import {
 	TimeInput,
 } from '@4people/ui'
 import { createFormHook, createFormHookContexts } from '@tanstack/react-form'
-import { LoaderCircle } from 'lucide-react'
+import { CircleCheck, CircleX, LoaderCircle, WandSparkles } from 'lucide-react'
 import {
 	type ClipboardEventHandler,
 	type HTMLInputTypeAttribute,
 	type ReactNode,
 	useCallback,
+	useMemo,
+	useRef,
 	useState,
 } from 'react'
+import { jsonErrorOffset, lineColumn } from '@/lib/algorithms/convert'
 import { applyMask, type Mask } from '@/lib/masks'
+import { highlightJsonLine } from '@/tools/_shared/json-code'
 
 /** Numeric keyboard on phones, unless the mask also takes letters (alphanumeric CNPJ). */
 const maskInputMode = (mask: Mask) => (mask.includes('A') ? 'text' : 'numeric')
@@ -288,6 +293,109 @@ function TextareaField({
 				placeholder={placeholder}
 				onBlur={field.handleBlur}
 				onChange={(event) => field.handleChange(event.target.value)}
+			/>
+		</Field>
+	)
+}
+
+/** Whether the JSON parses, and where the first error is (1-based). Empty text has no status. */
+function jsonStatus(
+	text: string,
+): { ok: true } | { ok: false; line: number; column: number } | null {
+	if (!text.trim()) return null
+	const offset = jsonErrorOffset(text)
+	if (offset === -1) return { ok: true }
+	return { ok: false, ...lineColumn(text, offset) }
+}
+
+/**
+ * JSON in a code editor: coloured, line numbers, Tab indents, Enter keeps the indentation, brackets
+ * and quotes close themselves. The bar above it says whether the JSON is valid (and where it breaks)
+ * and has a Format button (also Shift+Alt+F, as in VS Code) that undoes with Ctrl+Z.
+ */
+function JsonField({
+	id,
+	placeholder,
+	rows = 8,
+	...props
+}: BaseFieldProps & { id?: string; placeholder?: string; rows?: number }) {
+	const field = useFieldContext<string>()
+	const error = useFieldError()
+	const registerControl = useControlRef<HTMLTextAreaElement>()
+	const textarea = useRef<HTMLTextAreaElement | null>(null)
+	const value = field.state.value
+	const status = useMemo(() => jsonStatus(value), [value])
+
+	function format() {
+		let formatted: string
+		try {
+			formatted = JSON.stringify(JSON.parse(value), null, 2)
+		} catch {
+			return
+		}
+		if (formatted === value) return
+		const element = textarea.current
+		if (!element) return field.handleChange(formatted)
+		// Through the editing commands, so Ctrl+Z brings the previous text back.
+		element.focus()
+		element.select()
+		if (!document.execCommand('insertText', false, formatted)) field.handleChange(formatted)
+		element.setSelectionRange(0, 0)
+		element.scrollTop = 0
+	}
+
+	return (
+		<Field {...props} error={error}>
+			<CodeEditor
+				ref={(element) => {
+					textarea.current = element
+					registerControl(element)
+				}}
+				id={id ?? field.name}
+				name={field.name}
+				rows={rows}
+				value={value}
+				placeholder={placeholder}
+				onBlur={field.handleBlur}
+				onValueChange={field.handleChange}
+				onKeyDown={(event) => {
+					if (event.shiftKey && event.altKey && event.code === 'KeyF') {
+						event.preventDefault()
+						format()
+					}
+				}}
+				highlight={highlightJsonLine}
+				markedLine={status && !status.ok ? status.line : undefined}
+				toolbar={
+					<>
+						<span
+							role="status"
+							className={cn(
+								'flex items-center gap-1 text-[0.8125rem] font-medium',
+								!status && 'text-fg-subtle',
+								status?.ok && 'text-success',
+								status && !status.ok && 'text-danger',
+							)}
+						>
+							{status?.ok ? <CircleCheck aria-hidden="true" className="size-4" /> : null}
+							{status && !status.ok ? <CircleX aria-hidden="true" className="size-4" /> : null}
+							{!status
+								? 'JSON'
+								: status.ok
+									? 'JSON válido'
+									: `JSON inválido na linha ${status.line}, coluna ${status.column}`}
+						</span>
+						<Button
+							variant="ghost"
+							size="sm"
+							disabled={!status?.ok}
+							onClick={format}
+							title="Formatar (Shift+Alt+F)"
+						>
+							<WandSparkles /> Formatar
+						</Button>
+					</>
+				}
 			/>
 		</Field>
 	)
@@ -571,6 +679,7 @@ export const { useAppForm, withForm } = createFormHook({
 		TextField,
 		NumberField,
 		TextareaField,
+		JsonField,
 		SelectField,
 		RadioField,
 		CheckboxField,

@@ -13,6 +13,7 @@ export {
 	CardTitle,
 } from './components/card.tsx'
 export { Checkbox, type CheckboxProps } from './components/checkbox.tsx'
+export { CodeEditor, type CodeEditorProps } from './components/code-editor.tsx'
 export {
 	COLOR_PRESETS,
 	ColorArea,

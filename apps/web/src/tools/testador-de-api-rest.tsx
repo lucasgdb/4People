@@ -301,7 +301,17 @@ export default function RestApiTester() {
 						<form.AppField name="bodyType">
 							{(field) => <field.RadioField label="Corpo" options={BODY_TYPES} />}
 						</form.AppField>
-						{bodyType !== 'none' ? (
+						{bodyType === 'json' ? (
+							<form.AppField name="body">
+								{(field) => (
+									<field.JsonField
+										label="JSON"
+										rows={8}
+										placeholder={BODY_FIELD.json.placeholder}
+									/>
+								)}
+							</form.AppField>
+						) : bodyType !== 'none' ? (
 							<form.AppField name="body">
 								{(field) => (
 									<field.TextareaField
