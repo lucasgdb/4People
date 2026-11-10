@@ -215,33 +215,35 @@ export default function RestApiTester() {
 		})
 
 	return (
-		<ToolLayout>
-			<FormCard
-				title="Monte a requisição"
-				onSubmit={() => form.handleSubmit()}
-				actions={
-					<form.AppForm>
-						<form.SubmitButton>Enviar requisição</form.SubmitButton>
-					</form.AppForm>
-				}
-			>
-				<div className="grid gap-4 sm:grid-cols-[9rem_1fr]">
-					<form.AppField name="method">
-						{(field) => <field.SelectField label="Método" options={METHOD_OPTIONS} />}
-					</form.AppField>
-					<form.AppField name="url">
-						{(field) => (
-							<field.TextField
-								label="URL"
-								type="url"
-								inputMode="url"
-								enterKeyHint="send"
-								placeholder="Ex.: https://jsonplaceholder.typicode.com/todos/1"
-								description="Ou cole um comando curl: método, cabeçalhos e corpo são preenchidos."
-								onPaste={importCurl}
-							/>
-						)}
-					</form.AppField>
+		// Like Postman: the request on top, the response right below it at full width.
+		<ToolLayout className="xl:grid-cols-1">
+			<FormCard title="Monte a requisição" onSubmit={() => form.handleSubmit()}>
+				<div className="flex flex-col gap-2">
+					<div className="grid gap-4 sm:grid-cols-[9rem_minmax(0,1fr)_auto] sm:items-end">
+						<form.AppField name="method">
+							{(field) => <field.SelectField label="Método" options={METHOD_OPTIONS} />}
+						</form.AppField>
+						<form.AppField name="url">
+							{(field) => (
+								<field.TextField
+									label="URL"
+									type="url"
+									inputMode="url"
+									enterKeyHint="send"
+									placeholder="Ex.: https://jsonplaceholder.typicode.com/todos/1"
+									onPaste={importCurl}
+								/>
+							)}
+						</form.AppField>
+						<form.AppForm>
+							<form.SubmitButton size="md" className="w-full sm:w-auto">
+								Enviar
+							</form.SubmitButton>
+						</form.AppForm>
+					</div>
+					<p className="text-fg-muted text-[0.8125rem]">
+						Cole um comando curl na URL para preencher método, cabeçalhos e corpo.
+					</p>
 				</div>
 				{curlNote ? (
 					<Alert tone={curlNote.ok ? 'success' : 'danger'} role="status">
@@ -336,7 +338,7 @@ export default function RestApiTester() {
 			<ResultCard
 				title="Resposta"
 				empty={!response}
-				emptyText="Preencha a URL e clique em “Enviar requisição”."
+				emptyText="Preencha a URL e clique em “Enviar”."
 				copyText={response?.ok && !response.binary ? response.body : undefined}
 				onClear={() => send.reset()}
 				action={

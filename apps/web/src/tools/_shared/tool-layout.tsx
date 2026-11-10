@@ -6,7 +6,6 @@ import { type FormEvent, type ReactNode, useId } from 'react'
 import { downloadText } from '@/lib/format'
 
 /** Matches the `xl` breakpoint, where the form and the result stop being side by side. */
-const SINGLE_COLUMN_QUERY = '(max-width: 79.99rem)'
 
 type ToolLayoutProps = {
 	children: ReactNode
@@ -60,19 +59,21 @@ function prefersReducedMotion() {
 }
 
 /**
- * On a single column, scrolls the result card into view after a submit, unless the submit left an
+ * When the result card sits below the form (one column: phones, or a stacked layout), scrolls it into
+ * view after a submit, unless the submit left an
  * invalid field (that field gets focus instead) or the result is already visible. Waits two frames
  * so the new result has rendered.
  */
 function scrollToResult(form: HTMLFormElement) {
-	if (!window.matchMedia(SINGLE_COLUMN_QUERY).matches) return
-
 	requestAnimationFrame(() =>
 		requestAnimationFrame(() => {
 			if (form.querySelector('[aria-invalid="true"]')) return
 
 			const resultCard = form.nextElementSibling
 			if (!(resultCard instanceof HTMLElement)) return
+			// Side by side, the result is already next to the form.
+			const stacked = resultCard.getBoundingClientRect().top >= form.getBoundingClientRect().bottom
+			if (!stacked) return
 
 			const alreadyVisible = resultCard.getBoundingClientRect().top < window.innerHeight * 0.7
 			if (alreadyVisible) return
@@ -88,7 +89,8 @@ function scrollToResult(form: HTMLFormElement) {
 type FormCardProps = {
 	title?: string
 	onSubmit: () => void
-	actions: ReactNode
+	/** The submit row at the bottom. Leave it out when the submit button sits inside the fields. */
+	actions?: ReactNode
 	children: ReactNode
 	className?: string
 }
@@ -115,9 +117,11 @@ export function FormCard({
 		>
 			<StepTitle step={1}>{title}</StepTitle>
 			<div className="flex flex-1 flex-col gap-6">{children}</div>
-			<div className="flex flex-wrap items-center gap-4 [&>button[type=submit]]:w-full">
-				{actions}
-			</div>
+			{actions ? (
+				<div className="flex flex-wrap items-center gap-4 [&>button[type=submit]]:w-full">
+					{actions}
+				</div>
+			) : null}
 		</form>
 	)
 }
