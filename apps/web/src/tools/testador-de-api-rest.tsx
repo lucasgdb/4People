@@ -219,7 +219,7 @@ export default function RestApiTester() {
 		<ToolLayout className="xl:grid-cols-1">
 			<FormCard title="Monte a requisição" onSubmit={() => form.handleSubmit()}>
 				<div className="flex flex-col gap-2">
-					<div className="grid gap-4 sm:grid-cols-[9rem_minmax(0,1fr)_auto] sm:items-end">
+					<div className="grid gap-4 sm:grid-cols-[9rem_minmax(0,1fr)_auto] sm:items-start">
 						<form.AppField name="method">
 							{(field) => <field.SelectField label="Método" options={METHOD_OPTIONS} />}
 						</form.AppField>
@@ -235,11 +235,18 @@ export default function RestApiTester() {
 								/>
 							)}
 						</form.AppField>
-						<form.AppForm>
-							<form.SubmitButton size="md" className="w-full sm:w-auto">
-								Enviar
-							</form.SubmitButton>
-						</form.AppForm>
+						{/* The empty line stands in for a label, so the button lines up with the inputs even when the
+							URL shows an error below it. */}
+						<div className="flex flex-col gap-2">
+							<span aria-hidden="true" className="hidden text-sm leading-none sm:block">
+								&nbsp;
+							</span>
+							<form.AppForm>
+								<form.SubmitButton size="md" className="w-full sm:w-auto">
+									Enviar
+								</form.SubmitButton>
+							</form.AppForm>
+						</div>
 					</div>
 					<p className="text-fg-muted text-[0.8125rem]">
 						Cole um comando curl na URL para preencher método, cabeçalhos e corpo.
