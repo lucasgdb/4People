@@ -32,7 +32,7 @@ const haystack = new Map(
 )
 
 /** Whether the tool with this id (`area/topic/slug`) matches every word of the query. */
-export function toolMatches(id: string, query: string) {
+function toolMatches(id: string, query: string) {
 	const terms = normalize(query).split(/\s+/).filter(Boolean)
 	const text = haystack.get(id as ToolEntry['id']) ?? ''
 	return terms.every((term) => text.includes(term))
