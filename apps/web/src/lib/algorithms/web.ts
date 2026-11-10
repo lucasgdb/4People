@@ -735,6 +735,252 @@ export function toCurl(request: Pick<BuiltRequest, 'url' | 'method' | 'headers' 
 	return lines.join(' \\\n')
 }
 
+/**
+ * Splits a shell command into words the way bash does for what curl commands use: single quotes,
+ * double quotes (with \" \\ \$ \` escapes), ANSI-C $'…' quotes (Chrome's "Copy as cURL (bash)"),
+ * backslash escapes and `\` line continuations. Cmd's `^` continuations are joined too.
+ */
+function shellWords(command: string): string[] {
+	const text = command.replace(/\\\r?\n/g, ' ').replace(/\^\r?\n/g, ' ')
+	const words: string[] = []
+	let word = ''
+	let inWord = false
+	let i = 0
+	const ANSI: Record<string, string> = { n: '\n', t: '\t', r: '\r', '0': '\0', e: '\x1b' }
+	while (i < text.length) {
+		const char = text[i] as string
+		if (/\s/.test(char)) {
+			if (inWord) words.push(word)
+			word = ''
+			inWord = false
+			i++
+		} else if (char === "'") {
+			const end = text.indexOf("'", i + 1)
+			if (end < 0) throw new Error('Aspas simples sem fechamento no comando curl.')
+			word += text.slice(i + 1, end)
+			inWord = true
+			i = end + 1
+		} else if (char === '$' && text[i + 1] === "'") {
+			i += 2
+			while (i < text.length && text[i] !== "'") {
+				if (text[i] === '\\' && i + 1 < text.length) {
+					const next = text[i + 1] as string
+					if (next === 'x' || next === 'u') {
+						const size = next === 'x' ? 2 : 4
+						const hex = text.slice(i + 2, i + 2 + size)
+						word += String.fromCodePoint(Number.parseInt(hex, 16))
+						i += 2 + size
+					} else {
+						word += ANSI[next] ?? next
+						i += 2
+					}
+				} else word += text[i++]
+			}
+			if (i >= text.length) throw new Error("Aspas $'…' sem fechamento no comando curl.")
+			inWord = true
+			i++
+		} else if (char === '"') {
+			i++
+			while (i < text.length && text[i] !== '"') {
+				if (text[i] === '\\' && /["\\$`]/.test(text[i + 1] ?? '')) i++
+				word += text[i++]
+			}
+			if (i >= text.length) throw new Error('Aspas duplas sem fechamento no comando curl.')
+			inWord = true
+			i++
+		} else if (char === '\\' && i + 1 < text.length) {
+			word += text[i + 1]
+			inWord = true
+			i += 2
+		} else {
+			word += char
+			inWord = true
+			i++
+		}
+	}
+	if (inWord) words.push(word)
+	return words
+}
+
+/** curl options that take a value but don't change the request the tester sends. */
+const CURL_IGNORED_WITH_VALUE = new Set([
+	'-o',
+	'--output',
+	'-m',
+	'--max-time',
+	'--connect-timeout',
+	'-w',
+	'--write-out',
+	'--retry',
+	'-x',
+	'--proxy',
+	'--cacert',
+	'--capath',
+	'-E',
+	'--cert',
+	'--key',
+	'--resolve',
+	'--limit-rate',
+	'-c',
+	'--cookie-jar',
+	'--max-redirs',
+	'-r',
+	'--range',
+	'--interface',
+	'-T',
+	'--upload-file',
+])
+const CURL_DATA = new Set(['-d', '--data', '--data-raw', '--data-binary', '--data-ascii'])
+
+export type ParsedCurl = {
+	method: HttpMethod
+	url: string
+	headers: KeyValue[]
+	bodyType: BodyType
+	body: string
+}
+
+const isCurlCommand = (text: string) => /^\s*curl(?:\.exe)?\s/i.test(text)
+
+/**
+ * Reads a curl command (as copied from DevTools, Postman or docs) into the tester's fields:
+ * method, URL, headers and body. Returns null when the text is not a curl command; throws with a
+ * Portuguese message when it is one but can't be read.
+ */
+export function parseCurl(command: string): ParsedCurl | null {
+	if (!isCurlCommand(command)) return null
+	const words = shellWords(command.trim()).slice(1)
+	let method: string | undefined
+	let url: string | undefined
+	let json = false
+	let toQuery = false
+	const headers: KeyValue[] = []
+	const data: string[] = []
+	const addHeader = (line: string) => {
+		const colon = line.indexOf(':')
+		if (colon <= 0) return
+		const key = line.slice(0, colon).trim()
+		// "Name;" sends an empty header, "Name:" removes one; both are rare, keep the name with no value.
+		headers.push({ key, value: line.slice(colon + 1).trim() })
+	}
+
+	for (let i = 0; i < words.length; i++) {
+		const word = words[i] as string
+		const value = () => {
+			const next = words[++i]
+			if (next === undefined) throw new Error(`A opção ${word} do curl está sem valor.`)
+			return next
+		}
+		// --name=value
+		const longWithValue = /^(--[a-z-]+)=(.*)$/s.exec(word)
+		const [flag, inline] = longWithValue
+			? [longWithValue[1] as string, longWithValue[2]]
+			: [word, undefined]
+		const take = () => inline ?? value()
+
+		if (flag === '-X' || flag === '--request') method = take()
+		else if (/^-X./.test(flag)) method = flag.slice(2)
+		else if (flag === '-H' || flag === '--header') addHeader(take())
+		else if (/^-H./.test(flag)) addHeader(flag.slice(2))
+		else if (CURL_DATA.has(flag)) data.push(take())
+		else if (flag === '--data-urlencode') {
+			const raw = take()
+			const equals = raw.indexOf('=')
+			data.push(
+				equals < 0
+					? encodeURIComponent(raw)
+					: `${raw.slice(0, equals)}=${encodeURIComponent(raw.slice(equals + 1))}`,
+			)
+		} else if (flag === '--json') {
+			data.push(take())
+			json = true
+		} else if (flag === '-u' || flag === '--user') {
+			headers.push({ key: 'Authorization', value: `Basic ${btoa(take())}` })
+		} else if (flag === '-A' || flag === '--user-agent')
+			headers.push({ key: 'User-Agent', value: take() })
+		else if (flag === '-e' || flag === '--referer') headers.push({ key: 'Referer', value: take() })
+		else if (flag === '-b' || flag === '--cookie') headers.push({ key: 'Cookie', value: take() })
+		else if (flag === '--url') url = take()
+		else if (flag === '-G' || flag === '--get') toQuery = true
+		else if (flag === '-I' || flag === '--head') method = 'HEAD'
+		else if (CURL_IGNORED_WITH_VALUE.has(flag)) take()
+		else if (flag.startsWith('-')) {
+			// Switches with no value (--compressed, -sSL, -k, -v…) don't change the request.
+		} else if (url === undefined) url = word
+	}
+
+	if (!url) throw new Error('O comando curl não tem URL.')
+	if (!/^[a-z][a-z\d+.-]*:\/\//i.test(url)) url = `https://${url}`
+
+	if (json) {
+		const has = (name: string) => headers.some((h) => h.key.toLowerCase() === name)
+		if (!has('content-type')) headers.push({ key: 'Content-Type', value: 'application/json' })
+		if (!has('accept')) headers.push({ key: 'Accept', value: 'application/json' })
+	}
+
+	let body = data.join('&')
+	if (toQuery && body) {
+		url += (url.includes('?') ? '&' : '?') + body
+		body = ''
+	}
+	const upper = (method ?? (body ? 'POST' : 'GET')).toUpperCase()
+	if (!(HTTP_METHODS as readonly string[]).includes(upper)) {
+		throw new Error(`O método ${upper} do curl não é aceito aqui. Use ${HTTP_METHODS.join(', ')}.`)
+	}
+
+	const contentType = headers.find((h) => h.key.toLowerCase() === 'content-type')?.value ?? ''
+	let bodyType: BodyType = 'none'
+	if (body) {
+		const looksJson = (() => {
+			try {
+				JSON.parse(body)
+				return true
+			} catch {
+				return false
+			}
+		})()
+		if (json || contentType.includes('json') || (looksJson && !contentType)) {
+			bodyType = 'json'
+			if (looksJson) body = JSON.stringify(JSON.parse(body), null, 2)
+		} else if (
+			contentType.includes('x-www-form-urlencoded') ||
+			(!contentType && /^[^\s=&]+=[^&]*(?:&[^\s=&]+=[^&]*)*$/.test(body))
+		) {
+			// The tester takes form fields one per line, decoded.
+			bodyType = 'form'
+			body = [...new URLSearchParams(body)].map(([key, value]) => `${key}=${value}`).join('\n')
+		} else bodyType = 'text'
+	}
+	return { method: upper as HttpMethod, url, headers, bodyType, body }
+}
+
+export type JsonToken = {
+	text: string
+	kind: 'key' | 'string' | 'number' | 'literal' | 'punctuation' | 'space'
+}
+
+/** Splits JSON text (already valid, usually pretty-printed) into coloured tokens. */
+export function jsonTokens(json: string): JsonToken[] {
+	const tokens: JsonToken[] = []
+	const pattern =
+		/("(?:\\.|[^"\\])*")(\s*:)?|(-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)|(true|false|null)|([{}[\],:])|(\s+)/g
+	let last = 0
+	for (const match of json.matchAll(pattern)) {
+		const index = match.index ?? 0
+		if (index > last) tokens.push({ text: json.slice(last, index), kind: 'punctuation' })
+		if (match[1] !== undefined) {
+			tokens.push({ text: match[1], kind: match[2] ? 'key' : 'string' })
+			if (match[2]) tokens.push({ text: match[2], kind: 'punctuation' })
+		} else if (match[3] !== undefined) tokens.push({ text: match[3], kind: 'number' })
+		else if (match[4] !== undefined) tokens.push({ text: match[4], kind: 'literal' })
+		else if (match[5] !== undefined) tokens.push({ text: match[5], kind: 'punctuation' })
+		else tokens.push({ text: match[0], kind: 'space' })
+		last = index + match[0].length
+	}
+	if (last < json.length) tokens.push({ text: json.slice(last), kind: 'punctuation' })
+	return tokens
+}
+
 /** Pretty-prints JSON bodies (by content type or shape); anything else is returned as is. */
 export function prettyBody(text: string, contentType: string): { text: string; json: boolean } {
 	const trimmed = text.trim()

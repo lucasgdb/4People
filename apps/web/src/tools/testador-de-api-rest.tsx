@@ -3,8 +3,8 @@
 import { Alert, Badge, Button, CopyButton, DataList, Input } from '@4people/ui'
 import { useStore } from '@tanstack/react-form'
 import { useMutation } from '@tanstack/react-query'
-import { CircleX, Info, Plus, TriangleAlert, X } from 'lucide-react'
-import { useId, useState } from 'react'
+import { CircleCheck, CircleX, Info, Plus, TriangleAlert, X } from 'lucide-react'
+import { type ClipboardEvent, useId, useState } from 'react'
 import { z } from 'zod'
 import { useToolForm } from '@/components/form/use-tool-form'
 import {
@@ -16,11 +16,13 @@ import {
 	formatBytes,
 	HTTP_METHODS,
 	type KeyValue,
+	parseCurl,
 	prettyBody,
 	statusClass,
 	toCurl,
 } from '@/lib/algorithms/web'
 import { formatNumber } from '@/lib/format'
+import { JsonCode } from './_shared/json-code'
 import { FormCard, OutputBlock, ResultCard, ToolLayout } from './_shared/tool-layout'
 
 const METHOD_OPTIONS = HTTP_METHODS.map((method) => ({ value: method, label: method }))
@@ -58,6 +60,7 @@ type RequestOutcome =
 			bytes: number
 			headers: [string, string][]
 			body: string
+			json: boolean
 			binary: boolean
 			contentType: string
 			curl: string
@@ -107,6 +110,7 @@ async function sendRequest(values: Values, headers: readonly KeyValue[]): Promis
 		const binary = isBinary(contentType)
 		const { text, bytes } = await readBody(response, binary)
 		const durationMs = performance.now() - startedAt
+		const pretty = prettyBody(text, contentType)
 		return {
 			ok: true,
 			status: response.status,
@@ -114,7 +118,8 @@ async function sendRequest(values: Values, headers: readonly KeyValue[]): Promis
 			durationMs,
 			bytes,
 			headers: [...response.headers.entries()],
-			body: prettyBody(text, contentType).text,
+			body: pretty.text,
+			json: pretty.json,
 			binary,
 			contentType,
 			curl,
@@ -141,6 +146,7 @@ function ResponseBody({ outcome }: { outcome: Extract<RequestOutcome, { ok: true
 		)
 	}
 	if (!outcome.body) return <p className="text-fg-muted text-[0.9375rem]">Resposta sem corpo.</p>
+	if (outcome.json) return <JsonCode json={outcome.body} className="max-h-[32rem]" />
 	return (
 		<OutputBlock className="max-h-[32rem]">
 			<span translate="no">{outcome.body}</span>
@@ -154,6 +160,7 @@ export default function RestApiTester() {
 		{ id: 0, key: 'Accept', value: 'application/json' },
 	])
 	const headersId = useId()
+	const [curlNote, setCurlNote] = useState<{ ok: boolean; text: string } | null>(null)
 
 	// React Query tracks the request in flight and keeps the last outcome.
 	const send = useMutation({
@@ -174,6 +181,33 @@ export default function RestApiTester() {
 	const updateHeader = (id: number, patch: Partial<KeyValue>) =>
 		setHeaders((rows) => rows.map((row) => (row.id === id ? { ...row, ...patch } : row)))
 	const removeHeader = (id: number) => setHeaders((rows) => rows.filter((row) => row.id !== id))
+	/** Like Postman: a curl command pasted into the URL fills the method, URL, headers and body. */
+	function importCurl(event: ClipboardEvent<HTMLInputElement>) {
+		const text = event.clipboardData.getData('text')
+		let parsed: ReturnType<typeof parseCurl>
+		try {
+			parsed = parseCurl(text)
+		} catch (error) {
+			event.preventDefault()
+			setCurlNote({ ok: false, text: (error as Error).message })
+			return
+		}
+		if (!parsed) return
+		event.preventDefault()
+		form.setFieldValue('method', parsed.method)
+		form.setFieldValue('url', parsed.url)
+		form.setFieldValue('bodyType', parsed.bodyType)
+		form.setFieldValue('body', parsed.body)
+		setHeaders(parsed.headers.map((header, id) => ({ id, ...header })))
+		const headerCount = parsed.headers.length
+		const bodyLabel = BODY_TYPES.find((type) => type.value === parsed.bodyType)?.label
+		const parts = [
+			parsed.method,
+			headerCount === 1 ? '1 cabeçalho' : `${headerCount} cabeçalhos`,
+			parsed.bodyType === 'none' ? 'sem corpo' : `corpo em ${bodyLabel}`,
+		]
+		setCurlNote({ ok: true, text: `Comando curl importado: ${parts.join(', ')}.` })
+	}
 	const addHeader = () =>
 		setHeaders((rows) => {
 			const nextId = Math.max(0, ...rows.map((row) => row.id)) + 1
@@ -203,10 +237,18 @@ export default function RestApiTester() {
 								inputMode="url"
 								enterKeyHint="send"
 								placeholder="Ex.: https://jsonplaceholder.typicode.com/todos/1"
+								description="Ou cole um comando curl: método, cabeçalhos e corpo são preenchidos."
+								onPaste={importCurl}
 							/>
 						)}
 					</form.AppField>
 				</div>
+				{curlNote ? (
+					<Alert tone={curlNote.ok ? 'success' : 'danger'} role="status">
+						{curlNote.ok ? <CircleCheck /> : <CircleX />}
+						<span>{curlNote.text}</span>
+					</Alert>
+				) : null}
 				<fieldset className="flex flex-col gap-2" aria-describedby={`${headersId}-desc`}>
 					<legend className="text-fg mb-1 text-sm font-medium">Cabeçalhos</legend>
 					{headers.map((row, position) => (
@@ -323,11 +365,16 @@ export default function RestApiTester() {
 							<summary className="text-fg cursor-pointer text-sm font-semibold">
 								Cabeçalhos da resposta ({response.headers.length})
 							</summary>
-							<dl className="mt-4 flex flex-col gap-2 font-mono text-[0.8125rem]">
+							<dl className="mt-4 flex flex-col font-mono text-[0.8125rem]" translate="no">
 								{response.headers.map(([name, value]) => (
-									<div key={name} className="break-all" translate="no">
-										<dt className="text-fg-muted inline">{name}: </dt>
-										<dd className="text-fg inline">{value}</dd>
+									<div
+										key={name}
+										className="border-rule grid gap-1 border-t py-2 first:border-t-0 first:pt-0 sm:grid-cols-[minmax(0,14rem)_minmax(0,1fr)] sm:gap-4"
+									>
+										<dt className="text-accent-soft-fg font-medium [overflow-wrap:anywhere]">
+											{name}
+										</dt>
+										<dd className="text-fg [overflow-wrap:anywhere]">{value}</dd>
 									</div>
 								))}
 							</dl>

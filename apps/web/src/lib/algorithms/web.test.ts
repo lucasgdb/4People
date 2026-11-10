@@ -15,8 +15,10 @@ import {
 	formatBytes,
 	generateJson,
 	HTML_ENTITIES,
+	jsonTokens,
 	minifySvg,
 	PLACEHOLDERS,
+	parseCurl,
 	prettyBody,
 	renderTemplate,
 	statusClass,
@@ -290,6 +292,68 @@ describe('REST tester', () => {
 			/demorou/,
 		)
 		assert.equal(explainFetchError(new Error('boom'), 'https://x.com', 'https:'), 'boom')
+	})
+})
+
+describe('curl import', () => {
+	it('ignores text that is not a curl command', () => {
+		assert.equal(parseCurl('https://api.github.com/users/x'), null)
+	})
+	it('reads a DevTools "Copy as cURL (bash)" command', () => {
+		const parsed = parseCurl(
+			"curl 'https://api.exemplo.com/todos?x=1' \\\n  -H 'accept: application/json' \\\n  -H $'x-note: it\\'s ok' \\\n  --data-raw '{\"title\":\"pão\"}' \\\n  --compressed",
+		)
+		assert.deepEqual(parsed, {
+			method: 'POST',
+			url: 'https://api.exemplo.com/todos?x=1',
+			headers: [
+				{ key: 'accept', value: 'application/json' },
+				{ key: 'x-note', value: "it's ok" },
+			],
+			bodyType: 'json',
+			body: '{\n  "title": "pão"\n}',
+		})
+	})
+	it('reads -X, double quotes, --user and --json', () => {
+		const parsed = parseCurl('curl -sS -X PUT "api.x.com/a" -u ana:123 --json "{\\"a\\":1}"')
+		assert.equal(parsed?.method, 'PUT')
+		assert.equal(parsed?.url, 'https://api.x.com/a')
+		assert.deepEqual(parsed?.headers, [
+			{ key: 'Authorization', value: `Basic ${btoa('ana:123')}` },
+			{ key: 'Content-Type', value: 'application/json' },
+			{ key: 'Accept', value: 'application/json' },
+		])
+		assert.equal(parsed?.bodyType, 'json')
+	})
+	it('turns form data into one field per line and -G into a query', () => {
+		assert.deepEqual(
+			parseCurl("curl https://x.com -d 'nome=Ana%20B' -d idade=30")?.body,
+			'nome=Ana B\nidade=30',
+		)
+		const get = parseCurl('curl -G https://x.com/busca --data-urlencode "q=pão quente"')
+		assert.equal(get?.method, 'GET')
+		assert.equal(get?.url, 'https://x.com/busca?q=p%C3%A3o%20quente')
+		assert.equal(get?.bodyType, 'none')
+	})
+	it('explains what it cannot read', () => {
+		assert.throws(() => parseCurl('curl -H "Accept: x"'), /sem URL|não tem URL/)
+		assert.throws(() => parseCurl("curl 'https://x.com"), /sem fechamento/)
+		assert.throws(() => parseCurl('curl -X TRACE https://x.com'), /TRACE/)
+	})
+})
+
+describe('JSON tokens', () => {
+	it('tells keys from string values, numbers and literals', () => {
+		const tokens = jsonTokens('{\n  "a": "b",\n  "n": -1.5e3,\n  "ok": true\n}')
+		const pick = (kind: string) => tokens.filter((t) => t.kind === kind).map((t) => t.text)
+		assert.deepEqual(pick('key'), ['"a"', '"n"', '"ok"'])
+		assert.deepEqual(pick('string'), ['"b"'])
+		assert.deepEqual(pick('number'), ['-1.5e3'])
+		assert.deepEqual(pick('literal'), ['true'])
+		assert.equal(
+			tokens.map((t) => t.text).join(''),
+			'{\n  "a": "b",\n  "n": -1.5e3,\n  "ok": true\n}',
+		)
 	})
 })
 

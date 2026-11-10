@@ -27,7 +27,13 @@ import {
 } from '@4people/ui'
 import { createFormHook, createFormHookContexts } from '@tanstack/react-form'
 import { LoaderCircle } from 'lucide-react'
-import { type HTMLInputTypeAttribute, type ReactNode, useCallback, useState } from 'react'
+import {
+	type ClipboardEventHandler,
+	type HTMLInputTypeAttribute,
+	type ReactNode,
+	useCallback,
+	useState,
+} from 'react'
 import { applyMask, type Mask } from '@/lib/masks'
 
 /** Numeric keyboard on phones, unless the mask also takes letters (alphanumeric CNPJ). */
@@ -119,6 +125,7 @@ type TextFieldProps = BaseFieldProps & {
 	suffix?: ReactNode
 	/** DOM id of the input; defaults to the field name. Set it when one page has several forms. */
 	id?: string
+	onPaste?: ClipboardEventHandler<HTMLInputElement>
 }
 
 function TextField({
@@ -133,6 +140,7 @@ function TextField({
 	label,
 	hideLabel,
 	inputClassName,
+	onPaste,
 	...props
 }: TextFieldProps) {
 	const field = useFieldContext<string>()
@@ -154,6 +162,7 @@ function TextField({
 			autoCorrect="off"
 			maxLength={mask?.length}
 			onBlur={field.handleBlur}
+			onPaste={onPaste}
 			onChange={(event) =>
 				field.handleChange(mask ? applyMask(event.target.value, mask) : event.target.value)
 			}
@@ -197,7 +206,7 @@ function NumberField({
 	id,
 	enterKeyHint = 'done',
 	...props
-}: Omit<TextFieldProps, 'type' | 'inputMode' | 'mask'> & NumericOptions) {
+}: Omit<TextFieldProps, 'type' | 'inputMode' | 'mask' | 'onPaste'> & NumericOptions) {
 	const field = useFieldContext<string>()
 	const error = useFieldError()
 	const ref = useControlRef<HTMLInputElement>()
